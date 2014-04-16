@@ -42,12 +42,12 @@ Ackee has a modular architecture, which allows you to extend it to your own need
 
 Here's a list of all available Leafs. Made your own? [Notify me!](mailto:ackee@electerious.com)
 
-| Name | Description | Link |
+| Name | Included | Description | Link |
 |:-----------|:------------|:------------|
-| Pages | - | - |
-| Referrers | - | - |
-| Users | - | - |
-| Visits | - | - |
+| Pages | Yes | See which pages your visitors visit the most. | - |
+| Referrers | Yes | See where your visitors are from. | - |
+| Users | Yes | Know everything about your visitors. | - |
+| Visits | Yes | The amount of visitors visualized in stats. | - |
 
 ### Install
 
