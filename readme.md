@@ -80,4 +80,4 @@ Copyright (C) 2014 [Tobias Reich](http://electerious.com)
 
 [Ackee](http://purl.org/dc/terms/) by [Tobias Reich](http://electerious.com) is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US). Based on a work at [https://github.com/electerious/Ackee](https://github.com/electerious/Ackee).
 
-You are not allowed to use Ackee without a valid license from [our website](http://ackee.electerious.com#get).
+(You are not allowed to use Ackee without a valid license from [our website](http://ackee.electerious.com#get).) Never mind, you can use Ackee for free till version 1.0.
