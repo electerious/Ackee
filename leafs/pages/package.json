@@ -1,0 +1,8 @@
+{
+  "name": "pages",
+  "version": "0.0.1",
+  "description": "Which pages do your visitors visit the most.",
+  "authors": "Tobias Reich <tobias.reich.ich@gmail.com>",
+  "license": "MIT",
+  "main": "server.coffee"
+}

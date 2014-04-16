@@ -1,0 +1,11 @@
+{
+  "name": "Ackee",
+  "dependencies": {
+    "jQuery": "~2.1.0",
+    "platform": "~1.0.0",
+    "ionicons": "~1.4.1",
+    "js-md5": "~1.1.0",
+    "mousetrap": "~1.4.6",
+    "normalize.css": "~3.0.0"
+  }
+}

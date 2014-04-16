@@ -1,0 +1,122 @@
+/* Sass ------------------------------------------------*/
+@import 'basics';
+
+/* Animations ------------------------------------------------*/
+@include keyframes(fadeIn) {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* Leafs ------------------------------------------------*/
+.leaf {
+	float: left;
+	width: 100%;
+	min-width: 430px;
+	max-width: 900px;
+	height: 450px;
+	margin: 10px;
+	overflow: hidden;
+}
+
+	/* Styles ------------------------------------------------*/
+	.leaf.light {
+		background-color: $cMain;
+	}
+
+	.leaf.dark {
+		background-color: #333;
+	}
+
+	/* Header ------------------------------------------------*/
+	.leaf .header {
+		width: 100%;
+		height: 62px;
+		border-bottom: 1px solid black(.1);
+	}
+
+		.leaf.light .header {
+			background-color: black(.02);
+		}
+
+		.leaf.dark .header {
+			background-color: black(.15);
+		}
+
+	.leaf .header h1 {
+		float: left;
+		margin: 19px 0px 0px 22px;
+		font-size: 21px;
+		font-weight: 400;
+		color: white(1);
+	}
+
+	.leaf .header .switch {
+		float: right;
+		padding: 25px 22px 15px 22px;
+		color: white(.7);
+		font-size: 14px;
+		cursor: pointer;
+		opacity: 0;
+	}
+
+		.leaf .header .switch span {
+			margin-right: 5px;
+			display: inline-block;
+			@include vendorize(transform, translateY(-1px));
+		}
+
+		.leaf:hover .header .switch,
+		.leaf .header .switch.active {
+			opacity: 1;
+		}
+
+		.leaf:hover .header .switch:active {
+			color: white(.3);
+		}
+
+	/* Content ------------------------------------------------*/
+	.leaf .content {
+		width: 100%;
+		height: calc(100% - 63px);
+		@include vendorize(animation, fadeIn $sDuration $timing);
+	}
+
+	/* Empty State ------------------------------------------------*/
+	.leaf .content.empty {
+		@include flexbox();
+		@include vendorize(box-align, center);
+		@include vendorize(align-items, center);
+		@include vendorize(box-pack, center);
+		@include vendorize(justify-content, center);
+	}
+
+		.leaf .content.empty p {
+			margin-top: -15px;
+			color: white(1);
+			font-size: 16px;
+			text-align: center;
+			line-height: 20px;
+		}
+
+			.leaf .content.empty p a {
+				padding-bottom: 1px;
+				color: $cMain;
+				text-decoration: none;
+				border-bottom: 1px dashed $cMain;
+				cursor: pointer;
+			}
+
+			/* Styles ------------------------------------------------*/
+			.leaf.light .content.empty p a {
+				color: white(1);
+				border-bottom: 1px dashed white(1);
+			}
+
+			.leaf.dark .content.empty p a {
+				color: $cMain;
+				border-bottom: 1px dashed $cMain;
+			}

@@ -1,0 +1,36 @@
+/* Sass ------------------------------------------------*/
+@import 'basics';
+
+/* Basics -------------------------------------------------*/
+html, body {
+	height: 100%;
+}
+
+body {
+	background-color: #fff;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	-moz-osx-font-smoothing: grayscale;
+	@include vendorize(font-smoothing, antialiased);
+	@include vendorize(user-select, none);
+}
+
+.center {
+	left: 50%;
+	top: 50%;
+	position: absolute;
+}
+
+* {
+	@include vendorize(transition, opacity $sDuration ease-out);
+}
+
+/* Content ------------------------------------------------*/
+#content {
+	display: inline-block;
+	width: calc(100% - 30px);
+	margin: 15px;
+}
+
+/* Media Query ------------------------------------------------*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {}

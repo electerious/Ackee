@@ -1,0 +1,43 @@
+{
+  "name": "Ackee",
+  "version": "0.9.0",
+  "description": "Easy to use web-analytics.",
+  "authors": [
+    "Tobias Reich <tobias.reich.ich@gmail.com>"
+  ],
+  "keywords": [
+    "tracking",
+    "analytics"
+  ],
+  "license": "MIT",
+  "config": {
+    "debug": false,
+    "port": "8888",
+    "portSSL": "8889"
+  },
+  "scripts": {
+    "preinstall": "bower install",
+    "postinstall": "npm run build",
+    "start": "coffee ackee.coffee",
+    "build": "grunt"
+  },
+  "dependencies": {
+    "express": "~3.4.7",
+    "sqlite3": "~2.1.19",
+    "async": "~0.2.10",
+    "jsesc": "~0.4.3",
+    "colors": "~0.6.2",
+    "validator": "~3.5.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.0",
+    "grunt-sass": "~0.11.0",
+    "load-grunt-tasks": "~0.4.0"
+  }
+}

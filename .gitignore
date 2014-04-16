@@ -1,0 +1,8 @@
+etc/
+.nodemonignore
+
+node_modules/
+bower_components/
+
+data/
+cache/

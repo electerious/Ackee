@@ -1,0 +1,59 @@
+/* Colors ------------------------------------------------*/
+$cMain: #CA5858;
+$cRed: #FF2410;
+$cGreen: #09C845;
+
+/* Vars ------------------------------------------------*/
+$duration: .3s;
+$sDuration: .2s;
+$timing: cubic-bezier(0.51,.92,.24,1.15);
+
+/* Mixins ------------------------------------------------*/
+@mixin vendorize($property, $value) {
+	-webkit-#{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	#{$property}: $value;
+}
+
+@mixin vendorize2x($property, $value) {
+	-webkit-#{$property}: -webkit-#{$value};
+	-moz-#{$property}: -moz-#{$value};
+	-ms-#{$property}: -ms-#{$value};
+	#{$property}: $value;
+}
+
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes $animation-name {
+		@content;
+	}
+	@-moz-keyframes $animation-name {
+		@content;
+	}
+	@-ms-keyframes $animation-name {
+		@content;
+	}
+	@-o-keyframes $animation-name {
+		@content;
+	}
+	@keyframes $animation-name {
+		@content;
+	}
+}
+
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+/* Functions ------------------------------------------------*/
+@function black($opacity) {
+	@return rgba(0, 0, 0, $opacity);
+}
+
+@function white($opacity) {
+	@return rgba(255, 255, 255, $opacity);
+}

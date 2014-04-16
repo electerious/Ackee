@@ -1,0 +1,8 @@
+{
+  "name": "visits",
+  "version": "0.0.1",
+  "description": "The amount of visitors visualized in stats.",
+  "authors": "Tobias Reich <tobias.reich.ich@gmail.com>",
+  "license": "MIT",
+  "main": "server.coffee"
+}
