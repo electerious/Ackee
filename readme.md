@@ -43,7 +43,7 @@ Ackee has a modular architecture, which allows you to extend it to your own need
 Here's a list of all available Leafs. Made your own? [Notify me!](mailto:ackee@electerious.com)
 
 | Name | Included | Description | Link |
-|:-----------|:------------|:------------|
+|:-----------|:------------|:------------|:------------|
 | Pages | Yes | See which pages your visitors visit the most. | - |
 | Referrers | Yes | See where your visitors are from. | - |
 | Users | Yes | Know everything about your visitors. | - |
