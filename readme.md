@@ -2,7 +2,7 @@
 
 #### A great looking self-hosted website analytics tool
 
-![Ackee](http://l.electerious.com/uploads/big/620121cece7ef2bac2c7994b9a46e624.png)
+![Ackee](http://l.electerious.com/uploads/big/e730b2816e0299546214c5b8241661fc.png)
 
 Ackee is a polished, easy-to-use website analytics tool, which runs on your own server. It helps you to track your sites, know more about your visitors and to analyze your traffic.
 
