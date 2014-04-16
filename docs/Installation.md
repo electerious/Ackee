@@ -34,4 +34,4 @@ We recommend to use `forever` to run Ackee in production. [Forever](https://gith
 
 	forever start -c 'npm start' ./
 
-If you have trouble, take a look at the [FAQ]().
+If you have trouble, take a look at the [FAQ](FAQ.md).

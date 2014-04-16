@@ -2,6 +2,8 @@
 
 #### A great looking self-hosted website analytics tool
 
+![Ackee](http://l.electerious.com/uploads/big/620121cece7ef2bac2c7994b9a46e624.png)
+
 Ackee is a polished, easy-to-use website analytics tool, which runs on your own server. It helps you to track your sites, know more about your visitors and to analyze your traffic.
 
 ## Installation
@@ -14,7 +16,7 @@ You can use Ackee right after the installation. Here are some advanced features 
 
 ### Add Sites
 
-To track your sites, you need to add an individual code to the HTML-body of them. You can get the code from the menu on the top right of Ackee. 
+To track your sites, you need to add an individual code to the HTML-body of them. You can get the code from the menu on the top right corner of Ackee. 
 
 ### Settings
 
