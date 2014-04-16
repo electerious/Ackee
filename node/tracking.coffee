@@ -119,6 +119,12 @@ tracking = module.exports =
 
 		visit: (req, res) ->
 
+			if req.headers?.dnt? is 1
+
+				# Do not track
+				res.json 400, { error: 'DoNotTrack is enabled. Ackee ignores you.', details: null }
+				return false
+
 			parse.visits req, ->
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
@@ -159,6 +165,12 @@ tracking = module.exports =
 
 
 		duration: (req, res) ->
+
+			if req.headers?.dnt? is 1
+
+				# Do not track
+				res.json 400, { error: 'DoNotTrack is enabled. Ackee ignores you.', details: null }
+				return false
 
 			parse.duration req, ->
 
