@@ -119,7 +119,7 @@ tracking = module.exports =
 
 		visit: (req, res) ->
 
-			if req.headers?.dnt? is 1
+			if req.headers?.dnt? is 1 and process.env.npm_package_config_dnt is true
 
 				# Do not track
 				res.json 400, { error: 'DoNotTrack is enabled. Ackee ignores you.', details: null }
@@ -166,7 +166,7 @@ tracking = module.exports =
 
 		duration: (req, res) ->
 
-			if req.headers?.dnt? is 1
+			if req.headers?.dnt? is 1 and process.env.npm_package_config_dnt is true
 
 				# Do not track
 				res.json 400, { error: 'DoNotTrack is enabled. Ackee ignores you.', details: null }

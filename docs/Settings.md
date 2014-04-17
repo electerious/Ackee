@@ -4,6 +4,7 @@ The server settings are located in the `package.json`:
 
 	"config" : {
 		"debug": false,
+		"dnt": true,
 		"port" : "8888",
 		"portSSL" : "8889"
 	}
@@ -12,12 +13,21 @@ To edit this settings, do **not** modifiy the file in any way. Instead use the `
 
 #### Debug
 
-Type: `String`  
+Type: `Boolean`  
 Default: `false`
 
 If set to `true`, Ackee will output every request made to the server.
 
 	npm config set Ackee:debug false
+	
+#### DNT
+
+Type: `Boolean`  
+Default: `true`
+
+If set to `true`, Ackee will not track users, which enabled DoNotTrack in their browsers.
+
+	npm config set Ackee:dnt true
 
 #### Port
 

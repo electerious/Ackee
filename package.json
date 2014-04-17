@@ -12,6 +12,7 @@
   "license": "MIT",
   "config": {
     "debug": false,
+    "dnt": true,
     "port": "8888",
     "portSSL": "8889"
   },
