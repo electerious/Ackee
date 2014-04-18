@@ -1,1 +1,1 @@
-/* This is your own website. Ackee is ignoring you. */
+/* This is your own website. Ackee ignores you. */

@@ -9,6 +9,7 @@ db = require './db'
 file	 =
 	main: 'cache/tracking.js'
 	ignore: 'tracking/ignore.js'
+	dnt: 'tracking/dnt.js'
 
 parse =
 
@@ -91,7 +92,7 @@ parse =
 
 		# Check if required data exists
 
-		if not req.ip?
+		if not req.ip? or not validator.isIP req.ip
 			error 'ip', null
 			return false
 
@@ -119,13 +120,12 @@ tracking = module.exports =
 
 		visit: (req, res) ->
 
-			if req.headers?.dnt? is 1 and process.env.npm_package_config_dnt is true
-
-				# Do not track
-				res.json 400, { error: 'DoNotTrack is enabled. Ackee ignores you.', details: null }
-				return false
-
 			parse.visits req, ->
+
+				if process.env.npm_package_config_anonymize is true
+
+					# Do not save ip
+					req.ip = ''
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
 				currentTime		= Math.round(+new Date()/1000) - timezoneOffset
@@ -166,13 +166,12 @@ tracking = module.exports =
 
 		duration: (req, res) ->
 
-			if req.headers?.dnt? is 1 and process.env.npm_package_config_dnt is true
-
-				# Do not track
-				res.json 400, { error: 'DoNotTrack is enabled. Ackee ignores you.', details: null }
-				return false
-
 			parse.duration req, ->
+
+				if process.env.npm_package_config_anonymize is true
+
+					# Do not save ip
+					req.ip = ''
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
 				currentTime		= Math.round(+new Date()/1000) - timezoneOffset
@@ -202,8 +201,14 @@ tracking = module.exports =
 
 		if req.cookies.AckeeIgnore is 'true'
 
-			# Do not track
+			# Ignore
 			res.sendfile file.ignore
+			return true
+
+		else if req.headers?.dnt? is 1 and process.env.npm_package_config_dnt is true
+
+			# Do not track
+			res.sendfile file.dnt
 			return true
 
 		else
