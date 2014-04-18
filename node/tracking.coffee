@@ -125,7 +125,7 @@ tracking = module.exports =
 				if process.env.npm_package_config_anonymize is 'true'
 
 					# Do not save ip
-					req.ip = ''
+					req.ip = '-'
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
 				currentTime		= Math.round(+new Date()/1000) - timezoneOffset
@@ -171,7 +171,7 @@ tracking = module.exports =
 				if process.env.npm_package_config_anonymize is 'true'
 
 					# Do not save ip
-					req.ip = ''
+					req.ip = '-'
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
 				currentTime		= Math.round(+new Date()/1000) - timezoneOffset
