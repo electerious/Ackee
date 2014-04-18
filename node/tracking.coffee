@@ -122,7 +122,7 @@ tracking = module.exports =
 
 			parse.visits req, ->
 
-				if process.env.npm_package_config_anonymize is true
+				if process.env.npm_package_config_anonymize is 'true'
 
 					# Do not save ip
 					req.ip = ''
@@ -168,7 +168,7 @@ tracking = module.exports =
 
 			parse.duration req, ->
 
-				if process.env.npm_package_config_anonymize is true
+				if process.env.npm_package_config_anonymize is 'true'
 
 					# Do not save ip
 					req.ip = ''
@@ -205,7 +205,7 @@ tracking = module.exports =
 			res.sendfile file.ignore
 			return true
 
-		else if req.headers?.dnt? is 1 and process.env.npm_package_config_dnt is true
+		else if req.headers?.dnt is '1' and process.env.npm_package_config_dnt is 'true'
 
 			# Do not track
 			res.sendfile file.dnt
