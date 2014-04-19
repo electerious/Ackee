@@ -5,11 +5,12 @@ The server settings are located in the `package.json`:
 	"config" : {
 		"debug": false,
 		"dnt": true,
+		"anonymize": false,
 		"port" : "8888",
 		"portSSL" : "8889"
 	}
 	
-To edit this settings, do **not** modifiy the file in any way. Instead use the `npm config` command. This allows you to set settings only for your local machine. You need to restart Ackee to see changes taking effect.
+To edit this settings, do **not** modify the file in any way. Instead use the `npm config` command. This allows you to set settings only for your local machine. You need to restart Ackee to see changes taking effect.
 
 #### Debug
 
@@ -26,6 +27,15 @@ Type: `Boolean`
 Default: `true`
 
 If set to `true`, Ackee will not track users, which enabled DoNotTrack in their browsers.
+
+	npm config set Ackee:dnt true
+	
+#### Anonymize
+
+Type: `Boolean`  
+Default: `true`
+
+If set to `true`, Ackee will not save the IP of your visitors.
 
 	npm config set Ackee:dnt true
 
@@ -49,7 +59,7 @@ The port Ackee is listening on when requesting data via `https`.
 	
 ### User Settings
 
-All user-settings are located in a table called `settings` of your database. This database is lcoated in `data/`, which doesn't exist until you installed Ackee. You can change the properties manually, but we recommend to use the menus in Ackee.
+All user-settings are located in a table called `settings` of your database. This database is located in `data/`, which doesn't exist until you installed Ackee. You can change the properties manually, but we recommend to use the menus in Ackee.
 
 #### Username
 
