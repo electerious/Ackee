@@ -122,10 +122,10 @@ tracking = module.exports =
 
 			parse.visits req, ->
 
-				if process.env.npm_package_config_anonymize is 'true'
+				ip = '-'
 
-					# Do not save ip
-					req.ip = '-'
+				# Save IP
+				ip = req.ip if process.env.npm_package_config_anonymize isnt 'true'
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
 				currentTime		= Math.round(+new Date()/1000) - timezoneOffset
@@ -133,7 +133,7 @@ tracking = module.exports =
 				# Required data available
 				db.source.run 'INSERT INTO stats VALUES (NULL, $ip, $referrer, $site, $site_title, $time, $duration, $language, $browser, $browser_version, $browser_width, $browser_height, $platform, $screen_width, $screen_height)',
 
-					$ip: req.ip
+					$ip: ip
 					$referrer: req.query.referrer
 					$site: req.query.site
 					$site_title: req.query.site_title
@@ -168,10 +168,10 @@ tracking = module.exports =
 
 			parse.duration req, ->
 
-				if process.env.npm_package_config_anonymize is 'true'
+				ip = '-'
 
-					# Do not save ip
-					req.ip = '-'
+				# Save IP
+				ip = req.ip if process.env.npm_package_config_anonymize isnt 'true'
 
 				timezoneOffset	= (+new Date().getTimezoneOffset()) * 60
 				currentTime		= Math.round(+new Date()/1000) - timezoneOffset
@@ -180,7 +180,7 @@ tracking = module.exports =
 
 					$duration: currentTime
 					$id: req.query.id
-					$ip: req.ip
+					$ip: ip
 
 				, (error) ->
 
