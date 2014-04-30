@@ -24,22 +24,22 @@
     "build": "grunt"
   },
   "dependencies": {
-    "express": "~3.4.7",
-    "sqlite3": "~2.1.19",
-    "async": "~0.2.10",
-    "jsesc": "~0.4.3",
+    "async": "^0.2.10",
     "colors": "~0.6.2",
-    "validator": "~3.5.0"
+    "express": "^3.5.2",
+    "jsesc": "~0.4.3",
+    "sqlite3": "^2.2.3",
+    "validator": "^3.11.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-contrib-uglify": "~0.4.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-coffee": "~0.10.1",
-    "grunt-contrib-cssmin": "~0.9.0",
     "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-concat": "^0.3.0",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-watch": "~0.6.0",
-    "grunt-sass": "~0.11.0",
+    "grunt-sass": "^0.11.0",
     "load-grunt-tasks": "~0.4.0"
   }
 }
