@@ -26,10 +26,14 @@
   "dependencies": {
     "async": "^0.2.10",
     "colors": "~0.6.2",
-    "express": "^3.5.2",
+    "compression": "^1.0.2",
+    "cookie-parser": "^1.0.1",
+    "express": "^4.1.1",
+    "express-session": "^1.0.4",
     "jsesc": "~0.4.3",
+    "morgan": "^1.0.1",
     "sqlite3": "^2.2.3",
-    "validator": "^3.11.0"
+    "validator": "^3.11.2"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

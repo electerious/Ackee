@@ -5,6 +5,10 @@ https		= require 'https'
 # Express
 express		= require 'express'
 app			= express()
+compress	= require 'compression'
+morgan		= require 'morgan'
+cookieParser= require 'cookie-parser'
+session		= require 'express-session'
 
 # Dependencies
 sqlite		= require 'sqlite3'
@@ -79,12 +83,10 @@ init = ->
 			log.status 'ackee', 'Setting server configuration'
 
 			# App configuration
-			app.use express.logger('dev') if process.env.npm_package_config_debug is 'true'
-			app.use express.compress()
-			app.use express.json()
-			app.use express.urlencoded()
-			app.use express.cookieParser(cookieToken)
-			app.use express.session()
+			app.use morgan('dev') if process.env.npm_package_config_debug is 'true'
+			app.use compress()
+			app.use cookieParser(cookieToken)
+			app.use session()
 			app.use middleware.security
 			app.use express.static(__dirname + '/..')
 
