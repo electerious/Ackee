@@ -7,6 +7,7 @@
     "js-md5": "~1.1.0",
     "mousetrap": "~1.4.6",
     "normalize.css": "~3.0.0",
-    "basicModal": "~1.0.0"
+    "basicModal": "~1.0.0",
+    "basicContext": "~1.0.0"
   }
 }
