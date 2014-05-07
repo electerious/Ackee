@@ -40,6 +40,7 @@ module.exports = (grunt) ->
 					separator: "\n"
 				src: [
 					'bower_components/normalize.css/normalize.css'
+					'bower_components/ionicons/css/ionicons.min.css'
 					'bower_components/basicModal/dist/basicModal.min.css'
 					'bower_components/basicContext/dist/basicContext.min.css'
 					'bower_components/basicNotification/dist/basicNotification.min.css'
