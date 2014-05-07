@@ -82,7 +82,7 @@ module.exports = (grunt) ->
 				options:
 					separator: "\n"
 				src: [
-					'tracking/json2.js'
+					'bower_components/json2/json2.js'
 					'bower_components/platform/platform.js'
 					'cache/.temp/tracking.js'
 				]
