@@ -3,8 +3,6 @@ jsesc		= require 'jsesc'
 async		= require 'async'
 
 # Ackee modules
-leafs		= require './leafs'
-db			= require './db'
 log			= require './log'
 login		= require './login'
 middleware	= require './middleware'
