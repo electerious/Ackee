@@ -33,9 +33,9 @@
 	&:active {
 		color: lighten($cMain, 20%);
 	}
-}
 
-	#menu.fadeIn {
+	&.fadeIn {
 		display: block;
 		@include vendorize(animation, moveDown $duration $timing);
 	}
+}

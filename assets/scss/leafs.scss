@@ -20,33 +20,32 @@
 	height: 450px;
 	margin: 10px;
 	overflow: hidden;
-}
 
 	/* Styles ------------------------------------------------*/
-	.leaf.light {
+	&.light {
 		background-color: $cMain;
 	}
 
-	.leaf.dark {
+	&.dark {
 		background-color: #333;
 	}
 
 	/* Header ------------------------------------------------*/
-	.leaf .header {
+	.header {
 		width: 100%;
 		height: 62px;
 		border-bottom: 1px solid black(.1);
 	}
 
-		.leaf.light .header {
+		&.light .header {
 			background-color: black(.02);
 		}
 
-		.leaf.dark .header {
+		&.dark .header {
 			background-color: black(.15);
 		}
 
-	.leaf .header h1 {
+	.header h1 {
 		float: left;
 		margin: 19px 0px 0px 22px;
 		font-size: 21px;
@@ -54,7 +53,7 @@
 		color: white(1);
 	}
 
-	.leaf .header .switch {
+	.header .switch {
 		float: right;
 		padding: 25px 22px 15px 22px;
 		color: white(.7);
@@ -63,30 +62,30 @@
 		opacity: 0;
 	}
 
-		.leaf .header .switch span {
+		.header .switch span {
 			margin-right: 5px;
 			display: inline-block;
 			@include vendorize(transform, translateY(-1px));
 		}
 
-		.leaf:hover .header .switch,
-		.leaf .header .switch.active {
+		&:hover .header .switch,
+		.header .switch.active {
 			opacity: 1;
 		}
 
-		.leaf:hover .header .switch:active {
+		&:hover .header .switch:active {
 			color: white(.3);
 		}
 
 	/* Content ------------------------------------------------*/
-	.leaf .content {
+	.content {
 		width: 100%;
 		height: calc(100% - 63px);
 		@include vendorize(animation, fadeIn $sDuration $timing);
 	}
 
 	/* Empty State ------------------------------------------------*/
-	.leaf .content.empty {
+	.content.empty {
 		@include flexbox();
 		@include vendorize(box-align, center);
 		@include vendorize(align-items, center);
@@ -94,7 +93,7 @@
 		@include vendorize(justify-content, center);
 	}
 
-		.leaf .content.empty p {
+		.content.empty p {
 			margin-top: -15px;
 			color: white(1);
 			font-size: 16px;
@@ -102,7 +101,7 @@
 			line-height: 20px;
 		}
 
-			.leaf .content.empty p a {
+			.content.empty p a {
 				padding-bottom: 1px;
 				color: $cMain;
 				text-decoration: none;
@@ -111,12 +110,13 @@
 			}
 
 			/* Styles ------------------------------------------------*/
-			.leaf.light .content.empty p a {
+			&.light .content.empty p a {
 				color: white(1);
 				border-bottom: 1px dashed white(1);
 			}
 
-			.leaf.dark .content.empty p a {
+			&.dark .content.empty p a {
 				color: $cMain;
 				border-bottom: 1px dashed $cMain;
 			}
+}
