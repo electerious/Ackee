@@ -26,7 +26,7 @@ this.login =
 
 		modal.show
 			body:	"""
-					<h1>Ackee</h1>
+					<h1>#{ data.name }</h1>
 					<h2>Version #{ data.version } – Web analytics done right!</h2>
 					<input class="text" type="text" placeholder="username" data-name="username">
 					<input class="text" type="password" placeholder="password" data-name="password">

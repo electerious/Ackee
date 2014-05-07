@@ -27,6 +27,7 @@ session = module.exports =
 				res.json {
 					login: false
 					version: process.env.npm_package_version
+					name: process.env.npm_package_name
 					configured: if rows?.username? and rows.password? then true else false
 				}
 
