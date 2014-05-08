@@ -75,12 +75,12 @@ init = ->
 				return callback() if not error?
 
 				# Show error
-				log.status 'ackee', 'Loading SSL, database or generating cookieToken failed', error
+				log.status 'init', 'Loading SSL, database or generating cookieToken failed', error
 				return false
 
 		(callback) ->
 
-			log.status 'ackee', 'Setting server configuration'
+			log.status 'init', 'Setting server configuration'
 
 			# App configuration
 			app.use morgan('dev') if process.env.npm_package_config_debug is 'true'
@@ -104,7 +104,7 @@ init = ->
 
 		(callback) ->
 
-			log.status 'ackee', "Starting server"
+			log.status 'init', 'Starting server'
 
 			# Start http server
 			http = http.createServer app
@@ -128,7 +128,7 @@ init = ->
 
 					"""
 			text +=	"		=> https://localhost:#{ process.env.npm_package_config_portSSL }" if ssl?.key? and ssl.cert?
-			log.status 'ackee', text
+			log.status 'init', text
 
 	]
 
