@@ -1,7 +1,3 @@
-# Dependencies
-jsesc		= require 'jsesc'
-async		= require 'async'
-
 # Ackee modules
 log			= require './log'
 login		= require './login'
