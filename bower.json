@@ -10,6 +10,7 @@
     "basicModal": "~1.0.0",
     "basicContext": "~1.0.0",
     "basicNotification": "~1.0.0",
-    "json2": "*"
+    "json2": "*",
+    "basicFit": "~1.0.0"
   }
 }

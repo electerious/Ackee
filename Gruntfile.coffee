@@ -59,6 +59,7 @@ module.exports = (grunt) ->
 					'bower_components/basicModal/dist/basicModal.min.js'
 					'bower_components/basicContext/dist/basicContext.min.js'
 					'bower_components/basicNotification/dist/basicNotification.min.js'
+					'bower_components/basicFit/dist/basicFit.min.js'
 					'assets/js/*.js'
 					'cache/.temp/main.js'
 				]
