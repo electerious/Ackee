@@ -134,6 +134,7 @@ module.exports = (grunt) ->
 				options:
 					spawn: false
 					interrupt: true
+					livereload: true
 
 			scss:
 				files: [
@@ -144,6 +145,7 @@ module.exports = (grunt) ->
 				options:
 					spawn: false
 					interrupt: true
+					livereload: true
 
 			leafs:
 				files: 'leafs/*/*'
@@ -151,6 +153,7 @@ module.exports = (grunt) ->
 				options:
 					spawn: false
 					interrupt: true
+					livereload: true
 
 			tracking:
 				files: 'tracking/*'
@@ -158,6 +161,7 @@ module.exports = (grunt) ->
 				options:
 					spawn: false
 					interrupt: true
+					livereload: true
 
 		concurrent:
 			main: ['js', 'css', 'leafs', 'tracking']
