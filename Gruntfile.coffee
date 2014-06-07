@@ -159,16 +159,16 @@ module.exports = (grunt) ->
 					spawn: false
 					interrupt: true
 
+		concurrent:
+			main: ['js', 'css', 'leafs', 'tracking']
+
 		clean: ['cache/.temp/']
 
 	require('load-grunt-tasks')(grunt)
 
 	grunt.registerTask 'default', ->
 		grunt.task.run [
-			'js'
-			'css'
-			'leafs'
-			'tracking'
+			'concurrent'
 			'temp'
 		]
 
