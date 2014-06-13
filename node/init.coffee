@@ -124,10 +124,10 @@ init = ->
 			# Output notice
 			text =	"""
 					Ackee running at
-							=> http://localhost:#{ process.env.npm_package_config_port }
+							  => http://localhost:#{ process.env.npm_package_config_port }
 
 					"""
-			text +=	"		=> https://localhost:#{ process.env.npm_package_config_portSSL }" if ssl?.key? and ssl.cert?
+			text +=	"		  => https://localhost:#{ process.env.npm_package_config_portSSL }" if ssl?.key? and ssl.cert?
 			log.status 'init', text
 
 	]
