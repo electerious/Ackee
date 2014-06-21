@@ -1,8 +1,13 @@
 etc/
-.nodemonignore
 
 node_modules/
 bower_components/
 
+leafs/*
 data/
 cache/
+
+!leafs/pages/
+!leafs/referrers/
+!leafs/users/
+!leafs/visits/
