@@ -3,6 +3,7 @@ module.exports = (grunt) ->
 	grunt.initConfig
 
 		pkg: grunt.file.readJSON 'package.json'
+		exec: []
 
 		coffee:
 
@@ -123,6 +124,10 @@ module.exports = (grunt) ->
 				files:
 					'cache/leafs.css': 'cache/.temp/leafs.css'
 
+		shell:
+			npm:
+				command: '<%= exec %>'
+
 		watch:
 
 			js:
@@ -170,22 +175,23 @@ module.exports = (grunt) ->
 
 	require('load-grunt-tasks')(grunt)
 
-	grunt.registerTask 'default', ->
-		grunt.task.run [
-			'concurrent'
-			'temp'
-		]
+	grunt.registerTask 'default', [
+		'concurrent'
+		'temp'
+	]
 
 	grunt.registerTask 'js', [
 		'coffee:assets'
 		'concat:js'
 		'uglify:assets'
 	]
+
 	grunt.registerTask 'css', [
 		'sass:assets'
 		'concat:css'
 		'cssmin:assets'
 	]
+
 	grunt.registerTask 'leafs', [
 		'coffee:leafs'
 		'concat:leafs'
@@ -194,11 +200,30 @@ module.exports = (grunt) ->
 		'uglify:leafs'
 		'cssmin:leafs'
 	]
+
 	grunt.registerTask 'tracking', [
 		'coffee:tracking'
 		'concat:tracking'
 		'uglify:tracking'
 	]
+
 	grunt.registerTask 'temp', [
 		'clean'
 	]
+
+	grunt.registerTask 'npm', ->
+
+		exec = grunt.config.get 'exec'
+
+		# Read all directories
+		grunt.file.expand("./leafs/*").forEach (dir) ->
+
+			exec.push "cd #{ dir }"
+			exec.push 'npm install'
+			exec.push 'cd ../../'
+
+		# Save
+		grunt.config.set 'exec', exec.join('&&')
+
+		# When finished run in shell
+		grunt.task.run 'shell:npm'
