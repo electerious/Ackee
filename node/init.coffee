@@ -25,8 +25,7 @@ log			= require './log'
 middleware	= require './middleware'
 
 # Variables
-cookieToken	= ''
-ssl			= {}
+ssl = {}
 
 # Init
 init = ->
@@ -59,12 +58,6 @@ init = ->
 
 				(pCallback) ->
 
-					# Generate cookieToken
-					cookieToken = crypto.createHash('md5').update((new Date()).valueOf().toString()).digest('hex')
-					pCallback null
-
-				(pCallback) ->
-
 					# Load database
 					db.load ->
 						pCallback null
@@ -75,7 +68,7 @@ init = ->
 				return callback() if not error?
 
 				# Show error
-				log.status 'init', 'Loading SSL, database or generating cookieToken failed', error
+				log.status 'init', 'Loading SSL or database failed', error
 				return false
 
 		(callback) ->
@@ -85,8 +78,8 @@ init = ->
 			# App configuration
 			app.use morgan('dev') if process.env.npm_package_config_debug is 'true'
 			app.use compress()
-			app.use cookieParser(cookieToken)
-			app.use session()
+			app.use cookieParser(crypto.randomBytes(20).toString('hex'))
+			app.use session({secret: crypto.randomBytes(20).toString('hex'), saveUninitialized: true, resave: true})
 			app.use middleware.security
 			app.use express.static(__dirname + '/..')
 
