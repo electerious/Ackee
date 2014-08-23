@@ -125,8 +125,13 @@ module.exports = (grunt) ->
 					'cache/leafs.css': 'cache/.temp/leafs.css'
 
 		shell:
+
 			npm:
 				command: '<%= exec %>'
+
+		checkDependencies:
+
+			this: {}
 
 		watch:
 
@@ -169,13 +174,18 @@ module.exports = (grunt) ->
 					livereload: true
 
 		concurrent:
-			main: ['js', 'css', 'leafs', 'tracking']
+
+			main:
+				options:
+					limit: 4
+				tasks: ['js', 'css', 'leafs', 'tracking']
 
 		clean: ['cache/.temp/']
 
 	require('load-grunt-tasks')(grunt)
 
 	grunt.registerTask 'default', [
+		'checkDependencies'
 		'concurrent'
 		'temp'
 	]
