@@ -34,13 +34,8 @@ this.login =
 			closable: false
 			class: 'login'
 			buttons:
-				cancel:
-					title: ''
-					fn: -> modal.close() # @todo Link to github page
 				action:
 					title: 'Sign in and continue'
-					color: 'normal'
-					icon: ''
 					fn: login._try
 
 		if	localStorage?.getItem('username')?.length > 0
@@ -66,13 +61,8 @@ this.login =
 					closable: false
 					class: 'login'
 					buttons:
-						cancel:
-							title: ''
-							fn: -> modal.close true
 						action:
 							title: 'Create login and continue'
-							color: 'normal'
-							icon: ''
 							fn: steps[1]
 
 			# Save login
@@ -136,15 +126,12 @@ this.login =
 					body:	"""
 							<p>This step will reset your username and password, allowing you to change your login. Are your sure?</p>
 							"""
-					closable: true
 					buttons:
 						cancel:
 							title: 'Cancel'
 							fn: -> modal.close()
 						action:
 							title: 'Reset login'
-							color: 'normal'
-							icon: ''
 							fn: steps[1]
 
 			->
@@ -163,8 +150,6 @@ this.login =
 							fn: -> modal.close()
 						action:
 							title: 'Verify and reset login'
-							color: 'normal'
-							icon: ''
 							fn: steps[2]
 
 			(data) ->

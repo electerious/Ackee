@@ -19,9 +19,7 @@ this.settings =
 				action:
 					title: 'Done'
 					color: 'normal'
-					icon: ''
-					fn: ->
-						modal.close true
+					fn: -> modal.close(true)
 
 	help: ->
 
