@@ -79,9 +79,9 @@ parse =
 		# Data specific parsing
 
 		req.query.language = req.query.language.toLowerCase()
-		req.query.platform = switch
+		req.query.platform = switch req.query.platform
 			when req.query.platform.indexOf	'windows' isnt -1	then 'Windows'
-			when req.query.platform.indexOf	'Windows' isnt -1	then 'Windows'
+			when req.query.platform.indexOf	'OS X' isnt -1		then 'OS X'
 			when req.query.platform.indexOf	'Ubuntu' isnt -1	then 'Ubuntu'
 			else req.query.platform
 
