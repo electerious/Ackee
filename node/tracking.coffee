@@ -202,17 +202,17 @@ tracking = module.exports =
 		if req.cookies.AckeeIgnore is 'true'
 
 			# Ignore
-			res.sendfile file.ignore
+			res.sendFile file.ignore, {root: '.'}
 			return true
 
 		else if req.headers?.dnt is '1' and process.env.npm_package_config_dnt is 'true'
 
 			# Do not track
-			res.sendfile file.dnt
+			res.sendFile file.dnt, {root: '.'}
 			return true
 
 		else
 
 			# Return tracking file
-			res.sendfile file.main
+			res.sendFile file.main, {root: '.'}
 			return true
