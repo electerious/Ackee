@@ -1,6 +1,8 @@
 # Ackee modules
 db = require './db'
 
+cookieName = 'AckeeIgnore'
+
 session = module.exports =
 
 	init: (req, res) ->
@@ -13,7 +15,7 @@ session = module.exports =
 				req.session.login is true
 
 					# Logged in
-					res.cookie 'AckeeIgnore', 'true', { maxAge: 3600000*35*30, httpOnly: true }
+					res.cookie cookieName, 'true', { maxAge: 3600000*35*30, httpOnly: true }
 					res.json {
 						login: true
 						username: rows.username
@@ -62,5 +64,6 @@ session = module.exports =
 	logout: (req, res) ->
 
 		delete req.session.login
+		res.clearCookie cookieName
 		res.json true
 		return true
