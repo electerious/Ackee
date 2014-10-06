@@ -79,9 +79,9 @@ parse =
 		# Data specific parsing
 
 		req.query.language = req.query.language.toLowerCase()
-		req.query.platform = switch
+		req.query.platform = switch req.query.platform
 			when req.query.platform.indexOf	'windows' isnt -1	then 'Windows'
-			when req.query.platform.indexOf	'Windows' isnt -1	then 'Windows'
+			when req.query.platform.indexOf	'OS X' isnt -1		then 'OS X'
 			when req.query.platform.indexOf	'Ubuntu' isnt -1	then 'Ubuntu'
 			else req.query.platform
 
@@ -202,17 +202,17 @@ tracking = module.exports =
 		if req.cookies.AckeeIgnore is 'true'
 
 			# Ignore
-			res.sendfile file.ignore
+			res.sendFile file.ignore, {root: '.'}
 			return true
 
 		else if req.headers?.dnt is '1' and process.env.npm_package_config_dnt is 'true'
 
 			# Do not track
-			res.sendfile file.dnt
+			res.sendFile file.dnt, {root: '.'}
 			return true
 
 		else
 
 			# Return tracking file
-			res.sendfile file.main
+			res.sendFile file.main, {root: '.'}
 			return true
