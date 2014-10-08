@@ -54,7 +54,7 @@ query =
 		 LIMIT #{ settings.limit }
 		"""
 
-	locations: ->
+	languages: ->
 
 		"""
 		SELECT language, count(*) AS users
@@ -85,7 +85,7 @@ parse =
 				
 			, callback
 
-	locations: (rows, callback) ->
+	languages: (rows, callback) ->
 
 		countries =
 			af: 'Afghanistan'
@@ -336,9 +336,8 @@ parse =
 
 		async.each rows, (row, finish) ->
 		
-			row.location = row.language || 'Unknown'
-			row.location = countries[row.language] if countries.hasOwnProperty row.language
-			delete row.language
+			row.language = row.language || 'Unknown'
+			row.language = countries[row.language] if countries.hasOwnProperty row.language
 			finish()
 			
 		, callback
@@ -393,16 +392,16 @@ get =
 					res.json rows
 					return true
 
-	locations: (req, res) ->
+	languages: (req, res) ->
 
-		db.all query.locations(), (error, rows) ->
+		db.all query.languages(), (error, rows) ->
 
 			if error
 				res.json { error: 'Could not get data from database', details: error }
 				return false
 			else
 				parse.users rows, ->
-					parse.locations rows, ->
+					parse.languages rows, ->
 						res.json rows
 						return true
 
@@ -413,4 +412,4 @@ module.exports = (app, _db) ->
 	app.get '/api/get/users/platform', middleware.auth, get.platform
 	app.get '/api/get/users/screens', middleware.auth, get.screens
 	app.get '/api/get/users/duration', middleware.auth, get.duration
-	app.get '/api/get/users/locations', middleware.auth, get.locations
+	app.get '/api/get/users/languages', middleware.auth, get.languages

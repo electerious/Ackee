@@ -9,7 +9,7 @@ leafs.add leafs.users =
 						'api/get/users/platform',
 						'api/get/users/screens',
 						'api/get/users/duration',
-						'api/get/users/locations'
+						'api/get/users/languages'
 
 		leafs.users.switch.init()
 
@@ -19,7 +19,7 @@ leafs.add leafs.users =
 			when 'platform'			then leafs.users.load 'platform'
 			when 'screens'			then leafs.users.load 'screens'
 			when 'duration'			then leafs.users.load 'duration'
-			when 'locations'			then leafs.users.load 'locations'
+			when 'languages'			then leafs.users.load 'languages'
 
 	load: (mode) ->
 
@@ -52,7 +52,7 @@ leafs.add leafs.users =
 				{ type: 'item', title: 'Platform', icon: 'ion-android-storage', fn: -> leafs.users.load 'platform' }
 				{ type: 'item', title: 'Screens', icon: 'ion-monitor', fn: -> leafs.users.load 'screens' }
 				{ type: 'item', title: 'Duration', icon: 'ion-android-clock', fn: -> leafs.users.load 'duration' }
-				{ type: 'item', title: 'Locations', icon: 'ion-earth', fn: -> leafs.users.load 'locations' }
+				{ type: 'item', title: 'Languages', icon: 'ion-chatbox', fn: -> leafs.users.load 'languages' }
 			]
 
 			leafs.users.dom().find('.switch').click (e) ->
@@ -154,9 +154,9 @@ leafs.add leafs.users =
 						</tr>
 						"""
 
-				when 'locations'
+				when 'languages'
 
-					title = 'Location'
+					title = 'Language'
 
 					item = (row) ->
 
@@ -167,7 +167,7 @@ leafs.add leafs.users =
 						"""
 						<tr>
 							<td data-value='#{ row.percent }' title='#{ row.users } users'>#{ row.percent_text }%</td>
-							<td>#{ row.location }</td>
+							<td>#{ row.language }</td>
 						</tr>
 						"""
 
