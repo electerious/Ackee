@@ -1,3 +1,4 @@
+
 /* line 2, ../sass/_sortable.sass */
 table[data-sortable] {
   border-collapse: collapse;
@@ -16,6 +17,10 @@ table[data-sortable] th {
 table[data-sortable] td {
   text-align: left;
   padding: 7px 10px 7px 10px;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 table[data-sortable] tr:nth-child(2n) {
   background-color: rgba(0, 0, 0, .02);
