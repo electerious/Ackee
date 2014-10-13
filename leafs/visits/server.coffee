@@ -67,7 +67,7 @@ parse =
 	week: (rows, callback) ->
 
 		highest	= 0
-		weekday	= ['So', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+		weekday	= ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 
 		async.each rows, (row, finish) ->
 
