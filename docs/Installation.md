@@ -3,12 +3,12 @@
 - `node` [Node.js](http://nodejs.org) v0.10 or later
 - `npm` [Node Packaged Modules](https://www.npmjs.org)
 - `bower` [Bower](http://bower.io)
-- `grunt` [Grunt](http://gruntjs.com)
+- `gulp` [Gulp](http://gulpjs.com/)
 - `coffee` [Coffee](http://coffeescript.org)
 
 After [installing Node.js](http://nodejs.org) you can use the included `npm` package manager to install the global requirements with the following command:
 
-	npm install -g bower coffee-script grunt-cli
+	npm install -g bower coffee-script gulp
 	
 ### 2. Download
 
@@ -20,7 +20,7 @@ Or you can use the [direct download](https://github.com/electerious/Ackee/archiv
 
 ### 3. Install
 
-Before starting Ackee, you need to install all required dependencies using `npm`. This command will also install the `bower` dependencies and build Ackee using `grunt`:
+Before starting Ackee, you need to install all required dependencies using `npm`. This command will also install the `bower` dependencies and build Ackee using `gulp`:
 
 	npm install
 
