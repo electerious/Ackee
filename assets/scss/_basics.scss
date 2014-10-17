@@ -9,20 +9,6 @@ $sDuration: .2s;
 $timing: cubic-bezier(0.51,.92,.24,1.15);
 
 /* Mixins ------------------------------------------------*/
-@mixin vendorize($property, $value...) {
-	-webkit-#{$property}: $value;
-	-moz-#{$property}: $value;
-	-ms-#{$property}: $value;
-	#{$property}: $value;
-}
-
-@mixin vendorize2x($property, $value...) {
-	-webkit-#{$property}: -webkit-#{$value};
-	-moz-#{$property}: -moz-#{$value};
-	-ms-#{$property}: -ms-#{$value};
-	#{$property}: $value;
-}
-
 @mixin keyframes($animation-name) {
 	@-webkit-keyframes $animation-name {
 		@content;

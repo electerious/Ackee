@@ -65,7 +65,7 @@
 		.header .switch span {
 			margin-right: 5px;
 			display: inline-block;
-			@include vendorize(transform, translateY(-1px));
+			transform: translateY(-1px);
 		}
 
 		&:hover .header .switch,
@@ -81,16 +81,16 @@
 	.content {
 		width: 100%;
 		height: calc(100% - 63px);
-		@include vendorize(animation, fadeIn $sDuration $timing);
+		animation: fadeIn $sDuration $timing;
 	}
 
 	/* Empty State ------------------------------------------------*/
 	.content.empty {
 		@include flexbox();
-		@include vendorize(box-align, center);
-		@include vendorize(align-items, center);
-		@include vendorize(box-pack, center);
-		@include vendorize(justify-content, center);
+		box-align: center;
+		align-items: center;
+		box-pack: center;
+		justify-content: center;
 	}
 
 		.content.empty p {

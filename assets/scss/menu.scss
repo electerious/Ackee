@@ -4,10 +4,10 @@
 /* Animations ------------------------------------------------*/
 @include keyframes(moveDown) {
 	0% {
-		@include vendorize(transform, translateY(-65px));
+      transform: translateY(-65px);
 	}
 	100% {
-		@include vendorize(transform, translateY(0));
+		transform: translateY(0);
 	}
 }
 
@@ -24,7 +24,7 @@
 	border-radius: 100%;
 	z-index: 1;
 	display: none;
-	@include vendorize(transition, color $sDuration);
+	transition: color $sDuration;
 
 	&:hover {
 		color: $cMain;
@@ -36,6 +36,6 @@
 
 	&.fadeIn {
 		display: block;
-		@include vendorize(animation, moveDown $duration $timing);
+	   animation: moveDown $duration $timing;
 	}
 }

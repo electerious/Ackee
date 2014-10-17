@@ -1,14 +1,16 @@
-gulp       = require 'gulp'
-sass       = require 'gulp-ruby-sass'
-cssmin     = require 'gulp-cssmin'
-minify     = require 'gulp-minify-css'
-concat     = require 'gulp-concat'
-coffee     = require 'gulp-coffee'
-uglify     = require 'gulp-uglify'
-header     = require 'gulp-header'
-footer     = require 'gulp-footer'
-filelog    = require 'gulp-filelog'
-del        = require 'del'
+gulp         = require 'gulp'
+sass         = require 'gulp-ruby-sass'
+cssmin       = require 'gulp-cssmin'
+minify       = require 'gulp-minify-css'
+concat       = require 'gulp-concat'
+coffee       = require 'gulp-coffee'
+uglify       = require 'gulp-uglify'
+header       = require 'gulp-header'
+footer       = require 'gulp-footer'
+filelog      = require 'gulp-filelog'
+del          = require 'del'
+autoprefixer = require 'gulp-autoprefixer'
+
 
 pkg        = require('./package.json')
 
@@ -34,6 +36,10 @@ gulp.task 'css:concat', ['css:compile'], ->
 
 gulp.task 'css:minify', ['css:concat'], ->
   gulp.src 'cache/.temp/main.css'
+    .pipe autoprefixer {
+      browsers: ['last 2 versions'],
+      cascade: false
+    }
     .pipe minify {}
     .pipe gulp.dest 'cache/'
 
@@ -123,6 +129,10 @@ gulp.task 'leafs-css:concat', ['leafs-css:compile'], ->
 
 gulp.task 'leafs-css:minify', ['leafs-css:concat'], ->
   gulp.src 'cache/.temp/leafs.css'
+   .pipe autoprefixer {
+        browsers: ['last 2 versions'],
+        cascade: false
+      }
     .pipe minify {keepBreaks:true}
     .pipe gulp.dest 'cache/'
 

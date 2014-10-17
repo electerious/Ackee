@@ -11,8 +11,8 @@ body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	-moz-osx-font-smoothing: grayscale;
-	@include vendorize(font-smoothing, antialiased);
-	@include vendorize(user-select, none);
+	font-smoothing: antialiased;
+	user-select: none;
 }
 
 .center {
@@ -22,7 +22,7 @@ body {
 }
 
 * {
-	@include vendorize(transition, opacity $sDuration ease-out);
+	transition: opacity $sDuration ease-out;
 }
 
 /* Content ------------------------------------------------*/

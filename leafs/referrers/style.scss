@@ -53,7 +53,7 @@
 			text-decoration: none;
 			white-space: nowrap;
 			border-bottom: 1px dashed white(0);
-			@include vendorize(transition, border $sDuration);
+			transition: border $sDuration;
 
 			&:hover {
 				border-bottom: 1px dashed white(0.5);
@@ -83,7 +83,7 @@
 				color: white(.8);
 				text-decoration: none;
 				border-bottom: 1px dashed white(0);
-				@include vendorize(transition, border $sDuration);
+				transition: border $sDuration;
 
 				&:hover {
 					border-bottom: 1px dashed white(.5);
