@@ -3,6 +3,8 @@ etc/
 node_modules/
 bower_components/
 
+.sass-cache
+
 leafs/*
 data/
 cache/
