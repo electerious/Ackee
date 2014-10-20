@@ -8,7 +8,7 @@
     "mousetrap": "~1.4.6",
     "normalize.css": "~3.0.0",
     "basicModal": "~1.3.7",
-    "basicContext": "~1.0.4",
+    "basicContext": "~1.1.0",
     "basicNotification": "~1.0.4",
     "json2": "*",
     "basicFit": "~1.0.1"
