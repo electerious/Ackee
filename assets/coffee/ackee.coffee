@@ -11,11 +11,11 @@ this.ackee =
 		# Bind hotkeys
 		Mousetrap.bindGlobal 'enter', () ->
 			if $('.modalContainer').length isnt 0
-				$('.modalContainer #action').addClass('active').click()
+				modal.action()
 
 		Mousetrap.bindGlobal 'esc', () ->
 			if $('.modalContainer[data-closable=true]').length isnt 0
-				$('.modalContainer #cancel').addClass('active').click()
+				modal.cancel()
 			else if $('.context').length isnt 0
 				context.close()
 
