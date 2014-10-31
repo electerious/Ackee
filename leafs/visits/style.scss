@@ -1,8 +1,8 @@
 /* Sass ------------------------------------------------*/
-@import '_basics';
+@import 'basics';
 
 /* Animations ------------------------------------------------*/
-@include keyframes(moveUp) {
+@keyframes moveUp {
 	0% {
 		transform: translateY(700px);
 	}

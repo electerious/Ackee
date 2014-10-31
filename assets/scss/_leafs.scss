@@ -1,8 +1,5 @@
-/* Sass ------------------------------------------------*/
-@import '_basics';
-
 /* Animations ------------------------------------------------*/
-@include keyframes(fadeIn) {
+@keyframes fadeIn {
 	0% {
 		opacity: 0;
 	}
@@ -86,7 +83,7 @@
 
 	/* Empty State ------------------------------------------------*/
 	.content.empty {
-		@include flexbox();
+		display: flex;
 		box-align: center;
 		align-items: center;
 		box-pack: center;

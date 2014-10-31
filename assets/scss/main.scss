@@ -1,5 +1,5 @@
 /* Sass ------------------------------------------------*/
-@import '_basics';
+@import 'basics';
 
 /* Basics -------------------------------------------------*/
 html, body {
@@ -31,3 +31,8 @@ body {
 	width: calc(100% - 30px);
 	margin: 15px;
 }
+
+/* Files ------------------------------------------------*/
+@import 'leafs';
+@import 'menu';
+@import 'sortable';

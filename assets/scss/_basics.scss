@@ -8,33 +8,6 @@ $duration: .3s;
 $sDuration: .2s;
 $timing: cubic-bezier(0.51,.92,.24,1.15);
 
-/* Mixins ------------------------------------------------*/
-@mixin keyframes($animation-name) {
-	@-webkit-keyframes $animation-name {
-		@content;
-	}
-	@-moz-keyframes $animation-name {
-		@content;
-	}
-	@-ms-keyframes $animation-name {
-		@content;
-	}
-	@-o-keyframes $animation-name {
-		@content;
-	}
-	@keyframes $animation-name {
-		@content;
-	}
-}
-
-@mixin flexbox() {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-}
-
 /* Functions ------------------------------------------------*/
 @function black($opacity) {
 	@return rgba(0, 0, 0, $opacity);
