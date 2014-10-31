@@ -1,5 +1,5 @@
 gulp         = require 'gulp'
-sass         = require 'gulp-ruby-sass'
+sass         = require 'gulp-sass'
 cssmin       = require 'gulp-cssmin'
 minify       = require 'gulp-minify-css'
 concat       = require 'gulp-concat'
@@ -19,7 +19,7 @@ pkg        = require('./package.json')
 ###
 gulp.task 'css:compile', ->
   gulp.src './assets/scss/*.scss'
-    .pipe sass({quiet: true})
+    .pipe sass({ includePaths: ['./assets/scss'], errLogToConsole: true })
     .pipe gulp.dest 'cache/.temp/css/'
 
 gulp.task 'css:concat', ['css:compile'], ->
@@ -117,7 +117,7 @@ gulp.task 'leafs-js:minify', ['leafs-js:concat'], ->
 
 gulp.task 'leafs-css:compile', ->
   gulp.src 'leafs/*/*.scss'
-    .pipe sass({quiet: true})
+    .pipe sass({ includePaths: ['./assets/scss'], errLogToConsole: true })
     .pipe gulp.dest 'cache/.temp/leafs/'
 
 gulp.task 'leafs-css:concat', ['leafs-css:compile'], ->
