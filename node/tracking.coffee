@@ -202,7 +202,7 @@ tracking = module.exports =
 	get: (req, res) ->
 
 		# Just to prevent space in config
-		ignoredIps = process.env.npm_package_config_ignoreIps.split ","
+		ignoredIps = process.env.npm_package_config_ignoreIps.split ','
 		for ip, index in ignoredIps
 			ignoredIps[index] = ip.trim()
 
