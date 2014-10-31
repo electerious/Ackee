@@ -67,7 +67,6 @@ A list of Ip separated by a comma of IP which you don't want to track.
 	npm config set Ackee:ignoreIps "127.0.0.1"
 	npm config set Ackee:ignoreIps "127.0.0.1,8.8.8.8"
 
-
 ### User Settings
 
 All user-settings are located in a table called `settings` of your database. This database is located in `data/`, which doesn't exist until you installed Ackee. You can change the properties manually, but we recommend to use the menus in Ackee.
