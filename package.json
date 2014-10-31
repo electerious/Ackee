@@ -19,7 +19,8 @@
     "dnt": true,
     "anonymize": false,
     "port": "8888",
-    "portSSL": "8889"
+    "portSSL": "8889",
+	"ignoreIps": ""
   },
   "scripts": {
     "preinstall": "bower install",

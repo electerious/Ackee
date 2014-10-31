@@ -9,6 +9,7 @@ db = require './db'
 file	 =
 	main: 'cache/tracking.js'
 	ignore: 'tracking/ignore.js'
+	ignoreIp: 'tracking/ignoreIp.js'
 	dnt: 'tracking/dnt.js'
 
 parse =
@@ -200,10 +201,21 @@ tracking = module.exports =
 
 	get: (req, res) ->
 
+		# Just to prevent space in config
+		ignoredIps = process.env.npm_package_config_ignoreIps.split ","
+		for ip, index in ignoredIps
+			ignoredIps[index] = ip.trim()
+
 		if req.cookies.AckeeIgnore is 'true'
 
 			# Ignore
 			res.sendFile file.ignore, {root: '.'}
+			return true
+
+		else if req.ip in ignoredIps
+
+			# IgnoreIp
+			res.sendFile file.ignoreIp, {root: '.'}
 			return true
 
 		else if req.headers?.dnt is '1' and process.env.npm_package_config_dnt is 'true'

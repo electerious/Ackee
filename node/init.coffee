@@ -82,6 +82,7 @@ init = ->
 			app.use session({secret: crypto.randomBytes(20).toString('hex'), saveUninitialized: true, resave: true})
 			app.use middleware.security
 			app.use express.static(__dirname + '/..')
+			app.set 'trust proxy', 'loopback'
 
 			callback()
 
