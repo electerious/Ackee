@@ -5,9 +5,6 @@ this.login =
 		# Save username
 		localStorage.setItem 'username', data.username
 
-		# md5
-		data.password = md5 data.password
-
 		url = 'api/session/login?' + ackee.serialize(data)
 		ackee.api url, (data) ->
 
@@ -98,9 +95,6 @@ this.login =
 
 				# Save username
 				localStorage.setItem 'username', data.username
-
-				# md5
-				data.password = md5 data.password
 
 				# Removed unused var
 				delete data.repassword

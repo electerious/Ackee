@@ -51,7 +51,6 @@ gulp.task 'js:compile', ->
 gulp.task 'js:concat', ['js:compile'], ->
 	gulp.src [
 			'bower_components/jQuery/dist/jquery.min.js',
-			'bower_components/js-md5/js/md5.min.js',
 			'bower_components/mousetrap/mousetrap.min.js',
 			'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
 			'bower_components/basicModal/dist/basicModal.min.js',

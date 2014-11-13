@@ -1,6 +1,7 @@
 # Dependencies
 jsesc		= require 'jsesc'
 async		= require 'async'
+bcrypt		= require 'bcrypt'
 
 # Ackee modules
 db			= require './db'
@@ -46,7 +47,6 @@ login = module.exports =
 					return false
 
 			parse req, ->
-
 				async.parallel [
 
 					(pCallback) ->
@@ -56,8 +56,10 @@ login = module.exports =
 
 					(pCallback) ->
 
-						# Set password
-						db.settings.set 'password', req.query.password, pCallback
+						bcrypt.genSalt 10, (err, salt) ->
+							bcrypt.hash req.query.password, salt, (err, hash) ->
+								# Set password
+								db.settings.set 'password', hash, pCallback
 
 				], (error) ->
 
