@@ -159,9 +159,6 @@ this.login =
 				# Add username
 				data.username = ackee.settings.init.username || ''
 
-				# md5
-				data.password = md5 data.password
-
 				url = 'api/login/reset?' + ackee.serialize(data)
 				ackee.api url, (_data) ->
 
