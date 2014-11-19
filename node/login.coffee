@@ -91,27 +91,37 @@ login = module.exports =
 			else if	rows.username? and
 					rows.password? and
 					req.query? and
-					req.query.username is rows.username and
-					req.query.password is rows.password
+					req.query.password? and
+					req.query.username is rows.username
 
-						# Login vaild
-						req.session.login = false
+						bcrypt.compare req.query.password, rows.password, (err, result) ->
 
-						# Remove login
-						async.parallel [
+							if result is true
 
-							(pCallback) ->
+								# Login vaild
+								req.session.login = false
 
-								db.settings.remove 'username', pCallback
+								# Remove login
+								async.parallel [
 
-							(pCallback) ->
+									(pCallback) ->
 
-								db.settings.remove 'password', pCallback
+										db.settings.remove 'username', pCallback
 
-						], (error) ->
+									(pCallback) ->
 
-								res.json true
-								return true
+										db.settings.remove 'password', pCallback
+
+								], (error) ->
+
+										res.json true
+										return true
+
+							else
+
+								# Required data missing
+								res.json false
+								return false
 
 			else
 

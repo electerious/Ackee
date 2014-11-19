@@ -48,6 +48,7 @@ session = module.exports =
 			else if	rows.username? and
 					rows.password? and
 					req.query? and
+					req.query.password? and
 					req.query.username is rows.username
 
 						bcrypt.compare req.query.password, rows.password, (err, result) ->
