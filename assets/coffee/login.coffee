@@ -103,8 +103,17 @@ this.login =
 				ackee.api url, (_data) ->
 
 					if _data is true
+
+						# Success
 						modal.close true
 						ackee.init()
+						return true
+
+					else
+
+						# Unknown error
+						modal.reset()
+						return false
 
 		]
 

@@ -42,7 +42,7 @@ session = module.exports =
 				not rows?.password?
 
 					# Entries not found
-					res.json { error: 'Could not find username or password in database'}
+					res.json { error: 'Could not find username or password in database', details: null }
 					return false
 
 			else if	rows.username? and
@@ -52,12 +52,22 @@ session = module.exports =
 					req.query.username is rows.username
 
 						bcrypt.compare req.query.password, rows.password, (err, result) ->
-							if result is true
+
+							if err?
+
+								# Unknown error
+								res.json { error: 'Could not compare password with password in database', details: err }
+								return false
+
+							else if result is true
+
 								# Login valid
 								req.session.login = true
 								res.json true
 								return true
+
 							else
+
 								res.json false
 								return false
 

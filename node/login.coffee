@@ -57,7 +57,22 @@ login = module.exports =
 					(pCallback) ->
 
 						bcrypt.genSalt 10, (err, salt) ->
+
+							if err?
+
+								# Error
+								pCallback err
+								return false
+
+							# Hash password
 							bcrypt.hash req.query.password, salt, (err, hash) ->
+
+								if err?
+
+									# Error
+									pCallback err
+									return false
+
 								# Set password
 								db.settings.set 'password', hash, pCallback
 
@@ -96,9 +111,15 @@ login = module.exports =
 
 						bcrypt.compare req.query.password, rows.password, (err, result) ->
 
-							if result is true
+							if err?
 
-								# Login vaild
+								# Unknown error
+								res.json { error: 'Could not compare password with password in database', details: err }
+								return false
+
+							else if result is true
+
+								# Login vaild => Logout
 								req.session.login = false
 
 								# Remove login
