@@ -71,7 +71,7 @@ this.ackee =
 		# Show notification
 		loading = setTimeout ->
 			loading = notification.show {
-				icon: 'ios7-clock'
+				icon: 'ion-ios7-clock'
 				text: 'Still loading ...'
 				pin: true
 			}
@@ -91,7 +91,7 @@ this.ackee =
 
 				# Show error
 				notification.show {
-					icon: 'alert-circled'
+					icon: 'ion-alert-circled'
 					text: "Request failed and server returned: #{ errorThrown }"
 				}
 				console.error {
@@ -113,7 +113,7 @@ this.ackee =
 
 					# Show error
 					notification.show {
-						icon: 'alert-circled'
+						icon: 'ion-alert-circled'
 						text: data.error
 					}
 					console.error data
