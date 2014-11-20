@@ -89,7 +89,7 @@ leafs.add leafs.referrers =
 				return '' if not row?
 
 				row.time_text	= prettyDate(new Date(row.time*1000).toISOString().replace '.000', '')
-				row.favicon		= if blacklist.indexOf(row.referrer.host) is -1 then "http://#{ row.referrer.host }/favicon.ico" else 'assets/img/link.ico'
+				row.favicon		= if blacklist.indexOf(row.referrer.host) is -1 then "//#{ row.referrer.host }/favicon.ico" else 'assets/img/link.ico'
 
 				"""
 				<tr>
@@ -132,7 +132,7 @@ leafs.add leafs.referrers =
 
 				return '' if not row?
 
-				row.favicon = if blacklist.indexOf(row.referrer.host) is -1 then "http://#{ row.referrer.host }/favicon.ico" else ''
+				row.favicon = if blacklist.indexOf(row.referrer.host) is -1 then "//#{ row.referrer.host }/favicon.ico" else ''
 
 				"""
 				<tr>
