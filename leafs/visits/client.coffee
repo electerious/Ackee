@@ -49,12 +49,12 @@ leafs.add leafs.visits =
 
 			leafs.visits.dom().find('.switch').click (e) ->
 				$(this).addClass 'active'
-				context.show data, e, leafs.visits.switch.close
+				basicContext.show data, e, leafs.visits.switch.close
 
 		close: ->
 
 			leafs.visits.dom().find('.switch').removeClass 'active'
-			context.close()
+			basicContext.close()
 
 	build:
 

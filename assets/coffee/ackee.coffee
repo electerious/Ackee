@@ -16,8 +16,8 @@ this.ackee =
 		Mousetrap.bindGlobal 'esc', () ->
 			if $('.modalContainer[data-closable=true]').length isnt 0
 				modal.cancel()
-			else if $('.context').length isnt 0
-				context.close()
+			else if basicContext.visible() is true
+				basicContext.close()
 
 		ackee.api 'api/session/init', (data) ->
 

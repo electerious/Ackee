@@ -55,12 +55,12 @@ leafs.add leafs.referrers =
 
 			leafs.referrers.dom().find('.switch').click (e) ->
 				$(this).addClass 'active'
-				context.show data, e, leafs.referrers.switch.close
+				basicContext.show data, e, leafs.referrers.switch.close
 
 		close: ->
 
 			leafs.referrers.dom().find('.switch').removeClass 'active'
-			context.close()
+			basicContext.close()
 
 	build:
 
