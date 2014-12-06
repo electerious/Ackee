@@ -10,12 +10,12 @@ this.ackee =
 
 		# Bind hotkeys
 		Mousetrap.bindGlobal 'enter', () ->
-			if $('.modalContainer').length isnt 0
-				modal.action()
+			if basicModal.visible() is true
+				basicModal.action()
 
 		Mousetrap.bindGlobal 'esc', () ->
-			if $('.modalContainer[data-closable=true]').length isnt 0
-				modal.cancel()
+			if $('.basicModalContainer[data-closable=true]').length isnt 0
+				basicModal.cancel()
 			else if basicContext.visible() is true
 				basicContext.close()
 

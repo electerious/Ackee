@@ -16,16 +16,16 @@ pkg				= require('./package.json')
 # CSS Tasks
 ###
 gulp.task 'css:compile', ->
-	gulp.src './assets/scss/*.scss'
-		.pipe sass({ includePaths: ['./assets/scss'], errLogToConsole: true })
+	gulp.src 'assets/scss/*.scss'
+		.pipe sass({ errLogToConsole: true })
 		.pipe gulp.dest 'cache/.temp/css/'
 
 gulp.task 'css:concat', ['css:compile'], ->
 	gulp.src [
-			'bower_components/normalize.css/normalize.css',
-			'bower_components/basicModal/dist/basicModal.min.css',
-			'bower_components/basicContext/dist/basicContext.min.css',
-			'bower_components/basicNotification/dist/basicNotification.min.css',
+			'bower_components/normalize.css/normalize.css'
+			'bower_components/basicContext/dist/basicContext.min.css'
+			'bower_components/basicModal/dist/basicModal.min.css'
+			'bower_components/basicNotification/dist/basicNotification.min.css'
 			'cache/.temp/css/*.css'
 		]
 		.pipe concat {path: 'main.css', stat: {mode: "0666"}}
@@ -44,23 +44,23 @@ gulp.task 'css:minify', ['css:concat'], ->
 # JavaScript tasks
 ###
 gulp.task 'js:compile', ->
-	gulp.src './assets/coffee/*.coffee'
-		.pipe coffee {bare: true}
+	gulp.src 'assets/coffee/*.coffee'
+		.pipe coffee { bare: true }
 		.pipe gulp.dest 'cache/.temp/js'
 
 gulp.task 'js:concat', ['js:compile'], ->
 	gulp.src [
-			'bower_components/jQuery/dist/jquery.min.js',
-			'bower_components/mousetrap/mousetrap.min.js',
-			'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
-			'bower_components/basicModal/dist/basicModal.min.js',
-			'bower_components/basicContext/dist/basicContext.min.js',
-			'bower_components/basicNotification/dist/basicNotification.min.js',
-			'bower_components/basicFit/dist/basicFit.min.js',
-			'assets/js/*.js',
+			'bower_components/jQuery/dist/jquery.min.js'
+			'bower_components/mousetrap/mousetrap.min.js'
+			'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js'
+			'bower_components/basicModal/dist/basicModal.min.js'
+			'bower_components/basicContext/dist/basicContext.min.js'
+			'bower_components/basicNotification/dist/basicNotification.min.js'
+			'bower_components/basicFit/dist/basicFit.min.js'
+			'assets/js/*.js'
 			'cache/.temp/js/*.js'
 		]
-		.pipe concat 'main.js', {newLine: '\n' }
+		.pipe concat 'main.js', { newLine: '\n' }
 		.pipe header '/*! <%= pkg.name %> <%= pkg.version %> | <%= now.getFullYear() %>-<%= now.getMonth() %> */\n', { pkg: pkg, now: new Date() }
 		.pipe gulp.dest 'cache/.temp/'
 
@@ -74,13 +74,13 @@ gulp.task 'js:minify', ['js:concat'], ->
 ###
 gulp.task 'tracking:compile', ->
 	gulp.src 'tracking/ackee.coffee'
-		.pipe coffee {bare: true}
+		.pipe coffee { bare: true }
 		.pipe gulp.dest 'cache/.temp/tracking'
 
 gulp.task 'tracking:concat', ['tracking:compile'], ->
 	gulp.src [
-			'bower_components/json2/json2.js',
-			'bower_components/platform/platform.js',
+			'bower_components/json2/json2.js'
+			'bower_components/platform/platform.js'
 			'cache/.temp/tracking/ackee.js'
 		]
 		.pipe concat { path: 'tracking.js', stat: { mode: "0666" } }
@@ -96,13 +96,11 @@ gulp.task 'tracking:minify', ['tracking:concat'], ->
 ###
 gulp.task 'leafs-js:compile', ->
 	gulp.src 'leafs/*/client.coffee'
-		.pipe coffee {bare: true}
+		.pipe coffee { bare: true }
 		.pipe gulp.dest 'cache/.temp/leafs-js'
 
 gulp.task 'leafs-js:concat', ['leafs-js:compile'], ->
-	gulp.src [
-			'cache/.temp/leafs-js/*/client.js'
-		]
+	gulp.src 'cache/.temp/leafs-js/*/client.js'
 		.pipe concat 'leafs.js', {}
 		.pipe gulp.dest 'cache/.temp'
 
@@ -113,13 +111,11 @@ gulp.task 'leafs-js:minify', ['leafs-js:concat'], ->
 
 gulp.task 'leafs-css:compile', ->
 	gulp.src 'leafs/*/*.scss'
-		.pipe sass({ includePaths: ['./assets/scss'], errLogToConsole: true })
+		.pipe sass({ includePaths: ['assets/scss'], errLogToConsole: true })
 		.pipe gulp.dest 'cache/.temp/leafs/'
 
 gulp.task 'leafs-css:concat', ['leafs-css:compile'], ->
-	gulp.src [
-			'cache/.temp/leafs/*/*.css'
-		]
+	gulp.src 'cache/.temp/leafs/*/*.css'
 		.pipe concat {path: 'leafs.css', stat: {mode: "0666"}}
 		.pipe gulp.dest 'cache/.temp/'
 
@@ -144,15 +140,13 @@ gulp.task 'leafs-json', ->
 ###
 gulp.task 'watch-js', ->
 	gulp.watch [
-		'assets/coffee/*.coffee',
+		'assets/coffee/*.coffee'
 		'assets/js/*.js'
 	], ->
 		gulp.start 'js'
 
 gulp.task 'watch-css', ->
-	gulp.watch [
-		'assets/scss/*.scss'
-	], ->
+	gulp.watch 'assets/scss/*.scss', ->
 		gulp.start 'css'
 
 gulp.task 'watch-leafs', ->
@@ -179,45 +173,47 @@ gulp.task 'shorthand', ->
 # Registered tasks
 ###
 gulp.task 'default', [
-	'js',
-	'css',
-	'leafs',
+	'js'
+	'css'
+	'leafs'
 	'tracking'
 ]
 
 gulp.task 'css', [
-	'css:compile',
-	'css:concat',
+	'css:compile'
+	'css:concat'
 	'css:minify'
 ]
 
 gulp.task 'js', [
-	'js:compile',
-	'js:concat',
+	'js:compile'
+	'js:concat'
 	'js:minify'
 ]
 
 gulp.task 'tracking', [
-	'tracking:compile',
-	'tracking:concat',
+	'tracking:compile'
+	'tracking:concat'
 	'tracking:minify'
 ]
 
 gulp.task 'leafs', [
-	'leafs-json',
-	'leafs-js:compile',
-	'leafs-js:concat',
-	'leafs-js:minify',
-	'leafs-css:compile',
-	'leafs-css:concat',
+	'leafs-json'
+	'leafs-js:compile'
+	'leafs-js:concat'
+	'leafs-js:minify'
+	'leafs-css:compile'
+	'leafs-css:concat'
 	'leafs-css:minify'
 ]
 
 gulp.task 'watch', [
-	'watch-css',
-	'watch-js',
-	'watch-leafs',
+	'watch-css'
+	'watch-js'
+	'watch-leafs'
 	'watch-tracking'
 ]
 
-gulp.task 'temp', ['clean']
+gulp.task 'temp', [
+	'clean'
+]

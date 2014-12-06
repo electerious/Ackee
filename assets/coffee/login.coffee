@@ -11,17 +11,17 @@ this.login =
 			if data is true
 
 				# Login valid
-				modal.close true
+				basicModal.close true
 				ackee.init()
 				return true
 
 			# Login failed
-			modal.error 'password'
+			basicModal.error 'password'
 			return false
 
 	show: (data) ->
 
-		modal.show
+		basicModal.show
 			body:	"""
 					<h1>#{ data.name }</h1>
 					<h2>Version #{ data.version } – Web analytics done right!</h2>
@@ -47,7 +47,7 @@ this.login =
 			# Enter login
 			->
 
-				modal.show
+				basicModal.show
 					body:	"""
 							<h1>Welcome</h1>
 							<p>Hi there, lets create your login!</p>
@@ -69,28 +69,28 @@ this.login =
 					data.username is ''
 
 						# Invalid username
-						modal.error 'username'
+						basicModal.error 'username'
 						return false
 
 				if	not data?.password? or
 					data.password is ''
 
 						# Invalid password
-						modal.error 'password'
+						basicModal.error 'password'
 						return false
 
 				if	not data?.repassword? or
 					data.repassword is ''
 
 						# Invalid repassword
-						modal.error 'repassword'
+						basicModal.error 'repassword'
 						return false
 
 				if	data.password isnt data.repassword
 
 						# Invalid password and repassword
-						modal.error 'repassword'
-						$('.modalContainer input[data-name="password"]').addClass 'error'
+						basicModal.error 'repassword'
+						$('.basicModalContainer input[data-name="password"]').addClass 'error'
 						return false
 
 				# Save username
@@ -105,14 +105,14 @@ this.login =
 					if _data is true
 
 						# Success
-						modal.close true
+						basicModal.close true
 						ackee.init()
 						return true
 
 					else
 
 						# Unknown error
-						modal.reset()
+						basicModal.reset()
 						return false
 
 		]
@@ -125,21 +125,21 @@ this.login =
 
 			->
 
-				modal.show
+				basicModal.show
 					body:	"""
 							<p>This step will reset your username and password, allowing you to change your login. Are your sure?</p>
 							"""
 					buttons:
 						cancel:
 							title: 'Cancel'
-							fn: -> modal.close()
+							fn: -> basicModal.close()
 						action:
 							title: 'Reset login'
 							fn: steps[1]
 
 			->
 
-				modal.show
+				basicModal.show
 					body:	"""
 							<h1>Verify</h1>
 							<p>Enter your current passwort below to verify your identity:</p>
@@ -150,7 +150,7 @@ this.login =
 					buttons:
 						cancel:
 							title: ''
-							fn: -> modal.close()
+							fn: -> basicModal.close()
 						action:
 							title: 'Verify and reset login'
 							fn: steps[2]
@@ -162,7 +162,7 @@ this.login =
 					data.password is ''
 
 						# Invalid password
-						modal.error 'password'
+						basicModal.error 'password'
 						return false
 
 				# Add username
@@ -177,7 +177,7 @@ this.login =
 						return true
 
 					# Error
-					modal.error 'password'
+					basicModal.error 'password'
 					return false
 
 		]

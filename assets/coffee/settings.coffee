@@ -4,7 +4,7 @@ this.settings =
 
 		code = "<script async data-ackee type='text/javascript' src='#{ ackee.server() }!'></script>".replace "'", "&apos;"
 
-		modal.show
+		basicModal.show
 			body:	"""
 					<h1>Add Sites</h1>
 					<p>Paste the following code into the HTML-body of every website you want to track.</p>
@@ -15,11 +15,11 @@ this.settings =
 			buttons:
 				cancel:
 					title: ''
-					fn: -> modal.close true
+					fn: -> basicModal.close true
 				action:
 					title: 'Done'
 					color: 'normal'
-					fn: -> modal.close(true)
+					fn: -> basicModal.close(true)
 
 	help: ->
 
