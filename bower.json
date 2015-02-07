@@ -6,7 +6,7 @@
     "ionicons": "~1.5.2",
     "mousetrap": "~1.4.6",
     "normalize.css": "~3.0.0",
-    "basicModal": "~2.0.0",
+    "basicModal": "~2.0.3",
     "basicContext": "~2.0.2",
     "basicNotification": "~1.1.1",
     "json2": "*",
