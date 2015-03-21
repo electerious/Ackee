@@ -16,7 +16,7 @@ pkg				= require('./package.json')
 # CSS Tasks
 ###
 gulp.task 'css:compile', ->
-	gulp.src 'assets/scss/*.scss'
+	gulp.src 'assets/scss/main.scss'
 		.pipe sass({ errLogToConsole: true })
 		.pipe gulp.dest 'cache/.temp/css/'
 
@@ -24,7 +24,6 @@ gulp.task 'css:concat', ['css:compile'], ->
 	gulp.src [
 			'bower_components/normalize.css/normalize.css'
 			'bower_components/basicContext/dist/basicContext.min.css'
-			'bower_components/basicModal/dist/basicModal.min.css'
 			'bower_components/basicNotification/dist/basicNotification.min.css'
 			'cache/.temp/css/*.css'
 		]

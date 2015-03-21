@@ -16,3 +16,6 @@ $timing: cubic-bezier(0.51,.92,.24,1.15);
 @function white($opacity) {
 	@return rgba(255, 255, 255, $opacity);
 }
+
+/* basicModal ------------------------------------------------*/
+$basicModal__color: $cMain;
