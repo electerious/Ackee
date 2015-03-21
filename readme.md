@@ -74,7 +74,7 @@ Take a look at the [FAQ](docs/FAQ.md) if you have problems.
 
 ## License
 
-Copyright (C) 2014 [Tobias Reich](http://electerious.com)  
+Copyright (C) 2015 [Tobias Reich](http://electerious.com)  
 
 [![license](http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US)
 
