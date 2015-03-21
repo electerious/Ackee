@@ -10,6 +10,6 @@
     "basicContext": "~2.0.2",
     "basicNotification": "~1.1.1",
     "json2": "*",
-    "basicFit": "~1.0.1"
+    "basicFit": "~2.0.1"
   }
 }

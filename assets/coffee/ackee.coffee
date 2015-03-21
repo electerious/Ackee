@@ -36,7 +36,7 @@ this.ackee =
 
 					# Logged in
 					menu.init '#menu'
-					fit.init '#content', '.leaf'
+					basicFit.init '#content', '.leaf'
 					leafs.init()
 					cache.init()
 					return true

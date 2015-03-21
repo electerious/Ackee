@@ -40,5 +40,5 @@ this.leafs =
 		module.name	= encodeURI(module.title).toLowerCase()
 		module.dom	= -> ackee.dom.module(module.name)
 		ackee.dom.content.append leafs._build(module)
-		fit.refresh()
+		basicFit.refresh()
 		module.init()
