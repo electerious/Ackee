@@ -70,7 +70,7 @@ this.ackee =
 
 		# Show notification
 		loading = setTimeout ->
-			loading = notification.show {
+			loading = basicNotification.show {
 				icon: 'ion-ios7-clock'
 				text: 'Still loading ...'
 				pin: true
@@ -85,12 +85,12 @@ this.ackee =
 
 				# Hide notification
 				clearTimeout loading if loading
-				notification.close loading if loading >= 100
+				basicNotification.close loading if loading >= 100
 
 				errorThrown = 'Unknown' if errorThrown is ''
 
 				# Show error
-				notification.show {
+				basicNotification.show {
 					icon: 'ion-alert-circled'
 					text: "Request failed and server returned: #{ errorThrown }"
 				}
@@ -107,12 +107,12 @@ this.ackee =
 
 				# Hide notification
 				clearTimeout loading if loading
-				notification.close loading if loading >= 100
+				basicNotification.close loading if loading >= 100
 
 				if data?.error?
 
 					# Show error
-					notification.show {
+					basicNotification.show {
 						icon: 'ion-alert-circled'
 						text: data.error
 					}
