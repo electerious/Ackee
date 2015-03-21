@@ -8,7 +8,7 @@
     "normalize.css": "~3.0.0",
     "basicModal": "~2.0.4",
     "basicContext": "~2.0.3",
-    "basicNotification": "~2.0.1",
+    "basicNotification": "~2.0.5",
     "json2": "*",
     "basicFit": "~2.0.1"
   }
