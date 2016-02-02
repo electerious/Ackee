@@ -32,9 +32,9 @@ query =
 	month: ->
 
 		"""
-		SELECT strftime("%m", time, "unixepoch") month, COUNT() count
+		SELECT strftime("%m", time, "unixepoch") month, strftime("%Y", time, "unixepoch") year, COUNT() count
 		 FROM stats
-		 GROUP BY month
+		 GROUP BY year, month
 		 ORDER BY time DESC
 		 LIMIT #{ settings.limit }
 		"""
