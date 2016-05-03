@@ -1,0 +1,3 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/electerious/ackee-server.git
