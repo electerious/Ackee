@@ -1,15 +1,1 @@
-etc/
-
 node_modules/
-bower_components/
-
-.sass-cache
-
-leafs/*
-data/
-cache/
-
-!leafs/pages/
-!leafs/referrers/
-!leafs/users/
-!leafs/visits/

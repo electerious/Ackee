@@ -1,8 +1,0 @@
-{
-  "name": "users",
-  "version": "1.0.0",
-  "description": "Know everything about your visitors.",
-  "authors": "Tobias Reich <tobias.reich.ich@gmail.com>",
-  "license": "MIT",
-  "main": "server.coffee"
-}
