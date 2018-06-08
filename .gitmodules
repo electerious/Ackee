@@ -1,9 +1,6 @@
 [submodule "server"]
 	path = server
 	url = https://github.com/electerious/ackee-server.git
-[submodule "site"]
-	path = site
-	url = https://github.com/electerious/ackee-site.git
 [submodule "tracker"]
 	path = tracker
 	url = https://github.com/electerious/ackee-tracker.git
