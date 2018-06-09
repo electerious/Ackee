@@ -1,11 +1,11 @@
 {
-  "name": "ackee-server",
+  "name": "ackee",
   "private": true,
   "version": "1.0.0",
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
-  "description": "Where the magic happens: The server behind Ackee",
+  "description": "Self-hosted website analytics tool written in Node.js",
   "main": "src/index.js",
   "keywords": [
     "server",
@@ -13,10 +13,10 @@
     "analytics"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/electerious/ackee-server",
+  "homepage": "https://github.com/electerious/Ackee",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electerious/ackee-server.git"
+    "url": "https://github.com/electerious/Ackee.git"
   },
   "scripts": {
     "start": "node src/index.js"
