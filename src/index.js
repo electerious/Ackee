@@ -9,6 +9,7 @@ const { router, get, post, put, del } = require('microrouter')
 const pipe = require('./pipe')
 const auth = require('./auth')
 
+const ui = require('./routes/ui')
 const tokens = require('./routes/tokens')
 const domains = require('./routes/domains')
 const records = require('./routes/records')
@@ -17,6 +18,9 @@ mongoose.connect(process.env.MONGODB)
 
 const server = micro(
 	router(
+		get('/', ui.index),
+		get('/index.css', ui.styles),
+		get('/index.js', ui.scripts),
 		post('/tokens', tokens.add),
 		del('/tokens/:tokenId', tokens.del),
 		post('/domains', pipe(auth, domains.add)),
