@@ -1,16 +1,15 @@
 'use strict'
 
-module.exports = (updated) => {
+const second = 1000
+const minute = second * 60
+const hour = minute * 60
+const day = hour * 24
 
-	const second = 1000
-	const hour = second * 60
-	const day = hour * 60
+module.exports = (timestamp, ttl = day) => {
 
 	const current = Date.now()
-	const passed = current - updated
+	const passed = current - timestamp
 
-	const ttl = process.env.TTL || day
-
-	return ttl >= passed
+	return ttl > passed
 
 }

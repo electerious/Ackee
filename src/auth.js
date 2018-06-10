@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
 		throw createError(400, 'Token unknown')
 	}
 
-	const valid = ttl(entry.updated)
+	const valid = ttl(entry.updated, process.env.TTL)
 
 	if (valid === false) {
 		permit.fail(res)
