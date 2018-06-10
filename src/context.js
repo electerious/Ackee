@@ -1,10 +1,12 @@
 'use strict'
 
-module.exports = (req, key, value) => {
+module.exports = (obj, key, value) => {
 
-	if (req.context == null) req.context = {}
-	if (key === undefined) return req.context
+	if (obj.context == null) obj.context = {}
+	if (key === undefined) return obj.context
 
-	req.context[key] = value
+	obj.context[key] = value
+
+	return obj.context
 
 }
