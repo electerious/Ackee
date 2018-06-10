@@ -5,7 +5,7 @@ const uuid = require('uuid/v4')
 
 const messages = require('../src/messages')
 
-test('should extract messages from an object with errors', (t) => {
+test('extract messages from an object with errors', (t) => {
 
 	const message = uuid()
 	const errors = { 0: new Error(message) }

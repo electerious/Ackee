@@ -5,7 +5,7 @@ const uuid = require('uuid/v4')
 
 const context = require('../src/context')
 
-test('should return object context', (t) => {
+test('return object context', (t) => {
 
 	const key = uuid()
 	const value = uuid()
@@ -22,7 +22,7 @@ test('should return object context', (t) => {
 
 })
 
-test('should add key and value to object', (t) => {
+test('add key and value to object', (t) => {
 
 	const key = uuid()
 	const value = uuid()
