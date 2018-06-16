@@ -4,7 +4,7 @@ const path = require('path')
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js')
 
-const index = require('../ui/server')
+const index = require('../ui/index')
 
 const styles = async () => {
 
