@@ -21,7 +21,7 @@
   "scripts": {
     "start": "node src/index.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc ava"
+    "test": "nyc ava -v"
   },
   "dependencies": {
     "dotenv": "^6.0.0",
@@ -32,12 +32,15 @@
     "permit": "^0.2.2",
     "rosid-handler-js": "^10.1.0",
     "rosid-handler-sass": "^6.0.0",
+    "signale": "^1.2.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
     "ava": "^1.0.0-beta.5.1",
     "coveralls": "^3.0.1",
-    "nyc": "^12.0.2"
+    "node-fetch": "^2.1.2",
+    "nyc": "^12.0.2",
+    "test-listen": "^1.1.0"
   },
   "ava": {
     "babel": false,
