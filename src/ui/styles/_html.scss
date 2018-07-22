@@ -1,0 +1,23 @@
+html {
+
+	// Colors
+	--main: rgba(115, 250, 200, 1);
+	--white: rgba(255, 255, 255, 1);
+	--light: rgba(255, 255, 255, .5);
+	--black: rgba(40, 45, 50, 1);
+	--dimmed: rgba(255, 255, 255, .05);
+
+	// Sizes
+	--gutter: 1.8em;
+	--max-width: 1100px;
+	--radius: 6px;
+
+	// Fill the whole browser. Necessary when the body is smaller than the browser,
+	// but wants to fill the whole page using min-height.
+	width: 100%;
+	height: 100%;
+
+	// Set the font-size in the root element as rem is relative to the document root
+	font: normal 400 112.5%/1.6 'Rubik', sans-serif;
+
+}

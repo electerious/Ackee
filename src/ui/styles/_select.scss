@@ -1,0 +1,12 @@
+.select {
+
+	color: var(--white);
+	background-color: var(--dimmed);
+	border-radius: var(--radius);
+	border-width: 2px;
+
+	&:focus {
+		border-color: var(--main);
+	}
+
+}

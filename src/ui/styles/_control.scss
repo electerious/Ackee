@@ -1,0 +1,29 @@
+.control {
+
+	// We use an absolute unit (px) for the control size to avoid half pixels.
+	// Half pixels would transform the circle of the radio control into an egg.
+	$size: 24px;
+
+	&__input:focus + &__label {
+		&::before {
+			border-color: var(--main);
+		}
+	}
+
+	&__label {
+		padding-left: calc(#{ $size } + #{ $formbase__gutter/3 });
+
+		&::before,
+		&::after {
+			top: calc(50% - #{ $size/2 });
+			width: $size;
+			height: $size;
+		}
+
+		&::before {
+			background: var(--dimmed);
+			border-width: 2px;
+		}
+	}
+
+}
