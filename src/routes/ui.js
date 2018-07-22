@@ -19,8 +19,7 @@ const scripts = async () => {
 
 	const filePath = path.resolve(__dirname, '../ui/scripts/index.js')
 	const browserify = {}
-	const babel = { babelrc: false, compact: false }
-	const opts = { optimize: false, browserify, babel }
+	const opts = { optimize: false, browserify }
 
 	return js(filePath, opts)
 
