@@ -24,6 +24,8 @@
     "test": "nyc ava -v"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "dotenv": "^6.0.0",
     "formbase": "^6.0.4",
     "is-url": "^1.2.4",

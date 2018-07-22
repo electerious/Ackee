@@ -18,8 +18,37 @@ const styles = async () => {
 const scripts = async () => {
 
 	const filePath = path.resolve(__dirname, '../ui/scripts/index.js')
-	const browserify = {}
-	const opts = { optimize: false, browserify }
+
+	const babel = {
+		presets: [
+			[
+				'env', {
+					targets: {
+						browsers: [
+							'last 2 Safari versions',
+							'last 2 Chrome versions',
+							'last 2 Opera versions',
+							'last 2 Firefox versions'
+						]
+					}
+				}
+			]
+		],
+		plugins: [
+			[
+				'transform-object-rest-spread', {
+					useBuiltIns: true
+				}
+			]
+		],
+		babelrc: false
+	}
+
+	const opts = {
+		optimize: false,
+		browserify: {},
+		babel
+	}
 
 	return js(filePath, opts)
 
