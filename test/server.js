@@ -35,7 +35,7 @@ test('return CSS', async (t) => {
 	const res = await fetch(url.href)
 	const result = await res.text()
 
-	t.true(typeof result === 'string')
+	t.true(result.includes('html{'))
 
 })
 
