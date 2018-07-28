@@ -1,0 +1,35 @@
+.card {
+
+	background: var(--dimmed);
+	border-radius: var(--radius);
+	width: 100%;
+
+	&--login {
+		justify-self: center;
+		align-self: center;
+		max-width: 420px;
+	}
+
+	&__inner {
+		padding: calc(var(--gutter) * 1.5);
+	}
+
+	&__footer {
+		display: flex;
+		border-top: 1px solid var(--black);
+	}
+
+	&__button {
+		padding: var(--gutter) calc(var(--gutter) * 1.5);
+
+		&--primary {
+			width: 100%;
+		}
+	}
+
+	&__separator {
+		width: 1px;
+		background: var(--black);
+	}
+
+}

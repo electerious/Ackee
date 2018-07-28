@@ -2,17 +2,18 @@ import { compose, setDisplayName } from 'recompose'
 
 import h from '../utils/h'
 
-import Login from './Login'
-
 const enhance = compose(
 
-	setDisplayName('Main')
+	setDisplayName('Input')
 
 )
 
-const Component = () => (
+const Component = (props) => (
 
-	h(Login)
+	h('input', {
+		className: 'input',
+		...props
+	})
 
 )
 

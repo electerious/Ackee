@@ -1,23 +1,15 @@
 .c {
 
-	// &-main {
-	// 	color: var(--main);
-	// }
+	&-main {
+		color: var(--main);
+	}
 
 	&-white {
 		color: var(--white);
 	}
 
-	// &-light {
-	// 	color: var(--light);
-	// }
-	//
-	// &-black {
-	// 	color: var(--black);
-	// }
-	//
-	// &-dimmed {
-	// 	color: var(--dimmed);
-	// }
+	&-light {
+		color: var(--light);
+	}
 
 }

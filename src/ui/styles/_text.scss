@@ -1,0 +1,9 @@
+.text {
+
+	margin: 0 0 var(--gutter);
+
+	&--no-spacing {
+		margin-bottom: 0;
+	}
+
+}
