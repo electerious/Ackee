@@ -1,6 +1,5 @@
+import { createElement as h } from 'react'
 import { compose, setDisplayName } from 'recompose'
-
-import h from '../utils/h'
 
 const enhance = compose(
 

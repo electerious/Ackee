@@ -1,8 +1,8 @@
+import { createElement as h } from 'react'
 import { render } from 'react-dom'
 import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
 
-import h from './utils/h'
 import createStore from './utils/createStore'
 import enhanceState from './utils/enhanceState'
 import reducers from './reducers'
