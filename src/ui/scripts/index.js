@@ -10,7 +10,11 @@ import * as actions from './actions'
 
 import Main from './components/Main'
 
-const store = createStore(reducers)
+const store = createStore(reducers, {
+	token: {
+		value: localStorage.getItem('ackee_token')
+	}
+})
 
 const mapStateToProps = (state) => enhanceState(state)
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

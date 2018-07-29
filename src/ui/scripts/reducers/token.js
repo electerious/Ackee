@@ -17,6 +17,7 @@ export default (state = initalState, action) => immer(state, draft => {
 	switch (action.type) {
 		case SET_TOKEN_VALUE:
 			draft.value = action.payload
+			localStorage.setItem('ackee_token', action.payload)
 			break
 		case SET_TOKEN_FETCHING:
 			draft.fetching = action.payload
