@@ -6,6 +6,9 @@ html {
 	--light: rgba(255, 255, 255, .5);
 	--black: rgba(40, 45, 50, 1);
 	--dimmed: rgba(255, 255, 255, .05);
+	--success: rgba(0, 255, 0, .1);
+	--warning: rgba(255, 255, 0, .1);
+	--error: rgba(255, 0, 0, .1);
 
 	// Sizes
 	--gutter: 1rem;
@@ -18,6 +21,6 @@ html {
 	height: 100%;
 
 	// Set the font-size in the root element as rem is relative to the document root
-	font: normal 400 112.5%/1.6 'Rubik', sans-serif;
+	font: normal 400 112.5%/1.5 'Rubik', sans-serif;
 
 }

@@ -42,8 +42,10 @@ export const postToken = (props) => async (dispatch) => {
 
 	} catch (err) {
 
+		console.error(err)
+
 		dispatch(setTokenFetching(false))
-		dispatch(setTokenError(err))
+		dispatch(setTokenError(err.message))
 
 	}
 

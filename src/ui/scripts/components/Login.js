@@ -5,6 +5,7 @@ import Spacer from './Spacer'
 import Headline from './Headline'
 import Text from './Text'
 import Spinner from './Spinner'
+import Message from './Message'
 
 export default class Login extends Component {
 
@@ -58,6 +59,8 @@ export default class Login extends Component {
 				h(Text, {}, 'Welcome back, sign in to continue.'),
 
 				h(Spacer, { size: 2.5 }),
+
+				this.props.token.error != null && h(Message, { status: 'error', className: 'c-white' }, this.props.token.error),
 
 				h(Input, {
 					type: 'text',
