@@ -9,9 +9,9 @@ const enhance = compose(
 
 )
 
-const Component = () => (
+const Component = (props) => (
 
-	h(Login)
+	h(Login, props)
 
 )
 

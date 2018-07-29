@@ -1,12 +1,17 @@
 .input {
 
 	color: var(--white);
-	background-color: var(--dimmed);
+	background: var(--dimmed);
 	border-radius: var(--radius);
 	border-width: 2px;
 
 	&:focus {
 		border-color: var(--main);
+	}
+
+	&[disabled] {
+		background: var(--dimmed);
+		border-color: transparent;
 	}
 
 }

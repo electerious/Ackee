@@ -3,6 +3,7 @@
 	background: var(--dimmed);
 	border-radius: var(--radius);
 	width: 100%;
+	overflow: hidden;
 
 	&--login {
 		justify-self: center;
@@ -20,7 +21,24 @@
 	}
 
 	&__button {
+		display: flex;
+		justify-content: flex-end;
 		padding: var(--gutter) calc(var(--gutter) * 1.5);
+		transition: background .3s ease;
+
+		&[disabled] {
+			cursor: not-allowed;
+		}
+
+		&:not([disabled]):focus,
+		&:not([disabled]):hover {
+			background: var(--dimmed);
+		}
+
+		&:active {
+			background: none;
+			transition: none;
+		}
 
 		&--primary {
 			width: 100%;
@@ -28,6 +46,7 @@
 	}
 
 	&__separator {
+		flex-shrink: 0;
 		width: 1px;
 		background: var(--black);
 	}
