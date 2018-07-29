@@ -8,7 +8,7 @@ const enhance = compose(
 	setDisplayName('Message'),
 
 	setPropTypes({
-		status: PropTypes.string,
+		status: PropTypes.oneOf([ 'success', 'warning', 'error' ]).isRequired,
 		className: PropTypes.string,
 		children: PropTypes.node.isRequired
 	})
