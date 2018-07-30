@@ -12,7 +12,7 @@ const initalState = {
 	error: undefined
 }
 
-export default (state = initalState, action) => immer(state, draft => {
+export default (state = initalState, action) => immer(state, (draft) => {
 
 	switch (action.type) {
 		case SET_TOKEN_VALUE:
