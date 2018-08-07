@@ -6,7 +6,7 @@
 
 	&__input:focus + &__label {
 		&::before {
-			border-color: var(--main);
+			border-color: var(--primary);
 		}
 	}
 

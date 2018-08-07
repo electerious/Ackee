@@ -27,8 +27,8 @@
 		animation-iteration-count: infinite;
 		animation-timing-function: linear;
 
-		&--main {
-			border-right-color: var(--main);
+		&--primary {
+			border-right-color: var(--primary);
 			animation-duration: .5s;
 		}
 

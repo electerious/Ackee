@@ -1,0 +1,11 @@
+.headerLogo {
+
+	--size: 42px;
+
+	margin: var(--gutter) 0 calc(var(--gutter) / 2);
+	width: var(--size);
+	height: var(--size);
+	background: var(--gradient);
+	border-radius: 100%;
+
+}

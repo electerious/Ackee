@@ -1,11 +1,14 @@
 html {
 
 	// Colors
-	--main: rgba(115, 250, 200, 1);
+	--primary: rgba(115, 250, 200, 1);
+	--secondary: rgba(0, 210, 255, 1);
+	--gradient: linear-gradient(135deg, var(--primary), var(--secondary));
 	--white: rgba(255, 255, 255, 1);
 	--light: rgba(255, 255, 255, .5);
 	--black: rgba(40, 45, 50, 1);
 	--dimmed: rgba(255, 255, 255, .05);
+	--border: rgba(0, 0, 0, .3);
 	--success: rgba(0, 255, 0, .1);
 	--warning: rgba(255, 255, 0, .1);
 	--error: rgba(255, 0, 0, .15);

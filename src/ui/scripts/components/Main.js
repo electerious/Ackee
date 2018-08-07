@@ -1,7 +1,8 @@
-import { createElement as h } from 'react'
+import { createElement as h, Fragment } from 'react'
 import { compose, setDisplayName } from 'recompose'
 
 import Login from './Login'
+import Dashboard from './Dashboard'
 
 const enhance = compose(
 
@@ -11,7 +12,10 @@ const enhance = compose(
 
 const Component = (props) => (
 
-	h(Login, props)
+	h(Fragment, {},
+		props.token.value == null && h(Login, props),
+		props.token.value != null && h(Dashboard, props)
+	)
 
 )
 

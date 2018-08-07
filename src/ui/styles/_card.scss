@@ -11,6 +11,10 @@
 		max-width: 420px;
 	}
 
+	&--wide {
+		grid-column-end: span 3;
+	}
+
 	&__inner {
 		padding: calc(var(--gutter) * 1.5);
 	}
