@@ -25,7 +25,7 @@ docker run -p 27017:27017 -d mongo
 Configure Ackee using environment variables or create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
 
 ```
-MONGODB=mongodb://localhost/myapp
+MONGODB=mongodb://localhost/ackee
 USERNAME=username
 PASSWORD=password
 ```
