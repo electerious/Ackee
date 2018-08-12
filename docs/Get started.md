@@ -44,22 +44,10 @@ Install all required dependencies.
 npm install
 ```
 
-*or*
-
-```
-yarn install
-```
-
 ### 4. Start Ackee
 
 Run Ackee. It will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps in the interface.
 
 ```
 npm start
-```
-
-*or*
-
-```
-yarn start
 ```
