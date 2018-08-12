@@ -44,8 +44,9 @@ The interface of Ackee lets you view and analyse your tracked information.
 
 Ackee depends on...
 
-- [Node.js](https://nodejs.org/en/) (v8.9.0 or newer)
+- [Node.js](https://nodejs.org/en/) (v8.11.0 or newer)
 - [npm](https://www.npmjs.com)
+- [MongoDB](https://www.mongodb.com)
 
 Make sure to install and update all dependencies before you setup Ackee.
 
@@ -69,7 +70,7 @@ MONGODB=mongodb://localhost/ackee
 
 #### Port
 
-The port Ackee should listen on.
+The port Ackee should listen on. Defaults to `3000`.
 
 ```
 PORT=3000
