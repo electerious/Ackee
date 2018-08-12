@@ -66,6 +66,7 @@ export default class Login extends Component {
 					type: 'text',
 					placeholder: 'Username',
 					disabled: this.props.token.fetching === true,
+					required: true,
 					autoCapitalize: 'off',
 					autoCorrect: 'off',
 					autoComplete: 'username',
@@ -77,6 +78,7 @@ export default class Login extends Component {
 					type: 'password',
 					placeholder: 'Password',
 					disabled: this.props.token.fetching === true,
+					required: true,
 					autoComplete: 'current-password',
 					value: this.state.password,
 					onChange: this.onChange('password')
