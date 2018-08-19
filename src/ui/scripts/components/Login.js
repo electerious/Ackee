@@ -54,13 +54,13 @@ export default class Login extends Component {
 				h(Headline, {
 					type: 'h1',
 					spacing: false,
-					className: 'c-white'
+					className: 'color-white'
 				}, 'Ackee'),
 				h(Text, {}, 'Welcome back, sign in to continue.'),
 
 				h(Spacer, { size: 2.5 }),
 
-				this.props.token.error != null && h(Message, { status: 'error', className: 'c-white' }, this.props.token.error),
+				this.props.token.error != null && h(Message, { status: 'error', className: 'color-white' }, this.props.token.error),
 
 				h(Input, {
 					type: 'text',
@@ -99,7 +99,7 @@ export default class Login extends Component {
 				}),
 
 				h('button', {
-					className: 'card__button card__button--primary link c-white',
+					className: 'card__button card__button--primary link color-white',
 					disabled: this.props.token.fetching === true
 				}, this.props.token.fetching === true ? h(Spinner) : 'Sign In →')
 
