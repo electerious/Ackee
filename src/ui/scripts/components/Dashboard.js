@@ -21,7 +21,6 @@ export default class Dashboard extends Component {
 				this.props.route.tab === 'overview' && h(Fragment, {},
 					h(Card, { wide: true, title: 'Page Visits' }),
 					h(Card, { title: 'Visits' }),
-					h(Card, { title: 'Visits' }),
 					h(Card, { title: 'Visits' })
 				)
 			)
