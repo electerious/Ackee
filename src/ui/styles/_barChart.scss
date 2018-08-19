@@ -1,0 +1,80 @@
+.barChart {
+
+	position: relative;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	grid-template-columns: auto;
+	padding-top: calc(var(--gutter) * 3.5);
+	height: 300px;
+	overflow: hidden;
+
+	&__axis {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-self: stretch;
+	}
+
+	&__row {
+		position: relative;
+		font-size: .8em;
+		padding: calc(var(--gutter) / 2) 0;
+		padding-right: calc(var(--gutter) / 4);
+
+		&--top {
+			transform: translateY(-100%);
+		}
+
+		&--middle {
+			transform: translateY(-50%);
+		}
+
+		&--bottom {
+			transform: translateY(0);
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: var(--max-width);
+			height: 1px;
+			background: var(--dimmed);
+		}
+	}
+
+	&__column {
+		display: grid;
+		align-items: flex-end;
+		padding: 0 10%;
+		width: 100%;
+	}
+
+	&__bar {
+		position: relative;
+		width: 100%;
+		height: var(--size);
+		background: var(--tertiary);
+	}
+
+	&__column.active &__bar {
+		background: var(--primary);
+
+		&::after {
+			--arrow-width: 15px;
+			--arrow-height: 10px;
+
+			content: attr(data-label);
+			position: absolute;
+			right: 0;
+			bottom: calc(100% + var(--gutter));
+			padding: .2em .5em calc(.2em + var(--arrow-height));
+			background: var(--white);
+			clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--arrow-width)) calc(100% - var(--arrow-height)), 0 calc(100% - var(--arrow-height)));
+			color: currentColor;
+		}
+	}
+
+}
