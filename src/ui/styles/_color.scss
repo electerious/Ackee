@@ -1,4 +1,4 @@
-.c {
+.color {
 
 	&-main {
 		color: var(--primary);
@@ -10,6 +10,10 @@
 
 	&-light {
 		color: var(--light);
+	}
+
+	&-black {
+		color: var(--black);
 	}
 
 }
