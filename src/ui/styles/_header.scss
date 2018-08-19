@@ -5,4 +5,28 @@
 	align-items: center;
 	border-bottom: 1px solid var(--border);
 
+	&__logo {
+		--size: 42px;
+
+		margin: var(--gutter) 0 calc(var(--gutter) / 2);
+		width: var(--size);
+		height: var(--size);
+		background: var(--gradient);
+		border-radius: 100%;
+	}
+
+	&__button {
+		margin: 0 calc(var(--gutter) / 1.5);
+		padding: calc(var(--gutter) / 1.5) 2px;
+		transition: box-shadow .3s ease;
+
+		&:hover {
+			box-shadow: inset 0 -2px 0 var(--light);
+		}
+
+		&.active {
+			box-shadow: inset 0 -2px 0 var(--primary);
+		}
+	}
+
 }
