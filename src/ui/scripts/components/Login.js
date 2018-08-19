@@ -7,7 +7,7 @@ import Text from './Text'
 import Spinner from './Spinner'
 import Message from './Message'
 
-export default class Login extends Component {
+const Login = class extends Component {
 
 	constructor(props) {
 
@@ -46,66 +46,70 @@ export default class Login extends Component {
 
 	render() {
 
-		return h('form', { className: 'card card--login', onSubmit: this.onSubmit },
-			h('div', { className: 'card__inner align-center' },
+		return (
+			h('form', { className: 'card card--login', onSubmit: this.onSubmit },
+				h('div', { className: 'card__inner align-center' },
 
-				h(Spacer, { size: 2 }),
+					h(Spacer, { size: 2 }),
 
-				h(Headline, {
-					type: 'h1',
-					spacing: false,
-					className: 'color-white'
-				}, 'Ackee'),
-				h(Text, {}, 'Welcome back, sign in to continue.'),
+					h(Headline, {
+						type: 'h1',
+						spacing: false,
+						className: 'color-white'
+					}, 'Ackee'),
+					h(Text, {}, 'Welcome back, sign in to continue.'),
 
-				h(Spacer, { size: 2.5 }),
+					h(Spacer, { size: 2.5 }),
 
-				this.props.token.error != null && h(Message, { status: 'error', className: 'color-white' }, this.props.token.error),
+					this.props.token.error != null && h(Message, { status: 'error', className: 'color-white' }, this.props.token.error),
 
-				h(Input, {
-					type: 'text',
-					placeholder: 'Username',
-					disabled: this.props.token.fetching === true,
-					required: true,
-					autoCapitalize: 'off',
-					autoCorrect: 'off',
-					autoComplete: 'username',
-					autoFocus: true,
-					value: this.state.username,
-					onChange: this.onChange('username')
-				}),
-				h(Input, {
-					type: 'password',
-					placeholder: 'Password',
-					disabled: this.props.token.fetching === true,
-					required: true,
-					autoComplete: 'current-password',
-					value: this.state.password,
-					onChange: this.onChange('password')
-				}),
+					h(Input, {
+						type: 'text',
+						placeholder: 'Username',
+						disabled: this.props.token.fetching === true,
+						required: true,
+						autoCapitalize: 'off',
+						autoCorrect: 'off',
+						autoComplete: 'username',
+						autoFocus: true,
+						value: this.state.username,
+						onChange: this.onChange('username')
+					}),
+					h(Input, {
+						type: 'password',
+						placeholder: 'Password',
+						disabled: this.props.token.fetching === true,
+						required: true,
+						autoComplete: 'current-password',
+						value: this.state.password,
+						onChange: this.onChange('password')
+					}),
 
-				h(Spacer, { size: 1 })
+					h(Spacer, { size: 1 })
 
-			),
-			h('div', { className: 'card__footer' },
+				),
+				h('div', { className: 'card__footer' },
 
-				h('a', {
-					className: 'card__button link',
-					href: '#'
-				}, 'Help'),
+					h('a', {
+						className: 'card__button link',
+						href: '#'
+					}, 'Help'),
 
-				h('div', {
-					className: 'card__separator'
-				}),
+					h('div', {
+						className: 'card__separator'
+					}),
 
-				h('button', {
-					className: 'card__button card__button--primary link color-white',
-					disabled: this.props.token.fetching === true
-				}, this.props.token.fetching === true ? h(Spinner) : 'Sign In →')
+					h('button', {
+						className: 'card__button card__button--primary link color-white',
+						disabled: this.props.token.fetching === true
+					}, this.props.token.fetching === true ? h(Spinner) : 'Sign In →')
 
+				)
 			)
 		)
 
 	}
 
 }
+
+export default Login
