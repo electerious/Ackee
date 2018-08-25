@@ -50,3 +50,29 @@ export const postToken = (props) => async (dispatch) => {
 	}
 
 }
+
+export const deleteToken = (props) => async (dispatch) => {
+
+	dispatch(setTokenError())
+	dispatch(setTokenValue())
+
+	try {
+
+		const response = await fetch(`/tokens/${ props.token.value }`, {
+			method: 'delete'
+		})
+
+		if (response.ok === false) {
+			const text = await response.text()
+			throw new Error(text)
+		}
+
+	} catch (err) {
+
+		console.error(err)
+
+		dispatch(setTokenError(err.message))
+
+	}
+
+}
