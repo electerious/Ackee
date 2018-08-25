@@ -4,8 +4,12 @@ import {
 	SET_ROUTE_TAB
 } from '../actions'
 
+import {
+	OVERVIEW
+} from '../constants/routes'
+
 const initalState = {
-	tab: 'overview'
+	tab: OVERVIEW
 }
 
 export default (state = initalState, action) => immer(state, (draft) => {

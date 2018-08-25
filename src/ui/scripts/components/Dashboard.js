@@ -1,5 +1,7 @@
 import { createElement as h, Component, Fragment } from 'react'
 
+import * as routes from '../constants/routes'
+
 import Header from './Header'
 import Card from './Card'
 
@@ -17,6 +19,13 @@ const Dashboard = class extends Component {
 				400,
 				550,
 				901,
+				620,
+				800,
+				300,
+				250,
+				400,
+				550,
+				901,
 				620
 			]
 		}
@@ -27,20 +36,22 @@ const Dashboard = class extends Component {
 
 		return (
 			h('div', {},
-				h(Header, this.props),
+				h(Header, { buttons: [
+					{ onClick: () => this.props.setRouteTab(routes.OVERVIEW), active: this.props.route.tab === routes.OVERVIEW, label: 'Overview' },
+					{ onClick: () => this.props.setRouteTab(routes.SITES), active: this.props.route.tab === routes.SITES, label: 'Sites' },
+					{ onClick: () => this.props.setRouteTab(routes.SETTINGS), active: this.props.route.tab === routes.SETTINGS, label: 'Settings' }
+				] }),
 				h('main', { className: 'content' },
-					this.props.route.tab === 'overview' && h(Fragment, {},
+					this.props.route.tab === routes.OVERVIEW && h(Fragment, {},
 						h(Card, {
 							wide: true,
-							title: 'Page Visits',
-							data: [...this.state.data, ...this.state.data]
-						}),
-						h(Card, {
-							title: 'Visits',
+							title: 'Page Views',
 							data: this.state.data
-						}),
+						})
+					),
+					this.props.route.tab === routes.SETTINGS && h(Fragment, {},
 						h(Card, {
-							title: 'Visits',
+							title: 'Page Views',
 							data: this.state.data
 						})
 					)

@@ -1,10 +1,21 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName } from 'recompose'
+import { compose, setDisplayName, setPropTypes } from 'recompose'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const enhance = compose(
 
-	setDisplayName('Header')
+	setDisplayName('Header'),
+
+	setPropTypes({
+		buttons: PropTypes.arrayOf(
+			PropTypes.shape({
+				active: PropTypes.bool.isRequired,
+				onClick: PropTypes.func.isRequired,
+				label: PropTypes.string.isRequired
+			})
+		).isRequired
+	})
 
 )
 
@@ -32,10 +43,12 @@ const Component = (props) => (
 
 	h('header', { className: 'header' },
 		h(Logo),
-		h('nav', {},
-			h(Button, { onClick: props.setRouteTab.bind(null, 'overview'), active: props.route.tab === 'overview' }, 'Overview'),
-			h(Button, { onClick: props.setRouteTab.bind(null, 'sites'), active: props.route.tab === 'sites' }, 'Sites'),
-			h(Button, { onClick: props.setRouteTab.bind(null, 'settings'), active: props.route.tab === 'settings' }, 'Settings')
+		h('nav', {}, props.buttons.map(
+			(props, index) => h(Button, {
+				key: index,
+				active: props.active,
+				onClick: props.onClick
+			}, props.label))
 		)
 	)
 
