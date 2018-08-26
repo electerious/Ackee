@@ -1,0 +1,14 @@
+.linkItem {
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0 var(--gutter);
+	width: 100%;
+	transition: color .3s ease;
+
+	&:hover {
+		color: var(--white);
+	}
+
+}

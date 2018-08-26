@@ -4,6 +4,7 @@ import * as routes from '../constants/routes'
 
 import Header from './Header'
 import Card from './Card'
+import Account from './Account'
 
 const Dashboard = class extends Component {
 
@@ -50,10 +51,7 @@ const Dashboard = class extends Component {
 						})
 					),
 					this.props.route.tab === routes.SETTINGS && h(Fragment, {},
-						h(Card, {
-							title: 'Page Views',
-							data: this.state.data
-						})
+						h(Account, this.props)
 					)
 				)
 			)
