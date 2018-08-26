@@ -1,4 +1,4 @@
-import { createElement as h } from 'react'
+import { createElement as h, Fragment } from 'react'
 import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -8,7 +8,7 @@ const enhance = compose(
 	setDisplayName('Header'),
 
 	setPropTypes({
-		buttons: PropTypes.arrayOf(
+		items: PropTypes.arrayOf(
 			PropTypes.shape({
 				active: PropTypes.bool.isRequired,
 				onClick: PropTypes.func.isRequired,
@@ -43,12 +43,10 @@ const Component = (props) => (
 
 	h('header', { className: 'header' },
 		h(Logo),
-		h('nav', {}, props.buttons.map(
-			(props, index) => h(Button, {
-				key: index,
-				active: props.active,
-				onClick: props.onClick
-			}, props.label))
+		h('nav', {}, props.items.map(
+			(props, index) => h(Fragment, { key: index },
+				h(Button, props, props.label)
+			))
 		)
 	)
 

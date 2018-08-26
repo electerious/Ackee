@@ -7,7 +7,11 @@
 	width: 100%;
 	transition: color .3s ease;
 
-	&:hover {
+	&--disabled {
+		cursor: inherit;
+	}
+
+	&:not(.linkItem--disabled):hover {
 		color: var(--white);
 	}
 

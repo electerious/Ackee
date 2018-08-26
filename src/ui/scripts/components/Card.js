@@ -16,7 +16,8 @@ const enhance = compose(
 
 	setPropTypes({
 		wide: PropTypes.bool,
-		title: PropTypes.string.isRequired
+		headline: PropTypes.string.isRequired,
+		items: PropTypes.array.isRequired
 	})
 
 )
@@ -32,7 +33,7 @@ const Card = class extends Component {
 
 		this.state = {
 			// Index of the active element
-			active: toIndex(0, this.props.data.length - 1)
+			active: toIndex(0, this.props.items.length - 1)
 		}
 
 	}
@@ -50,7 +51,7 @@ const Card = class extends Component {
 
 		this.setState({
 			// Index of the active element
-			active: toIndex(0, this.props.data.length - 1)
+			active: toIndex(0, this.props.items.length - 1)
 		})
 
 	}
@@ -70,12 +71,12 @@ const Card = class extends Component {
 						small: true,
 						spacing: false,
 						className: 'color-white'
-					}, this.props.title),
+					}, this.props.headline),
 					h(Text, {
 						spacing: false
-					}, relativeDate(toOffset(this.state.active, this.props.data.length - 1))),
+					}, relativeDate(toOffset(this.state.active, this.props.items.length - 1))),
 					h(BarChart, {
-						data: this.props.data,
+						items: this.props.items,
 						active: this.state.active,
 						onEnter: this.onEnter,
 						onLeave: this.onLeave

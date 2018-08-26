@@ -6,8 +6,8 @@ import classNames from 'classnames'
 // Round upward to the next group of ten
 const round = (num) => Math.ceil(num / 10) * 10
 
-const max = (data) => round(Math.max.apply(Math, data))
-const mid = (data) => max(data) / 2
+const max = (items) => round(Math.max.apply(Math, items))
+const mid = (items) => max(items) / 2
 const min = () => 0
 
 const percentage = (amount, max) => (amount / max) * 100
@@ -17,7 +17,7 @@ const enhance = compose(
 	setDisplayName('BarChart'),
 
 	setPropTypes({
-		data: PropTypes.arrayOf(PropTypes.number).isRequired,
+		items: PropTypes.arrayOf(PropTypes.number).isRequired,
 		onEnter: PropTypes.func.isRequired,
 		onLeave: PropTypes.func.isRequired
 	})
@@ -61,15 +61,15 @@ const Component = (props) => (
 
 	h('div', { className: 'barChart' },
 		h('div', { className: 'barChart__axis' },
-			h(Row, { position: 'top' }, max(props.data)),
-			h(Row, { position: 'middle' }, mid(props.data)),
-			h(Row, { position: 'bottom' }, min(props.data))
+			h(Row, { position: 'top' }, max(props.items)),
+			h(Row, { position: 'middle' }, mid(props.items)),
+			h(Row, { position: 'bottom' }, min(props.items))
 		),
-		props.data.map((amount, index) => (
+		props.items.map((amount, index) => (
 			h(Column, {
 				key: index,
 				active: props.active === index,
-				size: `${ percentage(amount, max(props.data)) }%`,
+				size: `${ percentage(amount, max(props.items)) }%`,
 				onEnter: () => props.onEnter(index),
 				onLeave: () => props.onLeave(index),
 				label: amount

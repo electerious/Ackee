@@ -1,10 +1,11 @@
 import { createElement as h, Component, Fragment } from 'react'
 
+import { version } from '../../../../package'
 import * as routes from '../constants/routes'
 
 import Header from './Header'
 import Card from './Card'
-import Account from './Account'
+import Setting from './Setting'
 
 const Dashboard = class extends Component {
 
@@ -13,7 +14,7 @@ const Dashboard = class extends Component {
 		super(props)
 
 		this.state = {
-			data: [
+			items: [
 				800,
 				300,
 				250,
@@ -37,7 +38,7 @@ const Dashboard = class extends Component {
 
 		return (
 			h('div', {},
-				h(Header, { buttons: [
+				h(Header, { items: [
 					{ onClick: () => this.props.setRouteTab(routes.OVERVIEW), active: this.props.route.tab === routes.OVERVIEW, label: 'Overview' },
 					{ onClick: () => this.props.setRouteTab(routes.SITES), active: this.props.route.tab === routes.SITES, label: 'Sites' },
 					{ onClick: () => this.props.setRouteTab(routes.SETTINGS), active: this.props.route.tab === routes.SETTINGS, label: 'Settings' }
@@ -46,12 +47,26 @@ const Dashboard = class extends Component {
 					this.props.route.tab === routes.OVERVIEW && h(Fragment, {},
 						h(Card, {
 							wide: true,
-							title: 'Page Views',
-							data: this.state.data
+							headline: 'Page Views',
+							items: this.state.items
 						})
 					),
 					this.props.route.tab === routes.SETTINGS && h(Fragment, {},
-						h(Account, this.props)
+						h(Setting, {
+							headline: 'Account',
+							items: [
+								{ type: 'p', disabled: true, label: 'Version', text: version },
+								{ type: 'button', onClick: () => this.props.deleteToken(this.props), label: 'Sign Out' }
+							]
+						}),
+						h(Setting, {
+							headline: 'Help',
+							items: [
+								{ type: 'a', href: '#', label: 'Get started' },
+								{ type: 'a', href: '#', label: 'Add Ackee to your sites' },
+								{ type: 'a', href: '#', label: 'Change username or password' }
+							]
+						})
 					)
 				)
 			)
