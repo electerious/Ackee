@@ -5,9 +5,19 @@
 	align-items: center;
 	border-bottom: 1px solid var(--border);
 
+	@keyframes header__rotate {
+		0% {
+			transform: rotate(0turn);
+		}
+		100% {
+			transform: rotate(1turn);
+		}
+	}
+
 	&__logo {
 		--size: 42px;
 
+		position: relative;
 		margin: var(--gutter) 0 calc(var(--gutter) / 2);
 		width: var(--size);
 		height: var(--size);
@@ -15,12 +25,49 @@
 		border-radius: 100%;
 	}
 
+	&__spinner {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-style: solid;
+		border-width: 4px;
+		border-radius: 100%;
+		border-color: transparent;
+		mix-blend-mode: color-dodge;
+		opacity: 0;
+		transition: opacity .6s ease;
+		animation-name: header__rotate;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+
+		&--visible {
+			opacity: 1;
+		}
+
+		&--white {
+			border-right-color: var(--white);
+			animation-duration: .5s;
+		}
+
+		&--black {
+			border-right-color: var(--black);
+			animation-duration: 1s;
+		}
+
+		&--primary {
+			border-right-color: var(--primary);
+			animation-duration: 1.2s;
+		}
+	}
+
 	&__button {
 		margin: 0 calc(var(--gutter) / 1.5);
 		padding: calc(var(--gutter) / 1.5) 2px;
+		outline: none;
 		transition: box-shadow .3s ease;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			box-shadow: inset 0 -2px 0 var(--light);
 		}
 

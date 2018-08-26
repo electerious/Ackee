@@ -8,6 +8,7 @@ const enhance = compose(
 	setDisplayName('Header'),
 
 	setPropTypes({
+		fetching: PropTypes.bool.isRequired,
 		items: PropTypes.arrayOf(
 			PropTypes.shape({
 				active: PropTypes.bool.isRequired,
@@ -19,9 +20,31 @@ const enhance = compose(
 
 )
 
-const Logo = () => (
+const Logo = (props) => (
 
-	h('div', { className: 'header__logo' })
+	h('div', { className: 'header__logo' },
+		h('div', {
+			className: classNames({
+				'header__spinner': true,
+				'header__spinner--black': true,
+				'header__spinner--visible': props.fetching === true
+			})
+		}),
+		h('div', {
+			className: classNames({
+				'header__spinner': true,
+				'header__spinner--white': true,
+				'header__spinner--visible': props.fetching === true
+			})
+		}),
+		h('div', {
+			className: classNames({
+				'header__spinner': true,
+				'header__spinner--primary': true,
+				'header__spinner--visible': props.fetching === true
+			})
+		})
+	)
 
 )
 
@@ -42,7 +65,7 @@ const Button = (props) => (
 const Component = (props) => (
 
 	h('header', { className: 'header' },
-		h(Logo),
+		h(Logo, { fetching: props.fetching }),
 		h('nav', {}, props.items.map(
 			(props, index) => h(Fragment, { key: index },
 				h(Button, props, props.label)
