@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import Spacer from './Spacer'
 import Headline from './Headline'
+import Message from './Message'
 import LinkItem from './LinkItem'
 import Line from './Line'
 
@@ -15,6 +16,10 @@ const enhance = compose(
 
 	setPropTypes({
 		headline: PropTypes.string.isRequired,
+		message: PropTypes.shape({
+			status: PropTypes.string.isRequired,
+			label: PropTypes.string.isRequired
+		}),
 		items: PropTypes.array.isRequired
 	})
 
@@ -32,6 +37,8 @@ const Component = (props) => (
 			}, props.headline),
 
 			h(Spacer, { size: 1 }),
+
+			props.message != null && h(Message, { status: props.message.status }, props.message.label),
 
 			props.items.map(
 				(props, index, arr) => h(Fragment, { key: index },
