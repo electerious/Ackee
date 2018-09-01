@@ -13,9 +13,6 @@ const schema = new mongoose.Schema({
 	title: {
 		type: String
 	},
-	pattern: {
-		type: String
-	},
 	created: {
 		type: Date,
 		default: Date.now

@@ -34,7 +34,6 @@ Status: 200 OK
 			"data": {
 				"id": ":domainId",
 				"title": "Example",
-				"pattern": "^https:\/\/example\.com",
 				"created": "1475491394341",
 				"updated": "1475491394341"
 			}
@@ -53,8 +52,7 @@ POST /domains
 
 ```json
 {
-	"title": "Example",
-	"pattern": "^https:\/\/example\.com"
+	"title": "Example"
 }
 ```
 
@@ -69,7 +67,6 @@ POST /domains
 | Name | Type | Description |
 |:-----------|:------------|:------------|
 | title | String | Title of the domain. |
-| pattern | String | JavaScript pattern that matches with your targeted domain. |
 
 ### Response
 
@@ -84,7 +81,6 @@ Location: /domains/:domainId
 	"data": {
 		"id": ":domainId",
 		"title": "Example",
-		"pattern": "^https:\/\/example\.com",
 		"created": "1475491394341",
 		"updated": "1475491394341"
 	}
@@ -101,8 +97,7 @@ PATCH /domains/:domainId
 
 ```json
 {
-	"title": "Example",
-	"pattern": "^https:\/\/example\.com"
+	"title": "Example"
 }
 ```
 
@@ -117,7 +112,6 @@ PATCH /domains/:domainId
 | Name | Type | Description |
 |:-----------|:------------|:------------|
 | title | String | Title of the domain. |
-| pattern | String | JavaScript pattern that matches with your targeted domain. |
 
 ### Response
 
@@ -131,7 +125,6 @@ Status: 200 OK
 	"data": {
 		"id": ":domainId",
 		"title": "Example",
-		"pattern": "^https:\/\/example\.com",
 		"created": "1475491394341",
 		"updated": "1475491394341"
 	}

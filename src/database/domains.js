@@ -14,14 +14,13 @@ const all = async () => {
 
 }
 
-const update = async (id, { domain, pattern }) => {
+const update = async (id, { title }) => {
 
 	return Domain.findOneAndUpdate({
 		id
 	}, {
 		$set: {
-			domain,
-			pattern,
+			title,
 			updated: Date.now()
 		}
 	})
