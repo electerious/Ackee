@@ -20,29 +20,34 @@ const enhance = compose(
 
 )
 
+const Spinner = (props) => (
+
+	h('div', {
+		className: classNames({
+			'header__spinner': true,
+			'header__spinner--black': props.color === 'black',
+			'header__spinner--white': props.color === 'white',
+			'header__spinner--primary': props.color === 'primary',
+			'header__spinner--visible': props.fetching === true
+		})
+	})
+
+)
+
 const Logo = (props) => (
 
 	h('div', { className: 'header__logo' },
-		h('div', {
-			className: classNames({
-				'header__spinner': true,
-				'header__spinner--black': true,
-				'header__spinner--visible': props.fetching === true
-			})
+		h(Spinner, {
+			color: 'black',
+			fetching: props.fetching === true
 		}),
-		h('div', {
-			className: classNames({
-				'header__spinner': true,
-				'header__spinner--white': true,
-				'header__spinner--visible': props.fetching === true
-			})
+		h(Spinner, {
+			color: 'white',
+			fetching: props.fetching === true
 		}),
-		h('div', {
-			className: classNames({
-				'header__spinner': true,
-				'header__spinner--primary': true,
-				'header__spinner--visible': props.fetching === true
-			})
+		h(Spinner, {
+			color: 'primary',
+			fetching: props.fetching === true
 		})
 	)
 
