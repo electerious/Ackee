@@ -17,11 +17,11 @@ const schema = new mongoose.Schema({
 		type: String
 	},
 	created: {
-		type: Number,
+		type: Date,
 		default: Date.now
 	},
 	updated: {
-		type: Number,
+		type: Date,
 		default: Date.now
 	}
 })

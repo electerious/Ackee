@@ -11,11 +11,11 @@ const schema = new mongoose.Schema({
 		default: uuid
 	},
 	created: {
-		type: Number,
+		type: Date,
 		default: Date.now
 	},
 	updated: {
-		type: Number,
+		type: Date,
 		default: Date.now
 	}
 })
