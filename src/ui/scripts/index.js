@@ -5,6 +5,7 @@ import { Provider, connect } from 'react-redux'
 
 import createStore from './utils/createStore'
 import enhanceState from './utils/enhanceState'
+import * as storage from './utils/storage'
 import reducers from './reducers'
 import * as actions from './actions'
 
@@ -12,7 +13,7 @@ import Main from './components/Main'
 
 const store = createStore(reducers, {
 	token: {
-		value: localStorage.getItem('ackee_token')
+		value: storage.get('ackee_token')
 	}
 })
 
