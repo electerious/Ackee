@@ -8,18 +8,21 @@
 	overflow: hidden;
 
 	&__axis {
+		flex-shrink: 2;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		align-self: stretch;
+		width: 100%;
 		order: 1;
 	}
 
 	&__row {
 		position: relative;
 		font-size: .8em;
+		min-width: 1px;
 		padding: calc(var(--gutter) / 2) 0;
-		padding-right: calc(var(--gutter) / 3);
+		padding-right: calc(var(--gutter) / 2);
 
 		&--top {
 			transform: translateY(-100%);
