@@ -1,5 +1,7 @@
 import { createElement as h, Component, Fragment } from 'react'
 
+import enhanceViews from '../utils/enhanceViews'
+
 import Card from './Card'
 
 const Overview = class extends Component {
@@ -12,7 +14,15 @@ const Overview = class extends Component {
 
 	componentDidMount() {
 
-		this.props.fetchDomains(this.props)
+		this.props.fetchDomains(this.props).then(() => {
+
+			if (this.props.domains.value == null) return
+
+			this.props.domains.value.map((props) => {
+				this.props.fetchViews(props.data.id, this.props)
+			})
+
+		})
 
 	}
 
@@ -25,7 +35,7 @@ const Overview = class extends Component {
 					(props, index) => h(Fragment, { key: index },
 						h(Card, {
 							headline: props.data.title,
-							items: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+							items: this.props.views.value[props.data.id] == null ? [] : enhanceViews(this.props.views.value[props.data.id].value)
 						})
 					)
 				)
