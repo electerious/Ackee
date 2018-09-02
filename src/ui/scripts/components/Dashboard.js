@@ -23,15 +23,15 @@ const Component = (props) => (
 				props.token.fetching === true
 			),
 			items: [
-				{ onClick: () => props.setRouteTab(routes.OVERVIEW), active: props.route.tab === routes.OVERVIEW, label: 'Overview' },
-				{ onClick: () => props.setRouteTab(routes.DOMAINS), active: props.route.tab === routes.DOMAINS, label: 'Domains' },
-				{ onClick: () => props.setRouteTab(routes.SETTINGS), active: props.route.tab === routes.SETTINGS, label: 'Settings' }
+				{ onClick: () => props.setRouteValue(routes.OVERVIEW), active: props.route.value === routes.OVERVIEW, label: 'Overview' },
+				{ onClick: () => props.setRouteValue(routes.DOMAINS), active: props.route.value === routes.DOMAINS, label: 'Domains' },
+				{ onClick: () => props.setRouteValue(routes.SETTINGS), active: props.route.value === routes.SETTINGS, label: 'Settings' }
 			]
 		}),
 		h('main', { className: 'content' },
-			props.route.tab === routes.OVERVIEW && h(Overview, props),
-			props.route.tab === routes.DOMAINS && h(Domains, props),
-			props.route.tab === routes.SETTINGS && h(Settings, props)
+			props.route.value === routes.OVERVIEW && h(Overview, props),
+			props.route.value === routes.DOMAINS && h(Domains, props),
+			props.route.value === routes.SETTINGS && h(Settings, props)
 		)
 	)
 

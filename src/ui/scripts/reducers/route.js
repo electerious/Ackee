@@ -1,7 +1,7 @@
 import immer from 'immer'
 
 import {
-	SET_ROUTE_TAB
+	SET_ROUTE_VALUE
 } from '../actions'
 
 import {
@@ -9,14 +9,14 @@ import {
 } from '../constants/routes'
 
 const initalState = {
-	tab: OVERVIEW
+	value: OVERVIEW
 }
 
 export default (state = initalState, action) => immer(state, (draft) => {
 
 	switch (action.type) {
-		case SET_ROUTE_TAB:
-			draft.tab = action.payload
+		case SET_ROUTE_VALUE:
+			draft.value = action.payload || initalState.value
 			break
 	}
 

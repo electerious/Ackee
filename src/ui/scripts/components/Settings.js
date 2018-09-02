@@ -52,7 +52,7 @@ const Dashboard = class extends Component {
 						if (this.props.domains.error != null) return []
 
 						return [
-							...(this.props.domains.value || []).map(
+							...this.props.domains.value.map(
 								(props) => ({ type: 'button', label: props.data.title, text: props.data.id })
 							),
 							{ type: 'button', label: 'New domain' }

@@ -10,24 +10,26 @@ const initalState = {
 	value: {}
 }
 
-export default (state = initalState, action) => immer(state, (draft) => {
+const initalSubState = {
+	value: [],
+	fetching: false,
+	error: undefined
+}
 
-	// Initialize property for domain
-	if (draft.value[action.domainId] == null) draft.value[action.domainId] = {
-		value: [],
-		fetching: false,
-		error: undefined
-	}
+export default (state = initalState, action) => immer(state, (draft) => {
 
 	switch (action.type) {
 		case SET_VIEWS_VALUE:
-			draft.value[action.domainId].value = action.payload
+			if (draft.value[action.domainId] == null) draft.value[action.domainId] = initalSubState
+			draft.value[action.domainId].value = action.payload || initalSubState.value
 			break
 		case SET_VIEWS_FETCHING:
-			draft.value[action.domainId].fetching = action.payload
+			if (draft.value[action.domainId] == null) draft.value[action.domainId] = initalSubState
+			draft.value[action.domainId].fetching = action.payload || initalSubState.fetching
 			break
 		case SET_VIEWS_ERROR:
-			draft.value[action.domainId].error = action.payload
+			if (draft.value[action.domainId] == null) draft.value[action.domainId] = initalSubState
+			draft.value[action.domainId].error = action.payload || initalSubState.error
 			break
 	}
 

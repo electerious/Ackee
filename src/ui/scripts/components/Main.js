@@ -13,8 +13,8 @@ const enhance = compose(
 const Component = (props) => (
 
 	h(Fragment, {},
-		props.token.value == null && h(Login, props),
-		props.token.value != null && h(Dashboard, props)
+		props.token.value.id == null && h(Login, props),
+		props.token.value.id != null && h(Dashboard, props)
 	)
 
 )

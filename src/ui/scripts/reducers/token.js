@@ -9,7 +9,7 @@ import {
 } from '../actions'
 
 const initalState = {
-	value: undefined,
+	value: {},
 	fetching: false,
 	error: undefined
 }
@@ -18,15 +18,15 @@ export default (state = initalState, action) => immer(state, (draft) => {
 
 	switch (action.type) {
 		case SET_TOKEN_VALUE:
-			draft.value = action.payload
+			draft.value = action.payload || initalState.value
 			if (action.payload != null) storage.set('ackee_token', action.payload)
 			if (action.payload == null) storage.remove('ackee_token')
 			break
 		case SET_TOKEN_FETCHING:
-			draft.fetching = action.payload
+			draft.fetching = action.payload || initalState.fetching
 			break
 		case SET_TOKEN_ERROR:
-			draft.error = action.payload
+			draft.error = action.payload || initalState.error
 			break
 	}
 

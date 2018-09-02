@@ -16,8 +16,6 @@ const Overview = class extends Component {
 
 		this.props.fetchDomains(this.props).then(() => {
 
-			if (this.props.domains.value == null) return
-
 			this.props.domains.value.map((props) => {
 				this.props.fetchViews(props.data.id, this.props)
 			})
@@ -31,7 +29,7 @@ const Overview = class extends Component {
 		return (
 			h(Fragment, {},
 
-				this.props.domains.value != null && this.props.domains.value.map(
+				this.props.domains.value.map(
 					(props, index) => h(Fragment, { key: index },
 						h(Card, {
 							headline: props.data.title,

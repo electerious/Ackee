@@ -1,6 +1,6 @@
-export const SET_ROUTE_TAB = Symbol()
+export const SET_ROUTE_VALUE = Symbol()
 
-export const setRouteTab = (payload) => ({
-	type: SET_ROUTE_TAB,
+export const setRouteValue = (payload) => ({
+	type: SET_ROUTE_VALUE,
 	payload
 })
