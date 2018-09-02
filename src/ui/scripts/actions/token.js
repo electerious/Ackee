@@ -35,10 +35,10 @@ export const postToken = (props) => async (dispatch) => {
 		}
 
 		const json = await response.json()
-		const token = json.data.id
+		const data = json.data
 
 		dispatch(setTokenFetching(false))
-		dispatch(setTokenValue(token))
+		dispatch(setTokenValue(data))
 
 	} catch (err) {
 
@@ -58,7 +58,7 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	try {
 
-		const response = await fetch(`/tokens/${ props.token.value }`, {
+		const response = await fetch(`/tokens/${ props.token.value.id }`, {
 			method: 'delete'
 		})
 

@@ -27,7 +27,7 @@ export const fetchDomains = (props) => async (dispatch) => {
 		const response = await fetch('/domains', {
 			method: 'get',
 			headers: new Headers({
-				Authorization: `Bearer ${ props.token.value }`
+				Authorization: `Bearer ${ props.token.value.id }`
 			})
 		})
 
@@ -37,10 +37,10 @@ export const fetchDomains = (props) => async (dispatch) => {
 		}
 
 		const json = await response.json()
-		const domains = json.data
+		const data = json.data
 
 		dispatch(setDomainsFetching(false))
-		dispatch(setDomainsValue(domains))
+		dispatch(setDomainsValue(data))
 
 	} catch (err) {
 
