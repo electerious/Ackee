@@ -11,17 +11,15 @@ import * as actions from './actions'
 
 import Main from './components/Main'
 
-const store = createStore(reducers, {
-	token: {
-		value: storage.get('ackee_token')
-	}
-})
+const store = createStore(reducers)
 
 const mapStateToProps = (state) => enhanceState(state)
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main)
 const container = document.querySelector('#main')
+
+store.dispatch(actions.setTokenValue(storage.get('ackee_token')))
 
 const App = h(Provider, { store },
 	h(ConnectedMain)
