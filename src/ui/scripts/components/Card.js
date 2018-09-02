@@ -9,9 +9,6 @@ import Headline from './Headline'
 import Text from './Text'
 import BarChart from './BarChart'
 
-const toOffset = (index, max) => Math.abs(index - max)
-const toIndex = (offset, max) => max - offset
-
 const enhance = compose(
 
 	setPropTypes({
@@ -33,7 +30,7 @@ const Card = class extends Component {
 
 		this.state = {
 			// Index of the active element
-			active: toIndex(0, this.props.items.length - 1)
+			active: 0
 		}
 
 	}
@@ -41,7 +38,6 @@ const Card = class extends Component {
 	onEnter(index) {
 
 		this.setState({
-			// Index of the active element
 			active: index
 		})
 
@@ -50,8 +46,7 @@ const Card = class extends Component {
 	onLeave() {
 
 		this.setState({
-			// Index of the active element
-			active: toIndex(0, this.props.items.length - 1)
+			active: 0
 		})
 
 	}
@@ -74,7 +69,7 @@ const Card = class extends Component {
 					}, this.props.headline),
 					h(Text, {
 						spacing: false
-					}, relativeDate(toOffset(this.state.active, this.props.items.length - 1))),
+					}, relativeDate(this.state.active)),
 					h(BarChart, {
 						items: this.props.items,
 						active: this.state.active,

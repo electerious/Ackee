@@ -1,10 +1,8 @@
 .barChart {
 
 	position: relative;
-	display: grid;
-	grid-auto-flow: column;
-	grid-auto-columns: 1fr;
-	grid-template-columns: auto;
+	display: flex;
+	flex-direction: row-reverse;
 	padding-top: calc(var(--gutter) * 3.5);
 	height: 300px;
 	overflow: hidden;
@@ -14,13 +12,14 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-self: stretch;
+		order: 1;
 	}
 
 	&__row {
 		position: relative;
 		font-size: .8em;
 		padding: calc(var(--gutter) / 2) 0;
-		padding-right: calc(var(--gutter) / 4);
+		padding-right: calc(var(--gutter) / 3);
 
 		&--top {
 			transform: translateY(-100%);
@@ -46,9 +45,9 @@
 	}
 
 	&__column {
-		display: grid;
+		display: flex;
 		align-items: flex-end;
-		padding: 0 10%;
+		padding: 0 calc(var(--gutter) / 4);
 		width: 100%;
 	}
 

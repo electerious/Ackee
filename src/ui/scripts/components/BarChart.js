@@ -63,7 +63,7 @@ const Component = (props) => (
 		h('div', { className: 'barChart__axis' },
 			h(Row, { position: 'top' }, props.items.length === 0 ? '' : max(props.items)),
 			h(Row, { position: 'middle' }, props.items.length === 0 ? '' : mid(props.items)),
-			h(Row, { position: 'bottom' }, props.items.length === 0 ? '' : min(props.items))
+			h(Row, { position: 'bottom' }, props.items.length === 0 ? '' : min())
 		),
 		props.items.map((amount, index) => (
 			h(Column, {
