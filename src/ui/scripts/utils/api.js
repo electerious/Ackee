@@ -43,7 +43,7 @@ export default async (url, { props, method, body }) => {
 			props.deleteToken(props)
 		}
 
-		// Re-throw error so the callee can handle it, too
+		// Re-throw error so the caller can handle it, too
 		throw err
 
 	}
