@@ -1,3 +1,5 @@
+import api from '../utils/api'
+
 export const SET_VIEWS_VALUE = Symbol()
 export const SET_VIEWS_FETCHING = Symbol()
 export const SET_VIEWS_ERROR = Symbol()
@@ -27,35 +29,18 @@ export const fetchViews = (domainId, props) => async (dispatch) => {
 
 	try {
 
-		const response = await fetch(`/domains/${ domainId }/views`, {
+		const data = await api(`/domains/${ domainId }/views`, {
 			method: 'get',
-			headers: new Headers({
-				Authorization: `Bearer ${ props.token.value.id }`
-			})
+			props
 		})
-
-		if (response.ok === false) {
-			const text = await response.text()
-			throw new Error(text)
-		}
-
-		const json = await response.json()
-		const data = json.data
 
 		dispatch(setViewsFetching(domainId, false))
 		dispatch(setViewsValue(domainId, data))
 
 	} catch (err) {
 
-		console.error(err)
-
 		dispatch(setViewsFetching(domainId, false))
 		dispatch(setViewsError(domainId, err.message))
-
-		if (err.message === 'Token unknown') {
-			// Reset token and show login
-			props.deleteToken(props)
-		}
 
 	}
 

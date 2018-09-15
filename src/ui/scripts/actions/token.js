@@ -1,3 +1,5 @@
+import api from '../utils/api'
+
 export const SET_TOKEN_VALUE = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
 export const SET_TOKEN_ERROR = Symbol()
@@ -17,32 +19,23 @@ export const setTokenError = (payload) => ({
 	payload
 })
 
-export const postToken = (props) => async (dispatch) => {
+export const fetchToken = (props, state) => async (dispatch) => {
 
 	dispatch(setTokenFetching(true))
 	dispatch(setTokenError())
 
 	try {
 
-		const response = await fetch('/tokens', {
+		const data = await api('/tokens', {
 			method: 'post',
-			body: JSON.stringify(props)
+			body: JSON.stringify(state),
+			props
 		})
-
-		if (response.ok === false) {
-			const text = await response.text()
-			throw new Error(text)
-		}
-
-		const json = await response.json()
-		const data = json.data
 
 		dispatch(setTokenFetching(false))
 		dispatch(setTokenValue(data))
 
 	} catch (err) {
-
-		console.error(err)
 
 		dispatch(setTokenFetching(false))
 		dispatch(setTokenError(err.message))
@@ -58,18 +51,12 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	try {
 
-		const response = await fetch(`/tokens/${ props.token.value.id }`, {
-			method: 'delete'
+		await api(`/tokens/${ props.token.value.id }`, {
+			method: 'delete',
+			props
 		})
 
-		if (response.ok === false) {
-			const text = await response.text()
-			throw new Error(text)
-		}
-
 	} catch (err) {
-
-		console.error(err)
 
 		dispatch(setTokenError(err.message))
 

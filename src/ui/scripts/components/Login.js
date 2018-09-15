@@ -40,7 +40,7 @@ const Login = class extends Component {
 
 		e.preventDefault()
 
-		this.props.postToken(this.state)
+		this.props.fetchToken(this.props, this.state)
 
 	}
 
