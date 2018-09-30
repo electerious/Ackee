@@ -1,7 +1,7 @@
 import createArray from '../utils/createArray'
 import dateWithOffset from '../utils/dateWithOffset'
 
-export default (views) => createArray(7).map((_, index) => {
+export default (views, length) => createArray(length).map((_, index) => {
 
 	const date = dateWithOffset(index * -1)
 

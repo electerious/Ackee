@@ -33,7 +33,7 @@ const Overview = class extends Component {
 					(props, index) => h(Fragment, { key: index },
 						h(Card, {
 							headline: props.data.title,
-							items: this.props.views.value[props.data.id] == null ? [] : enhanceViews(this.props.views.value[props.data.id].value)
+							items: this.props.views.value[props.data.id] == null ? [] : enhanceViews(this.props.views.value[props.data.id].value, 7)
 						})
 					)
 				)
