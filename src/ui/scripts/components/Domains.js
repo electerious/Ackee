@@ -4,7 +4,7 @@ import enhanceViews from '../utils/enhanceViews'
 
 import Card from './Card'
 
-const Overview = class extends Component {
+const Domains = class extends Component {
 
 	constructor(props) {
 
@@ -45,4 +45,4 @@ const Overview = class extends Component {
 
 }
 
-export default Overview
+export default Domains
