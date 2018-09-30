@@ -4,7 +4,7 @@ import { version } from '../../../../package'
 
 import Setting from './Setting'
 
-const Dashboard = class extends Component {
+const Settings = class extends Component {
 
 	constructor(props) {
 
@@ -77,4 +77,4 @@ const Dashboard = class extends Component {
 
 }
 
-export default Dashboard
+export default Settings
