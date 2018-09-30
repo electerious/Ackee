@@ -8,16 +8,16 @@ import {
 	OVERVIEW
 } from '../constants/routes'
 
-const initalState = {
+const initalState = () => ({
 	value: OVERVIEW
-}
+})
 
 export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_ROUTE_VALUE:
-			draft.value = action.payload || initalState.value
+			draft.value = action.payload || initalState().value
 			break
 	}
 
-}, initalState)
+}, initalState())
