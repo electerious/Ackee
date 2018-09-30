@@ -2,13 +2,13 @@ import { createElement as h, Fragment } from 'react'
 import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 
+import isLast from '../utils/isLast'
+
 import Spacer from './Spacer'
 import Headline from './Headline'
 import Message from './Message'
 import LinkItem from './LinkItem'
 import Line from './Line'
-
-const isLast = (index, arr) => index === (arr.length - 1)
 
 const enhance = compose(
 
