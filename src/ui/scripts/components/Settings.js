@@ -12,12 +12,6 @@ const Settings = class extends Component {
 
 	}
 
-	componentDidMount() {
-
-		this.props.fetchDomains(this.props)
-
-	}
-
 	render() {
 
 		return (
