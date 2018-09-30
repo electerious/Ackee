@@ -1,5 +1,9 @@
 import { createElement as h, Component, Fragment } from 'react'
 
+import mergeViews from '../utils/mergeViews'
+import enhanceViews from '../utils/enhanceViews'
+import isDefined from '../utils/isDefined'
+
 import Card from './Card'
 
 const Overview = class extends Component {
@@ -8,42 +12,45 @@ const Overview = class extends Component {
 
 		super(props)
 
-		this.state = {}
-
 	}
 
 	componentDidMount() {
 
-		this.setState({
-			items: [
-				800,
-				300,
-				250,
-				400,
-				550,
-				901,
-				620,
-				800,
-				300,
-				250,
-				400,
-				550,
-				901,
-				620
-			]
+		this.props.fetchDomains(this.props).then(() => {
+
+			this.props.domains.value.map((props) => {
+				this.props.fetchViews(props.data.id, this.props)
+			})
+
 		})
 
 	}
 
 	render() {
 
+		// Enhance all view for all domains
+		const enhancedViews = this.props.domains.value.map((props) => {
+
+			const view = this.props.views.value[props.data.id]
+			const exists = view != null
+
+			return exists === true ? enhanceViews(view.value, 14) : undefined
+
+		})
+
+		// Remove views from domains that are still loading
+		const filteredViews = enhancedViews.filter(isDefined)
+
+		// Merge all views to one array of views
+		const mergedViews = mergeViews(filteredViews)
+
 		return (
 			h(Fragment, {},
 
-				this.state.items != null && h(Card, {
+				h(Card, {
 					wide: true,
 					headline: 'Page Views',
-					items: this.state.items
+					items: mergedViews
 				})
 
 			)
