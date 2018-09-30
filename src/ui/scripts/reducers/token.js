@@ -1,4 +1,4 @@
-import immer from 'immer'
+import produce from 'immer'
 
 import * as storage from '../utils/storage'
 
@@ -14,7 +14,7 @@ const initalState = {
 	error: undefined
 }
 
-export default (state = initalState, action) => immer(state, (draft) => {
+export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_TOKEN_VALUE:
@@ -30,4 +30,4 @@ export default (state = initalState, action) => immer(state, (draft) => {
 			break
 	}
 
-})
+}, initalState)

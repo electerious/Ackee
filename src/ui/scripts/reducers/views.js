@@ -1,4 +1,4 @@
-import immer from 'immer'
+import produce from 'immer'
 
 import {
 	SET_VIEWS_VALUE,
@@ -16,7 +16,7 @@ const initalSubState = {
 	error: undefined
 }
 
-export default (state = initalState, action) => immer(state, (draft) => {
+export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_VIEWS_VALUE:
@@ -33,4 +33,4 @@ export default (state = initalState, action) => immer(state, (draft) => {
 			break
 	}
 
-})
+}, initalState)

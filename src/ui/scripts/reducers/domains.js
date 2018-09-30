@@ -1,4 +1,4 @@
-import immer from 'immer'
+import produce from 'immer'
 
 import {
 	SET_DOMAINS_VALUE,
@@ -12,7 +12,7 @@ const initalState = {
 	error: undefined
 }
 
-export default (state = initalState, action) => immer(state, (draft) => {
+export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_DOMAINS_VALUE:
@@ -26,4 +26,4 @@ export default (state = initalState, action) => immer(state, (draft) => {
 			break
 	}
 
-})
+}, initalState)
