@@ -3,6 +3,7 @@ import api from '../utils/api'
 export const SET_TOKEN_VALUE = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
 export const SET_TOKEN_ERROR = Symbol()
+export const RESET_TOKEN = Symbol()
 
 export const setTokenValue = (payload) => ({
 	type: SET_TOKEN_VALUE,
@@ -17,6 +18,10 @@ export const setTokenFetching = (payload) => ({
 export const setTokenError = (payload) => ({
 	type: SET_TOKEN_ERROR,
 	payload
+})
+
+export const resetToken = () => ({
+	type: RESET_TOKEN
 })
 
 export const fetchToken = (props, state) => async (dispatch) => {
@@ -46,8 +51,7 @@ export const fetchToken = (props, state) => async (dispatch) => {
 
 export const deleteToken = (props) => async (dispatch) => {
 
-	dispatch(setTokenError())
-	dispatch(setTokenValue())
+	dispatch(resetToken())
 
 	try {
 

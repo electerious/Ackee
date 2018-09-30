@@ -3,7 +3,8 @@ import produce from 'immer'
 import {
 	SET_VIEWS_VALUE,
 	SET_VIEWS_FETCHING,
-	SET_VIEWS_ERROR
+	SET_VIEWS_ERROR,
+	RESET_VIEWS
 } from '../actions'
 
 const initalState = () => ({
@@ -18,19 +19,23 @@ const initalSubState = () => ({
 
 export default produce((draft, action) => {
 
+	const hasDomainId = () => action.domainId != null
+	const hasDomainValue = () => draft.value[action.domainId] != null
+
+	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initalSubState()
+
 	switch (action.type) {
 		case SET_VIEWS_VALUE:
-			if (draft.value[action.domainId] == null) draft.value[action.domainId] = initalSubState()
 			draft.value[action.domainId].value = action.payload || initalSubState.value
 			break
 		case SET_VIEWS_FETCHING:
-			if (draft.value[action.domainId] == null) draft.value[action.domainId] = initalSubState()
 			draft.value[action.domainId].fetching = action.payload || initalSubState.fetching
 			break
 		case SET_VIEWS_ERROR:
-			if (draft.value[action.domainId] == null) draft.value[action.domainId] = initalSubState()
 			draft.value[action.domainId].error = action.payload || initalSubState.error
 			break
+		case RESET_VIEWS:
+			return initalState()
 	}
 
 }, initalState())

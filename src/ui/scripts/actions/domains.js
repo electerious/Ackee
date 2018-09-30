@@ -3,6 +3,7 @@ import api from '../utils/api'
 export const SET_DOMAINS_VALUE = Symbol()
 export const SET_DOMAINS_FETCHING = Symbol()
 export const SET_DOMAINS_ERROR = Symbol()
+export const RESET_DOMAINS = Symbol()
 
 export const setDomainsValue = (payload) => ({
 	type: SET_DOMAINS_VALUE,
@@ -17,6 +18,10 @@ export const setDomainsFetching = (payload) => ({
 export const setDomainsError = (payload) => ({
 	type: SET_DOMAINS_ERROR,
 	payload
+})
+
+export const resetDomains = () => ({
+	type: RESET_DOMAINS
 })
 
 export const fetchDomains = (props) => async (dispatch) => {

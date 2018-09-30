@@ -3,6 +3,7 @@ import api from '../utils/api'
 export const SET_VIEWS_VALUE = Symbol()
 export const SET_VIEWS_FETCHING = Symbol()
 export const SET_VIEWS_ERROR = Symbol()
+export const RESET_VIEWS = Symbol()
 
 export const setViewsValue = (domainId, payload) => ({
 	type: SET_VIEWS_VALUE,
@@ -20,6 +21,10 @@ export const setViewsError = (domainId, payload) => ({
 	type: SET_VIEWS_ERROR,
 	domainId,
 	payload
+})
+
+export const resetViews = () => ({
+	type: RESET_VIEWS
 })
 
 export const fetchViews = (domainId, props) => async (dispatch) => {

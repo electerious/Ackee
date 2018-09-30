@@ -27,6 +27,14 @@ const Dashboard = class extends Component {
 
 	}
 
+	componentWillUnmount() {
+
+		this.props.resetDomains()
+		this.props.resetViews()
+		this.props.resetRoute()
+
+	}
+
 	render() {
 
 		return (

@@ -5,7 +5,8 @@ import * as storage from '../utils/storage'
 import {
 	SET_TOKEN_VALUE,
 	SET_TOKEN_FETCHING,
-	SET_TOKEN_ERROR
+	SET_TOKEN_ERROR,
+	RESET_TOKEN
 } from '../actions'
 
 const initalState = () => ({
@@ -28,6 +29,8 @@ export default produce((draft, action) => {
 		case SET_TOKEN_ERROR:
 			draft.error = action.payload || initalState().error
 			break
+		case RESET_TOKEN:
+			return initalState()
 	}
 
 }, initalState())
