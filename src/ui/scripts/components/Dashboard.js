@@ -40,10 +40,7 @@ const Dashboard = class extends Component {
 		return (
 			h('div', {},
 				h(Header, {
-					fetching: (
-						this.props.domains.fetching === true ||
-						this.props.token.fetching === true
-					),
+					fetching: this.props.fetching,
 					items: [
 						{ onClick: () => this.props.setRouteValue(routes.OVERVIEW), active: this.props.route.value === routes.OVERVIEW, label: 'Overview' },
 						{ onClick: () => this.props.setRouteValue(routes.DOMAINS), active: this.props.route.value === routes.DOMAINS, label: 'Domains' },
