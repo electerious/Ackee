@@ -47,7 +47,7 @@ const Login = class extends Component {
 	render() {
 
 		return (
-			h('form', { className: 'card card--login', onSubmit: this.onSubmit },
+			h('form', { className: 'card card--overlay', onSubmit: this.onSubmit },
 				h('div', { className: 'card__inner align-center' },
 
 					h(Spacer, { size: 2 }),
