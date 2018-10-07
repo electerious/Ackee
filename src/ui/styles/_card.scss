@@ -29,6 +29,7 @@
 		justify-content: flex-end;
 		padding: var(--gutter) calc(var(--gutter) * 1.5);
 		transition: background .3s ease;
+		outline: none;
 
 		&[disabled] {
 			cursor: not-allowed;
