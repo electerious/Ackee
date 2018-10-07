@@ -53,6 +53,10 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	dispatch(resetToken())
 
+	props.resetDomains()
+	props.resetViews()
+	props.resetRoute()
+
 	try {
 
 		await api(`/tokens/${ props.token.value.id }`, {
