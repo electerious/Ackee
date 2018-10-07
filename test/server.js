@@ -39,11 +39,11 @@ test('return CSS', async (t) => {
 
 })
 
-test('return 204', async (t) => {
+test('return 404', async (t) => {
 
 	const url = new URL(`/${ uuid() }`, await base)
 	const { status } = await fetch(url.href)
 
-	t.is(status, 204)
+	t.is(status, 404)
 
 })
