@@ -42,7 +42,7 @@ export default async (url, { props, method, body }) => {
 
 		console.error(err)
 
-		if (err.message === 'Token unknown') {
+		if (err.message === 'Token invalid') {
 			// Reset token and show login
 			props.deleteToken(props)
 		}

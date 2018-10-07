@@ -43,7 +43,7 @@ export const fetchToken = (props, state) => async (dispatch) => {
 	} catch (err) {
 
 		dispatch(setTokenFetching(false))
-		dispatch(setTokenError(err.message))
+		dispatch(setTokenError(err))
 
 	}
 

@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
 
 	const token = permit.check(req)
 
+	// Token not in request
 	if (token == null) {
 		permit.fail(res)
 		throw createError(400, 'Token missing')
@@ -20,13 +21,15 @@ module.exports = async (req, res) => {
 
 	const entry = await tokens.get(token)
 
+	// Token not in database
 	if (entry == null) {
 		permit.fail(res)
-		throw createError(400, 'Token unknown')
+		throw createError(400, 'Token invalid')
 	}
 
 	const valid = ttl(entry.updated, process.env.TTL)
 
+	// Token too old
 	if (valid === false) {
 		permit.fail(res)
 		throw createError(400, 'Token invalid')
