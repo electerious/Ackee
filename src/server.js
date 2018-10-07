@@ -1,7 +1,7 @@
 'use strict'
 
 const micro = require('micro')
-const { send } = require('micro')
+const { send, createError } = require('micro')
 const { router, get, post, put, del } = require('microrouter')
 
 const signale = require('./signale')
@@ -31,7 +31,11 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
-const notFound = async (req, res) => send(res, 404, 'Not found')
+const notFound = async () => {
+
+	throw createError(404)
+
+}
 
 module.exports = micro(
 	catchError(
