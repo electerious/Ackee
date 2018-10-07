@@ -12,6 +12,14 @@ const Failure = class extends Component {
 
 		super(props)
 
+		this.onReload = this.onReload.bind(this)
+
+	}
+
+	onReload() {
+
+		window.location.reload()
+
 	}
 
 	render() {
@@ -34,7 +42,8 @@ const Failure = class extends Component {
 					h(Message, { status: 'error' }, `Please report this issue on GitHub if you can't resolve it by yourself.`),
 
 					h(Textarea, {
-						disabled: true,
+						readOnly: true,
+						rows: 6,
 						value: this.props.errors.map((err) => err.stack).join('\n\n')
 					}),
 
@@ -53,7 +62,8 @@ const Failure = class extends Component {
 					}),
 
 					h('button', {
-						className: 'card__button card__button--primary link color-white'
+						className: 'card__button card__button--primary link color-white',
+						onClick: this.onReload
 					}, 'Reload Ackee')
 
 				)
