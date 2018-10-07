@@ -61,7 +61,7 @@ const Login = class extends Component {
 
 					h(Spacer, { size: 2.5 }),
 
-					this.props.token.error != null && h(Message, { status: 'error' }, this.props.token.error),
+					this.props.token.error != null && h(Message, { status: 'error' }, this.props.token.error.message),
 
 					h(Input, {
 						type: 'text',

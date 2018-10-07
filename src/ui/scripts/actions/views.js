@@ -45,7 +45,7 @@ export const fetchViews = (domainId, props) => async (dispatch) => {
 	} catch (err) {
 
 		dispatch(setViewsFetching(domainId, false))
-		dispatch(setViewsError(domainId, err.message))
+		dispatch(setViewsError(domainId, err))
 
 	}
 

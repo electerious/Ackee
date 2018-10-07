@@ -42,7 +42,7 @@ export const fetchDomains = (props) => async (dispatch) => {
 	} catch (err) {
 
 		dispatch(setDomainsFetching(false))
-		dispatch(setDomainsError(err.message))
+		dispatch(setDomainsError(err))
 
 	}
 

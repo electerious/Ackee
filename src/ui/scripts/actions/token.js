@@ -62,7 +62,7 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	} catch (err) {
 
-		dispatch(setTokenError(err.message))
+		dispatch(setTokenError(err))
 
 	}
 
