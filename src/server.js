@@ -31,6 +31,8 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
+const notFound = async (req, res) => send(res, 404, 'Not found')
+
 module.exports = micro(
 	catchError(
 		router(
@@ -45,7 +47,11 @@ module.exports = micro(
 			del('/domains/:domainId', pipe(auth, domains.del)),
 			post('/domains/:domainId/records', records.add),
 			put('/domains/:domainId/records/:recordId', records.update),
-			get('/domains/:domainId/views', pipe(auth, views.get))
+			get('/domains/:domainId/views', pipe(auth, views.get)),
+			get('/*', notFound),
+			post('/*', notFound),
+			put('/*', notFound),
+			del('/*', notFound)
 		)
 	)
 )
