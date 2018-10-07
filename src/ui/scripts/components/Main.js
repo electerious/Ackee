@@ -1,22 +1,37 @@
-import { createElement as h, Fragment } from 'react'
-import { compose, setDisplayName } from 'recompose'
+import { createElement as h, Component, Fragment } from 'react'
 
+import isUnknownError from '../utils/isUnknownError'
+
+import Failure from './Failure'
 import Login from './Login'
 import Dashboard from './Dashboard'
 
-const enhance = compose(
+const Main = class extends Component {
 
-	setDisplayName('Main')
+	constructor(props) {
 
-)
+		super(props)
 
-const Component = (props) => (
+	}
 
-	h(Fragment, {},
-		props.token.value.id == null && h(Login, props),
-		props.token.value.id != null && h(Dashboard, props)
-	)
+	render() {
 
-)
+		// Only handle errors not handled by other components
+		const unknownErrors = this.props.errors.filter(isUnknownError)
 
-export default enhance(Component)
+		const hasError = unknownErrors.length !== 0
+		const hasToken = this.props.token.value.id != null
+
+		return (
+			h(Fragment, {},
+				hasError === true && h(Failure, { errors: unknownErrors }),
+				hasError === false && hasToken === false && h(Login, this.props),
+				hasError === false && hasToken === true && h(Dashboard, this.props)
+			)
+		)
+
+	}
+
+}
+
+export default Main

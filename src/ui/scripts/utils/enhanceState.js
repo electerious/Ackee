@@ -1,3 +1,5 @@
+import isDefined from './isDefined'
+
 export default (state) => {
 
 	const fetching = (
@@ -6,8 +8,15 @@ export default (state) => {
 		state.token.fetching === true
 	)
 
+	const errors = [
+		...Object.keys(state.views.value).map((key) => state.views.value[key].error),
+		state.domains.error,
+		state.token.error
+	].filter(isDefined)
+
 	return Object.assign({}, state, {
-		fetching
+		fetching,
+		errors
 	})
 
 }

@@ -46,6 +46,9 @@ const Login = class extends Component {
 
 	render() {
 
+		const hasError = this.props.token.error != null
+		const isFetching = this.props.token.fetching === true
+
 		return (
 			h('form', { className: 'card card--overlay', onSubmit: this.onSubmit },
 				h('div', { className: 'card__inner align-center' },
@@ -61,12 +64,12 @@ const Login = class extends Component {
 
 					h(Spacer, { size: 2.5 }),
 
-					this.props.token.error != null && h(Message, { status: 'error' }, this.props.token.error.message),
+					hasError === true && h(Message, { status: 'error' }, this.props.token.error.message),
 
 					h(Input, {
 						type: 'text',
 						placeholder: 'Username',
-						disabled: this.props.token.fetching === true,
+						disabled: isFetching === true,
 						required: true,
 						autoCapitalize: 'off',
 						autoCorrect: 'off',
@@ -78,7 +81,7 @@ const Login = class extends Component {
 					h(Input, {
 						type: 'password',
 						placeholder: 'Password',
-						disabled: this.props.token.fetching === true,
+						disabled: isFetching === true,
 						required: true,
 						autoComplete: 'current-password',
 						value: this.state.password,
@@ -101,8 +104,8 @@ const Login = class extends Component {
 
 					h('button', {
 						className: 'card__button card__button--primary link color-white',
-						disabled: this.props.token.fetching === true
-					}, this.props.token.fetching === true ? h(Spinner) : 'Sign In →')
+						disabled: isFetching === true
+					}, isFetching === true ? h(Spinner) : 'Sign In →')
 
 				)
 			)

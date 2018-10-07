@@ -34,16 +34,10 @@ const Settings = class extends Component {
 							label: 'Fetching domains...'
 						}
 
-						if (this.props.domains.error != null) return {
-							status: 'error',
-							label: this.props.domains.error
-						}
-
 					})(),
 					items: (() => {
 
 						if (this.props.domains.fetching === true) return []
-						if (this.props.domains.error != null) return []
 
 						return [
 							...this.props.domains.value.map(
