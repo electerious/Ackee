@@ -1,6 +1,6 @@
 import { createElement as h, Component } from 'react'
 
-import Input from './Input'
+import Textarea from './Textarea'
 import Spacer from './Spacer'
 import Headline from './Headline'
 import Text from './Text'
@@ -33,9 +33,9 @@ const Failure = class extends Component {
 
 					h(Message, { status: 'error' }, `Please report this issue on GitHub if you can't resolve it by yourself.`),
 
-					h(Input, {
+					h(Textarea, {
 						disabled: true,
-						value: this.props.errors.join('\n\n')
+						value: this.props.errors.map((err) => err.stack).join('\n\n')
 					}),
 
 					h(Spacer, { size: 1 })
