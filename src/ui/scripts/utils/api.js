@@ -1,3 +1,5 @@
+import timeout from './timeout'
+
 export default async (url, { props, method, body }) => {
 
 	try {
@@ -7,11 +9,13 @@ export default async (url, { props, method, body }) => {
 
 		if (token) headers.append('Authorization', `Bearer ${ token }`)
 
-		const response = await fetch(url, {
+		const request = fetch(url, {
 			headers,
 			method,
 			body
 		})
+
+		const response = await timeout(request, 'Request timeout', 30000)
 
 		if (response.ok === false) {
 			const text = await response.text()
