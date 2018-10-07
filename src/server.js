@@ -33,7 +33,7 @@ const catchError = (fn) => async (req, res) => {
 
 const notFound = async () => {
 
-	throw createError(404)
+	throw createError(404, 'Not found')
 
 }
 
