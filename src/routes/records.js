@@ -3,6 +3,7 @@
 const { send, json, createError } = require('micro')
 
 const messages = require('../messages')
+const domains = require('../database/domains')
 const records = require('../database/records')
 
 const response = (entry) => ({
@@ -34,6 +35,10 @@ const add = async (req, res) => {
 
 	const { domainId } = req.params
 	const data = { ...await json(req), domainId }
+
+	const domain = await domains.get(domainId)
+
+	if (domain == null) throw createError(404, 'Unknown domain')
 
 	let entry
 

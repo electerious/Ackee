@@ -14,6 +14,14 @@ const all = async () => {
 
 }
 
+const get = async (id) => {
+
+	return Domain.findOne({
+		id
+	})
+
+}
+
 const update = async (id, { title }) => {
 
 	return Domain.findOneAndUpdate({
@@ -38,6 +46,7 @@ const del = async (id) => {
 module.exports = {
 	add,
 	all,
+	get,
 	update,
 	del
 }
