@@ -33,7 +33,7 @@ const add = async (req, res) => {
 	} catch (err) {
 
 		if (err.name === 'ValidationError') {
-			throw createError(400, messages(err.errors))
+			throw createError(400, messages(err.errors), err)
 		}
 
 		throw err
@@ -66,7 +66,7 @@ const update = async (req) => {
 	} catch (err) {
 
 		if (err.name === 'ValidationError') {
-			throw createError(400, messages(err.errors))
+			throw createError(400, messages(err.errors), err)
 		}
 
 		throw err
