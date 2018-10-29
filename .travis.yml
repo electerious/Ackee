@@ -1,5 +1,9 @@
 language: node_js
 node_js:
+  - '6'
+  - '8'
   - '10'
+  - 'stable'
+install: npm install
 after_success:
   - 'npm run coveralls'
