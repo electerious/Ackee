@@ -7,7 +7,7 @@ import {
 	RESET_DOMAINS
 } from '../actions'
 
-const initalState = () => ({
+const initialState = () => ({
 	value: [],
 	fetching: false,
 	error: undefined
@@ -17,16 +17,16 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_DOMAINS_VALUE:
-			draft.value = action.payload || initalState().value
+			draft.value = action.payload || initialState().value
 			break
 		case SET_DOMAINS_FETCHING:
-			draft.fetching = action.payload || initalState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_DOMAINS_ERROR:
-			draft.error = action.payload || initalState().error
+			draft.error = action.payload || initialState().error
 			break
 		case RESET_DOMAINS:
-			return initalState()
+			return initialState()
 	}
 
-}, initalState())
+}, initialState())
