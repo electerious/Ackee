@@ -22,7 +22,7 @@ const scripts = async () => {
 	const babel = {
 		presets: [
 			[
-				'env', {
+				'@babel/preset-env', {
 					targets: {
 						browsers: [
 							'last 2 Safari versions',
@@ -31,13 +31,6 @@ const scripts = async () => {
 							'last 2 Firefox versions'
 						]
 					}
-				}
-			]
-		],
-		plugins: [
-			[
-				'transform-object-rest-spread', {
-					useBuiltIns: true
 				}
 			]
 		],
