@@ -12,7 +12,7 @@ const url = `http://localhost:${ port }`
 
 signale.start(`Starting the server`)
 
-mongoose.connect(process.env.MONGODB)
+mongoose.connect(process.env.MONGODB, { useNewUrlParser: true })
 server.listen(port)
 
 signale.watch(`Listening on ${ url }`)
