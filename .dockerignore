@@ -1,0 +1,29 @@
+# Temporary files
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+**/.idea/
+**/Icon\r\r
+
+# External disk files
+**/.Spotlight-V100
+**/.Trashes
+
+# AFP share files
+**/.AppleDB
+**/.AppleDesktop
+**/.apdisk
+**/Network Trash Folder
+**/Temporary Items
+
+# Package Managers
+npm-debug.log
+node_modules
+
+# Dist folder
+dist
+
+# Miscellaneous
+Dockerfile
+.git
+.env

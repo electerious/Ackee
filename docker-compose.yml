@@ -1,0 +1,20 @@
+version: "2"
+services:
+  ackee:
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB=mongodb://mongo:27017/ackee
+      - WAIT_HOSTS=mongo:27017
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  mongo:
+    image: "mongo"
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
