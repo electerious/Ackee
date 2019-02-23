@@ -20,7 +20,7 @@ Ackee requires a running MongoDB instance. The easiest way to install MongoDB is
 docker run -p 27017:27017 -d mongo
 ```
 
-For persistent storage, mount a host directory to the container directory `/data/db`, which is identified as a potential mount point in the mongo Dockerfile.
+For persistent storage, mount a host directory to the container directory `/data/db`, which is identified as a potential mount point in the mongo Dockerfile. When starting a new container, Docker will use the volume of the previous container and copy it to the new container, ensuring that no data gets lost.
 
 ```
 docker run -p 27017:27017 -v /path/to/local/folder:/data/db -d mongo
