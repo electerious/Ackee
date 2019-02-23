@@ -66,7 +66,7 @@ The following environment variables are used by Ackee. You can also create a [`.
 MongoDB connection URI. See the [MongoDB connection string spec](https://docs.mongodb.com/manual/reference/connection-string/) for more detail.
 
 ```
-MONGODB=mongodb://localhost/ackee
+MONGODB=mongodb://localhost:27017/ackee
 ```
 
 #### Port
