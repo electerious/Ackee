@@ -6,7 +6,5 @@ os:
   - windows
   - linux
   - osx
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then npm i -g windows-build-tools; fi
 after_success:
   - 'npm run coveralls'
