@@ -1,6 +1,5 @@
 node_modules/
 coverage/
 .nyc_output/
-yarn.lock
 package-lock.json
 .env
