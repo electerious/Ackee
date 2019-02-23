@@ -18,6 +18,7 @@ signale.await(`Connecting to ${ process.env.MONGODB }`)
 mongoose.connect(process.env.MONGODB, {
 
 	useNewUrlParser: true,
+	useCreateIndex: true,
 	reconnectTries: Number.MAX_VALUE,
 	reconnectInterval: 1000
 
