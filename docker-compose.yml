@@ -7,6 +7,8 @@ services:
       - "3000:3000"
     environment:
       - MONGODB=mongodb://mongo:27017/ackee
+      - USERNAME=username
+      - PASSWORD=password
       - WAIT_HOSTS=mongo:27017
     links:
       - mongo
