@@ -13,28 +13,24 @@ const url = `http://localhost:${ port }`
 server.on('listening', () => signale.watch(`Listening on ${ url }`))
 server.on('error', (err) => signale.fatal(err))
 
-Promise.resolve().then(() => {
+signale.await(`Connecting to ${ process.env.MONGODB }`)
 
-	signale.start(`Starting the server`)
+mongoose.connect(process.env.MONGODB, {
 
-	server.listen(port)
-
-	signale.await(`Connecting to ${ process.env.MONGODB }`)
-
-	return mongoose.connect(process.env.MONGODB, {
-		useNewUrlParser: true,
-		useCreateIndex: true,
-		reconnectTries: Number.MAX_VALUE,
-		reconnectInterval: 1000
-	})
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	reconnectTries: Number.MAX_VALUE,
+	reconnectInterval: 1000
 
 }).then(() => {
 
 	signale.success(`Connected to ${ process.env.MONGODB }`)
+	signale.start(`Starting the server`)
+
+	server.listen(port)
 
 }).catch((err) => {
 
 	signale.fatal(err)
-	process.exit(1)
 
 })
