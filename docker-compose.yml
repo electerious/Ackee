@@ -7,12 +7,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - MONGODB=mongodb://mongo:27017/ackee
       - WAIT_HOSTS=mongo:27017
+      - MONGODB=mongodb://mongo:27017/ackee
     env_file:
       - .env
-    links:
-      - mongo
     depends_on:
       - mongo
   mongo:
