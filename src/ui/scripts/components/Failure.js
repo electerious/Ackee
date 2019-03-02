@@ -1,5 +1,7 @@
 import { createElement as h, Component } from 'react'
 
+import formatErrors from '../utils/formatErrors'
+
 import Textarea from './Textarea'
 import Spacer from './Spacer'
 import Headline from './Headline'
@@ -44,7 +46,7 @@ const Failure = class extends Component {
 					h(Textarea, {
 						readOnly: true,
 						rows: 6,
-						value: this.props.errors.map((err) => err.stack).join('\n\n')
+						value: formatErrors(this.props.errors)
 					}),
 
 					h(Spacer, { size: 1 })
