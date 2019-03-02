@@ -32,5 +32,6 @@ mongoose.connect(process.env.MONGODB, {
 }).catch((err) => {
 
 	signale.fatal(err)
+	process.exit(1)
 
 })
