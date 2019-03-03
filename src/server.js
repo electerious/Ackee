@@ -2,7 +2,7 @@
 
 const micro = require('micro')
 const { send, createError } = require('micro')
-const { router, get, post, put, del } = require('microrouter')
+const { router, get, post, put, patch, del, head, options } = require('microrouter')
 
 const signale = require('./signale')
 const pipe = require('./pipe')
@@ -40,11 +40,14 @@ const notFound = async () => {
 module.exports = micro(
 	catchError(
 		router(
+
 			get('/', ui.index),
 			get('/index.css', ui.styles),
 			get('/index.js', ui.scripts),
+
 			post('/tokens', tokens.add),
 			del('/tokens/:tokenId', tokens.del),
+
 			post('/domains', pipe(auth, domains.add)),
 			get('/domains', pipe(auth, domains.all)),
 			put('/domains/:domainId', pipe(auth, domains.update)),
@@ -52,10 +55,15 @@ module.exports = micro(
 			post('/domains/:domainId/records', records.add),
 			put('/domains/:domainId/records/:recordId', records.update),
 			get('/domains/:domainId/views', pipe(auth, views.get)),
+
 			get('/*', notFound),
 			post('/*', notFound),
 			put('/*', notFound),
-			del('/*', notFound)
+			patch('/*', notFound),
+			del('/*', notFound),
+			head('/*', notFound),
+			options('/*', notFound)
+
 		)
 	)
 )
