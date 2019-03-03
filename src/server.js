@@ -53,7 +53,7 @@ module.exports = micro(
 			put('/domains/:domainId', pipe(auth, domains.update)),
 			del('/domains/:domainId', pipe(auth, domains.del)),
 			post('/domains/:domainId/records', records.add),
-			put('/domains/:domainId/records/:recordId', records.update),
+			patch('/domains/:domainId/records/:recordId', records.update),
 			get('/domains/:domainId/views', pipe(auth, views.get)),
 
 			get('/*', notFound),

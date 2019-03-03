@@ -92,7 +92,7 @@ Location: /domains/:domainId
 ### Request
 
 ```
-PATCH /domains/:domainId
+PUT /domains/:domainId
 ```
 
 ```json
