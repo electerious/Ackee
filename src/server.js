@@ -2,7 +2,7 @@
 
 const micro = require('micro')
 const { send, createError } = require('micro')
-const { router, get, post, put, patch, del, head, options } = require('microrouter')
+const { router, get, post, put, patch, del } = require('microrouter')
 
 const signale = require('./signale')
 const pipe = require('./pipe')
@@ -60,9 +60,7 @@ module.exports = micro(
 			post('/*', notFound),
 			put('/*', notFound),
 			patch('/*', notFound),
-			del('/*', notFound),
-			head('/*', notFound),
-			options('/*', notFound)
+			del('/*', notFound)
 
 		)
 	)
