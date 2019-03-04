@@ -12,7 +12,16 @@ Ackee helps you to track your sites, know more about your visitors and to analyz
 
 ## Get started
 
-[Get started with Ackee &#187;](docs/Get%20started.md)
+Get Ackee up and running…
+
+- […with Docker Compose](docs/Get%20started.md#with-docker-compose)
+- […with Docker](docs/Get%20started.md#with-docker)
+- […without Docker](docs/Get%20started.md#without-docker)
+
+And configure Ackee and your server correctly…
+
+- […with environment variables](#options)
+- […with SSL and HTTPS enabled](docs/SSL%20and%20HTTPS.md)
 
 ## Introduction
 
@@ -45,7 +54,7 @@ The interface of Ackee lets you view and analyse your tracked information.
 Ackee depends on...
 
 - [Node.js](https://nodejs.org/en/) (v8.11.0 or newer)
-- [npm](https://www.npmjs.com)
+- [yarn](https://yarnpkg.com/en/)
 - [MongoDB](https://www.mongodb.com)
 
 Make sure to install and update all dependencies before you setup Ackee.
@@ -92,4 +101,12 @@ Specifies how long a generated token is valid. Defaults to `3600000` (1 day).
 
 ```
 TTL=3600000
+```
+
+#### Environment
+
+Set the environment to `development` to see additional details in the console and to disable caching.
+
+```
+NODE_ENV=development
 ```
