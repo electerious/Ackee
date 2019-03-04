@@ -5,7 +5,7 @@ const { Signale } = require('signale')
 
 const signale = require('../src/signale')
 
-test('should be a Signale instance', (t) => {
+test('is a Signale instance', (t) => {
 
 	t.true(signale instanceof Signale)
 
