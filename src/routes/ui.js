@@ -4,7 +4,14 @@ const path = require('path')
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js')
 
-const index = require('../ui/index')
+const preload = require('../preload')
+const html = require('../ui/index')
+
+const index = async () => {
+
+	return html()
+
+}
 
 const styles = async () => {
 
@@ -48,7 +55,7 @@ const scripts = async () => {
 }
 
 module.exports = {
-	index,
-	styles,
-	scripts
+	index: process.env.NODE_ENV === 'development' ? index : preload(index),
+	styles: process.env.NODE_ENV === 'development' ? styles : preload(styles),
+	scripts: process.env.NODE_ENV === 'development' ? scripts : preload(scripts)
 }
