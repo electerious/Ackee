@@ -42,6 +42,7 @@ module.exports = micro(
 		router(
 
 			get('/', ui.index),
+			get('/index.html', ui.index),
 			get('/index.css', ui.styles),
 			get('/index.js', ui.scripts),
 
