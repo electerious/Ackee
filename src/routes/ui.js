@@ -1,11 +1,13 @@
 'use strict'
 
-const path = require('path')
+const { resolve } = require('path')
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js')
 
 const preload = require('../preload')
 const html = require('../ui/index')
+
+const optimize = process.env.NODE_ENV !== 'development'
 
 const index = async () => {
 
@@ -15,16 +17,18 @@ const index = async () => {
 
 const styles = async () => {
 
-	const filePath = path.resolve(__dirname, '../ui/styles/index.scss')
-	const opts = { optimize: true }
+	const filePath = resolve(__dirname, '../ui/styles/index.scss')
 
-	return sass(filePath, opts)
+	return sass(filePath, {
+		optimize
+	})
 
 }
 
 const scripts = async () => {
 
-	const filePath = path.resolve(__dirname, '../ui/scripts/index.js')
+	console.log(process.env.NODE_ENV !== 'development')
+	const filePath = resolve(__dirname, '../ui/scripts/index.js')
 
 	const babel = {
 		presets: [
@@ -44,18 +48,15 @@ const scripts = async () => {
 		babelrc: false
 	}
 
-	const opts = {
-		optimize: false,
-		browserify: {},
+	return js(filePath, {
+		optimize,
 		babel
-	}
-
-	return js(filePath, opts)
+	})
 
 }
 
 module.exports = {
-	index: process.env.NODE_ENV === 'development' ? index : preload(index),
-	styles: process.env.NODE_ENV === 'development' ? styles : preload(styles),
-	scripts: process.env.NODE_ENV === 'development' ? scripts : preload(scripts)
+	index: optimize === true ? preload(index) : index,
+	styles: optimize === true ? preload(styles) : styles,
+	scripts: optimize === true ? preload(scripts) : scripts
 }
