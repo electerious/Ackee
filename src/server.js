@@ -9,6 +9,7 @@ const pipe = require('./pipe')
 const auth = require('./auth')
 
 const ui = require('./routes/ui')
+const tracker = require('./routes/tracker')
 const tokens = require('./routes/tokens')
 const domains = require('./routes/domains')
 const records = require('./routes/records')
@@ -45,6 +46,8 @@ module.exports = micro(
 			get('/index.html', ui.index),
 			get('/index.css', ui.styles),
 			get('/index.js', ui.scripts),
+
+			get('/tracker.js', tracker.get),
 
 			post('/tokens', tokens.add),
 			del('/tokens/:tokenId', tokens.del),
