@@ -4,6 +4,8 @@
 
 Ackee helps you to track your sites, know more about your visitors and to analyze your traffic.
 
+![Ackee in a browser](https://s.electerious.com/images/ackee/readme.png)
+
 ## Contents
 
 - 🏃 [Get started](#get-started)
