@@ -6,7 +6,7 @@ Ackee dependents on …
 
 - [Node.js](https://nodejs.org/en/) (v8.11.0 or newer)
 - [yarn](https://yarnpkg.com/en/)
-- [MongoDB](https://www.mongodb.com)
+- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
 
 Make sure to install and update all dependencies before you fork and setup Ackee.
 
