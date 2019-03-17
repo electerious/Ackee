@@ -1,4 +1,4 @@
-# Token
+# Tokens
 
 - [Create a token](#create-a-token)
 - [Delete a token](#delete-a-token)
