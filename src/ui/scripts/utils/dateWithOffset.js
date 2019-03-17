@@ -1,9 +1,6 @@
-export default (offset, date = new Date()) => {
+import day from '../../../day'
 
-	const second = 1000
-	const minute = second * 60
-	const hour = minute * 60
-	const day = hour * 24
+export default (offset, date = new Date()) => {
 
 	date.setTime(date.getTime() + day * offset)
 
