@@ -11,6 +11,11 @@ const get = async (id) => {
 			}
 		},
 		{
+			$sort: {
+				created: 1
+			}
+		},
+		{
 			$group: {
 				_id: {
 					day: {
@@ -27,6 +32,9 @@ const get = async (id) => {
 					$sum: 1
 				}
 			}
+		},
+		{
+			$limit: 14
 		}
 	])
 

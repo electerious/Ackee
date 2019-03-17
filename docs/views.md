@@ -4,6 +4,8 @@
 
 ## Get all views
 
+Get the amount of visits per day for the last 14 days. Days without entries are omitted.
+
 ### Request
 
 ```
