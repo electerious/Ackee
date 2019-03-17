@@ -4,9 +4,9 @@ const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 
-const signale = require('./signale')
-const pipe = require('./pipe')
-const auth = require('./auth')
+const signale = require('./utils/signale')
+const pipe = require('./utils/pipe')
+const auth = require('./utils/auth')
 
 const ui = require('./routes/ui')
 const tracker = require('./routes/tracker')

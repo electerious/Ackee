@@ -1,4 +1,4 @@
-import day from '../../../day'
+import day from '../../../utils/day'
 
 export default (offset, date = new Date()) => {
 

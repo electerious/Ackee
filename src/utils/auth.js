@@ -5,7 +5,7 @@ const { Bearer } = require('permit')
 
 const context = require('./context')
 const ttl = require('./ttl')
-const tokens = require('./database/tokens')
+const tokens = require('../database/tokens')
 
 const permit = new Bearer({ query: 'token' })
 

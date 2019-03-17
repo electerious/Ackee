@@ -3,7 +3,7 @@
 const { readFile } = require('fs')
 const { promisify } = require('util')
 
-const preload = require('../preload')
+const preload = require('../utils/preload')
 
 const optimize = process.env.NODE_ENV !== 'development'
 

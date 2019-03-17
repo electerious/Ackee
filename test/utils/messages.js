@@ -3,7 +3,7 @@
 const test = require('ava')
 const uuid = require('uuid/v4')
 
-const messages = require('../src/messages')
+const messages = require('../../src/utils/messages')
 
 test('extract messages from an object with errors', (t) => {
 

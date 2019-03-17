@@ -4,7 +4,7 @@ const { resolve } = require('path')
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js')
 
-const preload = require('../preload')
+const preload = require('../utils/preload')
 const html = require('../ui/index')
 
 const optimize = process.env.NODE_ENV !== 'development'
@@ -27,7 +27,6 @@ const styles = async () => {
 
 const scripts = async () => {
 
-	console.log(process.env.NODE_ENV !== 'development')
 	const filePath = resolve(__dirname, '../ui/scripts/index.js')
 
 	const babel = {

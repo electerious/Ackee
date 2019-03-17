@@ -5,7 +5,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 
 const server = require('./server')
-const signale = require('./signale')
+const signale = require('./utils/signale')
 
 const port = process.env.PORT || 3000
 const url = `http://localhost:${ port }`

@@ -3,7 +3,7 @@
 const test = require('ava')
 const uuid = require('uuid/v4')
 
-const pipe = require('../src/pipe')
+const pipe = require('../../src/utils/pipe')
 
 test('return response of first function with a return value', async (t) => {
 

@@ -2,7 +2,7 @@
 
 const test = require('ava')
 
-const ttl = require('../src/ttl')
+const ttl = require('../../src/utils/ttl')
 
 test('return true when `timestamp` is valid', (t) => {
 

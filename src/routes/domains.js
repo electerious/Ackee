@@ -2,7 +2,7 @@
 
 const { send, json, createError } = require('micro')
 
-const messages = require('../messages')
+const messages = require('../utils/messages')
 const domains = require('../database/domains')
 
 const response = (entry) => ({

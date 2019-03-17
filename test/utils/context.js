@@ -3,7 +3,7 @@
 const test = require('ava')
 const uuid = require('uuid/v4')
 
-const context = require('../src/context')
+const context = require('../../src/utils/context')
 
 test('return object context', (t) => {
 

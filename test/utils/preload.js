@@ -3,7 +3,7 @@
 const test = require('ava')
 const uuid = require('uuid/v4')
 
-const preload = require('../src/preload')
+const preload = require('../../src/utils/preload')
 
 test('return response of original function', async (t) => {
 
