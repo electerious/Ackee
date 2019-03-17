@@ -63,6 +63,7 @@ Make sure to install and update all dependencies before you setup Ackee.
 
 ### API
 
+- [/](docs/UI.md)
 - [/tokens](docs/tokens.md)
 - [/domains](docs/domains.md)
 - [/domains/:domainId/records](docs/records.md)
