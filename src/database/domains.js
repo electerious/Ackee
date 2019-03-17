@@ -10,7 +10,20 @@ const add = async (data) => {
 
 const all = async () => {
 
-	return Domain.find({})
+	return Domain.aggregate([
+		{
+			$addFields: {
+				insensitive: {
+					$toLower: '$title'
+				}
+			}
+		},
+		{
+			$sort: {
+				insensitive: 1
+			}
+		}
+	])
 
 }
 
