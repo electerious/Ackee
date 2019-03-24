@@ -6,11 +6,23 @@ import isDefined from '../utils/isDefined'
 
 import Card from './Card'
 
-const Overview = class extends Component {
+const Views = class extends Component {
 
 	constructor(props) {
 
 		super(props)
+
+	}
+
+	componentDidMount() {
+
+		this.props.fetchDomains(this.props).then(() => {
+
+			this.props.domains.value.map((props) => {
+				this.props.fetchViews(props.data.id, this.props)
+			})
+
+		})
 
 	}
 
@@ -57,4 +69,4 @@ const Overview = class extends Component {
 
 }
 
-export default Overview
+export default Views

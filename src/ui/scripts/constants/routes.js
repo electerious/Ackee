@@ -1,2 +1,2 @@
-export const OVERVIEW = Symbol()
+export const VIEWS = Symbol()
 export const SETTINGS = Symbol()
