@@ -1,0 +1,12 @@
+.favicon {
+
+	--size: 28px;
+
+	width: var(--size);
+	height: var(--size);
+	background: var(--white);
+	border-radius: 100%;
+	border: 1px solid var(--white);
+	overflow: hidden;
+
+}
