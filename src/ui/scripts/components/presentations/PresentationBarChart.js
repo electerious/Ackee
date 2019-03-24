@@ -65,14 +65,14 @@ const Component = (props) => (
 			h(Row, { position: 'middle' }, props.items.length === 0 ? '' : mid(props.items)),
 			h(Row, { position: 'bottom' }, props.items.length === 0 ? '' : min())
 		),
-		props.items.map((amount, index) => (
+		props.items.map((item, index) => (
 			h(Column, {
 				key: index,
 				active: props.active === index,
-				size: `${ percentage(amount, max(props.items)) }%`,
+				size: `${ percentage(item, max(props.items)) }%`,
 				onEnter: () => props.onEnter(index),
 				onLeave: () => props.onLeave(index),
-				label: amount
+				label: item
 			})
 		))
 	)
