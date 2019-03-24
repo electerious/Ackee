@@ -1,8 +1,6 @@
 import { createElement as h, Component, Fragment } from 'react'
 
-import mergeViews from '../../utils/mergeViews'
 import enhanceViews from '../../utils/enhanceViews'
-import isDefined from '../../utils/isDefined'
 
 import CardViews from '../cards/CardViews'
 
@@ -28,29 +26,13 @@ const RouteViews = class extends Component {
 
 	render() {
 
-		// Enhance all view for all domains
-		const enhancedViews = this.props.domains.value.map((props) => {
-
-			const view = this.props.views.value[props.data.id]
-			const exists = view != null
-
-			return exists === true ? enhanceViews(view.value, 14) : undefined
-
-		})
-
-		// Remove views from domains that are still loading
-		const filteredViews = enhancedViews.filter(isDefined)
-
-		// Merge all views to one array of views
-		const mergedViews = mergeViews(filteredViews)
-
 		return (
 			h(Fragment, {},
 
 				h(CardViews, {
 					wide: true,
 					headline: 'Page Views',
-					items: mergedViews
+					items: this.props.merged.views
 				}),
 
 				this.props.domains.value.map(
