@@ -37,13 +37,15 @@ export const fetchToken = (props, state) => async (dispatch) => {
 			props
 		})
 
-		dispatch(setTokenFetching(false))
 		dispatch(setTokenValue(data))
 
 	} catch (err) {
 
-		dispatch(setTokenFetching(false))
 		dispatch(setTokenError(err))
+
+	} finally {
+
+		dispatch(setTokenFetching(false))
 
 	}
 

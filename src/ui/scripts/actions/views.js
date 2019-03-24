@@ -39,13 +39,15 @@ export const fetchViews = (domainId, props) => async (dispatch) => {
 			props
 		})
 
-		dispatch(setViewsFetching(domainId, false))
 		dispatch(setViewsValue(domainId, data))
 
 	} catch (err) {
 
-		dispatch(setViewsFetching(domainId, false))
 		dispatch(setViewsError(domainId, err))
+
+	} finally {
+
+		dispatch(setViewsFetching(domainId, false))
 
 	}
 

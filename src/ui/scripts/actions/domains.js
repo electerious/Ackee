@@ -36,13 +36,15 @@ export const fetchDomains = (props) => async (dispatch) => {
 			props
 		})
 
-		dispatch(setDomainsFetching(false))
 		dispatch(setDomainsValue(data))
 
 	} catch (err) {
 
-		dispatch(setDomainsFetching(false))
 		dispatch(setDomainsError(err))
+
+	} finally {
+
+		dispatch(setDomainsFetching(false))
 
 	}
 
