@@ -1,14 +1,14 @@
 import { createElement as h, Component } from 'react'
 
-import formatErrors from '../utils/formatErrors'
+import formatErrors from '../../utils/formatErrors'
 
-import Textarea from './Textarea'
-import Spacer from './Spacer'
-import Headline from './Headline'
-import Text from './Text'
-import Message from './Message'
+import Textarea from '../Textarea'
+import Spacer from '../Spacer'
+import Headline from '../Headline'
+import Text from '../Text'
+import Message from '../Message'
 
-const Failure = class extends Component {
+const OverlayFailure = class extends Component {
 
 	constructor(props) {
 
@@ -76,4 +76,4 @@ const Failure = class extends Component {
 
 }
 
-export default Failure
+export default OverlayFailure

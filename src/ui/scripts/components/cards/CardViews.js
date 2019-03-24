@@ -3,11 +3,11 @@ import { compose, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import relativeDate from '../utils/relativeDate'
+import relativeDate from '../../utils/relativeDate'
 
-import Headline from './Headline'
-import Text from './Text'
-import BarChart from './BarChart'
+import Headline from '../Headline'
+import Text from '../Text'
+import BarChart from '../BarChart'
 
 const enhance = compose(
 
@@ -19,7 +19,7 @@ const enhance = compose(
 
 )
 
-const Card = class extends Component {
+const CardViews = class extends Component {
 
 	constructor(props) {
 
@@ -84,4 +84,4 @@ const Card = class extends Component {
 
 }
 
-export default enhance(Card)
+export default enhance(CardViews)

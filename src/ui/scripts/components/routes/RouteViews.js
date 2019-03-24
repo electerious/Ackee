@@ -1,12 +1,12 @@
 import { createElement as h, Component, Fragment } from 'react'
 
-import mergeViews from '../utils/mergeViews'
-import enhanceViews from '../utils/enhanceViews'
-import isDefined from '../utils/isDefined'
+import mergeViews from '../../utils/mergeViews'
+import enhanceViews from '../../utils/enhanceViews'
+import isDefined from '../../utils/isDefined'
 
-import Card from './Card'
+import CardViews from '../cards/CardViews'
 
-const Views = class extends Component {
+const RouteViews = class extends Component {
 
 	constructor(props) {
 
@@ -47,7 +47,7 @@ const Views = class extends Component {
 		return (
 			h(Fragment, {},
 
-				h(Card, {
+				h(CardViews, {
 					wide: true,
 					headline: 'Page Views',
 					items: mergedViews
@@ -55,7 +55,7 @@ const Views = class extends Component {
 
 				this.props.domains.value.map(
 					(props, index) => h(Fragment, { key: index },
-						h(Card, {
+						h(CardViews, {
 							headline: props.data.title,
 							items: this.props.views.value[props.data.id] == null ? [] : enhanceViews(this.props.views.value[props.data.id].value, 7)
 						})
@@ -69,4 +69,4 @@ const Views = class extends Component {
 
 }
 
-export default Views
+export default RouteViews

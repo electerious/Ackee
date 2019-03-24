@@ -1,13 +1,13 @@
 import { createElement as h, Component } from 'react'
 
-import Input from './Input'
-import Spacer from './Spacer'
-import Headline from './Headline'
-import Text from './Text'
-import Spinner from './Spinner'
-import Message from './Message'
+import Input from '../Input'
+import Spacer from '../Spacer'
+import Headline from '../Headline'
+import Text from '../Text'
+import Spinner from '../Spinner'
+import Message from '../Message'
 
-const Login = class extends Component {
+const OverlayLogin = class extends Component {
 
 	constructor(props) {
 
@@ -115,4 +115,4 @@ const Login = class extends Component {
 
 }
 
-export default Login
+export default OverlayLogin

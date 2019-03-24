@@ -2,8 +2,8 @@ import { createElement as h, Component, Fragment } from 'react'
 
 import isUnknownError from '../utils/isUnknownError'
 
-import Failure from './Failure'
-import Login from './Login'
+import OverlayFailure from './overlays/OverlayFailure'
+import OverlayLogin from './overlays/OverlayLogin'
 import Dashboard from './Dashboard'
 
 const Main = class extends Component {
@@ -24,8 +24,8 @@ const Main = class extends Component {
 
 		return (
 			h(Fragment, {},
-				hasError === true && h(Failure, { errors: unknownErrors }),
-				hasError === false && hasToken === false && h(Login, this.props),
+				hasError === true && h(OverlayFailure, { errors: unknownErrors }),
+				hasError === false && hasToken === false && h(OverlayLogin, this.props),
 				hasError === false && hasToken === true && h(Dashboard, this.props)
 			)
 		)

@@ -57,6 +57,7 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	props.resetDomains()
 	props.resetViews()
+	props.resetReferrers()
 	props.resetRoute()
 
 	try {

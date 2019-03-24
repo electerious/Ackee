@@ -1,10 +1,10 @@
 import { createElement as h, Component, Fragment } from 'react'
 
-import { version } from '../../../../package'
+import { version } from '../../../../../package'
 
-import Setting from './Setting'
+import CardSetting from '../cards/CardSetting'
 
-const Settings = class extends Component {
+const RouteSettings = class extends Component {
 
 	constructor(props) {
 
@@ -17,7 +17,7 @@ const Settings = class extends Component {
 		return (
 			h(Fragment, {},
 
-				h(Setting, {
+				h(CardSetting, {
 					headline: 'Account',
 					items: [
 						{ type: 'p', disabled: true, label: 'Version', text: version },
@@ -25,7 +25,7 @@ const Settings = class extends Component {
 					]
 				}),
 
-				h(Setting, {
+				h(CardSetting, {
 					headline: 'Domains',
 					message: (() => {
 
@@ -49,7 +49,7 @@ const Settings = class extends Component {
 					})()
 				}),
 
-				h(Setting, {
+				h(CardSetting, {
 					headline: 'Help',
 					items: [
 						{ type: 'a', href: '#', label: 'Get started' },
@@ -65,4 +65,4 @@ const Settings = class extends Component {
 
 }
 
-export default Settings
+export default RouteSettings
