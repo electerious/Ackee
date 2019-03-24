@@ -1,35 +1,49 @@
 .iconList {
 
 	position: relative;
-	margin-top: var(--gutter);
-	height: 300px;
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: calc(var(--gutter) / 2);
+		pointer-events: none;
+	}
+
+	&::before {
+		top: 0;
+		background: linear-gradient(var(--card), transparent);
+	}
+
+	&::after {
+		bottom: 0;
+		background: linear-gradient(transparent, var(--card));
+	}
+
+	&__inner {
+		padding-top: var(--gutter);
+		height: 300px;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
 
 	&__row {
 		display: grid;
-		grid-auto-flow: column;
+		grid-template-columns: auto 100%;
 		grid-column-gap: var(--gutter);
-		align-items: center;
 		justify-content: flex-start;
+		align-items: center;
 		padding: calc(var(--gutter) / 2) 0;
 		border-bottom: 1px solid var(--dimmed);
-	}
 
-	&__icon {
-		--size: 28px;
-
-		flex-shrink: 0;
-		width: var(--size);
-		height: var(--size);
-		border-radius: 100%;
-		background: var(--white);
-		overflow: hidden;
-		border: 1px solid var(--white);
+		&:last-child {
+			border-bottom: none;
+		}
 	}
 
 	&__link {
-		width: 100%;
 		margin: 0;
 		color: currentColor;
 		font-size: .9em;

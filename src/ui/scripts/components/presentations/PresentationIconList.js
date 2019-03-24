@@ -2,21 +2,14 @@ import { createElement as h } from 'react'
 import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 
+import Favicon from '../Favicon'
+
 const enhance = compose(
 
 	setDisplayName('PresentationIconList'),
 
 	setPropTypes({
 		items: PropTypes.arrayOf(PropTypes.object).isRequired
-	})
-
-)
-
-const Icon = (props) => (
-
-	h('img', {
-		className: 'iconList__icon',
-		src: props.url.origin + '/favicon.ico'
 	})
 
 )
@@ -34,7 +27,7 @@ const Link = (props) => (
 const Row = (props) => (
 
 	h('div', { className: 'iconList__row' },
-		h(Icon, props),
+		h(Favicon, { url: props.url.href }),
 		h(Link, props)
 	)
 
@@ -43,12 +36,14 @@ const Row = (props) => (
 const Component = (props) => (
 
 	h('div', { className: 'iconList' },
-		props.items.map((item, index) => (
-			h(Row, {
-				key: index,
-				...item
-			})
-		))
+		h('div', { className: 'iconList__inner' },
+			props.items.map((item, index) => (
+				h(Row, {
+					key: index,
+					...item
+				})
+			))
+		)
 	)
 
 )
