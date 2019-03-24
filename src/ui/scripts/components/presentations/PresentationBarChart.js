@@ -14,7 +14,7 @@ const percentage = (amount, max) => (amount / max) * 100
 
 const enhance = compose(
 
-	setDisplayName('BarChart'),
+	setDisplayName('PresentationBarChart'),
 
 	setPropTypes({
 		items: PropTypes.arrayOf(PropTypes.number).isRequired,

@@ -1,5 +1,5 @@
-import { createElement as h, Fragment } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
+import { createElement as h, Component, Fragment } from 'react'
+import { compose, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 
 import isLast from '../../utils/isLast'
@@ -12,8 +12,6 @@ import Line from '../Line'
 
 const enhance = compose(
 
-	setDisplayName('Setting'),
-
 	setPropTypes({
 		headline: PropTypes.string.isRequired,
 		message: PropTypes.shape({
@@ -25,31 +23,43 @@ const enhance = compose(
 
 )
 
-const Component = (props) => (
+const CardSetting = class extends Component {
 
-	h('div', { className: 'card card--wide' },
-		h('div', { className: 'card__inner' },
+	constructor(props) {
 
-			h(Headline, {
-				type: 'h2',
-				small: true,
-				className: 'color-white'
-			}, props.headline),
+		super(props)
 
-			h(Spacer, { size: 1 }),
+	}
 
-			props.message != null && h(Message, { status: props.message.status }, props.message.label),
+	render() {
 
-			props.items.map(
-				(props, index, arr) => h(Fragment, { key: index },
-					h(LinkItem, props, props.label),
-					isLast(index, arr) === false && h(Line)
+		return (
+			h('div', { className: 'card card--wide' },
+				h('div', { className: 'card__inner' },
+
+					h(Headline, {
+						type: 'h2',
+						small: true,
+						className: 'color-white'
+					}, this.props.headline),
+
+					h(Spacer, { size: 1 }),
+
+					this.props.message != null && h(Message, { status: this.props.message.status }, this.props.message.label),
+
+					this.props.items.map(
+						(props, index, arr) => h(Fragment, { key: index },
+							h(LinkItem, props, props.label),
+							isLast(index, arr) === false && h(Line)
+						)
+					)
+
 				)
 			)
-
 		)
-	)
 
-)
+	}
 
-export default enhance(Component)
+}
+
+export default enhance(CardSetting)

@@ -7,7 +7,7 @@ import relativeDate from '../../utils/relativeDate'
 
 import Headline from '../Headline'
 import Text from '../Text'
-import BarChart from '../BarChart'
+import PresentationBarChart from '../presentations/PresentationBarChart'
 
 const enhance = compose(
 
@@ -70,7 +70,7 @@ const CardViews = class extends Component {
 					h(Text, {
 						spacing: false
 					}, relativeDate(this.state.active)),
-					h(BarChart, {
+					h(PresentationBarChart, {
 						items: this.props.items,
 						active: this.state.active,
 						onEnter: this.onEnter,
