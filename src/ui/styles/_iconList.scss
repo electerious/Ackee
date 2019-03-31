@@ -8,22 +8,22 @@
 		position: absolute;
 		left: 0;
 		right: 0;
-		height: calc(var(--gutter) / 2);
+		height: $gutter/2;
 		pointer-events: none;
 	}
 
 	&::before {
 		top: 0;
-		background: linear-gradient(var(--card), transparent);
+		background: linear-gradient($card, rgba($card, 0));
 	}
 
 	&::after {
 		bottom: 0;
-		background: linear-gradient(transparent, var(--card));
+		background: linear-gradient(rgba($card, 0), $card);
 	}
 
 	&__inner {
-		padding-top: var(--gutter);
+		padding-top: $gutter;
 		height: 300px;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
@@ -32,11 +32,11 @@
 	&__row {
 		display: grid;
 		grid-template-columns: auto 100%;
-		grid-column-gap: var(--gutter);
+		grid-column-gap: $gutter;
 		justify-content: flex-start;
 		align-items: center;
-		padding: calc(var(--gutter) / 2) 0;
-		border-bottom: 1px solid var(--dimmed);
+		padding: $gutter/2 0;
+		border-bottom: 1px solid $dimmed;
 
 		&:last-child {
 			border-bottom: none;
@@ -51,7 +51,7 @@
 		transition: color .3s ease;
 
 		&:hover {
-			color: var(--white);
+			color: $white;
 		}
 	}
 

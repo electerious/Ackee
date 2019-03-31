@@ -28,17 +28,17 @@
 		animation-timing-function: linear;
 
 		&--primary {
-			border-right-color: var(--primary);
+			border-right-color: $primary;
 			animation-duration: .5s;
 		}
 
 		&--white {
-			border-right-color: var(--white);
+			border-right-color: $white;
 			animation-duration: .8s;
 		}
 
 		&--dimmed {
-			border-color: var(--dimmed);
+			border-color: $dimmed;
 		}
 	}
 

@@ -1,19 +1,19 @@
 .color {
 
 	&-main {
-		color: var(--primary);
+		color: $primary;
 	}
 
 	&-white {
-		color: var(--white);
+		color: $white;
 	}
 
 	&-light {
-		color: var(--light);
+		color: $light;
 	}
 
 	&-black {
-		color: var(--black);
+		color: $black;
 	}
 
 }

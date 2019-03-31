@@ -3,7 +3,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0 0 var(--gutter);
+	margin: 0 0 $gutter;
 	width: 100%;
 	transition: color .3s ease;
 
@@ -12,7 +12,7 @@
 	}
 
 	&:not(.linkItem--disabled):hover {
-		color: var(--white);
+		color: $white;
 	}
 
 }

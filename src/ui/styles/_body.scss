@@ -1,8 +1,8 @@
 body {
 
 	display: grid;
-	color: var(--light);
-	background: var(--black);
+	color: $light;
+	background: $black;
 
 	// Set the min-height to 100% to fill the whole page with a
 	// gradient when the body has a background gradient.

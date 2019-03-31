@@ -1,8 +1,8 @@
 .line {
 
-	margin: 0 0 var(--gutter);
+	margin: 0 0 $gutter;
 	height: 1px;
-	background: var(--dimmed);
+	background: $dimmed;
 	border: 0;
 
 }

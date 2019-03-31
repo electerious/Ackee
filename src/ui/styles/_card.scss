@@ -1,7 +1,7 @@
 .card {
 
-	background: var(--card);
-	border-radius: var(--radius);
+	background: $card;
+	border-radius: $radius;
 	width: 100%;
 	overflow: hidden;
 
@@ -16,18 +16,18 @@
 	}
 
 	&__inner {
-		padding: calc(var(--gutter) * 1.5);
+		padding: $gutter*1.5;
 	}
 
 	&__footer {
 		display: flex;
-		border-top: 1px solid var(--black);
+		border-top: 1px solid $black;
 	}
 
 	&__button {
 		display: flex;
 		justify-content: flex-end;
-		padding: var(--gutter) calc(var(--gutter) * 1.5);
+		padding: $gutter $gutter*1.5;
 		transition: background .3s ease;
 		outline: none;
 
@@ -37,7 +37,7 @@
 
 		&:not([disabled]):focus,
 		&:not([disabled]):hover {
-			background: var(--dimmed);
+			background: $dimmed;
 		}
 
 		&:active {
@@ -53,7 +53,7 @@
 	&__separator {
 		flex-shrink: 0;
 		width: 1px;
-		background: var(--black);
+		background: $black;
 	}
 
 }

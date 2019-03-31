@@ -1,15 +1,9 @@
 .input {
 
-	background: var(--dimmed);
 	border-width: 2px;
 
 	&:focus {
-		border-color: var(--primary);
-	}
-
-	&[disabled] {
-		background: var(--dimmed);
-		border-color: transparent;
+		border-color: $primary;
 	}
 
 }

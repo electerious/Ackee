@@ -1,6 +1,6 @@
 .text {
 
-	margin: 0 0 var(--gutter);
+	margin: 0 0 $gutter;
 
 	&--no-spacing {
 		margin-bottom: 0;

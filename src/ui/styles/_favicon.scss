@@ -4,9 +4,9 @@
 
 	width: var(--size);
 	height: var(--size);
-	background: var(--white);
+	background: $white;
 	border-radius: 100%;
-	border: 1px solid var(--white);
+	border: 1px solid $white;
 	overflow: hidden;
 
 }

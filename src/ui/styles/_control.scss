@@ -6,7 +6,7 @@
 
 	&__input:focus + &__label {
 		&::before {
-			border-color: var(--primary);
+			border-color: $primary;
 		}
 	}
 
@@ -21,7 +21,6 @@
 		}
 
 		&::before {
-			background: var(--dimmed);
 			border-width: 2px;
 		}
 	}

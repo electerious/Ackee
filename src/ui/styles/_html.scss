@@ -1,25 +1,5 @@
 html {
 
-	// Colors
-	--primary: rgba(115, 250, 200, 1);
-	--secondary: rgba(0, 190, 225, 1);
-	--tertiary: rgba(110, 115, 115, 1);
-	--gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-	--white: rgba(255, 255, 255, 1);
-	--light: rgba(255, 255, 255, .5);
-	--black: rgba(40, 45, 45, 1);
-	--dimmed: rgba(255, 255, 255, .05);
-	--card: rgba(51, 56, 56, 1);
-	--border: rgba(0, 0, 0, .3);
-	--success: rgba(0, 255, 0, .1);
-	--warning: rgba(255, 255, 0, .1);
-	--error: rgba(255, 0, 0, .15);
-
-	// Sizes
-	--gutter: 1rem;
-	--max-width: 1200px;
-	--radius: 6px;
-
 	// Fill the whole browser. Necessary when the body is smaller than the browser,
 	// but wants to fill the whole page using min-height.
 	width: 100%;

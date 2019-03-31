@@ -3,7 +3,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: row-reverse;
-	padding-top: calc(var(--gutter) * 3.5);
+	padding-top: $gutter*3.5;
 	height: 300px;
 	overflow: hidden;
 
@@ -21,8 +21,8 @@
 		position: relative;
 		font-size: .8em;
 		min-width: 1px;
-		padding: calc(var(--gutter) / 2) 0;
-		padding-right: calc(var(--gutter) / 2);
+		padding: $gutter/2 0;
+		padding-right: $gutter/2;
 
 		&--top {
 			transform: translateY(-100%);
@@ -41,16 +41,16 @@
 			position: absolute;
 			left: 0;
 			bottom: 0;
-			width: var(--max-width);
+			width: $maxWidth;
 			height: 1px;
-			background: var(--dimmed);
+			background: $dimmed;
 		}
 	}
 
 	&__column {
 		display: flex;
 		align-items: flex-end;
-		padding: 0 calc(var(--gutter) / 4);
+		padding: 0 $gutter/4;
 		width: 100%;
 	}
 
@@ -59,11 +59,11 @@
 		width: 100%;
 		height: var(--size);
 		min-height: 2px;
-		background: var(--tertiary);
+		background: $tertiary;
 	}
 
 	&__column.active &__bar {
-		background: var(--primary);
+		background: $primary;
 
 		&::after {
 			--arrow-width: 15px;
@@ -72,9 +72,9 @@
 			content: attr(data-label);
 			position: absolute;
 			right: 0;
-			bottom: calc(100% + var(--gutter));
+			bottom: calc(100% + #{ $gutter });
 			padding: .2em .5em calc(.2em + var(--arrow-height));
-			background: var(--white);
+			background: $white;
 			clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--arrow-width)) calc(100% - var(--arrow-height)), 0 calc(100% - var(--arrow-height)));
 			color: currentColor;
 		}

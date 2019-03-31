@@ -2,11 +2,11 @@
 
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-gap: var(--gutter);
+	grid-gap: $gutter;
 	margin: 0 auto;
-	padding: calc(var(--gutter) * 5) var(--gutter);
+	padding: $gutter*5 $gutter;
 	width: 100%;
-	max-width: var(--max-width);
+	max-width: $maxWidth;
 
 	@media (max-width: 800px) {
 		grid-template-columns: 1fr;
