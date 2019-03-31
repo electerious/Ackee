@@ -24,7 +24,8 @@ const Row = (props) => (
 		onMouseLeave: props.onLeave
 	},
 		h(Favicon, { url: props.url.href }),
-		props.url.hostname
+		h('span', { className: 'iconList__hostname' }, props.url.hostname),
+		h('span', { className: 'iconList__pathname' }, props.url.pathname)
 	)
 
 )

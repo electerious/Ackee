@@ -32,7 +32,6 @@
 	&__row {
 		display: grid;
 		grid-auto-flow: column;
-		grid-column-gap: $gutter;
 		justify-content: flex-start;
 		align-items: center;
 		margin: 0;
@@ -41,6 +40,7 @@
 		font-size: .9em;
 		text-decoration: none;
 		border-bottom: 1px solid $dimmed;
+		transition: color .3s ease;
 
 		&:last-child {
 			border-bottom: none;
@@ -49,6 +49,22 @@
 		&:hover {
 			color: $white;
 		}
+	}
+
+	&__hostname {
+		margin-left: $gutter;
+	}
+
+	&__pathname {
+		opacity: 0;
+		transition: opacity .3s ease;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&__row:hover &__pathname {
+		opacity: .6;
 	}
 
 }
