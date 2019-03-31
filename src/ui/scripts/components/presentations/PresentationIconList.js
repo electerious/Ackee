@@ -14,21 +14,17 @@ const enhance = compose(
 
 )
 
-const Link = (props) => (
-
-	h('a', {
-		className: 'iconList__link',
-		href: props.url.href,
-		target: '_blank'
-	}, props.url.hostname)
-
-)
-
 const Row = (props) => (
 
-	h('div', { className: 'iconList__row' },
+	h('a', {
+		className: 'iconList__row',
+		href: props.url.href,
+		target: '_blank',
+		onMouseEnter: props.onEnter,
+		onMouseLeave: props.onLeave
+	},
 		h(Favicon, { url: props.url.href }),
-		h(Link, props)
+		props.url.hostname
 	)
 
 )
@@ -40,6 +36,8 @@ const Component = (props) => (
 			props.items.map((item, index) => (
 				h(Row, {
 					key: index,
+					onEnter: () => props.onEnter(index),
+					onLeave: () => props.onLeave(index),
 					...item
 				})
 			))

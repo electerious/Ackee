@@ -31,24 +31,20 @@
 
 	&__row {
 		display: grid;
-		grid-template-columns: auto 100%;
+		grid-auto-flow: column;
 		grid-column-gap: $gutter;
 		justify-content: flex-start;
 		align-items: center;
+		margin: 0;
 		padding: $gutter/2 0;
+		color: currentColor;
+		font-size: .9em;
+		text-decoration: none;
 		border-bottom: 1px solid $dimmed;
 
 		&:last-child {
 			border-bottom: none;
 		}
-	}
-
-	&__link {
-		margin: 0;
-		color: currentColor;
-		font-size: .9em;
-		text-decoration: none;
-		transition: color .3s ease;
 
 		&:hover {
 			color: $white;
