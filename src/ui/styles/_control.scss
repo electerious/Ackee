@@ -4,12 +4,6 @@
 	// Half pixels would transform the circle of the radio control into an egg.
 	$size: 24px;
 
-	&__input:focus + &__label {
-		&::before {
-			border-color: $primary;
-		}
-	}
-
 	&__label {
 		padding-left: calc(#{ $size } + #{ $formbase__gutter/3 });
 
