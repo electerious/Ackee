@@ -890,10 +890,10 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
-ackee-tracker@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/ackee-tracker/-/ackee-tracker-3.1.2.tgz#4a5587672879f2ae267267c06e2c665625a3bfb2"
-  integrity sha512-pud6NMem7AtBVSHbXEi+xUiouNXr2Z37p2pwUxY7rNwXVgslNDTisxIFlFFk4Mp1uYjAVZBXDAg/jOk9JxOAwQ==
+ackee-tracker@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/ackee-tracker/-/ackee-tracker-3.1.3.tgz#28ef9f1e4070da38433284ee78e559a8fe30d547"
+  integrity sha512-YDCivdaIPfAZuaIpnNl4lMxQ2iBSSssPVn1eroQ5RIPL/59+DmswUY+sssQ3Clq6upYyOtnAjmDaTnJYq6hGGQ==
   dependencies:
     platform "^1.3.5"
 

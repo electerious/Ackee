@@ -26,7 +26,7 @@
   "dependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
-    "ackee-tracker": "^3.1.2",
+    "ackee-tracker": "^3.1.3",
     "classnames": "^2.2.6",
     "dotenv": "^6.2.0",
     "formbase": "^8.0.2",
