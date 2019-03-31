@@ -1,12 +1,16 @@
 .favicon {
 
-	--size: 28px;
+	--size: 30px;
 
 	width: var(--size);
 	height: var(--size);
 	background: $white;
 	border-radius: 100%;
-	border: 1px solid $white;
+	border: 2px solid $white;
 	overflow: hidden;
+
+	&--missing {
+		background: $gradient;
+	}
 
 }

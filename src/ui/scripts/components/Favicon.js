@@ -1,6 +1,7 @@
 import { createElement as h, Component } from 'react'
 import { compose, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 const enhance = compose(
 
@@ -27,7 +28,7 @@ const Favicon = class extends Component {
 	onError() {
 
 		this.setState({
-			src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+			src: undefined
 		})
 
 	}
@@ -36,7 +37,10 @@ const Favicon = class extends Component {
 
 		return (
 			h('img', {
-				className: 'favicon',
+				className: classNames({
+					'favicon': true,
+					'favicon--missing': this.state.src == null
+				}),
 				src: this.state.src,
 				onError: this.onError
 			})
