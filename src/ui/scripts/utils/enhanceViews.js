@@ -8,10 +8,10 @@ export default (views, length) => createArray(length).map((_, index) => {
 	const view = views.find((view) => {
 
 		const isDay = view.data.id.day === date.getDate()
-		const isMonth = view.data.id.month === date.getMonth()
-		const isYear = view.data.id.year === date.getYear()
+		const isMonth = view.data.id.month === date.getMonth() + 1
+		const isYear = view.data.id.year === date.getFullYear()
 
-		return isDay === isMonth === isYear === true
+		return isDay === true && isMonth === true && isYear === true
 
 	})
 
