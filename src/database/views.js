@@ -11,11 +11,6 @@ const get = async (id) => {
 			}
 		},
 		{
-			$sort: {
-				created: 1
-			}
-		},
-		{
 			$group: {
 				_id: {
 					day: {
@@ -31,6 +26,13 @@ const get = async (id) => {
 				count: {
 					$sum: 1
 				}
+			}
+		},
+		{
+			$sort: {
+				'_id.year': -1,
+				'_id.month': -1,
+				'_id.day': -1
 			}
 		},
 		{
