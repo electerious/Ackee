@@ -1,18 +1,7 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 
 import Favicon from '../Favicon'
-
-const enhance = compose(
-
-	setDisplayName('PresentationIconList'),
-
-	setPropTypes({
-		items: PropTypes.arrayOf(PropTypes.object).isRequired
-	})
-
-)
 
 const Row = (props) => (
 
@@ -47,4 +36,10 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'PresentationIconList'
+
+Component.propTypes = {
+	items: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default Component

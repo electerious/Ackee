@@ -1,5 +1,4 @@
 import { createElement as h, Component } from 'react'
-import { compose, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -8,16 +7,6 @@ import relativeDate from '../../utils/relativeDate'
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationBarChart from '../presentations/PresentationBarChart'
-
-const enhance = compose(
-
-	setPropTypes({
-		wide: PropTypes.bool,
-		headline: PropTypes.string.isRequired,
-		items: PropTypes.array.isRequired
-	})
-
-)
 
 const CardViews = class extends Component {
 
@@ -84,4 +73,10 @@ const CardViews = class extends Component {
 
 }
 
-export default enhance(CardViews)
+CardViews.propTypes = {
+	wide: PropTypes.bool,
+	headline: PropTypes.string.isRequired,
+	items: PropTypes.array.isRequired
+}
+
+export default CardViews

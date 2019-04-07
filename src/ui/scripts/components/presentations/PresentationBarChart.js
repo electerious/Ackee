@@ -1,5 +1,4 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -11,18 +10,6 @@ const mid = (items) => max(items) / 2
 const min = () => 0
 
 const percentage = (amount, max) => (amount / max) * 100
-
-const enhance = compose(
-
-	setDisplayName('PresentationBarChart'),
-
-	setPropTypes({
-		items: PropTypes.arrayOf(PropTypes.number).isRequired,
-		onEnter: PropTypes.func.isRequired,
-		onLeave: PropTypes.func.isRequired
-	})
-
-)
 
 const Row = (props) => (
 
@@ -79,4 +66,12 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'PresentationBarChart'
+
+Component.propTypes = {
+	items: PropTypes.arrayOf(PropTypes.number).isRequired,
+	onEnter: PropTypes.func.isRequired,
+	onLeave: PropTypes.func.isRequired
+}
+
+export default Component

@@ -1,5 +1,4 @@
 import { createElement as h, Component, Fragment } from 'react'
-import { compose, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 
 import isLast from '../../utils/isLast'
@@ -9,19 +8,6 @@ import Headline from '../Headline'
 import Message from '../Message'
 import LinkItem from '../LinkItem'
 import Line from '../Line'
-
-const enhance = compose(
-
-	setPropTypes({
-		headline: PropTypes.string.isRequired,
-		message: PropTypes.shape({
-			status: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired
-		}),
-		items: PropTypes.array.isRequired
-	})
-
-)
 
 const CardSetting = class extends Component {
 
@@ -62,4 +48,13 @@ const CardSetting = class extends Component {
 
 }
 
-export default enhance(CardSetting)
+CardSetting.propTypes = {
+	headline: PropTypes.string.isRequired,
+	message: PropTypes.shape({
+		status: PropTypes.string.isRequired,
+		label: PropTypes.string.isRequired
+	}),
+	items: PropTypes.array.isRequired
+}
+
+export default CardSetting
