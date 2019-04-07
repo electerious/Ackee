@@ -4,7 +4,7 @@
 
 ## Get all referrers
 
-Get the top 20 referrers of the last 7 days.
+Get the top 25 referrers of the last 7 days.
 
 ### Request
 

@@ -31,7 +31,7 @@ const get = async (id) => {
 			}
 		},
 		{
-			$limit: 20
+			$limit: 25
 		}
 	])
 
