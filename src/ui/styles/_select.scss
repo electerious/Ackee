@@ -1,6 +1,7 @@
 .select {
 
 	border-width: 2px;
+	padding-right: $gutter*2;
 
 	option {
 		// Some browser are using the color of the select to display options.
