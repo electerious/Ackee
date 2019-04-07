@@ -26,13 +26,13 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_VIEWS_VALUE:
-			draft.value[action.domainId].value = action.payload || initialSubState.value
+			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_VIEWS_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState.fetching
+			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
 			break
 		case SET_VIEWS_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState.error
+			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
 		case RESET_VIEWS:
 			return initialState()
