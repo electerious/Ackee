@@ -6,11 +6,11 @@ import {
 } from '../actions'
 
 import {
-	VIEWS
-} from '../constants/routes'
+	ROUTE_VIEWS
+} from '../constants/route'
 
 const initialState = () => ({
-	value: VIEWS
+	value: ROUTE_VIEWS
 })
 
 export default produce((draft, action) => {

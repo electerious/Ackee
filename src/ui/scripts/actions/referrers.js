@@ -1,9 +1,15 @@
 import api from '../utils/api'
 
+export const SET_REFERRERS_SORTING = Symbol()
 export const SET_REFERRERS_VALUE = Symbol()
 export const SET_REFERRERS_FETCHING = Symbol()
 export const SET_REFERRERS_ERROR = Symbol()
 export const RESET_REFERRERS = Symbol()
+
+export const setReferrersSorting = (payload) => ({
+	type: SET_REFERRERS_SORTING,
+	payload
+})
 
 export const setReferrersValue = (domainId, payload) => ({
 	type: SET_REFERRERS_VALUE,
@@ -34,7 +40,7 @@ export const fetchReferrers = (domainId, props) => async (dispatch) => {
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/referrers`, {
+		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }`, {
 			method: 'get',
 			props
 		})

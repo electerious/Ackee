@@ -1,13 +1,19 @@
 import produce from 'immer'
 
 import {
+	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
 	SET_REFERRERS_ERROR,
 	RESET_REFERRERS
 } from '../actions'
 
+import {
+	REFERRERS_TOP
+} from '../constants/referrers'
+
 const initialState = () => ({
+	sorting: REFERRERS_TOP,
 	value: {}
 })
 
@@ -25,14 +31,17 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
+		case SET_REFERRERS_SORTING:
+			draft.sorting = action.payload || initialState().sorting
+			break
 		case SET_REFERRERS_VALUE:
-			draft.value[action.domainId].value = action.payload || initialSubState.value
+			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_REFERRERS_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState.fetching
+			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
 			break
 		case SET_REFERRERS_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState.error
+			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
 		case RESET_REFERRERS:
 			return initialState()
