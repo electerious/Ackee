@@ -5,7 +5,7 @@
 	$size: 24px;
 
 	&__label {
-		padding-left: calc(#{ $size } + #{ $formbase__gutter/3 });
+		padding-left: calc(#{ $size } + #{ $formbase__padding });
 
 		&::before,
 		&::after {

@@ -3068,10 +3068,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formbase@^8.0.2:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/formbase/-/formbase-8.0.2.tgz#83006fc5d6a2c11362d4dc9e68b7091a54e89a9f"
-  integrity sha512-1E8nEvO7xvGiIZ1jGs4UDRka7b36+XazEup1xQsZM4aYfLYMqLndmdzG1olpbe//eFdM1dWIH+HC5w2vXhdbsg==
+formbase@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/formbase/-/formbase-9.0.0.tgz#db6d21f88da1b6447f279d91521b270a09155f36"
+  integrity sha512-rGujTog8AtuGzCeVyke4nMOtZRv+s/SMA35bY6t3fA3RJWanbjphzllnxF/gZiaVhPCarVT7KCHjEt60koSf2g==
 
 fragment-cache@^0.2.1:
   version "0.2.1"
