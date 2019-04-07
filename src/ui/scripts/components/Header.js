@@ -1,4 +1,4 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -53,9 +53,12 @@ const Component = (props) => (
 
 	h('header', { className: 'header' },
 		h(Logo, { fetching: props.fetching }),
-		h('nav', {}, props.items.map(
-			(props, index) => h(Fragment, { key: index },
-				h(Button, props, props.label)
+		h('nav', {},
+			props.items.map((props, index) => (
+				h(Button, {
+					key: index,
+					...props
+				}, props.label)
 			))
 		)
 	)
