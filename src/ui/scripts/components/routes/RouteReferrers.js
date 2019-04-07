@@ -53,8 +53,8 @@ const RouteReferrers = class extends Component {
 
 				h('div', { className: 'subHeader' },
 					h(Select, {
-						value: (e) => this.props.setReferrersSorting(e.target.value),
-						onChange: this.onChange,
+						value: this.props.referrers.sorting,
+						onChange: (e) => this.props.setReferrersSorting(e.target.value),
 						items: [
 							{ value: REFERRERS_TOP, label: 'Top referrers' },
 							{ value: REFERRERS_RECENT, label: 'Recent referrers' }
