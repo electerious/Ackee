@@ -1,4 +1,4 @@
-import { createElement as h, Component, Fragment } from 'react'
+import { createElement as h } from 'react'
 
 import isUnknownError from '../utils/isUnknownError'
 
@@ -6,32 +6,24 @@ import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
 import Dashboard from './Dashboard'
 
-const Main = class extends Component {
+const Component = (props) => {
 
-	constructor(props) {
+	// Only handle errors not handled by other components
+	const unknownErrors = props.errors.filter(isUnknownError)
 
-		super(props)
+	const hasError = unknownErrors.length !== 0
+	const hasToken = props.token.value.id != null
 
-	}
+	const showOverlayFailure = hasError === true
+	const showOverlayLogin = hasError === false && hasToken === false
+	const showDashboard = hasError === false && hasToken === true
 
-	render() {
-
-		// Only handle errors not handled by other components
-		const unknownErrors = this.props.errors.filter(isUnknownError)
-
-		const hasError = unknownErrors.length !== 0
-		const hasToken = this.props.token.value.id != null
-
-		return (
-			h(Fragment, {},
-				hasError === true && h(OverlayFailure, { errors: unknownErrors }),
-				hasError === false && hasToken === false && h(OverlayLogin, this.props),
-				hasError === false && hasToken === true && h(Dashboard, this.props)
-			)
-		)
-
-	}
+	if (showOverlayFailure === true) return h(OverlayFailure, { errors: unknownErrors })
+	if (showOverlayLogin === true) return h(OverlayLogin, props)
+	if (showDashboard === true) return h(Dashboard, props)
 
 }
 
-export default Main
+Component.displayName = 'Main'
+
+export default Component

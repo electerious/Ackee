@@ -1,16 +1,5 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
-
-const enhance = compose(
-
-	setDisplayName('Spacer'),
-
-	setPropTypes({
-		size: PropTypes.number.isRequired
-	})
-
-)
 
 const Component = (props) => (
 
@@ -23,4 +12,10 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'Spacer'
+
+Component.propTypes = {
+	size: PropTypes.number.isRequired
+}
+
+export default Component

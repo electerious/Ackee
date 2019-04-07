@@ -1,15 +1,6 @@
 import { createElement as h, Component } from 'react'
-import { compose, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
-const enhance = compose(
-
-	setPropTypes({
-		url: PropTypes.string.isRequired
-	})
-
-)
 
 const Favicon = class extends Component {
 
@@ -50,4 +41,8 @@ const Favicon = class extends Component {
 
 }
 
-export default enhance(Favicon)
+Favicon.propTypes = {
+	url: PropTypes.string.isRequired
+}
+
+export default Favicon

@@ -1,4 +1,4 @@
-import { createElement as h, Component } from 'react'
+import { createElement as h } from 'react'
 
 import {
 	ROUTE_VIEWS,
@@ -11,36 +11,26 @@ import RouteViews from './routes/RouteViews'
 import RouteReferrers from './routes/RouteReferrers'
 import RouteSettings from './routes/RouteSettings'
 
-const Dashboard = class extends Component {
+const Component = (props) => (
 
-	constructor(props) {
-
-		super(props)
-
-	}
-
-	render() {
-
-		return (
-			h('div', {},
-				h(Header, {
-					fetching: this.props.fetching,
-					items: [
-						{ onClick: () => this.props.setRouteValue(ROUTE_VIEWS), active: this.props.route.value === ROUTE_VIEWS, label: 'Views' },
-						{ onClick: () => this.props.setRouteValue(ROUTE_REFERRERS), active: this.props.route.value === ROUTE_REFERRERS, label: 'Referrers' },
-						{ onClick: () => this.props.setRouteValue(ROUTE_SETTINGS), active: this.props.route.value === ROUTE_SETTINGS, label: 'Settings' }
-					]
-				}),
-				h('main', { className: 'content' },
-					this.props.route.value === ROUTE_VIEWS && h(RouteViews, this.props),
-					this.props.route.value === ROUTE_REFERRERS && h(RouteReferrers, this.props),
-					this.props.route.value === ROUTE_SETTINGS && h(RouteSettings, this.props)
-				)
-			)
+	h('div', {},
+		h(Header, {
+			fetching: props.fetching,
+			items: [
+				{ onClick: () => props.setRouteValue(ROUTE_VIEWS), active: props.route.value === ROUTE_VIEWS, label: 'Views' },
+				{ onClick: () => props.setRouteValue(ROUTE_REFERRERS), active: props.route.value === ROUTE_REFERRERS, label: 'Referrers' },
+				{ onClick: () => props.setRouteValue(ROUTE_SETTINGS), active: props.route.value === ROUTE_SETTINGS, label: 'Settings' }
+			]
+		}),
+		h('main', { className: 'content' },
+			props.route.value === ROUTE_VIEWS && h(RouteViews, props),
+			props.route.value === ROUTE_REFERRERS && h(RouteReferrers, props),
+			props.route.value === ROUTE_SETTINGS && h(RouteSettings, props)
 		)
+	)
 
-	}
+)
 
-}
+Component.displayName = 'Dashboard'
 
-export default Dashboard
+export default Component

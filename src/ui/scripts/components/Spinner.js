@@ -1,11 +1,4 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName } from 'recompose'
-
-const enhance = compose(
-
-	setDisplayName('Spinner')
-
-)
 
 const Component = () => (
 
@@ -17,4 +10,6 @@ const Component = () => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'Spinner'
+
+export default Component

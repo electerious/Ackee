@@ -1,22 +1,6 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
-const enhance = compose(
-
-	setDisplayName('LinkItem'),
-
-	setPropTypes({
-		type: PropTypes.oneOf([ 'p', 'a', 'button' ]).isRequired,
-		href: PropTypes.string,
-		onClick: PropTypes.func,
-		disabled: PropTypes.bool,
-		text: PropTypes.string,
-		children: PropTypes.node.isRequired
-	})
-
-)
 
 const Component = (props) => (
 
@@ -35,4 +19,15 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'LinkItem'
+
+Component.propTypes = {
+	type: PropTypes.oneOf([ 'p', 'a', 'button' ]).isRequired,
+	href: PropTypes.string,
+	onClick: PropTypes.func,
+	disabled: PropTypes.bool,
+	text: PropTypes.string,
+	children: PropTypes.node.isRequired
+}
+
+export default Component

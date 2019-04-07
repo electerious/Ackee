@@ -1,23 +1,5 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
-
-const enhance = compose(
-
-	setDisplayName('Select'),
-
-	setPropTypes({
-		value: PropTypes.string,
-		onChange: PropTypes.func.isRequired,
-		items: PropTypes.arrayOf(
-			PropTypes.shape({
-				value: PropTypes.string.isRequired,
-				label: PropTypes.string.isRequired
-			})
-		).isRequired
-	})
-
-)
 
 const Component = (props) => (
 
@@ -36,4 +18,17 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'Select'
+
+Component.propTypes = {
+	value: PropTypes.string,
+	onChange: PropTypes.func.isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			value: PropTypes.string.isRequired,
+			label: PropTypes.string.isRequired
+		})
+	).isRequired
+}
+
+export default Component

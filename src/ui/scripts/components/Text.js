@@ -1,19 +1,6 @@
 import { createElement as h } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
-const enhance = compose(
-
-	setDisplayName('Text'),
-
-	setPropTypes({
-		spacing: PropTypes.bool,
-		className: PropTypes.string,
-		children: PropTypes.node.isRequired
-	})
-
-)
 
 const Component = (props) => (
 
@@ -26,4 +13,12 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'Text'
+
+Component.propTypes = {
+	spacing: PropTypes.bool,
+	className: PropTypes.string,
+	children: PropTypes.node.isRequired
+}
+
+export default Component

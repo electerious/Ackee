@@ -1,24 +1,6 @@
 import { createElement as h, Fragment } from 'react'
-import { compose, setDisplayName, setPropTypes } from 'recompose'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
-const enhance = compose(
-
-	setDisplayName('Header'),
-
-	setPropTypes({
-		fetching: PropTypes.bool.isRequired,
-		items: PropTypes.arrayOf(
-			PropTypes.shape({
-				active: PropTypes.bool.isRequired,
-				onClick: PropTypes.func.isRequired,
-				label: PropTypes.string.isRequired
-			})
-		).isRequired
-	})
-
-)
 
 const Spinner = (props) => (
 
@@ -80,4 +62,17 @@ const Component = (props) => (
 
 )
 
-export default enhance(Component)
+Component.displayName = 'Header'
+
+Component.propTypes = {
+	fetching: PropTypes.bool.isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			active: PropTypes.bool.isRequired,
+			onClick: PropTypes.func.isRequired,
+			label: PropTypes.string.isRequired
+		})
+	).isRequired
+}
+
+export default Component
