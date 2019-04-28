@@ -50,12 +50,14 @@ const Column = (props) => {
 
 const PresentationBarChart = (props) => {
 
+	const hasItems = props.items.length > 0
+
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
-				h(Row, { position: 'top' }, props.items.length === 0 ? '' : max(props.items)),
-				h(Row, { position: 'middle' }, props.items.length === 0 ? '' : mid(props.items)),
-				h(Row, { position: 'bottom' }, props.items.length === 0 ? '' : min())
+				h(Row, { position: 'top' }, hasItems === true ? max(props.items) : ''),
+				h(Row, { position: 'middle' }, hasItems === true ? mid(props.items) : ''),
+				h(Row, { position: 'bottom' }, hasItems === true ? min() : '')
 			),
 			props.items.map((item, index) => (
 				h(Column, {
