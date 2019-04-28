@@ -1,9 +1,9 @@
 import { createElement as h, Component, Fragment } from 'react'
 
 import {
-	REFERRERS_TOP,
-	REFERRERS_RECENT
-} from '../../constants/referrers'
+	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_RECENT
+} from '../../../../constants/referrers'
 
 import enhanceReferrers from '../../utils/enhanceReferrers'
 
@@ -50,8 +50,8 @@ const RouteReferrers = class extends Component {
 						value: this.props.referrers.sorting,
 						onChange: (e) => this.props.setReferrersSorting(e.target.value),
 						items: [
-							{ value: REFERRERS_TOP, label: 'Top referrers' },
-							{ value: REFERRERS_RECENT, label: 'Recent referrers' }
+							{ value: REFERRERS_SORTING_TOP, label: 'Top referrers' },
+							{ value: REFERRERS_SORTING_RECENT, label: 'Recent referrers' }
 						]
 					})
 				),

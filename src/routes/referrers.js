@@ -4,6 +4,11 @@ const { createError } = require('micro')
 
 const referrers = require('../database/referrers')
 
+const {
+	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_RECENT
+} = require('../constants/referrers')
+
 const response = (entry) => ({
 	type: 'referrer',
 	data: {
@@ -22,7 +27,12 @@ const get = async (req) => {
 	const { domainId } = req.params
 	const { sorting } = req.query
 
-	if ([ 'top', 'recent' ].includes(sorting) === false) throw createError(400, 'Unknown sorting')
+	const isKnownSorting = [
+		REFERRERS_SORTING_TOP,
+		REFERRERS_SORTING_RECENT
+	].includes(sorting) === true
+
+	if (isKnownSorting === false) throw createError(400, 'Unknown sorting')
 
 	const entries = await referrers.get(domainId, sorting)
 

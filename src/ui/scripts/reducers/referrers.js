@@ -9,11 +9,11 @@ import {
 } from '../actions'
 
 import {
-	REFERRERS_TOP
-} from '../constants/referrers'
+	REFERRERS_SORTING_TOP
+} from '../../../constants/referrers'
 
 const initialState = () => ({
-	sorting: REFERRERS_TOP,
+	sorting: REFERRERS_SORTING_TOP,
 	value: {}
 })
 

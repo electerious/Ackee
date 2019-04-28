@@ -3,6 +3,11 @@
 const Record = require('../schemas/Record')
 const dateWithOffset = require('../utils/dateWithOffset')
 
+const {
+	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_RECENT
+} = require('../constants/referrers')
+
 const getTop = async (id) => {
 
 	return Record.aggregate([
@@ -68,8 +73,8 @@ const getRecent = async (id) => {
 const get = async (id, sorting) => {
 
 	switch (sorting) {
-		case 'top': return getTop(id)
-		case 'recent': return getRecent(id)
+		case REFERRERS_SORTING_TOP: return getTop(id)
+		case REFERRERS_SORTING_RECENT: return getRecent(id)
 	}
 
 }
