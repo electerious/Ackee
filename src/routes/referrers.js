@@ -1,5 +1,7 @@
 'use strict'
 
+const { createError } = require('micro')
+
 const referrers = require('../database/referrers')
 
 const response = (entry) => ({
@@ -18,8 +20,11 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
+	const { sorting } = req.query
 
-	const entries = await referrers.get(domainId)
+	if ([ 'top', 'recent' ].includes(sorting) === false) throw createError(400, 'Unknown sorting')
+
+	const entries = await referrers.get(domainId, sorting)
 
 	return responses(entries)
 
