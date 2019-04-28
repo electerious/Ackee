@@ -61,11 +61,11 @@ const Header = (props) => {
 		h('header', { className: 'header' },
 			h(Logo, { fetching: props.fetching }),
 			h('nav', {},
-				props.items.map((props, index) => (
+				props.items.map((item, index) => (
 					h(Button, {
-						key: props.label + index,
-						...props
-					}, props.label)
+						key: item.label + index,
+						...item
+					}, item.label)
 				))
 			)
 		)
