@@ -25,7 +25,7 @@ const PresentationIconList = (props) => (
 		h('div', { className: 'iconList__inner' },
 			props.items.map((item, index) => (
 				h(Row, {
-					key: index,
+					key: item.url.href + index,
 					onEnter: () => props.onEnter(index),
 					onLeave: () => props.onLeave(index),
 					...item

@@ -10,7 +10,7 @@ const Select = (props) => (
 	},
 		props.items.map((item, index) => (
 			h('option', {
-				key: index,
+				key: item.value + index,
 				value: item.value
 			}, item.label)
 		))
