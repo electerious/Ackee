@@ -2,9 +2,9 @@
 
 const mongoose = require('mongoose')
 const uuid = require('uuid/v4')
-const isURL = require('is-url')
+const isUrl = require('is-url')
 
-const isNullOrURL = (value) => value == null || isURL(value)
+const isNullOrUrl = (value) => value == null || isUrl(value)
 
 const schema = new mongoose.Schema({
 	id: {
@@ -20,11 +20,11 @@ const schema = new mongoose.Schema({
 	siteLocation: {
 		type: String,
 		required: true,
-		validate: isURL
+		validate: isUrl
 	},
 	siteReferrer: {
 		type: String,
-		validate: isNullOrURL
+		validate: isNullOrUrl
 	},
 	siteTitle: {
 		type: String
