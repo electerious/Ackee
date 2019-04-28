@@ -12,7 +12,7 @@ const Row = (props) => (
 		onMouseEnter: props.onEnter,
 		onMouseLeave: props.onLeave
 	},
-		h(Favicon, { url: props.url.href }),
+		h(Favicon, { url: (new URL('/favicon.ico', props.url)).href }),
 		h('span', { className: 'iconList__hostname' }, props.url.hostname),
 		h('span', { className: 'iconList__pathname' }, props.url.pathname)
 	)

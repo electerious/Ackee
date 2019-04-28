@@ -2,6 +2,8 @@ import { createElement as h, Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+const transparentPixel = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+
 const Favicon = class extends Component {
 
 	constructor(props) {
@@ -11,7 +13,7 @@ const Favicon = class extends Component {
 		this.onError = this.onError.bind(this)
 
 		this.state = {
-			src: (new URL('/favicon.ico', this.props.url)).href
+			missing: false
 		}
 
 	}
@@ -19,7 +21,7 @@ const Favicon = class extends Component {
 	onError() {
 
 		this.setState({
-			src: undefined
+			missing: true
 		})
 
 	}
@@ -30,9 +32,9 @@ const Favicon = class extends Component {
 			h('img', {
 				className: classNames({
 					'favicon': true,
-					'favicon--missing': this.state.src == null
+					'favicon--missing': this.state.missing === true
 				}),
-				src: this.state.src,
+				src: this.state.missing === true ? transparentPixel : this.props.url,
 				onError: this.onError
 			})
 		)
