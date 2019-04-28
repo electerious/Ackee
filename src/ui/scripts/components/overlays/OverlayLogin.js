@@ -28,7 +28,6 @@ const OverlayLogin = class extends Component {
 		return (e) => {
 
 			this.setState({
-				...this.state,
 				[key]: e.target.value
 			})
 
