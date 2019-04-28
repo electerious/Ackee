@@ -34,7 +34,7 @@ const CardSetting = class extends Component {
 					this.props.message != null && h(Message, { status: this.props.message.status }, this.props.message.label),
 
 					this.props.items.map(
-						(props, index, arr) => h(Fragment, { key: index },
+						(props, index, arr) => h(Fragment, { key: props.label + index },
 							h(LinkItem, props, props.label),
 							isLast(index, arr) === false && h(Line)
 						)
