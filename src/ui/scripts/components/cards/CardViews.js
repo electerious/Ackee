@@ -1,4 +1,4 @@
-import { createElement as h, Component } from 'react'
+import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -8,68 +8,40 @@ import Headline from '../Headline'
 import Text from '../Text'
 import PresentationBarChart from '../presentations/PresentationBarChart'
 
-const CardViews = class extends Component {
+const CardViews = (props) => {
 
-	constructor(props) {
+	// Index of the active element
+	const [ active, setActive ] = useState(0)
 
-		super(props)
+	const onEnter = (index) => setActive(index)
+	const onLeave = () => setActive(0)
 
-		this.onEnter = this.onEnter.bind(this)
-		this.onLeave = this.onLeave.bind(this)
-
-		this.state = {
-			// Index of the active element
-			active: 0
-		}
-
-	}
-
-	onEnter(index) {
-
-		this.setState({
-			active: index
-		})
-
-	}
-
-	onLeave() {
-
-		this.setState({
-			active: 0
-		})
-
-	}
-
-	render() {
-
-		return (
-			h('div', {
-				className: classNames({
-					'card': true,
-					'card--wide': this.props.wide === true
+	return (
+		h('div', {
+			className: classNames({
+				'card': true,
+				'card--wide': props.wide === true
+			})
+		},
+			h('div', { className: 'card__inner' },
+				h(Headline, {
+					type: 'h2',
+					small: true,
+					spacing: false,
+					className: 'color-white'
+				}, props.headline),
+				h(Text, {
+					spacing: false
+				}, relativeDate(active)),
+				h(PresentationBarChart, {
+					items: props.items,
+					active: active,
+					onEnter,
+					onLeave
 				})
-			},
-				h('div', { className: 'card__inner' },
-					h(Headline, {
-						type: 'h2',
-						small: true,
-						spacing: false,
-						className: 'color-white'
-					}, this.props.headline),
-					h(Text, {
-						spacing: false
-					}, relativeDate(this.state.active)),
-					h(PresentationBarChart, {
-						items: this.props.items,
-						active: this.state.active,
-						onEnter: this.onEnter,
-						onLeave: this.onLeave
-					})
-				)
 			)
 		)
-
-	}
+	)
 
 }
 

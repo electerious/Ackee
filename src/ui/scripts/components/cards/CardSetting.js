@@ -9,36 +9,32 @@ import Message from '../Message'
 import LinkItem from '../LinkItem'
 import Line from '../Line'
 
-const CardSetting = class extends Component {
+const CardSetting = (props) => {
 
-	render() {
+	return (
+		h('div', { className: 'card card--wide' },
+			h('div', { className: 'card__inner' },
 
-		return (
-			h('div', { className: 'card card--wide' },
-				h('div', { className: 'card__inner' },
+				h(Headline, {
+					type: 'h2',
+					small: true,
+					className: 'color-white'
+				}, props.headline),
 
-					h(Headline, {
-						type: 'h2',
-						small: true,
-						className: 'color-white'
-					}, this.props.headline),
+				h(Spacer, { size: 1 }),
 
-					h(Spacer, { size: 1 }),
+				props.message != null && h(Message, { status: props.message.status }, props.message.label),
 
-					this.props.message != null && h(Message, { status: this.props.message.status }, this.props.message.label),
-
-					this.props.items.map(
-						(props, index, arr) => h(Fragment, { key: props.label + index },
-							h(LinkItem, props, props.label),
-							isLast(index, arr) === false && h(Line)
-						)
+				props.items.map(
+					(props, index, arr) => h(Fragment, { key: props.label + index },
+						h(LinkItem, props, props.label),
+						isLast(index, arr) === false && h(Line)
 					)
-
 				)
+
 			)
 		)
-
-	}
+	)
 
 }
 

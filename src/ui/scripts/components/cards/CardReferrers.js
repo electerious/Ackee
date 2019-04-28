@@ -1,4 +1,4 @@
-import { createElement as h, Component } from 'react'
+import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -14,67 +14,39 @@ const textLabel = (item) => {
 
 }
 
-const CardViews = class extends Component {
+const CardViews = (props) => {
 
-	constructor(props) {
+	// Index of the active element
+	const [ active, setActive ] = useState(undefined)
 
-		super(props)
+	const onEnter = (index) => setActive(index)
+	const onLeave = () => setActive(undefined)
 
-		this.onEnter = this.onEnter.bind(this)
-		this.onLeave = this.onLeave.bind(this)
-
-		this.state = {
-			// Index of the active element
-			active: undefined
-		}
-
-	}
-
-	onEnter(index) {
-
-		this.setState({
-			active: index
-		})
-
-	}
-
-	onLeave() {
-
-		this.setState({
-			active: undefined
-		})
-
-	}
-
-	render() {
-
-		return (
-			h('div', {
-				className: classNames({
-					'card': true,
-					'card--wide': this.props.wide === true
+	return (
+		h('div', {
+			className: classNames({
+				'card': true,
+				'card--wide': props.wide === true
+			})
+		},
+			h('div', { className: 'card__inner' },
+				h(Headline, {
+					type: 'h2',
+					small: true,
+					spacing: false,
+					className: 'color-white'
+				}, props.headline),
+				h(Text, {
+					spacing: false
+				}, textLabel(props.items[active])),
+				h(PresentationIconList, {
+					items: props.items,
+					onEnter,
+					onLeave
 				})
-			},
-				h('div', { className: 'card__inner' },
-					h(Headline, {
-						type: 'h2',
-						small: true,
-						spacing: false,
-						className: 'color-white'
-					}, this.props.headline),
-					h(Text, {
-						spacing: false
-					}, textLabel(this.props.items[this.state.active])),
-					h(PresentationIconList, {
-						items: this.props.items,
-						onEnter: this.onEnter,
-						onLeave: this.onLeave
-					})
-				)
 			)
 		)
-
-	}
+	)
 
 }
 
