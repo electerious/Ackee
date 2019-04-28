@@ -8,7 +8,10 @@ import PresentationIconList from '../presentations/PresentationIconList'
 
 const textLabel = (item) => {
 
-	if (item == null) return 'Last 7 days'
+	const defaultLabel = 'Last 7 days'
+
+	if (item == null) return defaultLabel
+	if (item.count == null) return defaultLabel
 
 	return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
 
