@@ -9,9 +9,14 @@ import * as storage from './utils/storage'
 import reducers from './reducers'
 import * as actions from './actions'
 
+import { initialState as initialTokenState } from './reducers/token'
+import { initialState as initialReferrersState } from './reducers/referrers'
+import { initialState as initialRouteState } from './reducers/route'
+
 import Main from './components/Main'
 
-const store = createStore(reducers)
+const persistedState = storage.load()
+const store = createStore(reducers, persistedState)
 
 const mapStateToProps = (state) => enhanceState(state)
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
@@ -19,7 +24,26 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main)
 const container = document.querySelector('#main')
 
-store.dispatch(actions.setTokenValue(storage.get('ackee_token')))
+store.subscribe(() => {
+
+	const currentState = store.getState()
+
+	storage.save({
+		token: {
+			...initialTokenState(),
+			value: currentState.token.value
+		},
+		route: {
+			...initialRouteState(),
+			value: currentState.route.value
+		},
+		referrers: {
+			...initialReferrersState(),
+			sorting: currentState.referrers.sorting
+		}
+	})
+
+})
 
 const App = h(Provider, { store },
 	h(ConnectedMain)

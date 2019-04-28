@@ -1,21 +1,23 @@
-export const get = (key) => {
+import { version } from '../../../../package'
 
-	const value = localStorage.getItem(key)
+// Should include the package version so we can increase the version number
+// when the structure of the state has changed to avoid loading outdated states.
+const PERSISTED_STATE_KEY = `ackee_state_${ version }`
 
-	return value == null ? undefined : JSON.parse(value)
+export const load = () => {
+
+	const serializedState = localStorage.getItem(PERSISTED_STATE_KEY)
+
+	if (serializedState == null) return undefined
+
+	return JSON.parse(serializedState)
 
 }
 
-export const set = (key, value) => {
+export const save = (state) => {
 
-	value = JSON.stringify(value)
+	const serializedState = JSON.stringify(state)
 
-	localStorage.setItem(key, value)
-
-}
-
-export const remove = (key) => {
-
-	localStorage.removeItem(key)
+	localStorage.setItem(PERSISTED_STATE_KEY, serializedState)
 
 }

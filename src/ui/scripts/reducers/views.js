@@ -7,11 +7,11 @@ import {
 	RESET_VIEWS
 } from '../actions'
 
-const initialState = () => ({
+export const initialState = () => ({
 	value: {}
 })
 
-const initialSubState = () => ({
+export const initialSubState = () => ({
 	value: [],
 	fetching: false,
 	error: undefined

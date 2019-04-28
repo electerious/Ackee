@@ -12,12 +12,12 @@ import {
 	REFERRERS_SORTING_TOP
 } from '../../../constants/referrers'
 
-const initialState = () => ({
+export const initialState = () => ({
 	sorting: REFERRERS_SORTING_TOP,
 	value: {}
 })
 
-const initialSubState = () => ({
+export const initialSubState = () => ({
 	value: [],
 	fetching: false,
 	error: undefined

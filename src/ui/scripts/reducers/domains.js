@@ -7,7 +7,7 @@ import {
 	RESET_DOMAINS
 } from '../actions'
 
-const initialState = () => ({
+export const initialState = () => ({
 	value: [],
 	fetching: false,
 	error: undefined

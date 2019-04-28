@@ -9,7 +9,7 @@ import {
 	ROUTE_VIEWS
 } from '../constants/route'
 
-const initialState = () => ({
+export const initialState = () => ({
 	value: ROUTE_VIEWS
 })
 
