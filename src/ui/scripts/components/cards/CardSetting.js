@@ -11,12 +11,6 @@ import Line from '../Line'
 
 const CardSetting = class extends Component {
 
-	constructor(props) {
-
-		super(props)
-
-	}
-
 	render() {
 
 		return (

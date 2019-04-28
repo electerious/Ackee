@@ -6,12 +6,6 @@ import CardViews from '../cards/CardViews'
 
 const RouteViews = class extends Component {
 
-	constructor(props) {
-
-		super(props)
-
-	}
-
 	componentDidMount() {
 
 		this.props.fetchDomains(this.props).then(() => {

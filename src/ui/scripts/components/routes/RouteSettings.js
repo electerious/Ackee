@@ -6,12 +6,6 @@ import CardSetting from '../cards/CardSetting'
 
 const RouteSettings = class extends Component {
 
-	constructor(props) {
-
-		super(props)
-
-	}
-
 	render() {
 
 		return (
