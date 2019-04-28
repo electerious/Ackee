@@ -1,4 +1,4 @@
-import { createElement as h, Component, Fragment } from 'react'
+import { createElement as h, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import isLast from '../../utils/isLast'
