@@ -2,16 +2,18 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Message = (props) => (
+const Message = (props) => {
 
-	h('div', {
-		className: classNames({
-			message: true,
-			[`message--${ props.status }`]: props.status != null
-		}, props.className)
-	}, props.children)
+	return (
+		h('div', {
+			className: classNames({
+				message: true,
+				[`message--${ props.status }`]: props.status != null
+			}, props.className)
+		}, props.children)
+	)
 
-)
+}
 
 Message.propTypes = {
 	status: PropTypes.oneOf([ 'success', 'warning', 'error' ]).isRequired,

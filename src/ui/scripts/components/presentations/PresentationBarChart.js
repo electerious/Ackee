@@ -11,60 +11,66 @@ const min = () => 0
 
 const percentage = (amount, max) => (amount / max) * 100
 
-const Row = (props) => (
+const Row = (props) => {
 
-	h('div', {
-		className: classNames({
-			'barChart__row': true,
-			'barChart__row--top': props.position === 'top',
-			'barChart__row--middle': props.position === 'middle',
-			'barChart__row--bottom': props.position === 'bottom',
-			'color-light': true
-		})
-	}, props.children)
-
-)
-
-const Column = (props) => (
-
-	h('div', {
-		className: classNames({
-			barChart__column: true,
-			active: props.active
-		}),
-		onMouseEnter: props.onEnter,
-		onMouseLeave: props.onLeave
-	},
+	return (
 		h('div', {
-			'className': 'barChart__bar color-black',
-			'style': { '--size': props.size },
-			'data-label': props.label
-		})
-	)
-
-)
-
-const PresentationBarChart = (props) => (
-
-	h('div', { className: 'barChart' },
-		h('div', { className: 'barChart__axis' },
-			h(Row, { position: 'top' }, props.items.length === 0 ? '' : max(props.items)),
-			h(Row, { position: 'middle' }, props.items.length === 0 ? '' : mid(props.items)),
-			h(Row, { position: 'bottom' }, props.items.length === 0 ? '' : min())
-		),
-		props.items.map((item, index) => (
-			h(Column, {
-				key: index,
-				active: props.active === index,
-				size: `${ percentage(item, max(props.items)) }%`,
-				onEnter: () => props.onEnter(index),
-				onLeave: () => props.onLeave(index),
-				label: item
+			className: classNames({
+				'barChart__row': true,
+				'barChart__row--top': props.position === 'top',
+				'barChart__row--middle': props.position === 'middle',
+				'barChart__row--bottom': props.position === 'bottom',
+				'color-light': true
 			})
-		))
+		}, props.children)
 	)
 
-)
+}
+
+const Column = (props) => {
+
+	return (
+		h('div', {
+			className: classNames({
+				barChart__column: true,
+				active: props.active
+			}),
+			onMouseEnter: props.onEnter,
+			onMouseLeave: props.onLeave
+		},
+			h('div', {
+				'className': 'barChart__bar color-black',
+				'style': { '--size': props.size },
+				'data-label': props.label
+			})
+		)
+	)
+
+}
+
+const PresentationBarChart = (props) => {
+
+	return (
+		h('div', { className: 'barChart' },
+			h('div', { className: 'barChart__axis' },
+				h(Row, { position: 'top' }, props.items.length === 0 ? '' : max(props.items)),
+				h(Row, { position: 'middle' }, props.items.length === 0 ? '' : mid(props.items)),
+				h(Row, { position: 'bottom' }, props.items.length === 0 ? '' : min())
+			),
+			props.items.map((item, index) => (
+				h(Column, {
+					key: index,
+					active: props.active === index,
+					size: `${ percentage(item, max(props.items)) }%`,
+					onEnter: () => props.onEnter(index),
+					onLeave: () => props.onLeave(index),
+					label: item
+				})
+			))
+		)
+	)
+
+}
 
 PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,

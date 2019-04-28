@@ -1,22 +1,24 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-const Select = (props) => (
+const Select = (props) => {
 
-	h('select', {
-		className: 'select',
-		value: props.value,
-		onChange: props.onChange
-	},
-		props.items.map((item, index) => (
-			h('option', {
-				key: item.value + index,
-				value: item.value
-			}, item.label)
-		))
+	return (
+		h('select', {
+			className: 'select',
+			value: props.value,
+			onChange: props.onChange
+		},
+			props.items.map((item, index) => (
+				h('option', {
+					key: item.value + index,
+					value: item.value
+				}, item.label)
+			))
+		)
 	)
 
-)
+}
 
 Select.propTypes = {
 	value: PropTypes.string,

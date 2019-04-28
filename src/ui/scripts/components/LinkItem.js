@@ -2,22 +2,24 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const LinkItem = (props) => (
+const LinkItem = (props) => {
 
-	h(props.type, {
-		onClick: props.onClick,
-		href: props.href,
-		className: classNames({
-			'linkItem': true,
-			'linkItem--disabled': props.disabled === true,
-			'link': true
-		})
-	},
-		h('span', {}, props.children),
-		props.text != null && h('span', {}, props.text)
+	return (
+		h(props.type, {
+			onClick: props.onClick,
+			href: props.href,
+			className: classNames({
+				'linkItem': true,
+				'linkItem--disabled': props.disabled === true,
+				'link': true
+			})
+		},
+			h('span', {}, props.children),
+			props.text != null && h('span', {}, props.text)
+		)
 	)
 
-)
+}
 
 LinkItem.propTypes = {
 	type: PropTypes.oneOf([ 'p', 'a', 'button' ]).isRequired,

@@ -8,6 +8,8 @@ const Favicon = (props) => {
 
 	const [ missing, setMissing ] = useState(false)
 
+	const onError = () => setMissing(true)
+
 	return (
 		h('img', {
 			className: classNames({
@@ -15,7 +17,7 @@ const Favicon = (props) => {
 				'favicon--missing': missing === true
 			}),
 			src: missing === true ? transparentPixel : props.url,
-			onError: () => setMissing(true)
+			onError
 		})
 	)
 
