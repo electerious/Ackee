@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-const Component = () => (
+const Spinner = () => (
 
 	h('div', { className: 'spinner' },
 		h('div', { className: 'spinner__circle spinner__circle--primary' }),
@@ -10,6 +10,4 @@ const Component = () => (
 
 )
 
-Component.displayName = 'Spinner'
-
-export default Component
+export default Spinner

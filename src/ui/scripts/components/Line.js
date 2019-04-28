@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-const Component = () => (
+const Line = () => (
 
 	h('hr', {
 		className: 'line'
@@ -8,6 +8,4 @@ const Component = () => (
 
 )
 
-Component.displayName = 'Line'
-
-export default Component
+export default Line

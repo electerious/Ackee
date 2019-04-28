@@ -44,7 +44,7 @@ const Column = (props) => (
 
 )
 
-const Component = (props) => (
+const PresentationBarChart = (props) => (
 
 	h('div', { className: 'barChart' },
 		h('div', { className: 'barChart__axis' },
@@ -66,12 +66,10 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'PresentationBarChart'
-
-Component.propTypes = {
+PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,
 	onEnter: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired
 }
 
-export default Component
+export default PresentationBarChart

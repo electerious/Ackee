@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-const Component = (props) => (
+const Spacer = (props) => (
 
 	h('div', {
 		className: 'spacer',
@@ -12,10 +12,8 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Spacer'
-
-Component.propTypes = {
+Spacer.propTypes = {
 	size: PropTypes.number.isRequired
 }
 
-export default Component
+export default Spacer

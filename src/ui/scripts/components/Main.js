@@ -6,7 +6,7 @@ import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
 import Dashboard from './Dashboard'
 
-const Component = (props) => {
+const Main = (props) => {
 
 	// Only handle errors not handled by other components
 	const unknownErrors = props.errors.filter(isUnknownError)
@@ -24,6 +24,4 @@ const Component = (props) => {
 
 }
 
-Component.displayName = 'Main'
-
-export default Component
+export default Main

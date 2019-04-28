@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-const Component = (props) => (
+const Input = (props) => (
 
 	h('input', {
 		className: 'input',
@@ -9,6 +9,4 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Input'
-
-export default Component
+export default Input

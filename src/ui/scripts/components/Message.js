@@ -2,7 +2,7 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Component = (props) => (
+const Message = (props) => (
 
 	h('div', {
 		className: classNames({
@@ -13,12 +13,10 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Message'
-
-Component.propTypes = {
+Message.propTypes = {
 	status: PropTypes.oneOf([ 'success', 'warning', 'error' ]).isRequired,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired
 }
 
-export default Component
+export default Message

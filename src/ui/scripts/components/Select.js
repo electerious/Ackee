@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-const Component = (props) => (
+const Select = (props) => (
 
 	h('select', {
 		className: 'select',
@@ -18,9 +18,7 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Select'
-
-Component.propTypes = {
+Select.propTypes = {
 	value: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	items: PropTypes.arrayOf(
@@ -31,4 +29,4 @@ Component.propTypes = {
 	).isRequired
 }
 
-export default Component
+export default Select

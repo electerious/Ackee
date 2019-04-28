@@ -19,7 +19,7 @@ const Row = (props) => (
 
 )
 
-const Component = (props) => (
+const PresentationIconList = (props) => (
 
 	h('div', { className: 'iconList' },
 		h('div', { className: 'iconList__inner' },
@@ -36,10 +36,8 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'PresentationIconList'
-
-Component.propTypes = {
+PresentationIconList.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default Component
+export default PresentationIconList

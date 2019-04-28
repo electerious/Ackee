@@ -2,7 +2,7 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Component = (props) => (
+const LinkItem = (props) => (
 
 	h(props.type, {
 		onClick: props.onClick,
@@ -19,9 +19,7 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'LinkItem'
-
-Component.propTypes = {
+LinkItem.propTypes = {
 	type: PropTypes.oneOf([ 'p', 'a', 'button' ]).isRequired,
 	href: PropTypes.string,
 	onClick: PropTypes.func,
@@ -30,4 +28,4 @@ Component.propTypes = {
 	children: PropTypes.node.isRequired
 }
 
-export default Component
+export default LinkItem

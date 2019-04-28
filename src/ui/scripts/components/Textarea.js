@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-const Component = (props) => (
+const Textarea = (props) => (
 
 	h('textarea', {
 		className: 'input',
@@ -9,6 +9,4 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Textarea'
-
-export default Component
+export default Textarea

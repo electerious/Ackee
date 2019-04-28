@@ -11,7 +11,7 @@ import RouteViews from './routes/RouteViews'
 import RouteReferrers from './routes/RouteReferrers'
 import RouteSettings from './routes/RouteSettings'
 
-const Component = (props) => (
+const Dashboard = (props) => (
 
 	h('div', {},
 		h(Header, {
@@ -31,6 +31,4 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Dashboard'
-
-export default Component
+export default Dashboard

@@ -2,7 +2,7 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Component = (props) => (
+const Text = (props) => (
 
 	h('p', {
 		className: classNames({
@@ -13,12 +13,10 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Text'
-
-Component.propTypes = {
+Text.propTypes = {
 	spacing: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired
 }
 
-export default Component
+export default Text

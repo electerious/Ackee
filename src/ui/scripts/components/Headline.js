@@ -2,7 +2,7 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Component = (props) => (
+const Headline = (props) => (
 
 	h(props.type, {
 		className: classNames({
@@ -14,9 +14,7 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Headline'
-
-Component.propTypes = {
+Headline.propTypes = {
 	type: PropTypes.oneOf([ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ]).isRequired,
 	small: PropTypes.bool,
 	spacing: PropTypes.bool,
@@ -24,4 +22,4 @@ Component.propTypes = {
 	children: PropTypes.node.isRequired
 }
 
-export default Component
+export default Headline

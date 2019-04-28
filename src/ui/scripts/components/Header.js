@@ -49,7 +49,7 @@ const Button = (props) => (
 
 )
 
-const Component = (props) => (
+const Header = (props) => (
 
 	h('header', { className: 'header' },
 		h(Logo, { fetching: props.fetching }),
@@ -65,9 +65,7 @@ const Component = (props) => (
 
 )
 
-Component.displayName = 'Header'
-
-Component.propTypes = {
+Header.propTypes = {
 	fetching: PropTypes.bool.isRequired,
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
@@ -78,4 +76,4 @@ Component.propTypes = {
 	).isRequired
 }
 
-export default Component
+export default Header
