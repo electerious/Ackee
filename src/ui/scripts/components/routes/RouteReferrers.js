@@ -63,8 +63,9 @@ const RouteReferrers = class extends Component {
 				),
 
 				this.props.domains.value.map(
-					(props, index) => h(Fragment, { key: index },
+					(props) => (
 						h(CardReferrers, {
+							key: props.data.id,
 							headline: props.data.title,
 							items: this.props.referrers.value[props.data.id] == null ? [] : enhanceReferrers(this.props.referrers.value[props.data.id].value)
 						})

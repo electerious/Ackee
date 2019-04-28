@@ -56,7 +56,7 @@ const Header = (props) => (
 		h('nav', {},
 			props.items.map((props, index) => (
 				h(Button, {
-					key: index,
+					key: props.label + index,
 					...props
 				}, props.label)
 			))

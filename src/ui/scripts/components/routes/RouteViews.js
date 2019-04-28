@@ -36,8 +36,9 @@ const RouteViews = class extends Component {
 				}),
 
 				this.props.domains.value.map(
-					(props, index) => h(Fragment, { key: index },
+					(props) => (
 						h(CardViews, {
+							key: props.data.id,
 							headline: props.data.title,
 							items: this.props.views.value[props.data.id] == null ? [] : enhanceViews(this.props.views.value[props.data.id].value, 7)
 						})
