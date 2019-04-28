@@ -5,6 +5,10 @@ import Favicon from '../Favicon'
 
 const Row = (props) => {
 
+	const faviconUrl = (new URL('/favicon.ico', props.url)).href
+	const hostnameUrl = props.url.hostname
+	const pathnameUrl = props.url.pathname
+
 	return (
 		h('a', {
 			className: 'iconList__row',
@@ -13,9 +17,9 @@ const Row = (props) => {
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave
 		},
-			h(Favicon, { url: (new URL('/favicon.ico', props.url)).href }),
-			h('span', { className: 'iconList__hostname' }, props.url.hostname),
-			h('span', { className: 'iconList__pathname' }, props.url.pathname)
+			h(Favicon, faviconUrl),
+			h('span', { className: 'iconList__hostname' }, hostnameUrl),
+			h('span', { className: 'iconList__pathname' }, pathnameUrl)
 		)
 	)
 
