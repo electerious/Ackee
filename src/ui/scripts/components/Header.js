@@ -20,20 +20,13 @@ const Spinner = (props) => {
 
 const Logo = (props) => {
 
+	const fetching = props.fetching === true
+
 	return (
 		h('div', { className: 'header__logo' },
-			h(Spinner, {
-				color: 'black',
-				fetching: props.fetching === true
-			}),
-			h(Spinner, {
-				color: 'white',
-				fetching: props.fetching === true
-			}),
-			h(Spinner, {
-				color: 'primary',
-				fetching: props.fetching === true
-			})
+			h(Spinner, { color: 'black', fetching }),
+			h(Spinner, { color: 'white', fetching }),
+			h(Spinner, { color: 'primary', fetching })
 		)
 	)
 
