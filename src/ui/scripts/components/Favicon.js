@@ -1,45 +1,23 @@
-import { createElement as h, Component } from 'react'
+import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const transparentPixel = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 
-const Favicon = class extends Component {
+const Favicon = (props) => {
 
-	constructor(props) {
+	const [ missing, setMissing ] = useState(false)
 
-		super(props)
-
-		this.onError = this.onError.bind(this)
-
-		this.state = {
-			missing: false
-		}
-
-	}
-
-	onError() {
-
-		this.setState({
-			missing: true
+	return (
+		h('img', {
+			className: classNames({
+				'favicon': true,
+				'favicon--missing': missing === true
+			}),
+			src: missing === true ? transparentPixel : props.url,
+			onError: () => setMissing(true)
 		})
-
-	}
-
-	render() {
-
-		return (
-			h('img', {
-				className: classNames({
-					'favicon': true,
-					'favicon--missing': this.state.missing === true
-				}),
-				src: this.state.missing === true ? transparentPixel : this.props.url,
-				onError: this.onError
-			})
-		)
-
-	}
+	)
 
 }
 
