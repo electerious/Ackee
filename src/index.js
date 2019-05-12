@@ -10,6 +10,8 @@ const signale = require('./utils/signale')
 const port = process.env.PORT || 3000
 const url = `http://localhost:${ port }`
 
+mongoose.set('useFindAndModify', false)
+
 server.on('listening', () => signale.watch(`Listening on ${ url }`))
 server.on('error', (err) => signale.fatal(err))
 
