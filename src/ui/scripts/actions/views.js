@@ -27,7 +27,7 @@ export const resetViews = () => ({
 	type: RESET_VIEWS
 })
 
-export const fetchViews = (domainId, props) => async (dispatch) => {
+export const fetchViews = (props, domainId) => async (dispatch) => {
 
 	dispatch(setViewsFetching(domainId, true))
 	dispatch(setViewsError(domainId))

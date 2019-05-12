@@ -17,7 +17,7 @@ const RouteReferrers = class extends Component {
 		this.props.fetchDomains(this.props).then(() => {
 
 			this.props.domains.value.map((props) => {
-				this.props.fetchReferrers(props.data.id, this.props)
+				this.props.fetchReferrers(this.props, props.data.id)
 			})
 
 		})
@@ -33,7 +33,7 @@ const RouteReferrers = class extends Component {
 		if (shouldFetch === true) {
 
 			this.props.domains.value.map((props) => {
-				this.props.fetchReferrers(props.data.id, this.props)
+				this.props.fetchReferrers(this.props, props.data.id)
 			})
 
 		}

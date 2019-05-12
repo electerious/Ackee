@@ -33,7 +33,7 @@ export const resetReferrers = () => ({
 	type: RESET_REFERRERS
 })
 
-export const fetchReferrers = (domainId, props) => async (dispatch) => {
+export const fetchReferrers = (props, domainId) => async (dispatch) => {
 
 	dispatch(setReferrersFetching(domainId, true))
 	dispatch(setReferrersError(domainId))

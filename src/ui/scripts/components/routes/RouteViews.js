@@ -11,7 +11,7 @@ const RouteViews = class extends Component {
 		this.props.fetchDomains(this.props).then(() => {
 
 			this.props.domains.value.map((props) => {
-				this.props.fetchViews(props.data.id, this.props)
+				this.props.fetchViews(this.props, props.data.id)
 			})
 
 		})
