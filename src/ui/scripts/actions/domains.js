@@ -76,3 +76,30 @@ export const updateDomain = (props, domainId, state) => async (dispatch) => {
 	}
 
 }
+
+export const deleteDomain = (props, domainId, state) => async (dispatch) => {
+
+	dispatch(setDomainsFetching(true))
+	dispatch(setDomainsError())
+
+	try {
+
+		await api(`/domains/${ domainId }`, {
+			method: 'delete',
+			body: JSON.stringify(state),
+			props
+		})
+
+		dispatch(fetchDomains(props))
+
+	} catch (err) {
+
+		dispatch(setDomainsError(err))
+
+	} finally {
+
+		dispatch(setDomainsFetching(false))
+
+	}
+
+}
