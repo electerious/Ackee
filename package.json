@@ -46,6 +46,7 @@
     "redux-thunk": "^2.3.0",
     "rosid-handler-js": "^12.1.0",
     "rosid-handler-sass": "^6.0.4",
+    "shortid": "^2.2.14",
     "signale": "^1.4.0",
     "uuid": "^3.3.2"
   },
