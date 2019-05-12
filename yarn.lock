@@ -1577,6 +1577,11 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
+basiclightbox@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/basiclightbox/-/basiclightbox-5.0.2.tgz#55f724aaf484795def289e9e1c7b78039b32eaa8"
+  integrity sha512-3UJL7GGXy3UVPmnU0aKng3TU/OCG0nHpMmUWf1J7+B98c1nUGZKQ6fZumhqvQxqSoNk1NUPU2YybQSem5X/+6A==
+
 bcrypt-pbkdf@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.2.tgz#a4301d389b6a43f9b67ff3ca11a3f6637e360e9e"

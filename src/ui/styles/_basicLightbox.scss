@@ -1,0 +1,10 @@
+.basicLightbox {
+
+	background: rgba(darken($black, 6%), .9);
+
+	&__placeholder {
+		width: 100%;
+		max-width: 600px;
+	}
+
+}

@@ -4,6 +4,7 @@
 // Modules ----------------------------------------------------- //
 @import '../../../node_modules/normalize.css/normalize';
 @import '../../../node_modules/formbase/src/styles/main';
+@import '../../../node_modules/basiclightbox/src/styles/main';
 
 // Styles ------------------------------------------------------ //
 @import 'html';
@@ -28,6 +29,7 @@
 @import 'iconList';
 @import 'favicon';
 @import 'subHeader';
+@import 'basicLightbox';
 
 // Helpers ----------------------------------------------------- //
 @import 'align';
