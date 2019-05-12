@@ -19,7 +19,7 @@ const Main = (props) => {
 	const showDashboard = hasError === false && hasToken === true
 
 	if (showOverlayFailure === true) return h(OverlayFailure, { errors: unknownErrors })
-	if (showOverlayLogin === true) return h(OverlayLogin, props)
+	if (showOverlayLogin === true) return h(OverlayLogin, { token: props.token, fetchToken: props.fetchToken.bind(null, props) })
 	if (showDashboard === true) return h(Dashboard, props)
 
 }

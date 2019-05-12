@@ -1,4 +1,5 @@
 import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import formatErrors from '../../utils/formatErrors'
 
@@ -58,6 +59,10 @@ const OverlayFailure = (props) => {
 		)
 	)
 
+}
+
+OverlayFailure.propTypes = {
+	errors: PropTypes.array.isRequired
 }
 
 export default OverlayFailure

@@ -1,4 +1,5 @@
 import { createElement as h, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import Input from '../Input'
 import Spacer from '../Spacer'
@@ -21,7 +22,7 @@ const OverlayLogin = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		props.fetchToken(props, inputs)
+		props.fetchToken(inputs)
 	}
 
 	const hasError = props.token.error != null
@@ -89,6 +90,11 @@ const OverlayLogin = (props) => {
 		)
 	)
 
+}
+
+OverlayLogin.propTypes = {
+	token: PropTypes.object.isRequired,
+	fetchToken: PropTypes.func.isRequired
 }
 
 export default OverlayLogin
