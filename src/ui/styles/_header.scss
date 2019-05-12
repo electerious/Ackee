@@ -33,9 +33,8 @@
 		border-width: 4px;
 		border-radius: 100%;
 		border-color: transparent;
-		mix-blend-mode: color-dodge;
 		opacity: 0;
-		transition: opacity .6s ease;
+		transition: opacity 1.2s ease;
 		animation-name: header__rotate;
 		animation-iteration-count: infinite;
 		animation-timing-function: linear;
