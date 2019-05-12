@@ -1,1 +1,0 @@
-export default (index, arr) => index === (arr.length - 1)

@@ -1,13 +1,8 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
-
-import isLast from '../../utils/isLast'
 
 import Spacer from '../Spacer'
 import Headline from '../Headline'
-import Message from '../Message'
-import LinkItem from '../LinkItem'
-import Line from '../Line'
 
 const CardSetting = (props) => {
 
@@ -23,14 +18,7 @@ const CardSetting = (props) => {
 
 				h(Spacer, { size: 1 }),
 
-				props.message != null && h(Message, { status: props.message.status }, props.message.label),
-
-				props.items.map(
-					(item, index, arr) => h(Fragment, { key: item.label + index },
-						h(LinkItem, item, item.label),
-						isLast(index, arr) === false && h(Line)
-					)
-				)
+				props.children
 
 			)
 		)
@@ -40,11 +28,10 @@ const CardSetting = (props) => {
 
 CardSetting.propTypes = {
 	headline: PropTypes.string.isRequired,
-	message: PropTypes.shape({
-		status: PropTypes.string.isRequired,
-		label: PropTypes.string.isRequired
-	}),
-	items: PropTypes.array.isRequired
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node
+	]).isRequired
 }
 
 export default CardSetting
