@@ -44,6 +44,8 @@ const update = async (id, { title }) => {
 			title,
 			updated: Date.now()
 		}
+	}, {
+		new: true
 	})
 
 }

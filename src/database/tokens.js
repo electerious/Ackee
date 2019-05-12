@@ -24,6 +24,8 @@ const update = async (id) => {
 		$set: {
 			updated: Date.now()
 		}
+	}, {
+		new: true
 	})
 
 }
