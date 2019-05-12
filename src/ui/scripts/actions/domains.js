@@ -49,3 +49,30 @@ export const fetchDomains = (props) => async (dispatch) => {
 	}
 
 }
+
+export const updateDomain = (props, domainId, state) => async (dispatch) => {
+
+	dispatch(setDomainsFetching(true))
+	dispatch(setDomainsError())
+
+	try {
+
+		await api(`/domains/${ domainId }`, {
+			method: 'put',
+			body: JSON.stringify(state),
+			props
+		})
+
+		dispatch(fetchDomains(props))
+
+	} catch (err) {
+
+		dispatch(setDomainsError(err))
+
+	} finally {
+
+		dispatch(setDomainsFetching(false))
+
+	}
+
+}
