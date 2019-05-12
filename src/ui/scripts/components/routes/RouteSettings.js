@@ -23,8 +23,11 @@ const RouteSettings = class extends Component {
 
 		const domainsItems = [
 			...this.props.domains.value.map(
-				(props) => h(LinkItem, { type: 'button', text: props.data.id }, props.data.title)
-			),
+				(props) => [
+					h(LinkItem, { type: 'button', text: props.data.id }, props.data.title),
+					h(Line)
+				]
+			).flat(),
 			h(LinkItem, { type: 'button' }, 'New domain')
 		]
 
