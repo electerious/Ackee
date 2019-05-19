@@ -32,11 +32,10 @@ const OverlayLogin = (props) => {
 		h('form', { className: 'card card--overlay', onSubmit },
 			h('div', { className: 'card__inner align-center' },
 
-				h(Spacer, { size: 2 }),
+				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
 					type: 'h1',
-					spacing: false,
 					className: 'color-white'
 				}, 'Ackee'),
 				h(Text, {}, 'Welcome back, sign in to continue.'),

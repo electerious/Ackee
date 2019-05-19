@@ -27,7 +27,6 @@ const CardViews = (props) => {
 				h(Headline, {
 					type: 'h2',
 					small: true,
-					spacing: false,
 					className: 'color-white'
 				}, props.headline),
 				h(Text, {

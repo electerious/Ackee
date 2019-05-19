@@ -8,8 +8,7 @@ const Headline = (props) => {
 		h(props.type, {
 			className: classNames({
 				'headline': true,
-				'headline--small': props.small === true,
-				'headline--no-spacing': props.spacing === false
+				'headline--small': props.small === true
 			}, props.className)
 		}, props.children)
 	)
@@ -19,7 +18,6 @@ const Headline = (props) => {
 Headline.propTypes = {
 	type: PropTypes.oneOf([ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ]).isRequired,
 	small: PropTypes.bool,
-	spacing: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired
 }

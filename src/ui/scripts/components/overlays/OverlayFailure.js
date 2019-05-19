@@ -17,11 +17,10 @@ const OverlayFailure = (props) => {
 		h('div', { className: 'card card--overlay' },
 			h('div', { className: 'card__inner align-center' },
 
-				h(Spacer, { size: 2 }),
+				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
 					type: 'h1',
-					spacing: false,
 					className: 'color-white'
 				}, 'Oops'),
 				h(Text, {}, 'Something went wrong.'),

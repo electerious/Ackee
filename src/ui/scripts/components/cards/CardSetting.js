@@ -16,7 +16,7 @@ const CardSetting = (props) => {
 					className: 'color-white'
 				}, props.headline),
 
-				h(Spacer, { size: 1 }),
+				h(Spacer, { size: 1.6 }),
 
 				props.children
 
