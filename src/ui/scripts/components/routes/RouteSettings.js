@@ -1,6 +1,7 @@
 import { createElement as h, Component, Fragment } from 'react'
 
 import { version } from '../../../../../package'
+import { MODALS_DOMAIN } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
 import LinkItem from '../LinkItem'
@@ -15,6 +16,17 @@ const RouteSettings = class extends Component {
 
 	}
 
+	showModal(id, title) {
+
+		this.props.addModalsModal({
+			type: MODALS_DOMAIN,
+			props: {
+				id,
+				title
+			}
+		})
+	}
+
 	render() {
 
 		const domainsFetching = [
@@ -24,7 +36,11 @@ const RouteSettings = class extends Component {
 		const domainsItems = [
 			...this.props.domains.value.map(
 				(props) => [
-					h(LinkItem, { type: 'button', text: props.data.id }, props.data.title),
+					h(LinkItem, {
+						type: 'button',
+						text: props.data.id,
+						onClick: () => this.showModal(props.data.id, props.data.title)
+					}, props.data.title),
 					h(Line)
 				]
 			).flat(),

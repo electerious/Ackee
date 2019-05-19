@@ -1,0 +1,36 @@
+.modal {
+
+	position: fixed;
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 0 $gutter;
+	background: rgba(darken($black, 6%), .9);
+	pointer-events: none;
+	opacity: 0;
+	z-index: 1;
+	transition: opacity .3s ease;
+
+	&.visible {
+		opacity: 1;
+		pointer-events: all;
+	}
+
+	&__inner {
+		width: 100%;
+		max-width: 600px;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		transform: translateY(20px);
+		transition: transform .3s ease;
+	}
+
+	&.visible &__inner {
+		transform: none;
+	}
+
+}

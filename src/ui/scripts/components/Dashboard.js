@@ -10,11 +10,13 @@ import Header from './Header'
 import RouteViews from './routes/RouteViews'
 import RouteReferrers from './routes/RouteReferrers'
 import RouteSettings from './routes/RouteSettings'
+import Modals from './Modals'
 
 const Dashboard = (props) => {
 
 	return (
 		h('div', {},
+			h(Modals, props),
 			h(Header, {
 				fetching: props.fetching,
 				items: [

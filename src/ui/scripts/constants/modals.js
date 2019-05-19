@@ -1,0 +1,1 @@
+export const MODALS_DOMAIN = 'modals_domain'
