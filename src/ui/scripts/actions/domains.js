@@ -63,17 +63,13 @@ export const updateDomain = (props, domainId, state) => async (dispatch) => {
 			props
 		})
 
-		dispatch(fetchDomains(props))
-
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
 
-	} finally {
-
-		dispatch(setDomainsFetching(false))
-
 	}
+
+	dispatch(fetchDomains(props))
 
 }
 
@@ -90,16 +86,12 @@ export const deleteDomain = (props, domainId, state) => async (dispatch) => {
 			props
 		})
 
-		dispatch(fetchDomains(props))
-
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
 
-	} finally {
-
-		dispatch(setDomainsFetching(false))
-
 	}
+
+	dispatch(fetchDomains(props))
 
 }
