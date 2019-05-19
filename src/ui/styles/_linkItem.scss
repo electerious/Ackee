@@ -6,11 +6,13 @@
 	margin: 0 0 $gutter;
 	width: 100%;
 	transition: color .3s ease;
+	outline: none;
 
 	&--disabled {
 		cursor: inherit;
 	}
 
+	&:not(.linkItem--disabled):focus,
 	&:not(.linkItem--disabled):hover {
 		color: $white;
 	}
