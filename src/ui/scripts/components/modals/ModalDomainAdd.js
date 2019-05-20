@@ -36,10 +36,10 @@ const ModalDomainAdd = (props) => {
 				h(Input, {
 					type: 'text',
 					id: titleId,
-					placeholder: 'Domain title',
 					required: true,
-					autoCapitalize: 'off',
-					autoCorrect: 'off',
+					disabled: props.fetching === true,
+					focused: true,
+					placeholder: 'Domain title',
 					value: inputs.title,
 					onChange: onChange('title')
 				})

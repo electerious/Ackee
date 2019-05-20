@@ -45,23 +45,19 @@ const OverlayLogin = (props) => {
 				hasError === true && h(Message, { status: 'error' }, props.token.error.message),
 
 				h(Input, {
-					type: 'text',
-					placeholder: 'Username',
-					disabled: isFetching === true,
+					type: 'username',
 					required: true,
-					autoCapitalize: 'off',
-					autoCorrect: 'off',
-					autoComplete: 'username',
-					autoFocus: true,
+					disabled: isFetching === true,
+					focused: true,
+					placeholder: 'Username',
 					value: inputs.username,
 					onChange: onChange('username')
 				}),
 				h(Input, {
 					type: 'password',
-					placeholder: 'Password',
-					disabled: isFetching === true,
 					required: true,
-					autoComplete: 'current-password',
+					disabled: isFetching === true,
+					placeholder: 'Password',
 					value: inputs.password,
 					onChange: onChange('password')
 				}),

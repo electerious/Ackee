@@ -48,10 +48,10 @@ const ModalDomainEdit = (props) => {
 				h(Input, {
 					type: 'text',
 					id: titleId,
-					placeholder: 'Domain title',
 					required: true,
-					autoCapitalize: 'off',
-					autoCorrect: 'off',
+					disabled: props.fetching === true,
+					focused: true,
+					placeholder: 'Domain title',
 					value: inputs.title,
 					onChange: onChange('title')
 				}),
@@ -63,8 +63,8 @@ const ModalDomainEdit = (props) => {
 					id: idId,
 					readOnly: true,
 					placeholder: 'Domain id',
-					onFocus: copyInput,
-					value: props.id
+					value: props.id,
+					onFocus: copyInput
 				})
 
 			),
