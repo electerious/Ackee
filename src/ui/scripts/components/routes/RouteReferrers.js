@@ -24,15 +24,7 @@ const RouteReferrers = (props) => {
 			props.fetchReferrers(props, domain.data.id)
 		})
 
-	}, [ props.domains.value ])
-
-	useEffect(() => {
-
-		props.domains.value.map((domain) => {
-			props.fetchReferrers(props, domain.data.id)
-		})
-
-	}, [ props.referrers.sorting ])
+	}, [ props.domains.value, props.referrers.sorting ])
 
 	return (
 		h(Fragment, {},
