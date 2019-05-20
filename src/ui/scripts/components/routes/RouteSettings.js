@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { version } from '../../../../../package'
+import { version, homepage } from '../../../../../package'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
@@ -75,11 +75,11 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Help'
 			},
-				h(LinkItem, { type: 'a', href: '#' }, 'Get started'),
+				h(LinkItem, { type: 'a', href: homepage }, 'Ackee on GitHub'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: '#' }, 'Add Ackee to your sites'),
+				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md' }, 'Get started'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: '#' }, 'Change username or password')
+				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/ackee-tracker' }, 'Add Ackee to your sites')
 			)
 
 		)

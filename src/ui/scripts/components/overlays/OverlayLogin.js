@@ -1,6 +1,8 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { homepage } from '../../../../../package'
+
 import Input from '../Input'
 import Spacer from '../Spacer'
 import Headline from '../Headline'
@@ -69,7 +71,7 @@ const OverlayLogin = (props) => {
 
 				h('a', {
 					className: 'card__button link',
-					href: '#'
+					href: homepage
 				}, 'Help'),
 
 				h('div', {

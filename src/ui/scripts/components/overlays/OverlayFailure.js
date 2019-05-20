@@ -1,6 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
+import { homepage } from '../../../../../package'
 import formatErrors from '../../utils/formatErrors'
 
 import Textarea from '../Textarea'
@@ -42,7 +43,7 @@ const OverlayFailure = (props) => {
 
 				h('a', {
 					className: 'card__button link',
-					href: '#'
+					href: homepage
 				}, 'Help'),
 
 				h('div', {
