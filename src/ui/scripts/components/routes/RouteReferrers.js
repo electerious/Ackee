@@ -1,4 +1,4 @@
-import { createElement as h, Component, Fragment } from 'react'
+import { createElement as h, Fragment, useEffect } from 'react'
 
 import {
 	REFERRERS_SORTING_TOP,
@@ -10,66 +10,56 @@ import enhanceReferrers from '../../utils/enhanceReferrers'
 import CardReferrers from '../cards/CardReferrers'
 import Select from '../Select'
 
-const RouteReferrers = class extends Component {
+const RouteReferrers = (props) => {
 
-	componentDidMount() {
+	useEffect(() => {
 
-		this.props.fetchDomains(this.props).then(() => {
+		props.fetchDomains(props)
 
-			this.props.domains.value.map((props) => {
-				this.props.fetchReferrers(this.props, props.data.id)
-			})
+	}, [])
 
+	useEffect(() => {
+
+		props.domains.value.map((domain) => {
+			props.fetchReferrers(props, domain.data.id)
 		})
 
-	}
+	}, [ props.domains.value ])
 
-	componentDidUpdate(prevProps) {
+	useEffect(() => {
 
-		const shouldFetch = (
-			prevProps.referrers.sorting !== this.props.referrers.sorting
-		)
+		props.domains.value.map((domain) => {
+			props.fetchReferrers(props, domain.data.id)
+		})
 
-		if (shouldFetch === true) {
+	}, [ props.referrers.sorting ])
 
-			this.props.domains.value.map((props) => {
-				this.props.fetchReferrers(this.props, props.data.id)
-			})
+	return (
+		h(Fragment, {},
 
-		}
+			h('div', { className: 'subHeader' },
+				h(Select, {
+					value: props.referrers.sorting,
+					onChange: (e) => props.setReferrersSorting(e.target.value),
+					items: [
+						{ value: REFERRERS_SORTING_TOP, label: 'Top referrers' },
+						{ value: REFERRERS_SORTING_RECENT, label: 'Recent referrers' }
+					]
+				})
+			),
 
-	}
-
-	render() {
-
-		return (
-			h(Fragment, {},
-
-				h('div', { className: 'subHeader' },
-					h(Select, {
-						value: this.props.referrers.sorting,
-						onChange: (e) => this.props.setReferrersSorting(e.target.value),
-						items: [
-							{ value: REFERRERS_SORTING_TOP, label: 'Top referrers' },
-							{ value: REFERRERS_SORTING_RECENT, label: 'Recent referrers' }
-						]
+			props.domains.value.map(
+				(domain) => (
+					h(CardReferrers, {
+						key: domain.data.id,
+						headline: domain.data.title,
+						items: props.referrers.value[domain.data.id] == null ? [] : enhanceReferrers(props.referrers.value[domain.data.id].value)
 					})
-				),
-
-				this.props.domains.value.map(
-					(props) => (
-						h(CardReferrers, {
-							key: props.data.id,
-							headline: props.data.title,
-							items: this.props.referrers.value[props.data.id] == null ? [] : enhanceReferrers(this.props.referrers.value[props.data.id].value)
-						})
-					)
 				)
-
 			)
-		)
 
-	}
+		)
+	)
 
 }
 

@@ -5,9 +5,9 @@ import isDefined from './isDefined'
 const mergedViews = (domains, views) => {
 
 	// Enhance all view for all domains
-	const enhancedViews = domains.value.map((props) => {
+	const enhancedViews = domains.value.map((domain) => {
 
-		const view = views.value[props.data.id]
+		const view = views.value[domain.data.id]
 		const exists = view != null
 
 		return exists === true ? enhanceViews(view.value, 14) : undefined

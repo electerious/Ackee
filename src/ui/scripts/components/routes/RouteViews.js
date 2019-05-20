@@ -1,48 +1,46 @@
-import { createElement as h, Component, Fragment } from 'react'
+import { createElement as h, Fragment, useEffect } from 'react'
 
 import enhanceViews from '../../utils/enhanceViews'
 
 import CardViews from '../cards/CardViews'
 
-const RouteViews = class extends Component {
+const RouteViews = (props) => {
 
-	componentDidMount() {
+	useEffect(() => {
 
-		this.props.fetchDomains(this.props).then(() => {
+		props.fetchDomains(props)
 
-			this.props.domains.value.map((props) => {
-				this.props.fetchViews(this.props, props.data.id)
-			})
+	}, [])
 
+	useEffect(() => {
+
+		props.domains.value.map((domain) => {
+			props.fetchViews(props, domain.data.id)
 		})
 
-	}
+	}, [ props.domains.value ])
 
-	render() {
+	return (
+		h(Fragment, {},
 
-		return (
-			h(Fragment, {},
+			h(CardViews, {
+				wide: true,
+				headline: 'Page Views',
+				items: props.merged.views
+			}),
 
-				h(CardViews, {
-					wide: true,
-					headline: 'Page Views',
-					items: this.props.merged.views
-				}),
-
-				this.props.domains.value.map(
-					(props) => (
-						h(CardViews, {
-							key: props.data.id,
-							headline: props.data.title,
-							items: this.props.views.value[props.data.id] == null ? [] : enhanceViews(this.props.views.value[props.data.id].value, 7)
-						})
-					)
+			props.domains.value.map(
+				(domain) => (
+					h(CardViews, {
+						key: domain.data.id,
+						headline: domain.data.title,
+						items: props.views.value[domain.data.id] == null ? [] : enhanceViews(props.views.value[domain.data.id].value, 7)
+					})
 				)
-
 			)
-		)
 
-	}
+		)
+	)
 
 }
 

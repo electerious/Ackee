@@ -1,4 +1,4 @@
-import { createElement as h, Component, Fragment } from 'react'
+import { createElement as h, Fragment, useEffect } from 'react'
 
 import { version } from '../../../../../package'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
@@ -8,84 +8,82 @@ import LinkItem from '../LinkItem'
 import Line from '../Line'
 import Message from '../Message'
 
-const RouteSettings = class extends Component {
+const RouteSettings = (props) => {
 
-	componentDidMount() {
+	useEffect(() => {
 
-		this.props.fetchDomains(this.props)
+		props.fetchDomains(props)
 
-	}
+	}, [])
 
-	showDomainEditModal(id, title) {
+	const showDomainEditModal = (id, title) => {
 
-		this.props.addModalsModal({
+		props.addModalsModal({
 			type: MODALS_DOMAIN_EDIT,
 			props: {
 				id,
 				title
 			}
 		})
+
 	}
 
-	showDomainAddModal() {
+	const showDomainAddModal = () => {
 
-		this.props.addModalsModal({
+		props.addModalsModal({
 			type: MODALS_DOMAIN_ADD,
 			props: {}
 		})
+
 	}
 
-	render() {
+	const domainsFetching = [
+		h(Message, { status: 'warning' }, 'Fetching domains...')
+	]
 
-		const domainsFetching = [
-			h(Message, { status: 'warning' }, 'Fetching domains...')
-		]
+	const domainsItems = [
+		...props.domains.value.map(
+			(domain) => [
+				h(LinkItem, {
+					type: 'button',
+					text: domain.data.id,
+					onClick: () => showDomainEditModal(domain.data.id, domain.data.title)
+				}, domain.data.title),
+				h(Line)
+			]
+		).flat(),
+		h(LinkItem, { type: 'button', onClick: showDomainAddModal }, 'New domain')
+	]
 
-		const domainsItems = [
-			...this.props.domains.value.map(
-				(props) => [
-					h(LinkItem, {
-						type: 'button',
-						text: props.data.id,
-						onClick: () => this.showDomainEditModal(props.data.id, props.data.title)
-					}, props.data.title),
-					h(Line)
-				]
-			).flat(),
-			h(LinkItem, { type: 'button', onClick: () => this.showDomainAddModal() }, 'New domain')
-		]
+	return (
+		h(Fragment, {},
 
-		return (
-			h(Fragment, {},
+			h(CardSetting, {
+				headline: 'Account'
+			},
+				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
+				h(Line),
+				h(LinkItem, { type: 'button', onClick: () => props.deleteToken(props) }, 'Sign Out')
+			),
 
-				h(CardSetting, {
-					headline: 'Account'
-				},
-					h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
-					h(Line),
-					h(LinkItem, { type: 'button', onClick: () => this.props.deleteToken(this.props) }, 'Sign Out')
-				),
+			h(CardSetting, {
+				headline: 'Domains'
+			},
+				...(props.domains.fetching === true ? domainsFetching : domainsItems)
+			),
 
-				h(CardSetting, {
-					headline: 'Domains'
-				},
-					...(this.props.domains.fetching === true ? domainsFetching : domainsItems)
-				),
-
-				h(CardSetting, {
-					headline: 'Help'
-				},
-					h(LinkItem, { type: 'a', href: '#' }, 'Get started'),
-					h(Line),
-					h(LinkItem, { type: 'a', href: '#' }, 'Add Ackee to your sites'),
-					h(Line),
-					h(LinkItem, { type: 'a', href: '#' }, 'Change username or password')
-				)
-
+			h(CardSetting, {
+				headline: 'Help'
+			},
+				h(LinkItem, { type: 'a', href: '#' }, 'Get started'),
+				h(Line),
+				h(LinkItem, { type: 'a', href: '#' }, 'Add Ackee to your sites'),
+				h(Line),
+				h(LinkItem, { type: 'a', href: '#' }, 'Change username or password')
 			)
-		)
 
-	}
+		)
+	)
 
 }
 
