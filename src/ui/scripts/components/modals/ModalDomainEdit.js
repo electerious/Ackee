@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import shortid from 'shortid'
 
 import Input from '../Input'
+import Textarea from '../Textarea'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
@@ -36,6 +37,10 @@ const ModalDomainEdit = (props) => {
 
 	const titleId = shortid.generate()
 	const idId = shortid.generate()
+	const embedId = shortid.generate()
+
+	const srcUrl = (new URL('/tracker.js', location.href)).href
+	const serverUrl = location.origin
 
 	return (
 		h('form', { className: 'card', onSubmit: updateDomain },
@@ -64,6 +69,17 @@ const ModalDomainEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Domain id',
 					value: props.id,
+					onFocus: copyInput
+				}),
+
+				h(Label, { htmlFor: embedId }, 'Embed code'),
+
+				h(Textarea, {
+					type: 'text',
+					id: embedId,
+					readOnly: true,
+					rows: 4,
+					value: `<script async src="${ srcUrl }" data-ackee-server="${ serverUrl }" data-ackee-domain-id="${ props.id }"></script>`,
 					onFocus: copyInput
 				})
 
