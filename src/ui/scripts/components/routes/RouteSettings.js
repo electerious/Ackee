@@ -1,7 +1,7 @@
 import { createElement as h, Component, Fragment } from 'react'
 
 import { version } from '../../../../../package'
-import { MODALS_DOMAIN_EDIT } from '../../constants/modals'
+import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
 import LinkItem from '../LinkItem'
@@ -16,7 +16,7 @@ const RouteSettings = class extends Component {
 
 	}
 
-	showModal(id, title) {
+	showDomainEditModal(id, title) {
 
 		this.props.addModalsModal({
 			type: MODALS_DOMAIN_EDIT,
@@ -24,6 +24,14 @@ const RouteSettings = class extends Component {
 				id,
 				title
 			}
+		})
+	}
+
+	showDomainAddModal() {
+
+		this.props.addModalsModal({
+			type: MODALS_DOMAIN_ADD,
+			props: {}
 		})
 	}
 
@@ -39,12 +47,12 @@ const RouteSettings = class extends Component {
 					h(LinkItem, {
 						type: 'button',
 						text: props.data.id,
-						onClick: () => this.showModal(props.data.id, props.data.title)
+						onClick: () => this.showDomainEditModal(props.data.id, props.data.title)
 					}, props.data.title),
 					h(Line)
 				]
 			).flat(),
-			h(LinkItem, { type: 'button' }, 'New domain')
+			h(LinkItem, { type: 'button', onClick: () => this.showDomainAddModal() }, 'New domain')
 		]
 
 		return (

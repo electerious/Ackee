@@ -50,6 +50,33 @@ export const fetchDomains = (props) => async (dispatch) => {
 
 }
 
+export const addDomain = (props, state) => async (dispatch) => {
+
+	dispatch(setDomainsFetching(true))
+	dispatch(setDomainsError())
+
+	try {
+
+		await api(`/domains`, {
+			method: 'post',
+			body: JSON.stringify(state),
+			props
+		})
+
+		await dispatch(fetchDomains(props))
+
+	} catch (err) {
+
+		dispatch(setDomainsError(err))
+
+	} finally {
+
+		dispatch(setDomainsFetching(false))
+
+	}
+
+}
+
 export const updateDomain = (props, domainId, state) => async (dispatch) => {
 
 	dispatch(setDomainsFetching(true))
@@ -63,13 +90,17 @@ export const updateDomain = (props, domainId, state) => async (dispatch) => {
 			props
 		})
 
+		await dispatch(fetchDomains(props))
+
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
 
-	}
+	} finally {
 
-	dispatch(fetchDomains(props))
+		dispatch(setDomainsFetching(false))
+
+	}
 
 }
 
@@ -86,12 +117,16 @@ export const deleteDomain = (props, domainId, state) => async (dispatch) => {
 			props
 		})
 
+		await dispatch(fetchDomains(props))
+
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
 
-	}
+	} finally {
 
-	dispatch(fetchDomains(props))
+		dispatch(setDomainsFetching(false))
+
+	}
 
 }
