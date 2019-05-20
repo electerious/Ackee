@@ -7,7 +7,7 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
-const ModalDomain = (props) => {
+const ModalDomainEdit = (props) => {
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -101,7 +101,7 @@ const ModalDomain = (props) => {
 
 }
 
-ModalDomain.propTypes = {
+ModalDomainEdit.propTypes = {
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	fetching: PropTypes.bool.isRequired,
@@ -110,4 +110,4 @@ ModalDomain.propTypes = {
 	closeModal: PropTypes.func.isRequired
 }
 
-export default ModalDomain
+export default ModalDomainEdit

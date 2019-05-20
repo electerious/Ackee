@@ -1,1 +1,1 @@
-export const MODALS_DOMAIN = 'modals_domain'
+export const MODALS_DOMAIN_EDIT = 'modals_domain_edit'

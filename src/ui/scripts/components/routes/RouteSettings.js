@@ -1,7 +1,7 @@
 import { createElement as h, Component, Fragment } from 'react'
 
 import { version } from '../../../../../package'
-import { MODALS_DOMAIN } from '../../constants/modals'
+import { MODALS_DOMAIN_EDIT } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
 import LinkItem from '../LinkItem'
@@ -19,7 +19,7 @@ const RouteSettings = class extends Component {
 	showModal(id, title) {
 
 		this.props.addModalsModal({
-			type: MODALS_DOMAIN,
+			type: MODALS_DOMAIN_EDIT,
 			props: {
 				id,
 				title
