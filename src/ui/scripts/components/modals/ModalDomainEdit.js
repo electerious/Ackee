@@ -98,7 +98,7 @@ const ModalDomainEdit = (props) => {
 
 				h('button', {
 					type: 'button',
-					className: 'card__button link',
+					className: 'card__button link color-destructive',
 					onClick: deleteDomain
 				}, 'Delete'),
 
