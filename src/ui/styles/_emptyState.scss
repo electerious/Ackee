@@ -1,0 +1,23 @@
+.emptyState {
+
+	display: grid;
+	align-content: center;
+	justify-content: center;
+	height: $cardContentHeight;
+
+	&__inner {
+		display: grid;
+		align-items: center;
+		grid-gap: $gutter/1.5;
+		grid-auto-flow: column;
+	}
+
+	&__icon {
+		$size: 24px;
+
+		fill: $light;
+		width: $size;
+		height: $size;
+	}
+
+}
