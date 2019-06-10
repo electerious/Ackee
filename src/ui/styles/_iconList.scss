@@ -24,7 +24,7 @@
 
 	&__inner {
 		padding-top: $gutter;
-		height: 300px;
+		height: $cardContentHeight;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 	}
