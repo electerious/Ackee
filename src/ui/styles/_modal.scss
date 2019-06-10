@@ -1,9 +1,9 @@
 .modal {
 
 	position: fixed;
-	display: grid;
-	align-content: center;
-	justify-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -23,8 +23,10 @@
 	&__inner {
 		width: 100%;
 		max-width: 600px;
+		max-height: 100%;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
+		overscroll-behavior: contain;
 		transform: translateY(20px);
 		transition: transform .3s ease;
 	}
