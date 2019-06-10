@@ -50,6 +50,9 @@ const getRecent = async (id) => {
 				domainId: id,
 				siteReferrer: {
 					$ne: null
+				},
+				created: {
+					$gte: dateWithOffset(-7)
 				}
 			}
 		},
