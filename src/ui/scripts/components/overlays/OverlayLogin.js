@@ -71,7 +71,8 @@ const OverlayLogin = (props) => {
 
 				h('a', {
 					className: 'card__button link',
-					href: homepage
+					href: homepage,
+					target: '_blank'
 				}, 'Help'),
 
 				h('div', {

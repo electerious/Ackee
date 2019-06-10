@@ -8,6 +8,7 @@ const LinkItem = (props) => {
 		h(props.type, {
 			onClick: props.onClick,
 			href: props.href,
+			target: props.target,
 			className: classNames({
 				'linkItem': true,
 				'linkItem--disabled': props.disabled === true,
@@ -24,6 +25,7 @@ const LinkItem = (props) => {
 LinkItem.propTypes = {
 	type: PropTypes.oneOf([ 'p', 'a', 'button' ]).isRequired,
 	href: PropTypes.string,
+	target: PropTypes.string,
 	onClick: PropTypes.func,
 	disabled: PropTypes.bool,
 	text: PropTypes.string,

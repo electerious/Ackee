@@ -75,11 +75,11 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Help'
 			},
-				h(LinkItem, { type: 'a', href: homepage }, 'Ackee on GitHub'),
+				h(LinkItem, { type: 'a', href: homepage, target: '_blank' }, 'Ackee on GitHub'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md' }, 'Get started'),
+				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md', target: '_blank' }, 'Get started'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/ackee-tracker' }, 'Add Ackee to your sites')
+				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/ackee-tracker', target: '_blank' }, 'Add Ackee to your sites')
 			)
 
 		)
