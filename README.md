@@ -38,7 +38,6 @@ Because nobody should share information about their visitors with others. The bi
 - Self-hosted
 - Written in Node.js
 - Lightweight and minimal user interface
-- Respects the privacy settings of your users
 - No unique user tracking and no cookies
 
 ### How does it work?
