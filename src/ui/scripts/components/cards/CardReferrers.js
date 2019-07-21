@@ -1,11 +1,10 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationIconList from '../presentations/PresentationIconList'
-import PresentationEmptyState from '../presentations/PresentationEmptyState'
+import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 
 const textLabel = (item) => {
 
@@ -28,6 +27,10 @@ const CardViews = (props) => {
 
 	const presentation = (() => {
 
+		if (props.loading === true) return h(PresentationEmptyState, {
+			icon: ICON_LOADING
+		}, 'Loading referrers')
+
 		const hasItems = props.items.length > 0
 
 		if (hasItems === true) return h(PresentationIconList, {
@@ -36,16 +39,15 @@ const CardViews = (props) => {
 			onLeave
 		})
 
-		return h(PresentationEmptyState, {}, 'No referrers')
+		return h(PresentationEmptyState, {
+			icon: ICON_WARNING
+		}, 'No referrers')
 
 	})()
 
 	return (
 		h('div', {
-			className: classNames({
-				'card': true,
-				'card--wide': props.wide === true
-			})
+			className: 'card'
 		},
 			h('div', { className: 'card__inner' },
 				h(Headline, {
@@ -64,8 +66,8 @@ const CardViews = (props) => {
 }
 
 CardViews.propTypes = {
-	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 

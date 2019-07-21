@@ -45,6 +45,7 @@ const RouteReferrers = (props) => {
 					h(CardReferrers, {
 						key: domain.data.id,
 						headline: domain.data.title,
+						loading: props.referrers.value[domain.data.id] == null ? false : props.referrers.value[domain.data.id].fetching,
 						items: props.referrers.value[domain.data.id] == null ? [] : enhanceReferrers(props.referrers.value[domain.data.id].value)
 					})
 				)
