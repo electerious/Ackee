@@ -21,7 +21,7 @@
   "scripts": {
     "start": "node src/index.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc ava -v"
+    "test": "nyc ava"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
@@ -59,7 +59,7 @@
   },
   "ava": {
     "babel": false,
-    "compileEnhancements": false
+    "verbose": true
   },
   "engines": {
     "node": ">= 10"
