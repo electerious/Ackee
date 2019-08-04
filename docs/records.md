@@ -15,7 +15,6 @@ POST /domains/:domainId/records
 {
 	"siteLocation": "https://example.com/index.html",
 	"siteReferrer": "https://example.com/referrer.html",
-	"siteTitle": "Example",
 	"siteLanguage": "en",
 	"screenWidth": 2560,
 	"screenHeight": 1440,
@@ -43,7 +42,6 @@ POST /domains/:domainId/records
 |:-----------|:------------|:------------|
 | siteLocation | String | URL of the site. |
 | siteReferrer | String | URL of the document that loaded the current document. |
-| siteTitle | String | Title of the site. |
 | siteLanguage | String | Language version of the browser. |
 | screenWidth | Number | The width of the screen in pixels. |
 | screenHeight | Number | The height of the screen in pixels. |
@@ -71,7 +69,6 @@ Location: /domains/:domainId/records/:recordId
 		"id": ":recordId",
 		"siteLocation": "https://example.com/index.html",
 		"siteReferrer": "https://example.com/referrer.html",
-		"siteTitle": "Example",
 		"siteLanguage": "en",
 		"screenWidth": 2560,
 		"screenHeight": 1440,
@@ -119,7 +116,6 @@ Status: 200 OK
 		"id": ":recordId",
 		"siteLocation": "https://example.com/index.html",
 		"siteReferrer": "https://example.com/referrer.html",
-		"siteTitle": "Example",
 		"siteLanguage": "en",
 		"screenWidth": 2560,
 		"screenHeight": 1440,

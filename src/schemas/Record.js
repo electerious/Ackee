@@ -29,9 +29,6 @@ const schema = new mongoose.Schema({
 		type: String,
 		validate: isNullOrUrl
 	},
-	siteTitle: {
-		type: String
-	},
 	siteLanguage: {
 		type: String,
 		minlength: 2,

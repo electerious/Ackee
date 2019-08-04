@@ -13,7 +13,6 @@ const response = (entry) => ({
 		domainId: entry.domainId,
 		siteLocation: entry.siteLocation,
 		siteReferrer: entry.siteReferrer,
-		siteTitle: entry.siteTitle,
 		siteLanguage: entry.siteLanguage,
 		screenWidth: entry.screenWidth,
 		screenHeight: entry.screenHeight,
