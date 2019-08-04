@@ -35,13 +35,13 @@ const get = async (id) => {
 
 }
 
-const update = async (id, { title }) => {
+const update = async (id, data) => {
 
 	return Domain.findOneAndUpdate({
 		id
 	}, {
 		$set: {
-			title,
+			title: data.title,
 			updated: Date.now()
 		}
 	}, {
