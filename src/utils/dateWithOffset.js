@@ -1,3 +1,5 @@
+'use strict'
+
 const day = require('./day')
 
 module.exports = (offset, date = new Date()) => {
