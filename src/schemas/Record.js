@@ -13,6 +13,9 @@ const schema = new mongoose.Schema({
 		unique: true,
 		default: uuid
 	},
+	identifier: {
+		type: String
+	},
 	domainId: {
 		type: String,
 		required: true
@@ -36,19 +39,16 @@ const schema = new mongoose.Schema({
 	},
 	screenWidth: {
 		type: Number,
-		required: true,
 		min: 0,
 		max: 100000
 	},
 	screenHeight: {
 		type: Number,
-		required: true,
 		min: 0,
 		max: 100000
 	},
 	screenColorDepth: {
 		type: Number,
-		required: true,
 		min: 1,
 		max: 48
 	},
@@ -72,22 +72,22 @@ const schema = new mongoose.Schema({
 	},
 	browserWidth: {
 		type: Number,
-		required: true,
 		min: 0,
 		max: 100000
 	},
 	browserHeight: {
 		type: Number,
-		required: true,
 		min: 0,
 		max: 100000
 	},
 	created: {
 		type: Date,
+		required: true,
 		default: Date.now
 	},
 	updated: {
 		type: Date,
+		required: true,
 		default: Date.now
 	}
 })
