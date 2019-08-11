@@ -1,13 +1,19 @@
 import produce from 'immer'
 
 import {
+	SET_VIEWS_TYPE,
 	SET_VIEWS_VALUE,
 	SET_VIEWS_FETCHING,
 	SET_VIEWS_ERROR,
 	RESET_VIEWS
 } from '../actions'
 
+import {
+	VIEWS_TYPE_TOTAL
+} from '../../../constants/views'
+
 export const initialState = () => ({
+	type: VIEWS_TYPE_TOTAL,
 	value: {}
 })
 
@@ -25,6 +31,9 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
+		case SET_VIEWS_TYPE:
+			draft.type = action.payload || initialState().type
+			break
 		case SET_VIEWS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break

@@ -3,8 +3,8 @@
 const Record = require('../schemas/Record')
 
 const {
-	VIEWS_TOTAL,
-	VIEWS_UNIQUE
+	VIEWS_TYPE_TOTAL,
+	VIEWS_TYPE_UNIQUE
 } = require('../constants/views')
 
 const getTotal = async (id) => {
@@ -94,8 +94,8 @@ const getUnique = async (id) => {
 const get = async (id, type) => {
 
 	switch (type) {
-		case VIEWS_TOTAL: return getTotal(id)
-		case VIEWS_UNIQUE: return getUnique(id)
+		case VIEWS_TYPE_TOTAL: return getTotal(id)
+		case VIEWS_TYPE_UNIQUE: return getUnique(id)
 	}
 
 }

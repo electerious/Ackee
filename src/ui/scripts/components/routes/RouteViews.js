@@ -1,8 +1,14 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import {
+	VIEWS_TYPE_TOTAL,
+	VIEWS_TYPE_UNIQUE
+} from '../../../../constants/views'
+
 import enhanceViews from '../../utils/enhanceViews'
 
 import CardViews from '../cards/CardViews'
+import Select from '../Select'
 
 const RouteViews = (props) => {
 
@@ -18,10 +24,21 @@ const RouteViews = (props) => {
 			props.fetchViews(props, domain.data.id)
 		})
 
-	}, [ props.domains.value ])
+	}, [ props.domains.value, props.views.type ])
 
 	return (
 		h(Fragment, {},
+
+			h('div', { className: 'subHeader' },
+				h(Select, {
+					value: props.views.type,
+					onChange: (e) => props.setViewsType(e.target.value),
+					items: [
+						{ value: VIEWS_TYPE_TOTAL, label: 'Total views' },
+						{ value: VIEWS_TYPE_UNIQUE, label: 'Unique views' }
+					]
+				})
+			),
 
 			h(CardViews, {
 				wide: true,

@@ -1,9 +1,15 @@
 import api from '../utils/api'
 
+export const SET_VIEWS_TYPE = Symbol()
 export const SET_VIEWS_VALUE = Symbol()
 export const SET_VIEWS_FETCHING = Symbol()
 export const SET_VIEWS_ERROR = Symbol()
 export const RESET_VIEWS = Symbol()
+
+export const setViewsType = (payload) => ({
+	type: SET_VIEWS_TYPE,
+	payload
+})
 
 export const setViewsValue = (domainId, payload) => ({
 	type: SET_VIEWS_VALUE,
@@ -34,7 +40,7 @@ export const fetchViews = (props, domainId) => async (dispatch) => {
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/views`, {
+		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }`, {
 			method: 'get',
 			props
 		})

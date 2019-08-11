@@ -5,8 +5,8 @@ const { createError } = require('micro')
 const views = require('../database/views')
 
 const {
-	VIEWS_TOTAL,
-	VIEWS_UNIQUE
+	VIEWS_TYPE_TOTAL,
+	VIEWS_TYPE_UNIQUE
 } = require('../constants/views')
 
 const response = (entry) => ({
@@ -32,8 +32,8 @@ const get = async (req) => {
 	const { type } = req.query
 
 	const isKnownType = [
-		VIEWS_TOTAL,
-		VIEWS_UNIQUE
+		VIEWS_TYPE_TOTAL,
+		VIEWS_TYPE_UNIQUE
 	].includes(type) === true
 
 	if (isKnownType === false) throw createError(400, 'Unknown type')
