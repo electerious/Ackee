@@ -1,4 +1,4 @@
-export default (schema, id, data = {}, props = []) => {
+module.exports = (schema, id, data = {}, props = []) => {
 
 	const _set = {}
 
