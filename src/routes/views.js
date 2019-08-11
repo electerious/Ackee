@@ -1,6 +1,13 @@
 'use strict'
 
+const { createError } = require('micro')
+
 const views = require('../database/views')
+
+const {
+	VIEWS_TOTAL,
+	VIEWS_UNIQUE
+} = require('../constants/views')
 
 const response = (entry) => ({
 	type: 'view',
@@ -22,8 +29,16 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
+	const { type } = req.query
 
-	const entries = await views.get(domainId)
+	const isKnownType = [
+		VIEWS_TOTAL,
+		VIEWS_UNIQUE
+	].includes(type) === true
+
+	if (isKnownType === false) throw createError(400, 'Unknown type')
+
+	const entries = await views.get(domainId, type)
 
 	return responses(entries)
 
