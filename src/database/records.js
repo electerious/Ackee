@@ -28,7 +28,6 @@ const anonymize = async (clientId) => {
 		clientId
 	}, {
 		clientId: null,
-		siteReferrer: null,
 		siteLanguage: null,
 		screenWidth: null,
 		screenHeight: null,
