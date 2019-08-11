@@ -69,6 +69,7 @@ Location: /domains/:domainId/records/:recordId
 	"type": "record",
 	"data": {
 		"id": ":recordId",
+		"domainId": ":domainId",
 		"siteLocation": "https://example.com/index.html",
 		"siteReferrer": "https://example.com/referrer.html",
 		"siteLanguage": "en",
@@ -118,6 +119,7 @@ Status: 200 OK
 	"type": "record",
 	"data": {
 		"id": ":recordId",
+		"domainId": ":domainId",
 		"siteLocation": "https://example.com/index.html",
 		"siteReferrer": "https://example.com/referrer.html",
 		"siteLanguage": "en",

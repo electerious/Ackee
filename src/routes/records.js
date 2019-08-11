@@ -11,7 +11,6 @@ const response = (entry) => ({
 	type: 'record',
 	data: {
 		id: entry.id,
-		clientId: entry.clientId,
 		domainId: entry.domainId,
 		siteLocation: entry.siteLocation,
 		siteReferrer: entry.siteReferrer,
