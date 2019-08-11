@@ -13,7 +13,7 @@ const schema = new mongoose.Schema({
 		unique: true,
 		default: uuid
 	},
-	identifier: {
+	clientId: {
 		type: String
 	},
 	domainId: {

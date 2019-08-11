@@ -2,6 +2,7 @@
 
 const { send, json, createError } = require('micro')
 
+const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
@@ -10,6 +11,7 @@ const response = (entry) => ({
 	type: 'record',
 	data: {
 		id: entry.id,
+		clientId: entry.clientId,
 		domainId: entry.domainId,
 		siteLocation: entry.siteLocation,
 		siteReferrer: entry.siteReferrer,
@@ -32,12 +34,17 @@ const response = (entry) => ({
 
 const add = async (req, res) => {
 
+	const clientId = identifier(req)
 	const { domainId } = req.params
-	const data = { ...await json(req), domainId }
+	const data = { ...await json(req), clientId, domainId }
 
 	const domain = await domains.get(domainId)
 
 	if (domain == null) throw createError(404, 'Unknown domain')
+
+	// Anonymize existing entries with the same clientId to prevent that the browsing history
+	// of a user is reconstructible. Will be skipped when there're no previous entries.
+	await records.anonymize(clientId)
 
 	let entry
 
@@ -62,7 +69,23 @@ const add = async (req, res) => {
 const update = async (req) => {
 
 	const { recordId } = req.params
-	const entry = await records.update(recordId)
+	const data = await json(req)
+
+	let entry
+
+	try {
+
+		entry = await records.update(recordId, data)
+
+	} catch (err) {
+
+		if (err.name === 'ValidationError') {
+			throw createError(400, messages(err.errors), err)
+		}
+
+		throw err
+
+	}
 
 	if (entry == null) throw createError(404, 'Unknown record')
 
