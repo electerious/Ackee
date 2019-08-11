@@ -10,8 +10,9 @@ import reducers from './reducers'
 import * as actions from './actions'
 
 import { initialState as initialTokenState } from './reducers/token'
-import { initialState as initialReferrersState } from './reducers/referrers'
 import { initialState as initialRouteState } from './reducers/route'
+import { initialState as initialViewsState } from './reducers/views'
+import { initialState as initialReferrersState } from './reducers/referrers'
 
 import Main from './components/Main'
 
@@ -36,6 +37,10 @@ store.subscribe(() => {
 		route: {
 			...initialRouteState(),
 			value: currentState.route.value
+		},
+		views: {
+			...initialViewsState(),
+			type: currentState.views.type
 		},
 		referrers: {
 			...initialReferrersState(),
