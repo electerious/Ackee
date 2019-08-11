@@ -22,10 +22,10 @@ POST /tokens
 
 ### Parameters
 
-| Name | Type | Description |
-|:-----------|:------------|:------------|
-| username | String | [Username of Ackee](../README.md#username-and-password). |
-| password | String | [Password of Ackee](../README.md#username-and-password). |
+| Name | Type | Required | Description |
+|:-----------|:------------|:------------|:------------|
+| username | String | true | [Username of Ackee](../README.md#username-and-password). |
+| password | String | true | [Password of Ackee](../README.md#username-and-password). |
 
 ### Response
 
