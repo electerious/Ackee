@@ -5,6 +5,8 @@
 
 ## Add a record
 
+Ackee uses the IP and user-agent to identify a user. A new record with an existing identification will remove all data from previous records, even when the new record contains less information than the previous record.
+
 ### Request
 
 ```
@@ -38,22 +40,22 @@ POST /domains/:domainId/records
 
 ### Parameters
 
-| Name | Type | Description |
-|:-----------|:------------|:------------|
-| siteLocation | String | URL of the site. |
-| siteReferrer | String | URL of the document that loaded the current document. |
-| siteLanguage | String | Language version of the browser. |
-| screenWidth | Number | The width of the screen in pixels. |
-| screenHeight | Number | The height of the screen in pixels. |
-| screenColorDepth | Number | The bit depth of the color palette for displaying images (in bits per pixel). |
-| deviceName | String | The name of the product hosting the browser. |
-| deviceManufacturer | String | The name of the product's manufacturer. |
-| osName | String |  The family of the OS. |
-| osVersion | String | The version of the OS. |
-| browserName | String | The name of the browser/environment. |
-| browserVersion | String | The browser/environment version. |
-| browserWidth | Number | The width of the screen in pixels. |
-| browserHeight | Number | The height of the screen in pixels. |
+| Name | Type | Required | Description |
+|:-----------|:------------|:------------|:------------|
+| siteLocation | String | true | URL of the site. |
+| siteReferrer | String | false | URL of the document that loaded the current document. |
+| siteLanguage | String | false | Language version of the browser. |
+| screenWidth | Number | false | The width of the screen in pixels. |
+| screenHeight | Number | false | The height of the screen in pixels. |
+| screenColorDepth | Number | false | The bit depth of the color palette for displaying images (in bits per pixel). |
+| deviceName | String | false | The name of the product hosting the browser. |
+| deviceManufacturer | String | false | The name of the product's manufacturer. |
+| osName | String | false | The family of the OS. |
+| osVersion | String | false | The version of the OS. |
+| browserName | String | false | The name of the browser/environment. |
+| browserVersion | String | false | The browser/environment version. |
+| browserWidth | Number | false | The width of the screen in pixels. |
+| browserHeight | Number | false | The height of the screen in pixels. |
 
 ### Response
 
@@ -89,7 +91,9 @@ Location: /domains/:domainId/records/:recordId
 
 ## Update a record
 
-It's not possible to update attributes of a record. An record PATCH will only update `updated`.
+It's not possible to update attributes of a record. An record PATCH will only update `updated`, which is used to determine the time a user spent on a page.
+
+The response might contain less data than initially added to the record. That's the case when a record has been anonymized, after a new record with an existing user identification has been added.
 
 ### Request
 
