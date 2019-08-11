@@ -1,6 +1,7 @@
 'use strict'
 
 const Domain = require('../schemas/Domain')
+const runUpdate = require('../utils/runUpdate')
 
 const add = async (data) => {
 
@@ -37,16 +38,9 @@ const get = async (id) => {
 
 const update = async (id, data) => {
 
-	return Domain.findOneAndUpdate({
-		id
-	}, {
-		$set: {
-			title: data.title,
-			updated: Date.now()
-		}
-	}, {
-		new: true
-	})
+	return runUpdate(Domain, id, data, [
+		'title'
+	])
 
 }
 

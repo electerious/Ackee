@@ -11,7 +11,8 @@ const schema = new mongoose.Schema({
 		default: uuid
 	},
 	title: {
-		type: String
+		type: String,
+		required: true
 	},
 	created: {
 		type: Date,

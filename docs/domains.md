@@ -64,9 +64,9 @@ POST /domains
 
 ### Parameters
 
-| Name | Type | Description |
-|:-----------|:------------|:------------|
-| title | String | Title of the domain. |
+| Name | Type | Required | Description |
+|:-----------|:------------|:------------|:------------|
+| title | String | true | Title of the domain. |
 
 ### Response
 
@@ -109,9 +109,9 @@ PUT /domains/:domainId
 
 ### Parameters
 
-| Name | Type | Description |
-|:-----------|:------------|:------------|
-| title | String | Title of the domain. |
+| Name | Type | Required | Description |
+|:-----------|:------------|:------------|:------------|
+| title | String | false | Title of the domain. |
 
 ### Response
 
