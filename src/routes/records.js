@@ -69,13 +69,12 @@ const add = async (req, res) => {
 const update = async (req) => {
 
 	const { recordId } = req.params
-	const data = await json(req)
 
 	let entry
 
 	try {
 
-		entry = await records.update(recordId, data)
+		entry = await records.update(recordId)
 
 	} catch (err) {
 
