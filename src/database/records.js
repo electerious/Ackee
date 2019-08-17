@@ -15,10 +15,17 @@ const update = async (id) => {
 
 }
 
-const anonymize = async (clientId) => {
+const anonymize = async (clientId, ignoreId) => {
 
 	return Record.updateMany({
-		clientId
+		$and: [
+			{ clientId },
+			{
+				id: {
+					$ne: ignoreId
+				}
+			}
+		]
 	}, {
 		clientId: null,
 		siteLanguage: null,

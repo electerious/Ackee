@@ -41,10 +41,6 @@ const add = async (req, res) => {
 
 	if (domain == null) throw createError(404, 'Unknown domain')
 
-	// Anonymize existing entries with the same clientId to prevent that the browsing history
-	// of a user is reconstructible. Will be skipped when there're no previous entries.
-	await records.anonymize(clientId)
-
 	let entry
 
 	try {
@@ -60,6 +56,10 @@ const add = async (req, res) => {
 		throw err
 
 	}
+
+	// Anonymize old entries with the same clientId to prevent that the browsing history
+	// of a user is reconstructible. Will be skipped when there're no previous entries.
+	await records.anonymize(clientId, entry.id)
 
 	return send(res, 201, response(entry))
 
