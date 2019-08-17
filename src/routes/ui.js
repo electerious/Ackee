@@ -7,7 +7,8 @@ const js = require('rosid-handler-js')
 const preload = require('../utils/preload')
 const html = require('../ui/index')
 
-const optimize = process.env.NODE_ENV !== 'development'
+const isDemo = require('../utils/isDemo')
+const isProductionEnv = require('../utils/isProductionEnv')
 
 const index = async () => {
 
@@ -20,7 +21,7 @@ const styles = async () => {
 	const filePath = resolve(__dirname, '../ui/styles/index.scss')
 
 	return sass(filePath, {
-		optimize
+		optimize: isProductionEnv === true
 	})
 
 }
@@ -48,14 +49,18 @@ const scripts = async () => {
 	}
 
 	return js(filePath, {
-		optimize,
+		optimize: isProductionEnv === true,
+		env: {
+			DEMO: isDemo === true ? 'true' : 'false',
+			NODE_ENV: isProductionEnv === true ? 'production' : 'development'
+		},
 		babel
 	})
 
 }
 
 module.exports = {
-	index: optimize === true ? preload(index) : index,
-	styles: optimize === true ? preload(styles) : styles,
-	scripts: optimize === true ? preload(scripts) : scripts
+	index: isProductionEnv === true ? preload(index) : index,
+	styles: isProductionEnv === true ? preload(styles) : styles,
+	scripts: isProductionEnv === true ? preload(scripts) : scripts
 }

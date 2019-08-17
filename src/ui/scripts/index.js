@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
 
+import isDemo from '../../utils/isDemo'
+
 import createStore from './utils/createStore'
 import enhanceState from './utils/enhanceState'
 import * as storage from './utils/storage'
@@ -24,6 +26,10 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main)
 const container = document.querySelector('#main')
+
+if (isDemo === true) {
+	console.warn('Ackee runs in demo mode')
+}
 
 store.subscribe(() => {
 
