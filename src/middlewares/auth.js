@@ -7,6 +7,8 @@ const context = require('../utils/context')
 const ttl = require('../utils/ttl')
 const tokens = require('../database/tokens')
 
+const permit = new Bearer({ query: 'token' })
+
 module.exports = async (req, res) => {
 
 	const token = permit.check(req)
