@@ -8,6 +8,7 @@ const signale = require('./utils/signale')
 const pipe = require('./utils/pipe')
 
 const auth = require('./middlewares/auth')
+const demo = require('./middlewares/demo')
 
 const ui = require('./routes/ui')
 const tracker = require('./routes/tracker')
@@ -54,10 +55,10 @@ module.exports = micro(
 			post('/tokens', tokens.add),
 			del('/tokens/:tokenId', tokens.del),
 
-			post('/domains', pipe(auth, domains.add)),
+			post('/domains', pipe(auth, demo, domains.add)),
 			get('/domains', pipe(auth, domains.all)),
-			put('/domains/:domainId', pipe(auth, domains.update)),
-			del('/domains/:domainId', pipe(auth, domains.del)),
+			put('/domains/:domainId', pipe(auth, demo, domains.update)),
+			del('/domains/:domainId', pipe(auth, demo, domains.del)),
 
 			post('/domains/:domainId/records', records.add),
 			patch('/domains/:domainId/records/:recordId', records.update),
