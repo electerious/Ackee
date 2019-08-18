@@ -6,10 +6,8 @@ const { router, get, post, put, patch, del } = require('microrouter')
 
 const signale = require('./utils/signale')
 const pipe = require('./utils/pipe')
-
 const requireAuth = require('./middlewares/requireAuth')
 const blockDemo = require('./middlewares/blockDemo')
-
 const ui = require('./routes/ui')
 const tracker = require('./routes/tracker')
 const tokens = require('./routes/tokens')
