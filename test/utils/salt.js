@@ -9,6 +9,6 @@ test('return same result as long as it is the same day', async (t) => {
 	const a = salt()
 	const b = salt()
 
-	t.true(a === b)
+	t.is(a, b)
 
 })

@@ -6,6 +6,6 @@ const isProductionEnv = require('../../src/utils/isProductionEnv')
 
 test('return boolean', async (t) => {
 
-	t.true(typeof isProductionEnv === 'boolean')
+	t.is(typeof isProductionEnv, 'boolean')
 
 })

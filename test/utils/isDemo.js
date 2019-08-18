@@ -6,6 +6,6 @@ const isDemo = require('../../src/utils/isDemo')
 
 test('return boolean', async (t) => {
 
-	t.true(typeof isDemo === 'boolean')
+	t.is(typeof isDemo, 'boolean')
 
 })

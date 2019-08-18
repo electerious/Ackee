@@ -19,6 +19,6 @@ test('return different identifiers', async (t) => {
 	const a = identifier(req())
 	const b = identifier(req())
 
-	t.false(a === b)
+	t.not(a, b)
 
 })
