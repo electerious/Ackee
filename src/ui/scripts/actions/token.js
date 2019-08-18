@@ -24,7 +24,7 @@ export const resetToken = () => ({
 	type: RESET_TOKEN
 })
 
-export const fetchToken = (props, state) => async (dispatch) => {
+export const addToken = (props, state) => async (dispatch) => {
 
 	dispatch(setTokenFetching(true))
 	dispatch(setTokenError())

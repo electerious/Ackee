@@ -25,7 +25,7 @@ const OverlayLogin = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		props.fetchToken(inputs)
+		props.addToken(inputs)
 	}
 
 	const hasError = props.token.error != null
@@ -93,7 +93,7 @@ const OverlayLogin = (props) => {
 
 OverlayLogin.propTypes = {
 	token: PropTypes.object.isRequired,
-	fetchToken: PropTypes.func.isRequired
+	addToken: PropTypes.func.isRequired
 }
 
 export default OverlayLogin
