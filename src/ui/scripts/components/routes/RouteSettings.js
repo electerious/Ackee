@@ -1,7 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { version, homepage } from '../../../../../package'
-import isDemo from '../../../../utils/isDemo'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
@@ -53,7 +52,7 @@ const RouteSettings = (props) => {
 				h(Line)
 			]
 		).flat(),
-		isDemo === false && h(LinkItem, { type: 'button', onClick: showDomainAddModal }, 'New domain')
+		h(LinkItem, { type: 'button', onClick: showDomainAddModal }, 'New domain')
 	]
 
 	return (
