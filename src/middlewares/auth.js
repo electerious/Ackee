@@ -3,7 +3,6 @@
 const { createError } = require('micro')
 const { Bearer } = require('permit')
 
-const context = require('../utils/context')
 const ttl = require('../utils/ttl')
 const tokens = require('../database/tokens')
 
@@ -36,7 +35,5 @@ module.exports = async (req, res) => {
 	}
 
 	await tokens.update(token)
-
-	context(req, 'token', token)
 
 }
