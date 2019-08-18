@@ -3,11 +3,9 @@
 const { createError } = require('micro')
 const { Bearer } = require('permit')
 
-const context = require('./context')
-const ttl = require('./ttl')
+const context = require('../utils/context')
+const ttl = require('../utils/ttl')
 const tokens = require('../database/tokens')
-
-const permit = new Bearer({ query: 'token' })
 
 module.exports = async (req, res) => {
 
