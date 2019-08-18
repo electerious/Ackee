@@ -4,8 +4,7 @@ const { readFile } = require('fs')
 const { promisify } = require('util')
 
 const preload = require('../utils/preload')
-
-const optimize = process.env.NODE_ENV !== 'development'
+const isProductionEnv = require('../utils/isProductionEnv')
 
 const get = async () => {
 
@@ -16,5 +15,5 @@ const get = async () => {
 }
 
 module.exports = {
-	get: optimize === true ? preload(get) : get
+	get: isProductionEnv === true ? preload(get) : get
 }
