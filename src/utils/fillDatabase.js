@@ -1,0 +1,251 @@
+'use strict'
+
+const crypto = require('crypto')
+const schedule = require('node-schedule')
+const fetch = require('node-fetch')
+const { Headers } = require('node-fetch')
+
+const signale = require('./signale')
+const randomItem = require('./randomItem')
+
+const userAgents = Array(100).fill().map(() => crypto.randomBytes(16).toString('hex'))
+
+const referrers = [
+	'https://electerious.com',
+	'https://laudableapps.com',
+	'https://laudablesites.com',
+	'https://dribbble.com',
+	'https://medium.com',
+	'https://codepen.io',
+	'https://google.com'
+]
+
+const langauges = [
+	'en',
+	'de',
+	'fr',
+	'ni'
+]
+
+const resolutions = [
+	{
+		width: 1366,
+		height: 768
+	},
+	{
+		width: 1920,
+		height: 1080
+	},
+	{
+		width: 1280,
+		height: 800
+	},
+	{
+		width: 320,
+		height: 568
+	},
+	{
+		width: 1440,
+		height: 900
+	},
+	{
+		width: 1280,
+		height: 1024
+	}
+]
+
+const screenColorDepths = [
+	16,
+	24,
+	32,
+	48
+]
+
+const devices = [
+	{
+		name: 'iPad',
+		manufacturer: 'Apple'
+	},
+	{
+		name: 'iPod',
+		manufacturer: 'Apple'
+	},
+	{
+		name: 'iPhone',
+		manufacturer: 'Apple'
+	},
+	{
+		name: 'Nexus',
+		manufacturer: 'Google'
+	},
+	{
+		name: 'Xbox One',
+		manufacturer: 'Microsoft'
+	}
+]
+
+const operatingSystems = [
+	{
+		name: 'OS X',
+		versions: [
+			'10.14.6',
+			'10.13.1',
+			'10.12.4'
+		]
+	},
+	{
+		name: 'Windows',
+		versions: [
+			'8.1',
+			'8',
+			'7'
+		]
+	},
+	{
+		name: 'Android',
+		versions: [
+			'9.0',
+			'8.1',
+			'7.1.2'
+		]
+	}
+]
+
+const browsers = [
+	{
+		name: 'IE',
+		versions: [
+			'11.0',
+			'10.0'
+		]
+	},
+	{
+		name: 'Safari',
+		versions: [
+			'5.1',
+			'5.0'
+		]
+	},
+	{
+		name: 'Opera',
+		versions: [
+			'11.52',
+			'11.50'
+		]
+	}
+]
+
+const createRecord = () => {
+
+	const resolution = randomItem(resolutions)
+	const device = randomItem(devices)
+	const operatingSystem = randomItem(operatingSystems)
+	const browser = randomItem(browsers)
+
+	const anonymousRecord = {
+		siteLocation: 'https://example.com'
+	}
+
+	const detailedRecord = {
+		siteLocation: 'https://example.com',
+		siteReferrer: randomItem(referrers),
+		siteLanguage: randomItem(langauges),
+		screenWidth: resolution.width,
+		screenHeight: resolution.height,
+		screenColorDepth: randomItem(screenColorDepths),
+		deviceName: device.name,
+		deviceManufacturer: device.manufacturer,
+		osName: operatingSystem.name,
+		osVersion: randomItem(operatingSystem.versions),
+		browserName: browser.name,
+		browserVersion: randomItem(browser.versions),
+		browserWidth: resolution.width,
+		browserHeight: resolution.height
+	}
+
+	return randomItem([
+		anonymousRecord,
+		detailedRecord
+	])
+
+}
+
+const addToken = async (url) => {
+
+	const response = await fetch(`${ url }/tokens`, {
+		method: 'post',
+		body: JSON.stringify({
+			username: process.env.USERNAME,
+			password: process.env.PASSWORD
+		})
+	})
+
+	const data = await response.json()
+
+	return data.data.id
+
+}
+
+const fetchDomains = async (url, token) => {
+
+	const headers = new Headers({
+		Authorization: `Bearer ${ token }`
+	})
+
+	const response = await fetch(`${ url }/domains`, {
+		headers
+	})
+
+	const data = await response.json()
+
+	return data.data
+
+}
+
+const addRecord = async (url, token, domain, record) => {
+
+	const headers = new Headers({
+		'Authorization': `Bearer ${ token }`,
+		'User-Agent': randomItem(userAgents)
+	})
+
+	const response = await fetch(`${ url }/domains/${ domain.id }/records`, {
+		method: 'post',
+		headers,
+		body: JSON.stringify(record)
+	})
+
+	const data = await response.json()
+
+	return data.data
+
+}
+
+const job = (url) => async () => {
+
+	try {
+
+		const token = await addToken(url)
+		const domains = await fetchDomains(url, token)
+
+		const domain = randomItem(domains).data
+		const record = createRecord()
+
+		await addRecord(url, token, domain, record)
+
+	} catch (err) {
+
+		signale.fatal(err)
+
+	}
+
+}
+
+module.exports = (url) => {
+
+	const rule = new schedule.RecurrenceRule()
+	rule.second = 0
+
+	return schedule.scheduleJob(rule, job(url))
+
+}
