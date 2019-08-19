@@ -11,16 +11,22 @@ const randomItem = require('./randomItem')
 const userAgents = Array(100).fill().map(() => crypto.randomBytes(16).toString('hex'))
 
 const referrers = [
+	null,
 	'https://electerious.com',
 	'https://laudableapps.com',
 	'https://laudablesites.com',
-	'https://dribbble.com',
-	'https://medium.com',
-	'https://codepen.io',
-	'https://google.com'
+	'https://dribbble.com/electerious',
+	'https://medium.com/@electerious',
+	'https://codepen.io/electerious',
+	'https://github.com/electerious',
+	'https://facebook.com/AppsLaudable',
+	'https://twitter.com/electerious',
+	'https://google.com',
+	'https://bing.com'
 ]
 
 const langauges = [
+	null,
 	'en',
 	'de',
 	'fr',
@@ -55,6 +61,7 @@ const resolutions = [
 ]
 
 const screenColorDepths = [
+	null,
 	16,
 	24,
 	32,
@@ -228,10 +235,12 @@ const job = (url) => async () => {
 		const token = await addToken(url)
 		const domains = await fetchDomains(url, token)
 
-		const domain = randomItem(domains).data
+		const domain = randomItem([ ...domains, null ])
 		const record = createRecord()
 
-		await addRecord(url, token, domain, record)
+		if (domain == null) return
+
+		await addRecord(url, token, domain.data, record)
 
 	} catch (err) {
 
