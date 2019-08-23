@@ -33,8 +33,8 @@ const response = (entry) => ({
 
 const add = async (req, res) => {
 
-	const clientId = identifier(req)
 	const { domainId } = req.params
+	const clientId = identifier(req, domainId)
 	const data = { ...await json(req), clientId, domainId }
 
 	const domain = await domains.get(domainId)

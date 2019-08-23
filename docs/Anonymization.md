@@ -4,7 +4,7 @@ Ackee tries its best to keep tracked data anonymized. Several steps are used to 
 
 ## User identifier
 
-Ackee uses the IP and user-agent to identify a user. Both information will be hashed together with a [salt](https://en.wikipedia.org/wiki/Salt_(cryptography)) that changes daily. The final hash is called `clientId`.
+Ackee uses the IP, user-agent and domainId to identify a user. All information will be hashed together with a [salt](https://en.wikipedia.org/wiki/Salt_(cryptography)) that changes daily. The final hash is called `clientId`.
 
 The daily salt is never stored anywhere. It avoids that database backups can be used to stick data together to reconstruct the browsing history of a user.
 
