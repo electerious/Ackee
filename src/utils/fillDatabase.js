@@ -1,6 +1,5 @@
 'use strict'
 
-const crypto = require('crypto')
 const schedule = require('node-schedule')
 const fetch = require('node-fetch')
 const { Headers } = require('node-fetch')
@@ -8,7 +7,7 @@ const { Headers } = require('node-fetch')
 const signale = require('./signale')
 const randomItem = require('./randomItem')
 
-const userAgents = Array(200).fill().map(() => crypto.randomBytes(16).toString('hex'))
+const userAgents = Array(200).fill().map((_, index) => index)
 
 const referrers = [
 	null,
