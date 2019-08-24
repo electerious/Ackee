@@ -54,7 +54,7 @@ The interface of Ackee lets you view and analyse your tracked information.
 
 Ackee depends on...
 
-- [Node.js](https://nodejs.org/en/) (v8.11.0 or newer)
+- [Node.js](https://nodejs.org/en/) (v10.16 or newer)
 - [yarn](https://yarnpkg.com/en/)
 - [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
 
