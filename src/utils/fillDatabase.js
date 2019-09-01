@@ -9,6 +9,16 @@ const randomItem = require('./randomItem')
 
 const userAgents = Array(200).fill().map((_, index) => index)
 
+const weekdayDuds = [
+	[ null, null, null, null ], // Sunday
+	[ null, null ], // Monday
+	[ null ], // Tuesday
+	[ null ], // Wednesday
+	[ null ], // Thursday
+	[ null, null ], // Friday
+	[ null, null, null ] // Saturday
+]
+
 const referrers = [
 	null,
 	'https://electerious.com',
@@ -231,10 +241,13 @@ const job = (url) => async () => {
 
 	try {
 
+		const currentDate = new Date()
+		const currentWeekday = currentDate.getDay()
+
 		const token = await addToken(url)
 		const domains = await fetchDomains(url, token)
 
-		const domain = randomItem([ ...domains, null ])
+		const domain = randomItem([ ...domains, ...weekdayDuds[currentWeekday] ])
 		const record = createRecord()
 
 		if (domain == null) return
