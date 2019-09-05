@@ -15,12 +15,12 @@
 	}
 
 	&__logo {
-		--size: 42px;
+		$size: 42px;
 
 		position: relative;
 		margin: $gutter 0 $gutter/2;
-		width: var(--size);
-		height: var(--size);
+		width: $size;
+		height: $size;
 		background: $gradient;
 		border-radius: 100%;
 	}

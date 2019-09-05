@@ -1,9 +1,9 @@
 .favicon {
 
-	--size: 30px;
+	$size: 30px;
 
-	width: var(--size);
-	height: var(--size);
+	width: $size;
+	height: $size;
 	background: $white;
 	border-radius: 100%;
 	border: 2px solid $white;
