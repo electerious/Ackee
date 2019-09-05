@@ -4,7 +4,6 @@ const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 const microCors = require('micro-cors')
-const cors = microCors()
 
 const signale = require('./utils/signale')
 const pipe = require('./utils/pipe')
@@ -17,6 +16,10 @@ const domains = require('./routes/domains')
 const records = require('./routes/records')
 const views = require('./routes/views')
 const referrers = require('./routes/referrers')
+
+const cors = microCors({
+	origin: "https://www.rich-text.net"
+})
 
 const catchError = (fn) => async (req, res) => {
 	try {
