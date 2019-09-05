@@ -18,7 +18,6 @@
     "url": "https://github.com/electerious/Ackee.git"
   },
   "scripts": {
-    "build": "yarn",
     "start": "node src/index.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava"
