@@ -2,7 +2,7 @@
 
 [![Travis Build Status](https://travis-ci.org/electerious/Ackee.svg?branch=master)](https://travis-ci.org/electerious/Ackee) [![Coverage Status](https://coveralls.io/repos/github/electerious/Ackee/badge.svg?branch=master)](https://coveralls.io/github/electerious/Ackee?branch=master) [![Dependencies](https://david-dm.org/electerious/Ackee.svg)](https://david-dm.org/electerious/Ackee#info=dependencies) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
 
-Ackee helps you to track your sites, know more about your visitors and to analyze your traffic.
+Self-hosted, Node.js based analytics tool for those who care about privacy. Ackee runs on your own server, analyses the traffic of your websites and provides useful statistics in a minimal interface.
 
 ![Ackee in a browser](https://s.electerious.com/images/ackee/readme.png)
 
@@ -25,20 +25,28 @@ And configure Ackee and your server correctly…
 - […with environment variables](#options)
 - […with SSL and HTTPS enabled](docs/SSL%20and%20HTTPS.md)
 
+Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
+
 ## Introduction
 
 ### What is Ackee?
 
-Ackee is a lightweight, self-hosted alternative to Google Analytics. It features an API and web interface and tracks only what's really necessary.
+Ackee is a web app you install on your server to analyse the traffic of your sites.
 
 ### Why Ackee?
 
-Because nobody should share information about their visitors with others. The big players already know enough about us.
+Ackee is lightweight, easy to install and has a good balance between analytics and privacy. It features an API and web interface and tracks only what's necessary.
+
+It's is the right tool for you if you care about privacy and don't need a full-features marketing analytics platform like Google Analytics or Matomo.
+
+### Benefits of Ackee?
 
 - Self-hosted
-- Written in Node.js
-- Lightweight and minimal user interface
+- Lightweight and easy to install
+- Modern and fast architecture
+- Beautiful and focused interface
 - No unique user tracking and no cookies
+- Fully documented API
 
 ### How does it work?
 
