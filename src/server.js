@@ -3,6 +3,8 @@
 const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
+const microCors = require('micro-cors')
+const cors = microCors()
 
 const signale = require('./utils/signale')
 const pipe = require('./utils/pipe')
@@ -17,32 +19,22 @@ const views = require('./routes/views')
 const referrers = require('./routes/referrers')
 
 const catchError = (fn) => async (req, res) => {
-
 	try {
-
 		return await fn(req, res)
-
 	} catch (err) {
-
 		signale.fatal(err)
-
 		if (err.statusCode != null) send(res, err.statusCode, err.message)
 		else send(res, 500, err.message)
-
 	}
-
 }
 
 const notFound = async () => {
-
 	throw createError(404, 'Not found')
-
 }
 
 module.exports = micro(
 	catchError(
-		router(
-
+		cors(router(
 			get('/', ui.index),
 			get('/index.html', ui.index),
 			get('/index.css', ui.styles),
@@ -71,6 +63,6 @@ module.exports = micro(
 			patch('/*', notFound),
 			del('/*', notFound)
 
-		)
+		))
 	)
 )
