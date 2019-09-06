@@ -1,4 +1,6 @@
-export default (body, styles, scripts) => `
+'use strict'
+
+module.exports = (body, styles, scripts) => `
 	<!doctype html>
 	<html lang="en">
 		<head>
