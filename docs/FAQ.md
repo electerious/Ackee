@@ -27,16 +27,7 @@ Ackee only works with one user and it's not planned to add support for multiple 
 
 ## Definitions
 
-### Views > Total views
-
-The total amount of page views. Each visit or reload of a page will increase this value.
-
-Examples:
-
-- User views three pages of a domain => The count increases by three
-- User reloads the same page two times => The count increases by three (initial visit + first reload + second reload)
-
-### Views > Unique views
+### Views > Unique site views
 
 The unique amount of site views. Each user increases this value when visiting a domain for the first time a day.
 
@@ -45,6 +36,24 @@ Examples:
 - User visits three pages of a domain => The count increases by one
 - The same user visits your page at the end of the day => The count won't increase because the user is a returning user
 - The same user visits two pages a on the next day => The count increases by one because new day = new user
+
+### Views > Total page views
+
+The total amount of page views. Each visit or reload of a page will increase this value.
+
+Examples:
+
+- User views three pages of a domain => The count increases by three
+- User reloads the same page two times => The count increases by three (initial visit + first reload + second reload)
+
+### Views > Views per page
+
+The 25 pages of a domain with the most views. Each visit or reload of a page will increase this value. The views aren't unique, because Ackee can't track returning users for individual pages.
+
+Examples:
+
+- User visits three pages of a domain => The count of each page increases by one
+- User reloads the same page two times => The count of the page increases by three (initial visit + first reload + second reload)
 
 ### Referrers > Top referrers
 

@@ -1,4 +1,6 @@
-.iconList {
+.itemList {
+
+	$textAdjustment: 2px;
 
 	position: relative;
 
@@ -30,11 +32,7 @@
 	}
 
 	&__row {
-		display: grid;
-		grid-auto-flow: column;
-		justify-content: flex-start;
-		align-items: center;
-		margin: 0;
+		display: block;
 		padding: $gutter/2 0;
 		color: currentColor;
 		font-size: .9em;
@@ -51,20 +49,53 @@
 		}
 	}
 
+	&__data {
+		position: relative;
+		display: grid;
+		grid-auto-flow: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	&__bar {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: var(--width);
+		min-width: $faviconSize;
+		height: 100%;
+		border-radius: 100px;
+		background: $dimmed;
+	}
+
 	&__hostname {
 		margin-left: $gutter;
+		margin-top: $textAdjustment;
 	}
 
 	&__pathname {
 		opacity: 0;
+		margin-top: $textAdjustment;
 		transition: opacity .3s ease;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
+
+		&.visible {
+			opacity: 1;
+		}
 	}
 
-	&__row:hover &__pathname {
+	&__row:hover &__pathname:not(.visible) {
 		opacity: .6;
+	}
+
+	&__text {
+		margin-left: $gutter;
+		margin-top: $textAdjustment;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
 }
