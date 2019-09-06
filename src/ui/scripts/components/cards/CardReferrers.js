@@ -17,7 +17,7 @@ const textLabel = (item) => {
 
 }
 
-const CardViews = (props) => {
+const CardReferrers = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState(undefined)
@@ -65,10 +65,10 @@ const CardViews = (props) => {
 
 }
 
-CardViews.propTypes = {
+CardReferrers.propTypes = {
 	headline: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 
-export default CardViews
+export default CardReferrers
