@@ -27,16 +27,13 @@ const get = async (req) => {
 	const { domainId } = req.params
 	const { sorting } = req.query
 
-	const isKnownSorting = [
-		REFERRERS_SORTING_TOP,
-		REFERRERS_SORTING_RECENT
-	].includes(sorting) === true
-
-	if (isKnownSorting === false) throw createError(400, 'Unknown sorting')
-
 	const entries = await referrers.get(domainId, sorting)
 
-	return responses(entries)
+	switch (sorting) {
+		case REFERRERS_SORTING_TOP: return responses(entries)
+		case REFERRERS_SORTING_RECENT: return responses(entries)
+		default: throw createError(400, 'Unknown sorting')
+	}
 
 }
 
