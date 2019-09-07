@@ -123,4 +123,5 @@ NODE_ENV=development
 ```
 
 ### More
-Review all the documentation at [the /docs folder](docs/)
+
+More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
