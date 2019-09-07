@@ -121,3 +121,7 @@ Set the environment to `development` to see additional details in the console an
 ```
 NODE_ENV=development
 ```
+
+### More
+
+More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
