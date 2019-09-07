@@ -20,11 +20,11 @@ const add = async (req, res) => {
 	if (username == null) throw createError(400, 'Username missing')
 	if (password == null) throw createError(400, 'Password missing')
 
-	if (process.env.USERNAME == null) throw createError(500, 'Ackee username missing in environment')
-	if (process.env.PASSWORD == null) throw createError(500, 'Ackee password missing in environment')
+	if (process.env.ACKEE_USERNAME == null) throw createError(500, 'Ackee username missing in environment')
+	if (process.env.ACKEE_PASSWORD == null) throw createError(500, 'Ackee password missing in environment')
 
-	if (username !== process.env.USERNAME) throw createError(400, 'Username or password incorrect')
-	if (password !== process.env.PASSWORD) throw createError(400, 'Username or password incorrect')
+	if (username !== process.env.ACKEE_USERNAME) throw createError(400, 'Username or password incorrect')
+	if (password !== process.env.ACKEE_PASSWORD) throw createError(400, 'Username or password incorrect')
 
 	const entry = await tokens.add()
 

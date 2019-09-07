@@ -192,8 +192,8 @@ const addToken = async (url) => {
 	const response = await fetch(`${ url }/tokens`, {
 		method: 'post',
 		body: JSON.stringify({
-			username: process.env.USERNAME,
-			password: process.env.PASSWORD
+			username: process.env.ACKEE_USERNAME,
+			password: process.env.ACKEE_PASSWORD
 		})
 	})
 

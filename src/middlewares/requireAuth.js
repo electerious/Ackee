@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 		throw createError(400, 'Token invalid')
 	}
 
-	const valid = ttl(entry.updated, process.env.TTL)
+	const valid = ttl(entry.updated, process.env.ACKEE_TTL)
 
 	// Token too old
 	if (valid === false) {
