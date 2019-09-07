@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - "Views per page" shows you the top 25 pages of a domain with the most views
 - More documentation and FAQ
+- Comparison bar behind items in the referrer list
 
 ### Changed
 
