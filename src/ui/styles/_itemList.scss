@@ -66,6 +66,7 @@
 		height: 100%;
 		border-radius: 100px;
 		background: $dimmed;
+		pointer-events: none;
 	}
 
 	&__hostname {
