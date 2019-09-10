@@ -1,8 +1,6 @@
 import { createElement as h, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import sumByProp from '../../utils/sumByProp'
-
 const Row = (props) => {
 
 	return (
@@ -12,7 +10,6 @@ const Row = (props) => {
 				href: props.url.href,
 				target: '_blank'
 			},
-				h('div', { className: 'gridList__bar', style: { '--width': `${ props.barWidth }%` } }),
 				h('div', { className: 'color-main' }, `${ props.count }x`)
 			),
 			h('a', {
@@ -29,8 +26,6 @@ const Row = (props) => {
 
 const PresentationCounterList = (props) => {
 
-	const totalCount = props.items.reduce(sumByProp('count'), 0)
-	const proportionalWidth = ({ count }) => (count / totalCount) * 100
 
 	return (
 		h('div', { className: 'gridList' },
@@ -39,7 +34,6 @@ const PresentationCounterList = (props) => {
 					props.items.map((item, index) => (
 						h(Row, {
 							key: item.url.href + index,
-							barWidth: proportionalWidth(item),
 							...item
 						})
 					))

@@ -1,5 +1,7 @@
 .gridList {
 
+	$textAdjustment: 2px;
+
 	position: relative;
 
 	&::before,
@@ -39,7 +41,7 @@
 	&__column {
 		display: flex;
 		align-items: center;
-		padding-top: 2px;
+		padding-top: $textAdjustment;
 		border-bottom: 1px solid $dimmed;
 		color: currentColor;
 		text-decoration: none;
@@ -47,7 +49,7 @@
 		overflow: hidden;
 
 		&--leading {
-			padding: 0 $gutter;
+			padding-right: $gutter;
 		}
 
 		&:nth-last-child(2),
@@ -59,19 +61,6 @@
 	&__column:hover,
 	&__column--leading:hover + &__column {
 		color: $white;
-	}
-
-	&__bar {
-		position: absolute;
-		left: 0;
-		margin-top: -1px;
-		width: var(--width);
-		// Value that looks good with a one digit number
-		min-width: 52px;
-		height: $faviconSize;
-		border-radius: 100px;
-		background: $dimmed;
-		pointer-events: none;
 	}
 
 	&__truncated {
