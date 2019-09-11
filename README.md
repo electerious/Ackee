@@ -86,7 +86,7 @@ The following environment variables are used by Ackee. You can also create a [`.
 MongoDB connection URI. See the [MongoDB connection string spec](https://docs.mongodb.com/manual/reference/connection-string/) for more detail.
 
 ```
-MONGODB=mongodb://localhost:27017/ackee
+ACKEE_MONGODB=mongodb://localhost:27017/ackee
 ```
 
 #### Port
@@ -94,7 +94,7 @@ MONGODB=mongodb://localhost:27017/ackee
 The port Ackee should listen on. Defaults to `3000`.
 
 ```
-PORT=3000
+ACKEE_PORT=3000
 ```
 
 #### Username and password
@@ -102,8 +102,8 @@ PORT=3000
 Username and password. Both are required to generate a new token.
 
 ```
-USERNAME=username
-PASSWORD=password
+ACKEE_USERNAME=username
+ACKEE_PASSWORD=password
 ```
 
 #### TTL
@@ -111,7 +111,7 @@ PASSWORD=password
 Specifies how long a generated token is valid. Defaults to `3600000` (1 day).
 
 ```
-TTL=3600000
+ACKEE_TTL=3600000
 ```
 
 #### Environment

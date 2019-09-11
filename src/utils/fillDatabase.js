@@ -10,13 +10,13 @@ const randomItem = require('./randomItem')
 const userAgents = Array(200).fill().map((_, index) => index)
 
 const weekdayDuds = [
-	[ null, null, null, null ], // Sunday
+	[ null, null, null, null, null, null, null, null ], // Sunday
 	[ null, null ], // Monday
 	[ null ], // Tuesday
-	[ null ], // Wednesday
+	[ null, null ], // Wednesday
 	[ null ], // Thursday
-	[ null, null ], // Friday
-	[ null, null, null ] // Saturday
+	[ null, null, null, null ], // Friday
+	[ null, null, null, null, null, null ] // Saturday
 ]
 
 const referrers = [
@@ -30,6 +30,7 @@ const referrers = [
 	'https://github.com/electerious',
 	'https://facebook.com/AppsLaudable',
 	'https://twitter.com/electerious',
+	'https://producthunt.com',
 	'https://google.com',
 	'https://bing.com'
 ]
@@ -191,8 +192,8 @@ const addToken = async (url) => {
 	const response = await fetch(`${ url }/tokens`, {
 		method: 'post',
 		body: JSON.stringify({
-			username: process.env.USERNAME,
-			password: process.env.PASSWORD
+			username: process.env.ACKEE_USERNAME,
+			password: process.env.ACKEE_PASSWORD
 		})
 	})
 

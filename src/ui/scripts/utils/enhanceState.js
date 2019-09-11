@@ -1,26 +1,4 @@
-import mergeViews from './mergeViews'
-import enhanceViews from './enhanceViews'
 import isDefined from './isDefined'
-
-const mergedViews = (domains, views) => {
-
-	// Enhance all view for all domains
-	const enhancedViews = domains.value.map((domain) => {
-
-		const view = views.value[domain.data.id]
-		const exists = view != null
-
-		return exists === true ? enhanceViews(view.value, 14) : undefined
-
-	})
-
-	// Remove views of domains that are still loading
-	const filteredViews = enhancedViews.filter(isDefined)
-
-	// Merge all views to one array of views
-	return mergeViews(filteredViews)
-
-}
 
 export default (state) => {
 
@@ -40,10 +18,7 @@ export default (state) => {
 
 	return Object.assign({}, state, {
 		fetching,
-		errors,
-		merged: {
-			views: mergedViews(state.domains, state.views)
-		}
+		errors
 	})
 
 }
