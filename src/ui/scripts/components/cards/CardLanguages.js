@@ -3,26 +3,28 @@ import PropTypes from 'prop-types'
 
 import Headline from '../Headline'
 import Text from '../Text'
-import PresentationLinkedCounterList from '../presentations/PresentationLinkedCounterList'
+import PresentationCounterList from '../presentations/PresentationCounterList'
+import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 
-const CardPageViews = (props) => {
+const CardLanguages = (props) => {
 
 	const presentation = (() => {
 
 		if (props.loading === true) return h(PresentationEmptyState, {
 			icon: ICON_LOADING
-		}, 'Loading pages')
+		}, 'Loading languages')
 
 		const hasItems = props.items.length > 0
+		const hasCount = props.items.every((item) => item.count != null)
 
-		if (hasItems === true) return h(PresentationLinkedCounterList, {
+		if (hasItems === true) return h(hasCount === true ? PresentationCounterList : PresentationList, {
 			items: props.items
 		})
 
 		return h(PresentationEmptyState, {
 			icon: ICON_WARNING
-		}, 'No pages')
+		}, 'No languages')
 
 	})()
 
@@ -46,10 +48,10 @@ const CardPageViews = (props) => {
 
 }
 
-CardPageViews.propTypes = {
+CardLanguages.propTypes = {
 	headline: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 
-export default CardPageViews
+export default CardLanguages

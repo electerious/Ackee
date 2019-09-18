@@ -6,6 +6,7 @@ import route from './route'
 import domains from './domains'
 import views from './views'
 import referrers from './referrers'
+import languages from './languages'
 
 export default combineReducers({
 	modals,
@@ -13,5 +14,6 @@ export default combineReducers({
 	route,
 	domains,
 	views,
-	referrers
+	referrers,
+	languages
 })

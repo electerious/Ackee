@@ -6,11 +6,6 @@ const Row = (props) => {
 	return (
 		h(Fragment, {},
 			h('div', {
-				className: 'gridList__column gridList__column--leading'
-			},
-				h('div', { className: 'color-main' }, `${ props.count }x`)
-			),
-			h('div', {
 				className: 'gridList__column'
 			},
 				h('div', { className: 'gridList__truncated' }, props.text)
@@ -20,12 +15,12 @@ const Row = (props) => {
 
 }
 
-const PresentationCounterList = (props) => {
+const PresentationList = (props) => {
 
 	return (
 		h('div', { className: 'gridList' },
 			h('div', { className: 'gridList__inner' },
-				h('div', { className: 'gridList__grid gridList__grid--two' },
+				h('div', { className: 'gridList__grid gridList__grid--one' },
 					props.items.map((item, index) => (
 						h(Row, {
 							key: item.text + index,
@@ -39,8 +34,8 @@ const PresentationCounterList = (props) => {
 
 }
 
-PresentationCounterList.propTypes = {
+PresentationList.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default PresentationCounterList
+export default PresentationList

@@ -5,22 +5,26 @@ const Row = (props) => {
 
 	return (
 		h(Fragment, {},
-			h('div', {
-				className: 'gridList__column gridList__column--leading'
+			h('a', {
+				className: 'gridList__column gridList__column--leading',
+				href: props.url.href,
+				target: '_blank'
 			},
 				h('div', { className: 'color-main' }, `${ props.count }x`)
 			),
-			h('div', {
-				className: 'gridList__column'
+			h('a', {
+				className: 'gridList__column',
+				href: props.url.href,
+				target: '_blank'
 			},
-				h('div', { className: 'gridList__truncated' }, props.text)
+				h('div', { className: 'gridList__truncated' }, props.url.href)
 			)
 		)
 	)
 
 }
 
-const PresentationCounterList = (props) => {
+const PresentationLinkedCounterList = (props) => {
 
 	return (
 		h('div', { className: 'gridList' },
@@ -28,7 +32,7 @@ const PresentationCounterList = (props) => {
 				h('div', { className: 'gridList__grid gridList__grid--two' },
 					props.items.map((item, index) => (
 						h(Row, {
-							key: item.text + index,
+							key: item.url.href + index,
 							...item
 						})
 					))
@@ -39,8 +43,8 @@ const PresentationCounterList = (props) => {
 
 }
 
-PresentationCounterList.propTypes = {
+PresentationLinkedCounterList.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default PresentationCounterList
+export default PresentationLinkedCounterList
