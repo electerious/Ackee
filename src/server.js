@@ -24,10 +24,17 @@ const catchError = (fn) => async (req, res) => {
 
 	} catch (err) {
 
-		signale.fatal(err)
+		const isUnknownError = err.statusCode == null
+		const hasOriginalError = err.originalError != null
 
-		if (err.statusCode != null) send(res, err.statusCode, err.message)
-		else send(res, 500, err.message)
+		// Only log the full error stack when the error isn't a known API response
+		if (isUnknownError === true) {
+			signale.fatal(err)
+			return send(res, 500, err.message)
+		}
+
+		signale.warn(hasOriginalError === true ? err.originalError.message : err.message)
+		send(res, err.statusCode, err.message)
 
 	}
 
