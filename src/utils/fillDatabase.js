@@ -51,7 +51,9 @@ const langauges = [
 	'en',
 	'de',
 	'fr',
-	'ni'
+	'ar',
+	'es',
+	'ja'
 ]
 
 const resolutions = [
