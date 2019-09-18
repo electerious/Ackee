@@ -1,8 +1,8 @@
 'use strict'
 
 const { send, json, createError } = require('micro')
-const normalizeUrl = require('normalize-url')
 
+const normalizeUrl = require('../utils/normalizeUrl')
 const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
 const domains = require('../database/domains')
