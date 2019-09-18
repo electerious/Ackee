@@ -74,6 +74,6 @@ Examples:
 
 The top 25 pages from which your visitors have come in the last 7 days. Sorted by popularity.
 
-### Referrers > Top referrers
+### Referrers > Recent referrers
 
 The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
