@@ -127,7 +127,7 @@ const update = async (req) => {
 
 	}
 
-	if (entry == null) throw createError(404, 'Unknown record', new Error(`Unknown record id \`${ recordId }\``))
+	if (entry == null) throw createError(404, 'Unknown record')
 
 	return response(entry)
 
