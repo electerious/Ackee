@@ -40,9 +40,11 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
-const notFound = async () => {
+const notFound = async (req) => {
 
-	throw createError(404, 'Not found')
+	const err = new Error(`\`${ req.url }\` not found`)
+
+	throw createError(404, 'Not found', err)
 
 }
 
