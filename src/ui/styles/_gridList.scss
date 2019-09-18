@@ -58,8 +58,8 @@
 		}
 	}
 
-	&__column:hover,
-	&__column--leading:hover + &__column {
+	&__column[href]:hover,
+	&__column--leading[href]:hover + &__column {
 		color: $white;
 	}
 
