@@ -77,3 +77,9 @@ The top 25 pages from which your visitors have come in the last 7 days. Sorted b
 ### Referrers > Recent referrers
 
 The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
+
+### Languages
+
+The top 25 user languages of the last 7 days. Sorted by popularity.
+
+The user language is the language of the user's browser.
