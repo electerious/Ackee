@@ -32,6 +32,44 @@ const response = (entry) => ({
 	}
 })
 
+const normalizeSiteLocation = (siteLocation) => {
+
+	if (siteLocation == null) {
+
+		// Pre-validate siteLocation and imitate MongoDB error
+		throw createError(400, `Path \`siteLocation\` is required`)
+
+	}
+
+	try {
+
+		return normalizeUrl(siteLocation)
+
+	} catch (err) {
+
+		throw createError(400, `Failed to normalize \`siteLocation\``, err)
+
+	}
+
+}
+
+const normalizeSiteReferrer = (siteReferrer) => {
+
+	// The siteReferrer is optional
+	if (siteReferrer == null) return siteReferrer
+
+	try {
+
+		return normalizeUrl(siteReferrer)
+
+	} catch (err) {
+
+		throw createError(400, `Failed to normalize \`siteReferrer\``, err)
+
+	}
+
+}
+
 const add = async (req, res) => {
 
 	const { domainId } = req.params
@@ -42,22 +80,8 @@ const add = async (req, res) => {
 
 	if (domain == null) throw createError(404, 'Unknown domain')
 
-	if (data.siteLocation == null) {
-
-		// Pre-validate siteLocation and imitate MongoDB error
-		throw createError(400, `Path \`siteLocation\` is required`)
-
-	}
-
-	try {
-
-		data.siteLocation = normalizeUrl(data.siteLocation)
-
-	} catch (err) {
-
-		throw createError(400, `Failed to normalize \`siteLocation\``, err)
-
-	}
+	data.siteLocation = normalizeSiteLocation(data.siteLocation)
+	data.siteReferrer = normalizeSiteReferrer(data.siteReferrer)
 
 	let entry
 
