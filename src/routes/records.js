@@ -45,7 +45,7 @@ const add = async (req, res) => {
 	if (data.siteLocation == null) {
 
 		// Pre-validate siteLocation and imitate MongoDB error
-		throw createError(400, `Path \`siteLocation\` is required.`)
+		throw createError(400, `Path \`siteLocation\` is required`)
 
 	}
 
