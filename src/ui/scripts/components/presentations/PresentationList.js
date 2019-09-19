@@ -1,14 +1,14 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 const Row = (props) => {
 
 	return (
-		h(Fragment, {},
-			h('div', {
-				className: 'gridList__column'
-			},
-				h('div', { className: 'gridList__truncated' }, props.text)
+		h('div', {
+			className: 'flexList__row'
+		},
+			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
+				h('span', { className: 'flexList__truncated' }, props.text)
 			)
 		)
 	)
@@ -18,16 +18,14 @@ const Row = (props) => {
 const PresentationList = (props) => {
 
 	return (
-		h('div', { className: 'gridList' },
-			h('div', { className: 'gridList__inner' },
-				h('div', { className: 'gridList__grid gridList__grid--one' },
-					props.items.map((item, index) => (
-						h(Row, {
-							key: item.text + index,
-							...item
-						})
-					))
-				)
+		h('div', { className: 'flexList' },
+			h('div', { className: 'flexList__inner' },
+				props.items.map((item, index) => (
+					h(Row, {
+						key: item.text + index,
+						...item
+					})
+				))
 			)
 		)
 	)

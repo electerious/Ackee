@@ -1,6 +1,6 @@
 .flexList {
 
-	$textAdjustment: 2px;
+	$textAdjustment: 3px;
 
 	position: relative;
 
@@ -12,6 +12,7 @@
 		right: 0;
 		height: $gutter/2;
 		pointer-events: none;
+		z-index: 1;
 	}
 
 	&::before {
@@ -32,71 +33,82 @@
 	}
 
 	&__row {
-		display: block;
-		padding: $gutter/2 0;
-		color: currentColor;
-		font-size: .9em;
-		text-decoration: none;
+		position: relative;
+		display: flex;
+		align-items: center;
+		height: calc(#{ $faviconSize } + #{ $gutter });
 		border-bottom: 1px solid $dimmed;
-		transition: color .3s ease;
+		font-size: .9em;
 
 		&:last-child {
 			border-bottom: none;
 		}
 
-		&:hover {
+		&[href] {
+			color: currentColor;
+			text-decoration: none;
+			transition: color .3s ease;
+		}
+
+		&[href]:hover {
 			color: $white;
 		}
 	}
 
-	&__data {
-		position: relative;
+	&__column {
 		display: grid;
 		grid-auto-flow: column;
-		justify-content: flex-start;
-		align-items: center;
+		width: var(--width);
+
+		&--spacing-left {
+			margin-left: $gutter;
+		}
+
+		&--spacing-right {
+			margin-right: $gutter;
+		}
+
+		&--text-adjustment {
+			margin-top: $textAdjustment;
+		}
 	}
 
 	&__bar {
 		position: absolute;
 		left: 0;
-		top: 0;
+		top: $gutter/2;
 		width: var(--width);
-		min-width: $faviconSize;
-		height: 100%;
+		height: $faviconSize;
 		border-radius: 100px;
 		background: $dimmed;
 		pointer-events: none;
+
+		&--favicon {
+			min-width: $faviconSize;
+		}
+
+		&--counter {
+			// A width that looks good with low number counters
+			min-width: 52px;
+		}
 	}
 
-	&__hostname {
-		margin-left: $gutter;
-		margin-top: $textAdjustment;
+	&__truncated {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
-	&__pathname {
+	&__obscured {
 		opacity: 0;
-		margin-top: $textAdjustment;
 		transition: opacity .3s ease;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
-
-		&.visible {
-			opacity: 1;
-		}
 	}
 
-	&__row:hover &__pathname:not(.visible) {
+	&__row:hover &__obscured {
 		opacity: .6;
-	}
-
-	&__text {
-		margin-left: $gutter;
-		margin-top: $textAdjustment;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
 	}
 
 }
