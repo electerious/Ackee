@@ -78,8 +78,12 @@ The top 25 pages from which your visitors have come in the last 7 days. Sorted b
 
 The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
 
-### Languages
+### Languages > Top languages
 
 The top 25 user languages of the last 7 days. Sorted by popularity.
 
 The user language is the language of the user's browser.
+
+### Languages > Recent languages
+
+The last 25 user languages from the last 7 days. Sorted by time.
