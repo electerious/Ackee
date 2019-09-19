@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Improved URL normalization for cleaner URLs in "Views per page" and "Referrers"
 - Improved logging of errors in the server log
 - Reset state after pressing "Reload Ackee" in the error overlay to recover from bugs caused by a faulty state
+- Comparison bars for "Views per page"
 
 ## [1.1.0] - 2019-09-11
 
