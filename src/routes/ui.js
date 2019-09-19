@@ -51,7 +51,7 @@ const scripts = async () => {
 	return js(filePath, {
 		optimize: isProductionEnv === true,
 		env: {
-			DEMO: isDemo === true ? 'true' : 'false',
+			ACKEE_DEMO: isDemo === true ? 'true' : 'false',
 			NODE_ENV: isProductionEnv === true ? 'production' : 'development'
 		},
 		babel

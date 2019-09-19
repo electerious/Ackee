@@ -9,11 +9,13 @@ import {
 } from '../actions'
 
 import {
-	VIEWS_TYPE_TOTAL
+	VIEWS_TYPE_UNIQUE
 } from '../../../constants/views'
 
+import isCriticViewTypeChange from '../utils/isCriticViewTypeChange'
+
 export const initialState = () => ({
-	type: VIEWS_TYPE_TOTAL,
+	type: VIEWS_TYPE_UNIQUE,
 	value: {}
 })
 
@@ -32,7 +34,11 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_VIEWS_TYPE:
-			draft.type = action.payload || initialState().type
+			// It's necessary to reset the state when the new type leads to a new data structure
+			const nextType = action.payload || initialState().type
+			const shouldResetState = isCriticViewTypeChange(draft.type, nextType)
+			if (shouldResetState === true) return { ...initialState(), type: nextType }
+			else draft.type = nextType
 			break
 		case SET_VIEWS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

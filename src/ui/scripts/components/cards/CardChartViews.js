@@ -8,7 +8,7 @@ import Headline from '../Headline'
 import Text from '../Text'
 import PresentationBarChart from '../presentations/PresentationBarChart'
 
-const CardViews = (props) => {
+const CardChartViews = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState(0)
@@ -44,10 +44,10 @@ const CardViews = (props) => {
 
 }
 
-CardViews.propTypes = {
+CardChartViews.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired
 }
 
-export default CardViews
+export default CardChartViews

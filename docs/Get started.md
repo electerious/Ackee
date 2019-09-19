@@ -23,8 +23,8 @@ Make sure to install and update all dependencies before you fork and setup Ackee
 Create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of this project to store all environment variables in one file.
 
 ```
-USERNAME=username
-PASSWORD=password
+ACKEE_USERNAME=username
+ACKEE_PASSWORD=password
 ```
 
 The [README](../README.md#Options) contains a detailed explanation of all available options, but only those two are required to run Ackee with the existing `docker-compose.yml`.
@@ -71,7 +71,7 @@ Explanation:
 #### 2. Run Ackee
 
 ```
-docker run -p 3000:3000 -e MONGODB='mongodb://mongo:27017/ackee' -e USERNAME='username' -e PASSWORD='password' --link mongo --name ackee electerious/ackee
+docker run -p 3000:3000 -e ACKEE_MONGODB='mongodb://mongo:27017/ackee' -e ACKEE_USERNAME='username' -e ACKEE_PASSWORD='password' --link mongo --name ackee electerious/ackee
 ```
 
 > 💡 Add the `-d` flag to the Docker command to run Ackee in the background.
@@ -99,9 +99,9 @@ Ackee requires a running MongoDB instance. Visit the [website of MongoDB](https:
 Configure Ackee using environment variables or create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
 
 ```
-MONGODB=mongodb://localhost:27017/ackee
-USERNAME=username
-PASSWORD=password
+ACKEE_MONGODB=mongodb://localhost:27017/ackee
+ACKEE_USERNAME=username
+ACKEE_PASSWORD=password
 ```
 
 The [README](../README.md#Options) contains a detailed explanation of all available options, but only those three are required to run Ackee.

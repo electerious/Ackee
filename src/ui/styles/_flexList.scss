@@ -1,0 +1,102 @@
+.flexList {
+
+	$textAdjustment: 2px;
+
+	position: relative;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: $gutter/2;
+		pointer-events: none;
+	}
+
+	&::before {
+		top: 0;
+		background: linear-gradient($card, rgba($card, 0));
+	}
+
+	&::after {
+		bottom: 0;
+		background: linear-gradient(rgba($card, 0), $card);
+	}
+
+	&__inner {
+		padding-top: $gutter;
+		height: $cardContentHeight;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	&__row {
+		display: block;
+		padding: $gutter/2 0;
+		color: currentColor;
+		font-size: .9em;
+		text-decoration: none;
+		border-bottom: 1px solid $dimmed;
+		transition: color .3s ease;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		&:hover {
+			color: $white;
+		}
+	}
+
+	&__data {
+		position: relative;
+		display: grid;
+		grid-auto-flow: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	&__bar {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: var(--width);
+		min-width: $faviconSize;
+		height: 100%;
+		border-radius: 100px;
+		background: $dimmed;
+		pointer-events: none;
+	}
+
+	&__hostname {
+		margin-left: $gutter;
+		margin-top: $textAdjustment;
+	}
+
+	&__pathname {
+		opacity: 0;
+		margin-top: $textAdjustment;
+		transition: opacity .3s ease;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+
+		&.visible {
+			opacity: 1;
+		}
+	}
+
+	&__row:hover &__pathname:not(.visible) {
+		opacity: .6;
+	}
+
+	&__text {
+		margin-left: $gutter;
+		margin-top: $textAdjustment;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+}

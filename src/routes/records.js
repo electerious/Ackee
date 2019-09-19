@@ -1,6 +1,7 @@
 'use strict'
 
 const { send, json, createError } = require('micro')
+const normalizeUrl = require('normalize-url')
 
 const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
@@ -40,6 +41,23 @@ const add = async (req, res) => {
 	const domain = await domains.get(domainId)
 
 	if (domain == null) throw createError(404, 'Unknown domain')
+
+	if (data.siteLocation == null) {
+
+		// Pre-validate siteLocation and imitate MongoDB error
+		throw createError(400, `Path \`siteLocation\` is required.`)
+
+	}
+
+	try {
+
+		data.siteLocation = normalizeUrl(data.siteLocation)
+
+	} catch (err) {
+
+		throw createError(400, `Failed to normalize \`siteLocation\``, err)
+
+	}
 
 	let entry
 

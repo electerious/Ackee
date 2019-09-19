@@ -1,6 +1,6 @@
 .spinner {
 
-	--size: 26px;
+	$size: 26px;
 
 	@keyframes spinner__rotate {
 		0% {
@@ -12,8 +12,8 @@
 	}
 
 	position: relative;
-	height: var(--size);
-	width: var(--size);
+	height: $size;
+	width: $size;
 
 	&__circle {
 		position: absolute;

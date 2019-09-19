@@ -1,6 +1,6 @@
 'use strict'
 
-const layout = require('./scripts/utils/layout')
+const layout = require('../utils/layout')
 
 module.exports = () => {
 
