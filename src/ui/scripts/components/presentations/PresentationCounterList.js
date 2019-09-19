@@ -11,7 +11,7 @@ const Row = (props) => {
 			className: 'flexList__row'
 		},
 			h('div', {
-				className: 'flexList__column flexList__column--text-adjustment flexList__column--spacing-left flexList__column--spacing-right',
+				className: 'flexList__column flexList__column--text-adjustment flexList__column--fixed-width flexList__column--spacing-left flexList__column--spacing-right',
 				style: { '--width': `${ props.counterWidth }px` }
 			},
 				h('div', { className: 'flexList__bar flexList__bar--counter', style: { '--width': `${ props.barWidth }%` } }),

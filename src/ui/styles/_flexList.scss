@@ -58,7 +58,11 @@
 	&__column {
 		display: grid;
 		grid-auto-flow: column;
-		width: var(--width);
+
+		&--fixed-width {
+			width: var(--width);
+			flex-shrink: 0;
+		}
 
 		&--spacing-left {
 			margin-left: $gutter;
