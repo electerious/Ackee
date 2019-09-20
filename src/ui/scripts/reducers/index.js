@@ -5,6 +5,7 @@ import token from './token'
 import route from './route'
 import domains from './domains'
 import views from './views'
+import pages from './pages'
 import referrers from './referrers'
 import languages from './languages'
 
@@ -14,6 +15,7 @@ export default combineReducers({
 	route,
 	domains,
 	views,
+	pages,
 	referrers,
 	languages
 })

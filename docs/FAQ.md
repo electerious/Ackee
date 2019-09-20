@@ -70,6 +70,10 @@ Examples:
 - User visits three pages of a domain => The count of each page increases by one
 - User reloads the same page two times => The count of the page increases by three (initial visit + first reload + second reload)
 
+### Pages > Recent pages
+
+The last 25 page visits of the last 7 days. Sorted by time.
+
 ### Referrers > Top referrers
 
 The top 25 pages from which your visitors have come in the last 7 days. Sorted by popularity.

@@ -14,6 +14,7 @@ import * as actions from './actions'
 import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialViewsState } from './reducers/views'
+import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
 import { initialState as initialLanguagesState } from './reducers/languages'
 
@@ -48,6 +49,10 @@ store.subscribe(() => {
 		views: {
 			...initialViewsState(),
 			type: currentState.views.type
+		},
+		pages: {
+			...initialPagesState(),
+			type: currentState.pages.type
 		},
 		referrers: {
 			...initialReferrersState(),

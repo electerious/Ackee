@@ -14,6 +14,7 @@ const tokens = require('./routes/tokens')
 const domains = require('./routes/domains')
 const records = require('./routes/records')
 const views = require('./routes/views')
+const pages = require('./routes/pages')
 const referrers = require('./routes/referrers')
 const languages = require('./routes/languages')
 
@@ -72,6 +73,8 @@ module.exports = micro(
 			patch('/domains/:domainId/records/:recordId', records.update),
 
 			get('/domains/:domainId/views', pipe(requireAuth, views.get)),
+
+			get('/domains/:domainId/pages', pipe(requireAuth, pages.get)),
 
 			get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
 
