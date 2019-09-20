@@ -13,9 +13,9 @@ const textLabel = (item) => {
 	const defaultLabel = 'Last 7 days'
 
 	if (item == null) return defaultLabel
-	if (item.date == null) return defaultLabel
+	if (item.date != null) return relativeDate(item.date)
 
-	return relativeDate(item.date)
+	return defaultLabel
 
 }
 

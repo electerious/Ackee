@@ -5,15 +5,17 @@ import Headline from '../Headline'
 import Text from '../Text'
 import PresentationIconList from '../presentations/PresentationIconList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
+import relativeDate from '../../utils/relativeDate'
 
 const textLabel = (item) => {
 
 	const defaultLabel = 'Last 7 days'
 
 	if (item == null) return defaultLabel
-	if (item.count == null) return defaultLabel
+	if (item.date != null) return relativeDate(item.date)
+	if (item.count != null) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
 
-	return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
+	return defaultLabel
 
 }
 
