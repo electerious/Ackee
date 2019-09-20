@@ -27,10 +27,10 @@ Status: 200 OK
 
 ```json
 {
-	"type": "chart_views",
+	"type": "views",
 	"data": [
 		{
-			"type": "chart_view",
+			"type": "view",
 			"data": {
 				"id": {
 					"day": 3,
@@ -68,10 +68,10 @@ Status: 200 OK
 
 ```json
 {
-	"type": "chart_views",
+	"type": "views",
 	"data": [
 		{
-			"type": "chart_view",
+			"type": "view",
 			"data": {
 				"id": {
 					"day": 3,

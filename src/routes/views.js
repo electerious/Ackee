@@ -10,7 +10,7 @@ const {
 } = require('../constants/views')
 
 const response = (entry) => ({
-	type: 'chart_view',
+	type: 'view',
 	data: {
 		id: {
 			day: entry._id.day,
@@ -22,7 +22,7 @@ const response = (entry) => ({
 })
 
 const responses = (entries) => ({
-	type: 'chart_views',
+	type: 'views',
 	data: entries.map(response)
 })
 
