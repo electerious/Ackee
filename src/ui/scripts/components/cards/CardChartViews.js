@@ -2,7 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import relativeDate from '../../utils/relativeDate'
+import relativeDays from '../../utils/relativeDays'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -31,7 +31,7 @@ const CardChartViews = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, relativeDate(active)),
+				}, relativeDays(active)),
 				h(PresentationBarChart, {
 					items: props.items,
 					active: active,
