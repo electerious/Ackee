@@ -13,7 +13,8 @@ const response = (entry) => ({
 	type: 'language',
 	data: {
 		id: entry._id,
-		count: entry.count
+		count: entry.count,
+		created: entry.created
 	}
 })
 

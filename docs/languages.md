@@ -69,7 +69,8 @@ Status: 200 OK
 		{
 			"type": "language",
 			"data": {
-				"id": "de"
+				"id": "de",
+				"created": "2019-09-19T15:54:00.020Z"
 			}
 		}
 	]
