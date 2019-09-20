@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Headline from '../Headline'
 import Text from '../Text'
-import PresentationLinkedCounterList from '../presentations/PresentationLinkedCounterList'
+import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
@@ -36,7 +36,7 @@ const CardPages = (props) => {
 		const hasItems = props.items.length > 0
 		const hasCount = props.items.every((item) => item.count != null)
 
-		if (hasItems === true && hasCount === true) return h(PresentationLinkedCounterList, {
+		if (hasItems === true && hasCount === true) return h(PresentationCounterList, {
 			items: props.items
 		})
 

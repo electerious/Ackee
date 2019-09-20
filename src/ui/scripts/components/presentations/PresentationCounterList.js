@@ -6,9 +6,15 @@ import maxByProp from '../../utils/maxByProp'
 
 const Row = (props) => {
 
+	const hasUrl = props.url != null
+
+	const rootType = hasUrl === true ? 'a' : 'div'
+	const rootProps = hasUrl === true ? { href: props.url.href, target: '_blank' } : {}
+
 	return (
-		h('div', {
-			className: 'flexList__row'
+		h(rootType, {
+			className: 'flexList__row',
+			...rootProps
 		},
 			h('div', {
 				className: 'flexList__column flexList__column--text-adjustment flexList__column--fixed-width flexList__column--spacing-left flexList__column--spacing-right',
@@ -52,6 +58,7 @@ const PresentationCounterList = (props) => {
 
 PresentationCounterList.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.shape({
+		url: PropTypes.object,
 		text: PropTypes.string.isRequired,
 		count: PropTypes.number.isRequired
 	})).isRequired
