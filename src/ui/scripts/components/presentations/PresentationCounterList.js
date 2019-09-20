@@ -51,7 +51,10 @@ const PresentationCounterList = (props) => {
 }
 
 PresentationCounterList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.object).isRequired
+	items: PropTypes.arrayOf(PropTypes.shape({
+		text: PropTypes.string.isRequired,
+		count: PropTypes.number.isRequired
+	})).isRequired
 }
 
 export default PresentationCounterList

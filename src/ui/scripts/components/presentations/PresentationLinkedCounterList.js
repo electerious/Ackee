@@ -53,7 +53,10 @@ const PresentationLinkedCounterList = (props) => {
 }
 
 PresentationLinkedCounterList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.object).isRequired
+	items: PropTypes.arrayOf(PropTypes.shape({
+		url: PropTypes.object.isRequired,
+		count: PropTypes.number.isRequired
+	})).isRequired
 }
 
 export default PresentationLinkedCounterList
