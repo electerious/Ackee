@@ -1,4 +1,4 @@
-import enhanceChartViews from './enhanceChartViews'
+import enhanceViews from './enhanceViews'
 import isDefined from './isDefined'
 
 // Turns the chart views of multiple domains into one array of views
@@ -10,7 +10,7 @@ export default (domains, views) => {
 		const view = views.value[domain.data.id]
 		const exists = view != null
 
-		return exists === true ? enhanceChartViews(view.value, 14) : undefined
+		return exists === true ? enhanceViews(view.value, 14) : undefined
 
 	})
 

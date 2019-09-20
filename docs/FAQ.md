@@ -61,7 +61,7 @@ Examples:
 - User views three pages of a domain => The count increases by three
 - User reloads the same page two times => The count increases by three (initial visit + first reload + second reload)
 
-### Views > Views per page
+### Pages > Top pages
 
 The 25 pages of a domain with the most views. Each visit or reload of a page will increase this value. The views aren't unique, because Ackee can't track returning users for individual pages.
 

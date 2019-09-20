@@ -6,11 +6,10 @@ const views = require('../database/views')
 
 const {
 	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL,
-	VIEWS_TYPE_PAGES
+	VIEWS_TYPE_TOTAL
 } = require('../constants/views')
 
-const chartResponse = (entry) => ({
+const response = (entry) => ({
 	type: 'chart_view',
 	data: {
 		id: {
@@ -22,22 +21,9 @@ const chartResponse = (entry) => ({
 	}
 })
 
-const chartResponses = (entries) => ({
+const responses = (entries) => ({
 	type: 'chart_views',
-	data: entries.map(chartResponse)
-})
-
-const pageResponse = (entry) => ({
-	type: 'page_view',
-	data: {
-		id: entry._id,
-		count: entry.count
-	}
-})
-
-const pageResponses = (entries) => ({
-	type: 'page_views',
-	data: entries.map(pageResponse)
+	data: entries.map(response)
 })
 
 const get = async (req) => {
@@ -48,9 +34,8 @@ const get = async (req) => {
 	const entries = await views.get(domainId, type)
 
 	switch (type) {
-		case VIEWS_TYPE_UNIQUE: return chartResponses(entries)
-		case VIEWS_TYPE_TOTAL: return chartResponses(entries)
-		case VIEWS_TYPE_PAGES: return pageResponses(entries)
+		case VIEWS_TYPE_UNIQUE: return responses(entries)
+		case VIEWS_TYPE_TOTAL: return responses(entries)
 		default: throw createError(400, 'Unknown type')
 	}
 
