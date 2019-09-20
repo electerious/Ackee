@@ -36,7 +36,7 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		height: calc(#{ $faviconSize } + #{ $gutter });
+		height: calc(#{ $rowHeight } + #{ $gutter });
 		border-bottom: 1px solid $dimmed;
 		font-size: .9em;
 
@@ -84,13 +84,13 @@
 		left: 0;
 		top: $gutter/2;
 		width: var(--width);
-		height: $faviconSize;
+		height: $rowHeight;
 		border-radius: 100px;
 		background: $dimmed;
 		pointer-events: none;
 
 		&--favicon {
-			min-width: $faviconSize;
+			min-width: $rowHeight;
 		}
 
 		&--counter {
