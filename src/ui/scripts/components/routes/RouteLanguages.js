@@ -45,6 +45,7 @@ const RouteLanguages = (props) => {
 					h(CardLanguages, {
 						key: domain.data.id,
 						headline: domain.data.title,
+						sorting: props.languages.sorting,
 						loading: props.languages.value[domain.data.id] == null ? false : props.languages.value[domain.data.id].fetching,
 						items: props.languages.value[domain.data.id] == null ? [] : enhanceLanguages(props.languages.value[domain.data.id].value)
 					})

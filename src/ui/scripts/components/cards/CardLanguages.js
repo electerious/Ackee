@@ -1,6 +1,11 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import {
+	LANGUAGES_SORTING_TOP,
+	LANGUAGES_SORTING_RECENT
+} from '../../../../constants/languages'
+
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationCounterList from '../presentations/PresentationCounterList'
@@ -34,13 +39,12 @@ const CardLanguages = (props) => {
 		}, 'Loading languages')
 
 		const hasItems = props.items.length > 0
-		const hasCount = props.items.every((item) => item.count != null)
 
-		if (hasItems === true && hasCount === true) return h(PresentationCounterList, {
+		if (hasItems === true && props.sorting === LANGUAGES_SORTING_TOP) return h(PresentationCounterList, {
 			items: props.items
 		})
 
-		if (hasItems === true && hasCount === false) return h(PresentationList, {
+		if (hasItems === true && props.sorting === LANGUAGES_SORTING_RECENT) return h(PresentationList, {
 			items: props.items,
 			onEnter,
 			onLeave
@@ -74,6 +78,7 @@ const CardLanguages = (props) => {
 
 CardLanguages.propTypes = {
 	headline: PropTypes.string.isRequired,
+	sorting: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

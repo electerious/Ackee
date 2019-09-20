@@ -32,7 +32,9 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_LANGUAGES_SORTING:
+			// Reset value because a different sorting results in a different value strcuture
 			draft.sorting = action.payload || initialState().sorting
+			draft.value = initialState().value
 			break
 		case SET_LANGUAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

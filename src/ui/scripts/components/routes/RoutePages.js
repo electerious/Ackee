@@ -45,6 +45,7 @@ const RoutePages = (props) => {
 					h(CardPages, {
 						key: domain.data.id,
 						headline: domain.data.title,
+						sorting: props.pages.sorting,
 						loading: props.pages.value[domain.data.id] == null ? false : props.pages.value[domain.data.id].fetching,
 						items: props.pages.value[domain.data.id] == null ? [] : enhancePages(props.pages.value[domain.data.id].value)
 					})
