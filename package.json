@@ -49,6 +49,7 @@
     "request-ip": "^2.1.3",
     "rosid-handler-js": "^12.2.0",
     "rosid-handler-sass": "^6.0.4",
+    "s-ago": "^2.1.0",
     "shortid": "^2.2.14",
     "signale": "^1.4.0",
     "uuid": "^3.3.2"

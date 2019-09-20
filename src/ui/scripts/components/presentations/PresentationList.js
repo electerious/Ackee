@@ -5,7 +5,9 @@ const Row = (props) => {
 
 	return (
 		h('div', {
-			className: 'flexList__row'
+			className: 'flexList__row flexList__row--has-hover',
+			onMouseEnter: props.onEnter,
+			onMouseLeave: props.onLeave
 		},
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', { className: 'flexList__truncated' }, props.text)
@@ -23,6 +25,8 @@ const PresentationList = (props) => {
 				props.items.map((item, index) => (
 					h(Row, {
 						key: item.text + index,
+						onEnter: () => props.onEnter(index),
+						onLeave: () => props.onLeave(index),
 						...item
 					})
 				))
@@ -33,7 +37,9 @@ const PresentationList = (props) => {
 }
 
 PresentationList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.object).isRequired
+	items: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onEnter: PropTypes.func.isRequired,
+	onLeave: PropTypes.func.isRequired
 }
 
 export default PresentationList

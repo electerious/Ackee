@@ -1,4 +1,4 @@
-import { createElement as h } from 'react'
+import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Headline from '../Headline'
@@ -6,8 +6,26 @@ import Text from '../Text'
 import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
+import relativeDate from '../../utils/relativeDate'
+
+const textLabel = (item) => {
+
+	const defaultLabel = 'Last 7 days'
+
+	if (item == null) return defaultLabel
+	if (item.date == null) return defaultLabel
+
+	return relativeDate(item.date)
+
+}
 
 const CardLanguages = (props) => {
+
+	// Index of the active element
+	const [ active, setActive ] = useState(undefined)
+
+	const onEnter = (index) => setActive(index)
+	const onLeave = () => setActive(undefined)
 
 	const presentation = (() => {
 
@@ -18,8 +36,14 @@ const CardLanguages = (props) => {
 		const hasItems = props.items.length > 0
 		const hasCount = props.items.every((item) => item.count != null)
 
-		if (hasItems === true) return h(hasCount === true ? PresentationCounterList : PresentationList, {
+		if (hasItems === true && hasCount === true) return h(PresentationCounterList, {
 			items: props.items
+		})
+
+		if (hasItems === true && hasCount === false) return h(PresentationList, {
+			items: props.items,
+			onEnter,
+			onLeave
 		})
 
 		return h(PresentationEmptyState, {
@@ -40,7 +64,7 @@ const CardLanguages = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, 'Last 7 days'),
+				}, textLabel(props.items[active])),
 				presentation
 			)
 		)

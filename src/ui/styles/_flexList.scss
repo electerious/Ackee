@@ -44,13 +44,15 @@
 			border-bottom: none;
 		}
 
-		&[href] {
+		&[href],
+		&--has-hover {
 			color: currentColor;
 			text-decoration: none;
 			transition: color .3s ease;
 		}
 
-		&[href]:hover {
+		&[href]:hover,
+		&--has-hover:hover {
 			color: $white;
 		}
 	}
