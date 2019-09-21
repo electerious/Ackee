@@ -10,6 +10,7 @@
 
 	@media (max-width: 800px) {
 		grid-template-columns: 1fr;
+		padding: $gutter*2 $gutter;
 	}
 
 }
