@@ -6,11 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
-### Changed
+### Added
 
 - Top and recent languages
-- Top and recent pages in a dedicated view
 - Comparison bars for "Views per page"
+
+### Changed
+
+- Top and recent pages in a dedicated view
 - Hover recent referrers to see the date
 - Improved URL normalization for cleaner URLs in "Views per page" and "Referrers"
 - Improved logging of errors in the server log
