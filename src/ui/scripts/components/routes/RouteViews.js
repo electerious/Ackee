@@ -2,64 +2,14 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import {
 	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL,
-	VIEWS_TYPE_PAGES
+	VIEWS_TYPE_TOTAL
 } from '../../../../constants/views'
 
-import enhanceChartViews from '../../utils/enhanceChartViews'
-import enhancePageViews from '../../utils/enhancePageViews'
+import enhanceViews from '../../utils/enhanceViews'
 import mergeChartViews from '../../utils/mergeChartViews'
 
-import CardChartViews from '../cards/CardChartViews'
-import CardPageViews from '../cards/CardPageViews'
+import CardViews from '../cards/CardViews'
 import Select from '../Select'
-
-const ChartViews = (props) => {
-
-	return (
-		h(Fragment, {},
-
-			h(CardChartViews, {
-				wide: true,
-				headline: 'Page Views',
-				items: mergeChartViews(props.domains, props.views)
-			}),
-
-			props.domains.value.map(
-				(domain) => (
-					h(CardChartViews, {
-						key: domain.data.id,
-						headline: domain.data.title,
-						items: props.views.value[domain.data.id] == null ? [] : enhanceChartViews(props.views.value[domain.data.id].value, 7)
-					})
-				)
-			)
-
-		)
-	)
-
-}
-
-const PageViews = (props) => {
-
-	return (
-		h(Fragment, {},
-
-			props.domains.value.map(
-				(domain) => (
-					h(CardPageViews, {
-						key: domain.data.id,
-						headline: domain.data.title,
-						loading: props.views.value[domain.data.id] == null ? false : props.views.value[domain.data.id].fetching,
-						items: props.views.value[domain.data.id] == null ? [] : enhancePageViews(props.views.value[domain.data.id].value)
-					})
-				)
-			)
-
-		)
-	)
-
-}
 
 const RouteViews = (props) => {
 
@@ -77,15 +27,6 @@ const RouteViews = (props) => {
 
 	}, [ props.domains.value, props.views.type ])
 
-	const isChartViews = (
-		props.views.type === VIEWS_TYPE_UNIQUE ||
-		props.views.type === VIEWS_TYPE_TOTAL
-	)
-
-	const isPageViews = (
-		props.views.type === VIEWS_TYPE_PAGES
-	)
-
 	return (
 		h(Fragment, {},
 
@@ -95,14 +36,26 @@ const RouteViews = (props) => {
 					onChange: (e) => props.setViewsType(e.target.value),
 					items: [
 						{ value: VIEWS_TYPE_UNIQUE, label: 'Unique site views' },
-						{ value: VIEWS_TYPE_TOTAL, label: 'Total page views' },
-						{ value: VIEWS_TYPE_PAGES, label: 'Views per page' }
+						{ value: VIEWS_TYPE_TOTAL, label: 'Total page views' }
 					]
 				})
 			),
 
-			isChartViews === true && h(ChartViews, props),
-			isPageViews === true && h(PageViews, props)
+			h(CardViews, {
+				wide: true,
+				headline: 'Page Views',
+				items: mergeChartViews(props.domains, props.views)
+			}),
+
+			props.domains.value.map(
+				(domain) => (
+					h(CardViews, {
+						key: domain.data.id,
+						headline: domain.data.title,
+						items: props.views.value[domain.data.id] == null ? [] : enhanceViews(props.views.value[domain.data.id].value, 7)
+					})
+				)
+			)
 
 		)
 	)

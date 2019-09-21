@@ -63,7 +63,8 @@ const getRecent = async (id) => {
 		},
 		{
 			$project: {
-				_id: '$siteReferrer'
+				_id: '$siteReferrer',
+				created: '$created'
 			}
 		},
 		{

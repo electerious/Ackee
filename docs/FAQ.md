@@ -61,7 +61,7 @@ Examples:
 - User views three pages of a domain => The count increases by three
 - User reloads the same page two times => The count increases by three (initial visit + first reload + second reload)
 
-### Views > Views per page
+### Pages > Top pages
 
 The 25 pages of a domain with the most views. Each visit or reload of a page will increase this value. The views aren't unique, because Ackee can't track returning users for individual pages.
 
@@ -70,10 +70,24 @@ Examples:
 - User visits three pages of a domain => The count of each page increases by one
 - User reloads the same page two times => The count of the page increases by three (initial visit + first reload + second reload)
 
+### Pages > Recent pages
+
+The last 25 page visits of the last 7 days. Sorted by time.
+
 ### Referrers > Top referrers
 
 The top 25 pages from which your visitors have come in the last 7 days. Sorted by popularity.
 
-### Referrers > Top referrers
+### Referrers > Recent referrers
 
 The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
+
+### Languages > Top languages
+
+The top 25 user languages of the last 7 days. Sorted by popularity.
+
+The user language is the language of the user's browser.
+
+### Languages > Recent languages
+
+The last 25 user languages from the last 7 days. Sorted by time.

@@ -1,12 +1,10 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const dateWithOffset = require('../utils/dateWithOffset')
 
 const {
 	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL,
-	VIEWS_TYPE_PAGES
+	VIEWS_TYPE_TOTAL
 } = require('../constants/views')
 
 const getUnique = async (id) => {
@@ -93,43 +91,11 @@ const getTotal = async (id) => {
 
 }
 
-const getPages = async (id) => {
-
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				created: {
-					$gte: dateWithOffset(-7)
-				}
-			}
-		},
-		{
-			$group: {
-				_id: '$siteLocation',
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$sort: {
-				count: -1
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
-
-}
-
 const get = async (id, type) => {
 
 	switch (type) {
 		case VIEWS_TYPE_UNIQUE: return getUnique(id)
 		case VIEWS_TYPE_TOTAL: return getTotal(id)
-		case VIEWS_TYPE_PAGES: return getPages(id)
 	}
 
 }

@@ -13,7 +13,8 @@ const response = (entry) => ({
 	type: 'referrer',
 	data: {
 		id: entry._id,
-		count: entry.count
+		count: entry.count,
+		created: entry.created
 	}
 })
 

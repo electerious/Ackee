@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package'
 import formatErrors from '../../utils/formatErrors'
+import * as storage from '../../utils/storage'
 
 import Textarea from '../Textarea'
 import Spacer from '../Spacer'
@@ -12,7 +13,10 @@ import Message from '../Message'
 
 const OverlayFailure = (props) => {
 
-	const onClick = () => window.location.reload()
+	const onClick = () => {
+		storage.reset()
+		window.location.reload()
+	}
 
 	return (
 		h('div', { className: 'card card--overlay' },

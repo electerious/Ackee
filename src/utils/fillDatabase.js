@@ -19,6 +19,17 @@ const weekdayDuds = [
 	[ null, null, null, null, null, null ] // Saturday
 ]
 
+const siteLocations = [
+	'https://example.com',
+	'https://example.com/projects.html',
+	'https://example.com/about.html',
+	'https://example.com/faq.html',
+	'https://example.com/projects/ackee.html',
+	'https://example.com/projects/lychee.html',
+	'https://example.com/projects/malvid.html',
+	'https://example.com/projects/laudablesites.html'
+]
+
 const referrers = [
 	null,
 	'https://electerious.com',
@@ -40,7 +51,9 @@ const langauges = [
 	'en',
 	'de',
 	'fr',
-	'ni'
+	'ar',
+	'es',
+	'ja'
 ]
 
 const resolutions = [
@@ -160,11 +173,11 @@ const createRecord = () => {
 	const browser = randomItem(browsers)
 
 	const anonymousRecord = {
-		siteLocation: 'https://example.com'
+		siteLocation: randomItem(siteLocations)
 	}
 
 	const detailedRecord = {
-		siteLocation: 'https://example.com',
+		siteLocation: randomItem(siteLocations),
 		siteReferrer: randomItem(referrers),
 		siteLanguage: randomItem(langauges),
 		screenWidth: resolution.width,
