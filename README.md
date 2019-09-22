@@ -24,6 +24,7 @@ And configure Ackee and your server correctly…
 
 - […with environment variables](#options)
 - […with SSL and HTTPS enabled](docs/SSL%20and%20HTTPS.md)
+- […with CORS headers](docs/CORS%20headers.md)
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
