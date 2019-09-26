@@ -34,7 +34,7 @@ server {
 
     location / {
         add_header          Access-Control-Allow-Origin "*" always;
-        add_header          Access-Control-Allow-Methods "POST, PATCH, OPTIONS" always;
+        add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
         add_header          Access-Control-Allow-Headers "DNT, X-CustomHeader, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
@@ -106,7 +106,7 @@ server {
 
     location / {
         add_header          Access-Control-Allow-Origin "$cors_header" always;
-        add_header          Access-Control-Allow-Methods "POST, PATCH, OPTIONS" always;
+        add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
         add_header          Access-Control-Allow-Headers "DNT, X-CustomHeader, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;

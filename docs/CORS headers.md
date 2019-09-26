@@ -10,7 +10,7 @@ When a site wants to send data to a different domain it needs the permissions to
 
 ```
 Access-Control-Allow-Origin: https://example.com
-Access-Control-Allow-Methods: POST, PATCH, OPTIONS
+Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 Access-Control-Allow-Headers: DNT, X-CustomHeader, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type
 ```
 
@@ -30,10 +30,10 @@ The `Access-Control-Allow-Origin` header only allows one domain or a wildcard (`
 
 ### Methods
 
-[ackee-tracker](https://github.com/electerious/ackee-tracker) needs the permission to send POST, PATCH and OPTIONS requests to the server.
+[ackee-tracker](https://github.com/electerious/ackee-tracker) needs the permission to send GET, POST, PATCH and OPTIONS requests to the server.
 
 ```
-Access-Control-Allow-Methods: POST, PATCH, OPTIONS
+Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 ```
 
 ### Headers
