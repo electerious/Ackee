@@ -11,22 +11,21 @@ import ModalDomainAdd from './modals/ModalDomainAdd'
 
 const Message = (props) => {
 
-	const modals = Object.keys(props.modals.value).map((modalId) => {
+	const modals = Object.entries(props.modals.value).map(([ modalId, modalData ]) => {
 
-		const modal = props.modals.value[modalId]
 		const closeModal = props.removeModalsModal.bind(null, modalId)
 
 		return (
-			h(Modal, { key: modalId, visible: modal.visible },
-				modal.type === MODALS_DOMAIN_EDIT && h(ModalDomainEdit, {
-					id: modal.props.id,
-					title: modal.props.title,
+			h(Modal, { key: modalId, visible: modalData.visible },
+				modalData.type === MODALS_DOMAIN_EDIT && h(ModalDomainEdit, {
+					id: modalData.props.id,
+					title: modalData.props.title,
 					fetching: props.domains.fetching,
 					updateDomain: props.updateDomain.bind(null, props),
 					deleteDomain: props.deleteDomain.bind(null, props),
 					closeModal
 				}),
-				modal.type === MODALS_DOMAIN_ADD && h(ModalDomainAdd, {
+				modalData.type === MODALS_DOMAIN_ADD && h(ModalDomainAdd, {
 					fetching: props.domains.fetching,
 					addDomain: props.addDomain.bind(null, props),
 					closeModal
