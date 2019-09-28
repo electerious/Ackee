@@ -8,6 +8,7 @@ const server = require('./server')
 const signale = require('./utils/signale')
 const isDemo = require('./utils/isDemo')
 const fillDatabase = require('./utils/fillDatabase')
+const stripUrlAuth = require('./utils/stripUrlAuth')
 
 const port = process.env.ACKEE_PORT || 3000
 const dbUrl = process.env.ACKEE_MONGODB
@@ -23,7 +24,7 @@ if (dbUrl == null) {
 	process.exit(1)
 }
 
-signale.await(`Connecting to ${ dbUrl }`)
+signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
 mongoose.connect(dbUrl, {
 
@@ -34,7 +35,7 @@ mongoose.connect(dbUrl, {
 
 }).then(() => {
 
-	signale.success(`Connected to ${ dbUrl }`)
+	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
 	signale.start(`Starting the server`)
 
 	server.listen(port)
