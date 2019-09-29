@@ -8,6 +8,6 @@ test('return random integer', async (t) => {
 
 	const result = randomInt(0, 1000)
 
-	t.is(result, Number.isInteger(result))
+	t.true(Number.isInteger(result))
 
 })
