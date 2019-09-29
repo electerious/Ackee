@@ -41,5 +41,5 @@ Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 The `Access-Control-Allow-Headers` header is used in response to a preflight request to indicate which HTTP headers can be used when making the actual request.
 
 ```
-Access-Control-Allow-Headers: DNT, X-CustomHeader, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type
+Access-Control-Allow-Headers: Content-Type
 ```
