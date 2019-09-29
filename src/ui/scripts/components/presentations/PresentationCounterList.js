@@ -21,7 +21,7 @@ const Row = (props) => {
 				style: { '--width': `${ props.counterWidth }px` }
 			},
 				h('div', { className: 'flexList__bar flexList__bar--counter', style: { '--width': `${ props.barWidth }%` } }),
-				h('span', { className: 'color-main' }, `${ props.count }x`)
+				h('span', { className: 'color-primary' }, `${ props.count }x`)
 			),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', { className: 'flexList__truncated' }, props.text)
