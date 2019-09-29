@@ -7,6 +7,7 @@ import domains from './domains'
 import views from './views'
 import pages from './pages'
 import referrers from './referrers'
+import durations from './durations'
 import languages from './languages'
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
 	views,
 	pages,
 	referrers,
+	durations,
 	languages
 })

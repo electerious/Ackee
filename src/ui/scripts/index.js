@@ -16,6 +16,7 @@ import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialViewsState } from './reducers/views'
 import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
+import { initialState as initialDurationsState } from './reducers/durations'
 import { initialState as initialLanguagesState } from './reducers/languages'
 
 import Main from './components/Main'
@@ -57,6 +58,10 @@ store.subscribe(() => {
 		referrers: {
 			...initialReferrersState(),
 			sorting: currentState.referrers.sorting
+		},
+		durations: {
+			...initialDurationsState(),
+			sorting: currentState.durations.sorting
 		},
 		languages: {
 			...initialLanguagesState(),

@@ -1,0 +1,88 @@
+.valuesBar {
+
+	display: grid;
+	grid-template-columns: 3em auto;
+	grid-gap: $gutter/2;
+	padding-top: $gutter*1.5;
+	height: $cardContentHeight;
+
+	&__bar {
+		display: flex;
+		flex-direction: column;
+		background: $dimmed;
+		border-radius: $radius;
+	}
+
+	&__value {
+		position: relative;
+		flex-grow: 1;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: $primary;
+			border-radius: inherit;
+			opacity: var(--opacity);
+		}
+
+		&:hover {
+			box-shadow: 0 0 0 2px $card, 0 0 0 4px white;
+		}
+
+		&:first-child {
+			border-radius: $radius $radius 0 0;
+		}
+
+		&:last-child {
+			border-radius: 0 0 $radius $radius;
+		}
+	}
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__line {
+		position: relative;
+		width: 100%;
+		height: 1px;
+		background: $dimmed;
+	}
+
+	&__anchor {
+		position: absolute;
+		padding: $gutter/2 0;
+		font-size: .8em;
+		right: 0;
+
+		&--top {
+			bottom: 0;
+		}
+
+		&--bottom {
+			top: 0;
+		}
+	}
+
+	&__content {
+		margin-left: $gutter*1.5;
+	}
+
+	&__duration {
+		margin: 0;
+		font-size: 1.8em;
+		text-rendering: optimizeLegibility;
+		line-height: 1.1;
+	}
+
+	&__description {
+		margin: 0;
+	}
+
+}

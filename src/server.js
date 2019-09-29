@@ -17,6 +17,7 @@ const views = require('./routes/views')
 const pages = require('./routes/pages')
 const referrers = require('./routes/referrers')
 const languages = require('./routes/languages')
+const durations = require('./routes/durations')
 
 const catchError = (fn) => async (req, res) => {
 
@@ -79,6 +80,8 @@ module.exports = micro(
 			get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
 
 			get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
+
+			get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
 
 			get('/*', notFound),
 			post('/*', notFound),
