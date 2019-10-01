@@ -13,6 +13,7 @@ const response = (entry) => ({
 	type: 'duration',
 	data: {
 		id: entry._id,
+		average: entry.average,
 		count: entry.count
 	}
 })

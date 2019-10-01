@@ -26,6 +26,8 @@ const PresentationValuesBar = (props) => {
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive(undefined)
 
+	const averageDuration = props.items[0].average
+
 	const minDuration = props.items.reduce(minByProp('duration'), Number.MAX_SAFE_INTEGER)
 	const maxDuration = props.items.reduce(maxByProp('duration'), 0)
 
@@ -35,7 +37,7 @@ const PresentationValuesBar = (props) => {
 	const content = (() => {
 
 		if (active == null) return h('div', { className: 'valuesBar__content' },
-			h('p', { className: 'valuesBar__duration color-white' }, formatDuration(0)),
+			h('p', { className: 'valuesBar__duration color-white' }, formatDuration(averageDuration)),
 			h('p', { className: 'valuesBar__description' }, 'Average visit duration')
 		)
 

@@ -1,11 +1,46 @@
 'use strict'
 
 const Record = require('../schemas/Record')
+const dateWithOffset = require('../utils/dateWithOffset')
 
 const {
 	// DURATIONS_TYPE_UNIQUE,
 	DURATIONS_TYPE_TOTAL
 } = require('../constants/durations')
+
+const getAverage = async (id) => {
+
+	const entries = await Record.aggregate([
+		{
+			$match: {
+				domainId: id,
+				created: {
+					$gte: dateWithOffset(-7)
+				}
+			}
+		},
+		{
+			$group: {
+				_id: null,
+				average: {
+					$avg: {
+						$subtract: [ '$updated', '$created' ]
+					}
+				}
+			}
+		},
+		{
+			$project: {
+				average: {
+					$ceil: [ '$average' ]
+				}
+			}
+		}
+	])
+
+	return entries[0].average
+
+}
 
 // const getUnique = async (id) => {
 
@@ -54,16 +89,22 @@ const {
 const getTotal = async (id) => {
 
 	const precision = 15000
+	const limit = 21600000
+
+	const average = await getAverage(id)
 
 	return Record.aggregate([
 		{
 			$match: {
-				domainId: id
+				domainId: id,
+				created: {
+					$gte: dateWithOffset(-7)
+				}
 			}
 		},
 		{
-			$group: {
-				_id: {
+			$project: {
+				duration: {
 					$multiply: [
 						{
 							$ceil: [
@@ -79,10 +120,28 @@ const getTotal = async (id) => {
 						},
 						precision
 					]
+				}
+			}
+		},
+		{
+			$group: {
+				_id: {
+					$cond: {
+						if: {
+							$gte: [ '$duration', limit ]
+						},
+						then: limit,
+						else: '$duration'
+					}
 				},
 				count: {
 					$sum: 1
 				}
+			}
+		},
+		{
+			$addFields: {
+				average
 			}
 		},
 		{
