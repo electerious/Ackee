@@ -32,59 +32,61 @@ const OverlayLogin = (props) => {
 	const isFetching = props.token.fetching === true
 
 	return (
-		h('form', { className: 'card card--overlay', onSubmit },
-			h('div', { className: 'card__inner align-center' },
+		h('main', { className: 'overlay' },
+			h('form', { className: 'card card--overlay', onSubmit },
+				h('div', { className: 'card__inner align-center' },
 
-				h(Spacer, { size: 2.4 }),
+					h(Spacer, { size: 2.4 }),
 
-				h(Headline, {
-					type: 'h1',
-					className: 'color-white'
-				}, 'Ackee'),
-				h(Text, {}, 'Welcome back, sign in to continue.'),
+					h(Headline, {
+						type: 'h1',
+						className: 'color-white'
+					}, 'Ackee'),
+					h(Text, {}, 'Welcome back, sign in to continue.'),
 
-				h(Spacer, { size: 2.5 }),
+					h(Spacer, { size: 2.5 }),
 
-				hasError === true && h(Message, { status: 'error' }, props.token.error.message),
+					hasError === true && h(Message, { status: 'error' }, props.token.error.message),
 
-				h(Input, {
-					type: 'username',
-					required: true,
-					disabled: isFetching === true,
-					focused: true,
-					placeholder: 'Username',
-					value: inputs.username,
-					onChange: onChange('username')
-				}),
-				h(Input, {
-					type: 'password',
-					required: true,
-					disabled: isFetching === true,
-					placeholder: 'Password',
-					value: inputs.password,
-					onChange: onChange('password')
-				}),
+					h(Input, {
+						type: 'username',
+						required: true,
+						disabled: isFetching === true,
+						focused: true,
+						placeholder: 'Username',
+						value: inputs.username,
+						onChange: onChange('username')
+					}),
+					h(Input, {
+						type: 'password',
+						required: true,
+						disabled: isFetching === true,
+						placeholder: 'Password',
+						value: inputs.password,
+						onChange: onChange('password')
+					}),
 
-				h(Spacer, { size: 1 })
+					h(Spacer, { size: 1 })
 
-			),
-			h('div', { className: 'card__footer' },
+				),
+				h('div', { className: 'card__footer' },
 
-				h('a', {
-					className: 'card__button link',
-					href: homepage,
-					target: '_blank'
-				}, 'Help'),
+					h('a', {
+						className: 'card__button link',
+						href: homepage,
+						target: '_blank'
+					}, 'Help'),
 
-				h('div', {
-					className: 'card__separator'
-				}),
+					h('div', {
+						className: 'card__separator'
+					}),
 
-				h('button', {
-					className: 'card__button card__button--primary link color-white',
-					disabled: isFetching === true
-				}, isFetching === true ? h(Spinner) : 'Sign In →')
+					h('button', {
+						className: 'card__button card__button--primary link color-white',
+						disabled: isFetching === true
+					}, isFetching === true ? h(Spinner) : 'Sign In →')
 
+				)
 			)
 		)
 	)

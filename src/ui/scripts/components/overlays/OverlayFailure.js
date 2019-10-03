@@ -19,47 +19,49 @@ const OverlayFailure = (props) => {
 	}
 
 	return (
-		h('div', { className: 'card card--overlay' },
-			h('div', { className: 'card__inner align-center' },
+		h('main', { className: 'overlay' },
+			h('div', { className: 'card card--overlay' },
+				h('div', { className: 'card__inner align-center' },
 
-				h(Spacer, { size: 2.4 }),
+					h(Spacer, { size: 2.4 }),
 
-				h(Headline, {
-					type: 'h1',
-					className: 'color-white'
-				}, 'Oops'),
-				h(Text, {}, 'Something went wrong.'),
+					h(Headline, {
+						type: 'h1',
+						className: 'color-white'
+					}, 'Oops'),
+					h(Text, {}, 'Something went wrong.'),
 
-				h(Spacer, { size: 2.5 }),
+					h(Spacer, { size: 2.5 }),
 
-				h(Message, { status: 'error' }, `Please report this issue on GitHub if you can't resolve it by yourself.`),
+					h(Message, { status: 'error' }, `Please report this issue on GitHub if you can't resolve it by yourself.`),
 
-				h(Textarea, {
-					readOnly: true,
-					rows: 6,
-					value: formatErrors(props.errors)
-				}),
+					h(Textarea, {
+						readOnly: true,
+						rows: 6,
+						value: formatErrors(props.errors)
+					}),
 
-				h(Spacer, { size: 1 })
+					h(Spacer, { size: 1 })
 
-			),
-			h('div', { className: 'card__footer' },
+				),
+				h('div', { className: 'card__footer' },
 
-				h('a', {
-					className: 'card__button link',
-					href: homepage,
-					target: '_blank'
-				}, 'Help'),
+					h('a', {
+						className: 'card__button link',
+						href: homepage,
+						target: '_blank'
+					}, 'Help'),
 
-				h('div', {
-					className: 'card__separator'
-				}),
+					h('div', {
+						className: 'card__separator'
+					}),
 
-				h('button', {
-					className: 'card__button card__button--primary link color-white',
-					onClick
-				}, 'Reload Ackee')
+					h('button', {
+						className: 'card__button card__button--primary link color-white',
+						onClick
+					}, 'Reload Ackee')
 
+				)
 			)
 		)
 	)
