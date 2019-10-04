@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Fixed
 
 - Remove username and password before logging MongoDB connection URI (#50)
+- Horizontal scroll on pages with vertical scroll (#52)
 
 ## [1.2.0] - 2019-09-21
 
