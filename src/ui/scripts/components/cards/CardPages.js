@@ -27,10 +27,10 @@ const textLabel = (item) => {
 const CardPages = (props) => {
 
 	// Index of the active element
-	const [ active, setActive ] = useState(undefined)
+	const [ active, setActive ] = useState()
 
 	const onEnter = (index) => setActive(index)
-	const onLeave = () => setActive(undefined)
+	const onLeave = () => setActive()
 
 	const presentation = (() => {
 

@@ -27,7 +27,7 @@ const PresentationValuesBar = (props) => {
 	const [ active, setActive ] = useState()
 
 	const onEnter = (item) => setActive(item)
-	const onLeave = () => setActive(undefined)
+	const onLeave = () => setActive()
 
 	const averageDuration = props.items[0].average
 
