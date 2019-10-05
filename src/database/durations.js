@@ -4,12 +4,11 @@ const Record = require('../schemas/Record')
 const dateWithOffset = require('../utils/dateWithOffset')
 
 const {
+	DURATIONS_INTERVAL,
+	DURATIONS_LIMIT,
 	// DURATIONS_TYPE_UNIQUE,
 	DURATIONS_TYPE_TOTAL
 } = require('../constants/durations')
-
-const precision = 15000
-const limit = 3600000
 
 const getAverage = async (id) => {
 
@@ -28,7 +27,7 @@ const getAverage = async (id) => {
 					$gte: dateWithOffset(-7)
 				},
 				duration: {
-					$lt: limit
+					$lt: DURATIONS_LIMIT
 				}
 			}
 		},
@@ -124,11 +123,11 @@ const getTotal = async (id) => {
 						{
 							$ceil: [
 								{
-									$divide: [ '$duration', precision ]
+									$divide: [ '$duration', DURATIONS_INTERVAL ]
 								}
 							]
 						},
-						precision
+						DURATIONS_INTERVAL
 					]
 				}
 			}
@@ -138,9 +137,9 @@ const getTotal = async (id) => {
 				_id: {
 					$cond: {
 						if: {
-							$gte: [ '$unifiedDuration', limit ]
+							$gte: [ '$unifiedDuration', DURATIONS_LIMIT ]
 						},
-						then: limit,
+						then: DURATIONS_LIMIT,
 						else: '$unifiedDuration'
 					}
 				},

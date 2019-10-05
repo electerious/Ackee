@@ -1,6 +1,10 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import {
+	DURATIONS_LIMIT
+} from '../../../../constants/durations'
+
 import minByProp from '../../utils/minByProp'
 import maxByProp from '../../utils/maxByProp'
 import formatDuration from '../../utils/formatDuration'
@@ -20,10 +24,9 @@ const Value = (props) => {
 
 const PresentationValuesBar = (props) => {
 
-	// Index of the active element
-	const [ active, setActive ] = useState(undefined)
+	const [ active, setActive ] = useState()
 
-	const onEnter = (index) => setActive(index)
+	const onEnter = (item) => setActive(item)
 	const onLeave = () => setActive(undefined)
 
 	const averageDuration = props.items[0].average
@@ -31,13 +34,11 @@ const PresentationValuesBar = (props) => {
 	const minDuration = props.items.reduce(minByProp('duration'), Number.MAX_SAFE_INTEGER)
 	const maxDuration = props.items.reduce(maxByProp('duration'), 0)
 
+	const belowLimitItems = props.items.filter(({ duration }) => duration < DURATIONS_LIMIT)
+	const aboveLimitItems = props.items.filter(({ duration }) => duration >= DURATIONS_LIMIT)
+
 	const maxCount = props.items.reduce(maxByProp('count'), 0)
 	const proportionalOpacity = ({ count }) => (count / maxCount)
-
-	const limit = 3600000
-
-	const belowLimitItems = props.items.filter(({ duration }) => duration < limit)
-	const aboveLimitItems = props.items.filter(({ duration }) => duration >= limit)
 
 	const content = (() => {
 
@@ -46,11 +47,10 @@ const PresentationValuesBar = (props) => {
 			h('p', { className: 'valuesBar__description' }, 'Average visit duration')
 		)
 
-		const activeValue = props.items[active]
-		const isAboveLimit = activeValue.duration >= limit
+		const isAboveLimit = active.duration >= DURATIONS_LIMIT
 
-		const duration = isAboveLimit === true ? `> ${ formatDuration(limit) }` : formatDuration(activeValue.duration)
-		const description = `${ activeValue.count } total visits`
+		const duration = `${ isAboveLimit === true ? '> ' : '' }${ formatDuration(active.duration) }`
+		const description = `${ active.count } total visits`
 
 		return h('div', { className: 'valuesBar__content' },
 			h('p', { className: 'valuesBar__duration color-primary' }, duration),
@@ -67,8 +67,8 @@ const PresentationValuesBar = (props) => {
 						h(Value, {
 							key: String(item.duration) + index,
 							opacity: proportionalOpacity(item),
-							onEnter: () => onEnter(index),
-							onLeave: () => onLeave(index),
+							onEnter: () => onEnter(item),
+							onLeave: () => onLeave(item),
 							...item
 						})
 					))
@@ -91,10 +91,10 @@ const PresentationValuesBar = (props) => {
 				h('div', { className: 'valuesBar__bar' },
 					aboveLimitItems.map((item, index) => (
 						h(Value, {
-							key: String(item.duration) + belowLimitItems.length + index,
+							key: String(item.duration) + index,
 							opacity: proportionalOpacity(item),
-							onEnter: () => onEnter(belowLimitItems.length + index),
-							onLeave: () => onLeave(belowLimitItems.length + index),
+							onEnter: () => onEnter(item),
+							onLeave: () => onLeave(item),
 							...item
 						})
 					))
