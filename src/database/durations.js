@@ -8,14 +8,27 @@ const {
 	DURATIONS_TYPE_TOTAL
 } = require('../constants/durations')
 
+const precision = 15000
+const limit = 3600000
+
 const getAverage = async (id) => {
 
 	const entries = await Record.aggregate([
+		{
+			$addFields: {
+				duration: {
+					$subtract: [ '$updated', '$created' ]
+				}
+			}
+		},
 		{
 			$match: {
 				domainId: id,
 				created: {
 					$gte: dateWithOffset(-7)
+				},
+				duration: {
+					$lt: limit
 				}
 			}
 		},
@@ -23,9 +36,7 @@ const getAverage = async (id) => {
 			$group: {
 				_id: null,
 				average: {
-					$avg: {
-						$subtract: [ '$updated', '$created' ]
-					}
+					$avg: '$duration'
 				}
 			}
 		},
@@ -88,9 +99,6 @@ const getAverage = async (id) => {
 
 const getTotal = async (id) => {
 
-	const precision = 15000
-	const limit = 21600000
-
 	const average = await getAverage(id)
 
 	return Record.aggregate([
@@ -105,16 +113,18 @@ const getTotal = async (id) => {
 		{
 			$project: {
 				duration: {
+					$subtract: [ '$updated', '$created' ]
+				}
+			}
+		},
+		{
+			$project: {
+				unifiedDuration: {
 					$multiply: [
 						{
 							$ceil: [
 								{
-									$divide: [
-										{
-											$subtract: [ '$updated', '$created' ]
-										},
-										precision
-									]
+									$divide: [ '$duration', precision ]
 								}
 							]
 						},
@@ -128,10 +138,10 @@ const getTotal = async (id) => {
 				_id: {
 					$cond: {
 						if: {
-							$gte: [ '$duration', limit ]
+							$gte: [ '$unifiedDuration', limit ]
 						},
 						then: limit,
-						else: '$duration'
+						else: '$unifiedDuration'
 					}
 				},
 				count: {

@@ -1,10 +1,16 @@
 .valuesBar {
 
 	display: grid;
-	grid-template-columns: 3em auto;
+	grid-template-rows: auto 1em;
 	grid-gap: $gutter/2;
 	padding-top: $gutter*1.5;
 	height: $cardContentHeight;
+
+	&__row {
+		display: grid;
+		grid-template-columns: 3em auto;
+		grid-gap: $gutter/2;
+	}
 
 	&__bar {
 		display: flex;
@@ -35,11 +41,13 @@
 		}
 
 		&:first-child {
-			border-radius: $radius $radius 0 0;
+			border-top-left-radius: $radius;
+			border-top-right-radius: $radius;
 		}
 
 		&:last-child {
-			border-radius: 0 0 $radius $radius;
+			border-bottom-left-radius: $radius;
+			border-bottom-right-radius: $radius;
 		}
 	}
 
