@@ -100,6 +100,9 @@ const getDetailed = async (id) => {
 		}
 	])
 
+	// No need to continue when there're no entries
+	if (averageEntries.length === 0) return []
+
 	const detailedEntries = await Record.aggregate([
 		{
 			$match: {
