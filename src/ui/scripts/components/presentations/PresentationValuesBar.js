@@ -54,7 +54,7 @@ const PresentationValuesBar = (props) => {
 	const maxDuration = belowLimitItems.reduce(maxByProp('duration'), 0)
 
 	const maxCount = props.items.reduce(maxByProp('count'), 0)
-	const proportionalOpacity = ({ count }) => (count / maxCount)
+	const proportionalOpacity = ({ count }) => count / maxCount
 
 	const content = (() => {
 
