@@ -4,22 +4,85 @@ const Record = require('../schemas/Record')
 const dateWithOffset = require('../utils/dateWithOffset')
 
 const {
-	DURATIONS_INTERVAL,
+	DURATIONS_TRACKING_INTERVAL,
+	DURATIONS_GROUP_INTERVAL,
 	DURATIONS_LIMIT,
 	// DURATIONS_TYPE_AVERAGE,
 	DURATIONS_TYPE_DETAILED
 } = require('../constants/durations')
 
-const getAverage = async (id) => {
+const getDetailed = async (id) => {
 
-	const entries = await Record.aggregate([
-		{
-			$addFields: {
-				duration: {
-					$subtract: [ '$updated', '$created' ]
-				}
+	// The time that elapsed between the creation and updating of records.
+	const addFieldsDuration = {
+		$addFields: {
+			duration: {
+				$subtract: [ '$updated', '$created' ]
 			}
-		},
+		}
+	}
+
+	// Ackee tracks durations in an interval, but some durations are between
+	// possible interval times. This could be caused by a network delay or the
+	// browser who's throttling JS execution. This step rounds all durations
+	// down to the nearest possible interval to get rid of inaccuracy.
+	const projectToTrackingInterval = {
+		$project: {
+			duration: {
+				$multiply: [
+					{
+						$floor: [
+							{
+								$divide: [ '$duration', DURATIONS_TRACKING_INTERVAL ]
+							}
+						]
+					},
+					DURATIONS_TRACKING_INTERVAL
+				]
+			}
+		}
+	}
+
+	// Ackee can't show all durations. It's just too much. This step groups
+	// all durations by rounding them up to the nearest group interval.
+	const projectToGroupInterval = {
+		$project: {
+			duration: {
+				$multiply: [
+					{
+						$ceil: [
+							{
+								$divide: [ '$duration', DURATIONS_GROUP_INTERVAL ]
+							}
+						]
+					},
+					DURATIONS_GROUP_INTERVAL
+				]
+			}
+		}
+	}
+
+	// Group durations. All durations above the limit will be grouped together
+	// as they are usually not relevant.
+	const groupDurationWithLimit = {
+		$group: {
+			_id: {
+				$cond: {
+					if: {
+						$gte: [ '$duration', DURATIONS_LIMIT ]
+					},
+					then: DURATIONS_LIMIT,
+					else: '$duration'
+				}
+			},
+			count: {
+				$sum: 1
+			}
+		}
+	}
+
+	const averageEntries = await Record.aggregate([
+		addFieldsDuration,
 		{
 			$match: {
 				domainId: id,
@@ -31,6 +94,7 @@ const getAverage = async (id) => {
 				}
 			}
 		},
+		projectToTrackingInterval,
 		{
 			$group: {
 				_id: null,
@@ -48,15 +112,8 @@ const getAverage = async (id) => {
 		}
 	])
 
-	return entries[0].average
-
-}
-
-const getDetailed = async (id) => {
-
-	const average = await getAverage(id)
-
-	return Record.aggregate([
+	const detailedEntries = await Record.aggregate([
+		addFieldsDuration,
 		{
 			$match: {
 				domainId: id,
@@ -65,48 +122,12 @@ const getDetailed = async (id) => {
 				}
 			}
 		},
-		{
-			$project: {
-				duration: {
-					$subtract: [ '$updated', '$created' ]
-				}
-			}
-		},
-		{
-			$project: {
-				unifiedDuration: {
-					$multiply: [
-						{
-							$ceil: [
-								{
-									$divide: [ '$duration', DURATIONS_INTERVAL ]
-								}
-							]
-						},
-						DURATIONS_INTERVAL
-					]
-				}
-			}
-		},
-		{
-			$group: {
-				_id: {
-					$cond: {
-						if: {
-							$gte: [ '$unifiedDuration', DURATIONS_LIMIT ]
-						},
-						then: DURATIONS_LIMIT,
-						else: '$unifiedDuration'
-					}
-				},
-				count: {
-					$sum: 1
-				}
-			}
-		},
+		projectToTrackingInterval,
+		projectToGroupInterval,
+		groupDurationWithLimit,
 		{
 			$addFields: {
-				average
+				average: averageEntries[0].average
 			}
 		},
 		{
@@ -115,6 +136,8 @@ const getDetailed = async (id) => {
 			}
 		}
 	])
+
+	return detailedEntries
 
 }
 
