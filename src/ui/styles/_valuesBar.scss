@@ -90,6 +90,15 @@
 		line-height: 1.1;
 	}
 
+	&__decorator {
+		font-size: .7em;
+	}
+
+	&__unit {
+		font-size: .7em;
+		margin-left: 2px;
+	}
+
 	&__description {
 		margin: 0;
 	}
