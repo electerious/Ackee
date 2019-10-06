@@ -8,7 +8,7 @@ const signale = require('./signale')
 const sleep = require('./sleep')
 const randomItem = require('./randomItem')
 const randomInt = require('./randomInt')
-const { day } = require('./times')
+const { hour } = require('./times')
 
 const userAgents = Array(200).fill().map((_, index) => index)
 
@@ -268,7 +268,7 @@ const job = (url) => async () => {
 
 		const currentDate = new Date()
 		const currentWeekday = currentDate.getDay()
-		const updateDelay = randomInt(0, day / 2)
+		const updateDelay = randomInt(0, hour * 1.5)
 
 		const token = await addToken(url)
 		const domains = await fetchDomains(url, token)
