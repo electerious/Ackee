@@ -2,7 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import {
 	// DURATIONS_TYPE_AVERAGE,
-	DURATIONS_TYPE_TOTAL
+	DURATIONS_TYPE_DETAILED
 } from '../../../../constants/durations'
 
 import enhanceDurations from '../../utils/enhanceDurations'
@@ -34,8 +34,8 @@ const RouteDurations = (props) => {
 					value: props.durations.type,
 					onChange: (e) => props.setDurationsType(e.target.value),
 					items: [
-						// { value: DURATIONS_TYPE_AVERAGE, label: 'Unique durations' },
-						{ value: DURATIONS_TYPE_TOTAL, label: 'Total durations' }
+						// { value: DURATIONS_TYPE_AVERAGE, label: 'Average durations' },
+						{ value: DURATIONS_TYPE_DETAILED, label: 'Detailed durations' }
 					]
 				})
 			),

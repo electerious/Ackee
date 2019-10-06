@@ -6,7 +6,7 @@ const durations = require('../database/durations')
 
 const {
 	// DURATIONS_TYPE_AVERAGE,
-	DURATIONS_TYPE_TOTAL
+	DURATIONS_TYPE_DETAILED
 } = require('../constants/durations')
 
 const response = (entry) => ({
@@ -32,7 +32,7 @@ const get = async (req) => {
 
 	switch (type) {
 		// case DURATIONS_TYPE_AVERAGE: return responses(entries)
-		case DURATIONS_TYPE_TOTAL: return responses(entries)
+		case DURATIONS_TYPE_DETAILED: return responses(entries)
 		default: throw createError(400, 'Unknown type')
 	}
 

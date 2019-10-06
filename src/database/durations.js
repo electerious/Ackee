@@ -7,7 +7,7 @@ const {
 	DURATIONS_INTERVAL,
 	DURATIONS_LIMIT,
 	// DURATIONS_TYPE_AVERAGE,
-	DURATIONS_TYPE_TOTAL
+	DURATIONS_TYPE_DETAILED
 } = require('../constants/durations')
 
 const getAverage = async (id) => {
@@ -52,7 +52,7 @@ const getAverage = async (id) => {
 
 }
 
-const getTotal = async (id) => {
+const getDetailed = async (id) => {
 
 	const average = await getAverage(id)
 
@@ -121,8 +121,8 @@ const getTotal = async (id) => {
 const get = async (id, type) => {
 
 	switch (type) {
-		// case DURATIONS_TYPE_AVERAGE: return getUnique(id)
-		case DURATIONS_TYPE_TOTAL: return getTotal(id)
+		// case DURATIONS_TYPE_AVERAGE: return getAverage(id)
+		case DURATIONS_TYPE_DETAILED: return getDetailed(id)
 	}
 
 }
