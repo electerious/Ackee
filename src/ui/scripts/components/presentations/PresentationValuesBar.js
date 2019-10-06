@@ -2,6 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import {
+	DURATIONS_GROUP_INTERVAL,
 	DURATIONS_LIMIT
 } from '../../../../constants/durations'
 
@@ -24,10 +25,12 @@ const Value = (props) => {
 
 const Content = (props) => {
 
+	const hasDecorator = props.decorator != null
+
 	return (
 		h('div', { className: 'valuesBar__content' },
 			h('p', { className: `valuesBar__duration color-${ props.color }` },
-				props.aboveLimit === true && h('span', { className: 'valuesBar__decorator' }, '> '),
+				hasDecorator === true && h('span', { className: 'valuesBar__decorator' }, props.decorator),
 				props.duration.value,
 				h('span', { className: 'valuesBar__unit' }, props.duration.unit)
 			),
@@ -61,17 +64,33 @@ const PresentationValuesBar = (props) => {
 		const activeItem = props.items[active]
 
 		if (activeItem == null) return h(Content, {
-			aboveLimit: false,
 			color: 'white',
 			duration: formatDuration(averageDuration),
 			description: 'Average visit duration'
 		})
 
+		const isBelowGroupInterval = activeItem.duration < DURATIONS_GROUP_INTERVAL
+		const isAboveLimit = activeItem.duration >= DURATIONS_LIMIT
+
+		const decorator = (() => {
+
+			if (isBelowGroupInterval === true) return '<'
+			if (isAboveLimit === true) return '>'
+
+		})()
+
+		const duration = (() => {
+
+			if (isBelowGroupInterval === true) return formatDuration(DURATIONS_GROUP_INTERVAL)
+			return formatDuration(activeItem.duration)
+
+		})()
+
 		return h(Content, {
-			aboveLimit: activeItem.duration >= DURATIONS_LIMIT,
 			color: 'primary',
-			duration: formatDuration(activeItem.duration),
-			description: `${ activeItem.count } total visits`
+			decorator,
+			duration,
+			description: `${ activeItem.count } visits`
 		})
 
 	})()
