@@ -90,13 +90,6 @@ const getDetailed = async (id) => {
 					$avg: '$duration'
 				}
 			}
-		},
-		{
-			$project: {
-				average: {
-					$ceil: [ '$average' ]
-				}
-			}
 		}
 	])
 
