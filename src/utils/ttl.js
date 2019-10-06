@@ -1,6 +1,6 @@
 'use strict'
 
-const day = require('./day')
+const { day } = require('./times')
 
 module.exports = (timestamp, ttl = day) => {
 

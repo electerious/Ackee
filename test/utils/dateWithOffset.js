@@ -2,7 +2,7 @@
 
 const test = require('ava')
 
-const day = require('../../src/utils/day')
+const { day } = require('../../src/utils/times')
 const dateWithOffset = require('../../src/utils/dateWithOffset')
 
 test('use current date by default', async (t) => {
