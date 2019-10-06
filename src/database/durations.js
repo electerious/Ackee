@@ -43,6 +43,23 @@ const getDetailed = async (id) => {
 		}
 	}
 
+	// Visits below the tracking interval will have a duration of zero. That's
+	// incorrect as visitors spent time on the site, but just not enough. This
+	// step sets the minimum duration to the tracking interval.
+	const projectToMinTrackingInterval = {
+		$project: {
+			duration: {
+				$cond: {
+					if: {
+						$lte: [ '$duration', DURATIONS_TRACKING_INTERVAL ]
+					},
+					then: DURATIONS_TRACKING_INTERVAL,
+					else: '$duration'
+				}
+			}
+		}
+	}
+
 	// Ackee can't show all durations. It's just too much. This step groups
 	// all durations by rounding them up to the nearest group interval.
 	const projectToGroupInterval = {
@@ -95,6 +112,7 @@ const getDetailed = async (id) => {
 			}
 		},
 		projectToTrackingInterval,
+		projectToMinTrackingInterval,
 		{
 			$group: {
 				_id: null,
@@ -123,6 +141,7 @@ const getDetailed = async (id) => {
 			}
 		},
 		projectToTrackingInterval,
+		projectToMinTrackingInterval,
 		projectToGroupInterval,
 		groupDurationWithLimit,
 		{
