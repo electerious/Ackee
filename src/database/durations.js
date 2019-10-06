@@ -4,8 +4,7 @@ const Record = require('../schemas/Record')
 const dateWithOffset = require('../utils/dateWithOffset')
 
 const {
-	DURATIONS_TRACKING_INTERVAL,
-	DURATIONS_GROUP_INTERVAL,
+	DURATIONS_INTERVAL,
 	DURATIONS_LIMIT,
 	// DURATIONS_TYPE_AVERAGE,
 	DURATIONS_TYPE_DETAILED
@@ -14,8 +13,8 @@ const {
 const getDetailed = async (id) => {
 
 	// The time that elapsed between the creation and updating of records.
-	const addFieldsDuration = {
-		$addFields: {
+	const projectDuration = {
+		$project: {
 			duration: {
 				$subtract: [ '$updated', '$created' ]
 			}
@@ -26,18 +25,18 @@ const getDetailed = async (id) => {
 	// possible interval times. This could be caused by a network delay or the
 	// browser who's throttling JS execution. This step rounds all durations
 	// down to the nearest possible interval to get rid of inaccuracy.
-	const projectToTrackingInterval = {
+	const projectInterval = {
 		$project: {
 			duration: {
 				$multiply: [
 					{
 						$floor: [
 							{
-								$divide: [ '$duration', DURATIONS_TRACKING_INTERVAL ]
+								$divide: [ '$duration', DURATIONS_INTERVAL ]
 							}
 						]
 					},
-					DURATIONS_TRACKING_INTERVAL
+					DURATIONS_INTERVAL
 				]
 			}
 		}
@@ -45,74 +44,45 @@ const getDetailed = async (id) => {
 
 	// Visits below the tracking interval will have a duration of zero. That's
 	// incorrect as visitors spent time on the site, but just not enough. This
-	// step sets the minimum duration to the tracking interval.
-	const projectToMinTrackingInterval = {
+	// step sets the minimum duration to the half of the tracking interval.
+	// This value is a compromise that doesn't influence the average too much.
+	const projectMinInterval = {
 		$project: {
 			duration: {
 				$cond: {
 					if: {
-						$lte: [ '$duration', DURATIONS_TRACKING_INTERVAL ]
+						$lt: [ '$duration', DURATIONS_INTERVAL ]
 					},
-					then: DURATIONS_TRACKING_INTERVAL,
+					then: DURATIONS_INTERVAL / 2,
 					else: '$duration'
 				}
 			}
 		}
 	}
 
-	// Ackee can't show all durations. It's just too much. This step groups
-	// all durations by rounding them up to the nearest group interval.
-	const projectToGroupInterval = {
-		$project: {
+	// Some visitors keep sites open in the background. Their duration is often
+	// way above the limit. This distorts the average and should be omitted.
+	const matchLimit = {
+		$match: {
 			duration: {
-				$multiply: [
-					{
-						$ceil: [
-							{
-								$divide: [ '$duration', DURATIONS_GROUP_INTERVAL ]
-							}
-						]
-					},
-					DURATIONS_GROUP_INTERVAL
-				]
-			}
-		}
-	}
-
-	// Group durations. All durations above the limit will be grouped together
-	// as they are usually not relevant.
-	const groupDurationWithLimit = {
-		$group: {
-			_id: {
-				$cond: {
-					if: {
-						$gte: [ '$duration', DURATIONS_LIMIT ]
-					},
-					then: DURATIONS_LIMIT,
-					else: '$duration'
-				}
-			},
-			count: {
-				$sum: 1
+				$lt: DURATIONS_LIMIT
 			}
 		}
 	}
 
 	const averageEntries = await Record.aggregate([
-		addFieldsDuration,
 		{
 			$match: {
 				domainId: id,
 				created: {
 					$gte: dateWithOffset(-7)
-				},
-				duration: {
-					$lt: DURATIONS_LIMIT
 				}
 			}
 		},
-		projectToTrackingInterval,
-		projectToMinTrackingInterval,
+		projectDuration,
+		projectInterval,
+		projectMinInterval,
+		matchLimit,
 		{
 			$group: {
 				_id: null,
@@ -131,7 +101,6 @@ const getDetailed = async (id) => {
 	])
 
 	const detailedEntries = await Record.aggregate([
-		addFieldsDuration,
 		{
 			$match: {
 				domainId: id,
@@ -140,10 +109,24 @@ const getDetailed = async (id) => {
 				}
 			}
 		},
-		projectToTrackingInterval,
-		projectToMinTrackingInterval,
-		projectToGroupInterval,
-		groupDurationWithLimit,
+		projectDuration,
+		projectInterval,
+		{
+			$group: {
+				_id: {
+					$cond: {
+						if: {
+							$gte: [ '$duration', DURATIONS_LIMIT ]
+						},
+						then: DURATIONS_LIMIT,
+						else: '$duration'
+					}
+				},
+				count: {
+					$sum: 1
+				}
+			}
+		},
 		{
 			$addFields: {
 				average: averageEntries[0].average

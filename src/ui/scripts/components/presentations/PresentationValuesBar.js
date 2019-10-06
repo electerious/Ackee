@@ -2,7 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-	DURATIONS_GROUP_INTERVAL,
+	DURATIONS_INTERVAL,
 	DURATIONS_LIMIT
 } from '../../../../constants/durations'
 
@@ -69,19 +69,19 @@ const PresentationValuesBar = (props) => {
 			description: 'Average visit duration'
 		})
 
-		const isBelowGroupInterval = activeItem.duration < DURATIONS_GROUP_INTERVAL
+		const isBelowInterval = activeItem.duration < DURATIONS_INTERVAL
 		const isAboveLimit = activeItem.duration >= DURATIONS_LIMIT
 
 		const decorator = (() => {
 
-			if (isBelowGroupInterval === true) return '<'
+			if (isBelowInterval === true) return '<'
 			if (isAboveLimit === true) return '>'
 
 		})()
 
 		const duration = (() => {
 
-			if (isBelowGroupInterval === true) return formatDuration(DURATIONS_GROUP_INTERVAL)
+			if (isBelowInterval === true) return formatDuration(DURATIONS_INTERVAL)
 			return formatDuration(activeItem.duration)
 
 		})()
