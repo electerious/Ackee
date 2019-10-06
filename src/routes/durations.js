@@ -5,7 +5,7 @@ const { createError } = require('micro')
 const durations = require('../database/durations')
 
 const {
-	// DURATIONS_TYPE_UNIQUE,
+	// DURATIONS_TYPE_AVERAGE,
 	DURATIONS_TYPE_TOTAL
 } = require('../constants/durations')
 
@@ -31,7 +31,7 @@ const get = async (req) => {
 	const entries = await durations.get(domainId, type)
 
 	switch (type) {
-		// case DURATIONS_TYPE_UNIQUE: return responses(entries)
+		// case DURATIONS_TYPE_AVERAGE: return responses(entries)
 		case DURATIONS_TYPE_TOTAL: return responses(entries)
 		default: throw createError(400, 'Unknown type')
 	}
