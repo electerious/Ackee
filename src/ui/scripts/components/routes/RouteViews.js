@@ -43,7 +43,10 @@ const RouteViews = (props) => {
 
 			h(CardViews, {
 				wide: true,
-				headline: 'Page Views',
+				headline: ({
+					[VIEWS_TYPE_UNIQUE]: 'Site Views',
+					[VIEWS_TYPE_TOTAL]: 'Page Views'
+				})[props.views.type],
 				items: mergeViews(props.domains, props.views)
 			}),
 
