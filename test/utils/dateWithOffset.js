@@ -15,16 +15,3 @@ test('use current date by default', async (t) => {
 	t.is(resultDate.getDate(), tomorrowDate.getDate())
 
 })
-
-test('return tomorrow\'s date', async (t) => {
-
-	const currentDate = new Date()
-	const currentTimestamp = currentDate.getTime()
-	const tomorrowTimestamp = currentTimestamp + day
-
-	const resultDate = dateWithOffset(1, currentDate)
-	const resultTimestamp = resultDate.getTime()
-
-	t.is(resultTimestamp, tomorrowTimestamp)
-
-})

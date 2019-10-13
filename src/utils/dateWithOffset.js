@@ -2,10 +2,12 @@
 
 const { day } = require('./times')
 
-module.exports = (offset, date = new Date()) => {
+module.exports = (offset) => {
 
-	date.setTime(date.getTime() + day * offset)
+	const currentDate = new Date()
 
-	return date
+	currentDate.setTime(currentDate.getTime() + day * offset)
+
+	return currentDate
 
 }
