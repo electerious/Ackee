@@ -82,6 +82,14 @@ The top 25 pages from which your visitors have come in the last 7 days. Sorted b
 
 The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
 
+### Durations > Average durations
+
+The average time users spend on your sites. Tracked in an interval of 15s. Visits above 30m won't be added to the average, because some visitors keep sites open in the background. This distorts the average and will be omitted.
+
+### Durations > Detailed durations
+
+The time users spend on your sites, grouped by similar durations in an interval of 15s. This view shows the first 30m and gives you more insides.
+
 ### Languages > Top languages
 
 The top 25 user languages of the last 7 days. Sorted by popularity.
