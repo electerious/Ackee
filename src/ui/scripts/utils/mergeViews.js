@@ -1,7 +1,7 @@
 import enhanceViews from './enhanceViews'
 import isDefined from './isDefined'
 
-// Turns the chart views of multiple domains into one array of views
+// Turns the views of multiple domains into one array of views
 export default (domains, views) => {
 
 	// Enhance all view for all domains

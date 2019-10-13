@@ -6,7 +6,7 @@ import {
 } from '../../../../constants/views'
 
 import enhanceViews from '../../utils/enhanceViews'
-import mergeChartViews from '../../utils/mergeChartViews'
+import mergeViews from '../../utils/mergeViews'
 
 import CardViews from '../cards/CardViews'
 import Select from '../Select'
@@ -44,7 +44,7 @@ const RouteViews = (props) => {
 			h(CardViews, {
 				wide: true,
 				headline: 'Page Views',
-				items: mergeChartViews(props.domains, props.views)
+				items: mergeViews(props.domains, props.views)
 			}),
 
 			props.domains.value.map(
