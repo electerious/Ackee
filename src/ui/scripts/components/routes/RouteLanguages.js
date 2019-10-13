@@ -6,6 +6,7 @@ import {
 } from '../../../../constants/languages'
 
 import enhanceLanguages from '../../utils/enhanceLanguages'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardLanguages from '../cards/CardLanguages'
 import Select from '../Select'
@@ -18,7 +19,7 @@ const RouteLanguages = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchLanguages(props, domain.data.id)

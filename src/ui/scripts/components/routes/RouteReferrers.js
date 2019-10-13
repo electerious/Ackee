@@ -6,6 +6,7 @@ import {
 } from '../../../../constants/referrers'
 
 import enhanceReferrers from '../../utils/enhanceReferrers'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardReferrers from '../cards/CardReferrers'
 import Select from '../Select'
@@ -18,7 +19,7 @@ const RouteReferrers = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchReferrers(props, domain.data.id)

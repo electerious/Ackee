@@ -7,6 +7,7 @@ import {
 
 import enhanceViews from '../../utils/enhanceViews'
 import mergeViews from '../../utils/mergeViews'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardViews from '../cards/CardViews'
 import Select from '../Select'
@@ -19,7 +20,7 @@ const RouteViews = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchViews(props, domain.data.id)

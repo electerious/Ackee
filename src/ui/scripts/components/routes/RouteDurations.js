@@ -8,6 +8,7 @@ import {
 import enhanceAverageDurations from '../../utils/enhanceAverageDurations'
 import enhanceDetailedDurations from '../../utils/enhanceDetailedDurations'
 import mergeAverageDurations from '../../utils/mergeAverageDurations'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardAverageDurations from '../cards/CardAverageDurations'
 import CardDetailedDurations from '../cards/CardDetailedDurations'
@@ -21,7 +22,7 @@ const RouteDurations = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchDurations(props, domain.data.id)
