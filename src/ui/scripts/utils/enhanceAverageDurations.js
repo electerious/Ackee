@@ -11,8 +11,6 @@ export default (durations, length) => createArray(length).map((_, index) => {
 		return matchesDate(duration.data.id.day, duration.data.id.month, duration.data.id.year, date)
 	})
 
-	console.log(duration)
-
 	return duration == null ? 0 : duration.data.average
 
 })
