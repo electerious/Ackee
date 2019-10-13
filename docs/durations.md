@@ -48,7 +48,7 @@ Status: 200 OK
 
 Get the time users spend on your sites, grouped by similar durations in an interval of 15s. Includes data from the last 7 days. Durations above 30m will be grouped together.
 
-The included average is the average time users spend on your site for the last 7 days. Each item includes the same average.
+The included average is the average time users spend on your site for the last 7 days. Every item includes the same average.
 
 ### Request
 
