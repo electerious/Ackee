@@ -18,6 +18,7 @@ const Row = (props) => {
 			className: 'flexList__row',
 			href: props.url.href,
 			target: '_blank',
+			rel: 'noopener',
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave
 		},

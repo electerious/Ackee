@@ -9,7 +9,7 @@ const Row = (props) => {
 	const hasUrl = props.url != null
 
 	const rootType = hasUrl === true ? 'a' : 'div'
-	const rootProps = hasUrl === true ? { href: props.url.href, target: '_blank' } : {}
+	const rootProps = hasUrl === true ? { href: props.url.href, target: '_blank', rel: 'noopener' } : {}
 
 	return (
 		h(rootType, {
