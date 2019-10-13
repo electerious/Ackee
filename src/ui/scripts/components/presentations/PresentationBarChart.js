@@ -62,16 +62,18 @@ const PresentationBarChart = (props) => {
 				h(Row, { position: 'middle' }, hasItems === true ? formatter(mid(props.items)) : ''),
 				h(Row, { position: 'bottom' }, hasItems === true ? formatter(min()) : '')
 			),
-			props.items.map((item, index) => (
-				h(Column, {
-					key: index,
-					active: props.active === index,
-					size: `${ percentage(item, max(props.items)) }%`,
-					onEnter: () => props.onEnter(index),
-					onLeave: () => props.onLeave(index),
-					label: formatter(item)
-				})
-			))
+			h('div', { className: 'barChart__columns' },
+				props.items.map((item, index) => (
+					h(Column, {
+						key: index,
+						active: props.active === index,
+						size: `${ percentage(item, max(props.items)) }%`,
+						onEnter: () => props.onEnter(index),
+						onLeave: () => props.onLeave(index),
+						label: formatter(item)
+					})
+				))
+			)
 		)
 	)
 
