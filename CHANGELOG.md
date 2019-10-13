@@ -6,10 +6,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Added
+
+- Average and detailed durations
+
+### Changed
+
+- Links now open in a new tab with `rel="noopener"`
+
 ### Fixed
 
 - Remove username and password before logging MongoDB connection URI (#50)
 - Horizontal scroll on pages with vertical scroll (#52)
+- Large numbers in chart view overlapping bars
+- "Last 7 days" now shows last 7 days instead of 8
+- Title for "Unique site views"
+- CORS headers in documentation
 
 ## [1.2.0] - 2019-09-21
 
