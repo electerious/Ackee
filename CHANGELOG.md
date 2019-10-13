@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - "Last 7 days" now shows last 7 days instead of 8
 - Title for "Unique site views"
 - CORS headers in documentation
+- Data fetched twice when navigating in UI
 
 ## [1.2.0] - 2019-09-21
 
