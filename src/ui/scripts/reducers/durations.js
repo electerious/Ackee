@@ -32,6 +32,8 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_DURATIONS_TYPE:
+			// Reset value because a different sorting results in a different value strcuture
+			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
 		case SET_DURATIONS_VALUE:
