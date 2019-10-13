@@ -18,7 +18,7 @@ export default (domains, durations) => {
 	const filteredDurations = enhancedDurations.filter(isDefined)
 
 	// Merge all durations to one array of durations
-	return filteredDurations.reduce((acc, durations) => {
+	const mergedDurations = filteredDurations.reduce((acc, durations) => {
 
 		// Durations is an array. Each item represents the average duration of one day.
 		durations.forEach((duration, index) => {
@@ -34,5 +34,14 @@ export default (domains, durations) => {
 		return acc
 
 	}, [])
+
+	// Convert merged, total durations into average durations
+	return mergedDurations.map((duration) => {
+
+		const totalDomains = filteredDurations.length
+
+		return duration / totalDomains
+
+	})
 
 }
