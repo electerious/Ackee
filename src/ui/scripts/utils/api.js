@@ -1,6 +1,6 @@
 import timeout from './timeout'
 
-export default async (url, { props, method, body }) => {
+export default async (url, { props, method, body, signal }) => {
 
 	try {
 
@@ -12,7 +12,8 @@ export default async (url, { props, method, body }) => {
 		const request = fetch(url, {
 			headers,
 			method,
-			body
+			body,
+			signal
 		})
 
 		const response = await timeout(request, 'Request timeout', 30000)

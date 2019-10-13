@@ -1,4 +1,10 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	fetchPages: {}
+}
 
 export const SET_PAGES_SORTING = Symbol()
 export const SET_PAGES_VALUE = Symbol()
@@ -35,24 +41,26 @@ export const resetPages = () => ({
 
 export const fetchPages = (props, domainId) => async (dispatch) => {
 
+	abortControllers.fetchPages[domainId] = abortAndCreateController(abortControllers.fetchPages[domainId])
+	const signal = abortControllers.fetchPages[domainId].signal
+
 	dispatch(setPagesFetching(domainId, true))
 	dispatch(setPagesError(domainId))
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }`, {
+		const data = await swallowAbortError(api)(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }`, {
 			method: 'get',
-			props
+			props,
+			signal
 		})
 
 		dispatch(setPagesValue(domainId, data))
+		dispatch(setPagesFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setPagesError(domainId, err))
-
-	} finally {
-
 		dispatch(setPagesFetching(domainId, false))
 
 	}

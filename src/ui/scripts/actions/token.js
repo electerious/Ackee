@@ -1,4 +1,11 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	addToken: undefined,
+	deleteToken: undefined
+}
 
 export const SET_TOKEN_VALUE = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
@@ -26,25 +33,27 @@ export const resetToken = () => ({
 
 export const addToken = (props, state) => async (dispatch) => {
 
+	abortControllers.addToken = abortAndCreateController(abortControllers.addToken)
+	const signal = abortControllers.addToken.signal
+
 	dispatch(setTokenFetching(true))
 	dispatch(setTokenError())
 
 	try {
 
-		const data = await api('/tokens', {
+		const data = await swallowAbortError(api)('/tokens', {
 			method: 'post',
 			body: JSON.stringify(state),
-			props
+			props,
+			signal
 		})
 
 		dispatch(setTokenValue(data))
+		dispatch(setTokenFetching(false))
 
 	} catch (err) {
 
 		dispatch(setTokenError(err))
-
-	} finally {
-
 		dispatch(setTokenFetching(false))
 
 	}
@@ -52,6 +61,9 @@ export const addToken = (props, state) => async (dispatch) => {
 }
 
 export const deleteToken = (props) => async (dispatch) => {
+
+	abortControllers.deleteToken = abortAndCreateController(abortControllers.deleteToken)
+	const signal = abortControllers.deleteToken.signal
 
 	dispatch(resetToken())
 
@@ -65,9 +77,10 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	try {
 
-		await api(`/tokens/${ props.token.value.id }`, {
+		await swallowAbortError(api)(`/tokens/${ props.token.value.id }`, {
 			method: 'delete',
-			props
+			props,
+			signal
 		})
 
 	} catch (err) {

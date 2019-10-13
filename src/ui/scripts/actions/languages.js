@@ -1,4 +1,10 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	fetchLanguages: {}
+}
 
 export const SET_LANGUAGES_SORTING = Symbol()
 export const SET_LANGUAGES_VALUE = Symbol()
@@ -35,24 +41,26 @@ export const resetLanguages = () => ({
 
 export const fetchLanguages = (props, domainId) => async (dispatch) => {
 
+	abortControllers.fetchLanguages[domainId] = abortAndCreateController(abortControllers.fetchLanguages[domainId])
+	const signal = abortControllers.fetchLanguages[domainId].signal
+
 	dispatch(setLanguagesFetching(domainId, true))
 	dispatch(setLanguagesError(domainId))
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/languages?sorting=${ props.languages.sorting }`, {
+		const data = await swallowAbortError(api)(`/domains/${ domainId }/languages?sorting=${ props.languages.sorting }`, {
 			method: 'get',
-			props
+			props,
+			signal
 		})
 
 		dispatch(setLanguagesValue(domainId, data))
+		dispatch(setLanguagesFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setLanguagesError(domainId, err))
-
-	} finally {
-
 		dispatch(setLanguagesFetching(domainId, false))
 
 	}

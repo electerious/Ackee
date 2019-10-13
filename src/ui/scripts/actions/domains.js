@@ -1,4 +1,12 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	fetchDomains: undefined,
+	updateDomain: {},
+	deleteDomain: {}
+}
 
 export const SET_DOMAINS_VALUE = Symbol()
 export const SET_DOMAINS_FETCHING = Symbol()
@@ -26,24 +34,26 @@ export const resetDomains = () => ({
 
 export const fetchDomains = (props) => async (dispatch) => {
 
+	abortControllers.fetchDomains = abortAndCreateController(abortControllers.fetchDomains)
+	const signal = abortControllers.fetchDomains.signal
+
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
 
 	try {
 
-		const data = await api('/domains', {
+		const data = await swallowAbortError(api)('/domains', {
 			method: 'get',
-			props
+			props,
+			signal
 		})
 
 		dispatch(setDomainsValue(data))
+		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
-
-	} finally {
-
 		dispatch(setDomainsFetching(false))
 
 	}
@@ -64,13 +74,11 @@ export const addDomain = (props, state) => async (dispatch) => {
 		})
 
 		await dispatch(fetchDomains(props))
+		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
-
-	} finally {
-
 		dispatch(setDomainsFetching(false))
 
 	}
@@ -79,25 +87,27 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 export const updateDomain = (props, domainId, state) => async (dispatch) => {
 
+	abortControllers.updateDomain[domainId] = abortAndCreateController(abortControllers.updateDomain[domainId])
+	const signal = abortControllers.updateDomain[domainId].signal
+
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
 
 	try {
 
-		await api(`/domains/${ domainId }`, {
+		await swallowAbortError(api)(`/domains/${ domainId }`, {
 			method: 'put',
 			body: JSON.stringify(state),
-			props
+			props,
+			signal
 		})
 
 		await dispatch(fetchDomains(props))
+		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
-
-	} finally {
-
 		dispatch(setDomainsFetching(false))
 
 	}
@@ -106,25 +116,27 @@ export const updateDomain = (props, domainId, state) => async (dispatch) => {
 
 export const deleteDomain = (props, domainId, state) => async (dispatch) => {
 
+	abortControllers.deleteDomain[domainId] = abortAndCreateController(abortControllers.deleteDomain[domainId])
+	const signal = abortControllers.deleteDomain[domainId].signal
+
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
 
 	try {
 
-		await api(`/domains/${ domainId }`, {
+		await swallowAbortError(api)(`/domains/${ domainId }`, {
 			method: 'delete',
 			body: JSON.stringify(state),
-			props
+			props,
+			signal
 		})
 
 		await dispatch(fetchDomains(props))
+		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
 		dispatch(setDomainsError(err))
-
-	} finally {
-
 		dispatch(setDomainsFetching(false))
 
 	}

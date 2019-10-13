@@ -1,4 +1,10 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	fetchDurations: {}
+}
 
 export const SET_DURATIONS_TYPE = Symbol()
 export const SET_DURATIONS_VALUE = Symbol()
@@ -35,24 +41,26 @@ export const resetDurations = () => ({
 
 export const fetchDurations = (props, domainId) => async (dispatch) => {
 
+	abortControllers.fetchDurations[domainId] = abortAndCreateController(abortControllers.fetchDurations[domainId])
+	const signal = abortControllers.fetchDurations[domainId].signal
+
 	dispatch(setDurationsFetching(domainId, true))
 	dispatch(setDurationsError(domainId))
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/durations?type=${ props.durations.type }`, {
+		const data = await swallowAbortError(api)(`/domains/${ domainId }/durations?type=${ props.durations.type }`, {
 			method: 'get',
-			props
+			props,
+			signal
 		})
 
 		dispatch(setDurationsValue(domainId, data))
+		dispatch(setDurationsFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setDurationsError(domainId, err))
-
-	} finally {
-
 		dispatch(setDurationsFetching(domainId, false))
 
 	}

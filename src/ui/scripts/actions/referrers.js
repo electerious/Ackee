@@ -1,4 +1,10 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	fetchReferrers: {}
+}
 
 export const SET_REFERRERS_SORTING = Symbol()
 export const SET_REFERRERS_VALUE = Symbol()
@@ -35,24 +41,26 @@ export const resetReferrers = () => ({
 
 export const fetchReferrers = (props, domainId) => async (dispatch) => {
 
+	abortControllers.fetchReferrers[domainId] = abortAndCreateController(abortControllers.fetchReferrers[domainId])
+	const signal = abortControllers.fetchReferrers[domainId].signal
+
 	dispatch(setReferrersFetching(domainId, true))
 	dispatch(setReferrersError(domainId))
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }`, {
+		const data = await swallowAbortError(api)(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }`, {
 			method: 'get',
-			props
+			props,
+			signal
 		})
 
 		dispatch(setReferrersValue(domainId, data))
+		dispatch(setReferrersFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setReferrersError(domainId, err))
-
-	} finally {
-
 		dispatch(setReferrersFetching(domainId, false))
 
 	}

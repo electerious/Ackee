@@ -1,4 +1,10 @@
 import api from '../utils/api'
+import abortAndCreateController from '../utils/abortAndCreateController'
+import swallowAbortError from '../utils/swallowAbortError'
+
+const abortControllers = {
+	fetchViews: {}
+}
 
 export const SET_VIEWS_TYPE = Symbol()
 export const SET_VIEWS_VALUE = Symbol()
@@ -35,24 +41,26 @@ export const resetViews = () => ({
 
 export const fetchViews = (props, domainId) => async (dispatch) => {
 
+	abortControllers.fetchViews[domainId] = abortAndCreateController(abortControllers.fetchViews[domainId])
+	const signal = abortControllers.fetchViews[domainId].signal
+
 	dispatch(setViewsFetching(domainId, true))
 	dispatch(setViewsError(domainId))
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }`, {
+		const data = await swallowAbortError(api)(`/domains/${ domainId }/views?type=${ props.views.type }`, {
 			method: 'get',
-			props
+			props,
+			signal
 		})
 
 		dispatch(setViewsValue(domainId, data))
+		dispatch(setViewsFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setViewsError(domainId, err))
-
-	} finally {
-
 		dispatch(setViewsFetching(domainId, false))
 
 	}
