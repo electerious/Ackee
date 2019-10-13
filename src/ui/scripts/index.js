@@ -61,7 +61,7 @@ store.subscribe(() => {
 		},
 		durations: {
 			...initialDurationsState(),
-			sorting: currentState.durations.sorting
+			type: currentState.durations.type
 		},
 		languages: {
 			...initialLanguagesState(),

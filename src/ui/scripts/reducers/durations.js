@@ -9,11 +9,11 @@ import {
 } from '../actions'
 
 import {
-	DURATIONS_TYPE_DETAILED
+	DURATIONS_TYPE_AVERAGE
 } from '../../../constants/durations'
 
 export const initialState = () => ({
-	type: DURATIONS_TYPE_DETAILED,
+	type: DURATIONS_TYPE_AVERAGE,
 	value: {}
 })
 

@@ -6,7 +6,7 @@ import Text from '../Text'
 import PresentationValuesBar from '../presentations/PresentationValuesBar'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 
-const CardDurations = (props) => {
+const CardDetailedDurations = (props) => {
 
 	const presentation = (() => {
 
@@ -46,10 +46,10 @@ const CardDurations = (props) => {
 
 }
 
-CardDurations.propTypes = {
+CardDetailedDurations.propTypes = {
 	headline: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 
-export default CardDurations
+export default CardDetailedDurations
