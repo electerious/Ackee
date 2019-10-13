@@ -18,7 +18,7 @@ const getTop = async (id) => {
 					$ne: null
 				},
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},
@@ -52,7 +52,7 @@ const getRecent = async (id) => {
 					$ne: null
 				},
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},

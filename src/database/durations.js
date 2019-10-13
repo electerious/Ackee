@@ -122,7 +122,7 @@ const getDetailed = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},
@@ -148,7 +148,7 @@ const getDetailed = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},
