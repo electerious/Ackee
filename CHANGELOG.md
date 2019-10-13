@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Title for "Unique site views"
 - CORS headers in documentation
 - Data fetched twice when navigating in UI
+- Abort old fetch calls when they're triggered again
 
 ## [1.2.0] - 2019-09-21
 
