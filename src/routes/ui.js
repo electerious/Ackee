@@ -26,7 +26,9 @@ const styles = async () => {
 
 }
 
-const scripts = async () => {
+const scripts = async (req, res) => {
+
+	res.setHeader('Content-Type', 'application/javascript; charset=utf-8')
 
 	const filePath = resolve(__dirname, '../ui/scripts/index.js')
 
