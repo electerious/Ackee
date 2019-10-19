@@ -1,11 +1,5 @@
 import api from '../utils/api'
-import abortAndCreateController from '../utils/abortAndCreateController'
-import swallowAbortError from '../utils/swallowAbortError'
-
-const abortControllers = {
-	addToken: undefined,
-	deleteToken: undefined
-}
+import signalHandler from '../utils/signalHandler'
 
 export const SET_TOKEN_VALUE = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
@@ -31,21 +25,18 @@ export const resetToken = () => ({
 	type: RESET_TOKEN
 })
 
-export const addToken = (props, state) => async (dispatch) => {
-
-	abortControllers.addToken = abortAndCreateController(abortControllers.addToken)
-	const signal = abortControllers.addToken.signal
+export const addToken = signalHandler((signal) => (props, state) => async (dispatch) => {
 
 	dispatch(setTokenFetching(true))
 	dispatch(setTokenError())
 
 	try {
 
-		const data = await swallowAbortError(api)('/tokens', {
+		const data = await api('/tokens', {
 			method: 'post',
 			body: JSON.stringify(state),
 			props,
-			signal
+			signal: signal()
 		})
 
 		dispatch(setTokenValue(data))
@@ -58,12 +49,9 @@ export const addToken = (props, state) => async (dispatch) => {
 
 	}
 
-}
+})
 
-export const deleteToken = (props) => async (dispatch) => {
-
-	abortControllers.deleteToken = abortAndCreateController(abortControllers.deleteToken)
-	const signal = abortControllers.deleteToken.signal
+export const deleteToken = signalHandler((signal) => (props) => async (dispatch) => {
 
 	dispatch(resetToken())
 
@@ -77,10 +65,10 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	try {
 
-		await swallowAbortError(api)(`/tokens/${ props.token.value.id }`, {
+		await api(`/tokens/${ props.token.value.id }`, {
 			method: 'delete',
 			props,
-			signal
+			signal: signal()
 		})
 
 	} catch (err) {
@@ -89,4 +77,4 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	}
 
-}
+})

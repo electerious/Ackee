@@ -43,6 +43,11 @@ export default async (url, { props, method, body, signal }) => {
 
 		console.error(err)
 
+		if (err.name === 'AbortError') {
+			// Request has been canceled => Do nothing
+			return
+		}
+
 		if (err.message === 'Token invalid') {
 			// Reset token and show login
 			props.deleteToken(props)

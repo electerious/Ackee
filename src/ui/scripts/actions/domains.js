@@ -1,12 +1,5 @@
 import api from '../utils/api'
-import abortAndCreateController from '../utils/abortAndCreateController'
-import swallowAbortError from '../utils/swallowAbortError'
-
-const abortControllers = {
-	fetchDomains: undefined,
-	updateDomain: {},
-	deleteDomain: {}
-}
+import signalHandler from '../utils/signalHandler'
 
 export const SET_DOMAINS_VALUE = Symbol()
 export const SET_DOMAINS_FETCHING = Symbol()
@@ -32,20 +25,17 @@ export const resetDomains = () => ({
 	type: RESET_DOMAINS
 })
 
-export const fetchDomains = (props) => async (dispatch) => {
-
-	abortControllers.fetchDomains = abortAndCreateController(abortControllers.fetchDomains)
-	const signal = abortControllers.fetchDomains.signal
+export const fetchDomains = signalHandler((signal) => (props) => async (dispatch) => {
 
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
 
 	try {
 
-		const data = await swallowAbortError(api)('/domains', {
+		const data = await api('/domains', {
 			method: 'get',
 			props,
-			signal
+			signal: signal()
 		})
 
 		dispatch(setDomainsValue(data))
@@ -58,7 +48,7 @@ export const fetchDomains = (props) => async (dispatch) => {
 
 	}
 
-}
+})
 
 export const addDomain = (props, state) => async (dispatch) => {
 
@@ -85,21 +75,18 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 }
 
-export const updateDomain = (props, domainId, state) => async (dispatch) => {
-
-	abortControllers.updateDomain[domainId] = abortAndCreateController(abortControllers.updateDomain[domainId])
-	const signal = abortControllers.updateDomain[domainId].signal
+export const updateDomain = signalHandler((signal) => (props, domainId, state) => async (dispatch) => {
 
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
 
 	try {
 
-		await swallowAbortError(api)(`/domains/${ domainId }`, {
+		await api(`/domains/${ domainId }`, {
 			method: 'put',
 			body: JSON.stringify(state),
 			props,
-			signal
+			signal: signal(domainId)
 		})
 
 		await dispatch(fetchDomains(props))
@@ -112,23 +99,20 @@ export const updateDomain = (props, domainId, state) => async (dispatch) => {
 
 	}
 
-}
+})
 
-export const deleteDomain = (props, domainId, state) => async (dispatch) => {
-
-	abortControllers.deleteDomain[domainId] = abortAndCreateController(abortControllers.deleteDomain[domainId])
-	const signal = abortControllers.deleteDomain[domainId].signal
+export const deleteDomain = signalHandler((signal) => (props, domainId, state) => async (dispatch) => {
 
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
 
 	try {
 
-		await swallowAbortError(api)(`/domains/${ domainId }`, {
+		await api(`/domains/${ domainId }`, {
 			method: 'delete',
 			body: JSON.stringify(state),
 			props,
-			signal
+			signal: signal(domainId)
 		})
 
 		await dispatch(fetchDomains(props))
@@ -141,4 +125,4 @@ export const deleteDomain = (props, domainId, state) => async (dispatch) => {
 
 	}
 
-}
+})
