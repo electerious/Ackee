@@ -1,6 +1,6 @@
 import dateWithOffset from '../../../utils/dateWithOffset'
-import createArray from './createArray'
-import matchesDate from './matchesDate'
+import createArray from '../utils/createArray'
+import matchesDate from '../utils/matchesDate'
 
 export default (views, length) => createArray(length).map((_, index) => {
 

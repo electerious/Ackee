@@ -5,7 +5,7 @@ import {
 	VIEWS_TYPE_TOTAL
 } from '../../../../constants/views'
 
-import enhanceViews from '../../utils/enhanceViews'
+import enhanceViews from '../../enhancers/enhanceViews'
 import mergeViews from '../../utils/mergeViews'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 

@@ -1,4 +1,4 @@
-import enhanceAverageDurations from './enhanceAverageDurations'
+import enhanceAverageDurations from '../enhancers/enhanceAverageDurations'
 import isDefined from './isDefined'
 
 // Turns the durations of multiple domains into one array of durations

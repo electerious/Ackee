@@ -6,8 +6,8 @@ import { Provider, connect } from 'react-redux'
 import isDemo from '../../utils/isDemo'
 
 import createStore from './utils/createStore'
-import enhanceState from './utils/enhanceState'
 import * as storage from './utils/storage'
+import enhanceState from './enhancers/enhanceState'
 import reducers from './reducers'
 import * as actions from './actions'
 

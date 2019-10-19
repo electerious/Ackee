@@ -5,8 +5,8 @@ import {
 	DURATIONS_TYPE_DETAILED
 } from '../../../../constants/durations'
 
-import enhanceAverageDurations from '../../utils/enhanceAverageDurations'
-import enhanceDetailedDurations from '../../utils/enhanceDetailedDurations'
+import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
+import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'
 import mergeAverageDurations from '../../utils/mergeAverageDurations'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 

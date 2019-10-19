@@ -1,4 +1,4 @@
-import isDefined from './isDefined'
+import isDefined from '../utils/isDefined'
 
 export default (state) => {
 

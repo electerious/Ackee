@@ -1,4 +1,4 @@
-import enhanceViews from './enhanceViews'
+import enhanceViews from '../enhancers/enhanceViews'
 import isDefined from './isDefined'
 
 // Turns the views of multiple domains into one array of views

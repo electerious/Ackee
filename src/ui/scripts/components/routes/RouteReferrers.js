@@ -5,7 +5,7 @@ import {
 	REFERRERS_SORTING_RECENT
 } from '../../../../constants/referrers'
 
-import enhanceReferrers from '../../utils/enhanceReferrers'
+import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardReferrers from '../cards/CardReferrers'

@@ -5,7 +5,7 @@ import {
 	LANGUAGES_SORTING_RECENT
 } from '../../../../constants/languages'
 
-import enhanceLanguages from '../../utils/enhanceLanguages'
+import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardLanguages from '../cards/CardLanguages'
