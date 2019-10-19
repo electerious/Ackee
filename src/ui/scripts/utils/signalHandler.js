@@ -11,8 +11,6 @@ export default (fn) => {
 		// Cancel existing AbortController
 		if (abortControllers[id] != null) abortControllers[id].abort()
 
-		console.log(id, abortControllers[id] != null)
-
 		abortControllers[id] = new AbortController()
 
 		return abortControllers[id].signal
