@@ -1,10 +1,10 @@
-import enhanceViews from './enhanceViews'
+import enhanceViews from '../enhancers/enhanceViews'
 import isDefined from './isDefined'
 
-// Turns the chart views of multiple domains into one array of views
+// Turns the views of multiple domains into one array of views
 export default (domains, views) => {
 
-	// Enhance all view for all domains
+	// Enhance views for all domains
 	const enhancedViews = domains.value.map((domain) => {
 
 		const view = views.value[domain.data.id]

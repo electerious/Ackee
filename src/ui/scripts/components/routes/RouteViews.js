@@ -5,8 +5,9 @@ import {
 	VIEWS_TYPE_TOTAL
 } from '../../../../constants/views'
 
-import enhanceViews from '../../utils/enhanceViews'
-import mergeChartViews from '../../utils/mergeChartViews'
+import enhanceViews from '../../enhancers/enhanceViews'
+import mergeViews from '../../utils/mergeViews'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardViews from '../cards/CardViews'
 import Select from '../Select'
@@ -19,7 +20,7 @@ const RouteViews = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchViews(props, domain.data.id)
@@ -43,8 +44,11 @@ const RouteViews = (props) => {
 
 			h(CardViews, {
 				wide: true,
-				headline: 'Page Views',
-				items: mergeChartViews(props.domains, props.views)
+				headline: ({
+					[VIEWS_TYPE_UNIQUE]: 'Site Views',
+					[VIEWS_TYPE_TOTAL]: 'Page Views'
+				})[props.views.type],
+				items: mergeViews(props.domains, props.views)
 			}),
 
 			props.domains.value.map(

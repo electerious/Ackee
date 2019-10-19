@@ -1,4 +1,5 @@
 import api from '../utils/api'
+import signalHandler from '../utils/signalHandler'
 
 export const SET_VIEWS_TYPE = Symbol()
 export const SET_VIEWS_VALUE = Symbol()
@@ -33,7 +34,7 @@ export const resetViews = () => ({
 	type: RESET_VIEWS
 })
 
-export const fetchViews = (props, domainId) => async (dispatch) => {
+export const fetchViews = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
 	dispatch(setViewsFetching(domainId, true))
 	dispatch(setViewsError(domainId))
@@ -42,19 +43,18 @@ export const fetchViews = (props, domainId) => async (dispatch) => {
 
 		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }`, {
 			method: 'get',
-			props
+			props,
+			signal: signal(domainId)
 		})
 
 		dispatch(setViewsValue(domainId, data))
+		dispatch(setViewsFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setViewsError(domainId, err))
-
-	} finally {
-
 		dispatch(setViewsFetching(domainId, false))
 
 	}
 
-}
+})

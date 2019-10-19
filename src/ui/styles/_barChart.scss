@@ -1,29 +1,26 @@
 .barChart {
 
 	position: relative;
-	display: flex;
-	flex-direction: row-reverse;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: min-content auto;
+	grid-gap: $gutter/2;
 	padding-top: $gutter*3.5;
 	height: $cardContentHeight;
 	overflow: hidden;
 
 	&__axis {
-		flex-shrink: 2;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		align-self: stretch;
-		width: 100%;
 		min-width: 40px;
-		order: 1;
 	}
 
 	&__row {
 		position: relative;
 		font-size: .8em;
-		min-width: 1px;
 		padding: $gutter/2 0;
-		padding-right: $gutter/2;
 
 		&--top {
 			transform: translateY(-100%);
@@ -46,6 +43,11 @@
 			height: 1px;
 			background: $dimmed;
 		}
+	}
+
+	&__columns {
+		display: flex;
+		flex-direction: row-reverse;
 	}
 
 	&__column {

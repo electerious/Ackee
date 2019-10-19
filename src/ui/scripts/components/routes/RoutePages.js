@@ -5,7 +5,8 @@ import {
 	PAGES_SORTING_RECENT
 } from '../../../../constants/pages'
 
-import enhancePages from '../../utils/enhancePages'
+import enhancePages from '../../enhancers/enhancePages'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardPages from '../cards/CardPages'
 import Select from '../Select'
@@ -18,7 +19,7 @@ const RoutePages = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchPages(props, domain.data.id)

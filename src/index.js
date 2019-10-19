@@ -8,18 +8,25 @@ const server = require('./server')
 const signale = require('./utils/signale')
 const isDemo = require('./utils/isDemo')
 const fillDatabase = require('./utils/fillDatabase')
+const stripUrlAuth = require('./utils/stripUrlAuth')
 
 const port = process.env.ACKEE_PORT || 3000
-const url = `http://localhost:${ port }`
+const dbUrl = process.env.ACKEE_MONGODB
+const serverUrl = `http://localhost:${ port }`
 
 mongoose.set('useFindAndModify', false)
 
-server.on('listening', () => signale.watch(`Listening on ${ url }`))
+server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
 server.on('error', (err) => signale.fatal(err))
 
-signale.await(`Connecting to ${ process.env.ACKEE_MONGODB }`)
+if (dbUrl == null) {
+	signale.fatal('MongoDB connection URI missing in environment')
+	process.exit(1)
+}
 
-mongoose.connect(process.env.ACKEE_MONGODB, {
+signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
+
+mongoose.connect(dbUrl, {
 
 	useNewUrlParser: true,
 	useCreateIndex: true,
@@ -28,14 +35,14 @@ mongoose.connect(process.env.ACKEE_MONGODB, {
 
 }).then(() => {
 
-	signale.success(`Connected to ${ process.env.ACKEE_MONGODB }`)
+	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
 	signale.start(`Starting the server`)
 
 	server.listen(port)
 
 	if (isDemo === true) {
 
-		const job = fillDatabase(url)
+		const job = fillDatabase(serverUrl)
 		const date = job.nextInvocation()
 
 		const formattedDate = `${ date.getDate() }.${ date.getMonth() }.${ date.getFullYear() }`

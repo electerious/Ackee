@@ -33,8 +33,8 @@ export default produce((draft, action) => {
 	switch (action.type) {
 		case SET_PAGES_SORTING:
 			// Reset value because a different sorting results in a different value strcuture
-			draft.sorting = action.payload || initialState().sorting
 			draft.value = initialState().value
+			draft.sorting = action.payload || initialState().sorting
 			break
 		case SET_PAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

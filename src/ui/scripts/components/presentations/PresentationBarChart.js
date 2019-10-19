@@ -50,25 +50,30 @@ const Column = (props) => {
 
 const PresentationBarChart = (props) => {
 
+	const defaultFormatter = (_) => _
+
 	const hasItems = props.items.length > 0
+	const formatter = props.formatter || defaultFormatter
 
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
-				h(Row, { position: 'top' }, hasItems === true ? max(props.items) : ''),
-				h(Row, { position: 'middle' }, hasItems === true ? mid(props.items) : ''),
-				h(Row, { position: 'bottom' }, hasItems === true ? min() : '')
+				h(Row, { position: 'top' }, hasItems === true ? formatter(max(props.items)) : ''),
+				h(Row, { position: 'middle' }, hasItems === true ? formatter(mid(props.items)) : ''),
+				h(Row, { position: 'bottom' }, hasItems === true ? formatter(min()) : '')
 			),
-			props.items.map((item, index) => (
-				h(Column, {
-					key: index,
-					active: props.active === index,
-					size: `${ percentage(item, max(props.items)) }%`,
-					onEnter: () => props.onEnter(index),
-					onLeave: () => props.onLeave(index),
-					label: item
-				})
-			))
+			h('div', { className: 'barChart__columns' },
+				props.items.map((item, index) => (
+					h(Column, {
+						key: index,
+						active: props.active === index,
+						size: `${ percentage(item, max(props.items)) }%`,
+						onEnter: () => props.onEnter(index),
+						onLeave: () => props.onLeave(index),
+						label: formatter(item)
+					})
+				))
+			)
 		)
 	)
 
@@ -76,6 +81,7 @@ const PresentationBarChart = (props) => {
 
 PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,
+	formatter: PropTypes.func,
 	onEnter: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired
 }

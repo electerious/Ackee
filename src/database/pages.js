@@ -15,7 +15,7 @@ const getTop = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},
@@ -46,7 +46,7 @@ const getRecent = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},

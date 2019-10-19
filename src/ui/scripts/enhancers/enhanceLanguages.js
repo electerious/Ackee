@@ -1,4 +1,4 @@
-import languageCodes from './languageCodes'
+import languageCodes from '../utils/languageCodes'
 
 export default (languages) => {
 

@@ -1,4 +1,5 @@
 import api from '../utils/api'
+import signalHandler from '../utils/signalHandler'
 
 export const SET_LANGUAGES_SORTING = Symbol()
 export const SET_LANGUAGES_VALUE = Symbol()
@@ -33,7 +34,7 @@ export const resetLanguages = () => ({
 	type: RESET_LANGUAGES
 })
 
-export const fetchLanguages = (props, domainId) => async (dispatch) => {
+export const fetchLanguages = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
 	dispatch(setLanguagesFetching(domainId, true))
 	dispatch(setLanguagesError(domainId))
@@ -42,19 +43,18 @@ export const fetchLanguages = (props, domainId) => async (dispatch) => {
 
 		const data = await api(`/domains/${ domainId }/languages?sorting=${ props.languages.sorting }`, {
 			method: 'get',
-			props
+			props,
+			signal: signal(domainId)
 		})
 
 		dispatch(setLanguagesValue(domainId, data))
+		dispatch(setLanguagesFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setLanguagesError(domainId, err))
-
-	} finally {
-
 		dispatch(setLanguagesFetching(domainId, false))
 
 	}
 
-}
+})

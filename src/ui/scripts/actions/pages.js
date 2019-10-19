@@ -1,4 +1,5 @@
 import api from '../utils/api'
+import signalHandler from '../utils/signalHandler'
 
 export const SET_PAGES_SORTING = Symbol()
 export const SET_PAGES_VALUE = Symbol()
@@ -33,7 +34,7 @@ export const resetPages = () => ({
 	type: RESET_PAGES
 })
 
-export const fetchPages = (props, domainId) => async (dispatch) => {
+export const fetchPages = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
 	dispatch(setPagesFetching(domainId, true))
 	dispatch(setPagesError(domainId))
@@ -42,19 +43,18 @@ export const fetchPages = (props, domainId) => async (dispatch) => {
 
 		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }`, {
 			method: 'get',
-			props
+			props,
+			signal: signal(domainId)
 		})
 
 		dispatch(setPagesValue(domainId, data))
+		dispatch(setPagesFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setPagesError(domainId, err))
-
-	} finally {
-
 		dispatch(setPagesFetching(domainId, false))
 
 	}
 
-}
+})

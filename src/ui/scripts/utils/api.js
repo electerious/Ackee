@@ -1,6 +1,6 @@
 import timeout from './timeout'
 
-export default async (url, { props, method, body }) => {
+export default async (url, { props, method, body, signal }) => {
 
 	try {
 
@@ -12,7 +12,8 @@ export default async (url, { props, method, body }) => {
 		const request = fetch(url, {
 			headers,
 			method,
-			body
+			body,
+			signal
 		})
 
 		const response = await timeout(request, 'Request timeout', 30000)
@@ -41,6 +42,11 @@ export default async (url, { props, method, body }) => {
 	} catch (err) {
 
 		console.error(err)
+
+		if (err.name === 'AbortError') {
+			// Request has been canceled => Do nothing
+			return
+		}
 
 		if (err.message === 'Token invalid') {
 			// Reset token and show login
