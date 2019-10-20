@@ -1,5 +1,5 @@
 import enhanceViews from '../enhancers/enhanceViews'
-import isDefined from './isDefined'
+import isDefined from '../../../utils/isDefined'
 
 // Turns the views of multiple domains into one array of views
 export default (domains, views) => {
