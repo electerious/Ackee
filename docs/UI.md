@@ -1,6 +1,7 @@
 # UI
 
 - [Index](#index)
+- [Favicon](#favicon)
 - [Styles](#styles)
 - [Scripts](#scripts)
 - [Tracker](#tracker)
@@ -29,6 +30,22 @@ Status: 200 OK
 
 		<title>Ackee</title>
 		…
+```
+
+## Favicon
+
+Favicon of Ackee.
+
+### Request
+
+```
+GET /favicon.ico
+```
+
+### Response
+
+```
+Status: 200 OK
 ```
 
 ## Styles
