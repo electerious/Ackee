@@ -2,6 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import {
 	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_NEW,
 	REFERRERS_SORTING_RECENT
 } from '../../../../constants/referrers'
 
@@ -36,6 +37,7 @@ const RouteReferrers = (props) => {
 					onChange: (e) => props.setReferrersSorting(e.target.value),
 					items: [
 						{ value: REFERRERS_SORTING_TOP, label: 'Top referrers' },
+						{ value: REFERRERS_SORTING_NEW, label: 'New referrers' },
 						{ value: REFERRERS_SORTING_RECENT, label: 'Recent referrers' }
 					]
 				})
