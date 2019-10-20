@@ -6,6 +6,8 @@ const { router, get, post, put, patch, del } = require('microrouter')
 
 const signale = require('./utils/signale')
 const pipe = require('./utils/pipe')
+const isDefined = require('./utils/isDefined')
+const customTrackerUrl = require('./utils/customTrackerUrl')
 const requireAuth = require('./middlewares/requireAuth')
 const blockDemo = require('./middlewares/blockDemo')
 const ui = require('./routes/ui')
@@ -50,44 +52,47 @@ const notFound = async (req) => {
 
 }
 
+const routes = [
+
+	get('/', ui.index),
+	get('/index.html', ui.index),
+	get('/favicon.ico', ui.favicon),
+	get('/index.css', ui.styles),
+	get('/index.js', ui.scripts),
+	get('/tracker.js', ui.tracker),
+	customTrackerUrl != null ? get(customTrackerUrl, ui.tracker) : undefined,
+
+	post('/tokens', tokens.add),
+	del('/tokens/:tokenId', tokens.del),
+
+	post('/domains', pipe(requireAuth, blockDemo, domains.add)),
+	get('/domains', pipe(requireAuth, domains.all)),
+	put('/domains/:domainId', pipe(requireAuth, blockDemo, domains.update)),
+	del('/domains/:domainId', pipe(requireAuth, blockDemo, domains.del)),
+
+	post('/domains/:domainId/records', records.add),
+	patch('/domains/:domainId/records/:recordId', records.update),
+
+	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
+
+	get('/domains/:domainId/pages', pipe(requireAuth, pages.get)),
+
+	get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
+
+	get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
+
+	get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
+
+	get('/*', notFound),
+	post('/*', notFound),
+	put('/*', notFound),
+	patch('/*', notFound),
+	del('/*', notFound)
+
+].filter(isDefined)
+
 module.exports = micro(
 	catchError(
-		router(
-
-			get('/', ui.index),
-			get('/index.html', ui.index),
-			get('/favicon.ico', ui.favicon),
-			get('/index.css', ui.styles),
-			get('/index.js', ui.scripts),
-			get('/tracker.js', ui.tracker),
-
-			post('/tokens', tokens.add),
-			del('/tokens/:tokenId', tokens.del),
-
-			post('/domains', pipe(requireAuth, blockDemo, domains.add)),
-			get('/domains', pipe(requireAuth, domains.all)),
-			put('/domains/:domainId', pipe(requireAuth, blockDemo, domains.update)),
-			del('/domains/:domainId', pipe(requireAuth, blockDemo, domains.del)),
-
-			post('/domains/:domainId/records', records.add),
-			patch('/domains/:domainId/records/:recordId', records.update),
-
-			get('/domains/:domainId/views', pipe(requireAuth, views.get)),
-
-			get('/domains/:domainId/pages', pipe(requireAuth, pages.get)),
-
-			get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
-
-			get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
-
-			get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
-
-			get('/*', notFound),
-			post('/*', notFound),
-			put('/*', notFound),
-			patch('/*', notFound),
-			del('/*', notFound)
-
-		)
+		router(...routes)
 	)
 )

@@ -73,7 +73,10 @@
   },
   "ava": {
     "babel": false,
-    "verbose": true
+    "verbose": true,
+    "environmentVariables": {
+      "ACKEE_TRACKER": "custom name"
+    }
   },
   "engines": {
     "node": ">= 10"

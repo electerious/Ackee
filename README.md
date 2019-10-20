@@ -120,6 +120,16 @@ Specifies how long a generated token is valid. Defaults to `3600000` (1 day).
 ACKEE_TTL=3600000
 ```
 
+#### Tracker
+
+Pick a custom name for the tracking script of Ackee to avoid getting blocked by browser extensions. The default script will always be available via `/tracker.js`. You custom script will be available via `/custom%20name.js`. Ackee will encode your custom name to a URL encoded format.
+
+Make sure to adjust the tracking script URL on your sites when changing this option. Sites that are using the default URL won't be affected.
+
+```
+ACKEE_TRACKER=custom name
+```
+
 #### Environment
 
 Set the environment to `development` to see additional details in the console and to disable caching.
