@@ -57,6 +57,7 @@ module.exports = micro(
 
 			get('/', ui.index),
 			get('/index.html', ui.index),
+			get('/favicon.ico', ui.favicon),
 			get('/index.css', ui.styles),
 			get('/index.js', ui.scripts),
 

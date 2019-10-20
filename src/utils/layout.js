@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = (body, styles, scripts) => `
+module.exports = (body, favicon, styles, scripts) => `
 	<!doctype html>
 	<html lang="en">
 		<head>
@@ -9,6 +9,9 @@ module.exports = (body, styles, scripts) => `
 
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
+
+			<!-- Favicon -->
+			<link rel="shortcut icon" href="${ favicon }" type="image/x-icon">
 
 			<!-- CSS -->
 			${ styles.map((src) => `<link rel="stylesheet" href="${ src }">`).join('') }

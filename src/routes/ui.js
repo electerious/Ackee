@@ -1,6 +1,7 @@
 'use strict'
 
 const { resolve } = require('path')
+const { readFile } = require('fs').promises
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js')
 
@@ -16,6 +17,20 @@ const index = () => {
 	return async (req, res) => {
 
 		res.setHeader('Content-Type', 'text/html; charset=utf-8')
+		res.end(await data)
+
+	}
+
+}
+
+const favicon = () => {
+
+	const filePath = resolve(__dirname, '../ui/images/favicon.ico')
+	const data = readFile(filePath)
+
+	return async (req, res) => {
+
+		res.setHeader('Content-Type', 'image/vnd.microsoft.icon')
 		res.end(await data)
 
 	}
@@ -78,6 +93,7 @@ const scripts = () => {
 
 module.exports = {
 	index: isProductionEnv === true ? index() : (req, res) => index()(req, res),
+	favicon: isProductionEnv === true ? favicon() : (req, res) => favicon()(req, res),
 	styles: isProductionEnv === true ? styles() : (req, res) => styles()(req, res),
 	scripts: isProductionEnv === true ? scripts() : (req, res) => scripts()(req, res)
 }
