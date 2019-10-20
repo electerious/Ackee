@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Added
+
+- "New referrers"
+
 ### Fixed
 
 - Incorrect content type for JS files (#54)
