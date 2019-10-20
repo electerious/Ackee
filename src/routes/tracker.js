@@ -2,17 +2,22 @@
 
 const { readFile } = require('fs').promises
 
-const preload = require('../utils/preload')
 const isProductionEnv = require('../utils/isProductionEnv')
 
-const get = async () => {
+const get = () => {
 
 	const filePath = require.resolve('ackee-tracker')
+	const data = readFile(filePath, 'utf8')
 
-	return readFile(filePath, 'utf8')
+	return async (req, res) => {
+
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await data)
+
+	}
 
 }
 
 module.exports = {
-	get: isProductionEnv === true ? preload(get) : get
+	get: isProductionEnv === true ? get() : (req, res) => get()(req, res)
 }

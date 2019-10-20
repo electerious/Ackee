@@ -4,29 +4,39 @@ const { resolve } = require('path')
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js')
 
-const preload = require('../utils/preload')
 const html = require('../ui/index')
 
 const isDemo = require('../utils/isDemo')
 const isProductionEnv = require('../utils/isProductionEnv')
 
-const index = async () => {
+const index = () => {
 
-	return html()
+	const data = html()
+
+	return async (req, res) => {
+
+		res.setHeader('Content-Type', 'text/html; charset=utf-8')
+		res.end(await data)
+
+	}
 
 }
 
-const styles = async () => {
+const styles = () => {
 
 	const filePath = resolve(__dirname, '../ui/styles/index.scss')
+	const data = sass(filePath, { optimize: isProductionEnv === true })
 
-	return sass(filePath, {
-		optimize: isProductionEnv === true
-	})
+	return async (req, res) => {
+
+		res.setHeader('Content-Type', 'text/css; charset=utf-8')
+		res.end(await data)
+
+	}
 
 }
 
-const scripts = async () => {
+const scripts = () => {
 
 	const filePath = resolve(__dirname, '../ui/scripts/index.js')
 
@@ -48,7 +58,7 @@ const scripts = async () => {
 		babelrc: false
 	}
 
-	return js(filePath, {
+	const data = js(filePath, {
 		optimize: isProductionEnv === true,
 		env: {
 			ACKEE_DEMO: isDemo === true ? 'true' : 'false',
@@ -57,10 +67,17 @@ const scripts = async () => {
 		babel
 	})
 
+	return async (req, res) => {
+
+		res.setHeader('Content-Type', 'application/javascript; charset=utf-8')
+		res.end(await data)
+
+	}
+
 }
 
 module.exports = {
-	index: isProductionEnv === true ? preload(index) : index,
-	styles: isProductionEnv === true ? preload(styles) : styles,
-	scripts: isProductionEnv === true ? preload(scripts) : scripts
+	index: isProductionEnv === true ? index() : (req, res) => index()(req, res),
+	styles: isProductionEnv === true ? styles() : (req, res) => styles()(req, res),
+	scripts: isProductionEnv === true ? scripts() : (req, res) => scripts()(req, res)
 }
