@@ -22,7 +22,7 @@
     "start": "node src/index.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
-    "lint": "eslint 'src/**/*.js'"
+    "lint": "eslint '{src,test}/**/*.js'"
   },
   "eslintConfig": {
     "extends": "@electerious/eslint-config"
