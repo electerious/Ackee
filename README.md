@@ -4,6 +4,8 @@
 
 Self-hosted, Node.js based analytics tool for those who care about privacy. Ackee runs on your own server, analyses the traffic of your websites and provides useful statistics in a minimal interface.
 
+Try the [🔮 live demo](https://demo.ackee.electerious.com) or learn more about Ackee on our [🌍 website](https://ackee.electerious.com).
+
 ![Ackee in a browser](https://s.electerious.com/images/ackee/readme.png)
 
 ## Contents
