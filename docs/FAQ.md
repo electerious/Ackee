@@ -78,6 +78,10 @@ The last 25 page visits of the last 7 days. Sorted by time.
 
 The top 25 pages from which your visitors have come in the last 7 days. Sorted by popularity.
 
+### Referrers > New referrers
+
+Pages from which your visitors have come in the last 7 days. Ignores old referrers. Sorted by time.
+
 ### Referrers > Recent referrers
 
 The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
