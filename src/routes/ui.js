@@ -91,9 +91,24 @@ const scripts = () => {
 
 }
 
+const tracker = () => {
+
+	const filePath = require.resolve('ackee-tracker')
+	const data = readFile(filePath, 'utf8')
+
+	return async (req, res) => {
+
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await data)
+
+	}
+
+}
+
 module.exports = {
 	index: isProductionEnv === true ? index() : (req, res) => index()(req, res),
 	favicon: isProductionEnv === true ? favicon() : (req, res) => favicon()(req, res),
 	styles: isProductionEnv === true ? styles() : (req, res) => styles()(req, res),
-	scripts: isProductionEnv === true ? scripts() : (req, res) => scripts()(req, res)
+	scripts: isProductionEnv === true ? scripts() : (req, res) => scripts()(req, res),
+	tracker: isProductionEnv === true ? tracker() : (req, res) => tracker()(req, res)
 }

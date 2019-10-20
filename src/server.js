@@ -9,7 +9,6 @@ const pipe = require('./utils/pipe')
 const requireAuth = require('./middlewares/requireAuth')
 const blockDemo = require('./middlewares/blockDemo')
 const ui = require('./routes/ui')
-const tracker = require('./routes/tracker')
 const tokens = require('./routes/tokens')
 const domains = require('./routes/domains')
 const records = require('./routes/records')
@@ -60,8 +59,7 @@ module.exports = micro(
 			get('/favicon.ico', ui.favicon),
 			get('/index.css', ui.styles),
 			get('/index.js', ui.scripts),
-
-			get('/tracker.js', tracker.get),
+			get('/tracker.js', ui.tracker),
 
 			post('/tokens', tokens.add),
 			del('/tokens/:tokenId', tokens.del),
