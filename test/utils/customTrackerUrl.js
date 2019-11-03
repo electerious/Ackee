@@ -4,7 +4,7 @@ const test = require('ava')
 
 const customTrackerUrl = require('../../src/utils/customTrackerUrl')
 
-test('return undefined', async (t) => {
+test('return custom URL', async (t) => {
 
 	const result = customTrackerUrl
 
