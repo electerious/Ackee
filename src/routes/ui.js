@@ -76,6 +76,7 @@ const scripts = () => {
 	const data = js(filePath, {
 		optimize: isProductionEnv === true,
 		env: {
+			ACKEE_TRACKER: process.env.ACKEE_TRACKER,
 			ACKEE_DEMO: isDemo === true ? 'true' : 'false',
 			NODE_ENV: isProductionEnv === true ? 'production' : 'development'
 		},
