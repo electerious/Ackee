@@ -30,7 +30,7 @@
   "dependencies": {
     "@babel/core": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
-    "ackee-tracker": "^3.2.1",
+    "ackee-tracker": "^3.2.2",
     "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
     "formbase": "^11.0.0",
