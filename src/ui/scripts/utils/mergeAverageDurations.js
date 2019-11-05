@@ -1,5 +1,5 @@
 import enhanceAverageDurations from '../enhancers/enhanceAverageDurations'
-import isDefined from './isDefined'
+import isDefined from '../../../utils/isDefined'
 
 // Turns the durations of multiple domains into one array of durations
 export default (domains, durations) => {
