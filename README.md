@@ -13,6 +13,7 @@ Try the [🔮 live demo](https://demo.ackee.electerious.com) or learn more about
 - 🏃 [Get started](#get-started)
 - 📄 [Introduction](#introduction)
 - ⚙️ [Documentation](#documentation)
+- ➕ [More](#more)
 
 ## Get started
 
@@ -141,3 +142,9 @@ NODE_ENV=development
 ### More
 
 More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
+
+#### Related
+
+- [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
+- [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
+- [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
