@@ -25,6 +25,7 @@
     "lint": "eslint '{src,test}/**/*.js'"
   },
   "eslintConfig": {
+    "root": true,
     "extends": "@electerious/eslint-config"
   },
   "dependencies": {
