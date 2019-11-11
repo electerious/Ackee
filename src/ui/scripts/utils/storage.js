@@ -21,3 +21,9 @@ export const save = (state) => {
 	localStorage.setItem(PERSISTED_STATE_KEY, serializedState)
 
 }
+
+export const reset = () => {
+
+	localStorage.removeItem(PERSISTED_STATE_KEY)
+
+}

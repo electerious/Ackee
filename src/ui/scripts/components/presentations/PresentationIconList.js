@@ -18,16 +18,17 @@ const Row = (props) => {
 			className: 'flexList__row',
 			href: props.url.href,
 			target: '_blank',
+			rel: 'noopener',
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave
 		},
-			h('div', {
-				className: 'flexList__data'
-			},
-				hasBar === true && h('div', { className: 'flexList__bar', style: { '--width': `${ props.barWidth }%` } }),
-				h(Favicon, { url: faviconUrl }),
-				h('span', { className: 'flexList__hostname' }, hostnameUrl),
-				h('span', { className: 'flexList__pathname' }, pathnameUrl)
+			h('div', { className: 'flexList__column flexList__column--spacing-right' },
+				hasBar === true && h('div', { className: 'flexList__bar flexList__bar--favicon', style: { '--width': `${ props.barWidth }%` } }),
+				h(Favicon, { url: faviconUrl })
+			),
+			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
+				h('span', {}, hostnameUrl),
+				h('span', { className: 'flexList__obscured' }, pathnameUrl)
 			)
 		)
 	)
@@ -59,7 +60,10 @@ const PresentationIconList = (props) => {
 }
 
 PresentationIconList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.object).isRequired,
+	items: PropTypes.arrayOf(PropTypes.shape({
+		url: PropTypes.object.isRequired,
+		count: PropTypes.number
+	})).isRequired,
 	onEnter: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired
 }

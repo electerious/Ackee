@@ -15,7 +15,7 @@ Ackee also removes personal data from previous records when a new record with an
 Ackee won't track personal information by default, but it has the ability to do so in a privacy focused way. Our recommendation:
 
 1. Ask the user for permission to track personal data and set a cookie to remember his decision
-2. Enable `detailed` with the next pageview (an option of [ackee-tracker](https://github.com/electerious/ackee-tracker))
+2. Enable `detailed` with the next page view (an option of [ackee-tracker](https://github.com/electerious/ackee-tracker))
 3. Ackee now receives data considered as "personal data"
 
 The following data is considered as "personal data":

@@ -3,26 +3,26 @@ import PropTypes from 'prop-types'
 
 import Headline from '../Headline'
 import Text from '../Text'
-import PresentationCounterList from '../presentations/PresentationCounterList'
+import PresentationValuesBar from '../presentations/PresentationValuesBar'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 
-const CardPageViews = (props) => {
+const CardDetailedDurations = (props) => {
 
 	const presentation = (() => {
 
 		if (props.loading === true) return h(PresentationEmptyState, {
 			icon: ICON_LOADING
-		}, 'Loading pages')
+		}, 'Loading durations')
 
 		const hasItems = props.items.length > 0
 
-		if (hasItems === true) return h(PresentationCounterList, {
+		if (hasItems === true) return h(PresentationValuesBar, {
 			items: props.items
 		})
 
 		return h(PresentationEmptyState, {
 			icon: ICON_WARNING
-		}, 'No pages')
+		}, 'No durations')
 
 	})()
 
@@ -46,10 +46,10 @@ const CardPageViews = (props) => {
 
 }
 
-CardPageViews.propTypes = {
+CardDetailedDurations.propTypes = {
 	headline: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 
-export default CardPageViews
+export default CardDetailedDurations

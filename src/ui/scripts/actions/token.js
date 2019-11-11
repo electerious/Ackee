@@ -1,4 +1,5 @@
 import api from '../utils/api'
+import signalHandler from '../utils/signalHandler'
 
 export const SET_TOKEN_VALUE = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
@@ -24,7 +25,7 @@ export const resetToken = () => ({
 	type: RESET_TOKEN
 })
 
-export const addToken = (props, state) => async (dispatch) => {
+export const addToken = signalHandler((signal) => (props, state) => async (dispatch) => {
 
 	dispatch(setTokenFetching(true))
 	dispatch(setTokenError())
@@ -34,37 +35,40 @@ export const addToken = (props, state) => async (dispatch) => {
 		const data = await api('/tokens', {
 			method: 'post',
 			body: JSON.stringify(state),
-			props
+			props,
+			signal: signal()
 		})
 
 		dispatch(setTokenValue(data))
+		dispatch(setTokenFetching(false))
 
 	} catch (err) {
 
 		dispatch(setTokenError(err))
-
-	} finally {
-
 		dispatch(setTokenFetching(false))
 
 	}
 
-}
+})
 
-export const deleteToken = (props) => async (dispatch) => {
+export const deleteToken = signalHandler((signal) => (props) => async (dispatch) => {
 
 	dispatch(resetToken())
 
 	props.resetDomains()
 	props.resetViews()
+	props.resetPages()
 	props.resetReferrers()
+	props.resetDurations()
+	props.resetLanguages()
 	props.resetRoute()
 
 	try {
 
 		await api(`/tokens/${ props.token.value.id }`, {
 			method: 'delete',
-			props
+			props,
+			signal: signal()
 		})
 
 	} catch (err) {
@@ -73,4 +77,4 @@ export const deleteToken = (props) => async (dispatch) => {
 
 	}
 
-}
+})

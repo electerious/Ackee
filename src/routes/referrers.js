@@ -6,6 +6,7 @@ const referrers = require('../database/referrers')
 
 const {
 	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_NEW,
 	REFERRERS_SORTING_RECENT
 } = require('../constants/referrers')
 
@@ -13,7 +14,8 @@ const response = (entry) => ({
 	type: 'referrer',
 	data: {
 		id: entry._id,
-		count: entry.count
+		count: entry.count,
+		created: entry.created
 	}
 })
 
@@ -31,6 +33,7 @@ const get = async (req) => {
 
 	switch (sorting) {
 		case REFERRERS_SORTING_TOP: return responses(entries)
+		case REFERRERS_SORTING_NEW: return responses(entries)
 		case REFERRERS_SORTING_RECENT: return responses(entries)
 		default: throw createError(400, 'Unknown sorting')
 	}

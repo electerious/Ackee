@@ -2,6 +2,8 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
 
+import customTrackerUrl from '../../../../utils/customTrackerUrl'
+
 import Input from '../Input'
 import Textarea from '../Textarea'
 import Label from '../Label'
@@ -39,7 +41,8 @@ const ModalDomainEdit = (props) => {
 	const idId = shortid.generate()
 	const embedId = shortid.generate()
 
-	const srcUrl = (new URL('/tracker.js', location.href)).href
+	const trackerUrl = customTrackerUrl || '/tracker.js'
+	const srcUrl = (new URL(trackerUrl, location.href)).href
 	const serverUrl = location.origin
 
 	return (

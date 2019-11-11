@@ -1,11 +1,18 @@
 'use strict'
 
-const day = require('./day')
+const { day } = require('./times')
 
-module.exports = (offset, date = new Date()) => {
+module.exports = (offset) => {
 
-	date.setTime(date.getTime() + day * offset)
+	const currentDate = new Date()
 
-	return date
+	currentDate.setHours(0)
+	currentDate.setMinutes(0)
+	currentDate.setSeconds(0)
+	currentDate.setMilliseconds(0)
+
+	currentDate.setTime(currentDate.getTime() + day * offset)
+
+	return currentDate
 
 }

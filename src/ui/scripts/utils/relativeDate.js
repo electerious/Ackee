@@ -1,9 +1,10 @@
-export default (offset) => {
+import sAgo from 's-ago'
 
-	switch (offset) {
-		case 0: return 'Today'
-		case 1: return 'Yesterday'
-		default: return `${ offset } days ago`
-	}
+export default (date) => {
+
+	const value = sAgo(date)
+
+	// Uppercase first character
+	return value.charAt(0).toUpperCase() + value.slice(1)
 
 }

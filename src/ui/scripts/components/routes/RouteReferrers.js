@@ -2,10 +2,12 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import {
 	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_NEW,
 	REFERRERS_SORTING_RECENT
 } from '../../../../constants/referrers'
 
-import enhanceReferrers from '../../utils/enhanceReferrers'
+import enhanceReferrers from '../../enhancers/enhanceReferrers'
+import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardReferrers from '../cards/CardReferrers'
 import Select from '../Select'
@@ -18,7 +20,7 @@ const RouteReferrers = (props) => {
 
 	}, [])
 
-	useEffect(() => {
+	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchReferrers(props, domain.data.id)
@@ -35,6 +37,7 @@ const RouteReferrers = (props) => {
 					onChange: (e) => props.setReferrersSorting(e.target.value),
 					items: [
 						{ value: REFERRERS_SORTING_TOP, label: 'Top referrers' },
+						{ value: REFERRERS_SORTING_NEW, label: 'New referrers' },
 						{ value: REFERRERS_SORTING_RECENT, label: 'Recent referrers' }
 					]
 				})

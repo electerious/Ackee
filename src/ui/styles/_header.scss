@@ -1,9 +1,29 @@
 .header {
 
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	border-bottom: 1px solid $border;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: $gutter*2;
+	}
+
+	&::before {
+		left: 0;
+		background: linear-gradient(to right, $black, rgba($black, 0));
+	}
+
+	&::after {
+		right: 0;
+		background: linear-gradient(to right, rgba($black, 0), $black);
+	}
 
 	@keyframes header__rotate {
 		0% {
@@ -59,8 +79,21 @@
 		}
 	}
 
+	&__nav {
+		display: flex;
+		width: 100%;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	&__buttons {
+		display: flex;
+		margin: 0 auto;
+		padding: 0 $gutter/2;
+	}
+
 	&__button {
-		margin: 0 $gutter/1.5;
+		margin: 0 $gutter/2;
 		padding: $gutter/1.5 2px;
 		outline: none;
 		transition: box-shadow .3s ease;

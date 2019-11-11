@@ -19,6 +19,16 @@ test('return HTML', async (t) => {
 
 })
 
+test('return favicon', async (t) => {
+
+	const url = new URL('/favicon.ico', await base)
+	const res = await fetch(url.href)
+	const headers = res.headers
+
+	t.is(headers.get('Content-Type'), 'image/vnd.microsoft.icon')
+
+})
+
 test('return JS', async (t) => {
 
 	const url = new URL('/index.js', await base)
@@ -36,6 +46,16 @@ test('return CSS', async (t) => {
 	const result = await res.text()
 
 	t.true(result.includes('html{'))
+
+})
+
+test('return tracking script', async (t) => {
+
+	const url = new URL('/tracker.js', await base)
+	const res = await fetch(url.href)
+	const result = await res.text()
+
+	t.true(result.includes('use strict'))
 
 })
 

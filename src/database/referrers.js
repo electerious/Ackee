@@ -5,6 +5,7 @@ const dateWithOffset = require('../utils/dateWithOffset')
 
 const {
 	REFERRERS_SORTING_TOP,
+	REFERRERS_SORTING_NEW,
 	REFERRERS_SORTING_RECENT
 } = require('../constants/referrers')
 
@@ -18,7 +19,7 @@ const getTop = async (id) => {
 					$ne: null
 				},
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},
@@ -42,6 +43,47 @@ const getTop = async (id) => {
 
 }
 
+const getNew = async (id) => {
+
+	return Record.aggregate([
+		{
+			$match: {
+				domainId: id,
+				siteReferrer: {
+					$ne: null
+				}
+			}
+		},
+		{
+			$group: {
+				_id: '$siteReferrer',
+				count: {
+					$sum: 1
+				},
+				created: {
+					$first: '$created'
+				}
+			}
+		},
+		{
+			$match: {
+				created: {
+					$gte: dateWithOffset(-6)
+				}
+			}
+		},
+		{
+			$sort: {
+				created: -1
+			}
+		},
+		{
+			$limit: 25
+		}
+	])
+
+}
+
 const getRecent = async (id) => {
 
 	return Record.aggregate([
@@ -52,7 +94,7 @@ const getRecent = async (id) => {
 					$ne: null
 				},
 				created: {
-					$gte: dateWithOffset(-7)
+					$gte: dateWithOffset(-6)
 				}
 			}
 		},
@@ -63,7 +105,8 @@ const getRecent = async (id) => {
 		},
 		{
 			$project: {
-				_id: '$siteReferrer'
+				_id: '$siteReferrer',
+				created: '$created'
 			}
 		},
 		{
@@ -77,6 +120,7 @@ const get = async (id, sorting) => {
 
 	switch (sorting) {
 		case REFERRERS_SORTING_TOP: return getTop(id)
+		case REFERRERS_SORTING_NEW: return getNew(id)
 		case REFERRERS_SORTING_RECENT: return getRecent(id)
 	}
 

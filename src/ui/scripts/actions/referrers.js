@@ -1,4 +1,5 @@
 import api from '../utils/api'
+import signalHandler from '../utils/signalHandler'
 
 export const SET_REFERRERS_SORTING = Symbol()
 export const SET_REFERRERS_VALUE = Symbol()
@@ -33,7 +34,7 @@ export const resetReferrers = () => ({
 	type: RESET_REFERRERS
 })
 
-export const fetchReferrers = (props, domainId) => async (dispatch) => {
+export const fetchReferrers = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
 	dispatch(setReferrersFetching(domainId, true))
 	dispatch(setReferrersError(domainId))
@@ -42,19 +43,18 @@ export const fetchReferrers = (props, domainId) => async (dispatch) => {
 
 		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }`, {
 			method: 'get',
-			props
+			props,
+			signal: signal(domainId)
 		})
 
 		dispatch(setReferrersValue(domainId, data))
+		dispatch(setReferrersFetching(domainId, false))
 
 	} catch (err) {
 
 		dispatch(setReferrersError(domainId, err))
-
-	} finally {
-
 		dispatch(setReferrersFetching(domainId, false))
 
 	}
 
-}
+})

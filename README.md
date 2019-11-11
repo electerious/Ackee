@@ -4,6 +4,8 @@
 
 Self-hosted, Node.js based analytics tool for those who care about privacy. Ackee runs on your own server, analyses the traffic of your websites and provides useful statistics in a minimal interface.
 
+Try the [🔮 live demo](https://demo.ackee.electerious.com) or learn more about Ackee on our [🌍 website](https://ackee.electerious.com).
+
 ![Ackee in a browser](https://s.electerious.com/images/ackee/readme.png)
 
 ## Contents
@@ -24,6 +26,7 @@ And configure Ackee and your server correctly…
 
 - […with environment variables](#options)
 - […with SSL and HTTPS enabled](docs/SSL%20and%20HTTPS.md)
+- […with CORS headers](docs/CORS%20headers.md)
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
@@ -75,7 +78,10 @@ Make sure to install and update all dependencies before you setup Ackee.
 - [/domains](docs/domains.md)
 - [/domains/:domainId/records](docs/records.md)
 - [/domains/:domainId/views](docs/views.md)
+- [/domains/:domainId/pages](docs/pages.md)
 - [/domains/:domainId/referrers](docs/referrers.md)
+- [/domains/:domainId/durations](docs/durations.md)
+- [/domains/:domainId/languages](docs/languages.md)
 
 ### Options
 
@@ -112,6 +118,16 @@ Specifies how long a generated token is valid. Defaults to `3600000` (1 day).
 
 ```
 ACKEE_TTL=3600000
+```
+
+#### Tracker
+
+Pick a custom name for the tracking script of Ackee to avoid getting blocked by browser extensions. The default script will always be available via `/tracker.js`. You custom script will be available via `/custom%20name.js`. Ackee will encode your custom name to a URL encoded format.
+
+Make sure to adjust the tracking script URL on your sites when changing this option. Sites that are using the default URL won't be affected.
+
+```
+ACKEE_TRACKER=custom name
 ```
 
 #### Environment

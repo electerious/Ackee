@@ -5,7 +5,10 @@ const fetch = require('node-fetch')
 const { Headers } = require('node-fetch')
 
 const signale = require('./signale')
+const sleep = require('./sleep')
 const randomItem = require('./randomItem')
+const randomInt = require('./randomInt')
+const { hour } = require('./times')
 
 const userAgents = Array(200).fill().map((_, index) => index)
 
@@ -17,6 +20,17 @@ const weekdayDuds = [
 	[ null ], // Thursday
 	[ null, null, null, null ], // Friday
 	[ null, null, null, null, null, null ] // Saturday
+]
+
+const siteLocations = [
+	'https://example.com',
+	'https://example.com/projects.html',
+	'https://example.com/about.html',
+	'https://example.com/faq.html',
+	'https://example.com/projects/ackee.html',
+	'https://example.com/projects/lychee.html',
+	'https://example.com/projects/malvid.html',
+	'https://example.com/projects/laudablesites.html'
 ]
 
 const referrers = [
@@ -40,7 +54,9 @@ const langauges = [
 	'en',
 	'de',
 	'fr',
-	'ni'
+	'ar',
+	'es',
+	'ja'
 ]
 
 const resolutions = [
@@ -160,11 +176,11 @@ const createRecord = () => {
 	const browser = randomItem(browsers)
 
 	const anonymousRecord = {
-		siteLocation: 'https://example.com'
+		siteLocation: randomItem(siteLocations)
 	}
 
 	const detailedRecord = {
-		siteLocation: 'https://example.com',
+		siteLocation: randomItem(siteLocations),
 		siteReferrer: randomItem(referrers),
 		siteLanguage: randomItem(langauges),
 		screenWidth: resolution.width,
@@ -219,17 +235,25 @@ const fetchDomains = async (url, token) => {
 
 }
 
-const addRecord = async (url, token, domain, record) => {
-
-	const headers = new Headers({
-		'Authorization': `Bearer ${ token }`,
-		'User-Agent': randomItem(userAgents)
-	})
+const addRecord = async (url, headers, domain, record) => {
 
 	const response = await fetch(`${ url }/domains/${ domain.id }/records`, {
 		method: 'post',
 		headers,
 		body: JSON.stringify(record)
+	})
+
+	const data = await response.json()
+
+	return data.data
+
+}
+
+const updateRecord = async (url, headers, domain, record) => {
+
+	const response = await fetch(`${ url }/domains/${ domain.id }/records/${ record.id }`, {
+		method: 'patch',
+		headers
 	})
 
 	const data = await response.json()
@@ -244,6 +268,7 @@ const job = (url) => async () => {
 
 		const currentDate = new Date()
 		const currentWeekday = currentDate.getDay()
+		const updateDelay = randomInt(0, hour * 1.5)
 
 		const token = await addToken(url)
 		const domains = await fetchDomains(url, token)
@@ -251,9 +276,17 @@ const job = (url) => async () => {
 		const domain = randomItem([ ...domains, ...weekdayDuds[currentWeekday] ])
 		const record = createRecord()
 
+		const headers = new Headers({
+			'Authorization': `Bearer ${ token }`,
+			'User-Agent': randomItem(userAgents)
+		})
+
 		if (domain == null) return
 
-		await addRecord(url, token, domain.data, record)
+		const response = await addRecord(url, headers, domain.data, record)
+
+		await sleep(updateDelay)
+		await updateRecord(url, headers, domain.data, response)
 
 	} catch (err) {
 
