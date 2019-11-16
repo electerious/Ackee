@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Favicon from '../Favicon'
 
+import enhanceUrl from '../../enhancers/enhanceUrl'
 import sumByProp from '../../utils/sumByProp'
 
 const Row = (props) => {
@@ -16,7 +17,7 @@ const Row = (props) => {
 	return (
 		h('a', {
 			className: 'flexList__row',
-			href: props.url.href,
+			href: enhanceUrl(props.url).href,
 			target: '_blank',
 			rel: 'noopener',
 			onMouseEnter: props.onEnter,

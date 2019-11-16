@@ -1,6 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
+import enhanceUrl from '../../enhancers/enhanceUrl'
 import sumByProp from '../../utils/sumByProp'
 import maxByProp from '../../utils/maxByProp'
 
@@ -9,7 +10,7 @@ const Row = (props) => {
 	const hasUrl = props.url != null
 
 	const rootType = hasUrl === true ? 'a' : 'div'
-	const rootProps = hasUrl === true ? { href: props.url.href, target: '_blank', rel: 'noopener' } : {}
+	const rootProps = hasUrl === true ? { href: enhanceUrl(props.url).href, target: '_blank', rel: 'noopener' } : {}
 
 	return (
 		h(rootType, {

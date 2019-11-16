@@ -1,7 +1,7 @@
 {
   "name": "ackee",
   "private": true,
-  "version": "1.4.0",
+  "version": "1.4.1",
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
@@ -25,6 +25,7 @@
     "lint": "eslint '{src,test}/**/*.js'"
   },
   "eslintConfig": {
+    "root": true,
     "extends": "@electerious/eslint-config"
   },
   "dependencies": {
