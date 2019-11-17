@@ -1,24 +1,12 @@
 # Get started
 
-## Requirements
-
-Ackee dependents on …
-
-- [Node.js](https://nodejs.org/en/) (v10.16 or newer)
-- [yarn](https://yarnpkg.com/en/)
-- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
-
-Make sure to install and update all dependencies before you fork and setup Ackee.
-
-## Setup
-
 - [With Docker Compose](#with-docker-compose)
 - [With Docker](#with-docker)
 - [Without Docker](#without-docker)
 
-### With Docker Compose
+## With Docker Compose
 
-#### 1. Create the configuration
+### 1. Create the configuration
 
 Create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of this project to store all environment variables in one file.
 
@@ -29,7 +17,7 @@ ACKEE_PASSWORD=password
 
 The [README](../README.md#Options) contains a detailed explanation of all available options, but only those two are required to run Ackee with the existing `docker-compose.yml`.
 
-#### 2. Run Ackee
+### 2. Run Ackee
 
 Run this command in the root of the project to use the predefined `docker-compose.yml`. It contains everything you need, including MongoDB and Ackee.
 
@@ -39,13 +27,13 @@ docker-compose up
 
 > 💡 Add the `-d` flag to the Docker command to run the services in the background.
 
-#### 3. Open Ackee
+### 3. Open Ackee
 
 Ackee will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps using the interface.
 
-### With Docker
+## With Docker
 
-#### 1. Setup MongoDB
+### 1. Setup MongoDB
 
 Ackee requires a running MongoDB instance. The easiest way to install MongoDB is by using [Docker](https://www.docker.com). Skip this step if you have MongoDB installed or visit the [website of MongoDB](https://www.mongodb.com) for alternative setups.
 
@@ -68,7 +56,7 @@ Explanation:
 - `--name` sets the container name to `mongo`
 - `mongo` is the name of the image
 
-#### 2. Run Ackee
+### 2. Run Ackee
 
 ```
 docker run -p 3000:3000 -e ACKEE_MONGODB='mongodb://mongo:27017/ackee' -e ACKEE_USERNAME='username' -e ACKEE_PASSWORD='password' --link mongo --name ackee electerious/ackee
@@ -84,17 +72,23 @@ Explanation:
 - `--name` sets the container name to `ackee`
 - `electerious/ackee` is the name of the image
 
-#### 3. Open Ackee
+### 3. Open Ackee
 
 Ackee will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps using the interface.
 
-### Without Docker
+## Without Docker
 
-#### 1. Setup MongoDB
+### 1. Install dependencies
 
-Ackee requires a running MongoDB instance. Visit the [website of MongoDB](https://www.mongodb.com) for installation instructions.
+Ackee dependents on …
 
-#### 2. Create the configuration
+- [Node.js](https://nodejs.org/en/) (v10.16 or newer)
+- [yarn](https://yarnpkg.com/en/)
+- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
+
+Make sure to install and update all dependencies before you continue. The installation instructions for the individual dependencies can be found on the linked websites.
+
+### 2. Create the configuration
 
 Configure Ackee using environment variables or create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
 
@@ -110,7 +104,7 @@ The [MongoDB connection string](https://docs.mongodb.com/manual/reference/connec
 
 The username and password variables are used to secure your Ackee interface/API.
 
-#### 3. Install Ackee
+### 3. Install Ackee
 
 Install all required dependencies.
 
@@ -118,7 +112,7 @@ Install all required dependencies.
 yarn
 ```
 
-#### 4. Run Ackee
+### 4. Run Ackee
 
 Ackee will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps using the interface.
 
