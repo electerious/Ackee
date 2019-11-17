@@ -31,6 +31,13 @@ docker-compose up
 
 Ackee will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps using the interface.
 
+### 4. Get Ackee online
+
+Ackee now runs on port `3000` and is only accessible from you local network. It's recommended to use a reverse proxy in front of Ackee. The following guides will help you through this steps.
+
+- [SSL and HTTPS](./SSL%20and%20HTTPS.md)
+- [CORS headers](./CORS%20headers.md)
+
 ## With Docker
 
 ### 1. Setup MongoDB
@@ -76,6 +83,13 @@ Explanation:
 
 Ackee will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps using the interface.
 
+### 4. Get Ackee online
+
+Ackee now runs on port `3000` and is only accessible from you local network. It's recommended to use a reverse proxy in front of Ackee. The following guides will help you through this steps.
+
+- [SSL and HTTPS](./SSL%20and%20HTTPS.md)
+- [CORS headers](./CORS%20headers.md)
+
 ## Without Docker
 
 ### 1. Install dependencies
@@ -119,3 +133,10 @@ Ackee will output the URL it's listening on once the server is running. Visit th
 ```
 yarn start
 ```
+
+### 5. Get Ackee online
+
+Ackee now runs on port `3000` and is only accessible from you local network. It's recommended to use a reverse proxy in front of Ackee. The following guides will help you through this steps.
+
+- [SSL and HTTPS](./SSL%20and%20HTTPS.md)
+- [CORS headers](./CORS%20headers.md)
