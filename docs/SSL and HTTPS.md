@@ -38,7 +38,7 @@ server {
         add_header          Access-Control-Allow-Headers "Content-Type" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
-        proxy_pass          http://ackee;
+        proxy_pass          http://localhost:3000;
         proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
         proxy_redirect      off;
         proxy_buffering     off;
@@ -110,7 +110,7 @@ server {
         add_header          Access-Control-Allow-Headers "Content-Type" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
-        proxy_pass          http://ackee;
+        proxy_pass          http://localhost:3000;
         proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
         proxy_redirect      off;
         proxy_buffering     off;
