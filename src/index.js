@@ -10,7 +10,7 @@ const isDemo = require('./utils/isDemo')
 const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
 
-const port = process.env.ACKEE_PORT || 3000
+const port = process.env.PORT || 3000
 const dbUrl = process.env.ACKEE_MONGODB
 const serverUrl = `http://localhost:${ port }`
 
