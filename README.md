@@ -101,6 +101,12 @@ ACKEE_MONGODB=mongodb://localhost:27017/ackee
 The port Ackee should listen on. Defaults to `3000`.
 
 ```
+ACKEE_PORT=3000
+```
+
+*or*
+
+```
 PORT=3000
 ```
 
