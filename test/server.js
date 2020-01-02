@@ -61,9 +61,22 @@ test('return tracking script', async (t) => {
 
 test('return 404', async (t) => {
 
-	const url = new URL(`/${ uuid() }`, await base)
+	const url = new URL(`/${uuid()}`, await base)
 	const { status } = await fetch(url.href)
 
 	t.is(status, 404)
+
+})
+
+test('return correct cors headers', async (t) => {
+
+	const url = new URL(await base)
+	const res = await fetch(url.href)
+	const headers = res.headers
+
+	t.is(headers.get('Access-Control-Allow-Origin'), 'https://test-website.com')
+	t.is(headers.get('Access-Control-Allow-Credentials'), 'true')
+	t.is(headers.get('Access-Control-Allow-Methods'), 'GET,PUT,POST,DELETE,OPTIONS')
+	t.is(headers.get('Access-Control-Allow-Headers'), 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
 
 })
