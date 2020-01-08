@@ -8,7 +8,7 @@ const mockedEnv = require('mocked-env')
 test('return no cors headers if env var specifies none', async (t) => {
 
 	const restore = mockedEnv({
-		ACCESS_CONTROL_ALLOW_ORIGIN: undefined
+		ACKEE_ALLOW_ORIGIN: undefined
 	})
 
 	const server = require('../src/server')

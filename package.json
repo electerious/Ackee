@@ -78,7 +78,7 @@
     "verbose": true,
     "environmentVariables": {
       "ACKEE_TRACKER": "custom name",
-      "ACCESS_CONTROL_ALLOW_ORIGIN": "https://test-website.com"
+      "ACKEE_ALLOW_ORIGIN": "https://test-website.com"
     }
   },
   "engines": {

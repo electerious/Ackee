@@ -51,7 +51,7 @@ If you are running Ackee on a platform which handles SSL for you, you may want a
 As an environment variable, you will need to just set:
 
 ```bash
-ACCESS_CONTROL_ALLOW_ORIGIN="https://example.com"
+ACKEE_ALLOW_ORIGIN="https://example.com"
 ```
 
 The proper header value for `Access-Control-Allow-Origin` will be set

@@ -44,7 +44,7 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
-const ACCESS_CONTROL_ALLOW_ORIGIN = process.env.ACCESS_CONTROL_ALLOW_ORIGIN
+const ACKEE_ALLOW_ORIGIN = process.env.ACKEE_ALLOW_ORIGIN
 
 /**
  * Attaches CORS headers to all requests.
@@ -54,10 +54,10 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = process.env.ACCESS_CONTROL_ALLOW_ORIGIN
  * @returns {Function} Function which is called on each request made to the server
  */
 const attachCORSHeaders = (fn) => async (req, res) => {
-	if (!ACCESS_CONTROL_ALLOW_ORIGIN) {
+	if (!ACKEE_ALLOW_ORIGIN) {
 		return await fn(req, res)
 	}
-	res.setHeader('Access-Control-Allow-Origin', ACCESS_CONTROL_ALLOW_ORIGIN)
+	res.setHeader('Access-Control-Allow-Origin', ACKEE_ALLOW_ORIGIN)
 	res.setHeader('Access-Control-Allow-Credentials', true)
 	res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
 	res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
@@ -66,7 +66,7 @@ const attachCORSHeaders = (fn) => async (req, res) => {
 
 const notFound = async (req) => {
 
-	const err = new Error(`\`${ req.url }\` not found`)
+	const err = new Error(`\`${req.url}\` not found`)
 
 	throw createError(404, 'Not found', err)
 
