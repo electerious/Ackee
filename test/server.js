@@ -4,6 +4,7 @@ const test = require('ava')
 const uuid = require('uuid/v4')
 const listen = require('test-listen')
 const fetch = require('node-fetch')
+const mockedEnv = require('mocked-env')
 
 const server = require('../src/server')
 
@@ -75,8 +76,7 @@ test('return correct cors headers', async (t) => {
 	const headers = res.headers
 
 	t.is(headers.get('Access-Control-Allow-Origin'), 'https://test-website.com')
-	t.is(headers.get('Access-Control-Allow-Credentials'), 'true')
-	t.is(headers.get('Access-Control-Allow-Methods'), 'GET,PUT,POST,DELETE,OPTIONS')
+	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
 	t.is(headers.get('Access-Control-Allow-Headers'), 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
 
 })

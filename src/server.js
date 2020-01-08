@@ -58,8 +58,7 @@ const attachCORSHeaders = (fn) => async (req, res) => {
 		return await fn(req, res)
 	}
 	res.setHeader('Access-Control-Allow-Origin', ACKEE_ALLOW_ORIGIN)
-	res.setHeader('Access-Control-Allow-Credentials', true)
-	res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
 	res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
 	return await fn(req, res)
 }
