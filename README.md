@@ -153,4 +153,5 @@ More documentation and guides are located in [the /docs folder](docs/). Also tak
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
+- [Soapberry](https://wordpress.org/plugins/soapberry/) - WordPress plugin for Ackee
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
