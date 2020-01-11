@@ -1,0 +1,26 @@
+{
+    "name": "Ackee",
+    "description": "Self-hosted, Node.js based analytics tool for those who care about privacy.",
+    "keywords": [
+        "server",
+        "tracking",
+        "analytics"
+    ],
+    "website": "https://ackee.electerious.com/",
+    "repository": "https://github.com/aleccool213/Ackee",
+    "env": {
+        "ACKEE_USERNAME": {
+            "description": "Username which will be used to log in to Ackee",
+            "required": true
+        },
+        "ACKEE_PASSWORD": {
+            "description": "Passowrd which will be used to log in to Ackee",
+            "required": true
+        }
+    },
+    "addons": [
+        {
+            "plan": "mongolab"
+        }
+    ]
+}
