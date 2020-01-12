@@ -97,6 +97,12 @@ MongoDB connection URI. See the [MongoDB connection string spec](https://docs.mo
 ACKEE_MONGODB=mongodb://localhost:27017/ackee
 ```
 
+*or*
+
+```
+MONGODB_URI=mongodb://localhost:27017/ackee
+```
+
 #### Port
 
 The port Ackee should listen on. Defaults to `3000`.
