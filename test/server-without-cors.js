@@ -5,15 +5,15 @@ const listen = require('test-listen')
 const fetch = require('node-fetch')
 const mockedEnv = require('mocked-env')
 
+const server = require('../src/server')
+
+const base = listen(server)
+
 test('return no cors headers if env var specifies none', async (t) => {
 
 	const restore = mockedEnv({
 		ACKEE_ALLOW_ORIGIN: undefined
 	})
-
-	const server = require('../src/server')
-
-	const base = listen(server)
 
 	const url = new URL(await base)
 	const res = await fetch(url.href)

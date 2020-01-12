@@ -77,8 +77,7 @@
     "babel": false,
     "verbose": true,
     "environmentVariables": {
-      "ACKEE_TRACKER": "custom name",
-      "ACKEE_ALLOW_ORIGIN": "https://example.com"
+      "ACKEE_TRACKER": "custom name"
     }
   },
   "engines": {

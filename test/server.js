@@ -67,15 +67,3 @@ test('return 404', async (t) => {
 	t.is(status, 404)
 
 })
-
-test('return correct cors headers', async (t) => {
-
-	const url = new URL(await base)
-	const res = await fetch(url.href)
-	const headers = res.headers
-
-	t.is(headers.get('Access-Control-Allow-Origin'), 'https://example.com')
-	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
-	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type')
-
-})
