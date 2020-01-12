@@ -5,7 +5,7 @@
 
 ## Create a token
 
-A token stays valid for as long as specified in the [TTL option](../README.md#ttl). Using a token will reset the timeout.
+A token stays valid for as long as specified in the [TTL option](Options.md#ttl). Using a token will reset the timeout.
 
 ### Request
 
@@ -24,8 +24,8 @@ POST /tokens
 
 | Name | Type | Required | Description |
 |:-----------|:------------|:------------|:------------|
-| username | String | true | [Username of Ackee](../README.md#username-and-password). |
-| password | String | true | [Password of Ackee](../README.md#username-and-password). |
+| username | String | true | [Username of Ackee](Options.md#username-and-password). |
+| password | String | true | [Password of Ackee](Options.md#username-and-password). |
 
 ### Response
 

@@ -16,7 +16,7 @@ ACKEE_USERNAME=username
 ACKEE_PASSWORD=password
 ```
 
-The [README](../README.md#Options) contains a detailed explanation of all available options, but only those two are required to run Ackee with the existing `docker-compose.yml`.
+Only those two are required to run Ackee with the existing `docker-compose.yml`. Take a look at the [options](Options.md) for a detailed explanation.
 
 ### 2. Run Ackee
 
@@ -75,7 +75,7 @@ docker run -p 3000:3000 -e ACKEE_MONGODB='mongodb://mongo:27017/ackee' -e ACKEE_
 Explanation:
 
 - `-p` makes port `3000` available at port `3000` on the host
-- `-e` sets [environment variables](../README.md#Options) required by Ackee
+- `-e` sets [environment variables](Options.md) required by Ackee
 - `--link` links Ackee with the `mongo` container
 - `--name` sets the container name to `ackee`
 - `electerious/ackee` is the name of the image
@@ -113,7 +113,7 @@ ACKEE_USERNAME=username
 ACKEE_PASSWORD=password
 ```
 
-The [README](../README.md#Options) contains a detailed explanation of all available options, but only those three are required to run Ackee.
+Only those three are required to run Ackee. Take a look at the [options](Options.md) for a detailed explanation.
 
 The [MongoDB connection string](https://docs.mongodb.com/manual/reference/connection-string/) is used to connect to your MongoDB. It should also contain the username and password of your MongoDB instance when required.
 
