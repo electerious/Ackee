@@ -65,7 +65,7 @@ const attachCORSHeaders = (fn) => async (req, res) => {
 
 const notFound = async (req) => {
 
-	const err = new Error(`\`${req.url}\` not found`)
+	const err = new Error(`\`${ req.url }\` not found`)
 
 	throw createError(404, 'Not found', err)
 

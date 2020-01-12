@@ -4,7 +4,6 @@ const test = require('ava')
 const uuid = require('uuid/v4')
 const listen = require('test-listen')
 const fetch = require('node-fetch')
-const mockedEnv = require('mocked-env')
 
 const server = require('../src/server')
 
@@ -62,7 +61,7 @@ test('return tracking script', async (t) => {
 
 test('return 404', async (t) => {
 
-	const url = new URL(`/${uuid()}`, await base)
+	const url = new URL(`/${ uuid() }`, await base)
 	const { status } = await fetch(url.href)
 
 	t.is(status, 404)
