@@ -2,11 +2,14 @@
 
 Ackee requires correct [CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). [ackee-tracker](https://github.com/electerious/ackee-tracker) (the script that sends data from your sites to Ackee) won't be able to contact your server when the CORS headers aren't available or when they are configured incorrectly.
 
+- [Reverse proxy configuration](#reverse-proxy-configuration)
+- [Heroku or Platforms-As-A-Service configuration](#heroku-or-platforms-as-a-service-configuration)
+
 ## Why?
 
 When a site wants to send data to a different domain it needs the permissions to do so. Browsers use an OPTIONS request (preflight request) that checks to see if the CORS protocol is understood.
 
-## Recommended configuration
+## Reverse proxy configuration
 
 ```
 Access-Control-Allow-Origin: https://example.com
@@ -44,9 +47,9 @@ The `Access-Control-Allow-Headers` header is used in response to a preflight req
 Access-Control-Allow-Headers: Content-Type
 ```
 
-### Heroku or other Platforms-As-A-Service
+## Heroku or Platforms-As-A-Service configuration
 
-If you are running Ackee on a platform which handles SSL for you, you may want a quick solution for setting CORS headers.
+If you are running Ackee on a platform which handles SSL for you, you may want a quick solution for setting CORS headers instead of using a [reverse proxy](SSL%20and%20HTTPS.md).
 
 As an environment variable, you will need to just set:
 
@@ -54,5 +57,4 @@ As an environment variable, you will need to just set:
 ACKEE_ALLOW_ORIGIN="https://example.com"
 ```
 
-The proper header value for `Access-Control-Allow-Origin` will be set
-with the other headers being the recommended values.
+The proper header value for `Access-Control-Allow-Origin` will be set with the other headers being the recommended values.
