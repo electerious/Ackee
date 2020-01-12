@@ -44,15 +44,15 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
-const ACKEE_ALLOW_ORIGIN = process.env.ACKEE_ALLOW_ORIGIN
-
 const attachCorsHeaders = (fn) => async (req, res) => {
 
-	if (ACKEE_ALLOW_ORIGIN == null) return fn(req, res)
+	const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN
 
-	res.setHeader('Access-Control-Allow-Origin', ACKEE_ALLOW_ORIGIN)
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+	if (allowOrigin != null) {
+		res.setHeader('Access-Control-Allow-Origin', allowOrigin)
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
+		res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+	}
 
 	return fn(req, res)
 
