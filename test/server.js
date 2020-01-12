@@ -4,6 +4,7 @@ const test = require('ava')
 const uuid = require('uuid/v4')
 const listen = require('test-listen')
 const fetch = require('node-fetch')
+const mockedEnv = require('mocked-env')
 
 const server = require('../src/server')
 
@@ -61,9 +62,21 @@ test('return tracking script', async (t) => {
 
 test('return 404', async (t) => {
 
-	const url = new URL(`/${ uuid() }`, await base)
+	const url = new URL(`/${uuid()}`, await base)
 	const { status } = await fetch(url.href)
 
 	t.is(status, 404)
+
+})
+
+test('return correct cors headers', async (t) => {
+
+	const url = new URL(await base)
+	const res = await fetch(url.href)
+	const headers = res.headers
+
+	t.is(headers.get('Access-Control-Allow-Origin'), 'https://test-website.com')
+	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
+	t.is(headers.get('Access-Control-Allow-Headers'), 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
 
 })

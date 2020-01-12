@@ -43,3 +43,16 @@ The `Access-Control-Allow-Headers` header is used in response to a preflight req
 ```
 Access-Control-Allow-Headers: Content-Type
 ```
+
+### Heroku or other Platforms-As-A-Service
+
+If you are running Ackee on a platform which handles SSL for you, you may want a quick solution for setting CORS headers.
+
+As an environment variable, you will need to just set:
+
+```bash
+ACKEE_ALLOW_ORIGIN="https://example.com"
+```
+
+The proper header value for `Access-Control-Allow-Origin` will be set
+with the other headers being the recommended values.

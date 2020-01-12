@@ -44,9 +44,28 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
+const ACKEE_ALLOW_ORIGIN = process.env.ACKEE_ALLOW_ORIGIN
+
+/**
+ * Attaches CORS headers to all requests.
+ * This is needed if the client is sending requests to Ackee
+ * from a different domain.
+ * @param {*} fn Micro request callback
+ * @returns {Function} Function which is called on each request made to the server
+ */
+const attachCORSHeaders = (fn) => async (req, res) => {
+	if (!ACKEE_ALLOW_ORIGIN) {
+		return await fn(req, res)
+	}
+	res.setHeader('Access-Control-Allow-Origin', ACKEE_ALLOW_ORIGIN)
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
+	res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
+	return await fn(req, res)
+}
+
 const notFound = async (req) => {
 
-	const err = new Error(`\`${ req.url }\` not found`)
+	const err = new Error(`\`${req.url}\` not found`)
 
 	throw createError(404, 'Not found', err)
 
@@ -92,7 +111,9 @@ const routes = [
 ].filter(isDefined)
 
 module.exports = micro(
-	catchError(
-		router(...routes)
+	attachCORSHeaders(
+		catchError(
+			router(...routes)
+		)
 	)
 )
