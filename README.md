@@ -60,6 +60,12 @@ The API of Ackee accepts information about your visitors sent to it using [ackee
 
 The interface of Ackee lets you view and analyse your tracked information.
 
+## Deploy To Heroku
+
+Want to get up and running quickly? Simply deploy to Heroku using this button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/electerious/Ackee)
+
 ## Documentation
 
 ### Requirements
