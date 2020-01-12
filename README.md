@@ -22,6 +22,7 @@ Get Ackee up and running…
 - […with Docker Compose](docs/Get%20started.md#with-docker-compose)
 - […with Docker](docs/Get%20started.md#with-docker)
 - […without Docker](docs/Get%20started.md#without-docker)
+- […with Heroku](docs/Get%20started.md#with-heroku)
 
 And configure Ackee and your server correctly…
 

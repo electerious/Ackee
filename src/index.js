@@ -11,7 +11,7 @@ const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
 
 const port = process.env.ACKEE_PORT || process.env.PORT || 3000
-const dbUrl = process.env.ACKEE_MONGODB
+const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 const serverUrl = `http://localhost:${ port }`
 
 mongoose.set('useFindAndModify', false)
