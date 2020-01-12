@@ -76,6 +76,6 @@ test('return correct cors headers', async (t) => {
 
 	t.is(headers.get('Access-Control-Allow-Origin'), 'https://test-website.com')
 	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
-	t.is(headers.get('Access-Control-Allow-Headers'), 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
+	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type')
 
 })

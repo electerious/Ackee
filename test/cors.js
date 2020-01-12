@@ -24,4 +24,5 @@ test('return no cors headers if env var specifies none', async (t) => {
 	t.is(headers.get('Access-Control-Allow-Headers'), null)
 
 	restore()
+
 })
