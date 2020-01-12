@@ -44,6 +44,20 @@ const catchError = (fn) => async (req, res) => {
 
 }
 
+const attachCorsHeaders = (fn) => async (req, res) => {
+
+	const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN
+
+	if (allowOrigin != null) {
+		res.setHeader('Access-Control-Allow-Origin', allowOrigin)
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
+		res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+	}
+
+	return fn(req, res)
+
+}
+
 const notFound = async (req) => {
 
 	const err = new Error(`\`${ req.url }\` not found`)
@@ -92,7 +106,9 @@ const routes = [
 ].filter(isDefined)
 
 module.exports = micro(
-	catchError(
-		router(...routes)
+	attachCorsHeaders(
+		catchError(
+			router(...routes)
+		)
 	)
 )
