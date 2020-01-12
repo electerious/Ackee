@@ -74,7 +74,7 @@ test('return correct cors headers', async (t) => {
 	const res = await fetch(url.href)
 	const headers = res.headers
 
-	t.is(headers.get('Access-Control-Allow-Origin'), 'https://test-website.com')
+	t.is(headers.get('Access-Control-Allow-Origin'), 'https://example.com')
 	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
 	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type')
 
