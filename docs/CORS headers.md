@@ -29,7 +29,7 @@ Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Origin: *
 ```
 
-The `Access-Control-Allow-Origin` header only allows one domain or a wildcard (`*`). Take a look at our [advanced configuration](./SSL%20and%20HTTPS.md#advanced-configuration) if you want to allow requests from multiple domains without using the insecure wildcard.
+The `Access-Control-Allow-Origin` header only allows one domain or a wildcard (`*`). Take a look at our [advanced configuration](SSL%20and%20HTTPS.md#advanced-configuration) if you want to allow requests from multiple domains without using the insecure wildcard.
 
 ### Methods
 

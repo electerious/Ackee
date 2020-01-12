@@ -36,8 +36,8 @@ Ackee will output the URL it's listening on once the server is running. Visit th
 
 Ackee now runs on port `3000` and is only accessible from you local network. It's recommended to use a reverse proxy in front of Ackee. The following guides will help you through this steps.
 
-- [SSL and HTTPS](./SSL%20and%20HTTPS.md)
-- [CORS headers](./CORS%20headers.md)
+- [SSL and HTTPS](SSL%20and%20HTTPS.md)
+- [CORS headers](CORS%20headers.md)
 
 ## With Docker
 
@@ -88,8 +88,8 @@ Ackee will output the URL it's listening on once the server is running. Visit th
 
 Ackee now runs on port `3000` and is only accessible from you local network. It's recommended to use a reverse proxy in front of Ackee. The following guides will help you through this steps.
 
-- [SSL and HTTPS](./SSL%20and%20HTTPS.md)
-- [CORS headers](./CORS%20headers.md)
+- [SSL and HTTPS](SSL%20and%20HTTPS.md)
+- [CORS headers](CORS%20headers.md)
 
 ## Without Docker
 
@@ -139,8 +139,8 @@ yarn start
 
 Ackee now runs on port `3000` and is only accessible from you local network. It's recommended to use a reverse proxy in front of Ackee. The following guides will help you through this steps.
 
-- [SSL and HTTPS](./SSL%20and%20HTTPS.md)
-- [CORS headers](./CORS%20headers.md)
+- [SSL and HTTPS](SSL%20and%20HTTPS.md)
+- [CORS headers](CORS%20headers.md)
 
 ## With Heroku
 
@@ -152,4 +152,4 @@ Simply deploy to Heroku by clicking this button:
 
 ### 2. Configure Ackee
 
-Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20Headers.md#heroku-or-platforms-as-a-service-configuration).
+Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#heroku-or-platforms-as-a-service-configuration).
