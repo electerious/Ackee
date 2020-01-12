@@ -3,6 +3,7 @@
 - [With Docker Compose](#with-docker-compose)
 - [With Docker](#with-docker)
 - [Without Docker](#without-docker)
+- [With Heroku](#with-heroku)
 
 ## With Docker Compose
 
@@ -140,3 +141,15 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 - [SSL and HTTPS](./SSL%20and%20HTTPS.md)
 - [CORS headers](./CORS%20headers.md)
+
+## With Heroku
+
+### 1. Deploy to Heroku
+
+Simply deploy to Heroku by clicking this button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/electerious/Ackee)
+
+### 2. Configure Ackee
+
+Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20Headers.md#heroku-or-platforms-as-a-service-configuration).

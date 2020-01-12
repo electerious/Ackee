@@ -22,6 +22,7 @@ Get Ackee up and running…
 - […with Docker Compose](docs/Get%20started.md#with-docker-compose)
 - […with Docker](docs/Get%20started.md#with-docker)
 - […without Docker](docs/Get%20started.md#without-docker)
+- […with Heroku](docs/Get%20started.md#with-heroku)
 
 And configure Ackee and your server correctly…
 
@@ -59,12 +60,6 @@ You run the Ackee server which then waits for requests through its API.
 The API of Ackee accepts information about your visitors sent to it using [ackee-tracker](https://github.com/electerious/ackee-tracker). It's a small script you add to your sites, similar to the JavaScript tracking snippet provided by Google Analytics.
 
 The interface of Ackee lets you view and analyse your tracked information.
-
-## Deploy To Heroku
-
-Want to get up and running quickly? Simply deploy to Heroku using this button:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/electerious/Ackee)
 
 ## Documentation
 
