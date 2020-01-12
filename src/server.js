@@ -46,7 +46,7 @@ const catchError = (fn) => async (req, res) => {
 
 const ACKEE_ALLOW_ORIGIN = process.env.ACKEE_ALLOW_ORIGIN
 
-const attachCORSHeaders = (fn) => async (req, res) => {
+const attachCorsHeaders = (fn) => async (req, res) => {
 
 	if (ACKEE_ALLOW_ORIGIN == null) return fn(req, res)
 
@@ -106,7 +106,7 @@ const routes = [
 ].filter(isDefined)
 
 module.exports = micro(
-	attachCORSHeaders(
+	attachCorsHeaders(
 		catchError(
 			router(...routes)
 		)
