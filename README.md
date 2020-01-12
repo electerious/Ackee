@@ -22,6 +22,7 @@ Get Ackee up and running…
 - […with Docker Compose](docs/Get%20started.md#with-docker-compose)
 - […with Docker](docs/Get%20started.md#with-docker)
 - […without Docker](docs/Get%20started.md#without-docker)
+- […with Heroku](docs/Get%20started.md#with-heroku)
 
 And configure Ackee and your server correctly…
 
@@ -86,64 +87,7 @@ Make sure to install and update all dependencies before you setup Ackee.
 
 ### Options
 
-The following environment variables are used by Ackee. You can also create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
-
-#### Database
-
-MongoDB connection URI. See the [MongoDB connection string spec](https://docs.mongodb.com/manual/reference/connection-string/) for more detail.
-
-```
-ACKEE_MONGODB=mongodb://localhost:27017/ackee
-```
-
-#### Port
-
-The port Ackee should listen on. Defaults to `3000`.
-
-```
-ACKEE_PORT=3000
-```
-
-*or*
-
-```
-PORT=3000
-```
-
-#### Username and password
-
-Username and password. Both are required to generate a new token.
-
-```
-ACKEE_USERNAME=username
-ACKEE_PASSWORD=password
-```
-
-#### TTL
-
-Specifies how long a generated token is valid. Defaults to `3600000` (1 day).
-
-```
-ACKEE_TTL=3600000
-```
-
-#### Tracker
-
-Pick a custom name for the tracking script of Ackee to avoid getting blocked by browser extensions. The default script will always be available via `/tracker.js`. You custom script will be available via `/custom%20name.js`. Ackee will encode your custom name to a URL encoded format.
-
-Make sure to adjust the tracking script URL on your sites when changing this option. Sites that are using the default URL won't be affected.
-
-```
-ACKEE_TRACKER=custom name
-```
-
-#### Environment
-
-Set the environment to `development` to see additional details in the console and to disable caching.
-
-```
-NODE_ENV=development
-```
+Ackee uses environment variables and supports [`.env` files](https://www.npmjs.com/package/dotenv) in the root of the project if you want to store all variables in one file. [Options &#187;](docs/Options.md)
 
 ### More
 

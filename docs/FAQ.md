@@ -19,7 +19,7 @@ Ackee only works with one user and it's not planned to add support for multiple 
 
 ### How to reset my password?
 
-You can change the [username and password environment variables](../README.md#username-and-password) whenever you want. Just make sure you restart Ackee after changing those.
+You can change the [username and password environment variables](Options.md#username-and-password) whenever you want. Just make sure you restart Ackee after changing those.
 
 #### How to reset my account?
 

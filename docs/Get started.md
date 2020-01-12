@@ -3,6 +3,7 @@
 - [With Docker Compose](#with-docker-compose)
 - [With Docker](#with-docker)
 - [Without Docker](#without-docker)
+- [With Heroku](#with-heroku)
 
 ## With Docker Compose
 
@@ -15,7 +16,7 @@ ACKEE_USERNAME=username
 ACKEE_PASSWORD=password
 ```
 
-The [README](../README.md#Options) contains a detailed explanation of all available options, but only those two are required to run Ackee with the existing `docker-compose.yml`.
+Only those two are required to run Ackee with the existing `docker-compose.yml`. Take a look at the [options](Options.md) for a detailed explanation.
 
 ### 2. Run Ackee
 
@@ -74,7 +75,7 @@ docker run -p 3000:3000 -e ACKEE_MONGODB='mongodb://mongo:27017/ackee' -e ACKEE_
 Explanation:
 
 - `-p` makes port `3000` available at port `3000` on the host
-- `-e` sets [environment variables](../README.md#Options) required by Ackee
+- `-e` sets [environment variables](Options.md) required by Ackee
 - `--link` links Ackee with the `mongo` container
 - `--name` sets the container name to `ackee`
 - `electerious/ackee` is the name of the image
@@ -112,7 +113,7 @@ ACKEE_USERNAME=username
 ACKEE_PASSWORD=password
 ```
 
-The [README](../README.md#Options) contains a detailed explanation of all available options, but only those three are required to run Ackee.
+Only those three are required to run Ackee. Take a look at the [options](Options.md) for a detailed explanation.
 
 The [MongoDB connection string](https://docs.mongodb.com/manual/reference/connection-string/) is used to connect to your MongoDB. It should also contain the username and password of your MongoDB instance when required.
 
@@ -140,3 +141,15 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 - [SSL and HTTPS](./SSL%20and%20HTTPS.md)
 - [CORS headers](./CORS%20headers.md)
+
+## With Heroku
+
+### 1. Deploy to Heroku
+
+Simply deploy to Heroku by clicking this button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/electerious/Ackee)
+
+### 2. Configure Ackee
+
+Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20Headers.md#heroku-or-platforms-as-a-service-configuration).
