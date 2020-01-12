@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Added
 
-- `ACKEE_ALLOW_ORIGIN` option for [Heroku or other Platforms-As-A-Service](docs/CORS%20headers.md)
+- Simply [deploy to Heroku](docs/Get%20started.md#with-heroku) by clicking one button (#72, thanks @aleccool213)
+- `ACKEE_ALLOW_ORIGIN` option for [Heroku or other Platforms-As-A-Service](docs/CORS%20headers.md) (#73, thanks @aleccool213)
 
 ## [1.4.2] - 2019-12-19
 
