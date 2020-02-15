@@ -6,6 +6,7 @@ import {
 	ROUTE_REFERRERS,
 	ROUTE_DURATIONS,
 	ROUTE_LANGUAGES,
+	ROUTE_SIZES,
 	ROUTE_SETTINGS
 } from '../constants/route'
 
@@ -15,6 +16,7 @@ import RoutePages from './routes/RoutePages'
 import RouteReferrers from './routes/RouteReferrers'
 import RouteDurations from './routes/RouteDurations'
 import RouteLanguages from './routes/RouteLanguages'
+import RouteSizes from './routes/RouteSizes'
 import RouteSettings from './routes/RouteSettings'
 import Modals from './Modals'
 
@@ -31,6 +33,7 @@ const Dashboard = (props) => {
 					{ onClick: () => props.setRouteValue(ROUTE_REFERRERS), active: props.route.value === ROUTE_REFERRERS, label: 'Referrers' },
 					{ onClick: () => props.setRouteValue(ROUTE_DURATIONS), active: props.route.value === ROUTE_DURATIONS, label: 'Durations' },
 					{ onClick: () => props.setRouteValue(ROUTE_LANGUAGES), active: props.route.value === ROUTE_LANGUAGES, label: 'Languages' },
+					{ onClick: () => props.setRouteValue(ROUTE_SIZES), active: props.route.value === ROUTE_SIZES, label: 'Sizes' },
 					{ onClick: () => props.setRouteValue(ROUTE_SETTINGS), active: props.route.value === ROUTE_SETTINGS, label: 'Settings' }
 				]
 			}),
@@ -40,6 +43,7 @@ const Dashboard = (props) => {
 				props.route.value === ROUTE_REFERRERS && h(RouteReferrers, props),
 				props.route.value === ROUTE_DURATIONS && h(RouteDurations, props),
 				props.route.value === ROUTE_LANGUAGES && h(RouteLanguages, props),
+				props.route.value === ROUTE_SIZES && h(RouteSizes, props),
 				props.route.value === ROUTE_SETTINGS && h(RouteSettings, props)
 			)
 		)

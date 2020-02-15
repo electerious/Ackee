@@ -9,6 +9,7 @@ import pages from './pages'
 import referrers from './referrers'
 import durations from './durations'
 import languages from './languages'
+import sizes from './sizes'
 
 export default combineReducers({
 	modals,
@@ -19,5 +20,6 @@ export default combineReducers({
 	pages,
 	referrers,
 	durations,
-	languages
+	languages,
+	sizes
 })
