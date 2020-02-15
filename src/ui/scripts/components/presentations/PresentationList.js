@@ -45,10 +45,12 @@ const PresentationList = (props) => {
 }
 
 PresentationList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.shape({
-		url: PropTypes.object,
-		text: PropTypes.string.isRequired
-	})).isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			url: PropTypes.object,
+			text: PropTypes.string.isRequired
+		})
+	).isRequired,
 	onEnter: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired
 }

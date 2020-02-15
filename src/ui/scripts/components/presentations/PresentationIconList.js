@@ -61,10 +61,12 @@ const PresentationIconList = (props) => {
 }
 
 PresentationIconList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.shape({
-		url: PropTypes.object.isRequired,
-		count: PropTypes.number
-	})).isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			url: PropTypes.object.isRequired,
+			count: PropTypes.number
+		})
+	).isRequired,
 	onEnter: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired
 }
