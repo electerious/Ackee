@@ -1,7 +1,8 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const dateWithOffset = require('../utils/dateWithOffset')
+const aggregateTopFields = require('../utils/aggregateTopFields')
+const aggregateRecentFields = require('../utils/aggregateRecentFields')
 
 const {
 	PAGES_SORTING_TOP,
@@ -10,61 +11,17 @@ const {
 
 const getTop = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$group: {
-				_id: '$siteLocation',
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$sort: {
-				count: -1
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateTopFields(id, 'siteLocation')
+	)
 
 }
 
 const getRecent = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$sort: {
-				created: -1
-			}
-		},
-		{
-			$project: {
-				_id: '$siteLocation',
-				created: '$created'
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateRecentFields(id, 'siteLocation')
+	)
 
 }
 

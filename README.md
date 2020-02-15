@@ -84,6 +84,7 @@ Make sure to install and update all dependencies before you setup Ackee.
 - [/domains/:domainId/referrers](docs/referrers.md)
 - [/domains/:domainId/durations](docs/durations.md)
 - [/domains/:domainId/languages](docs/languages.md)
+- [/domains/:domainId/sizes](docs/sizes.md)
 
 ### Options
 
