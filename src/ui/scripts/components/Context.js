@@ -17,7 +17,10 @@ const Context = (props) => {
 	return createPortal(
 		h('div', {
 			ref,
-			className: 'context',
+			className: classNames({
+				context: true,
+				visible: measurement != null
+			}),
 			style: {
 				'--top': runWhenDefined(props.top, measurement),
 				'--right': runWhenDefined(props.right, measurement),
