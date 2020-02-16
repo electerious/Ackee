@@ -61,6 +61,7 @@ export const deleteToken = signalHandler((signal) => (props) => async (dispatch)
 	props.resetReferrers()
 	props.resetDurations()
 	props.resetLanguages()
+	props.resetSizes()
 	props.resetRoute()
 
 	try {

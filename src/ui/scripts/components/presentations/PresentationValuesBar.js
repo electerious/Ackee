@@ -142,10 +142,12 @@ const PresentationValuesBar = (props) => {
 }
 
 PresentationValuesBar.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.shape({
-		duration: PropTypes.number.isRequired,
-		count: PropTypes.number.isRequired
-	})).isRequired
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			duration: PropTypes.number.isRequired,
+			count: PropTypes.number.isRequired
+		})
+	).isRequired
 }
 
 export default PresentationValuesBar

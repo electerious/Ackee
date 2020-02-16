@@ -58,11 +58,13 @@ const PresentationCounterList = (props) => {
 }
 
 PresentationCounterList.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.shape({
-		url: PropTypes.object,
-		text: PropTypes.string.isRequired,
-		count: PropTypes.number.isRequired
-	})).isRequired
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			url: PropTypes.object,
+			text: PropTypes.string.isRequired,
+			count: PropTypes.number.isRequired
+		})
+	).isRequired
 }
 
 export default PresentationCounterList

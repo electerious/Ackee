@@ -21,7 +21,10 @@ $radius: 6px;
 $cardContentHeight: 300px;
 $rowHeight: 32px;
 
-// formbase ----------------------------------------------------- //
+// Properties -------------------------------------------------- //
+$shadow: 0 2px 10px rgba(0, 0, 0, .12);
+
+// formbase ---------------------------------------------------- //
 $formbase__radius: $radius;
 $formbase__background: $dimmed;
 $formbase__svg: #fff;

@@ -1,7 +1,9 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const dateWithOffset = require('../utils/dateWithOffset')
+const aggregateTopFields = require('../utils/aggregateTopFields')
+const aggregateRecentFields = require('../utils/aggregateRecentFields')
+const aggregateNewFields = require('../utils/aggregateNewFields')
 
 const {
 	REFERRERS_SORTING_TOP,
@@ -11,108 +13,25 @@ const {
 
 const getTop = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				siteReferrer: {
-					$ne: null
-				},
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$group: {
-				_id: '$siteReferrer',
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$sort: {
-				count: -1
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateTopFields(id, 'siteReferrer')
+	)
 
 }
 
 const getNew = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				siteReferrer: {
-					$ne: null
-				}
-			}
-		},
-		{
-			$group: {
-				_id: '$siteReferrer',
-				count: {
-					$sum: 1
-				},
-				created: {
-					$first: '$created'
-				}
-			}
-		},
-		{
-			$match: {
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$sort: {
-				created: -1
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateNewFields(id, 'siteReferrer')
+	)
 
 }
 
 const getRecent = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				siteReferrer: {
-					$ne: null
-				},
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$sort: {
-				created: -1
-			}
-		},
-		{
-			$project: {
-				_id: '$siteReferrer',
-				created: '$created'
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateRecentFields(id, 'siteReferrer')
+	)
 
 }
 

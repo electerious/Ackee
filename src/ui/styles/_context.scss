@@ -1,0 +1,32 @@
+.context {
+
+	position: absolute;
+	display: none;
+	top: var(--top);
+	right: var(--right);
+	bottom: var(--bottom);
+	left: var(--left);
+	padding: $gutter/2 0;
+	min-width: 150px;
+	background: $card;
+	border-radius: $radius;
+	transform: translate(var(--x, 0), var(--y, 0));
+	box-shadow: $shadow;
+
+	&.visible {
+		display: grid;
+	}
+
+	&__button {
+		padding: $gutter/6 $gutter;
+		padding-right: $gutter*2;
+		color: currentColor;
+		text-align: left;
+		transition: color .3s ease;
+
+		&:hover {
+			color: $white;
+		}
+	}
+
+}

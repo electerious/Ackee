@@ -1,7 +1,8 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const dateWithOffset = require('../utils/dateWithOffset')
+const aggregateTopFields = require('../utils/aggregateTopFields')
+const aggregateRecentFields = require('../utils/aggregateRecentFields')
 
 const {
 	LANGUAGES_SORTING_TOP,
@@ -10,67 +11,17 @@ const {
 
 const getTop = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				siteLanguage: {
-					$ne: null
-				},
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$group: {
-				_id: '$siteLanguage',
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$sort: {
-				count: -1
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateTopFields(id, 'siteLanguage')
+	)
 
 }
 
 const getRecent = async (id) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				siteLanguage: {
-					$ne: null
-				},
-				created: {
-					$gte: dateWithOffset(-6)
-				}
-			}
-		},
-		{
-			$sort: {
-				created: -1
-			}
-		},
-		{
-			$project: {
-				_id: '$siteLanguage',
-				created: '$created'
-			}
-		},
-		{
-			$limit: 25
-		}
-	])
+	return Record.aggregate(
+		aggregateRecentFields(id, 'siteLanguage')
+	)
 
 }
 

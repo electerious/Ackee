@@ -1,19 +1,19 @@
 import produce from 'immer'
 
 import {
-	SET_PAGES_SORTING,
-	SET_PAGES_VALUE,
-	SET_PAGES_FETCHING,
-	SET_PAGES_ERROR,
-	RESET_PAGES
+	SET_SIZES_TYPE,
+	SET_SIZES_VALUE,
+	SET_SIZES_FETCHING,
+	SET_SIZES_ERROR,
+	RESET_SIZES
 } from '../actions'
 
 import {
-	PAGES_SORTING_TOP
-} from '../../../constants/pages'
+	SIZES_TYPE_BROWSER_WIDTH
+} from '../../../constants/sizes'
 
 export const initialState = () => ({
-	sorting: PAGES_SORTING_TOP,
+	type: SIZES_TYPE_BROWSER_WIDTH,
 	value: {}
 })
 
@@ -31,22 +31,22 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_PAGES_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
+		case SET_SIZES_TYPE:
+			// Reset value because a different type results in a different value strcuture
 			// and because the view shouldn't show the old data when switching.
 			draft.value = initialState().value
-			draft.sorting = action.payload || initialState().sorting
+			draft.type = action.payload || initialState().type
 			break
-		case SET_PAGES_VALUE:
+		case SET_SIZES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
-		case SET_PAGES_FETCHING:
+		case SET_SIZES_FETCHING:
 			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
 			break
-		case SET_PAGES_ERROR:
+		case SET_SIZES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_PAGES:
+		case RESET_SIZES:
 			return initialState()
 	}
 
