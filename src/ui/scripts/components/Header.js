@@ -62,11 +62,19 @@ const Dropdown = (props) => {
 	const close = () => setActive(false)
 	const toggle = () => setActive(!active)
 
+	const containsActiveItem = props.items.some((item) => item.active === true)
+
 	return (
 		h(Fragment, {},
 			h('button', {
 				ref: ref,
-				className: 'header__button link',
+				className: classNames({
+					'header__button': true,
+					'hovered': active === true,
+					'active': containsActiveItem === true,
+					'link': true,
+					'color-white': containsActiveItem === true
+				}),
 				onClick: toggle
 			},
 				props.children,

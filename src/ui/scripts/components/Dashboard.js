@@ -32,7 +32,7 @@ const Dashboard = (props) => {
 					createButton('Pages', ROUTE_PAGES, props),
 					createButton('Referrers', ROUTE_REFERRERS, props),
 					createButton('Durations', ROUTE_DURATIONS, props),
-					createDropdown('Advanced', [
+					createDropdown('Detailed', [
 						createButton('Languages', ROUTE_LANGUAGES, props),
 						createButton('Sizes', ROUTE_SIZES, props)
 					]),
