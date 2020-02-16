@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useInterval } from 'react-use'
 
+// Checking those keys is enough to recognize changes
 const keys = [
-	'top',
-	'right',
-	'bottom',
-	'left',
+	'scrollWidth',
+	'scrollHeight',
 	'width',
 	'height',
 	'x',
@@ -26,6 +25,8 @@ const getMeasurement = (ref) => {
 		height: refBoundingClientRect.height,
 		x: refBoundingClientRect.x,
 		y: refBoundingClientRect.y,
+		scrollWidth: documentBoundingClientRect.width,
+		scrollHeight: documentBoundingClientRect.height,
 		scrollX: documentBoundingClientRect.x,
 		scrollY: documentBoundingClientRect.y
 	}
@@ -34,8 +35,6 @@ const getMeasurement = (ref) => {
 
 const shouldStateUpdate = (prevState = {}, nextState = {}) => {
 
-	// No need to check scrollX and scrollY. When the scroll position
-	// changes the x and y values changes anyway.
 	return keys.some((key) => prevState[key] !== nextState[key])
 
 }

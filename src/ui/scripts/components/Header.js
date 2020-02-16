@@ -75,8 +75,7 @@ const Dropdown = (props) => {
 			active === true && h(Context, {
 				targetRef: ref,
 				top: (measurement) => `${ measurement.bottom - measurement.scrollY }px`,
-				left: (measurement) => `${ measurement.right - measurement.scrollX }px`,
-				x: '-100%',
+				right: (measurement) => `${ Math.max(10, measurement.scrollWidth - measurement.right) }px`,
 				y: '10px',
 				items: props.items,
 				onItemClick: close,
