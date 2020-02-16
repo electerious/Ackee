@@ -93,6 +93,8 @@
 	}
 
 	&__button {
+		display: flex;
+		align-items: center;
 		margin: 0 $gutter/2;
 		padding: $gutter/1.5 2px;
 		outline: none;
@@ -106,6 +108,15 @@
 		&.active {
 			box-shadow: inset 0 -2px 0 $primary;
 		}
+	}
+
+	&__arrow {
+		$size: 12px;
+
+		margin-left: $gutter/2;
+		width: $size;
+		height: $size;
+		fill: currentColor;
 	}
 
 }

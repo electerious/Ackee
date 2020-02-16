@@ -10,7 +10,7 @@ import {
 	ROUTE_SETTINGS
 } from '../constants/route'
 
-import Header from './Header'
+import Header, { createButton, createDropdown } from './Header'
 import RouteViews from './routes/RouteViews'
 import RoutePages from './routes/RoutePages'
 import RouteReferrers from './routes/RouteReferrers'
@@ -28,13 +28,15 @@ const Dashboard = (props) => {
 			h(Header, {
 				fetching: props.fetching,
 				items: [
-					{ onClick: () => props.setRouteValue(ROUTE_VIEWS), active: props.route.value === ROUTE_VIEWS, label: 'Views' },
-					{ onClick: () => props.setRouteValue(ROUTE_PAGES), active: props.route.value === ROUTE_PAGES, label: 'Pages' },
-					{ onClick: () => props.setRouteValue(ROUTE_REFERRERS), active: props.route.value === ROUTE_REFERRERS, label: 'Referrers' },
-					{ onClick: () => props.setRouteValue(ROUTE_DURATIONS), active: props.route.value === ROUTE_DURATIONS, label: 'Durations' },
-					{ onClick: () => props.setRouteValue(ROUTE_LANGUAGES), active: props.route.value === ROUTE_LANGUAGES, label: 'Languages' },
-					{ onClick: () => props.setRouteValue(ROUTE_SIZES), active: props.route.value === ROUTE_SIZES, label: 'Sizes' },
-					{ onClick: () => props.setRouteValue(ROUTE_SETTINGS), active: props.route.value === ROUTE_SETTINGS, label: 'Settings' }
+					createButton('Views', ROUTE_VIEWS, props),
+					createButton('Pages', ROUTE_PAGES, props),
+					createButton('Referrers', ROUTE_REFERRERS, props),
+					createButton('Durations', ROUTE_DURATIONS, props),
+					createDropdown('Advanced', [
+						createButton('Languages', ROUTE_LANGUAGES, props),
+						createButton('Sizes', ROUTE_SIZES, props)
+					]),
+					createButton('Settings', ROUTE_SETTINGS, props)
 				]
 			}),
 			h('main', { className: 'content' },

@@ -1,6 +1,14 @@
-import { createElement as h } from 'react'
+import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+
+import useMeasure from '../utils/useMeasure'
+
+import Context from './Context'
+import IconArrowDown from './icons/IconArrowDown'
+
+const BUTTON = Symbol()
+const DROPDOWN = Symbol()
 
 const Spinner = (props) => {
 
@@ -48,6 +56,41 @@ const Button = (props) => {
 
 }
 
+const Dropdown = (props) => {
+
+	const buttonRef = useRef()
+	const [ active, setActive ] = useState(false)
+	const measurement = useMeasure(buttonRef, active)
+
+	const close = () => setActive(false)
+	const toggle = () => setActive(!active)
+
+	const isContextVisible = active === true && measurement != null
+
+	return (
+		h(Fragment, {},
+			h('button', {
+				ref: buttonRef,
+				className: 'header__button link',
+				onClick: toggle
+			},
+				props.children,
+				h(IconArrowDown, { className: 'header__arrow' })
+			),
+			isContextVisible === true && h(Context, {
+				top: `${ measurement.bottom - measurement.scrollY }px`,
+				left: `${ measurement.right - measurement.scrollX }px`,
+				x: '-100%',
+				y: '10px',
+				items: props.items,
+				onItemClick: close,
+				onAwayClick: close
+			})
+		)
+	)
+
+}
+
 const Header = (props) => {
 
 	return (
@@ -55,12 +98,19 @@ const Header = (props) => {
 			h(Logo, { fetching: props.fetching }),
 			h('nav', { className: 'header__nav' },
 				h('div', { className: 'header__buttons' },
-					props.items.map((item, index) => (
-						h(Button, {
+					props.items.map((item, index) => {
+
+						if (item.type === BUTTON) return h(Button, {
 							key: item.label + index,
 							...item
 						}, item.label)
-					))
+
+						if (item.type === DROPDOWN) return h(Dropdown, {
+							key: item.label + index,
+							...item
+						}, item.label)
+
+					})
 				)
 			)
 		)
@@ -70,13 +120,20 @@ const Header = (props) => {
 
 Header.propTypes = {
 	fetching: PropTypes.bool.isRequired,
-	items: PropTypes.arrayOf(
-		PropTypes.shape({
-			active: PropTypes.bool.isRequired,
-			onClick: PropTypes.func.isRequired,
-			label: PropTypes.string.isRequired
-		})
-	).isRequired
+	items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
+
+export const createButton = (label, route, props) => ({
+	type: BUTTON,
+	onClick: () => props.setRouteValue(route),
+	active: props.route.value === route,
+	label
+})
+
+export const createDropdown = (label, items) => ({
+	type: DROPDOWN,
+	items,
+	label
+})
 
 export default Header
