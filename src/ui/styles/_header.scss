@@ -13,6 +13,7 @@
 		top: 0;
 		bottom: 0;
 		width: $gutter*2;
+		pointer-events: none;
 	}
 
 	&::before {
