@@ -4,9 +4,13 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { useClickAway } from 'react-use'
 
+import runWhenDefined from '../utils/runWhenDefined'
+import useMeasure from '../utils/useMeasure'
+
 const Context = (props) => {
 
 	const ref = useRef()
+	const measurement = useMeasure(props.targetRef)
 
 	useClickAway(ref, props.onAwayClick, [ 'click' ])
 
@@ -15,10 +19,10 @@ const Context = (props) => {
 			ref,
 			className: 'context',
 			style: {
-				'--top': props.top,
-				'--right': props.right,
-				'--bottom': props.bottom,
-				'--left': props.left,
+				'--top': runWhenDefined(props.top, measurement),
+				'--right': runWhenDefined(props.right, measurement),
+				'--bottom': runWhenDefined(props.bottom, measurement),
+				'--left': runWhenDefined(props.left, measurement),
 				'--x': props.x,
 				'--y': props.y
 			}
@@ -44,10 +48,13 @@ const Context = (props) => {
 }
 
 Context.propTypes = {
-	top: PropTypes.string,
-	right: PropTypes.string,
-	bottom: PropTypes.string,
-	left: PropTypes.string,
+	targetRef: PropTypes.shape({
+		current: PropTypes.instanceOf(Element)
+	}),
+	top: PropTypes.func,
+	right: PropTypes.func,
+	bottom: PropTypes.func,
+	left: PropTypes.func,
 	x: PropTypes.string,
 	y: PropTypes.string,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,

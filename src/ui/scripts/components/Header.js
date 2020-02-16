@@ -2,8 +2,6 @@ import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import useMeasure from '../utils/useMeasure'
-
 import Context from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
@@ -58,28 +56,26 @@ const Button = (props) => {
 
 const Dropdown = (props) => {
 
-	const buttonRef = useRef()
+	const ref = useRef()
 	const [ active, setActive ] = useState(false)
-	const measurement = useMeasure(buttonRef, active)
 
 	const close = () => setActive(false)
 	const toggle = () => setActive(!active)
 
-	const isContextVisible = active === true && measurement != null
-
 	return (
 		h(Fragment, {},
 			h('button', {
-				ref: buttonRef,
+				ref: ref,
 				className: 'header__button link',
 				onClick: toggle
 			},
 				props.children,
 				h(IconArrowDown, { className: 'header__arrow' })
 			),
-			isContextVisible === true && h(Context, {
-				top: `${ measurement.bottom - measurement.scrollY }px`,
-				left: `${ measurement.right - measurement.scrollX }px`,
+			active === true && h(Context, {
+				targetRef: ref,
+				top: (measurement) => `${ measurement.bottom - measurement.scrollY }px`,
+				left: (measurement) => `${ measurement.right - measurement.scrollX }px`,
 				x: '-100%',
 				y: '10px',
 				items: props.items,

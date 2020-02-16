@@ -40,13 +40,12 @@ const shouldStateUpdate = (prevState = {}, nextState = {}) => {
 
 }
 
-export default (ref, active = false) => {
+export default (ref) => {
 
 	const [ measurement, setMeasurement ] = useState()
 
 	useInterval(() => {
 
-		if (active === false) return
 		if (ref.current == null) return
 
 		const nextMeasurement = getMeasurement(ref)
