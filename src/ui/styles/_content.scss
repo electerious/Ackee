@@ -2,7 +2,7 @@
 
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-gap: $gutter;
+	gap: $gutter;
 	margin: 0 auto;
 	padding: $gutter*5 $gutter;
 	width: 100%;
