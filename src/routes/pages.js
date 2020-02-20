@@ -3,11 +3,7 @@
 const { createError } = require('micro')
 
 const pages = require('../database/pages')
-
-const {
-	PAGES_SORTING_TOP,
-	PAGES_SORTING_RECENT
-} = require('../constants/pages')
+const constants = require('../constants/pages')
 
 const response = (entry) => ({
 	type: 'page',
@@ -28,13 +24,16 @@ const get = async (req) => {
 	const { domainId } = req.params
 	const { sorting } = req.query
 
+	const sortings = [
+		constants.PAGES_SORTING_TOP,
+		constants.PAGES_SORTING_RECENT
+	]
+
+	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
+
 	const entries = await pages.get(domainId, sorting)
 
-	switch (sorting) {
-		case PAGES_SORTING_TOP: return responses(entries)
-		case PAGES_SORTING_RECENT: return responses(entries)
-		default: throw createError(400, 'Unknown sorting')
-	}
+	return responses(entries)
 
 }
 

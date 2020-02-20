@@ -2,7 +2,10 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import {
 	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL
+	VIEWS_TYPE_TOTAL,
+	VIEWS_INTERVAL_DAILY,
+	VIEWS_INTERVAL_MONTHLY,
+	VIEWS_INTERVAL_YEARLY
 } from '../../../../constants/views'
 
 import enhanceViews from '../../enhancers/enhanceViews'
@@ -26,7 +29,7 @@ const RouteViews = (props) => {
 			props.fetchViews(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.views.type ])
+	}, [ props.domains.value, props.views.type, props.views.interval ])
 
 	return (
 		h(Fragment, {},
@@ -39,6 +42,15 @@ const RouteViews = (props) => {
 						{ value: VIEWS_TYPE_UNIQUE, label: 'Unique site views' },
 						{ value: VIEWS_TYPE_TOTAL, label: 'Total page views' }
 					]
+				}),
+				h(Select, {
+					value: props.views.interval,
+					onChange: (e) => props.setViewsInterval(e.target.value),
+					items: [
+						{ value: VIEWS_INTERVAL_DAILY, label: 'Daily' },
+						{ value: VIEWS_INTERVAL_MONTHLY, label: 'Monthly' },
+						{ value: VIEWS_INTERVAL_YEARLY, label: 'Yearly' }
+					]
 				})
 			),
 
@@ -48,6 +60,7 @@ const RouteViews = (props) => {
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.views.type],
+				interval: props.views.interval,
 				items: mergeViews(props.domains, props.views)
 			}),
 
@@ -56,7 +69,8 @@ const RouteViews = (props) => {
 					h(CardViews, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						items: props.views.value[domain.data.id] == null ? [] : enhanceViews(props.views.value[domain.data.id].value, 7)
+						interval: props.views.interval,
+						items: props.views.value[domain.data.id] == null ? [] : enhanceViews(props.views.value[domain.data.id].value, 7, props.views.interval)
 					})
 				)
 			)

@@ -1,6 +1,6 @@
 'use strict'
 
-const dateWithOffset = require('./dateWithOffset')
+const { subDays } = require('date-fns')
 
 module.exports = (id, property) => [
 	{
@@ -25,7 +25,7 @@ module.exports = (id, property) => [
 	{
 		$match: {
 			created: {
-				$gte: dateWithOffset(-6)
+				$gte: subDays(new Date(), 6)
 			}
 		}
 	},

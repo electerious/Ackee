@@ -1,14 +1,9 @@
 'use strict'
 
-const Record = require('../schemas/Record')
-const dateWithOffset = require('../utils/dateWithOffset')
+const { subDays } = require('date-fns')
 
-const {
-	DURATIONS_INTERVAL,
-	DURATIONS_LIMIT,
-	DURATIONS_TYPE_AVERAGE,
-	DURATIONS_TYPE_DETAILED
-} = require('../constants/durations')
+const Record = require('../schemas/Record')
+const constants = require('../constants/durations')
 
 // The time that elapsed between the creation and updating of records.
 const projectDuration = {
@@ -32,11 +27,11 @@ const projectInterval = {
 				{
 					$floor: [
 						{
-							$divide: [ '$duration', DURATIONS_INTERVAL ]
+							$divide: [ '$duration', constants.DURATIONS_INTERVAL ]
 						}
 					]
 				},
-				DURATIONS_INTERVAL
+				constants.DURATIONS_INTERVAL
 			]
 		}
 	}
@@ -52,9 +47,9 @@ const projectMinInterval = {
 		duration: {
 			$cond: {
 				if: {
-					$lt: [ '$duration', DURATIONS_INTERVAL ]
+					$lt: [ '$duration', constants.DURATIONS_INTERVAL ]
 				},
-				then: DURATIONS_INTERVAL / 2,
+				then: constants.DURATIONS_INTERVAL / 2,
 				else: '$duration'
 			}
 		}
@@ -66,7 +61,7 @@ const projectMinInterval = {
 const matchLimit = {
 	$match: {
 		duration: {
-			$lt: DURATIONS_LIMIT
+			$lt: constants.DURATIONS_LIMIT
 		}
 	}
 }
@@ -122,7 +117,7 @@ const getDetailed = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: dateWithOffset(-6)
+					$gte: subDays(new Date(), 6)
 				}
 			}
 		},
@@ -148,7 +143,7 @@ const getDetailed = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: dateWithOffset(-6)
+					$gte: subDays(new Date(), 6)
 				}
 			}
 		},
@@ -159,9 +154,9 @@ const getDetailed = async (id) => {
 				_id: {
 					$cond: {
 						if: {
-							$gte: [ '$duration', DURATIONS_LIMIT ]
+							$gte: [ '$duration', constants.DURATIONS_LIMIT ]
 						},
-						then: DURATIONS_LIMIT,
+						then: constants.DURATIONS_LIMIT,
 						else: '$duration'
 					}
 				},
@@ -189,8 +184,8 @@ const getDetailed = async (id) => {
 const get = async (id, type) => {
 
 	switch (type) {
-		case DURATIONS_TYPE_AVERAGE: return getAverage(id)
-		case DURATIONS_TYPE_DETAILED: return getDetailed(id)
+		case constants.DURATIONS_TYPE_AVERAGE: return getAverage(id)
+		case constants.DURATIONS_TYPE_DETAILED: return getDetailed(id)
 	}
 
 }

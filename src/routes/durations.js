@@ -3,11 +3,7 @@
 const { createError } = require('micro')
 
 const durations = require('../database/durations')
-
-const {
-	DURATIONS_TYPE_AVERAGE,
-	DURATIONS_TYPE_DETAILED
-} = require('../constants/durations')
+const constants = require('../constants/durations')
 
 const response = (entry) => ({
 	type: 'duration',
@@ -28,13 +24,16 @@ const get = async (req) => {
 	const { domainId } = req.params
 	const { type } = req.query
 
+	const types = [
+		constants.DURATIONS_TYPE_AVERAGE,
+		constants.DURATIONS_TYPE_DETAILED
+	]
+
+	if (types.includes(type) === false) throw createError(400, 'Unknown type')
+
 	const entries = await durations.get(domainId, type)
 
-	switch (type) {
-		case DURATIONS_TYPE_AVERAGE: return responses(entries)
-		case DURATIONS_TYPE_DETAILED: return responses(entries)
-		default: throw createError(400, 'Unknown type')
-	}
+	return responses(entries)
 
 }
 

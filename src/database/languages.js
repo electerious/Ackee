@@ -3,11 +3,7 @@
 const Record = require('../schemas/Record')
 const aggregateTopFields = require('../utils/aggregateTopFields')
 const aggregateRecentFields = require('../utils/aggregateRecentFields')
-
-const {
-	LANGUAGES_SORTING_TOP,
-	LANGUAGES_SORTING_RECENT
-} = require('../constants/languages')
+const constants = require('../constants/languages')
 
 const getTop = async (id) => {
 
@@ -28,8 +24,8 @@ const getRecent = async (id) => {
 const get = async (id, sorting) => {
 
 	switch (sorting) {
-		case LANGUAGES_SORTING_TOP: return getTop(id)
-		case LANGUAGES_SORTING_RECENT: return getRecent(id)
+		case constants.LANGUAGES_SORTING_TOP: return getTop(id)
+		case constants.LANGUAGES_SORTING_RECENT: return getRecent(id)
 	}
 
 }

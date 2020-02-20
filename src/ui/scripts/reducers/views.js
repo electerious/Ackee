@@ -2,6 +2,7 @@ import produce from 'immer'
 
 import {
 	SET_VIEWS_TYPE,
+	SET_VIEWS_INTERVAL,
 	SET_VIEWS_VALUE,
 	SET_VIEWS_FETCHING,
 	SET_VIEWS_ERROR,
@@ -9,11 +10,13 @@ import {
 } from '../actions'
 
 import {
-	VIEWS_TYPE_UNIQUE
+	VIEWS_TYPE_UNIQUE,
+	VIEWS_INTERVAL_DAILY
 } from '../../../constants/views'
 
 export const initialState = () => ({
 	type: VIEWS_TYPE_UNIQUE,
+	interval: VIEWS_INTERVAL_DAILY,
 	value: {}
 })
 
@@ -33,6 +36,9 @@ export default produce((draft, action) => {
 	switch (action.type) {
 		case SET_VIEWS_TYPE:
 			draft.type = action.payload || initialState().type
+			break
+		case SET_VIEWS_INTERVAL:
+			draft.interval = action.payload || initialState().interval
 			break
 		case SET_VIEWS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
