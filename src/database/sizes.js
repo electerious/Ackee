@@ -1,7 +1,7 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateTopFields = require('../utils/aggregateTopFields')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const constants = require('../constants/sizes')
 
 const getBrowserWidth = async (id) => {

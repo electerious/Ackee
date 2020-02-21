@@ -1,8 +1,8 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateTopFields = require('../utils/aggregateTopFields')
-const aggregateRecentFields = require('../utils/aggregateRecentFields')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const constants = require('../constants/languages')
 
 const getTop = async (id) => {

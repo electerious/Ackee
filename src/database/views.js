@@ -1,9 +1,9 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateDailyViews = require('../utils/aggregateDailyViews')
-const aggregateMonthlyViews = require('../utils/aggregateMonthlyViews')
-const aggregateYearlyViews = require('../utils/aggregateYearlyViews')
+const aggregateDailyViews = require('../aggregations/aggregateDailyViews')
+const aggregateMonthlyViews = require('../aggregations/aggregateMonthlyViews')
+const aggregateYearlyViews = require('../aggregations/aggregateYearlyViews')
 const constants = require('../constants/views')
 
 const getUnique = async (id, interval) => {

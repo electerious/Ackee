@@ -1,9 +1,9 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateTopFields = require('../utils/aggregateTopFields')
-const aggregateRecentFields = require('../utils/aggregateRecentFields')
-const aggregateNewFields = require('../utils/aggregateNewFields')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const constants = require('../constants/referrers')
 
 const getTop = async (id) => {
