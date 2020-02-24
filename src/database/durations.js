@@ -4,6 +4,7 @@ const { subDays } = require('date-fns')
 
 const Record = require('../schemas/Record')
 const constants = require('../constants/durations')
+const zeroDate = require('../utils/zeroDate')
 
 // The time that elapsed between the creation and updating of records.
 const projectDuration = {
@@ -117,7 +118,7 @@ const getDetailed = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: subDays(new Date(), 6)
+					$gte: subDays(zeroDate(), 6)
 				}
 			}
 		},
@@ -143,7 +144,7 @@ const getDetailed = async (id) => {
 			$match: {
 				domainId: id,
 				created: {
-					$gte: subDays(new Date(), 6)
+					$gte: subDays(zeroDate(), 6)
 				}
 			}
 		},
