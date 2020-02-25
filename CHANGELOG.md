@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
 - Switch between daily, weekly and yearly views
+- `ACKEE_ALLOW_ORIGIN` now supports multiple domains (#82, thanks @jaryl)
 
 ### Improved
 
