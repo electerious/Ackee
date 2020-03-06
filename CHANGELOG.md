@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.6.0] - 2020-03-06
 
 ### Added
 
@@ -17,8 +17,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Fixed
 
-- Loading indicator when the sizes view is loading
-- Catch errors when the sizes view throws an error
+- Loading indicator when the sizes-view is loading
+- Catch errors when the sizes-view throws an error
 
 ## [1.5.0] - 2020-02-16
 
