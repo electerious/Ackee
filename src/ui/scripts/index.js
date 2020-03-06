@@ -50,7 +50,8 @@ store.subscribe(() => {
 		},
 		views: {
 			...initialViewsState(),
-			type: currentState.views.type
+			type: currentState.views.type,
+			interval: currentState.views.interval
 		},
 		pages: {
 			...initialPagesState(),

@@ -51,10 +51,20 @@ Access-Control-Allow-Headers: Content-Type
 
 If you are running Ackee on a platform which handles SSL for you, you may want a quick solution for setting CORS headers instead of using a [reverse proxy](SSL%20and%20HTTPS.md).
 
-As an environment variable, you will need to just set:
+As an environment variable, you will need to set:
 
-```bash
+```
 ACKEE_ALLOW_ORIGIN="https://example.com"
 ```
 
 The proper header value for `Access-Control-Allow-Origin` will be set with the other headers being the recommended values.
+
+It's also possible to allow requests from all domains (not recommended) or from multiple domains:
+
+```
+ACKEE_ALLOW_ORIGIN="*"
+```
+
+```
+ACKEE_ALLOW_ORIGIN="https://example.com,https://example2.com"
+```

@@ -5,12 +5,14 @@
 
 ## Get unique site views
 
-Get the unique amount of visits per day for the last 14 days. Days without entries are omitted. A user is unique when he visits a site for the first time a day.
+Get the unique amount of visits per day, month or year for the last 14 intervals. Entries without views are omitted. A user is unique when he visits a site for the first time a day.
 
 ### Request
 
 ```
-GET /domains/:domainId/views?type=unique
+GET /domains/:domainId/views?type=unique&interval=daily
+GET /domains/:domainId/views?type=unique&interval=monthly
+GET /domains/:domainId/views?type=unique&interval=yearly
 ```
 
 ### Headers
@@ -46,12 +48,14 @@ Status: 200 OK
 
 ## Get total page views
 
-Get the total amount of visits per day for the last 14 days. Days without entries are omitted.
+Get the total amount of visits per day, month or year for the last 14 intervals. Entries without views are omitted.
 
 ### Request
 
 ```
-GET /domains/:domainId/views?type=total
+GET /domains/:domainId/views?type=total&interval=daily
+GET /domains/:domainId/views?type=total&interval=monthly
+GET /domains/:domainId/views?type=total&interval=yearly
 ```
 
 ### Headers

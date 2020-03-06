@@ -1,11 +1,11 @@
 # Sizes
 
-- [Get browser width](#get-browser-width)
-- [Get browser height](#get-browser-height)
-- [Get screen width](#get-screen-width)
-- [Get screen height](#get-screen-height)
+- [Get browser widths](#get-browser-widths)
+- [Get browser heights](#get-browser-heights)
+- [Get screen widths](#get-screen-widths)
+- [Get screen heights](#get-screen-heights)
 
-## Get browser width
+## Get browser widths
 
 Get the top 25 browser widths of the last 7 days.
 
@@ -42,7 +42,7 @@ Status: 200 OK
 }
 ```
 
-## Get browser height
+## Get browser heights
 
 Get the top 25 browser heights of the last 7 days.
 
@@ -79,7 +79,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen width
+## Get screen widths
 
 Get the top 25 screen widths of the last 7 days.
 
@@ -116,7 +116,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen height
+## Get screen heights
 
 Get the top 25 screen heights of the last 7 days.
 

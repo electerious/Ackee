@@ -1,101 +1,48 @@
 'use strict'
 
 const Record = require('../schemas/Record')
+const aggregateDailyViews = require('../aggregations/aggregateDailyViews')
+const aggregateMonthlyViews = require('../aggregations/aggregateMonthlyViews')
+const aggregateYearlyViews = require('../aggregations/aggregateYearlyViews')
+const constants = require('../constants/views')
 
-const {
-	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL
-} = require('../constants/views')
+const getUnique = async (id, interval) => {
 
-const getUnique = async (id) => {
-
-	return Record.aggregate([
-		{
-			$match: {
-				clientId: {
-					$exists: true,
-					$ne: null
-				},
-				domainId: id
-			}
-		},
-		{
-			$group: {
-				_id: {
-					day: {
-						$dayOfMonth: '$created'
-					},
-					month: {
-						$month: '$created'
-					},
-					year: {
-						$year: '$created'
-					}
-				},
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$sort: {
-				'_id.year': -1,
-				'_id.month': -1,
-				'_id.day': -1
-			}
-		},
-		{
-			$limit: 14
-		}
-	])
+	switch (interval) {
+		case constants.VIEWS_INTERVAL_DAILY: return Record.aggregate(
+			aggregateDailyViews(id, true)
+		)
+		case constants.VIEWS_INTERVAL_MONTHLY: return Record.aggregate(
+			aggregateMonthlyViews(id, true)
+		)
+		case constants.VIEWS_INTERVAL_YEARLY: return Record.aggregate(
+			aggregateYearlyViews(id, true)
+		)
+	}
 
 }
 
-const getTotal = async (id) => {
+const getTotal = async (id, interval) => {
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id
-			}
-		},
-		{
-			$group: {
-				_id: {
-					day: {
-						$dayOfMonth: '$created'
-					},
-					month: {
-						$month: '$created'
-					},
-					year: {
-						$year: '$created'
-					}
-				},
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$sort: {
-				'_id.year': -1,
-				'_id.month': -1,
-				'_id.day': -1
-			}
-		},
-		{
-			$limit: 14
-		}
-	])
+	switch (interval) {
+		case constants.VIEWS_INTERVAL_DAILY: return Record.aggregate(
+			aggregateDailyViews(id, false)
+		)
+		case constants.VIEWS_INTERVAL_MONTHLY: return Record.aggregate(
+			aggregateMonthlyViews(id, false)
+		)
+		case constants.VIEWS_INTERVAL_YEARLY: return Record.aggregate(
+			aggregateYearlyViews(id, false)
+		)
+	}
 
 }
 
-const get = async (id, type) => {
+const get = async (id, type, interval) => {
 
 	switch (type) {
-		case VIEWS_TYPE_UNIQUE: return getUnique(id)
-		case VIEWS_TYPE_TOTAL: return getTotal(id)
+		case constants.VIEWS_TYPE_UNIQUE: return getUnique(id, interval)
+		case constants.VIEWS_TYPE_TOTAL: return getTotal(id, interval)
 	}
 
 }

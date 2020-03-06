@@ -71,3 +71,23 @@ Set the environment to `development` to see additional details in the console an
 ```
 NODE_ENV=development
 ```
+
+## CORS headers
+
+Quick solution for setting [CORS headers](CORS%20headers.md) instead of using a [reverse proxy](SSL%20and%20HTTPS.md). This is helpful if you are running Ackee on a platform which handles SSL for you.
+
+```
+ACKEE_ALLOW_ORIGIN="*"
+```
+
+*or*
+
+```
+ACKEE_ALLOW_ORIGIN="https://example.com"
+```
+
+*or*
+
+```
+ACKEE_ALLOW_ORIGIN="https://example.com,https://example2.com"
+```
