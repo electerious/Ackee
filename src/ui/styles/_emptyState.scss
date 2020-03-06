@@ -8,8 +8,8 @@
 	&__inner {
 		display: grid;
 		align-items: center;
-		grid-gap: $gutter/1.5;
 		grid-auto-flow: column;
+		gap: $gutter/1.5;
 	}
 
 	&__icon {

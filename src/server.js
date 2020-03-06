@@ -47,7 +47,16 @@ const catchError = (fn) => async (req, res) => {
 
 const attachCorsHeaders = (fn) => async (req, res) => {
 
-	const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN
+	const allowOrigin = (() => {
+
+		if (process.env.ACKEE_ALLOW_ORIGIN === '*') return '*'
+
+		if (process.env.ACKEE_ALLOW_ORIGIN) {
+			const origins = process.env.ACKEE_ALLOW_ORIGIN.split(',')
+			return origins.find((origin) => origin.includes(req.headers.host))
+		}
+
+	})()
 
 	if (allowOrigin != null) {
 		res.setHeader('Access-Control-Allow-Origin', allowOrigin)

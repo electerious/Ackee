@@ -9,12 +9,12 @@ const server = require('../src/server')
 
 const base = listen(server)
 
-test('return cors headers if env var specifies one', async (t) => {
+test('return cors headers with corresponding origin if env var specifies multiple origins', async (t) => {
 
 	const url = new URL(await base)
 
 	const restore = mockedEnv({
-		ACKEE_ALLOW_ORIGIN: url.origin
+		ACKEE_ALLOW_ORIGIN: `https://example.com,${ url.origin }`
 	})
 
 	const res = await fetch(url.href)

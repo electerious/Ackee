@@ -2,14 +2,14 @@
 
 	display: grid;
 	grid-template-rows: auto 1em;
-	grid-gap: $gutter/2;
+	gap: $gutter/2;
 	padding-top: $gutter*1.5;
 	height: $cardContentHeight;
 
 	&__row {
 		display: grid;
 		grid-template-columns: 3em auto;
-		grid-gap: $gutter/2;
+		gap: $gutter/2;
 	}
 
 	&__bar {

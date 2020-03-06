@@ -3,11 +3,7 @@
 const { createError } = require('micro')
 
 const views = require('../database/views')
-
-const {
-	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL
-} = require('../constants/views')
+const constants = require('../constants/views')
 
 const response = (entry) => ({
 	type: 'view',
@@ -29,15 +25,25 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { type } = req.query
+	const { type, interval } = req.query
 
-	const entries = await views.get(domainId, type)
+	const types = [
+		constants.VIEWS_TYPE_UNIQUE,
+		constants.VIEWS_TYPE_TOTAL
+	]
 
-	switch (type) {
-		case VIEWS_TYPE_UNIQUE: return responses(entries)
-		case VIEWS_TYPE_TOTAL: return responses(entries)
-		default: throw createError(400, 'Unknown type')
-	}
+	const intervals = [
+		constants.VIEWS_INTERVAL_DAILY,
+		constants.VIEWS_INTERVAL_MONTHLY,
+		constants.VIEWS_INTERVAL_YEARLY
+	]
+
+	if (types.includes(type) === false) throw createError(400, 'Unknown type')
+	if (intervals.includes(interval) === false) throw createError(400, 'Unknown interval')
+
+	const entries = await views.get(domainId, type, interval)
+
+	return responses(entries)
 
 }
 

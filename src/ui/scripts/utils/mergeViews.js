@@ -10,7 +10,7 @@ export default (domains, views) => {
 		const view = views.value[domain.data.id]
 		const exists = view != null
 
-		return exists === true ? enhanceViews(view.value, 14) : undefined
+		return exists === true ? enhanceViews(view.value, 14, views.interval) : undefined
 
 	})
 
@@ -20,13 +20,13 @@ export default (domains, views) => {
 	// Merge all views to one array of views
 	return filteredViews.reduce((acc, views) => {
 
-		// Views is an array. Each item represents the visit count of one day.
+		// Views is an array. Each item represents the visit count of one day, month or year.
 		views.forEach((view, index) => {
 
-			// The current day might be new as should be initialised first
+			// The current day, month or year might be new and should be initialised first
 			const initial = acc[index] == null ? 0 : acc[index]
 
-			// Add the current day to the global array of days
+			// Add the current day, month or year to the global array of days, months or years
 			acc[index] = initial + view
 
 		})
