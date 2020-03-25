@@ -4,11 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2020-03-25
+
+### Fixed
+
+- Origin header check for multiple hosts (#84, thanks @jaryl)
+
 ## [1.6.0] - 2020-03-06
 
 ### Added
 
-- Switch between daily, weekly and yearly views
+- Switch between daily, monthly and yearly views
 - `ACKEE_ALLOW_ORIGIN` now supports multiple domains (#79 #82, thanks @jaryl)
 
 ### Improved
