@@ -53,7 +53,7 @@ const attachCorsHeaders = (fn) => async (req, res) => {
 
 		if (process.env.ACKEE_ALLOW_ORIGIN) {
 			const origins = process.env.ACKEE_ALLOW_ORIGIN.split(',')
-			return origins.find((origin) => origin.includes(req.headers.host))
+			return origins.find((origin) => origin.includes(req.headers.origin) || origin.includes(req.headers.host))
 		}
 
 	})()
