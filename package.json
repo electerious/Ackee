@@ -20,6 +20,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
+    "dev": "NODE_ENV=development nodemon",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
     "lint": "eslint '{src,test}/**/*.js'"
@@ -73,6 +74,7 @@
     "eslint-plugin-react-hooks": "^2.4.0",
     "eslint-plugin-react-native": "^3.8.1",
     "mocked-env": "^1.3.2",
+    "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
     "test-listen": "^1.1.0"
   },
@@ -82,6 +84,14 @@
     "environmentVariables": {
       "ACKEE_TRACKER": "custom name"
     }
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*",
+      "docs/*",
+      "test/*",
+      "src/ui/*"
+    ]
   },
   "engines": {
     "node": ">= 10"
