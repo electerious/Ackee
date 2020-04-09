@@ -1,11 +1,17 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
+export const SET_SIZES_TOP_DATE_RANGE = Symbol()
 export const SET_SIZES_TYPE = Symbol()
 export const SET_SIZES_VALUE = Symbol()
 export const SET_SIZES_FETCHING = Symbol()
 export const SET_SIZES_ERROR = Symbol()
 export const RESET_SIZES = Symbol()
+
+export const setSizesTopDateRange = (payload) => ({
+	type: SET_SIZES_TOP_DATE_RANGE,
+	payload
+})
 
 export const setSizesType = (payload) => ({
 	type: SET_SIZES_TYPE,
@@ -41,7 +47,7 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/sizes?type=${ props.sizes.type }`, {
+		const data = await api(`/domains/${ domainId }/sizes?type=${ props.sizes.type }&dateRange=${ props.sizes.dateRange }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

@@ -1,12 +1,20 @@
 import produce from 'immer'
 
 import {
-	SET_OS_ERROR, SET_OS_FETCHING, SET_OS_SORTING, SET_OS_VALUE, RESET_OS, SET_OS_TYPE
+	RESET_OS,
+	SET_OS_ERROR,
+	SET_OS_FETCHING,
+	SET_OS_SORTING,
+	SET_OS_VALUE,
+	SET_OS_TYPE,
+	SET_OS_TOP_DATE_RANGE
 } from '../actions'
 
 import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'
+import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
+	dateRange: LAST_7_DAYS.value.toString(),
 	type: OS_NO_VERSION,
 	sorting: OS_SORTING_TOP,
 	value: {}
@@ -29,6 +37,10 @@ export default produce((draft, action) => {
 		case SET_OS_TYPE:
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
+			break
+		case SET_OS_TOP_DATE_RANGE:
+			draft.value = initialState().value
+			draft.dateRange = action.payload || initialState().dateRange
 			break
 		case SET_OS_SORTING:
 			// Reset value because a different sorting results in a different value strcuture

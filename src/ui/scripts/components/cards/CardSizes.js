@@ -1,10 +1,21 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
+import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
+
+const textLabel = (dateRange) => {
+	if (dateRange) {
+		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
+		if (range) return range.label
+	}
+
+	return LAST_7_DAYS.label
+}
 
 const CardSizes = (props) => {
 
@@ -38,7 +49,7 @@ const CardSizes = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, 'Last 7 days'),
+				}, textLabel(props.dateRange)),
 				presentation
 			)
 		)
@@ -48,6 +59,7 @@ const CardSizes = (props) => {
 
 CardSizes.propTypes = {
 	headline: PropTypes.string.isRequired,
+	dateRange: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

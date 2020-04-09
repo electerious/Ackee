@@ -7,7 +7,8 @@ const Select = (props) => {
 		h('select', {
 			className: 'select',
 			value: props.value,
-			onChange: props.onChange
+			onChange: props.onChange,
+			disabled: props.disabled
 		},
 			props.items.map((item, index) => (
 				h('option', {
