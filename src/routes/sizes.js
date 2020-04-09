@@ -26,10 +26,12 @@ const get = async (req) => {
 	const { type, dateRange = LAST_7_DAYS.value } = req.query
 
 	const types = [
-		constants.SIZES_TYPE_BROWSER_WIDTH,
 		constants.SIZES_TYPE_BROWSER_HEIGHT,
-		constants.SIZES_TYPE_SCREEN_WIDTH,
-		constants.SIZES_TYPE_SCREEN_HEIGHT
+		constants.SIZES_TYPE_BROWSER_RESOLUTION,
+		constants.SIZES_TYPE_BROWSER_WIDTH,
+		constants.SIZES_TYPE_SCREEN_HEIGHT,
+		constants.SIZES_TYPE_SCREEN_RESOLUTION,
+		constants.SIZES_TYPE_SCREEN_WIDTH
 	]
 
 	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
