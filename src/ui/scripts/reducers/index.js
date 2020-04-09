@@ -10,6 +10,7 @@ import referrers from './referrers'
 import durations from './durations'
 import languages from './languages'
 import sizes from './sizes'
+import os from './os'
 
 export default combineReducers({
 	modals,
@@ -21,5 +22,6 @@ export default combineReducers({
 	referrers,
 	durations,
 	languages,
-	sizes
+	sizes,
+	os
 })

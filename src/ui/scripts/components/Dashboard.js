@@ -7,6 +7,7 @@ import {
 	ROUTE_DURATIONS,
 	ROUTE_LANGUAGES,
 	ROUTE_SIZES,
+	ROUTE_OS,
 	ROUTE_SETTINGS
 } from '../constants/route'
 
@@ -16,6 +17,7 @@ import RoutePages from './routes/RoutePages'
 import RouteReferrers from './routes/RouteReferrers'
 import RouteDurations from './routes/RouteDurations'
 import RouteLanguages from './routes/RouteLanguages'
+import RouteOs from './routes/RouteOs'
 import RouteSizes from './routes/RouteSizes'
 import RouteSettings from './routes/RouteSettings'
 import Modals from './Modals'
@@ -34,6 +36,7 @@ const Dashboard = (props) => {
 					createButton('Durations', ROUTE_DURATIONS, props),
 					createDropdown('Detailed', [
 						createButton('Languages', ROUTE_LANGUAGES, props),
+						createButton('Os', ROUTE_OS, props),
 						createButton('Sizes', ROUTE_SIZES, props)
 					]),
 					createButton('Settings', ROUTE_SETTINGS, props)
@@ -45,6 +48,7 @@ const Dashboard = (props) => {
 				props.route.value === ROUTE_REFERRERS && h(RouteReferrers, props),
 				props.route.value === ROUTE_DURATIONS && h(RouteDurations, props),
 				props.route.value === ROUTE_LANGUAGES && h(RouteLanguages, props),
+				props.route.value === ROUTE_OS && h(RouteOs, props),
 				props.route.value === ROUTE_SIZES && h(RouteSizes, props),
 				props.route.value === ROUTE_SETTINGS && h(RouteSettings, props)
 			)
