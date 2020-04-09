@@ -20,6 +20,7 @@ const referrers = require('./routes/referrers')
 const languages = require('./routes/languages')
 const durations = require('./routes/durations')
 const sizes = require('./routes/sizes')
+const os = require('./routes/os')
 
 const catchError = (fn) => async (req, res) => {
 
@@ -108,6 +109,8 @@ const routes = [
 	get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
 
 	get('/domains/:domainId/sizes', pipe(requireAuth, sizes.get)),
+
+	get('/domains/:domainId/os', pipe(requireAuth, os.get)),
 
 	get('/*', notFound),
 	post('/*', notFound),
