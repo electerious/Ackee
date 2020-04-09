@@ -5,6 +5,7 @@ const { subDays } = require('date-fns')
 const zeroDate = require('../utils/zeroDate')
 
 module.exports = (id, properties) => {
+
 	const aggregate = [
 		{
 			$match: {
@@ -38,4 +39,5 @@ module.exports = (id, properties) => {
 	})
 
 	return aggregate
+
 }

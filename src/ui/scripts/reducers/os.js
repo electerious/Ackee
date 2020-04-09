@@ -1,10 +1,18 @@
 import produce from 'immer'
 
 import {
-	SET_OS_ERROR, SET_OS_FETCHING, SET_OS_SORTING, SET_OS_VALUE, RESET_OS, SET_OS_TYPE
+	SET_OS_SORTING,
+	SET_OS_FETCHING,
+	SET_OS_ERROR,
+	SET_OS_VALUE,
+	SET_OS_TYPE,
+	RESET_OS
 } from '../actions'
 
-import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'
+import {
+	OS_SORTING_TOP,
+	OS_NO_VERSION
+} from '../../../constants/os'
 
 export const initialState = () => ({
 	type: OS_NO_VERSION,
