@@ -30,10 +30,10 @@ module.exports = (id, properties) => {
 		}
 	]
 
-	properties.forEach(property => {
-		aggregate[0].$match[property] = { $ne: null };
-		aggregate[2].$project._id[property] = `$${property}`;
-	});
+	properties.forEach((property) => {
+		aggregate[0].$match[property] = { $ne: null }
+		aggregate[2].$project._id[property] = `$${ property }`
+	})
 
-	return aggregate;
+	return aggregate
 }

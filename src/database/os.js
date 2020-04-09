@@ -10,14 +10,14 @@ const constants = require('../constants/os')
 const getTopWithVersion = async (id) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, ['osName', 'osVersion'])
+		aggregateTopFieldsMultiple(id, [ 'osName', 'osVersion' ])
 	)
 }
 
 const getRecentWithVersion = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFieldsMultiple(id, ['osName', 'osVersion'])
+		aggregateRecentFieldsMultiple(id, [ 'osName', 'osVersion' ])
 	)
 }
 
