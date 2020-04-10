@@ -7,7 +7,7 @@
 
 ## Get browser widths
 
-Get the top 25 browser widths of the last 7 days.
+Get the top 30 browser widths of the last 7 days.
 
 ### Request
 
@@ -44,7 +44,7 @@ Status: 200 OK
 
 ## Get browser heights
 
-Get the top 25 browser heights of the last 7 days.
+Get the top 30 browser heights of the last 7 days.
 
 ### Request
 
@@ -81,7 +81,7 @@ Status: 200 OK
 
 ## Get screen widths
 
-Get the top 25 screen widths of the last 7 days.
+Get the top 30 screen widths of the last 7 days.
 
 ### Request
 
@@ -118,7 +118,7 @@ Status: 200 OK
 
 ## Get screen heights
 
-Get the top 25 screen heights of the last 7 days.
+Get the top 30 screen heights of the last 7 days.
 
 ### Request
 
