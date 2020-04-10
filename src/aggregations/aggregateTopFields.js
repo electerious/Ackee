@@ -3,6 +3,7 @@
 const getDateRange = require('../utils/getDateRange')
 
 module.exports = (id, property, dateRange) => {
+
 	const aggregate = [
 		{
 			$match: {
@@ -36,4 +37,5 @@ module.exports = (id, property, dateRange) => {
 	}
 
 	return aggregate
+
 }
