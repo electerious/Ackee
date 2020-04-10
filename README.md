@@ -94,6 +94,10 @@ Ackee uses environment variables and supports [`.env` files](https://www.npmjs.c
 
 More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
+#### Donate
+
+I am working hard on continuously developing and maintaining Ackee. Please consider making a donation [via PayPal](https://paypal.me/electerious) to keep the project going strong and me motivated.
+
 #### Related
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee

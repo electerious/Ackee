@@ -18,6 +18,10 @@
     "type": "git",
     "url": "https://github.com/electerious/Ackee.git"
   },
+  "funding": {
+    "type" : "paypal",
+    "url" : "https://paypal.me/electerious"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "NODE_ENV=development nodemon",
