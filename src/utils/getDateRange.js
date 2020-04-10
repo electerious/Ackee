@@ -10,9 +10,9 @@ module.exports = (dateRange) => {
 		case ALL_TIME.value:
 			return null
 		case LAST_30_DAYS.value:
-			return { $gte: subDays(zeroDate(), LAST_30_DAYS.value) }
+			return { $gte: subDays(zeroDate(), 29) }
 		case LAST_7_DAYS.value:
-			return { $gte: subDays(zeroDate(), LAST_7_DAYS.value) }
+			return { $gte: subDays(zeroDate(), 6) }
 		default:
 			return null
 	}

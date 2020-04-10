@@ -34,9 +34,9 @@ const get = async (req) => {
 
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
-	if (dateRanges.includes(Number(dateRange)) === false) throw createError(400, 'Unknown date range')
+	if (dateRanges.includes(dateRange) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await languages.get(domainId, sorting, Number(dateRange))
+	const entries = await languages.get(domainId, sorting, dateRange)
 
 	return responses(entries)
 

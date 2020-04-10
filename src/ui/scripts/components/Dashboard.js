@@ -42,7 +42,7 @@ const Dashboard = (props) => {
 						createButton('Browsers', ROUTE_BROWSERS, props),
 						createButton('Devices', ROUTE_DEVICES, props),
 						createButton('Languages', ROUTE_LANGUAGES, props),
-						createButton('Os', ROUTE_OS, props),
+						createButton('Operating Systems', ROUTE_OS, props),
 						createButton('Sizes', ROUTE_SIZES, props)
 					]),
 					createButton('Settings', ROUTE_SETTINGS, props)

@@ -10,11 +10,15 @@ import {
 	SET_OS_TOP_DATE_RANGE
 } from '../actions'
 
-import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'
+import {
+	OS_SORTING_TOP,
+	OS_NO_VERSION
+} from '../../../constants/os'
+
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value.toString(),
+	dateRange: LAST_7_DAYS.value,
 	type: OS_NO_VERSION,
 	sorting: OS_SORTING_TOP,
 	value: {}

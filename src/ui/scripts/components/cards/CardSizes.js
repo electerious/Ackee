@@ -10,7 +10,7 @@ import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentat
 
 const textLabel = (dateRange) => {
 	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
+		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
 		if (range) return range.label
 	}
 

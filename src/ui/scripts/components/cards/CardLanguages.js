@@ -11,10 +11,11 @@ import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
 
-const textLabel = (item, dateRange) => {
+const textLabel = (item, dateRange, isRecent) => {
+	if (isRecent && !item) return 'Recent'
 	if (item && item.date) return relativeDate(item.date)
 	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
+		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
 		if (range) return range.label
 	}
 
@@ -65,7 +66,7 @@ const CardLanguages = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active], props.dateRange)),
+				}, textLabel(props.items[active], props.dateRange, props.sorting === LANGUAGES_SORTING_RECENT)),
 				presentation
 			)
 		)

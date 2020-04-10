@@ -13,7 +13,7 @@ import { SIZES_TYPE_SCREEN_RESOLUTION } from '../../../constants/sizes'
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value.toString(),
+	dateRange: LAST_7_DAYS.value,
 	type: SIZES_TYPE_SCREEN_RESOLUTION,
 	value: {}
 })
