@@ -9,12 +9,12 @@ import {
 	SET_SIZES_TOP_DATE_RANGE
 } from '../actions'
 
-import { SIZES_TYPE_SCREEN_RESOLUTION } from '../../../constants/sizes'
+import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
 	dateRange: LAST_7_DAYS.value,
-	type: SIZES_TYPE_SCREEN_RESOLUTION,
+	type: SIZES_TYPE_BROWSER_RESOLUTION,
 	value: {}
 })
 
