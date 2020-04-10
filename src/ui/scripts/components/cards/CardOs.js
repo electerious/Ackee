@@ -2,7 +2,6 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -10,13 +9,14 @@ import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
+import dateRangeLabel from '../../utils/dateRangeLabel'
 
 const textLabel = (item, dateRange, isRecent) => {
 
 	if (item && item.date) return relativeDate(item.date)
 	if (isRecent) return 'Recent'
 
-	return [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
+	return dateRangeLabel(dateRange)
 
 }
 
