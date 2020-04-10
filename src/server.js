@@ -22,6 +22,7 @@ const durations = require('./routes/durations')
 const sizes = require('./routes/sizes')
 const os = require('./routes/os')
 const devices = require('./routes/devices')
+const browsers = require('./routes/browsers')
 
 const catchError = (fn) => async (req, res) => {
 
@@ -114,6 +115,8 @@ const routes = [
 	get('/domains/:domainId/os', pipe(requireAuth, os.get)),
 
 	get('/domains/:domainId/devices', pipe(requireAuth, devices.get)),
+
+	get('/domains/:domainId/browsers', pipe(requireAuth, browsers.get)),
 
 	get('/*', notFound),
 	post('/*', notFound),
