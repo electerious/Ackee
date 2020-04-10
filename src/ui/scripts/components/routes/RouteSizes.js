@@ -1,14 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	SIZES_TYPE_BROWSER_HEIGHT,
-	SIZES_TYPE_BROWSER_RESOLUTION,
-	SIZES_TYPE_BROWSER_WIDTH,
-	SIZES_TYPE_SCREEN_HEIGHT,
-	SIZES_TYPE_SCREEN_RESOLUTION,
-	SIZES_TYPE_SCREEN_WIDTH
-} from '../../../../constants/sizes'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { SIZES_TYPE_BROWSER_HEIGHT, SIZES_TYPE_BROWSER_RESOLUTION, SIZES_TYPE_BROWSER_WIDTH, SIZES_TYPE_SCREEN_HEIGHT, SIZES_TYPE_SCREEN_RESOLUTION, SIZES_TYPE_SCREEN_WIDTH } from '../../../../constants/sizes'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'

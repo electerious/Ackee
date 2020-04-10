@@ -1,11 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	REFERRERS_SORTING_TOP,
-	REFERRERS_SORTING_NEW,
-	REFERRERS_SORTING_RECENT
-} from '../../../../constants/referrers'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { REFERRERS_SORTING_TOP, REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import useDidMountEffect from '../../utils/useDidMountEffect'

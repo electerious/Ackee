@@ -1,17 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	OS_SORTING_TOP,
-	OS_SORTING_RECENT,
-	OS_NO_VERSION,
-	OS_WITH_VERSION
-} from '../../../../constants/os'
-
-import {
-	ALL_TIME,
-	LAST_7_DAYS,
-	LAST_30_DAYS
-} from '../../../../constants/dateRange'
+import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_NO_VERSION, OS_WITH_VERSION } from '../../../../constants/os'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceOs from '../../enhancers/enhanceOs'
 import useDidMountEffect from '../../utils/useDidMountEffect'
