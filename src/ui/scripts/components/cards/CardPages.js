@@ -13,14 +13,10 @@ import relativeDate from '../../utils/relativeDate'
 
 const textLabel = (item, dateRange, isRecent) => {
 
-	if (isRecent && !item) return 'Recent'
 	if (item && item.date) return relativeDate(item.date)
-	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
-		if (range) return range.label
-	}
+	if (isRecent) return 'Recent'
 
-	return LAST_7_DAYS.label
+	return [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
 
 }
 
@@ -68,7 +64,11 @@ const CardPages = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active], props.dateRange, props.sorting === PAGES_SORTING_RECENT)),
+				}, textLabel(
+					props.items[active],
+					props.dateRange,
+					props.sorting === PAGES_SORTING_RECENT
+				)),
 				presentation
 			)
 		)
