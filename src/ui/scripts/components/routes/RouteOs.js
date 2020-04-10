@@ -64,16 +64,6 @@ const RouteOs = (props) => {
 						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
 						{ value: ALL_TIME.value, label: ALL_TIME.label }
 					]
-				}),
-				h(Select, {
-					disabled: props.os.sorting !== OS_SORTING_TOP,
-					value: props.os.dateRange,
-					onChange: (e) => props.setOsTopDateRange(e.target.value),
-					items: [
-						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value, label: ALL_TIME.label }
-					]
 				})
 			),
 
