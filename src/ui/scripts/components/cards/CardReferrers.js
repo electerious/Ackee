@@ -2,13 +2,13 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationIconList from '../presentations/PresentationIconList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
+import dateRangeLabel from '../../utils/dateRangeLabel'
 
 const textLabel = (item, dateRange, isRecent, isNew) => {
 
@@ -18,7 +18,7 @@ const textLabel = (item, dateRange, isRecent, isNew) => {
 	if (isRecent) return 'Recent'
 	if (isNew) return 'New'
 
-	return [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
+	return dateRangeLabel(dateRange)
 
 }
 
