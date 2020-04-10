@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { DEVICES_SORTING_TOP, DEVICES_SORTING_RECENT, DEVICES_WITH_MODEL, DEVICES_NO_MODEL } from '../../../../constants/devices'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceDevices from '../../enhancers/enhanceDevices'
 import useDidMountEffect from '../../utils/useDidMountEffect'

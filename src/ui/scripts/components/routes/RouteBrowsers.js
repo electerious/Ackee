@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_SORTING_RECENT, BROWSERS_NO_VERSION, BROWSERS_WITH_VERSION } from '../../../../constants/browsers'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import useDidMountEffect from '../../utils/useDidMountEffect'

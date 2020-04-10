@@ -67,7 +67,8 @@ const CardBrowsers = (props) => {
 				}, textLabel(
 					props.items[active],
 					props.dateRange,
-					props.sorting === BROWSERS_SORTING_RECENT)),
+					props.sorting === BROWSERS_SORTING_RECENT
+				)),
 				presentation
 			)
 		)

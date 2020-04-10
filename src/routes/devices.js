@@ -4,7 +4,7 @@ const { createError } = require('micro')
 
 const devices = require('../database/devices')
 const constants = require('../constants/devices')
-const { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } = require('../constants/dateRange')
+const { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } = require('../constants/dateRange')
 
 const response = (entry) => ({
 	type: 'device',
@@ -30,9 +30,16 @@ const get = async (req) => {
 		constants.DEVICES_SORTING_RECENT
 	]
 
-	const types = [ constants.DEVICES_WITH_MODEL, constants.DEVICES_NO_MODEL ]
+	const types = [
+		constants.DEVICES_WITH_MODEL,
+		constants.DEVICES_NO_MODEL
+	]
 
-	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
+	const dateRanges = [
+		LAST_7_DAYS.value,
+		LAST_30_DAYS.value,
+		ALL_TIME.value
+	]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
