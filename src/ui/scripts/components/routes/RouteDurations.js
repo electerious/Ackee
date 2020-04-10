@@ -28,28 +28,6 @@ const RouteDurations = (props) => {
 
 	}, [ props.domains.value, props.durations.type ])
 
-	const mainView = (() => {
-		if (props.domains.value.length > 0) {
-			return (
-				h('div', { className: 'subHeader' },
-					h(Select, {
-						value: props.durations.type,
-						onChange: (e) => props.setDurationsType(e.target.value),
-						items: [
-							{ value: DURATIONS_TYPE_AVERAGE, label: 'Average durations' },
-							{ value: DURATIONS_TYPE_DETAILED, label: 'Detailed durations' }
-						]
-					})
-				),
-				content
-			)
-		}
-
-		return h(NoDomain, {
-			addModalsModal: props.addModalsModal
-		})
-	})()
-
 	const content = (() => {
 
 		const type = props.durations.type
@@ -86,6 +64,28 @@ const RouteDurations = (props) => {
 				)
 			)
 		)
+	})()
+
+	const mainView = (() => {
+		if (props.domains.value.length > 0) {
+			return (
+				h('div', { className: 'subHeader' },
+					h(Select, {
+						value: props.durations.type,
+						onChange: (e) => props.setDurationsType(e.target.value),
+						items: [
+							{ value: DURATIONS_TYPE_AVERAGE, label: 'Average durations' },
+							{ value: DURATIONS_TYPE_DETAILED, label: 'Detailed durations' }
+						]
+					})
+				),
+				content
+			)
+		}
+
+		return h(NoDomain, {
+			addModalsModal: props.addModalsModal
+		})
 	})()
 
 	return (h(Fragment, {},	mainView))
