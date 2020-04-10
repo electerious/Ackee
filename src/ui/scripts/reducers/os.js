@@ -1,13 +1,13 @@
 import produce from 'immer'
 
 import {
-	RESET_OS,
 	SET_OS_ERROR,
 	SET_OS_FETCHING,
 	SET_OS_SORTING,
 	SET_OS_VALUE,
 	SET_OS_TYPE,
-	SET_OS_TOP_DATE_RANGE
+	SET_OS_TOP_DATE_RANGE,
+	RESET_OS
 } from '../actions'
 
 import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'

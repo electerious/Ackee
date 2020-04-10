@@ -1,12 +1,12 @@
 import produce from 'immer'
 
 import {
-	RESET_LANGUAGES,
 	SET_LANGUAGES_SORTING,
 	SET_LANGUAGES_VALUE,
 	SET_LANGUAGES_FETCHING,
 	SET_LANGUAGES_ERROR,
-	SET_LANGUAGES_TOP_DATE_RANGE
+	SET_LANGUAGES_TOP_DATE_RANGE,
+	RESET_LANGUAGES
 } from '../actions'
 
 import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'

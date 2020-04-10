@@ -1,12 +1,12 @@
 import produce from 'immer'
 
 import {
-	RESET_SIZES,
 	SET_SIZES_TYPE,
 	SET_SIZES_VALUE,
 	SET_SIZES_FETCHING,
 	SET_SIZES_ERROR,
-	SET_SIZES_TOP_DATE_RANGE
+	SET_SIZES_TOP_DATE_RANGE,
+	RESET_SIZES
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'

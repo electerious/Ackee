@@ -40,11 +40,11 @@ const RouteSizes = (props) => {
 					value: props.sizes.type,
 					onChange: (e) => props.setSizesType(e.target.value),
 					items: [
-						{ value: SIZES_TYPE_BROWSER_HEIGHT, label: 'Browser heights' },
 						{ value: SIZES_TYPE_BROWSER_RESOLUTION, label: 'Browser resolutions' },
+						{ value: SIZES_TYPE_BROWSER_HEIGHT, label: 'Browser heights' },
 						{ value: SIZES_TYPE_BROWSER_WIDTH, label: 'Browser widths' },
-						{ value: SIZES_TYPE_SCREEN_HEIGHT, label: 'Screen heights' },
 						{ value: SIZES_TYPE_SCREEN_RESOLUTION, label: 'Screen resolutions' },
+						{ value: SIZES_TYPE_SCREEN_HEIGHT, label: 'Screen heights' },
 						{ value: SIZES_TYPE_SCREEN_WIDTH, label: 'Screen widths' }
 					]
 				}),

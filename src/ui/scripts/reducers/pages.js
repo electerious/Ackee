@@ -1,12 +1,12 @@
 import produce from 'immer'
 
 import {
-	RESET_PAGES,
 	SET_PAGES_SORTING,
 	SET_PAGES_VALUE,
 	SET_PAGES_FETCHING,
 	SET_PAGES_ERROR,
-	SET_PAGES_TOP_DATE_RANGE
+	SET_PAGES_TOP_DATE_RANGE,
+	RESET_PAGES
 } from '../actions'
 
 import { PAGES_SORTING_TOP } from '../../../constants/pages'
