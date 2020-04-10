@@ -1,15 +1,8 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-	ALL_TIME,
-	LAST_7_DAYS,
-	LAST_30_DAYS
-} from '../../../../constants/dateRange'
-import {
-	OS_SORTING_TOP,
-	OS_SORTING_RECENT
-} from '../../../../constants/os'
+import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'

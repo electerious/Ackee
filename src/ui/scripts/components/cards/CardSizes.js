@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'

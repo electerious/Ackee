@@ -2,11 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import {
-	VIEWS_INTERVAL_DAILY,
-	VIEWS_INTERVAL_MONTHLY,
-	VIEWS_INTERVAL_YEARLY
-} from '../../../../constants/views'
+import { VIEWS_INTERVAL_DAILY, VIEWS_INTERVAL_MONTHLY, VIEWS_INTERVAL_YEARLY } from '../../../../constants/views'
 
 import relativeDays from '../../utils/relativeDays'
 import relativeMonths from '../../utils/relativeMonths'

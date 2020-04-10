@@ -2,7 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { PAGES_SORTING_TOP,	PAGES_SORTING_RECENT } from '../../../../constants/pages'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
