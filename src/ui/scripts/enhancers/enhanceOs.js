@@ -1,4 +1,5 @@
 export default (os) => {
+
 	// Extract and enhance the data from the API
 	return os.map((singleOs) => ({
 		text: singleOs.data.id.osName ? `${ singleOs.data.id.osName } ${ singleOs.data.id.osVersion }` : singleOs.data.id,

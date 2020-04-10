@@ -1,7 +1,17 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_NO_VERSION, OS_WITH_VERSION } from '../../../../constants/os'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import {
+	OS_SORTING_TOP,
+	OS_SORTING_RECENT,
+	OS_NO_VERSION,
+	OS_WITH_VERSION
+} from '../../../../constants/os'
+
+import {
+	ALL_TIME,
+	LAST_7_DAYS,
+	LAST_30_DAYS
+} from '../../../../constants/dateRange'
 
 import enhanceOs from '../../enhancers/enhanceOs'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -41,8 +51,8 @@ const RouteOs = (props) => {
 					value: props.os.type,
 					onChange: (e) => props.setOsType(e.target.value),
 					items: [
-						{ value: OS_NO_VERSION, label: 'No OS version' },
-						{ value: OS_WITH_VERSION, label: 'With OS version' }
+						{ value: OS_NO_VERSION, label: 'No version' },
+						{ value: OS_WITH_VERSION, label: 'With version' }
 					]
 				}),
 				h(Select, {

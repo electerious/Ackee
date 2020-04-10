@@ -30,7 +30,10 @@ const get = async (req) => {
 		constants.OS_SORTING_RECENT
 	]
 
-	const types = [ constants.OS_WITH_VERSION, constants.OS_NO_VERSION ]
+	const types = [
+		constants.OS_WITH_VERSION,
+		constants.OS_NO_VERSION
+	]
 
 	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
 
