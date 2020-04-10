@@ -20,7 +20,7 @@ const referrers = require('./routes/referrers')
 const languages = require('./routes/languages')
 const durations = require('./routes/durations')
 const sizes = require('./routes/sizes')
-const os = require('./routes/os')
+const systems = require('./routes/systems')
 const devices = require('./routes/devices')
 const browsers = require('./routes/browsers')
 
@@ -112,7 +112,7 @@ const routes = [
 
 	get('/domains/:domainId/sizes', pipe(requireAuth, sizes.get)),
 
-	get('/domains/:domainId/os', pipe(requireAuth, os.get)),
+	get('/domains/:domainId/systems', pipe(requireAuth, systems.get)),
 
 	get('/domains/:domainId/devices', pipe(requireAuth, devices.get)),
 

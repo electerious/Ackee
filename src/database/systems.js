@@ -5,7 +5,7 @@ const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFi
 const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
-const constants = require('../constants/os')
+const constants = require('../constants/systems')
 
 const getTopWithVersion = async (id, range) => {
 
@@ -39,10 +39,10 @@ const getRecentNoVersion = async (id) => {
 const get = async (id, sorting, type, range) => {
 
 	switch (sorting) {
-		case constants.OS_SORTING_TOP:
-			return type === constants.OS_TYPE_NO_VERSION ? getTopNoVersion(id, range) : getTopWithVersion(id, range)
-		case constants.OS_SORTING_RECENT:
-			return type === constants.OS_TYPE_NO_VERSION ? getRecentNoVersion(id) : getRecentWithVersion(id)
+		case constants.SYSTEMS_SORTING_TOP:
+			return type === constants.SYSTEMS_TYPE_NO_VERSION ? getTopNoVersion(id, range) : getTopWithVersion(id, range)
+		case constants.SYSTEMS_SORTING_RECENT:
+			return type === constants.SYSTEMS_TYPE_NO_VERSION ? getRecentNoVersion(id) : getRecentWithVersion(id)
 	}
 
 }

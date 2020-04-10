@@ -10,7 +10,7 @@ import referrers from './referrers'
 import durations from './durations'
 import languages from './languages'
 import sizes from './sizes'
-import os from './os'
+import systems from './systems'
 import devices from './devices'
 import browsers from './browsers'
 
@@ -25,7 +25,7 @@ export default combineReducers({
 	durations,
 	languages,
 	sizes,
-	os,
+	systems,
 	devices,
 	browsers
 })

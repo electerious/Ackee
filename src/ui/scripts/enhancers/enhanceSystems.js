@@ -8,13 +8,13 @@ const getText = ({ id }) => {
 
 }
 
-export default (os) => {
+export default (systems) => {
 
 	// Extract and enhance the data from the API
-	return os.map((singleOs) => ({
-		text: getText(singleOs.data),
-		count: singleOs.data.count,
-		date: singleOs.data.created == null ? null : new Date(singleOs.data.created)
+	return systems.map((system) => ({
+		text: getText(system.data),
+		count: system.data.count,
+		date: system.data.created == null ? null : new Date(system.data.created)
 	}))
 
 }

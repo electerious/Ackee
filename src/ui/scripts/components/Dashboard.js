@@ -7,7 +7,7 @@ import {
 	ROUTE_DURATIONS,
 	ROUTE_LANGUAGES,
 	ROUTE_SIZES,
-	ROUTE_OS,
+	ROUTE_SYSTEMS,
 	ROUTE_SETTINGS,
 	ROUTE_DEVICES,
 	ROUTE_BROWSERS
@@ -21,7 +21,7 @@ import RouteDurations from './routes/RouteDurations'
 import RouteBrowsers from './routes/RouteBrowsers'
 import RouteDevices from './routes/RouteDevices'
 import RouteLanguages from './routes/RouteLanguages'
-import RouteOs from './routes/RouteOs'
+import RouteSystems from './routes/RouteSystems'
 import RouteSizes from './routes/RouteSizes'
 import RouteSettings from './routes/RouteSettings'
 import Modals from './Modals'
@@ -39,11 +39,11 @@ const Dashboard = (props) => {
 					createButton('Referrers', ROUTE_REFERRERS, props),
 					createButton('Durations', ROUTE_DURATIONS, props),
 					createDropdown('Detailed', [
-						createButton('Browsers', ROUTE_BROWSERS, props),
+						createButton('Systems', ROUTE_SYSTEMS, props),
 						createButton('Devices', ROUTE_DEVICES, props),
-						createButton('Languages', ROUTE_LANGUAGES, props),
-						createButton('Operating Systems', ROUTE_OS, props),
-						createButton('Sizes', ROUTE_SIZES, props)
+						createButton('Browsers', ROUTE_BROWSERS, props),
+						createButton('Sizes', ROUTE_SIZES, props),
+						createButton('Languages', ROUTE_LANGUAGES, props)
 					]),
 					createButton('Settings', ROUTE_SETTINGS, props)
 				]
@@ -53,11 +53,11 @@ const Dashboard = (props) => {
 				props.route.value === ROUTE_PAGES && h(RoutePages, props),
 				props.route.value === ROUTE_REFERRERS && h(RouteReferrers, props),
 				props.route.value === ROUTE_DURATIONS && h(RouteDurations, props),
-				props.route.value === ROUTE_BROWSERS && h(RouteBrowsers, props),
+				props.route.value === ROUTE_SYSTEMS && h(RouteSystems, props),
 				props.route.value === ROUTE_DEVICES && h(RouteDevices, props),
-				props.route.value === ROUTE_LANGUAGES && h(RouteLanguages, props),
+				props.route.value === ROUTE_BROWSERS && h(RouteBrowsers, props),
 				props.route.value === ROUTE_SIZES && h(RouteSizes, props),
-				props.route.value === ROUTE_OS && h(RouteOs, props),
+				props.route.value === ROUTE_LANGUAGES && h(RouteLanguages, props),
 				props.route.value === ROUTE_SETTINGS && h(RouteSettings, props)
 			)
 		)

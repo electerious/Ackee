@@ -1,7 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
+import { SYSTEMS_SORTING_TOP, SYSTEMS_SORTING_RECENT } from '../../../../constants/systems'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -20,7 +20,7 @@ const textLabel = (item, range, isRecent) => {
 
 }
 
-const CardOs = (props) => {
+const CardSystems = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState()
@@ -32,15 +32,15 @@ const CardOs = (props) => {
 
 		if (props.loading === true) return h(PresentationEmptyState, {
 			icon: ICON_LOADING
-		}, 'Loading os')
+		}, 'Loading systems')
 
 		const hasItems = props.items.length > 0
 
-		if (hasItems === true && props.sorting === OS_SORTING_TOP) return h(PresentationCounterList, {
+		if (hasItems === true && props.sorting === SYSTEMS_SORTING_TOP) return h(PresentationCounterList, {
 			items: props.items
 		})
 
-		if (hasItems === true && props.sorting === OS_SORTING_RECENT) return h(PresentationList, {
+		if (hasItems === true && props.sorting === SYSTEMS_SORTING_RECENT) return h(PresentationList, {
 			items: props.items,
 			onEnter,
 			onLeave
@@ -48,7 +48,7 @@ const CardOs = (props) => {
 
 		return h(PresentationEmptyState, {
 			icon: ICON_WARNING
-		}, 'No os')
+		}, 'No systems')
 
 	})()
 
@@ -67,7 +67,7 @@ const CardOs = (props) => {
 				}, textLabel(
 					props.items[active],
 					props.range,
-					props.sorting === OS_SORTING_RECENT
+					props.sorting === SYSTEMS_SORTING_RECENT
 				)),
 				presentation
 			)
@@ -76,7 +76,7 @@ const CardOs = (props) => {
 
 }
 
-CardOs.propTypes = {
+CardSystems.propTypes = {
 	headline: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
@@ -84,4 +84,4 @@ CardOs.propTypes = {
 	items: PropTypes.array.isRequired
 }
 
-export default CardOs
+export default CardSystems
