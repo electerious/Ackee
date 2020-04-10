@@ -10,10 +10,10 @@ import {
 } from '../actions'
 
 import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
-import { LAST_7_DAYS } from '../../../constants/ranges'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	range: LAST_7_DAYS.value,
+	range: RANGES_LAST_7_DAYS.value,
 	sorting: REFERRERS_SORTING_TOP,
 	value: {}
 })

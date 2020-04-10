@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_SORTING_RECENT, BROWSERS_NO_VERSION, BROWSERS_WITH_VERSION } from '../../../../constants/browsers'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/ranges'
+import { RANGES_LAST_7_DAYS, RANGES_LAST_30_DAYS, RANGES_ALL_TIME } from '../../../../constants/ranges'
 
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -50,9 +50,9 @@ const RouteBrowsers = (props) => {
 					value: props.browsers.range,
 					onChange: (e) => props.setBrowsersRange(e.target.value),
 					items: [
-						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value, label: ALL_TIME.label }
+						{ value: RANGES_LAST_7_DAYS.value, label: RANGES_LAST_7_DAYS.label },
+						{ value: RANGES_LAST_30_DAYS.value, label: RANGES_LAST_30_DAYS.label },
+						{ value: RANGES_ALL_TIME.value, label: RANGES_ALL_TIME.label }
 					]
 				})
 			),

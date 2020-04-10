@@ -11,10 +11,10 @@ import {
 } from '../actions'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_NO_VERSION } from '../../../constants/browsers'
-import { LAST_7_DAYS } from '../../../constants/ranges'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	range: LAST_7_DAYS.value,
+	range: RANGES_LAST_7_DAYS.value,
 	type: BROWSERS_NO_VERSION,
 	sorting: BROWSERS_SORTING_TOP,
 	value: {}

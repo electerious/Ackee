@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { SIZES_TYPE_BROWSER_HEIGHT, SIZES_TYPE_BROWSER_RESOLUTION, SIZES_TYPE_BROWSER_WIDTH, SIZES_TYPE_SCREEN_HEIGHT, SIZES_TYPE_SCREEN_RESOLUTION, SIZES_TYPE_SCREEN_WIDTH } from '../../../../constants/sizes'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/ranges'
+import { RANGES_LAST_7_DAYS, RANGES_LAST_30_DAYS, RANGES_ALL_TIME } from '../../../../constants/ranges'
 
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -45,9 +45,9 @@ const RouteSizes = (props) => {
 					value: props.sizes.range,
 					onChange: (e) => props.setSizesRange(e.target.value),
 					items: [
-						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value, label: ALL_TIME.label }
+						{ value: RANGES_LAST_7_DAYS.value, label: RANGES_LAST_7_DAYS.label },
+						{ value: RANGES_LAST_30_DAYS.value, label: RANGES_LAST_30_DAYS.label },
+						{ value: RANGES_ALL_TIME.value, label: RANGES_ALL_TIME.label }
 					]
 				})
 			),

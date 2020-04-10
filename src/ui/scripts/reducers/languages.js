@@ -10,10 +10,10 @@ import {
 } from '../actions'
 
 import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'
-import { LAST_7_DAYS } from '../../../constants/ranges'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	range: LAST_7_DAYS.value,
+	range: RANGES_LAST_7_DAYS.value,
 	sorting: LANGUAGES_SORTING_TOP,
 	value: {}
 })

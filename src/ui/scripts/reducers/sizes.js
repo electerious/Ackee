@@ -10,10 +10,10 @@ import {
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
-import { LAST_7_DAYS } from '../../../constants/ranges'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	range: LAST_7_DAYS.value,
+	range: RANGES_LAST_7_DAYS.value,
 	type: SIZES_TYPE_BROWSER_RESOLUTION,
 	value: {}
 })

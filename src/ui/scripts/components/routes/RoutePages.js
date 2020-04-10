@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { PAGES_SORTING_TOP,	PAGES_SORTING_RECENT } from '../../../../constants/pages'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/ranges'
+import { RANGES_LAST_7_DAYS, RANGES_LAST_30_DAYS, RANGES_ALL_TIME } from '../../../../constants/ranges'
 
 import enhancePages from '../../enhancers/enhancePages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -42,9 +42,9 @@ const RoutePages = (props) => {
 					value: props.pages.range,
 					onChange: (e) => props.setPagesRange(e.target.value),
 					items: [
-						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value, label: ALL_TIME.label }
+						{ value: RANGES_LAST_7_DAYS.value, label: RANGES_LAST_7_DAYS.label },
+						{ value: RANGES_LAST_30_DAYS.value, label: RANGES_LAST_30_DAYS.label },
+						{ value: RANGES_ALL_TIME.value, label: RANGES_ALL_TIME.label }
 					]
 				})
 			),
