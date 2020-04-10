@@ -7,10 +7,10 @@ const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const constants = require('../constants/devices')
 
-const getTopWithModel = async (id, dateRange) => {
+const getTopWithModel = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'deviceManufacturer', 'deviceName' ], dateRange)
+		aggregateTopFieldsMultiple(id, [ 'deviceManufacturer', 'deviceName' ], range)
 	)
 }
 
@@ -21,10 +21,10 @@ const getRecentWithModel = async (id) => {
 	)
 }
 
-const getTopNoModel = async (id, dateRange) => {
+const getTopNoModel = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'deviceManufacturer', dateRange)
+		aggregateTopFields(id, 'deviceManufacturer', range)
 	)
 }
 
@@ -36,11 +36,11 @@ const getRecentNoModel = async (id) => {
 }
 
 
-const get = async (id, sorting, type, dateRange) => {
+const get = async (id, sorting, type, range) => {
 
 	switch (sorting) {
 		case constants.DEVICES_SORTING_TOP:
-			return type === constants.DEVICES_NO_MODEL ? getTopNoModel(id, dateRange) : getTopWithModel(id, dateRange)
+			return type === constants.DEVICES_NO_MODEL ? getTopNoModel(id, range) : getTopWithModel(id, range)
 		case constants.DEVICES_SORTING_RECENT:
 			return type === constants.DEVICES_NO_MODEL ? getRecentNoModel(id) : getRecentWithModel(id)
 	}

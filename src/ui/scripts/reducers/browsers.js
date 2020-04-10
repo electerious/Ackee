@@ -7,14 +7,14 @@ import {
 	SET_BROWSERS_SORTING,
 	SET_BROWSERS_VALUE,
 	SET_BROWSERS_TYPE,
-	SET_BROWSERS_TOP_DATE_RANGE
+	SET_BROWSERS_RANGE
 } from '../actions'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_NO_VERSION } from '../../../constants/browsers'
-import { LAST_7_DAYS } from '../../../constants/dateRange'
+import { LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value,
+	range: LAST_7_DAYS.value,
 	type: BROWSERS_NO_VERSION,
 	sorting: BROWSERS_SORTING_TOP,
 	value: {}
@@ -39,10 +39,10 @@ export default produce((draft, action) => {
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
-		case SET_BROWSERS_TOP_DATE_RANGE:
+		case SET_BROWSERS_RANGE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.dateRange = action.payload || initialState().dateRange
+			draft.range = action.payload || initialState().range
 			break
 		case SET_BROWSERS_SORTING:
 			// Reset value because the view shouldn't show the old data when switching

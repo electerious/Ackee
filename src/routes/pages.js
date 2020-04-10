@@ -4,7 +4,7 @@ const { createError } = require('micro')
 
 const pages = require('../database/pages')
 const constants = require('../constants/pages')
-const { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } = require('../constants/dateRange')
+const ranges = require('../constants/ranges')
 
 const response = (entry) => ({
 	type: 'page',
@@ -23,23 +23,17 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { sorting, dateRange = LAST_7_DAYS.value } = req.query
+	const { sorting, range } = req.query
 
 	const sortings = [
 		constants.PAGES_SORTING_TOP,
 		constants.PAGES_SORTING_RECENT
 	]
 
-	const dateRanges = [
-		LAST_7_DAYS.value,
-		LAST_30_DAYS.value,
-		ALL_TIME.value
-	]
-
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
-	if (dateRanges.includes(dateRange) === false) throw createError(400, 'Unknown date range')
+	if (ranges.toValues().includes(range) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await pages.get(domainId, sorting, dateRange)
+	const entries = await pages.get(domainId, sorting, range)
 
 	return responses(entries)
 

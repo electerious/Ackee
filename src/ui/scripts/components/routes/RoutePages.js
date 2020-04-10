@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { PAGES_SORTING_TOP,	PAGES_SORTING_RECENT } from '../../../../constants/pages'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/ranges'
 
 import enhancePages from '../../enhancers/enhancePages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +23,7 @@ const RoutePages = (props) => {
 			props.fetchPages(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.pages.sorting, props.pages.dateRange ])
+	}, [ props.domains.value, props.pages.sorting, props.pages.range ])
 
 	return (
 		h(Fragment, {},
@@ -39,8 +39,8 @@ const RoutePages = (props) => {
 				}),
 				h(Select, {
 					disabled: props.pages.sorting !== PAGES_SORTING_TOP,
-					value: props.pages.dateRange,
-					onChange: (e) => props.setPagesTopDateRange(e.target.value),
+					value: props.pages.range,
+					onChange: (e) => props.setPagesRange(e.target.value),
 					items: [
 						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
 						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
@@ -54,7 +54,7 @@ const RoutePages = (props) => {
 					h(CardPages, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						dateRange: props.pages.dateRange,
+						range: props.pages.range,
 						sorting: props.pages.sorting,
 						loading: props.pages.value[domain.data.id] == null ? false : props.pages.value[domain.data.id].fetching,
 						items: props.pages.value[domain.data.id] == null ? [] : enhancePages(props.pages.value[domain.data.id].value)

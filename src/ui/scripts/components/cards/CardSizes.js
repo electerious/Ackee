@@ -5,11 +5,11 @@ import Headline from '../Headline'
 import Text from '../Text'
 import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
-import dateRangeLabel from '../../utils/dateRangeLabel'
+import rangeLabel from '../../utils/rangeLabel'
 
-const textLabel = (dateRange) => {
+const textLabel = (range) => {
 
-	return dateRangeLabel(dateRange)
+	return rangeLabel(range)
 
 }
 
@@ -45,7 +45,7 @@ const CardSizes = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.dateRange)),
+				}, textLabel(props.range)),
 				presentation
 			)
 		)
@@ -55,7 +55,7 @@ const CardSizes = (props) => {
 
 CardSizes.propTypes = {
 	headline: PropTypes.string.isRequired,
-	dateRange: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

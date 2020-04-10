@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { SIZES_TYPE_BROWSER_HEIGHT, SIZES_TYPE_BROWSER_RESOLUTION, SIZES_TYPE_BROWSER_WIDTH, SIZES_TYPE_SCREEN_HEIGHT, SIZES_TYPE_SCREEN_RESOLUTION, SIZES_TYPE_SCREEN_WIDTH } from '../../../../constants/sizes'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/ranges'
 
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +23,7 @@ const RouteSizes = (props) => {
 			props.fetchSizes(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.sizes.type, props.sizes.dateRange ])
+	}, [ props.domains.value, props.sizes.type, props.sizes.range ])
 
 	return (
 		h(Fragment, {},
@@ -42,8 +42,8 @@ const RouteSizes = (props) => {
 					]
 				}),
 				h(Select, {
-					value: props.sizes.dateRange,
-					onChange: (e) => props.setSizesTopDateRange(e.target.value),
+					value: props.sizes.range,
+					onChange: (e) => props.setSizesRange(e.target.value),
 					items: [
 						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
 						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
@@ -56,7 +56,7 @@ const RouteSizes = (props) => {
 				(domain) => (
 					h(CardSizes, {
 						key: domain.data.id,
-						dateRange: props.sizes.dateRange,
+						range: props.sizes.range,
 						headline: domain.data.title,
 						loading: props.sizes.value[domain.data.id] == null ? false : props.sizes.value[domain.data.id].fetching,
 						items: props.sizes.value[domain.data.id] == null ? [] : enhanceSizes(props.sizes.value[domain.data.id].value)

@@ -58,12 +58,12 @@ store.subscribe(() => {
 		},
 		pages: {
 			...initialPagesState(),
-			dateRange: currentState.pages.dateRange,
+			range: currentState.pages.range,
 			sorting: currentState.pages.sorting
 		},
 		referrers: {
 			...initialReferrersState(),
-			dateRange: currentState.referrers.dateRange,
+			range: currentState.referrers.range,
 			sorting: currentState.referrers.sorting
 		},
 		durations: {
@@ -72,30 +72,30 @@ store.subscribe(() => {
 		},
 		languages: {
 			...initialLanguagesState(),
-			dateRange: currentState.languages.dateRange,
+			range: currentState.languages.range,
 			sorting: currentState.languages.sorting
 		},
 		os: {
 			...initialOsState(),
-			dateRange: currentState.os.dateRange,
+			range: currentState.os.range,
 			type: currentState.os.type,
 			sorting: currentState.os.sorting
 		},
 		browsers: {
 			...initialBrowsersState(),
-			dateRange: currentState.browsers.dateRange,
+			range: currentState.browsers.range,
 			type: currentState.browsers.type,
 			sorting: currentState.browsers.sorting
 		},
 		devices: {
 			...initialDevicesState(),
-			dateRange: currentState.devices.dateRange,
+			range: currentState.devices.range,
 			type: currentState.devices.type,
 			sorting: currentState.devices.sorting
 		},
 		sizes: {
 			...initialSizesState(),
-			dateRange: currentState.sizes.dateRange,
+			range: currentState.sizes.range,
 			type: currentState.sizes.type
 		}
 	})

@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_SORTING_RECENT, BROWSERS_NO_VERSION, BROWSERS_WITH_VERSION } from '../../../../constants/browsers'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/ranges'
 
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +23,7 @@ const RouteBrowsers = (props) => {
 			props.fetchBrowsers(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.browsers.sorting, props.browsers.type, props.browsers.dateRange ])
+	}, [ props.domains.value, props.browsers.sorting, props.browsers.type, props.browsers.range ])
 
 	return (
 		h(Fragment, {},
@@ -47,8 +47,8 @@ const RouteBrowsers = (props) => {
 				}),
 				h(Select, {
 					disabled: props.browsers.sorting !== BROWSERS_SORTING_TOP,
-					value: props.browsers.dateRange,
-					onChange: (e) => props.setBrowsersTopDateRange(e.target.value),
+					value: props.browsers.range,
+					onChange: (e) => props.setBrowsersRange(e.target.value),
 					items: [
 						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
 						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
@@ -62,7 +62,7 @@ const RouteBrowsers = (props) => {
 					h(CardBrowsers, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						dateRange: props.browsers.dateRange,
+						range: props.browsers.range,
 						sorting: props.browsers.sorting,
 						loading: props.browsers.value[domain.data.id] == null ? false : props.browsers.value[domain.data.id].fetching,
 						items: props.browsers.value[domain.data.id] == null ? [] : enhanceBrowsers(props.browsers.value[domain.data.id].value)

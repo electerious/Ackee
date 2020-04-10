@@ -1,15 +1,15 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_REFERRERS_TOP_DATE_RANGE = Symbol()
+export const SET_REFERRERS_RANGE = Symbol()
 export const SET_REFERRERS_SORTING = Symbol()
 export const SET_REFERRERS_VALUE = Symbol()
 export const SET_REFERRERS_FETCHING = Symbol()
 export const SET_REFERRERS_ERROR = Symbol()
 export const RESET_REFERRERS = Symbol()
 
-export const setReferrersTopDateRange = (payload) => ({
-	type: SET_REFERRERS_TOP_DATE_RANGE,
+export const setReferrersRange = (payload) => ({
+	type: SET_REFERRERS_RANGE,
 	payload
 })
 
@@ -47,7 +47,7 @@ export const fetchReferrers = signalHandler((signal) => (props, domainId) => asy
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }&dateRange=${ props.referrers.dateRange }`, {
+		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }&range=${ props.referrers.range }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)
