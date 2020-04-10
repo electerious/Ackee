@@ -60,6 +60,7 @@ const RouteReferrers = (props) => {
 						key: domain.data.id,
 						headline: domain.data.title,
 						dateRange: props.referrers.dateRange,
+						sorting: props.referrers.sorting,
 						loading: props.referrers.value[domain.data.id] == null ? false : props.referrers.value[domain.data.id].fetching,
 						items: props.referrers.value[domain.data.id] == null ? [] : enhanceReferrers(props.referrers.value[domain.data.id].value)
 					})
