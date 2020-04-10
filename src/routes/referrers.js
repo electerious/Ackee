@@ -4,6 +4,7 @@ const { createError } = require('micro')
 
 const referrers = require('../database/referrers')
 const constants = require('../constants/referrers')
+const { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } = require('../constants/dateRange')
 
 const response = (entry) => ({
 	type: 'referrer',
@@ -22,17 +23,19 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { sorting } = req.query
+	const { sorting, dateRange = LAST_7_DAYS.value } = req.query
 
 	const sortings = [
 		constants.REFERRERS_SORTING_TOP,
 		constants.REFERRERS_SORTING_NEW,
 		constants.REFERRERS_SORTING_RECENT
 	]
+	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
+	if (dateRanges.includes(Number(dateRange)) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await referrers.get(domainId, sorting)
+	const entries = await referrers.get(domainId, sorting, Number(dateRange))
 
 	return responses(entries)
 

@@ -5,10 +5,10 @@ const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const constants = require('../constants/pages')
 
-const getTop = async (id) => {
+const getTop = async (id, dateRange) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'siteLocation')
+		aggregateTopFields(id, 'siteLocation', dateRange)
 	)
 
 }
@@ -21,10 +21,10 @@ const getRecent = async (id) => {
 
 }
 
-const get = async (id, sorting) => {
+const get = async (id, sorting, dateRange) => {
 
 	switch (sorting) {
-		case constants.PAGES_SORTING_TOP: return getTop(id)
+		case constants.PAGES_SORTING_TOP: return getTop(id, dateRange)
 		case constants.PAGES_SORTING_RECENT: return getRecent(id)
 	}
 
