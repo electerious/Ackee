@@ -56,7 +56,7 @@ const RouteSizes = (props) => {
 				(domain) => (
 					h(CardSizes, {
 						key: domain.data.id,
-						dateRange: props.pages.dateRange,
+						dateRange: props.sizes.dateRange,
 						headline: domain.data.title,
 						loading: props.sizes.value[domain.data.id] == null ? false : props.sizes.value[domain.data.id].fetching,
 						items: props.sizes.value[domain.data.id] == null ? [] : enhanceSizes(props.sizes.value[domain.data.id].value)
