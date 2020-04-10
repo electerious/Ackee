@@ -32,8 +32,7 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_DURATIONS_TYPE:
-			// Reset value because a different type results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break

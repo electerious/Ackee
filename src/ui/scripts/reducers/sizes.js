@@ -33,12 +33,12 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_SIZES_TYPE:
-			// Reset value because a different type results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
 		case SET_SIZES_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.dateRange = action.payload || initialState().dateRange
 			break

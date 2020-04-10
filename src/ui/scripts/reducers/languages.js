@@ -33,12 +33,12 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_LANGUAGES_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
 			break
 		case SET_LANGUAGES_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.dateRange = action.payload || initialState().dateRange
 			break
