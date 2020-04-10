@@ -1,9 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	DURATIONS_TYPE_AVERAGE,
-	DURATIONS_TYPE_DETAILED
-} from '../../../../constants/durations'
+import { DURATIONS_TYPE_AVERAGE, DURATIONS_TYPE_DETAILED } from '../../../../constants/durations'
 
 import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
 import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'

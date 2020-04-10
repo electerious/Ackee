@@ -42,8 +42,8 @@ const RouteDevices = (props) => {
 						value: props.devices.type,
 						onChange: (e) => props.setDevicesType(e.target.value),
 						items: [
-							{ value: DEVICES_NO_MODEL, label: 'No devices model' },
-							{ value: DEVICES_WITH_MODEL, label: 'With devices model' }
+							{ value: DEVICES_NO_MODEL, label: 'No model' },
+							{ value: DEVICES_WITH_MODEL, label: 'With model' }
 						]
 					}),
 					h(Select, {
@@ -51,9 +51,9 @@ const RouteDevices = (props) => {
 						value: props.devices.dateRange,
 						onChange: (e) => props.setDevicesTopDateRange(e.target.value),
 						items: [
-							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+							{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value, label: ALL_TIME.label }
 						]
 					})
 				)

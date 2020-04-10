@@ -14,7 +14,7 @@ import { DEVICES_SORTING_TOP, DEVICES_WITH_MODEL } from '../../../constants/devi
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value.toString(),
+	dateRange: LAST_7_DAYS.value,
 	type: DEVICES_WITH_MODEL,
 	sorting: DEVICES_SORTING_TOP,
 	value: {}

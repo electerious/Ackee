@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { PAGES_SORTING_TOP,	PAGES_SORTING_RECENT } from '../../../../constants/pages'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhancePages from '../../enhancers/enhancePages'
 import useDidMountEffect from '../../utils/useDidMountEffect'

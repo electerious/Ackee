@@ -14,7 +14,7 @@ import { BROWSERS_SORTING_TOP, BROWSERS_NO_VERSION } from '../../../constants/br
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value.toString(),
+	dateRange: LAST_7_DAYS.value,
 	type: BROWSERS_NO_VERSION,
 	sorting: BROWSERS_SORTING_TOP,
 	value: {}

@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_NO_VERSION, OS_WITH_VERSION } from '../../../../constants/os'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceOs from '../../enhancers/enhanceOs'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -42,8 +42,8 @@ const RouteOs = (props) => {
 						value: props.os.type,
 						onChange: (e) => props.setOsType(e.target.value),
 						items: [
-							{ value: OS_NO_VERSION, label: 'No OS version' },
-							{ value: OS_WITH_VERSION, label: 'With OS version' }
+							{ value: OS_NO_VERSION, label: 'No version' },
+							{ value: OS_WITH_VERSION, label: 'With version' }
 						]
 					}),
 					h(Select, {
@@ -51,9 +51,9 @@ const RouteOs = (props) => {
 						value: props.os.dateRange,
 						onChange: (e) => props.setOsTopDateRange(e.target.value),
 						items: [
-							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+							{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value, label: ALL_TIME.label }
 						]
 					})
 				)

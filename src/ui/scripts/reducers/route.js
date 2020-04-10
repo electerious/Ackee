@@ -5,9 +5,7 @@ import {
 	RESET_ROUTE
 } from '../actions'
 
-import {
-	ROUTE_VIEWS
-} from '../constants/route'
+import { ROUTE_VIEWS } from '../constants/route'
 
 export const initialState = () => ({
 	value: ROUTE_VIEWS

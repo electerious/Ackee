@@ -42,8 +42,8 @@ const RouteBrowsers = (props) => {
 						value: props.browsers.type,
 						onChange: (e) => props.setBrowsersType(e.target.value),
 						items: [
-							{ value: BROWSERS_NO_VERSION, label: 'No browsers version' },
-							{ value: BROWSERS_WITH_VERSION, label: 'With browsers version' }
+							{ value: BROWSERS_NO_VERSION, label: 'No version' },
+							{ value: BROWSERS_WITH_VERSION, label: 'With version' }
 						]
 					}),
 					h(Select, {
@@ -51,9 +51,9 @@ const RouteBrowsers = (props) => {
 						value: props.browsers.dateRange,
 						onChange: (e) => props.setBrowsersTopDateRange(e.target.value),
 						items: [
-							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+							{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value, label: ALL_TIME.label }
 						]
 					})
 				)

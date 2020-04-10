@@ -4,7 +4,7 @@ const { createError } = require('micro')
 
 const os = require('../database/os')
 const constants = require('../constants/os')
-const { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } = require('../constants/dateRange')
+const { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } = require('../constants/dateRange')
 
 const response = (entry) => ({
 	type: 'os',
@@ -30,15 +30,22 @@ const get = async (req) => {
 		constants.OS_SORTING_RECENT
 	]
 
-	const types = [ constants.OS_WITH_VERSION, constants.OS_NO_VERSION ]
+	const types = [
+		constants.OS_WITH_VERSION,
+		constants.OS_NO_VERSION
+	]
 
-	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
+	const dateRanges = [
+		LAST_7_DAYS.value,
+		LAST_30_DAYS.value,
+		ALL_TIME.value
+	]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
-	if (dateRanges.includes(Number(dateRange)) === false) throw createError(400, 'Unknown date range')
+	if (dateRanges.includes(dateRange) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await os.get(domainId, sorting, type, Number(dateRange))
+	const entries = await os.get(domainId, sorting, type, dateRange)
 
 	return responses(entries)
 

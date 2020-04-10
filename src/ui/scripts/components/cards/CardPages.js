@@ -2,7 +2,6 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { PAGES_SORTING_TOP,	PAGES_SORTING_RECENT } from '../../../../constants/pages'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -10,15 +9,15 @@ import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
+import dateRangeLabel from '../../utils/dateRangeLabel'
 
-const textLabel = (item, dateRange) => {
+const textLabel = (item, dateRange, isRecent) => {
+
 	if (item && item.date) return relativeDate(item.date)
-	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
-		if (range) return range.label
-	}
+	if (isRecent) return 'Recent'
 
-	return LAST_7_DAYS.label
+	return dateRangeLabel(dateRange)
+
 }
 
 const CardPages = (props) => {
@@ -65,7 +64,11 @@ const CardPages = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active], props.dateRange)),
+				}, textLabel(
+					props.items[active],
+					props.dateRange,
+					props.sorting === PAGES_SORTING_RECENT
+				)),
 				presentation
 			)
 		)

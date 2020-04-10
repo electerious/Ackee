@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { LANGUAGES_SORTING_TOP,	LANGUAGES_SORTING_RECENT } from '../../../../constants/languages'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -43,9 +43,9 @@ const RouteLanguages = (props) => {
 						value: props.languages.dateRange,
 						onChange: (e) => props.setLanguagesTopDateRange(e.target.value),
 						items: [
-							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+							{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value, label: ALL_TIME.label }
 						]
 					})
 				)

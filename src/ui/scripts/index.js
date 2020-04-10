@@ -18,6 +18,7 @@ import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
 import { initialState as initialDurationsState } from './reducers/durations'
 import { initialState as initialLanguagesState } from './reducers/languages'
+import { initialState as initialOsState } from './reducers/os'
 import { initialState as initialSizesState } from './reducers/sizes'
 
 import Main from './components/Main'
@@ -55,10 +56,12 @@ store.subscribe(() => {
 		},
 		pages: {
 			...initialPagesState(),
-			type: currentState.pages.type
+			dateRange: currentState.pages.dateRange,
+			sorting: currentState.pages.sorting
 		},
 		referrers: {
 			...initialReferrersState(),
+			dateRange: currentState.referrers.dateRange,
 			sorting: currentState.referrers.sorting
 		},
 		durations: {
@@ -67,10 +70,18 @@ store.subscribe(() => {
 		},
 		languages: {
 			...initialLanguagesState(),
+			dateRange: currentState.languages.dateRange,
 			sorting: currentState.languages.sorting
+		},
+		os: {
+			...initialOsState(),
+			dateRange: currentState.os.dateRange,
+			type: currentState.os.type,
+			sorting: currentState.os.sorting
 		},
 		sizes: {
 			...initialSizesState(),
+			dateRange: currentState.sizes.dateRange,
 			type: currentState.sizes.type
 		}
 	})

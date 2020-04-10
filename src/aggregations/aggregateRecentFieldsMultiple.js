@@ -1,17 +1,11 @@
 'use strict'
 
-const { subDays } = require('date-fns')
-
-const zeroDate = require('../utils/zeroDate')
-
 module.exports = (id, properties) => {
+
 	const aggregate = [
 		{
 			$match: {
-				domainId: id,
-				created: {
-					$gte: subDays(zeroDate(), 6)
-				}
+				domainId: id
 			}
 		},
 		{
@@ -36,4 +30,5 @@ module.exports = (id, properties) => {
 	})
 
 	return aggregate
+
 }

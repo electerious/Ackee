@@ -1,19 +1,19 @@
 import produce from 'immer'
 
 import {
-	RESET_LANGUAGES,
 	SET_LANGUAGES_SORTING,
 	SET_LANGUAGES_VALUE,
 	SET_LANGUAGES_FETCHING,
 	SET_LANGUAGES_ERROR,
-	SET_LANGUAGES_TOP_DATE_RANGE
+	SET_LANGUAGES_TOP_DATE_RANGE,
+	RESET_LANGUAGES
 } from '../actions'
 
 import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value.toString(),
+	dateRange: LAST_7_DAYS.value,
 	sorting: LANGUAGES_SORTING_TOP,
 	value: {}
 })
@@ -33,12 +33,12 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_LANGUAGES_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
 			break
 		case SET_LANGUAGES_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.dateRange = action.payload || initialState().dateRange
 			break
