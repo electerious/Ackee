@@ -63,7 +63,7 @@ Examples:
 
 ### Pages > Top pages
 
-The 25 pages of a domain with the most views. Each visit or reload of a page will increase this value. The views aren't unique, because Ackee can't track returning users for individual pages.
+The 30 pages of a domain with the most views. Each visit or reload of a page will increase this value. The views aren't unique, because Ackee can't track returning users for individual pages.
 
 Examples:
 
@@ -72,11 +72,11 @@ Examples:
 
 ### Pages > Recent pages
 
-The last 25 page visits of the last 7 days. Sorted by time.
+The last 30 page visits of the last 7 days. Sorted by time.
 
 ### Referrers > Top referrers
 
-The top 25 pages from which your visitors have come in the last 7 days. Sorted by popularity.
+The top 30 pages from which your visitors have come in the last 7 days. Sorted by popularity.
 
 ### Referrers > New referrers
 
@@ -84,7 +84,7 @@ Pages from which your visitors have come in the last 7 days. Ignores old referre
 
 ### Referrers > Recent referrers
 
-The last 25 pages from which your visitors have come in the last 7 days. Sorted by time.
+The last 30 pages from which your visitors have come in the last 7 days. Sorted by time.
 
 ### Durations > Average durations
 
@@ -96,10 +96,10 @@ The time users spend on your sites, grouped by similar durations in an interval 
 
 ### Languages > Top languages
 
-The top 25 user languages of the last 7 days. Sorted by popularity.
+The top 30 user languages of the last 7 days. Sorted by popularity.
 
 The user language is the language of the user's browser.
 
 ### Languages > Recent languages
 
-The last 25 user languages from the last 7 days. Sorted by time.
+The last 30 user languages from the last 7 days. Sorted by time.

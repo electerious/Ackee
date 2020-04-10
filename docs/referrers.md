@@ -6,7 +6,7 @@
 
 ## Get top referrers
 
-Get the top 25 referrers of the last 7 days.
+Get the top 30 referrers of the last 7 days.
 
 ### Request
 
@@ -43,7 +43,7 @@ Status: 200 OK
 
 ## Get new referrers
 
-Get the 25 most recent referrers who have linked to your site for the first time in the last 7 days.
+Get the 30 most recent referrers who have linked to your site for the first time in the last 7 days.
 
 ### Request
 
@@ -81,7 +81,7 @@ Status: 200 OK
 
 ## Get recent referrers
 
-Get the 25 most recent referrers of the last 7 days.
+Get the 30 most recent referrers of the last 7 days.
 
 ### Request
 

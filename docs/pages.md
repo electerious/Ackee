@@ -5,7 +5,7 @@
 
 ## Get top pages
 
-Get the top 25 pages of the last 7 days.
+Get the top 30 pages of the last 7 days.
 
 ### Request
 
@@ -42,7 +42,7 @@ Status: 200 OK
 
 ## Get recent pages
 
-Get the 25 most recent page views of the last 7 days.
+Get the 30 most recent page views of the last 7 days.
 
 ### Request
 

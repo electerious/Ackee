@@ -66,7 +66,8 @@ const CardDevices = (props) => {
 				}, textLabel(
 					props.items[active],
 					props.dateRange,
-					props.sorting === DEVICES_SORTING_RECENT)),
+					props.sorting === DEVICES_SORTING_RECENT
+				)),
 				presentation
 			)
 		)

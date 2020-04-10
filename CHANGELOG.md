@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Browsers, devices and operating systems are now visible in the UI (thanks @RomainCscn)
+- Browser and screen resolutions allow you to view width and height combined (thanks @RomainCscn)
+- View the last 7 days, last 30 days or the top entries of all time (thanks @RomainCscn)
+
 ## [1.6.1] - 2020-03-25
 
 ### Fixed
