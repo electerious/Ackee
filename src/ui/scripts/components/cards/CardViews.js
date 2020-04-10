@@ -13,11 +13,13 @@ import Text from '../Text'
 import PresentationBarChart from '../presentations/PresentationBarChart'
 
 const relativeFn = (interval) => {
+
 	switch (interval) {
 		case VIEWS_INTERVAL_DAILY: return relativeDays
 		case VIEWS_INTERVAL_MONTHLY: return relativeMonths
 		case VIEWS_INTERVAL_YEARLY: return relativeYears
 	}
+
 }
 
 const CardViews = (props) => {

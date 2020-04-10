@@ -12,6 +12,7 @@ import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentat
 import relativeDate from '../../utils/relativeDate'
 
 const textLabel = (item, dateRange, isRecent) => {
+
 	if (isRecent && !item) return 'Recent'
 	if (item && item.date) return relativeDate(item.date)
 	if (dateRange) {
@@ -20,6 +21,7 @@ const textLabel = (item, dateRange, isRecent) => {
 	}
 
 	return LAST_7_DAYS.label
+
 }
 
 const CardPages = (props) => {
