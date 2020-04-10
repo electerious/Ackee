@@ -11,6 +11,7 @@ const LinkItem = (props) => {
 			target: props.target,
 			className: classNames({
 				'linkItem': true,
+				'linkItem--primary': props.primary === true,
 				'linkItem--disabled': props.disabled === true,
 				'link': true
 			})
@@ -28,6 +29,7 @@ LinkItem.propTypes = {
 	target: PropTypes.string,
 	onClick: PropTypes.func,
 	disabled: PropTypes.bool,
+	primary: PropTypes.bool,
 	text: PropTypes.string,
 	children: PropTypes.node.isRequired
 }

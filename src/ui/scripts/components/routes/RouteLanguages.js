@@ -8,6 +8,7 @@ import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardLanguages from '../cards/CardLanguages'
 import Select from '../Select'
+import NoDomain from '../NoDomain'
 
 const RouteLanguages = (props) => {
 
@@ -25,30 +26,40 @@ const RouteLanguages = (props) => {
 
 	}, [ props.domains.value, props.languages.sorting, props.languages.dateRange ])
 
+	const mainView = (() => {
+		if (props.domains.value.length > 0) {
+			return (
+				h('div', { className: 'subHeader' },
+					h(Select, {
+						value: props.languages.sorting,
+						onChange: (e) => props.setLanguagesSorting(e.target.value),
+						items: [
+							{ value: LANGUAGES_SORTING_TOP, label: 'Top languages' },
+							{ value: LANGUAGES_SORTING_RECENT, label: 'Recent languages' }
+						]
+					}),
+					h(Select, {
+						disabled: props.languages.sorting !== LANGUAGES_SORTING_TOP,
+						value: props.languages.dateRange,
+						onChange: (e) => props.setLanguagesTopDateRange(e.target.value),
+						items: [
+							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+						]
+					})
+				)
+			)
+		}
+
+		return h(NoDomain, {
+			addModalsModal: props.addModalsModal
+		})
+	})()
+
 	return (
 		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.languages.sorting,
-					onChange: (e) => props.setLanguagesSorting(e.target.value),
-					items: [
-						{ value: LANGUAGES_SORTING_TOP, label: 'Top languages' },
-						{ value: LANGUAGES_SORTING_RECENT, label: 'Recent languages' }
-					]
-				}),
-				h(Select, {
-					disabled: props.languages.sorting !== LANGUAGES_SORTING_TOP,
-					value: props.languages.dateRange,
-					onChange: (e) => props.setLanguagesTopDateRange(e.target.value),
-					items: [
-						{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
-					]
-				})
-			),
-
+			mainView,
 			props.domains.value.map(
 				(domain) => (
 					h(CardLanguages, {

@@ -13,6 +13,7 @@ import useDidMountEffect from '../../utils/useDidMountEffect'
 import CardAverageDurations from '../cards/CardAverageDurations'
 import CardDetailedDurations from '../cards/CardDetailedDurations'
 import Select from '../Select'
+import NoDomain from '../NoDomain'
 
 const RouteDurations = (props) => {
 
@@ -29,6 +30,28 @@ const RouteDurations = (props) => {
 		})
 
 	}, [ props.domains.value, props.durations.type ])
+
+	const mainView = (() => {
+		if (props.domains.value.length > 0) {
+			return (
+				h('div', { className: 'subHeader' },
+					h(Select, {
+						value: props.durations.type,
+						onChange: (e) => props.setDurationsType(e.target.value),
+						items: [
+							{ value: DURATIONS_TYPE_AVERAGE, label: 'Average durations' },
+							{ value: DURATIONS_TYPE_DETAILED, label: 'Detailed durations' }
+						]
+					})
+				),
+				content
+			)
+		}
+
+		return h(NoDomain, {
+			addModalsModal: props.addModalsModal
+		})
+	})()
 
 	const content = (() => {
 
@@ -66,27 +89,9 @@ const RouteDurations = (props) => {
 				)
 			)
 		)
-
 	})()
 
-	return (
-		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.durations.type,
-					onChange: (e) => props.setDurationsType(e.target.value),
-					items: [
-						{ value: DURATIONS_TYPE_AVERAGE, label: 'Average durations' },
-						{ value: DURATIONS_TYPE_DETAILED, label: 'Detailed durations' }
-					]
-				})
-			),
-
-			content
-
-		)
-	)
+	return (h(Fragment, {},	mainView))
 
 }
 

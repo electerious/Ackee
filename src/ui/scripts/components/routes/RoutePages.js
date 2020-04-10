@@ -8,6 +8,7 @@ import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardPages from '../cards/CardPages'
 import Select from '../Select'
+import NoDomain from '../NoDomain'
 
 const RoutePages = (props) => {
 
@@ -25,30 +26,41 @@ const RoutePages = (props) => {
 
 	}, [ props.domains.value, props.pages.sorting, props.pages.dateRange ])
 
+
+	const mainView = (() => {
+		if (props.domains.value.length > 0) {
+			return (
+				h('div', { className: 'subHeader' },
+					h(Select, {
+						value: props.pages.sorting,
+						onChange: (e) => props.setPagesSorting(e.target.value),
+						items: [
+							{ value: PAGES_SORTING_TOP, label: 'Top pages' },
+							{ value: PAGES_SORTING_RECENT, label: 'Recent pages' }
+						]
+					}),
+					h(Select, {
+						disabled: props.pages.sorting !== PAGES_SORTING_TOP,
+						value: props.pages.dateRange,
+						onChange: (e) => props.setPagesTopDateRange(e.target.value),
+						items: [
+							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+						]
+					})
+				)
+			)
+		}
+
+		return h(NoDomain, {
+			addModalsModal: props.addModalsModal
+		})
+	})()
+
 	return (
 		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.pages.sorting,
-					onChange: (e) => props.setPagesSorting(e.target.value),
-					items: [
-						{ value: PAGES_SORTING_TOP, label: 'Top pages' },
-						{ value: PAGES_SORTING_RECENT, label: 'Recent pages' }
-					]
-				}),
-				h(Select, {
-					disabled: props.pages.sorting !== PAGES_SORTING_TOP,
-					value: props.pages.dateRange,
-					onChange: (e) => props.setPagesTopDateRange(e.target.value),
-					items: [
-						{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
-					]
-				})
-			),
-
+			mainView,
 			props.domains.value.map(
 				(domain) => (
 					h(CardPages, {

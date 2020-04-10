@@ -8,6 +8,7 @@ import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardBrowsers from '../cards/CardBrowsers'
 import Select from '../Select'
+import NoDomain from '../NoDomain'
 
 const RouteBrowsers = (props) => {
 
@@ -25,38 +26,48 @@ const RouteBrowsers = (props) => {
 
 	}, [ props.domains.value, props.browsers.sorting, props.browsers.type, props.browsers.dateRange ])
 
+	const mainView = (() => {
+		if (props.domains.value.length > 0) {
+			return (
+				h('div', { className: 'subHeader' },
+					h(Select, {
+						value: props.browsers.sorting,
+						onChange: (e) => props.setBrowsersSorting(e.target.value),
+						items: [
+							{ value: BROWSERS_SORTING_TOP, label: 'Top browsers' },
+							{ value: BROWSERS_SORTING_RECENT, label: 'Recent browsers' }
+						]
+					}),
+					h(Select, {
+						value: props.browsers.type,
+						onChange: (e) => props.setBrowsersType(e.target.value),
+						items: [
+							{ value: BROWSERS_NO_VERSION, label: 'No browsers version' },
+							{ value: BROWSERS_WITH_VERSION, label: 'With browsers version' }
+						]
+					}),
+					h(Select, {
+						disabled: props.browsers.sorting !== BROWSERS_SORTING_TOP,
+						value: props.browsers.dateRange,
+						onChange: (e) => props.setBrowsersTopDateRange(e.target.value),
+						items: [
+							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+						]
+					})
+				)
+			)
+		}
+
+		return h(NoDomain, {
+			addModalsModal: props.addModalsModal
+		})
+	})()
+
 	return (
 		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.browsers.sorting,
-					onChange: (e) => props.setBrowsersSorting(e.target.value),
-					items: [
-						{ value: BROWSERS_SORTING_TOP, label: 'Top browsers' },
-						{ value: BROWSERS_SORTING_RECENT, label: 'Recent browsers' }
-					]
-				}),
-				h(Select, {
-					value: props.browsers.type,
-					onChange: (e) => props.setBrowsersType(e.target.value),
-					items: [
-						{ value: BROWSERS_NO_VERSION, label: 'No browsers version' },
-						{ value: BROWSERS_WITH_VERSION, label: 'With browsers version' }
-					]
-				}),
-				h(Select, {
-					disabled: props.browsers.sorting !== BROWSERS_SORTING_TOP,
-					value: props.browsers.dateRange,
-					onChange: (e) => props.setBrowsersTopDateRange(e.target.value),
-					items: [
-						{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
-					]
-				})
-			),
-
+			mainView,
 			props.domains.value.map(
 				(domain) => (
 					h(CardBrowsers, {

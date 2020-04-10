@@ -8,6 +8,7 @@ import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardOs from '../cards/CardOs'
 import Select from '../Select'
+import NoDomain from '../NoDomain'
 
 const RouteOs = (props) => {
 
@@ -25,38 +26,48 @@ const RouteOs = (props) => {
 
 	}, [ props.domains.value, props.os.sorting, props.os.type, props.os.dateRange ])
 
+	const mainView = (() => {
+		if (props.domains.value.length > 0) {
+			return (
+				h('div', { className: 'subHeader' },
+					h(Select, {
+						value: props.os.sorting,
+						onChange: (e) => props.setOsSorting(e.target.value),
+						items: [
+							{ value: OS_SORTING_TOP, label: 'Top OS' },
+							{ value: OS_SORTING_RECENT, label: 'Recent OS' }
+						]
+					}),
+					h(Select, {
+						value: props.os.type,
+						onChange: (e) => props.setOsType(e.target.value),
+						items: [
+							{ value: OS_NO_VERSION, label: 'No OS version' },
+							{ value: OS_WITH_VERSION, label: 'With OS version' }
+						]
+					}),
+					h(Select, {
+						disabled: props.os.sorting !== OS_SORTING_TOP,
+						value: props.os.dateRange,
+						onChange: (e) => props.setOsTopDateRange(e.target.value),
+						items: [
+							{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
+							{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
+							{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+						]
+					})
+				)
+			)
+		}
+
+		return h(NoDomain, {
+			addModalsModal: props.addModalsModal
+		})
+	})()
+
 	return (
 		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.os.sorting,
-					onChange: (e) => props.setOsSorting(e.target.value),
-					items: [
-						{ value: OS_SORTING_TOP, label: 'Top OS' },
-						{ value: OS_SORTING_RECENT, label: 'Recent OS' }
-					]
-				}),
-				h(Select, {
-					value: props.os.type,
-					onChange: (e) => props.setOsType(e.target.value),
-					items: [
-						{ value: OS_NO_VERSION, label: 'No OS version' },
-						{ value: OS_WITH_VERSION, label: 'With OS version' }
-					]
-				}),
-				h(Select, {
-					disabled: props.os.sorting !== OS_SORTING_TOP,
-					value: props.os.dateRange,
-					onChange: (e) => props.setOsTopDateRange(e.target.value),
-					items: [
-						{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
-					]
-				})
-			),
-
+			mainView,
 			props.domains.value.map(
 				(domain) => (
 					h(CardOs, {

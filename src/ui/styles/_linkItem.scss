@@ -12,6 +12,10 @@
 		cursor: inherit;
 	}
 
+	&--primary {
+		color: $primary;
+	}
+
 	&:not(.linkItem--disabled):focus,
 	&:not(.linkItem--disabled):hover {
 		color: $white;
