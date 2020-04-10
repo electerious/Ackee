@@ -5,7 +5,7 @@ const test = require('ava')
 const { subDays } = require('date-fns')
 
 const zeroDate = require('../../src/utils/zeroDate')
-const getDateRange = require('../../src/utils/getDateRange')
+const getDateRange = require('../../src/utils/dateOffsetByDateRange')
 const {
 	ALL_TIME,
 	LAST_7_DAYS,
@@ -16,7 +16,7 @@ test('return correct value for LAST_7_DAYS value', async (t) => {
 
 	const result = getDateRange(LAST_7_DAYS.value)
 
-	t.deepEqual(result, { $gte: subDays(zeroDate(), 6) })
+	t.deepEqual(result, subDays(zeroDate(), 6))
 
 })
 
@@ -24,7 +24,7 @@ test('return correct value for LAST_30_DAYS value', async (t) => {
 
 	const result = getDateRange(LAST_30_DAYS.value)
 
-	t.deepEqual(result, { $gte: subDays(zeroDate(), 29) })
+	t.deepEqual(result, subDays(zeroDate(), 29))
 
 })
 
