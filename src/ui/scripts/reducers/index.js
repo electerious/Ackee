@@ -11,6 +11,7 @@ import durations from './durations'
 import languages from './languages'
 import sizes from './sizes'
 import os from './os'
+import devices from './devices'
 
 export default combineReducers({
 	modals,
@@ -23,5 +24,6 @@ export default combineReducers({
 	durations,
 	languages,
 	sizes,
-	os
+	os,
+	devices
 })
