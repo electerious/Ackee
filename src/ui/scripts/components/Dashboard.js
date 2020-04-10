@@ -36,7 +36,7 @@ const Dashboard = (props) => {
 					createButton('Durations', ROUTE_DURATIONS, props),
 					createDropdown('Detailed', [
 						createButton('Languages', ROUTE_LANGUAGES, props),
-						createButton('Os', ROUTE_OS, props),
+						createButton('Operating Systems', ROUTE_OS, props),
 						createButton('Sizes', ROUTE_SIZES, props)
 					]),
 					createButton('Settings', ROUTE_SETTINGS, props)

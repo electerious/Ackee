@@ -29,7 +29,10 @@ const get = async (req) => {
 		constants.OS_SORTING_RECENT
 	]
 
-	const types = [ constants.OS_WITH_VERSION, constants.OS_NO_VERSION ]
+	const types = [
+		constants.OS_WITH_VERSION,
+		constants.OS_NO_VERSION
+	]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')

@@ -1,7 +1,10 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
+import {
+	OS_SORTING_TOP,
+	OS_SORTING_RECENT
+} from '../../../../constants/os'
 
 import Headline from '../Headline'
 import Text from '../Text'
