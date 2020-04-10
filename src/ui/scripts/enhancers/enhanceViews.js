@@ -10,11 +10,13 @@ import createArray from '../utils/createArray'
 import matchesDate from '../utils/matchesDate'
 
 const subFn = (interval) => {
+
 	switch (interval) {
 		case VIEWS_INTERVAL_DAILY: return subDays
 		case VIEWS_INTERVAL_MONTHLY: return subMonths
 		case VIEWS_INTERVAL_YEARLY: return subYears
 	}
+
 }
 
 export default (views, length, interval) => createArray(length).map((_, index) => {

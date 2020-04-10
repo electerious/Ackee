@@ -1,0 +1,52 @@
+'use strict'
+
+const Record = require('../schemas/Record')
+const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
+const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const constants = require('../constants/browsers')
+
+const getTopWithVersion = async (id, dateRange) => {
+
+	return Record.aggregate(
+		aggregateTopFieldsMultiple(id, [ 'browserName', 'browserVersion' ], dateRange)
+	)
+}
+
+const getRecentWithVersion = async (id) => {
+
+	return Record.aggregate(
+		aggregateRecentFieldsMultiple(id, [ 'browserName', 'browserVersion' ])
+	)
+}
+
+const getTopNoVersion = async (id, dateRange) => {
+
+	return Record.aggregate(
+		aggregateTopFields(id, 'browserName', dateRange)
+	)
+}
+
+const getRecentNoVersion = async (id) => {
+
+	return Record.aggregate(
+		aggregateRecentFields(id, 'browserName')
+	)
+}
+
+
+const get = async (id, sorting, type, dateRange) => {
+
+	switch (sorting) {
+		case constants.BROWSERS_SORTING_TOP:
+			return type === constants.BROWSERS_NO_VERSION ? getTopNoVersion(id, dateRange) : getTopWithVersion(id, dateRange)
+		case constants.BROWSERS_SORTING_RECENT:
+			return type === constants.BROWSERS_NO_VERSION ? getRecentNoVersion(id) : getRecentWithVersion(id)
+	}
+
+}
+
+module.exports = {
+	get
+}
