@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_NO_VERSION, OS_WITH_VERSION } from '../../../../constants/os'
+import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_TYPE_NO_VERSION, OS_TYPE_WITH_VERSION } from '../../../../constants/os'
 import ranges from '../../../../constants/ranges'
 
 import enhanceOs from '../../enhancers/enhanceOs'
@@ -41,8 +41,8 @@ const RouteOs = (props) => {
 					value: props.os.type,
 					onChange: (e) => props.setOsType(e.target.value),
 					items: [
-						{ value: OS_NO_VERSION, label: 'No version' },
-						{ value: OS_WITH_VERSION, label: 'With version' }
+						{ value: OS_TYPE_NO_VERSION, label: 'No version' },
+						{ value: OS_TYPE_WITH_VERSION, label: 'With version' }
 					]
 				}),
 				h(Select, {

@@ -10,12 +10,12 @@ import {
 	RESET_OS
 } from '../actions'
 
-import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'
+import { OS_SORTING_TOP, OS_TYPE_NO_VERSION } from '../../../constants/os'
 import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
 	range: RANGES_LAST_7_DAYS.value,
-	type: OS_NO_VERSION,
+	type: OS_TYPE_NO_VERSION,
 	sorting: OS_SORTING_TOP,
 	value: {}
 })

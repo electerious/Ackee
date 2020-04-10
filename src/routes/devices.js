@@ -31,8 +31,8 @@ const get = async (req) => {
 	]
 
 	const types = [
-		constants.DEVICES_WITH_MODEL,
-		constants.DEVICES_NO_MODEL
+		constants.DEVICES_TYPE_WITH_MODEL,
+		constants.DEVICES_TYPE_NO_MODEL
 	]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')

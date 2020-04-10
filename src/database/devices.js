@@ -40,9 +40,9 @@ const get = async (id, sorting, type, range) => {
 
 	switch (sorting) {
 		case constants.DEVICES_SORTING_TOP:
-			return type === constants.DEVICES_NO_MODEL ? getTopNoModel(id, range) : getTopWithModel(id, range)
+			return type === constants.DEVICES_TYPE_NO_MODEL ? getTopNoModel(id, range) : getTopWithModel(id, range)
 		case constants.DEVICES_SORTING_RECENT:
-			return type === constants.DEVICES_NO_MODEL ? getRecentNoModel(id) : getRecentWithModel(id)
+			return type === constants.DEVICES_TYPE_NO_MODEL ? getRecentNoModel(id) : getRecentWithModel(id)
 	}
 
 }

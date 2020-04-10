@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { DEVICES_SORTING_TOP, DEVICES_SORTING_RECENT, DEVICES_WITH_MODEL, DEVICES_NO_MODEL } from '../../../../constants/devices'
+import { DEVICES_SORTING_TOP, DEVICES_SORTING_RECENT, DEVICES_TYPE_WITH_MODEL, DEVICES_TYPE_NO_MODEL } from '../../../../constants/devices'
 import ranges from '../../../../constants/ranges'
 
 import enhanceDevices from '../../enhancers/enhanceDevices'
@@ -41,8 +41,8 @@ const RouteDevices = (props) => {
 					value: props.devices.type,
 					onChange: (e) => props.setDevicesType(e.target.value),
 					items: [
-						{ value: DEVICES_NO_MODEL, label: 'No model' },
-						{ value: DEVICES_WITH_MODEL, label: 'With model' }
+						{ value: DEVICES_TYPE_NO_MODEL, label: 'No model' },
+						{ value: DEVICES_TYPE_WITH_MODEL, label: 'With model' }
 					]
 				}),
 				h(Select, {

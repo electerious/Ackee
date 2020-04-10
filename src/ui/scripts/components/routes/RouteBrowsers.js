@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { BROWSERS_SORTING_TOP, BROWSERS_SORTING_RECENT, BROWSERS_NO_VERSION, BROWSERS_WITH_VERSION } from '../../../../constants/browsers'
+import { BROWSERS_SORTING_TOP, BROWSERS_SORTING_RECENT, BROWSERS_TYPE_NO_VERSION, BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import ranges from '../../../../constants/ranges'
 
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
@@ -41,8 +41,8 @@ const RouteBrowsers = (props) => {
 					value: props.browsers.type,
 					onChange: (e) => props.setBrowsersType(e.target.value),
 					items: [
-						{ value: BROWSERS_NO_VERSION, label: 'No version' },
-						{ value: BROWSERS_WITH_VERSION, label: 'With version' }
+						{ value: BROWSERS_TYPE_NO_VERSION, label: 'No version' },
+						{ value: BROWSERS_TYPE_WITH_VERSION, label: 'With version' }
 					]
 				}),
 				h(Select, {

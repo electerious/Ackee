@@ -10,12 +10,12 @@ import {
 	SET_DEVICES_RANGE
 } from '../actions'
 
-import { DEVICES_SORTING_TOP, DEVICES_WITH_MODEL } from '../../../constants/devices'
+import { DEVICES_SORTING_TOP, DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
 import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
 	range: RANGES_LAST_7_DAYS.value,
-	type: DEVICES_WITH_MODEL,
+	type: DEVICES_TYPE_WITH_MODEL,
 	sorting: DEVICES_SORTING_TOP,
 	value: {}
 })
