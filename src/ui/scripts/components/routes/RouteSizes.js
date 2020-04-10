@@ -1,14 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	SIZES_TYPE_BROWSER_HEIGHT,
-	SIZES_TYPE_BROWSER_RESOLUTION,
-	SIZES_TYPE_BROWSER_WIDTH,
-	SIZES_TYPE_SCREEN_HEIGHT,
-	SIZES_TYPE_SCREEN_RESOLUTION,
-	SIZES_TYPE_SCREEN_WIDTH
-} from '../../../../constants/sizes'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { SIZES_TYPE_BROWSER_HEIGHT, SIZES_TYPE_BROWSER_RESOLUTION, SIZES_TYPE_BROWSER_WIDTH, SIZES_TYPE_SCREEN_HEIGHT, SIZES_TYPE_SCREEN_RESOLUTION, SIZES_TYPE_SCREEN_WIDTH } from '../../../../constants/sizes'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -40,11 +33,11 @@ const RouteSizes = (props) => {
 					value: props.sizes.type,
 					onChange: (e) => props.setSizesType(e.target.value),
 					items: [
-						{ value: SIZES_TYPE_BROWSER_HEIGHT, label: 'Browser heights' },
 						{ value: SIZES_TYPE_BROWSER_RESOLUTION, label: 'Browser resolutions' },
+						{ value: SIZES_TYPE_BROWSER_HEIGHT, label: 'Browser heights' },
 						{ value: SIZES_TYPE_BROWSER_WIDTH, label: 'Browser widths' },
-						{ value: SIZES_TYPE_SCREEN_HEIGHT, label: 'Screen heights' },
 						{ value: SIZES_TYPE_SCREEN_RESOLUTION, label: 'Screen resolutions' },
+						{ value: SIZES_TYPE_SCREEN_HEIGHT, label: 'Screen heights' },
 						{ value: SIZES_TYPE_SCREEN_WIDTH, label: 'Screen widths' }
 					]
 				}),
@@ -63,7 +56,7 @@ const RouteSizes = (props) => {
 				(domain) => (
 					h(CardSizes, {
 						key: domain.data.id,
-						dateRange: props.pages.dateRange,
+						dateRange: props.sizes.dateRange,
 						headline: domain.data.title,
 						loading: props.sizes.value[domain.data.id] == null ? false : props.sizes.value[domain.data.id].fetching,
 						items: props.sizes.value[domain.data.id] == null ? [] : enhanceSizes(props.sizes.value[domain.data.id].value)

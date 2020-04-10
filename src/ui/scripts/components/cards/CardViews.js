@@ -2,11 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import {
-	VIEWS_INTERVAL_DAILY,
-	VIEWS_INTERVAL_MONTHLY,
-	VIEWS_INTERVAL_YEARLY
-} from '../../../../constants/views'
+import { VIEWS_INTERVAL_DAILY, VIEWS_INTERVAL_MONTHLY, VIEWS_INTERVAL_YEARLY } from '../../../../constants/views'
 
 import relativeDays from '../../utils/relativeDays'
 import relativeMonths from '../../utils/relativeMonths'
@@ -17,11 +13,13 @@ import Text from '../Text'
 import PresentationBarChart from '../presentations/PresentationBarChart'
 
 const relativeFn = (interval) => {
+
 	switch (interval) {
 		case VIEWS_INTERVAL_DAILY: return relativeDays
 		case VIEWS_INTERVAL_MONTHLY: return relativeMonths
 		case VIEWS_INTERVAL_YEARLY: return relativeYears
 	}
+
 }
 
 const CardViews = (props) => {

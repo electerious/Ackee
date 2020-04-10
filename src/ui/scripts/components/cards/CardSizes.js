@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -9,12 +9,14 @@ import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 
 const textLabel = (dateRange) => {
+
 	if (dateRange) {
 		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
 		if (range) return range.label
 	}
 
 	return LAST_7_DAYS.label
+
 }
 
 const CardSizes = (props) => {

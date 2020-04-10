@@ -2,7 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { LANGUAGES_SORTING_TOP,	LANGUAGES_SORTING_RECENT } from '../../../../constants/languages'
-import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -12,14 +12,12 @@ import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentat
 import relativeDate from '../../utils/relativeDate'
 
 const textLabel = (item, dateRange, isRecent) => {
-	if (isRecent && !item) return 'Recent'
-	if (item && item.date) return relativeDate(item.date)
-	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
-		if (range) return range.label
-	}
 
-	return LAST_7_DAYS.label
+	if (item && item.date) return relativeDate(item.date)
+	if (isRecent) return 'Recent'
+
+	return [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
+
 }
 
 const CardLanguages = (props) => {
@@ -66,7 +64,11 @@ const CardLanguages = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active], props.dateRange, props.sorting === LANGUAGES_SORTING_RECENT)),
+				}, textLabel(
+					props.items[active],
+					props.dateRange,
+					props.sorting === LANGUAGES_SORTING_RECENT
+				)),
 				presentation
 			)
 		)

@@ -1,15 +1,8 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-	ALL_TIME,
-	LAST_7_DAYS,
-	LAST_30_DAYS
-} from '../../../../constants/dateRange'
-import {
-	OS_SORTING_TOP,
-	OS_SORTING_RECENT
-} from '../../../../constants/os'
+import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -19,14 +12,12 @@ import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentat
 import relativeDate from '../../utils/relativeDate'
 
 const textLabel = (item, dateRange, isRecent) => {
-	if (isRecent && !item) return 'Recent'
-	if (item && item.date) return relativeDate(item.date)
-	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
-		if (range) return range.label
-	}
 
-	return LAST_7_DAYS.label
+	if (item && item.date) return relativeDate(item.date)
+	if (isRecent) return 'Recent'
+
+	return [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
+
 }
 
 const CardOs = (props) => {
@@ -73,7 +64,11 @@ const CardOs = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active], props.dateRange, props.sorting === OS_SORTING_RECENT)),
+				}, textLabel(
+					props.items[active],
+					props.dateRange,
+					props.sorting === OS_SORTING_RECENT
+				)),
 				presentation
 			)
 		)

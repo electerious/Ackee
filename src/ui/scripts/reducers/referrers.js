@@ -1,12 +1,12 @@
 import produce from 'immer'
 
 import {
-	RESET_REFERRERS,
 	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
 	SET_REFERRERS_ERROR,
-	SET_REFERRERS_TOP_DATE_RANGE
+	SET_REFERRERS_TOP_DATE_RANGE,
+	RESET_REFERRERS
 } from '../actions'
 
 import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
@@ -33,12 +33,12 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_REFERRERS_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
 			break
 		case SET_REFERRERS_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.dateRange = action.payload || initialState().dateRange
 			break

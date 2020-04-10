@@ -1,20 +1,16 @@
 import produce from 'immer'
 
 import {
-	RESET_OS,
 	SET_OS_ERROR,
 	SET_OS_FETCHING,
 	SET_OS_SORTING,
 	SET_OS_VALUE,
 	SET_OS_TYPE,
-	SET_OS_TOP_DATE_RANGE
+	SET_OS_TOP_DATE_RANGE,
+	RESET_OS
 } from '../actions'
 
-import {
-	OS_SORTING_TOP,
-	OS_NO_VERSION
-} from '../../../constants/os'
-
+import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
@@ -39,16 +35,17 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_OS_TYPE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
 		case SET_OS_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.dateRange = action.payload || initialState().dateRange
 			break
 		case SET_OS_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
 			break

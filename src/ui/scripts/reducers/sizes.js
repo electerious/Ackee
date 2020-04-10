@@ -1,20 +1,20 @@
 import produce from 'immer'
 
 import {
-	RESET_SIZES,
 	SET_SIZES_TYPE,
 	SET_SIZES_VALUE,
 	SET_SIZES_FETCHING,
 	SET_SIZES_ERROR,
-	SET_SIZES_TOP_DATE_RANGE
+	SET_SIZES_TOP_DATE_RANGE,
+	RESET_SIZES
 } from '../actions'
 
-import { SIZES_TYPE_SCREEN_RESOLUTION } from '../../../constants/sizes'
+import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
 	dateRange: LAST_7_DAYS.value,
-	type: SIZES_TYPE_SCREEN_RESOLUTION,
+	type: SIZES_TYPE_BROWSER_RESOLUTION,
 	value: {}
 })
 
@@ -33,12 +33,12 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_SIZES_TYPE:
-			// Reset value because a different type results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
 		case SET_SIZES_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.dateRange = action.payload || initialState().dateRange
 			break
