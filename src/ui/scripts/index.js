@@ -19,6 +19,8 @@ import { initialState as initialReferrersState } from './reducers/referrers'
 import { initialState as initialDurationsState } from './reducers/durations'
 import { initialState as initialLanguagesState } from './reducers/languages'
 import { initialState as initialOsState } from './reducers/os'
+import { initialState as initialBrowsersState } from './reducers/browsers'
+import { initialState as initialDevicesState } from './reducers/devices'
 import { initialState as initialSizesState } from './reducers/sizes'
 
 import Main from './components/Main'
@@ -78,6 +80,18 @@ store.subscribe(() => {
 			dateRange: currentState.os.dateRange,
 			type: currentState.os.type,
 			sorting: currentState.os.sorting
+		},
+		browsers: {
+			...initialBrowsersState(),
+			dateRange: currentState.browsers.dateRange,
+			type: currentState.browsers.type,
+			sorting: currentState.browsers.sorting
+		},
+		devices: {
+			...initialDevicesState(),
+			dateRange: currentState.devices.dateRange,
+			type: currentState.devices.type,
+			sorting: currentState.devices.sorting
 		},
 		sizes: {
 			...initialSizesState(),
