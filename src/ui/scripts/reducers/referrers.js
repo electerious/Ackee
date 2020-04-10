@@ -5,14 +5,15 @@ import {
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
 	SET_REFERRERS_ERROR,
+	SET_REFERRERS_TOP_DATE_RANGE,
 	RESET_REFERRERS
 } from '../actions'
 
-import {
-	REFERRERS_SORTING_TOP
-} from '../../../constants/referrers'
+import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
+import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
+	dateRange: LAST_7_DAYS.value,
 	sorting: REFERRERS_SORTING_TOP,
 	value: {}
 })
@@ -32,10 +33,14 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_REFERRERS_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
+			break
+		case SET_REFERRERS_TOP_DATE_RANGE:
+			// Reset value because the view shouldn't show the old data when switching
+			draft.value = initialState().value
+			draft.dateRange = action.payload || initialState().dateRange
 			break
 		case SET_REFERRERS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

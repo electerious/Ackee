@@ -1,10 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-	OS_SORTING_TOP,
-	OS_SORTING_RECENT
-} from '../../../../constants/os'
+import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -12,15 +9,14 @@ import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
+import dateRangeLabel from '../../utils/dateRangeLabel'
 
-const textLabel = (item) => {
+const textLabel = (item, dateRange, isRecent) => {
 
-	const defaultLabel = 'Last 7 days'
+	if (item && item.date) return relativeDate(item.date)
+	if (isRecent) return 'Recent'
 
-	if (item == null) return defaultLabel
-	if (item.date != null) return relativeDate(item.date)
-
-	return defaultLabel
+	return dateRangeLabel(dateRange)
 
 }
 
@@ -68,7 +64,11 @@ const CardOs = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active])),
+				}, textLabel(
+					props.items[active],
+					props.dateRange,
+					props.sorting === OS_SORTING_RECENT
+				)),
 				presentation
 			)
 		)
@@ -78,6 +78,7 @@ const CardOs = (props) => {
 
 CardOs.propTypes = {
 	headline: PropTypes.string.isRequired,
+	dateRange: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired

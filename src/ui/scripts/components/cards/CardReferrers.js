@@ -1,21 +1,24 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
+
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationIconList from '../presentations/PresentationIconList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
+import dateRangeLabel from '../../utils/dateRangeLabel'
 
-const textLabel = (item) => {
+const textLabel = (item, dateRange, isRecent, isNew) => {
 
-	const defaultLabel = 'Last 7 days'
+	if (item && item.date) return relativeDate(item.date)
+	if (item && item.count) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
 
-	if (item == null) return defaultLabel
-	if (item.date != null) return relativeDate(item.date)
-	if (item.count != null) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
+	if (isRecent) return 'Recent'
+	if (isNew) return 'New'
 
-	return defaultLabel
+	return dateRangeLabel(dateRange)
 
 }
 
@@ -59,7 +62,12 @@ const CardReferrers = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active])),
+				}, textLabel(
+					props.items[active],
+					props.dateRange,
+					props.sorting === REFERRERS_SORTING_RECENT,
+					props.sorting === REFERRERS_SORTING_NEW
+				)),
 				presentation
 			)
 		)
@@ -69,6 +77,7 @@ const CardReferrers = (props) => {
 
 CardReferrers.propTypes = {
 	headline: PropTypes.string.isRequired,
+	dateRange: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

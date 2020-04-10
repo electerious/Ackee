@@ -5,6 +5,13 @@ import Headline from '../Headline'
 import Text from '../Text'
 import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
+import dateRangeLabel from '../../utils/dateRangeLabel'
+
+const textLabel = (dateRange) => {
+
+	return dateRangeLabel(dateRange)
+
+}
 
 const CardSizes = (props) => {
 
@@ -38,7 +45,7 @@ const CardSizes = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, 'Last 7 days'),
+				}, textLabel(props.dateRange)),
 				presentation
 			)
 		)
@@ -48,6 +55,7 @@ const CardSizes = (props) => {
 
 CardSizes.propTypes = {
 	headline: PropTypes.string.isRequired,
+	dateRange: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

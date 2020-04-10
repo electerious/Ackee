@@ -6,10 +6,10 @@ const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const constants = require('../constants/referrers')
 
-const getTop = async (id) => {
+const getTop = async (id, dateRange) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'siteReferrer')
+		aggregateTopFields(id, 'siteReferrer', dateRange)
 	)
 
 }
@@ -30,10 +30,10 @@ const getRecent = async (id) => {
 
 }
 
-const get = async (id, sorting) => {
+const get = async (id, sorting, dateRange) => {
 
 	switch (sorting) {
-		case constants.REFERRERS_SORTING_TOP: return getTop(id)
+		case constants.REFERRERS_SORTING_TOP: return getTop(id, dateRange)
 		case constants.REFERRERS_SORTING_NEW: return getNew(id)
 		case constants.REFERRERS_SORTING_RECENT: return getRecent(id)
 	}

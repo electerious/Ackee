@@ -1,11 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	OS_SORTING_TOP,
-	OS_SORTING_RECENT,
-	OS_NO_VERSION,
-	OS_WITH_VERSION
-} from '../../../../constants/os'
+import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_NO_VERSION, OS_WITH_VERSION } from '../../../../constants/os'
+import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
 
 import enhanceOs from '../../enhancers/enhanceOs'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -27,7 +23,7 @@ const RouteOs = (props) => {
 			props.fetchOs(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.os.sorting, props.os.type ])
+	}, [ props.domains.value, props.os.sorting, props.os.type, props.os.dateRange ])
 
 	return (
 		h(Fragment, {},
@@ -48,6 +44,16 @@ const RouteOs = (props) => {
 						{ value: OS_NO_VERSION, label: 'No version' },
 						{ value: OS_WITH_VERSION, label: 'With version' }
 					]
+				}),
+				h(Select, {
+					disabled: props.os.sorting !== OS_SORTING_TOP,
+					value: props.os.dateRange,
+					onChange: (e) => props.setOsTopDateRange(e.target.value),
+					items: [
+						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+						{ value: ALL_TIME.value, label: ALL_TIME.label }
+					]
 				})
 			),
 
@@ -56,6 +62,7 @@ const RouteOs = (props) => {
 					h(CardOs, {
 						key: domain.data.id,
 						headline: domain.data.title,
+						dateRange: props.os.dateRange,
 						sorting: props.os.sorting,
 						loading: props.os.value[domain.data.id] == null ? false : props.os.value[domain.data.id].fetching,
 						items: props.os.value[domain.data.id] == null ? [] : enhanceOs(props.os.value[domain.data.id].value)

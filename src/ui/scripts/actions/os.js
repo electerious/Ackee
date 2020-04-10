@@ -1,12 +1,18 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
+export const SET_OS_TOP_DATE_RANGE = Symbol()
 export const SET_OS_TYPE = Symbol()
 export const SET_OS_SORTING = Symbol()
 export const SET_OS_VALUE = Symbol()
 export const SET_OS_FETCHING = Symbol()
 export const SET_OS_ERROR = Symbol()
 export const RESET_OS = Symbol()
+
+export const setOsTopDateRange = (payload) => ({
+	type: SET_OS_TOP_DATE_RANGE,
+	payload
+})
 
 export const setOsSorting = (payload) => ({
 	type: SET_OS_SORTING,
@@ -47,7 +53,7 @@ export const fetchOs = signalHandler((signal) => (props, domainId) => async (dis
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/os?sorting=${ props.os.sorting }&type=${ props.os.type }`, {
+		const data = await api(`/domains/${ domainId }/os?sorting=${ props.os.sorting }&type=${ props.os.type }&dateRange=${ props.os.dateRange }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

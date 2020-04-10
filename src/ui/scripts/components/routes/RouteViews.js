@@ -1,12 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL,
-	VIEWS_INTERVAL_DAILY,
-	VIEWS_INTERVAL_MONTHLY,
-	VIEWS_INTERVAL_YEARLY
-} from '../../../../constants/views'
+import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL, VIEWS_INTERVAL_DAILY, VIEWS_INTERVAL_MONTHLY, VIEWS_INTERVAL_YEARLY } from '../../../../constants/views'
 
 import enhanceViews from '../../enhancers/enhanceViews'
 import mergeViews from '../../utils/mergeViews'

@@ -9,10 +9,7 @@ import {
 	RESET_VIEWS
 } from '../actions'
 
-import {
-	VIEWS_TYPE_UNIQUE,
-	VIEWS_INTERVAL_DAILY
-} from '../../../constants/views'
+import { VIEWS_TYPE_UNIQUE, VIEWS_INTERVAL_DAILY } from '../../../constants/views'
 
 export const initialState = () => ({
 	type: VIEWS_TYPE_UNIQUE,
