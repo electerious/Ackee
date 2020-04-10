@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { REFERRERS_SORTING_TOP, REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
-import { RANGES_LAST_7_DAYS, RANGES_LAST_30_DAYS, RANGES_ALL_TIME } from '../../../../constants/ranges'
+import ranges from '../../../../constants/ranges'
 
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -42,11 +42,7 @@ const RouteReferrers = (props) => {
 					disabled: props.referrers.sorting !== REFERRERS_SORTING_TOP,
 					value: props.referrers.range,
 					onChange: (e) => props.setReferrersRange(e.target.value),
-					items: [
-						{ value: RANGES_LAST_7_DAYS.value, label: RANGES_LAST_7_DAYS.label },
-						{ value: RANGES_LAST_30_DAYS.value, label: RANGES_LAST_30_DAYS.label },
-						{ value: RANGES_ALL_TIME.value, label: RANGES_ALL_TIME.label }
-					]
+					items: ranges.toArray()
 				})
 			),
 

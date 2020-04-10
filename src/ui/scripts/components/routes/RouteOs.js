@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { OS_SORTING_TOP, OS_SORTING_RECENT, OS_NO_VERSION, OS_WITH_VERSION } from '../../../../constants/os'
-import { RANGES_LAST_7_DAYS, RANGES_LAST_30_DAYS, RANGES_ALL_TIME } from '../../../../constants/ranges'
+import ranges from '../../../../constants/ranges'
 
 import enhanceOs from '../../enhancers/enhanceOs'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -49,11 +49,7 @@ const RouteOs = (props) => {
 					disabled: props.os.sorting !== OS_SORTING_TOP,
 					value: props.os.range,
 					onChange: (e) => props.setOsRange(e.target.value),
-					items: [
-						{ value: RANGES_LAST_7_DAYS.value, label: RANGES_LAST_7_DAYS.label },
-						{ value: RANGES_LAST_30_DAYS.value, label: RANGES_LAST_30_DAYS.label },
-						{ value: RANGES_ALL_TIME.value, label: RANGES_ALL_TIME.label }
-					]
+					items: ranges.toArray()
 				})
 			),
 

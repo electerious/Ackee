@@ -8,7 +8,7 @@ const ranges = require('../../src/constants/ranges')
 const zeroDate = require('../../src/utils/zeroDate')
 const offsetByRange = require('../../src/utils/offsetByRange')
 
-test('return correct value for RANGES_LAST_7_DAYS value', async (t) => {
+test('return correct offset for RANGES_LAST_7_DAYS value', async (t) => {
 
 	const result = offsetByRange(ranges.RANGES_LAST_7_DAYS.value)
 
@@ -16,7 +16,7 @@ test('return correct value for RANGES_LAST_7_DAYS value', async (t) => {
 
 })
 
-test('return correct value for RANGES_LAST_30_DAYS value', async (t) => {
+test('return correct offset for RANGES_LAST_30_DAYS value', async (t) => {
 
 	const result = offsetByRange(ranges.RANGES_LAST_30_DAYS.value)
 
@@ -33,7 +33,7 @@ test('return null for RANGES_ALL_TIME value', async (t) => {
 })
 
 
-test('return null for other value', async (t) => {
+test('return null for other values', async (t) => {
 
 	const resultString = offsetByRange('test')
 	const resultNull = offsetByRange(null)
