@@ -9,4 +9,9 @@
 		color: black;
 	}
 
+	&:disabled {
+		color: 	grey;
+		background-image: none;
+	}
+
 }

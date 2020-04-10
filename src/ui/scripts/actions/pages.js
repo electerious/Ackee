@@ -1,11 +1,17 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
+export const SET_PAGES_TOP_DATE_RANGE = Symbol()
 export const SET_PAGES_SORTING = Symbol()
 export const SET_PAGES_VALUE = Symbol()
 export const SET_PAGES_FETCHING = Symbol()
 export const SET_PAGES_ERROR = Symbol()
 export const RESET_PAGES = Symbol()
+
+export const setPagesTopDateRange = (payload) => ({
+	type: SET_PAGES_TOP_DATE_RANGE,
+	payload
+})
 
 export const setPagesSorting = (payload) => ({
 	type: SET_PAGES_SORTING,
@@ -41,7 +47,7 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }`, {
+		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }&dateRange=${ props.pages.dateRange }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

@@ -1,22 +1,24 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
+
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationIconList from '../presentations/PresentationIconList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
 
-const textLabel = (item) => {
+const textLabel = (item, dateRange) => {
+	if (item && item.date) return relativeDate(item.date)
+	if (item && item.count) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
 
-	const defaultLabel = 'Last 7 days'
+	if (dateRange) {
+		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
+		if (range) return range.label
+	}
 
-	if (item == null) return defaultLabel
-	if (item.date != null) return relativeDate(item.date)
-	if (item.count != null) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
-
-	return defaultLabel
-
+	return LAST_7_DAYS.label
 }
 
 const CardReferrers = (props) => {
@@ -59,7 +61,7 @@ const CardReferrers = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active])),
+				}, textLabel(props.items[active], props.dateRange)),
 				presentation
 			)
 		)
@@ -69,6 +71,7 @@ const CardReferrers = (props) => {
 
 CardReferrers.propTypes = {
 	headline: PropTypes.string.isRequired,
+	dateRange: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

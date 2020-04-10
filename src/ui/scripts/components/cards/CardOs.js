@@ -2,6 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
+import { ALL_TIME, LAST_7_DAYS, LAST_30_DAYS } from '../../../../constants/dateRange'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -10,15 +11,14 @@ import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
 
-const textLabel = (item) => {
+const textLabel = (item, dateRange) => {
+	if (item && item.date) return relativeDate(item.date)
+	if (dateRange) {
+		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
+		if (range) return range.label
+	}
 
-	const defaultLabel = 'Last 7 days'
-
-	if (item == null) return defaultLabel
-	if (item.date != null) return relativeDate(item.date)
-
-	return defaultLabel
-
+	return LAST_7_DAYS.label
 }
 
 const CardOs = (props) => {
@@ -65,7 +65,7 @@ const CardOs = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.items[active])),
+				}, textLabel(props.items[active], props.dateRange)),
 				presentation
 			)
 		)
@@ -75,6 +75,7 @@ const CardOs = (props) => {
 
 CardOs.propTypes = {
 	headline: PropTypes.string.isRequired,
+	dateRange: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired

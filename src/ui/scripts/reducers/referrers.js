@@ -1,18 +1,19 @@
 import produce from 'immer'
 
 import {
+	RESET_REFERRERS,
 	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
 	SET_REFERRERS_ERROR,
-	RESET_REFERRERS
+	SET_REFERRERS_TOP_DATE_RANGE
 } from '../actions'
 
-import {
-	REFERRERS_SORTING_TOP
-} from '../../../constants/referrers'
+import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
+import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
+	dateRange: LAST_7_DAYS.value.toString(),
 	sorting: REFERRERS_SORTING_TOP,
 	value: {}
 })
@@ -36,6 +37,10 @@ export default produce((draft, action) => {
 			// and because the view shouldn't show the old data when switching.
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
+			break
+		case SET_REFERRERS_TOP_DATE_RANGE:
+			draft.value = initialState().value
+			draft.dateRange = action.payload || initialState().dateRange
 			break
 		case SET_REFERRERS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
