@@ -47,9 +47,9 @@ const RouteReferrers = (props) => {
 					value: props.referrers.dateRange,
 					onChange: (e) => props.setReferrersTopDateRange(e.target.value),
 					items: [
-						{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+						{ value: ALL_TIME.value, label: ALL_TIME.label }
 					]
 				})
 			),

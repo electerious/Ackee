@@ -52,9 +52,9 @@ const RouteSizes = (props) => {
 					value: props.sizes.dateRange,
 					onChange: (e) => props.setSizesTopDateRange(e.target.value),
 					items: [
-						{ value: LAST_7_DAYS.value.toString(), label: LAST_7_DAYS.label },
-						{ value: LAST_30_DAYS.value.toString(), label: LAST_30_DAYS.label },
-						{ value: ALL_TIME.value.toString(), label: ALL_TIME.label }
+						{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
+						{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
+						{ value: ALL_TIME.value, label: ALL_TIME.label }
 					]
 				})
 			),

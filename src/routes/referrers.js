@@ -33,9 +33,9 @@ const get = async (req) => {
 	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
-	if (dateRanges.includes(Number(dateRange)) === false) throw createError(400, 'Unknown date range')
+	if (dateRanges.includes(dateRange) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await referrers.get(domainId, sorting, Number(dateRange))
+	const entries = await referrers.get(domainId, sorting, dateRange)
 
 	return responses(entries)
 

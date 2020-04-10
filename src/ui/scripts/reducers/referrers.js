@@ -13,7 +13,7 @@ import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
 import { LAST_7_DAYS } from '../../../constants/dateRange'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value.toString(),
+	dateRange: LAST_7_DAYS.value,
 	sorting: REFERRERS_SORTING_TOP,
 	value: {}
 })

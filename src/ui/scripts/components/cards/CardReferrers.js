@@ -14,7 +14,7 @@ const textLabel = (item, dateRange) => {
 	if (item && item.count) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
 
 	if (dateRange) {
-		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === Number(dateRange))
+		const range = [ ALL_TIME, LAST_7_DAYS, LAST_30_DAYS ].find((range) => range.value === dateRange)
 		if (range) return range.label
 	}
 

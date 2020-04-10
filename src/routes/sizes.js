@@ -37,9 +37,9 @@ const get = async (req) => {
 	const dateRanges = [ ALL_TIME.value, LAST_7_DAYS.value, LAST_30_DAYS.value ]
 
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
-	if (dateRanges.includes(Number(dateRange)) === false) throw createError(400, 'Unknown date range')
+	if (dateRanges.includes(dateRange) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await sizes.get(domainId, type, Number(dateRange))
+	const entries = await sizes.get(domainId, type, dateRange)
 
 	return responses(entries)
 
