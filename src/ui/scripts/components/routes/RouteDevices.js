@@ -41,8 +41,8 @@ const RouteDevices = (props) => {
 					value: props.devices.type,
 					onChange: (e) => props.setDevicesType(e.target.value),
 					items: [
-						{ value: DEVICES_NO_MODEL, label: 'No devices model' },
-						{ value: DEVICES_WITH_MODEL, label: 'With devices model' }
+						{ value: DEVICES_NO_MODEL, label: 'No model' },
+						{ value: DEVICES_WITH_MODEL, label: 'With model' }
 					]
 				}),
 				h(Select, {

@@ -41,8 +41,8 @@ const RouteBrowsers = (props) => {
 					value: props.browsers.type,
 					onChange: (e) => props.setBrowsersType(e.target.value),
 					items: [
-						{ value: BROWSERS_NO_VERSION, label: 'No browsers version' },
-						{ value: BROWSERS_WITH_VERSION, label: 'With browsers version' }
+						{ value: BROWSERS_NO_VERSION, label: 'No version' },
+						{ value: BROWSERS_WITH_VERSION, label: 'With version' }
 					]
 				}),
 				h(Select, {
