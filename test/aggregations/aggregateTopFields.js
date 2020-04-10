@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('ava')
-const uuid = require('uuid/v4')
+const uuid = require('uuid').v4
 
 const aggregateTopFields = require('../../src/aggregations/aggregateTopFields')
 
