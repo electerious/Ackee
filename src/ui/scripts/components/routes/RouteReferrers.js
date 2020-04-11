@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { REFERRERS_SORTING_TOP, REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
+import ranges from '../../../../constants/ranges'
 
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -24,7 +24,7 @@ const RouteReferrers = (props) => {
 			props.fetchReferrers(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.referrers.sorting, props.referrers.dateRange ])
+	}, [ props.domains.value, props.referrers.sorting, props.referrers.range ])
 
 	const mainView = (() => {
 		if (props.domains.value.length > 0) {
@@ -41,13 +41,9 @@ const RouteReferrers = (props) => {
 					}),
 					h(Select, {
 						disabled: props.referrers.sorting !== REFERRERS_SORTING_TOP,
-						value: props.referrers.dateRange,
-						onChange: (e) => props.setReferrersTopDateRange(e.target.value),
-						items: [
-							{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
-							{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
-							{ value: ALL_TIME.value, label: ALL_TIME.label }
-						]
+						value: props.referrers.range,
+						onChange: (e) => props.setReferrersRange(e.target.value),
+						items: ranges.toArray()
 					})
 				)
 			)
@@ -66,7 +62,7 @@ const RouteReferrers = (props) => {
 					h(CardReferrers, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						dateRange: props.referrers.dateRange,
+						range: props.referrers.range,
 						sorting: props.referrers.sorting,
 						loading: props.referrers.value[domain.data.id] == null ? false : props.referrers.value[domain.data.id].fetching,
 						items: props.referrers.value[domain.data.id] == null ? [] : enhanceReferrers(props.referrers.value[domain.data.id].value)

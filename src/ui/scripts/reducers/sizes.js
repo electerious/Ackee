@@ -5,15 +5,15 @@ import {
 	SET_SIZES_VALUE,
 	SET_SIZES_FETCHING,
 	SET_SIZES_ERROR,
-	SET_SIZES_TOP_DATE_RANGE,
+	SET_SIZES_RANGE,
 	RESET_SIZES
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
-import { LAST_7_DAYS } from '../../../constants/dateRange'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value,
+	range: RANGES_LAST_7_DAYS.value,
 	type: SIZES_TYPE_BROWSER_RESOLUTION,
 	value: {}
 })
@@ -37,10 +37,10 @@ export default produce((draft, action) => {
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
-		case SET_SIZES_TOP_DATE_RANGE:
+		case SET_SIZES_RANGE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.dateRange = action.payload || initialState().dateRange
+			draft.range = action.payload || initialState().range
 			break
 		case SET_SIZES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

@@ -11,7 +11,7 @@
 	background: $card;
 	border-radius: $radius;
 	transform: translate(var(--x, 0), var(--y, 0));
-	box-shadow: $shadow;
+	box-shadow: inset 0 0 0 1px $border, $shadow;
 
 	&.visible {
 		display: grid;

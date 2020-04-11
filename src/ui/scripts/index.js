@@ -18,7 +18,7 @@ import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
 import { initialState as initialDurationsState } from './reducers/durations'
 import { initialState as initialLanguagesState } from './reducers/languages'
-import { initialState as initialOsState } from './reducers/os'
+import { initialState as initialSystemsState } from './reducers/systems'
 import { initialState as initialBrowsersState } from './reducers/browsers'
 import { initialState as initialDevicesState } from './reducers/devices'
 import { initialState as initialSizesState } from './reducers/sizes'
@@ -58,12 +58,12 @@ store.subscribe(() => {
 		},
 		pages: {
 			...initialPagesState(),
-			dateRange: currentState.pages.dateRange,
+			range: currentState.pages.range,
 			sorting: currentState.pages.sorting
 		},
 		referrers: {
 			...initialReferrersState(),
-			dateRange: currentState.referrers.dateRange,
+			range: currentState.referrers.range,
 			sorting: currentState.referrers.sorting
 		},
 		durations: {
@@ -72,30 +72,30 @@ store.subscribe(() => {
 		},
 		languages: {
 			...initialLanguagesState(),
-			dateRange: currentState.languages.dateRange,
+			range: currentState.languages.range,
 			sorting: currentState.languages.sorting
 		},
-		os: {
-			...initialOsState(),
-			dateRange: currentState.os.dateRange,
-			type: currentState.os.type,
-			sorting: currentState.os.sorting
+		systems: {
+			...initialSystemsState(),
+			range: currentState.systems.range,
+			type: currentState.systems.type,
+			sorting: currentState.systems.sorting
 		},
 		browsers: {
 			...initialBrowsersState(),
-			dateRange: currentState.browsers.dateRange,
+			range: currentState.browsers.range,
 			type: currentState.browsers.type,
 			sorting: currentState.browsers.sorting
 		},
 		devices: {
 			...initialDevicesState(),
-			dateRange: currentState.devices.dateRange,
+			range: currentState.devices.range,
 			type: currentState.devices.type,
 			sorting: currentState.devices.sorting
 		},
 		sizes: {
 			...initialSizesState(),
-			dateRange: currentState.sizes.dateRange,
+			range: currentState.sizes.range,
 			type: currentState.sizes.type
 		}
 	})

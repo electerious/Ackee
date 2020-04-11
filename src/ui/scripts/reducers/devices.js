@@ -7,15 +7,15 @@ import {
 	SET_DEVICES_SORTING,
 	SET_DEVICES_VALUE,
 	SET_DEVICES_TYPE,
-	SET_DEVICES_TOP_DATE_RANGE
+	SET_DEVICES_RANGE
 } from '../actions'
 
-import { DEVICES_SORTING_TOP, DEVICES_WITH_MODEL } from '../../../constants/devices'
-import { LAST_7_DAYS } from '../../../constants/dateRange'
+import { DEVICES_SORTING_TOP, DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value,
-	type: DEVICES_WITH_MODEL,
+	range: RANGES_LAST_7_DAYS.value,
+	type: DEVICES_TYPE_WITH_MODEL,
 	sorting: DEVICES_SORTING_TOP,
 	value: {}
 })
@@ -39,10 +39,10 @@ export default produce((draft, action) => {
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
-		case SET_DEVICES_TOP_DATE_RANGE:
+		case SET_DEVICES_RANGE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.dateRange = action.payload || initialState().dateRange
+			draft.range = action.payload || initialState().range
 			break
 		case SET_DEVICES_SORTING:
 			// Reset value because the view shouldn't show the old data when switching

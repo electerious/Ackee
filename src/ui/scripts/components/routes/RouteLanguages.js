@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { LANGUAGES_SORTING_TOP,	LANGUAGES_SORTING_RECENT } from '../../../../constants/languages'
-import { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } from '../../../../constants/dateRange'
+import ranges from '../../../../constants/ranges'
 
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -24,7 +24,7 @@ const RouteLanguages = (props) => {
 			props.fetchLanguages(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.languages.sorting, props.languages.dateRange ])
+	}, [ props.domains.value, props.languages.sorting, props.languages.range ])
 
 	const mainView = (() => {
 		if (props.domains.value.length > 0) {
@@ -40,13 +40,9 @@ const RouteLanguages = (props) => {
 					}),
 					h(Select, {
 						disabled: props.languages.sorting !== LANGUAGES_SORTING_TOP,
-						value: props.languages.dateRange,
-						onChange: (e) => props.setLanguagesTopDateRange(e.target.value),
-						items: [
-							{ value: LAST_7_DAYS.value, label: LAST_7_DAYS.label },
-							{ value: LAST_30_DAYS.value, label: LAST_30_DAYS.label },
-							{ value: ALL_TIME.value, label: ALL_TIME.label }
-						]
+						value: props.languages.range,
+						onChange: (e) => props.setLanguagesRange(e.target.value),
+						items: ranges.toArray()
 					})
 				)
 			)
@@ -65,7 +61,7 @@ const RouteLanguages = (props) => {
 					h(CardLanguages, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						dateRange: props.languages.dateRange,
+						range: props.languages.range,
 						sorting: props.languages.sorting,
 						loading: props.languages.value[domain.data.id] == null ? false : props.languages.value[domain.data.id].fetching,
 						items: props.languages.value[domain.data.id] == null ? [] : enhanceLanguages(props.languages.value[domain.data.id].value)

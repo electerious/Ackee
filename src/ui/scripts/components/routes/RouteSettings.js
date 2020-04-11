@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { version, homepage } from '../../../../../package'
+import { version, homepage, funding } from '../../../../../package'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
@@ -62,6 +62,8 @@ const RouteSettings = (props) => {
 				headline: 'Account'
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
+				h(Line),
+				h(LinkItem, { type: 'a', href: funding.url, target: '_blank', rel: 'noopener' }, 'Donate via PayPal'),
 				h(Line),
 				h(LinkItem, { type: 'button', onClick: () => props.deleteToken(props) }, 'Sign Out')
 			),

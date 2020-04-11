@@ -5,63 +5,63 @@ const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
 const constants = require('../constants/sizes')
 
-const getBrowserWidth = async (id, dateRange) => {
+const getBrowserWidth = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'browserWidth', dateRange)
+		aggregateTopFields(id, 'browserWidth', range)
 	)
 
 }
 
-const getBrowserHeight = async (id, dateRange) => {
+const getBrowserHeight = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'browserHeight', dateRange)
+		aggregateTopFields(id, 'browserHeight', range)
 	)
 
 }
 
-const getBrowserResolution = async (id, dateRange) => {
+const getBrowserResolution = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'browserWidth', 'browserHeight' ], dateRange)
+		aggregateTopFieldsMultiple(id, [ 'browserWidth', 'browserHeight' ], range)
 	)
 
 }
 
-const getScreenWidth = async (id, dateRange) => {
+const getScreenWidth = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'screenWidth', dateRange)
+		aggregateTopFields(id, 'screenWidth', range)
 	)
 
 }
 
-const getScreenHeight = async (id, dateRange) => {
+const getScreenHeight = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'screenHeight', dateRange)
+		aggregateTopFields(id, 'screenHeight', range)
 	)
 
 }
 
-const getScreenResolution = async (id, dateRange) => {
+const getScreenResolution = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'screenWidth', 'screenHeight' ], dateRange)
+		aggregateTopFieldsMultiple(id, [ 'screenWidth', 'screenHeight' ], range)
 	)
 
 }
 
-const get = async (id, type, dateRange) => {
+const get = async (id, type, range) => {
 
 	switch (type) {
-		case constants.SIZES_TYPE_BROWSER_HEIGHT: return getBrowserHeight(id, dateRange)
-		case constants.SIZES_TYPE_BROWSER_RESOLUTION: return getBrowserResolution(id, dateRange)
-		case constants.SIZES_TYPE_BROWSER_WIDTH: return getBrowserWidth(id, dateRange)
-		case constants.SIZES_TYPE_SCREEN_HEIGHT: return getScreenHeight(id, dateRange)
-		case constants.SIZES_TYPE_SCREEN_RESOLUTION: return getScreenResolution(id, dateRange)
-		case constants.SIZES_TYPE_SCREEN_WIDTH: return getScreenWidth(id, dateRange)
+		case constants.SIZES_TYPE_BROWSER_HEIGHT: return getBrowserHeight(id, range)
+		case constants.SIZES_TYPE_BROWSER_RESOLUTION: return getBrowserResolution(id, range)
+		case constants.SIZES_TYPE_BROWSER_WIDTH: return getBrowserWidth(id, range)
+		case constants.SIZES_TYPE_SCREEN_HEIGHT: return getScreenHeight(id, range)
+		case constants.SIZES_TYPE_SCREEN_RESOLUTION: return getScreenResolution(id, range)
+		case constants.SIZES_TYPE_SCREEN_WIDTH: return getScreenWidth(id, range)
 	}
 
 }

@@ -1,8 +1,8 @@
 'use strict'
 
-const dateRangeOffset = require('../utils/dateRangeOffset')
+const offsetByRange = require('../utils/offsetByRange')
 
-module.exports = (id, property, dateRange) => {
+module.exports = (id, property, range) => {
 
 	const aggregate = [
 		{
@@ -31,9 +31,9 @@ module.exports = (id, property, dateRange) => {
 		}
 	]
 
-	const createdDateRange = dateRangeOffset(dateRange)
-	if (createdDateRange) {
-		aggregate[0].$match.created = { $gte: createdDateRange }
+	const dateOffset = offsetByRange(range)
+	if (dateOffset != null) {
+		aggregate[0].$match.created = { $gte: dateOffset }
 	}
 
 	return aggregate

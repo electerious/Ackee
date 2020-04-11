@@ -5,12 +5,12 @@ const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFi
 const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
-const constants = require('../constants/os')
+const constants = require('../constants/systems')
 
-const getTopWithVersion = async (id, dateRange) => {
+const getTopWithVersion = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'osName', 'osVersion' ], dateRange)
+		aggregateTopFieldsMultiple(id, [ 'osName', 'osVersion' ], range)
 	)
 }
 
@@ -21,10 +21,10 @@ const getRecentWithVersion = async (id) => {
 	)
 }
 
-const getTopNoVersion = async (id, dateRange) => {
+const getTopNoVersion = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'osName', dateRange)
+		aggregateTopFields(id, 'osName', range)
 	)
 }
 
@@ -36,13 +36,13 @@ const getRecentNoVersion = async (id) => {
 }
 
 
-const get = async (id, sorting, type, dateRange) => {
+const get = async (id, sorting, type, range) => {
 
 	switch (sorting) {
-		case constants.OS_SORTING_TOP:
-			return type === constants.OS_NO_VERSION ? getTopNoVersion(id, dateRange) : getTopWithVersion(id, dateRange)
-		case constants.OS_SORTING_RECENT:
-			return type === constants.OS_NO_VERSION ? getRecentNoVersion(id) : getRecentWithVersion(id)
+		case constants.SYSTEMS_SORTING_TOP:
+			return type === constants.SYSTEMS_TYPE_NO_VERSION ? getTopNoVersion(id, range) : getTopWithVersion(id, range)
+		case constants.SYSTEMS_SORTING_RECENT:
+			return type === constants.SYSTEMS_TYPE_NO_VERSION ? getRecentNoVersion(id) : getRecentWithVersion(id)
 	}
 
 }

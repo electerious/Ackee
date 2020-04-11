@@ -2,12 +2,12 @@
 
 const { createError } = require('micro')
 
-const devices = require('../database/devices')
-const constants = require('../constants/devices')
+const systems = require('../database/systems')
+const constants = require('../constants/systems')
 const ranges = require('../constants/ranges')
 
 const response = (entry) => ({
-	type: 'device',
+	type: 'systems',
 	data: {
 		id: entry._id,
 		count: entry.count,
@@ -16,7 +16,7 @@ const response = (entry) => ({
 })
 
 const responses = (entries) => ({
-	type: 'devices',
+	type: 'system',
 	data: entries.map(response)
 })
 
@@ -26,20 +26,20 @@ const get = async (req) => {
 	const { sorting, type, range } = req.query
 
 	const sortings = [
-		constants.DEVICES_SORTING_TOP,
-		constants.DEVICES_SORTING_RECENT
+		constants.SYSTEMS_SORTING_TOP,
+		constants.SYSTEMS_SORTING_RECENT
 	]
 
 	const types = [
-		constants.DEVICES_TYPE_WITH_MODEL,
-		constants.DEVICES_TYPE_NO_MODEL
+		constants.SYSTEMS_TYPE_WITH_VERSION,
+		constants.SYSTEMS_TYPE_NO_VERSION
 	]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
 	if (ranges.toValues().includes(range) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await devices.get(domainId, sorting, type, range)
+	const entries = await systems.get(domainId, sorting, type, range)
 
 	return responses(entries)
 

@@ -1,7 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { OS_SORTING_TOP, OS_SORTING_RECENT } from '../../../../constants/os'
+import { SYSTEMS_SORTING_TOP, SYSTEMS_SORTING_RECENT } from '../../../../constants/systems'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -9,18 +9,18 @@ import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
-import dateRangeLabel from '../../utils/dateRangeLabel'
+import rangeLabel from '../../utils/rangeLabel'
 
-const textLabel = (item, dateRange, isRecent) => {
+const textLabel = (item, range, isRecent) => {
 
 	if (item && item.date) return relativeDate(item.date)
 	if (isRecent) return 'Recent'
 
-	return dateRangeLabel(dateRange)
+	return rangeLabel(range)
 
 }
 
-const CardOs = (props) => {
+const CardSystems = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState()
@@ -32,15 +32,15 @@ const CardOs = (props) => {
 
 		if (props.loading === true) return h(PresentationEmptyState, {
 			icon: ICON_LOADING
-		}, 'Loading os')
+		}, 'Loading systems')
 
 		const hasItems = props.items.length > 0
 
-		if (hasItems === true && props.sorting === OS_SORTING_TOP) return h(PresentationCounterList, {
+		if (hasItems === true && props.sorting === SYSTEMS_SORTING_TOP) return h(PresentationCounterList, {
 			items: props.items
 		})
 
-		if (hasItems === true && props.sorting === OS_SORTING_RECENT) return h(PresentationList, {
+		if (hasItems === true && props.sorting === SYSTEMS_SORTING_RECENT) return h(PresentationList, {
 			items: props.items,
 			onEnter,
 			onLeave
@@ -48,7 +48,7 @@ const CardOs = (props) => {
 
 		return h(PresentationEmptyState, {
 			icon: ICON_WARNING
-		}, 'No os')
+		}, 'No systems')
 
 	})()
 
@@ -66,8 +66,8 @@ const CardOs = (props) => {
 					spacing: false
 				}, textLabel(
 					props.items[active],
-					props.dateRange,
-					props.sorting === OS_SORTING_RECENT
+					props.range,
+					props.sorting === SYSTEMS_SORTING_RECENT
 				)),
 				presentation
 			)
@@ -76,12 +76,12 @@ const CardOs = (props) => {
 
 }
 
-CardOs.propTypes = {
+CardSystems.propTypes = {
 	headline: PropTypes.string.isRequired,
-	dateRange: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 
-export default CardOs
+export default CardSystems

@@ -9,14 +9,14 @@ import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
-import dateRangeLabel from '../../utils/dateRangeLabel'
+import rangeLabel from '../../utils/rangeLabel'
 
-const textLabel = (item, dateRange, isRecent) => {
+const textLabel = (item, range, isRecent) => {
 
 	if (item && item.date) return relativeDate(item.date)
 	if (isRecent) return 'Recent'
 
-	return dateRangeLabel(dateRange)
+	return rangeLabel(range)
 
 }
 
@@ -66,7 +66,7 @@ const CardBrowsers = (props) => {
 					spacing: false
 				}, textLabel(
 					props.items[active],
-					props.dateRange,
+					props.range,
 					props.sorting === BROWSERS_SORTING_RECENT
 				)),
 				presentation
@@ -78,7 +78,7 @@ const CardBrowsers = (props) => {
 
 CardBrowsers.propTypes = {
 	headline: PropTypes.string.isRequired,
-	dateRange: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired

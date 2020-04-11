@@ -1,22 +1,22 @@
 import produce from 'immer'
 
 import {
-	SET_OS_ERROR,
-	SET_OS_FETCHING,
-	SET_OS_SORTING,
-	SET_OS_VALUE,
-	SET_OS_TYPE,
-	SET_OS_TOP_DATE_RANGE,
-	RESET_OS
+	SET_SYSTEMS_ERROR,
+	SET_SYSTEMS_FETCHING,
+	SET_SYSTEMS_SORTING,
+	SET_SYSTEMS_VALUE,
+	SET_SYSTEMS_TYPE,
+	SET_SYSTEMS_RANGE,
+	RESET_SYSTEMS
 } from '../actions'
 
-import { OS_SORTING_TOP, OS_NO_VERSION } from '../../../constants/os'
-import { LAST_7_DAYS } from '../../../constants/dateRange'
+import { SYSTEMS_SORTING_TOP, SYSTEMS_TYPE_NO_VERSION } from '../../../constants/systems'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value,
-	type: OS_NO_VERSION,
-	sorting: OS_SORTING_TOP,
+	range: RANGES_LAST_7_DAYS.value,
+	type: SYSTEMS_TYPE_NO_VERSION,
+	sorting: SYSTEMS_SORTING_TOP,
 	value: {}
 })
 
@@ -34,31 +34,31 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_OS_TYPE:
+		case SET_SYSTEMS_TYPE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.type = action.payload || initialState().type
 			break
-		case SET_OS_TOP_DATE_RANGE:
+		case SET_SYSTEMS_RANGE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.dateRange = action.payload || initialState().dateRange
+			draft.range = action.payload || initialState().range
 			break
-		case SET_OS_SORTING:
+		case SET_SYSTEMS_SORTING:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
 			break
-		case SET_OS_VALUE:
+		case SET_SYSTEMS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
-		case SET_OS_FETCHING:
+		case SET_SYSTEMS_FETCHING:
 			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
 			break
-		case SET_OS_ERROR:
+		case SET_SYSTEMS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_OS:
+		case RESET_SYSTEMS:
 			return initialState()
 	}
 

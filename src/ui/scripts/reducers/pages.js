@@ -5,15 +5,15 @@ import {
 	SET_PAGES_VALUE,
 	SET_PAGES_FETCHING,
 	SET_PAGES_ERROR,
-	SET_PAGES_TOP_DATE_RANGE,
+	SET_PAGES_RANGE,
 	RESET_PAGES
 } from '../actions'
 
 import { PAGES_SORTING_TOP } from '../../../constants/pages'
-import { LAST_7_DAYS } from '../../../constants/dateRange'
+import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	dateRange: LAST_7_DAYS.value,
+	range: RANGES_LAST_7_DAYS.value,
 	sorting: PAGES_SORTING_TOP,
 	value: {}
 })
@@ -37,10 +37,10 @@ export default produce((draft, action) => {
 			draft.value = initialState().value
 			draft.sorting = action.payload || initialState().sorting
 			break
-		case SET_PAGES_TOP_DATE_RANGE:
+		case SET_PAGES_RANGE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.dateRange = action.payload || initialState().dateRange
+			draft.range = action.payload || initialState().range
 			break
 		case SET_PAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

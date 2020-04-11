@@ -1,7 +1,7 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_DEVICES_TOP_DATE_RANGE = Symbol()
+export const SET_DEVICES_RANGE = Symbol()
 export const SET_DEVICES_TYPE = Symbol()
 export const SET_DEVICES_SORTING = Symbol()
 export const SET_DEVICES_VALUE = Symbol()
@@ -9,8 +9,8 @@ export const SET_DEVICES_FETCHING = Symbol()
 export const SET_DEVICES_ERROR = Symbol()
 export const RESET_DEVICES = Symbol()
 
-export const setDevicesTopDateRange = (payload) => ({
-	type: SET_DEVICES_TOP_DATE_RANGE,
+export const setDevicesRange = (payload) => ({
+	type: SET_DEVICES_RANGE,
 	payload
 })
 
@@ -53,7 +53,7 @@ export const fetchDevices = signalHandler((signal) => (props, domainId) => async
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/devices?sorting=${ props.devices.sorting }&type=${ props.devices.type }&dateRange=${ props.devices.dateRange }`, {
+		const data = await api(`/domains/${ domainId }/devices?sorting=${ props.devices.sorting }&type=${ props.devices.type }&range=${ props.devices.range }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

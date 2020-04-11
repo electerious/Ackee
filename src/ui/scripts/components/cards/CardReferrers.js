@@ -8,9 +8,9 @@ import Text from '../Text'
 import PresentationIconList from '../presentations/PresentationIconList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
-import dateRangeLabel from '../../utils/dateRangeLabel'
+import rangeLabel from '../../utils/rangeLabel'
 
-const textLabel = (item, dateRange, isRecent, isNew) => {
+const textLabel = (item, range, isRecent, isNew) => {
 
 	if (item && item.date) return relativeDate(item.date)
 	if (item && item.count) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
@@ -18,7 +18,7 @@ const textLabel = (item, dateRange, isRecent, isNew) => {
 	if (isRecent) return 'Recent'
 	if (isNew) return 'New'
 
-	return dateRangeLabel(dateRange)
+	return rangeLabel(range)
 
 }
 
@@ -64,7 +64,7 @@ const CardReferrers = (props) => {
 					spacing: false
 				}, textLabel(
 					props.items[active],
-					props.dateRange,
+					props.range,
 					props.sorting === REFERRERS_SORTING_RECENT,
 					props.sorting === REFERRERS_SORTING_NEW
 				)),
@@ -77,7 +77,7 @@ const CardReferrers = (props) => {
 
 CardReferrers.propTypes = {
 	headline: PropTypes.string.isRequired,
-	dateRange: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }

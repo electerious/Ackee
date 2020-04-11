@@ -4,7 +4,7 @@ const { createError } = require('micro')
 
 const sizes = require('../database/sizes')
 const constants = require('../constants/sizes')
-const { LAST_7_DAYS, LAST_30_DAYS, ALL_TIME } = require('../constants/dateRange')
+const ranges = require('../constants/ranges')
 
 const response = (entry) => ({
 	type: 'size',
@@ -23,7 +23,7 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { type, dateRange = LAST_7_DAYS.value } = req.query
+	const { type, range } = req.query
 
 	const types = [
 		constants.SIZES_TYPE_BROWSER_HEIGHT,
@@ -34,16 +34,10 @@ const get = async (req) => {
 		constants.SIZES_TYPE_SCREEN_WIDTH
 	]
 
-	const dateRanges = [
-		LAST_7_DAYS.value,
-		LAST_30_DAYS.value,
-		ALL_TIME.value
-	]
-
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
-	if (dateRanges.includes(dateRange) === false) throw createError(400, 'Unknown date range')
+	if (ranges.toValues().includes(range) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await sizes.get(domainId, type, dateRange)
+	const entries = await sizes.get(domainId, type, range)
 
 	return responses(entries)
 
