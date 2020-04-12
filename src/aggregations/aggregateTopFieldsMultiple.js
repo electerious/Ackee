@@ -24,7 +24,7 @@ module.exports = (id, properties, range) => {
 			}
 		},
 		{
-			$limit: 40
+			$limit: 30
 		}
 	]
 
