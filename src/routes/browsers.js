@@ -23,7 +23,7 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { sorting, type, range } = req.query
+	const { sorting, type, range = ranges.RANGES_LAST_7_DAYS } = req.query
 
 	const sortings = [
 		constants.BROWSERS_SORTING_TOP,
