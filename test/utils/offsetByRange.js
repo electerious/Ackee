@@ -24,9 +24,9 @@ test('return correct offset for RANGES_LAST_30_DAYS value', async (t) => {
 
 })
 
-test('return null for RANGES_ALL_TIME value', async (t) => {
+test('return null for RANGES_UNLIMITED value', async (t) => {
 
-	const result = offsetByRange(ranges.RANGES_ALL_TIME.value)
+	const result = offsetByRange(ranges.RANGES_UNLIMITED.value)
 
 	t.is(result, null)
 

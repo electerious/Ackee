@@ -23,7 +23,7 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { type, range = ranges.RANGES_LAST_7_DAYS } = req.query
+	const { type, range = ranges.RANGES_LAST_7_DAYS.value } = req.query
 
 	const types = [
 		constants.SIZES_TYPE_BROWSER_HEIGHT,
