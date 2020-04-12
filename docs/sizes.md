@@ -1,9 +1,54 @@
 # Sizes
 
+- [Get browser resolutions](#get-browser-resolutions)
 - [Get browser widths](#get-browser-widths)
 - [Get browser heights](#get-browser-heights)
+- [Get screen resolutions](#get-screen-resolutions)
 - [Get screen widths](#get-screen-widths)
 - [Get screen heights](#get-screen-heights)
+
+## Get browser resolutions
+
+Get the top 30 browser resolutions.
+
+### Request
+
+```
+GET /domains/:domainId/sizes?type=browser_resolution
+GET /domains/:domainId/sizes?type=browser_resolution&range=weekly
+GET /domains/:domainId/sizes?type=browser_resolution&range=monthly
+GET /domains/:domainId/sizes?type=browser_resolution&range=unlimited
+```
+
+### Headers
+
+| Name | Example |
+|:-----------|:------------|
+| Authorization | `Authorization: Bearer :tokenId` |
+
+### Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+	"type": "sizes",
+	"data": [
+		{
+			"type": "size",
+			"data": {
+				"id": {
+					"browserWidth": "1920",
+					"browserHeight": "1080"
+				},
+				"count": 1
+			}
+		}
+	]
+}
+```
 
 ## Get browser widths
 
@@ -78,6 +123,49 @@ Status: 200 OK
 			"type": "size",
 			"data": {
 				"id": "1080",
+				"count": 1
+			}
+		}
+	]
+}
+```
+
+## Get screen resolutions
+
+Get the top 30 screen resolutions.
+
+### Request
+
+```
+GET /domains/:domainId/sizes?type=screen_resolution
+GET /domains/:domainId/sizes?type=screen_resolution&range=weekly
+GET /domains/:domainId/sizes?type=screen_resolution&range=monthly
+GET /domains/:domainId/sizes?type=screen_resolution&range=unlimited
+```
+
+### Headers
+
+| Name | Example |
+|:-----------|:------------|
+| Authorization | `Authorization: Bearer :tokenId` |
+
+### Response
+
+```
+Status: 200 OK
+```
+
+```json
+{
+	"type": "sizes",
+	"data": [
+		{
+			"type": "size",
+			"data": {
+				"id": {
+					"screenWidth": "1920",
+					"screenHeight": "1080"
+				},
 				"count": 1
 			}
 		}
