@@ -1,11 +1,11 @@
 # Browsers
 
-- [Get top browsers without version](#get-top-browsers-without-version)
-- [Get top browsers with version](#get-top-browsers-with-version)
-- [Get recent browsers without version](#get-recent-browsers-without-version)
-- [Get recent browsers with version](#get-recent-browsers-with-version)
+- [Top browsers without version](#top-browsers-without-version)
+- [Top browsers with version](#top-browsers-with-version)
+- [Recent browsers without version](#recent-browsers-without-version)
+- [Recent browsers with version](#recent-browsers-with-version)
 
-## Get top browsers without version
+## Top browsers without version
 
 Get the top 30 browsers without the version.
 
@@ -45,7 +45,7 @@ Status: 200 OK
 }
 ```
 
-## Get top browsers with version
+## Top browsers with version
 
 Get the top 30 browsers with the version.
 
@@ -88,7 +88,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent browsers without version
+## Recent browsers without version
 
 Get the 30 most recent browsers without the version.
 
@@ -125,7 +125,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent browsers with version
+## Recent browsers with version
 
 Get the 30 most recent browsers with the version.
 

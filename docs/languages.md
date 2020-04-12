@@ -1,9 +1,9 @@
 # Languages
 
-- [Get top languages](#get-top-languages)
-- [Get recent languages](#get-recent-languages)
+- [Top languages](#top-languages)
+- [Recent languages](#recent-languages)
 
-## Get top languages
+## Top languages
 
 Get the top 30 user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)).
 
@@ -43,7 +43,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent languages
+## Recent languages
 
 Get the 30 most recent user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)).
 

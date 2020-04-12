@@ -1,11 +1,11 @@
 # Systems
 
-- [Get top systems without version](#get-top-systems-without-version)
-- [Get top systems with version](#get-top-systems-with-version)
-- [Get recent systems without version](#get-recent-systems-without-version)
-- [Get recent systems with version](#get-recent-systems-with-version)
+- [Top systems without version](#top-systems-without-version)
+- [Top systems with version](#top-systems-with-version)
+- [Recent systems without version](#recent-systems-without-version)
+- [Recent systems with version](#recent-systems-with-version)
 
-## Get top systems without version
+## Top systems without version
 
 Get the top 30 systems without the version.
 
@@ -45,7 +45,7 @@ Status: 200 OK
 }
 ```
 
-## Get top systems with version
+## Top systems with version
 
 Get the top 30 systems with the version.
 
@@ -88,7 +88,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent systems without version
+## Recent systems without version
 
 Get the 30 most recent systems without the version.
 
@@ -125,7 +125,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent systems with version
+## Recent systems with version
 
 Get the 30 most recent systems with the version.
 

@@ -1,13 +1,13 @@
 # Sizes
 
-- [Get browser resolutions](#get-browser-resolutions)
-- [Get browser widths](#get-browser-widths)
-- [Get browser heights](#get-browser-heights)
-- [Get screen resolutions](#get-screen-resolutions)
-- [Get screen widths](#get-screen-widths)
-- [Get screen heights](#get-screen-heights)
+- [Browser resolutions](#browser-resolutions)
+- [Browser widths](#browser-widths)
+- [Browser heights](#browser-heights)
+- [Screen resolutions](#screen-resolutions)
+- [Screen widths](#screen-widths)
+- [Screen heights](#screen-heights)
 
-## Get browser resolutions
+## Browser resolutions
 
 Get the top 30 browser resolutions.
 
@@ -50,7 +50,7 @@ Status: 200 OK
 }
 ```
 
-## Get browser widths
+## Browser widths
 
 Get the top 30 browser widths.
 
@@ -90,7 +90,7 @@ Status: 200 OK
 }
 ```
 
-## Get browser heights
+## Browser heights
 
 Get the top 30 browser heights.
 
@@ -130,7 +130,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen resolutions
+## Screen resolutions
 
 Get the top 30 screen resolutions.
 
@@ -173,7 +173,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen widths
+## Screen widths
 
 Get the top 30 screen widths.
 
@@ -213,7 +213,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen heights
+## Screen heights
 
 Get the top 30 screen heights.
 

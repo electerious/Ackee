@@ -1,9 +1,9 @@
 # Pages
 
-- [Get top pages](#get-top-pages)
-- [Get recent pages](#get-recent-pages)
+- [Top pages](#top-pages)
+- [Recent pages](#recent-pages)
 
-## Get top pages
+## Top pages
 
 Get the top 30 pages.
 
@@ -43,7 +43,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent pages
+## Recent pages
 
 Get the 30 most recent page views.
 

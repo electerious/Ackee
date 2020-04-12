@@ -1,11 +1,11 @@
 # Devices
 
-- [Get top devices without model](#get-top-devices-without-model)
-- [Get top devices with model](#get-top-devices-with-model)
-- [Get recent devices without model](#get-recent-devices-without-model)
-- [Get recent devices with model](#get-recent-devices-with-model)
+- [Top devices without model](#top-devices-without-model)
+- [Top devices with model](#top-devices-with-model)
+- [Recent devices without model](#recent-devices-without-model)
+- [Recent devices with model](#recent-devices-with-model)
 
-## Get top devices without model
+## Top devices without model
 
 Get the top 30 devices without the model.
 
@@ -45,7 +45,7 @@ Status: 200 OK
 }
 ```
 
-## Get top devices with model
+## Top devices with model
 
 Get the top 30 devices with the model.
 
@@ -88,7 +88,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent devices without model
+## Recent devices without model
 
 Get the 30 most recent devices without the model.
 
@@ -125,7 +125,7 @@ Status: 200 OK
 }
 ```
 
-## Get recent devices with model
+## Recent devices with model
 
 Get the 30 most recent devices with the model.
 
