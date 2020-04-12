@@ -42,7 +42,7 @@ Status: 200 OK
 
 ## Get recent pages
 
-Get the 30 most recent page views of the last 7 days.
+Get the 30 most recent page views.
 
 ### Request
 
