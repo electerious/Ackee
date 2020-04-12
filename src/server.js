@@ -11,6 +11,7 @@ const customTrackerUrl = require('./utils/customTrackerUrl')
 const requireAuth = require('./middlewares/requireAuth')
 const blockDemo = require('./middlewares/blockDemo')
 const ui = require('./routes/ui')
+const events = require('./routes/events')
 const tokens = require('./routes/tokens')
 const domains = require('./routes/domains')
 const records = require('./routes/records')
@@ -99,6 +100,9 @@ const routes = [
 
 	post('/domains/:domainId/records', records.add),
 	patch('/domains/:domainId/records/:recordId', records.update),
+
+	post('/domains/:domainId/events', events.add),
+	get('/domains/:domainId/events', events.all),
 
 	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
 
