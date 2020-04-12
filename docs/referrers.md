@@ -6,7 +6,7 @@
 
 ## Get top referrers
 
-Get the top 30 referrers of the last 7 days.
+Get the top 30 referrers.
 
 ### Request
 

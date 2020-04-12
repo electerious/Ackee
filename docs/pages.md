@@ -5,7 +5,7 @@
 
 ## Get top pages
 
-Get the top 30 pages of the last 7 days.
+Get the top 30 pages.
 
 ### Request
 
