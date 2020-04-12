@@ -15,7 +15,7 @@ Get the top 30 systems without the version.
 GET /domains/:domainId/systems?sorting=top&type=noVersion
 GET /domains/:domainId/systems?sorting=top&type=noVersion&range=weekly
 GET /domains/:domainId/systems?sorting=top&type=noVersion&range=monthly
-GET /domains/:domainId/systems?sorting=top&type=noVersion&range=unlimited
+GET /domains/:domainId/systems?sorting=top&type=noVersion&range=allTime
 ```
 
 ### Headers
@@ -55,7 +55,7 @@ Get the top 30 systems with the version.
 GET /domains/:domainId/systems?sorting=top&type=withVersion
 GET /domains/:domainId/systems?sorting=top&type=withVersion&range=weekly
 GET /domains/:domainId/systems?sorting=top&type=withVersion&range=monthly
-GET /domains/:domainId/systems?sorting=top&type=withVersion&range=unlimited
+GET /domains/:domainId/systems?sorting=top&type=withVersion&range=allTime
 ```
 
 ### Headers

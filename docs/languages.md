@@ -13,7 +13,7 @@ Get the top 30 user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/L
 GET /domains/:domainId/languages?sorting=top
 GET /domains/:domainId/languages?sorting=top&range=weekly
 GET /domains/:domainId/languages?sorting=top&range=monthly
-GET /domains/:domainId/languages?sorting=top&range=unlimited
+GET /domains/:domainId/languages?sorting=top&range=allTime
 ```
 
 ### Headers

@@ -14,7 +14,7 @@ Get the top 30 referrers.
 GET /domains/:domainId/referrers?sorting=top
 GET /domains/:domainId/referrers?sorting=top&range=weekly
 GET /domains/:domainId/referrers?sorting=top&range=monthly
-GET /domains/:domainId/referrers?sorting=top&range=unlimited
+GET /domains/:domainId/referrers?sorting=top&range=allTime
 ```
 
 ### Headers

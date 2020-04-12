@@ -13,7 +13,7 @@ Get the top 30 pages.
 GET /domains/:domainId/pages?sorting=top
 GET /domains/:domainId/pages?sorting=top&range=weekly
 GET /domains/:domainId/pages?sorting=top&range=monthly
-GET /domains/:domainId/pages?sorting=top&range=unlimited
+GET /domains/:domainId/pages?sorting=top&range=allTime
 ```
 
 ### Headers
