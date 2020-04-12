@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Browser and screen resolutions allow you to view width and height combined (thanks [@RomainCscn](https://github.com/RomainCscn))
 - View the last 7 days, last 30 days or the top entries of all time (thanks [@RomainCscn](https://github.com/RomainCscn))
 
+### Changed
+
+- API returns more entries (25 -> 30)
+
 ## [1.6.1] - 2020-03-25
 
 ### Fixed
