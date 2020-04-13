@@ -37,6 +37,7 @@ Ackee is the right tool for you if Matomo offers more than you need and when you
 
 Ackee and Fathom are very similar. Both in the way they display data and how they process it. The biggest advantages at the moment of writing:
 
+- Ackee is free and open-source
 - Ackee offers a documented REST API that lets you build upon it. The API can be used for custom import scripts or apps that display your current visitor stats in the menu bar. The possibilities are endless.
 - Ackee allows you to track more than just page/site views (browser, system, etc.). This is optional and off by default, but great for people/companies that need more insights.
 
@@ -74,18 +75,6 @@ Examples:
 
 The last 30 page visits of the last 7 days. Sorted by time.
 
-### Referrers > Top referrers
-
-The top 30 pages from which your visitors have come in the last 7 days. Sorted by popularity.
-
-### Referrers > New referrers
-
-Pages from which your visitors have come in the last 7 days. Ignores old referrers. Sorted by time.
-
-### Referrers > Recent referrers
-
-The last 30 pages from which your visitors have come in the last 7 days. Sorted by time.
-
 ### Durations > Average durations
 
 The average time users spend on your sites. Tracked in an interval of 15s. Visits above 30m won't be added to the average, because some visitors keep sites open in the background. This distorts the average and will be omitted.
@@ -93,13 +82,3 @@ The average time users spend on your sites. Tracked in an interval of 15s. Visit
 ### Durations > Detailed durations
 
 The time users spend on your sites, grouped by similar durations in an interval of 15s. This view shows the first 30m and gives you more insides.
-
-### Languages > Top languages
-
-The top 30 user languages of the last 7 days. Sorted by popularity.
-
-The user language is the language of the user's browser.
-
-### Languages > Recent languages
-
-The last 30 user languages from the last 7 days. Sorted by time.

@@ -26,6 +26,19 @@ import RouteSizes from './routes/RouteSizes'
 import RouteSettings from './routes/RouteSettings'
 import Modals from './Modals'
 
+const routesMap = {
+	[ROUTE_VIEWS]: RouteViews,
+	[ROUTE_PAGES]: RoutePages,
+	[ROUTE_REFERRERS]: RouteReferrers,
+	[ROUTE_DURATIONS]: RouteDurations,
+	[ROUTE_SYSTEMS]: RouteSystems,
+	[ROUTE_DEVICES]: RouteDevices,
+	[ROUTE_BROWSERS]: RouteBrowsers,
+	[ROUTE_SIZES]: RouteSizes,
+	[ROUTE_LANGUAGES]: RouteLanguages,
+	[ROUTE_SETTINGS]: RouteSettings
+}
+
 const Dashboard = (props) => {
 
 	return (
@@ -49,16 +62,7 @@ const Dashboard = (props) => {
 				]
 			}),
 			h('main', { className: 'content' },
-				props.route.value === ROUTE_VIEWS && h(RouteViews, props),
-				props.route.value === ROUTE_PAGES && h(RoutePages, props),
-				props.route.value === ROUTE_REFERRERS && h(RouteReferrers, props),
-				props.route.value === ROUTE_DURATIONS && h(RouteDurations, props),
-				props.route.value === ROUTE_SYSTEMS && h(RouteSystems, props),
-				props.route.value === ROUTE_DEVICES && h(RouteDevices, props),
-				props.route.value === ROUTE_BROWSERS && h(RouteBrowsers, props),
-				props.route.value === ROUTE_SIZES && h(RouteSizes, props),
-				props.route.value === ROUTE_LANGUAGES && h(RouteLanguages, props),
-				props.route.value === ROUTE_SETTINGS && h(RouteSettings, props)
+				h(routesMap[props.route.value], props)
 			)
 		)
 	)

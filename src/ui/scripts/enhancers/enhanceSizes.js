@@ -1,10 +1,10 @@
 const getText = ({ id }) => {
 
-	const isScreenResolution = id.screenHeight != null && id.screenWidth != null
+	const isScreenResolution = id.screenWidth != null && id.screenHeight != null
 	const isBrowserResolution = id.browserWidth != null && id.browserHeight != null
 
-	if (isScreenResolution === true) return `${ id.screenWidth } x ${ id.screenHeight }px`
-	if (isBrowserResolution === true) return `${ id.browserWidth } x ${ id.browserHeight }px`
+	if (isScreenResolution === true) return `${ id.screenWidth }px x ${ id.screenHeight }px`
+	if (isBrowserResolution === true) return `${ id.browserWidth }px x ${ id.browserHeight }px`
 
 	return `${ id }px`
 

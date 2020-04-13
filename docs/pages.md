@@ -1,16 +1,20 @@
 # Pages
 
-- [Get top pages](#get-top-pages)
-- [Get recent pages](#get-recent-pages)
+- [Top pages](#top-pages)
+- [Recent pages](#recent-pages)
 
-## Get top pages
+## Top pages
 
-Get the top 30 pages of the last 7 days.
+Get the top 30 pages.
 
 ### Request
 
 ```
 GET /domains/:domainId/pages?sorting=top
+GET /domains/:domainId/pages?sorting=top&range=daily
+GET /domains/:domainId/pages?sorting=top&range=weekly
+GET /domains/:domainId/pages?sorting=top&range=monthly
+GET /domains/:domainId/pages?sorting=top&range=allTime
 ```
 
 ### Headers
@@ -40,9 +44,9 @@ Status: 200 OK
 }
 ```
 
-## Get recent pages
+## Recent pages
 
-Get the 30 most recent page views of the last 7 days.
+Get the 30 most recent page views.
 
 ### Request
 

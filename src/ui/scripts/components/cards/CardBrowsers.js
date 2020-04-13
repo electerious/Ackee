@@ -48,7 +48,7 @@ const CardBrowsers = (props) => {
 
 		return h(PresentationEmptyState, {
 			icon: ICON_WARNING
-		}, 'No browser')
+		}, 'No browsers')
 
 	})()
 
