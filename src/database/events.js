@@ -8,9 +8,14 @@ const add = async (data) => {
 
 }
 
-const all = async () => {
-
+const get = async (id) => {
+	console.log(id)
 	return Event.aggregate([
+		{
+			$match: {
+				domainId: id
+			}
+		},
 		{
 			$addFields: {
 				insensitive: {
@@ -29,5 +34,5 @@ const all = async () => {
 
 module.exports = {
 	add,
-	all
+	get
 }

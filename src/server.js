@@ -102,7 +102,7 @@ const routes = [
 	patch('/domains/:domainId/records/:recordId', records.update),
 
 	post('/domains/:domainId/events', events.add),
-	get('/domains/:domainId/events', events.all),
+	get('/domains/:domainId/events', events.get),
 
 	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
 

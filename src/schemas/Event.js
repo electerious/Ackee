@@ -10,6 +10,13 @@ const schema = new mongoose.Schema({
 		unique: true,
 		default: uuid
 	},
+	clientId: {
+		type: String
+	},
+	domainId: {
+		type: String,
+		required: true
+	},
 	category: {
 		type: String,
 		required: true
