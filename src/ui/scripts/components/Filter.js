@@ -259,28 +259,21 @@ const Filter = (props) => {
 						description: 'Recent systems',
 						active: props.systems.sorting === systems.SYSTEMS_SORTING_RECENT,
 						onClick: () => props.setSystemsSorting(systems.SYSTEMS_SORTING_RECENT)
-					}
-				]
-			},
-			{
-				label: ({
-					[systems.SYSTEMS_TYPE_NO_VERSION]: 'No version',
-					[systems.SYSTEMS_TYPE_WITH_VERSION]: 'With version'
-				})[props.systems.type],
-				items: [
+					},
 					{
-						type: BUTTON,
-						label: 'No version',
-						description: 'Don\'t include version',
-						active: props.systems.type === systems.SYSTEMS_TYPE_NO_VERSION,
-						onClick: () => props.setSystemsType(systems.SYSTEMS_TYPE_NO_VERSION)
+						type: SEPARATOR
 					},
 					{
 						type: BUTTON,
-						label: 'With version',
-						description: 'Include version',
-						active: props.systems.type === systems.SYSTEMS_TYPE_WITH_VERSION,
-						onClick: () => props.setSystemsType(systems.SYSTEMS_TYPE_WITH_VERSION)
+						label: ({
+							[systems.SYSTEMS_TYPE_NO_VERSION]: 'Show version',
+							[systems.SYSTEMS_TYPE_WITH_VERSION]: 'Hide version'
+						})[props.systems.type],
+						description: ({
+							[systems.SYSTEMS_TYPE_NO_VERSION]: 'Include system version',
+							[systems.SYSTEMS_TYPE_WITH_VERSION]: 'Don\'t include version'
+						})[props.systems.type],
+						onClick: () => props.setSystemsType(props.systems.type === systems.SYSTEMS_TYPE_NO_VERSION ? systems.SYSTEMS_TYPE_WITH_VERSION : systems.SYSTEMS_TYPE_NO_VERSION)
 					}
 				]
 			},
@@ -306,28 +299,21 @@ const Filter = (props) => {
 						description: 'Recent systems',
 						active: props.devices.sorting === devices.DEVICES_SORTING_RECENT,
 						onClick: () => props.setDevicesSorting(devices.DEVICES_SORTING_RECENT)
-					}
-				]
-			},
-			{
-				label: ({
-					[devices.DEVICES_TYPE_NO_MODEL]: 'No version',
-					[devices.DEVICES_TYPE_WITH_MODEL]: 'With version'
-				})[props.devices.type],
-				items: [
+					},
 					{
-						type: BUTTON,
-						label: 'No model',
-						description: 'Don\'t include model',
-						active: props.devices.type === devices.DEVICES_TYPE_NO_MODEL,
-						onClick: () => props.setDevicesType(devices.DEVICES_TYPE_NO_MODEL)
+						type: SEPARATOR
 					},
 					{
 						type: BUTTON,
-						label: 'With model',
-						description: 'Include model',
-						active: props.devices.type === devices.DEVICES_TYPE_WITH_MODEL,
-						onClick: () => props.setDevicesType(devices.DEVICES_TYPE_WITH_MODEL)
+						label: ({
+							[devices.DEVICES_TYPE_NO_MODEL]: 'Show model',
+							[devices.DEVICES_TYPE_WITH_MODEL]: 'Hide model'
+						})[props.devices.type],
+						description: ({
+							[devices.DEVICES_TYPE_NO_MODEL]: 'Include device model',
+							[devices.DEVICES_TYPE_WITH_MODEL]: 'Don\'t include model'
+						})[props.devices.type],
+						onClick: () => props.setDevicesType(props.devices.type === devices.DEVICES_TYPE_NO_MODEL ? devices.DEVICES_TYPE_WITH_MODEL : devices.DEVICES_TYPE_NO_MODEL)
 					}
 				]
 			},
@@ -353,28 +339,21 @@ const Filter = (props) => {
 						description: 'Recent systems',
 						active: props.browsers.sorting === browsers.BROWSERS_SORTING_RECENT,
 						onClick: () => props.setBrowsersSorting(browsers.BROWSERS_SORTING_RECENT)
-					}
-				]
-			},
-			{
-				label: ({
-					[browsers.BROWSERS_TYPE_NO_VERSION]: 'No version',
-					[browsers.BROWSERS_TYPE_WITH_VERSION]: 'With version'
-				})[props.browsers.type],
-				items: [
+					},
 					{
-						type: BUTTON,
-						label: 'No version',
-						description: 'Don\'t include version',
-						active: props.browsers.type === browsers.BROWSERS_TYPE_NO_VERSION,
-						onClick: () => props.setBrowsersType(browsers.BROWSERS_TYPE_NO_VERSION)
+						type: SEPARATOR
 					},
 					{
 						type: BUTTON,
-						label: 'With version',
-						description: 'Include version',
-						active: props.browsers.type === browsers.BROWSERS_TYPE_WITH_VERSION,
-						onClick: () => props.setBrowsersType(browsers.BROWSERS_TYPE_WITH_VERSION)
+						label: ({
+							[browsers.BROWSERS_TYPE_NO_VERSION]: 'Show version',
+							[browsers.BROWSERS_TYPE_WITH_VERSION]: 'Hide version'
+						})[props.browsers.type],
+						description: ({
+							[browsers.BROWSERS_TYPE_NO_VERSION]: 'Include browser version',
+							[browsers.BROWSERS_TYPE_WITH_VERSION]: 'Don\'t include version'
+						})[props.browsers.type],
+						onClick: () => props.setBrowsersType(props.browsers.type === browsers.BROWSERS_TYPE_NO_VERSION ? browsers.BROWSERS_TYPE_WITH_VERSION : browsers.BROWSERS_TYPE_NO_VERSION)
 					}
 				]
 			},
@@ -400,15 +379,13 @@ const Filter = (props) => {
 					},
 					{
 						type: BUTTON,
-						label: 'Browser widths',
-						description: 'Width only',
+						label: '↳ widths',
 						active: props.sizes.type === sizes.SIZES_TYPE_BROWSER_WIDTH,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_BROWSER_WIDTH)
 					},
 					{
 						type: BUTTON,
-						label: 'Browser heights',
-						description: 'Height only',
+						label: '↳ heights',
 						active: props.sizes.type === sizes.SIZES_TYPE_BROWSER_HEIGHT,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_BROWSER_HEIGHT)
 					},
@@ -424,15 +401,13 @@ const Filter = (props) => {
 					},
 					{
 						type: BUTTON,
-						label: 'Screen widths',
-						description: 'Width only',
+						label: '↳ widths',
 						active: props.sizes.type === sizes.SIZES_TYPE_SCREEN_WIDTH,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_SCREEN_WIDTH)
 					},
 					{
 						type: BUTTON,
-						label: 'Screen heights',
-						description: 'Height only',
+						label: '↳ heights',
 						active: props.sizes.type === sizes.SIZES_TYPE_SCREEN_HEIGHT,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_SCREEN_HEIGHT)
 					}
