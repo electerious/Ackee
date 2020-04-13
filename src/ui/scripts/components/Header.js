@@ -14,7 +14,6 @@ const Spinner = (props) => {
 		h('div', {
 			className: classNames({
 				'header__spinner': true,
-				'header__spinner--black': props.color === 'black',
 				'header__spinner--white': props.color === 'white',
 				'header__spinner--primary': props.color === 'primary',
 				'header__spinner--visible': props.fetching === true
@@ -30,7 +29,6 @@ const Logo = (props) => {
 
 	return (
 		h('div', { className: 'header__logo' },
-			h(Spinner, { color: 'black', fetching }),
 			h(Spinner, { color: 'white', fetching }),
 			h(Spinner, { color: 'primary', fetching })
 		)
