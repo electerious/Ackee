@@ -25,11 +25,12 @@
 	}
 
 	&__button {
-		padding: $gutter/5 $gutter*1.2;
+		padding: $gutter/3 $gutter*1.2;
 		padding-right: $gutter*3;
 		color: currentColor;
 		text-align: left;
 		transition: color .3s ease, background .2s ease;
+		line-height: 1.4;
 		outline: none;
 
 		&.active {
@@ -46,7 +47,6 @@
 		padding: $gutter/2 $gutter/1.6;
 		padding-right: $gutter*3;
 		color: $white;
-		// transition: background .2s ease;
 		border-radius: $radius;
 
 		&.active {
