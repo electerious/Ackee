@@ -9,7 +9,7 @@ import Modal from './modals/Modal'
 import ModalDomainEdit from './modals/ModalDomainEdit'
 import ModalDomainAdd from './modals/ModalDomainAdd'
 
-const Message = (props) => {
+const Modals = (props) => {
 
 	const modals = Object.entries(props.modals.value).map(([ modalId, modalData ]) => {
 
@@ -41,4 +41,4 @@ const Message = (props) => {
 
 }
 
-export default Message
+export default Modals
