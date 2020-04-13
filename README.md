@@ -106,5 +106,6 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
 - [Soapberry](https://wordpress.org/plugins/soapberry/) - WordPress plugin for Ackee
+- [Ackee-PHP](https://github.com/BrookeDot/ackee-php) - A PHP Class for Ackee
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
