@@ -1,13 +1,13 @@
 # Sizes
 
-- [Get browser resolutions](#get-browser-resolutions)
-- [Get browser widths](#get-browser-widths)
-- [Get browser heights](#get-browser-heights)
-- [Get screen resolutions](#get-screen-resolutions)
-- [Get screen widths](#get-screen-widths)
-- [Get screen heights](#get-screen-heights)
+- [Browser resolutions](#browser-resolutions)
+- [Browser widths](#browser-widths)
+- [Browser heights](#browser-heights)
+- [Screen resolutions](#screen-resolutions)
+- [Screen widths](#screen-widths)
+- [Screen heights](#screen-heights)
 
-## Get browser resolutions
+## Browser resolutions
 
 Get the top 30 browser resolutions.
 
@@ -15,9 +15,10 @@ Get the top 30 browser resolutions.
 
 ```
 GET /domains/:domainId/sizes?type=browser_resolution
+GET /domains/:domainId/sizes?type=browser_resolution&range=daily
 GET /domains/:domainId/sizes?type=browser_resolution&range=weekly
 GET /domains/:domainId/sizes?type=browser_resolution&range=monthly
-GET /domains/:domainId/sizes?type=browser_resolution&range=unlimited
+GET /domains/:domainId/sizes?type=browser_resolution&range=allTime
 ```
 
 ### Headers
@@ -50,7 +51,7 @@ Status: 200 OK
 }
 ```
 
-## Get browser widths
+## Browser widths
 
 Get the top 30 browser widths.
 
@@ -58,9 +59,10 @@ Get the top 30 browser widths.
 
 ```
 GET /domains/:domainId/sizes?type=browser_width
+GET /domains/:domainId/sizes?type=browser_width&range=daily
 GET /domains/:domainId/sizes?type=browser_width&range=weekly
 GET /domains/:domainId/sizes?type=browser_width&range=monthly
-GET /domains/:domainId/sizes?type=browser_width&range=unlimited
+GET /domains/:domainId/sizes?type=browser_width&range=allTime
 ```
 
 ### Headers
@@ -90,7 +92,7 @@ Status: 200 OK
 }
 ```
 
-## Get browser heights
+## Browser heights
 
 Get the top 30 browser heights.
 
@@ -98,9 +100,10 @@ Get the top 30 browser heights.
 
 ```
 GET /domains/:domainId/sizes?type=browser_height
+GET /domains/:domainId/sizes?type=browser_height&range=daily
 GET /domains/:domainId/sizes?type=browser_height&range=weekly
 GET /domains/:domainId/sizes?type=browser_height&range=monthly
-GET /domains/:domainId/sizes?type=browser_height&range=unlimited
+GET /domains/:domainId/sizes?type=browser_height&range=allTime
 ```
 
 ### Headers
@@ -130,7 +133,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen resolutions
+## Screen resolutions
 
 Get the top 30 screen resolutions.
 
@@ -138,9 +141,10 @@ Get the top 30 screen resolutions.
 
 ```
 GET /domains/:domainId/sizes?type=screen_resolution
+GET /domains/:domainId/sizes?type=screen_resolution&range=daily
 GET /domains/:domainId/sizes?type=screen_resolution&range=weekly
 GET /domains/:domainId/sizes?type=screen_resolution&range=monthly
-GET /domains/:domainId/sizes?type=screen_resolution&range=unlimited
+GET /domains/:domainId/sizes?type=screen_resolution&range=allTime
 ```
 
 ### Headers
@@ -173,7 +177,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen widths
+## Screen widths
 
 Get the top 30 screen widths.
 
@@ -181,9 +185,10 @@ Get the top 30 screen widths.
 
 ```
 GET /domains/:domainId/sizes?type=screen_width
+GET /domains/:domainId/sizes?type=screen_width&range=daily
 GET /domains/:domainId/sizes?type=screen_width&range=weekly
 GET /domains/:domainId/sizes?type=screen_width&range=monthly
-GET /domains/:domainId/sizes?type=screen_width&range=unlimited
+GET /domains/:domainId/sizes?type=screen_width&range=allTime
 ```
 
 ### Headers
@@ -213,7 +218,7 @@ Status: 200 OK
 }
 ```
 
-## Get screen heights
+## Screen heights
 
 Get the top 30 screen heights.
 
@@ -221,9 +226,10 @@ Get the top 30 screen heights.
 
 ```
 GET /domains/:domainId/sizes?type=height
+GET /domains/:domainId/sizes?type=height&range=daily
 GET /domains/:domainId/sizes?type=height&range=weekly
 GET /domains/:domainId/sizes?type=height&range=monthly
-GET /domains/:domainId/sizes?type=height&range=unlimited
+GET /domains/:domainId/sizes?type=height&range=allTime
 ```
 
 ### Headers

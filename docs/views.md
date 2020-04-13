@@ -1,9 +1,9 @@
 # Views
 
-- [Get unique site views](#get-unique-site-views)
-- [Get total page views](#get-total-page-views)
+- [Unique site views](#unique-site-views)
+- [Total page views](#total-page-views)
 
-## Get unique site views
+## Unique site views
 
 Get the unique amount of visits per day, month or year for the last 14 intervals. Entries without views are omitted. A user is unique when he visits a site for the first time a day.
 
@@ -46,7 +46,7 @@ Status: 200 OK
 }
 ```
 
-## Get total page views
+## Total page views
 
 Get the total amount of visits per day, month or year for the last 14 intervals. Entries without views are omitted.
 

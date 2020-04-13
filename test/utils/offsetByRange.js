@@ -8,6 +8,14 @@ const ranges = require('../../src/constants/ranges')
 const zeroDate = require('../../src/utils/zeroDate')
 const offsetByRange = require('../../src/utils/offsetByRange')
 
+test('return correct offset for RANGES_LAST_24_HOURS value', async (t) => {
+
+	const result = offsetByRange(ranges.RANGES_LAST_24_HOURS.value)
+
+	t.deepEqual(result, subDays(zeroDate(), 1))
+
+})
+
 test('return correct offset for RANGES_LAST_7_DAYS value', async (t) => {
 
 	const result = offsetByRange(ranges.RANGES_LAST_7_DAYS.value)
@@ -24,9 +32,9 @@ test('return correct offset for RANGES_LAST_30_DAYS value', async (t) => {
 
 })
 
-test('return null for RANGES_UNLIMITED value', async (t) => {
+test('return null for RANGES_ALL_TIME value', async (t) => {
 
-	const result = offsetByRange(ranges.RANGES_UNLIMITED.value)
+	const result = offsetByRange(ranges.RANGES_ALL_TIME.value)
 
 	t.is(result, null)
 
