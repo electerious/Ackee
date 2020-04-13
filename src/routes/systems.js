@@ -37,7 +37,7 @@ const get = async (req) => {
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
-	if (ranges.toValues().includes(range) === false) throw createError(400, 'Unknown range')
+	if (ranges.toArray().includes(range) === false) throw createError(400, 'Unknown range')
 
 	const entries = await systems.get(domainId, sorting, type, range)
 
