@@ -1,7 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { SIZES_TYPE_BROWSER_HEIGHT, SIZES_TYPE_BROWSER_RESOLUTION, SIZES_TYPE_BROWSER_WIDTH, SIZES_TYPE_SCREEN_HEIGHT, SIZES_TYPE_SCREEN_RESOLUTION, SIZES_TYPE_SCREEN_WIDTH } from '../../../../constants/sizes'
-import ranges from '../../../../constants/ranges'
 
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +22,7 @@ const RouteSizes = (props) => {
 			props.fetchSizes(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.sizes.type, props.sizes.range ])
+	}, [ props.filter.range, props.domains.value, props.sizes.type ])
 
 	return (
 		h(Fragment, {},
@@ -40,11 +39,6 @@ const RouteSizes = (props) => {
 						{ value: SIZES_TYPE_SCREEN_HEIGHT, label: 'Screen heights' },
 						{ value: SIZES_TYPE_SCREEN_WIDTH, label: 'Screen widths' }
 					]
-				}),
-				h(Select, {
-					value: props.sizes.range,
-					onChange: (e) => props.setSizesRange(e.target.value),
-					items: ranges.toArray()
 				})
 			),
 

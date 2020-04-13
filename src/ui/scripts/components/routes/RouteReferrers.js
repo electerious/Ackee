@@ -1,7 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { REFERRERS_SORTING_TOP, REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
-import ranges from '../../../../constants/ranges'
 
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +22,7 @@ const RouteReferrers = (props) => {
 			props.fetchReferrers(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.referrers.sorting, props.referrers.range ])
+	}, [ props.filter.range, props.domains.value, props.referrers.sorting ])
 
 	return (
 		h(Fragment, {},
@@ -37,12 +36,6 @@ const RouteReferrers = (props) => {
 						{ value: REFERRERS_SORTING_NEW, label: 'New referrers' },
 						{ value: REFERRERS_SORTING_RECENT, label: 'Recent referrers' }
 					]
-				}),
-				h(Select, {
-					disabled: props.referrers.sorting !== REFERRERS_SORTING_TOP,
-					value: props.referrers.range,
-					onChange: (e) => props.setReferrersRange(e.target.value),
-					items: ranges.toArray()
 				})
 			),
 

@@ -1,18 +1,12 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_BROWSERS_RANGE = Symbol()
 export const SET_BROWSERS_TYPE = Symbol()
 export const SET_BROWSERS_SORTING = Symbol()
 export const SET_BROWSERS_VALUE = Symbol()
 export const SET_BROWSERS_FETCHING = Symbol()
 export const SET_BROWSERS_ERROR = Symbol()
 export const RESET_BROWSERS = Symbol()
-
-export const setBrowsersRange = (payload) => ({
-	type: SET_BROWSERS_RANGE,
-	payload
-})
 
 export const setBrowsersSorting = (payload) => ({
 	type: SET_BROWSERS_SORTING,
@@ -53,7 +47,7 @@ export const fetchBrowsers = signalHandler((signal) => (props, domainId) => asyn
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/browsers?sorting=${ props.browsers.sorting }&type=${ props.browsers.type }&range=${ props.browsers.range }`, {
+		const data = await api(`/domains/${ domainId }/browsers?sorting=${ props.browsers.sorting }&type=${ props.browsers.type }&range=${ props.filter.range }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

@@ -18,8 +18,9 @@ const Context = (props) => {
 		h('div', {
 			ref,
 			className: classNames({
-				context: true,
-				visible: measurement != null
+				'context': true,
+				'context--floating': props.floating === true,
+				'visible': measurement != null
 			}),
 			style: {
 				'--top': runWhenDefined(props.top, measurement),
@@ -34,15 +35,18 @@ const Context = (props) => {
 				h('button', {
 					key: item.label + index,
 					className: classNames({
-						'context__button': true,
-						'link': true,
-						'color-white': item.active === true
+						context__button: true,
+						active: item.active === true,
+						link: true
 					}),
 					onClick: (e) => {
 						item.onClick(e)
 						props.onItemClick(e)
 					}
-				}, item.label)
+				},
+					h('div', {}, item.label),
+					item.description != null && h('div', { className: 'context__description' }, item.description)
+				)
 			))
 		),
 		document.body
@@ -60,6 +64,7 @@ Context.propTypes = {
 	left: PropTypes.func,
 	x: PropTypes.string,
 	y: PropTypes.string,
+	floating: PropTypes.bool,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onItemClick: PropTypes.func.isRequired,
 	onAwayClick: PropTypes.func.isRequired

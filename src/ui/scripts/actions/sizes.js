@@ -1,17 +1,11 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_SIZES_RANGE = Symbol()
 export const SET_SIZES_TYPE = Symbol()
 export const SET_SIZES_VALUE = Symbol()
 export const SET_SIZES_FETCHING = Symbol()
 export const SET_SIZES_ERROR = Symbol()
 export const RESET_SIZES = Symbol()
-
-export const setSizesRange = (payload) => ({
-	type: SET_SIZES_RANGE,
-	payload
-})
 
 export const setSizesType = (payload) => ({
 	type: SET_SIZES_TYPE,
@@ -47,7 +41,7 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/sizes?type=${ props.sizes.type }&range=${ props.sizes.range }`, {
+		const data = await api(`/domains/${ domainId }/sizes?type=${ props.sizes.type }&range=${ props.filter.range }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

@@ -1,18 +1,12 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_SYSTEMS_RANGE = Symbol()
 export const SET_SYSTEMS_TYPE = Symbol()
 export const SET_SYSTEMS_SORTING = Symbol()
 export const SET_SYSTEMS_VALUE = Symbol()
 export const SET_SYSTEMS_FETCHING = Symbol()
 export const SET_SYSTEMS_ERROR = Symbol()
 export const RESET_SYSTEMS = Symbol()
-
-export const setSystemsRange = (payload) => ({
-	type: SET_SYSTEMS_RANGE,
-	payload
-})
 
 export const setSystemsSorting = (payload) => ({
 	type: SET_SYSTEMS_SORTING,
@@ -53,7 +47,7 @@ export const fetchSystems = signalHandler((signal) => (props, domainId) => async
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/systems?sorting=${ props.systems.sorting }&type=${ props.systems.type }&range=${ props.systems.range }`, {
+		const data = await api(`/domains/${ domainId }/systems?sorting=${ props.systems.sorting }&type=${ props.systems.type }&range=${ props.filter.range }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

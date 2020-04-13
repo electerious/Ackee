@@ -1,7 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { LANGUAGES_SORTING_TOP,	LANGUAGES_SORTING_RECENT } from '../../../../constants/languages'
-import ranges from '../../../../constants/ranges'
 
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +22,7 @@ const RouteLanguages = (props) => {
 			props.fetchLanguages(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.languages.sorting, props.languages.range ])
+	}, [ props.filter.range, props.domains.value, props.languages.sorting ])
 
 	return (
 		h(Fragment, {},
@@ -36,12 +35,6 @@ const RouteLanguages = (props) => {
 						{ value: LANGUAGES_SORTING_TOP, label: 'Top languages' },
 						{ value: LANGUAGES_SORTING_RECENT, label: 'Recent languages' }
 					]
-				}),
-				h(Select, {
-					disabled: props.languages.sorting !== LANGUAGES_SORTING_TOP,
-					value: props.languages.range,
-					onChange: (e) => props.setLanguagesRange(e.target.value),
-					items: ranges.toArray()
 				})
 			),
 

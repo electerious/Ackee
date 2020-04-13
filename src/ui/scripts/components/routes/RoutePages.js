@@ -1,13 +1,9 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { PAGES_SORTING_TOP,	PAGES_SORTING_RECENT } from '../../../../constants/pages'
-import ranges from '../../../../constants/ranges'
-
 import enhancePages from '../../enhancers/enhancePages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardPages from '../cards/CardPages'
-import Select from '../Select'
 
 const RoutePages = (props) => {
 
@@ -23,27 +19,10 @@ const RoutePages = (props) => {
 			props.fetchPages(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.pages.sorting, props.pages.range ])
+	}, [ props.filter.range, props.domains.value, props.pages.sorting ])
 
 	return (
 		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.pages.sorting,
-					onChange: (e) => props.setPagesSorting(e.target.value),
-					items: [
-						{ value: PAGES_SORTING_TOP, label: 'Top pages' },
-						{ value: PAGES_SORTING_RECENT, label: 'Recent pages' }
-					]
-				}),
-				h(Select, {
-					disabled: props.pages.sorting !== PAGES_SORTING_TOP,
-					value: props.pages.range,
-					onChange: (e) => props.setPagesRange(e.target.value),
-					items: ranges.toArray()
-				})
-			),
 
 			props.domains.value.map(
 				(domain) => (

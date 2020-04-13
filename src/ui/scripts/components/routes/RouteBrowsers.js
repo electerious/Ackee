@@ -1,7 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_SORTING_RECENT, BROWSERS_TYPE_NO_VERSION, BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
-import ranges from '../../../../constants/ranges'
 
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -23,7 +22,7 @@ const RouteBrowsers = (props) => {
 			props.fetchBrowsers(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.browsers.sorting, props.browsers.type, props.browsers.range ])
+	}, [ props.filter.range, props.domains.value, props.browsers.sorting, props.browsers.type ])
 
 	return (
 		h(Fragment, {},
@@ -44,12 +43,6 @@ const RouteBrowsers = (props) => {
 						{ value: BROWSERS_TYPE_NO_VERSION, label: 'No version' },
 						{ value: BROWSERS_TYPE_WITH_VERSION, label: 'With version' }
 					]
-				}),
-				h(Select, {
-					disabled: props.browsers.sorting !== BROWSERS_SORTING_TOP,
-					value: props.browsers.range,
-					onChange: (e) => props.setBrowsersRange(e.target.value),
-					items: ranges.toArray()
 				})
 			),
 
