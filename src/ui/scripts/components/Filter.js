@@ -65,35 +65,35 @@ const Filter = (props) => {
 
 	const rangeButton = {
 		label: ({
-			[ranges.RANGES_LAST_24_HOURS.value]: '24 hours',
-			[ranges.RANGES_LAST_7_DAYS.value]: '7 days',
-			[ranges.RANGES_LAST_30_DAYS.value]: '30 days',
-			[ranges.RANGES_ALL_TIME.value]: 'All time'
+			[ranges.RANGES_LAST_24_HOURS]: '24 hours',
+			[ranges.RANGES_LAST_7_DAYS]: '7 days',
+			[ranges.RANGES_LAST_30_DAYS]: '30 days',
+			[ranges.RANGES_ALL_TIME]: 'All time'
 		})[props.filter.range],
 		items: [
 			{
 				label: '24 hours',
 				description: 'Show last 24 hours',
-				active: props.filter.range === ranges.RANGES_LAST_24_HOURS.value,
-				onClick: () => props.setFilterRange(ranges.RANGES_LAST_24_HOURS.value)
+				active: props.filter.range === ranges.RANGES_LAST_24_HOURS,
+				onClick: () => props.setFilterRange(ranges.RANGES_LAST_24_HOURS)
 			},
 			{
 				label: '7 days',
 				description: 'Show last 7 days',
-				active: props.filter.range === ranges.RANGES_LAST_7_DAYS.value,
-				onClick: () => props.setFilterRange(ranges.RANGES_LAST_7_DAYS.value)
+				active: props.filter.range === ranges.RANGES_LAST_7_DAYS,
+				onClick: () => props.setFilterRange(ranges.RANGES_LAST_7_DAYS)
 			},
 			{
 				label: '30 days',
 				description: 'Show last 30 days',
-				active: props.filter.range === ranges.RANGES_LAST_30_DAYS.value,
-				onClick: () => props.setFilterRange(ranges.RANGES_LAST_30_DAYS.value)
+				active: props.filter.range === ranges.RANGES_LAST_30_DAYS,
+				onClick: () => props.setFilterRange(ranges.RANGES_LAST_30_DAYS)
 			},
 			{
 				label: 'All time',
 				description: 'Show all data',
-				active: props.filter.range === ranges.RANGES_ALL_TIME.value,
-				onClick: () => props.setFilterRange(ranges.RANGES_ALL_TIME.value)
+				active: props.filter.range === ranges.RANGES_ALL_TIME,
+				onClick: () => props.setFilterRange(ranges.RANGES_ALL_TIME)
 			}
 		]
 	}

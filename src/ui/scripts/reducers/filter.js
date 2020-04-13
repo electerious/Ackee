@@ -7,7 +7,7 @@ import {
 import { RANGES_LAST_7_DAYS } from '../../../constants/ranges'
 
 export const initialState = () => ({
-	range: RANGES_LAST_7_DAYS.value
+	range: RANGES_LAST_7_DAYS
 })
 
 export default produce((draft, action) => {

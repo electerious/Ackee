@@ -23,7 +23,7 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { type, range = ranges.RANGES_LAST_7_DAYS.value } = req.query
+	const { type, range = ranges.RANGES_LAST_7_DAYS } = req.query
 
 	const types = [
 		constants.SIZES_TYPE_BROWSER_HEIGHT,
@@ -35,7 +35,7 @@ const get = async (req) => {
 	]
 
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
-	if (ranges.toValues().includes(range) === false) throw createError(400, 'Unknown date range')
+	if (ranges.toArray().includes(range) === false) throw createError(400, 'Unknown range')
 
 	const entries = await sizes.get(domainId, type, range)
 
