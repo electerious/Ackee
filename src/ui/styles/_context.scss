@@ -6,7 +6,7 @@
 	right: var(--right);
 	bottom: var(--bottom);
 	left: var(--left);
-	padding: $gutter/1.5 0;
+	padding: $gutter/2 0;
 	min-width: 170px;
 	background: $context;
 	border-radius: $radius;
@@ -16,7 +16,6 @@
 
 	&--floating {
 		position: fixed;
-		padding: $gutter/2;
 		border-radius: 12px;
 	}
 
@@ -44,6 +43,7 @@
 	}
 
 	&--floating &__button {
+		margin: 0 $gutter/2;
 		padding: $gutter/2 $gutter/1.6;
 		padding-right: $gutter*3;
 		color: $white;
@@ -57,6 +57,12 @@
 	&__description {
 		font-size: .9em;
 		color: $light;
+	}
+
+	&__separator {
+		height: 1px;
+		background: $dimmed;
+		margin: $gutter/2 0;
 	}
 
 }

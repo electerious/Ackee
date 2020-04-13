@@ -7,6 +7,9 @@ import { useClickAway } from 'react-use'
 import runWhenDefined from '../utils/runWhenDefined'
 import useMeasure from '../utils/useMeasure'
 
+export const BUTTON = Symbol()
+export const SEPARATOR = Symbol()
+
 const Context = (props) => {
 
 	const ref = useRef()
@@ -31,8 +34,9 @@ const Context = (props) => {
 				'--y': props.y
 			}
 		},
-			props.items.map((item, index) => (
-				h('button', {
+			props.items.map((item, index) => {
+
+				if (item.type === BUTTON) return h('button', {
 					key: item.label + index,
 					className: classNames({
 						context__button: true,
@@ -47,7 +51,12 @@ const Context = (props) => {
 					h('div', {}, item.label),
 					item.description != null && h('div', { className: 'context__description' }, item.description)
 				)
-			))
+
+				if (item.type === SEPARATOR) return h('div', {
+					className: 'context__separator'
+				})
+
+			})
 		),
 		document.body
 	)

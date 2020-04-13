@@ -24,7 +24,7 @@ import * as sizes from '../../../constants/sizes'
 import * as languages from '../../../constants/languages'
 import * as ranges from '../../../constants/ranges'
 
-import Context from './Context'
+import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
 const FilterItem = (props) => {
@@ -72,24 +72,28 @@ const Filter = (props) => {
 		})[props.filter.range],
 		items: [
 			{
+				type: BUTTON,
 				label: '24 hours',
 				description: 'Show last 24 hours',
 				active: props.filter.range === ranges.RANGES_LAST_24_HOURS,
 				onClick: () => props.setFilterRange(ranges.RANGES_LAST_24_HOURS)
 			},
 			{
+				type: BUTTON,
 				label: '7 days',
 				description: 'Show last 7 days',
 				active: props.filter.range === ranges.RANGES_LAST_7_DAYS,
 				onClick: () => props.setFilterRange(ranges.RANGES_LAST_7_DAYS)
 			},
 			{
+				type: BUTTON,
 				label: '30 days',
 				description: 'Show last 30 days',
 				active: props.filter.range === ranges.RANGES_LAST_30_DAYS,
 				onClick: () => props.setFilterRange(ranges.RANGES_LAST_30_DAYS)
 			},
 			{
+				type: BUTTON,
 				label: 'All time',
 				description: 'Show all data',
 				active: props.filter.range === ranges.RANGES_ALL_TIME,
@@ -107,12 +111,14 @@ const Filter = (props) => {
 				})[props.views.type],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Unique',
 						description: 'Unique site views',
 						active: props.views.type === views.VIEWS_TYPE_UNIQUE,
 						onClick: () => props.setViewsType(views.VIEWS_TYPE_UNIQUE)
 					},
 					{
+						type: BUTTON,
 						label: 'Total',
 						description: 'Total page views',
 						active: props.views.type === views.VIEWS_TYPE_TOTAL,
@@ -128,18 +134,21 @@ const Filter = (props) => {
 				})[props.views.interval],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Daily',
 						description: 'Grouped by day',
 						active: props.views.interval === views.VIEWS_INTERVAL_DAILY,
 						onClick: () => props.setViewsInterval(views.VIEWS_INTERVAL_DAILY)
 					},
 					{
+						type: BUTTON,
 						label: 'Monthly',
 						description: 'Grouped by month',
 						active: props.views.interval === views.VIEWS_INTERVAL_MONTHLY,
 						onClick: () => props.setViewsInterval(views.VIEWS_INTERVAL_MONTHLY)
 					},
 					{
+						type: BUTTON,
 						label: 'Yearly',
 						description: 'Grouped by year',
 						active: props.views.interval === views.VIEWS_INTERVAL_YEARLY,
@@ -156,12 +165,14 @@ const Filter = (props) => {
 				})[props.pages.sorting],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Top',
 						description: 'Top page visits',
 						active: props.pages.sorting === pages.PAGES_SORTING_TOP,
 						onClick: () => props.setPagesSorting(pages.PAGES_SORTING_TOP)
 					},
 					{
+						type: BUTTON,
 						label: 'Recent',
 						description: 'Recent page visits',
 						active: props.pages.sorting === pages.PAGES_SORTING_RECENT,
@@ -180,18 +191,21 @@ const Filter = (props) => {
 				})[props.referrers.sorting],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Top',
 						description: 'Top referrers',
 						active: props.referrers.sorting === referrers.REFERRERS_SORTING_TOP,
 						onClick: () => props.setReferrersSorting(referrers.REFERRERS_SORTING_TOP)
 					},
 					{
+						type: BUTTON,
 						label: 'New',
 						description: 'New referrers',
 						active: props.referrers.sorting === referrers.REFERRERS_SORTING_NEW,
 						onClick: () => props.setReferrersSorting(referrers.REFERRERS_SORTING_NEW)
 					},
 					{
+						type: BUTTON,
 						label: 'Recent',
 						description: 'Recent referrers',
 						active: props.referrers.sorting === referrers.REFERRERS_SORTING_RECENT,
@@ -209,12 +223,14 @@ const Filter = (props) => {
 				})[props.durations.type],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Average',
 						description: 'Average durations',
 						active: props.durations.type === durations.DURATIONS_TYPE_AVERAGE,
 						onClick: () => props.setDurationsType(durations.DURATIONS_TYPE_AVERAGE)
 					},
 					{
+						type: BUTTON,
 						label: 'Detailed',
 						description: 'Detailed durations',
 						active: props.durations.type === durations.DURATIONS_TYPE_DETAILED,
@@ -231,12 +247,14 @@ const Filter = (props) => {
 				})[props.systems.sorting],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Top',
 						description: 'Top systems',
 						active: props.systems.sorting === systems.SYSTEMS_SORTING_TOP,
 						onClick: () => props.setSystemsSorting(systems.SYSTEMS_SORTING_TOP)
 					},
 					{
+						type: BUTTON,
 						label: 'Recent',
 						description: 'Recent systems',
 						active: props.systems.sorting === systems.SYSTEMS_SORTING_RECENT,
@@ -251,12 +269,14 @@ const Filter = (props) => {
 				})[props.systems.type],
 				items: [
 					{
+						type: BUTTON,
 						label: 'No version',
 						description: 'Don\'t include version',
 						active: props.systems.type === systems.SYSTEMS_TYPE_NO_VERSION,
 						onClick: () => props.setSystemsType(systems.SYSTEMS_TYPE_NO_VERSION)
 					},
 					{
+						type: BUTTON,
 						label: 'With version',
 						description: 'Include version',
 						active: props.systems.type === systems.SYSTEMS_TYPE_WITH_VERSION,
@@ -274,12 +294,14 @@ const Filter = (props) => {
 				})[props.devices.sorting],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Top',
 						description: 'Top systems',
 						active: props.devices.sorting === devices.DEVICES_SORTING_TOP,
 						onClick: () => props.setDevicesSorting(devices.DEVICES_SORTING_TOP)
 					},
 					{
+						type: BUTTON,
 						label: 'Recent',
 						description: 'Recent systems',
 						active: props.devices.sorting === devices.DEVICES_SORTING_RECENT,
@@ -294,12 +316,14 @@ const Filter = (props) => {
 				})[props.devices.type],
 				items: [
 					{
+						type: BUTTON,
 						label: 'No model',
 						description: 'Don\'t include model',
 						active: props.devices.type === devices.DEVICES_TYPE_NO_MODEL,
 						onClick: () => props.setDevicesType(devices.DEVICES_TYPE_NO_MODEL)
 					},
 					{
+						type: BUTTON,
 						label: 'With model',
 						description: 'Include model',
 						active: props.devices.type === devices.DEVICES_TYPE_WITH_MODEL,
@@ -317,12 +341,14 @@ const Filter = (props) => {
 				})[props.browsers.sorting],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Top',
 						description: 'Top systems',
 						active: props.browsers.sorting === browsers.BROWSERS_SORTING_TOP,
 						onClick: () => props.setBrowsersSorting(browsers.BROWSERS_SORTING_TOP)
 					},
 					{
+						type: BUTTON,
 						label: 'Recent',
 						description: 'Recent systems',
 						active: props.browsers.sorting === browsers.BROWSERS_SORTING_RECENT,
@@ -337,12 +363,14 @@ const Filter = (props) => {
 				})[props.browsers.type],
 				items: [
 					{
+						type: BUTTON,
 						label: 'No version',
 						description: 'Don\'t include version',
 						active: props.browsers.type === browsers.BROWSERS_TYPE_NO_VERSION,
 						onClick: () => props.setBrowsersType(browsers.BROWSERS_TYPE_NO_VERSION)
 					},
 					{
+						type: BUTTON,
 						label: 'With version',
 						description: 'Include version',
 						active: props.browsers.type === browsers.BROWSERS_TYPE_WITH_VERSION,
@@ -364,36 +392,45 @@ const Filter = (props) => {
 				})[props.sizes.type],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Browser sizes',
 						description: 'Width and height combined',
 						active: props.sizes.type === sizes.SIZES_TYPE_BROWSER_RESOLUTION,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_BROWSER_RESOLUTION)
 					},
 					{
+						type: BUTTON,
 						label: 'Browser widths',
 						description: 'Width only',
 						active: props.sizes.type === sizes.SIZES_TYPE_BROWSER_WIDTH,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_BROWSER_WIDTH)
 					},
 					{
+						type: BUTTON,
 						label: 'Browser heights',
 						description: 'Height only',
 						active: props.sizes.type === sizes.SIZES_TYPE_BROWSER_HEIGHT,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_BROWSER_HEIGHT)
 					},
 					{
+						type: SEPARATOR
+					},
+					{
+						type: BUTTON,
 						label: 'Screen sizes',
 						description: 'Width and height combined',
 						active: props.sizes.type === sizes.SIZES_TYPE_SCREEN_RESOLUTION,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_SCREEN_RESOLUTION)
 					},
 					{
+						type: BUTTON,
 						label: 'Screen widths',
 						description: 'Width only',
 						active: props.sizes.type === sizes.SIZES_TYPE_SCREEN_WIDTH,
 						onClick: () => props.setSizesType(sizes.SIZES_TYPE_SCREEN_WIDTH)
 					},
 					{
+						type: BUTTON,
 						label: 'Screen heights',
 						description: 'Height only',
 						active: props.sizes.type === sizes.SIZES_TYPE_SCREEN_HEIGHT,
@@ -411,12 +448,14 @@ const Filter = (props) => {
 				})[props.languages.sorting],
 				items: [
 					{
+						type: BUTTON,
 						label: 'Top',
 						description: 'Top languages',
 						active: props.languages.sorting === languages.LANGUAGES_SORTING_TOP,
 						onClick: () => props.setLanguagesSorting(languages.LANGUAGES_SORTING_TOP)
 					},
 					{
+						type: BUTTON,
 						label: 'Recent',
 						description: 'Recent languages',
 						active: props.languages.sorting === languages.LANGUAGES_SORTING_RECENT,
