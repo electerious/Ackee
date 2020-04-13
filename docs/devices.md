@@ -13,6 +13,7 @@ Get the top 30 devices without the model.
 
 ```
 GET /domains/:domainId/devices?sorting=top&type=noModel
+GET /domains/:domainId/devices?sorting=top&type=noModel&range=daily
 GET /domains/:domainId/devices?sorting=top&type=noModel&range=weekly
 GET /domains/:domainId/devices?sorting=top&type=noModel&range=monthly
 GET /domains/:domainId/devices?sorting=top&type=noModel&range=allTime
@@ -53,6 +54,7 @@ Get the top 30 devices with the model.
 
 ```
 GET /domains/:domainId/devices?sorting=top&type=withModel
+GET /domains/:domainId/devices?sorting=top&type=withModel&range=daily
 GET /domains/:domainId/devices?sorting=top&type=withModel&range=weekly
 GET /domains/:domainId/devices?sorting=top&type=withModel&range=monthly
 GET /domains/:domainId/devices?sorting=top&type=withModel&range=allTime

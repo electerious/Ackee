@@ -13,6 +13,7 @@ Get the top 30 browsers without the version.
 
 ```
 GET /domains/:domainId/browsers?sorting=top&type=noVersion
+GET /domains/:domainId/browsers?sorting=top&type=noVersion&range=daily
 GET /domains/:domainId/browsers?sorting=top&type=noVersion&range=weekly
 GET /domains/:domainId/browsers?sorting=top&type=noVersion&range=monthly
 GET /domains/:domainId/browsers?sorting=top&type=noVersion&range=allTime
@@ -53,6 +54,7 @@ Get the top 30 browsers with the version.
 
 ```
 GET /domains/:domainId/browsers?sorting=top&type=withVersion
+GET /domains/:domainId/browsers?sorting=top&type=withVersion&range=daily
 GET /domains/:domainId/browsers?sorting=top&type=withVersion&range=weekly
 GET /domains/:domainId/browsers?sorting=top&type=withVersion&range=monthly
 GET /domains/:domainId/browsers?sorting=top&type=withVersion&range=allTime
