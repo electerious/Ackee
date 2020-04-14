@@ -8,33 +8,33 @@ const ranges = require('../../src/constants/ranges')
 const zeroDate = require('../../src/utils/zeroDate')
 const offsetByRange = require('../../src/utils/offsetByRange')
 
-test('return correct offset for RANGES_LAST_24_HOURS value', async (t) => {
+test('return correct offset for RANGES_LAST_24_HOURS', async (t) => {
 
-	const result = offsetByRange(ranges.RANGES_LAST_24_HOURS.value)
+	const result = offsetByRange(ranges.RANGES_LAST_24_HOURS)
 
 	t.deepEqual(result, subDays(zeroDate(), 1))
 
 })
 
-test('return correct offset for RANGES_LAST_7_DAYS value', async (t) => {
+test('return correct offset for RANGES_LAST_7_DAYS', async (t) => {
 
-	const result = offsetByRange(ranges.RANGES_LAST_7_DAYS.value)
+	const result = offsetByRange(ranges.RANGES_LAST_7_DAYS)
 
 	t.deepEqual(result, subDays(zeroDate(), 6))
 
 })
 
-test('return correct offset for RANGES_LAST_30_DAYS value', async (t) => {
+test('return correct offset for RANGES_LAST_30_DAYS', async (t) => {
 
-	const result = offsetByRange(ranges.RANGES_LAST_30_DAYS.value)
+	const result = offsetByRange(ranges.RANGES_LAST_30_DAYS)
 
 	t.deepEqual(result, subDays(zeroDate(), 29))
 
 })
 
-test('return null for RANGES_ALL_TIME value', async (t) => {
+test('return null for RANGES_ALL_TIME', async (t) => {
 
-	const result = offsetByRange(ranges.RANGES_ALL_TIME.value)
+	const result = offsetByRange(ranges.RANGES_ALL_TIME)
 
 	t.is(result, null)
 

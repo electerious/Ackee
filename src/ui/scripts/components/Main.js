@@ -1,4 +1,4 @@
-import { createElement as h } from 'react'
+import { createElement as h, Fragment } from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 
 import isUnknownError from '../utils/isUnknownError'
@@ -6,6 +6,7 @@ import isUnknownError from '../utils/isUnknownError'
 import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
 import ErrorFallback from './ErrorFallback'
+import Filter from './Filter'
 import Dashboard from './Dashboard'
 
 const Main = (props) => {
@@ -22,7 +23,11 @@ const Main = (props) => {
 
 	if (showOverlayFailure === true) return h(OverlayFailure, { errors: unknownErrors })
 	if (showOverlayLogin === true) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
-	if (showDashboard === true) return h(Dashboard, props)
+
+	if (showDashboard === true) return h(Fragment, {},
+		h(Filter, props),
+		h(Dashboard, props)
+	)
 
 }
 
