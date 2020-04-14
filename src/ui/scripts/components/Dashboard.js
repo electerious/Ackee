@@ -14,7 +14,7 @@ import {
 	ROUTE_EVENTS
 } from '../constants/route'
 
-import Header, { createButton, createDropdown } from './Header'
+import Header, { createButton, createDropdown, createDropdownButton } from './Header'
 import RouteViews from './routes/RouteViews'
 import RoutePages from './routes/RoutePages'
 import RouteEvents from './routes/RouteEvents'
@@ -56,11 +56,11 @@ const Dashboard = (props) => {
 					createButton('Referrers', ROUTE_REFERRERS, props),
 					createButton('Durations', ROUTE_DURATIONS, props),
 					createDropdown('Detailed', [
-						createButton('Systems', ROUTE_SYSTEMS, props),
-						createButton('Devices', ROUTE_DEVICES, props),
-						createButton('Browsers', ROUTE_BROWSERS, props),
-						createButton('Sizes', ROUTE_SIZES, props),
-						createButton('Languages', ROUTE_LANGUAGES, props)
+						createDropdownButton('Systems', ROUTE_SYSTEMS, props),
+						createDropdownButton('Devices', ROUTE_DEVICES, props),
+						createDropdownButton('Browsers', ROUTE_BROWSERS, props),
+						createDropdownButton('Sizes', ROUTE_SIZES, props),
+						createDropdownButton('Languages', ROUTE_LANGUAGES, props)
 					]),
 					createButton('Settings', ROUTE_SETTINGS, props)
 				]

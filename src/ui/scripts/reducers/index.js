@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import modals from './modals'
 import token from './token'
 import route from './route'
+import filter from './filter'
 import domains from './domains'
 import views from './views'
 import pages from './pages'
@@ -19,6 +20,7 @@ export default combineReducers({
 	modals,
 	token,
 	route,
+	filter,
 	domains,
 	views,
 	pages,

@@ -6,27 +6,63 @@
 	right: var(--right);
 	bottom: var(--bottom);
 	left: var(--left);
-	padding: $gutter/1.5 0;
+	padding: $gutter/2 0;
 	min-width: 170px;
-	background: $card;
+	background: $context;
 	border-radius: $radius;
 	transform: translate(var(--x, 0), var(--y, 0));
-	box-shadow: inset 0 0 0 1px $border, $shadow;
+	backdrop-filter: blur(10px);
+	z-index: 3;
+
+	&--floating {
+		position: fixed;
+		border-radius: 12px;
+	}
 
 	&.visible {
 		display: grid;
 	}
 
 	&__button {
-		padding: $gutter/5 $gutter*1.2;
-		padding-right: $gutter*2;
+		padding: $gutter/3 $gutter*1.2;
+		padding-right: $gutter*3;
 		color: currentColor;
 		text-align: left;
-		transition: color .3s ease;
+		transition: color .3s ease, background .2s ease;
+		line-height: 1.4;
+		outline: none;
 
-		&:hover {
+		&.active {
 			color: $white;
 		}
+
+		&:focus,
+		&:hover {
+			background: $dimmed;
+		}
+	}
+
+	&--floating &__button {
+		margin: 0 $gutter/2;
+		padding: $gutter/2 $gutter/1.6;
+		padding-right: $gutter*3;
+		color: $white;
+		border-radius: $radius;
+
+		&.active {
+			color: $primary;
+		}
+	}
+
+	&__description {
+		font-size: .9em;
+		color: $light;
+	}
+
+	&__separator {
+		height: 1px;
+		background: $dimmed;
+		margin: $gutter/2 0;
 	}
 
 }

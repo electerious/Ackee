@@ -2,7 +2,7 @@ import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import Context from './Context'
+import Context, { BUTTON as DROPDOWN_BUTTON } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
 const BUTTON = Symbol()
@@ -134,6 +134,13 @@ export const createButton = (label, route, props) => ({
 export const createDropdown = (label, items) => ({
 	type: DROPDOWN,
 	items,
+	label
+})
+
+export const createDropdownButton = (label, route, props) => ({
+	type: DROPDOWN_BUTTON,
+	onClick: () => props.setRouteValue(route),
+	active: props.route.value === route,
 	label
 })
 
