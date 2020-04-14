@@ -13,6 +13,7 @@ import sizes from './sizes'
 import systems from './systems'
 import devices from './devices'
 import browsers from './browsers'
+import events from './events'
 
 export default combineReducers({
 	modals,
@@ -27,5 +28,6 @@ export default combineReducers({
 	sizes,
 	systems,
 	devices,
-	browsers
+	browsers,
+	events
 })

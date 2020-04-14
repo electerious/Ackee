@@ -10,12 +10,14 @@ import {
 	ROUTE_SYSTEMS,
 	ROUTE_SETTINGS,
 	ROUTE_DEVICES,
-	ROUTE_BROWSERS
+	ROUTE_BROWSERS,
+	ROUTE_EVENTS
 } from '../constants/route'
 
 import Header, { createButton, createDropdown } from './Header'
 import RouteViews from './routes/RouteViews'
 import RoutePages from './routes/RoutePages'
+import RouteEvents from './routes/RouteEvents'
 import RouteReferrers from './routes/RouteReferrers'
 import RouteDurations from './routes/RouteDurations'
 import RouteBrowsers from './routes/RouteBrowsers'
@@ -29,6 +31,7 @@ import Modals from './Modals'
 const routesMap = {
 	[ROUTE_VIEWS]: RouteViews,
 	[ROUTE_PAGES]: RoutePages,
+	[ROUTE_EVENTS]: RouteEvents,
 	[ROUTE_REFERRERS]: RouteReferrers,
 	[ROUTE_DURATIONS]: RouteDurations,
 	[ROUTE_SYSTEMS]: RouteSystems,
@@ -49,6 +52,7 @@ const Dashboard = (props) => {
 				items: [
 					createButton('Views', ROUTE_VIEWS, props),
 					createButton('Pages', ROUTE_PAGES, props),
+					createButton('Events', ROUTE_EVENTS, props),
 					createButton('Referrers', ROUTE_REFERRERS, props),
 					createButton('Durations', ROUTE_DURATIONS, props),
 					createDropdown('Detailed', [

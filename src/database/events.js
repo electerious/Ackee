@@ -9,7 +9,7 @@ const add = async (data) => {
 }
 
 const get = async (id) => {
-	console.log(id)
+
 	return Event.aggregate([
 		{
 			$match: {
