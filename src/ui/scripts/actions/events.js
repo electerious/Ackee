@@ -1,10 +1,16 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
+export const SET_EVENTS_TYPE = Symbol()
 export const SET_EVENTS_VALUE = Symbol()
 export const SET_EVENTS_FETCHING = Symbol()
 export const SET_EVENTS_ERROR = Symbol()
 export const RESET_EVENTS = Symbol()
+
+export const setEventsType = (payload) => ({
+	type: SET_EVENTS_TYPE,
+	payload
+})
 
 export const setEventsValue = (domainId, payload) => ({
 	type: SET_EVENTS_VALUE,
@@ -35,7 +41,7 @@ export const fetchEvents = signalHandler((signal) => (props, domainId) => async 
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/events?range=${ props.filter.range }`, {
+		const data = await api(`/domains/${ domainId }/events?range=${ props.filter.range }&type=${ props.events.type }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

@@ -104,7 +104,8 @@ store.subscribe(() => {
 			type: currentState.sizes.type
 		},
 		events: {
-			...initialEventsState()
+			...initialEventsState(),
+			type: currentState.events.type
 		}
 	})
 

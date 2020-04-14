@@ -1,5 +1,5 @@
 const getText = ({ id }) => {
-	return `${ id.category } - ${ id.action }`
+	return id.category && id.action ? `${ id.category } - ${ id.action }` : id
 }
 
 export default (events) => {

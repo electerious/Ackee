@@ -19,7 +19,7 @@ const RouteEvents = (props) => {
 			props.fetchEvents(props, domain.data.id)
 		})
 
-	}, [ props.filter.range, props.domains.value ])
+	}, [ props.filter.range, props.domains.value, props.events.type ])
 
 	return (
 		h(Fragment, {},

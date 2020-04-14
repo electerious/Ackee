@@ -7,6 +7,7 @@ const domains = require('../database/domains')
 const events = require('../database/events')
 const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
+const constants = require('../constants/events')
 
 const response = (entry) => ({
 	type: 'event',
@@ -55,11 +56,18 @@ const add = async (req, res) => {
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { range = ranges.RANGES_LAST_7_DAYS } = req.query
+	const { type, range = ranges.RANGES_LAST_7_DAYS } = req.query
 
+	const types = [
+		constants.EVENTS_TYPE_ACTIONS,
+		constants.EVENTS_TYPE_CATEGORIES,
+		constants.EVENTS_TYPE_COMBINED
+	]
+
+	if (types.includes(type) === false) throw createError(400, 'Unknown type')
 	if (ranges.toArray().includes(range) === false) throw createError(400, 'Unknown date range')
 
-	const entries = await events.get(domainId, range)
+	const entries = await events.get(domainId, type, range)
 
 	return responses(entries)
 

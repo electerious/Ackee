@@ -24,6 +24,7 @@ import * as browsers from '../../../constants/browsers'
 import * as sizes from '../../../constants/sizes'
 import * as languages from '../../../constants/languages'
 import * as ranges from '../../../constants/ranges'
+import * as events from '../../../constants/events'
 
 import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
@@ -442,6 +443,34 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_EVENTS]: [
+			{
+				label: ({
+					[events.EVENTS_TYPE_ACTIONS]: 'Actions',
+					[events.EVENTS_TYPE_CATEGORIES]: 'Categories',
+					[events.EVENTS_TYPE_COMBINED]: 'Both'
+				})[props.events.type],
+				items: [
+					{
+						type: BUTTON,
+						label: 'Actions',
+						active: props.events.type === events.EVENTS_TYPE_ACTIONS,
+						onClick: () => props.setEventsType(events.EVENTS_TYPE_ACTIONS)
+					},
+					{
+						type: BUTTON,
+						label: 'Categories',
+						active: props.events.type === events.EVENTS_TYPE_CATEGORIES,
+						onClick: () => props.setEventsType(events.EVENTS_TYPE_CATEGORIES)
+					},
+					{
+						type: BUTTON,
+						label: 'Both',
+						description: 'Show actions and categories combined',
+						active: props.events.type === events.EVENTS_TYPE_COMBINED,
+						onClick: () => props.setEventsType(events.EVENTS_TYPE_COMBINED)
+					}
+				]
+			},
 			rangeButton
 		]
 	}
