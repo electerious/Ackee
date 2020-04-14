@@ -40,9 +40,11 @@ const RouteDevices = (props) => {
 			)
 		}
 
-		return h(NoDomain, {
-			addModalsModal: props.addModalsModal
-		})
+		if (!props.fetching) {
+			return h(NoDomain, {
+				addModalsModal: props.addModalsModal
+			})
+		}
 	})()
 
 	return (

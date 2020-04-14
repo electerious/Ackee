@@ -26,6 +26,7 @@ const RouteViews = (props) => {
 	}, [ props.domains.value, props.views.type, props.views.interval ])
 
 	const mainView = (() => {
+		console.log(props)
 		if (props.domains.value.length > 0) {
 			return (
 				h(CardViews, {
@@ -51,9 +52,11 @@ const RouteViews = (props) => {
 			)
 		}
 
-		return h(NoDomain, {
-			addModalsModal: props.addModalsModal
-		})
+		if (!props.fetching) {
+			return h(NoDomain, {
+				addModalsModal: props.addModalsModal
+			})
+		}
 	})()
 
 	return (
