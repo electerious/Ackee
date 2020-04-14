@@ -10,7 +10,8 @@ import {
 	ROUTE_SIZES,
 	ROUTE_SYSTEMS,
 	ROUTE_DEVICES,
-	ROUTE_BROWSERS
+	ROUTE_BROWSERS,
+	ROUTE_EVENTS
 } from '../constants/route'
 
 import * as views from '../../../constants/views'
@@ -438,6 +439,9 @@ const Filter = (props) => {
 					}
 				]
 			},
+			rangeButton
+		],
+		[ROUTE_EVENTS]: [
 			rangeButton
 		]
 	}

@@ -1,6 +1,7 @@
 'use strict'
 
 const Event = require('../schemas/Event')
+const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
 
 const add = async (data) => {
 
@@ -8,27 +9,11 @@ const add = async (data) => {
 
 }
 
-const get = async (id) => {
+const get = async (id, range) => {
 
-	return Event.aggregate([
-		{
-			$match: {
-				domainId: id
-			}
-		},
-		{
-			$addFields: {
-				insensitive: {
-					$toLower: '$category'
-				}
-			}
-		},
-		{
-			$sort: {
-				insensitive: 1
-			}
-		}
-	])
+	return Event.aggregate(
+		aggregateTopFieldsMultiple(id, [ 'category', 'action' ], range)
+	)
 
 }
 

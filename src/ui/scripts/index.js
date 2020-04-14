@@ -23,6 +23,7 @@ import { initialState as initialSystemsState } from './reducers/systems'
 import { initialState as initialBrowsersState } from './reducers/browsers'
 import { initialState as initialDevicesState } from './reducers/devices'
 import { initialState as initialSizesState } from './reducers/sizes'
+import { initialState as initialEventsState } from './reducers/events'
 
 import Main from './components/Main'
 
@@ -101,6 +102,9 @@ store.subscribe(() => {
 			...initialSizesState(),
 			range: currentState.sizes.range,
 			type: currentState.sizes.type
+		},
+		events: {
+			...initialEventsState()
 		}
 	})
 

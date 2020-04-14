@@ -1,11 +1,13 @@
+const getText = ({ id }) => {
+	return `${ id.category } - ${ id.action }`
+}
+
 export default (events) => {
 
 	// Extract and enhance the data from the API
 	return events.map((event) => ({
-		category: event.data.category,
-		action: event.data.action,
-		label: event.data.label,
-		value: event.data.value,
+		text: getText(event.data),
+		count: event.data.count,
 		date: event.data.created == null ? null : new Date(event.data.created)
 	}))
 

@@ -11,11 +11,8 @@ const messages = require('../utils/messages')
 const response = (entry) => ({
 	type: 'event',
 	data: {
-		id: entry.id,
-		category: entry.category,
-		action: entry.action,
-		label: entry.label,
-		value: entry.value,
+		id: entry._id,
+		count: entry.count,
 		created: entry.created
 	}
 })
@@ -58,9 +55,9 @@ const add = async (req, res) => {
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { range = ranges.RANGES_LAST_7_DAYS.value } = req.query
+	const { range = ranges.RANGES_LAST_7_DAYS } = req.query
 
-	if (ranges.toValues().includes(range) === false) throw createError(400, 'Unknown date range')
+	if (ranges.toArray().includes(range) === false) throw createError(400, 'Unknown date range')
 
 	const entries = await events.get(domainId, range)
 

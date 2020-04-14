@@ -1,7 +1,6 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-
 import Headline from '../Headline'
 import Text from '../Text'
 import PresentationCounterList from '../presentations/PresentationCounterList'
@@ -50,7 +49,7 @@ const CardEvents = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.range)),
+				}, textLabel(null, props.range)),
 				presentation
 			)
 		)
