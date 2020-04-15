@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - API returns more entries (25 -> 30)
+- Loading design in header
 
 ## [1.6.1] - 2020-03-25
 
