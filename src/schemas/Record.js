@@ -34,6 +34,10 @@ const schema = new mongoose.Schema({
 		minlength: 2,
 		maxlength: 2
 	},
+	clientCountry: {
+		type: String,
+		required: false
+	},
 	screenWidth: {
 		type: Number,
 		min: 0,

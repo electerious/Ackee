@@ -4,6 +4,7 @@ const { send, json, createError } = require('micro')
 
 const normalizeUrl = require('../utils/normalizeUrl')
 const identifier = require('../utils/identifier')
+const countryFromIp = require('../utils/countryFromIp')
 const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
@@ -16,6 +17,7 @@ const response = (entry) => ({
 		siteLocation: entry.siteLocation,
 		siteReferrer: entry.siteReferrer,
 		siteLanguage: entry.siteLanguage,
+		clientCountry: entry.clientCountry,
 		screenWidth: entry.screenWidth,
 		screenHeight: entry.screenHeight,
 		screenColorDepth: entry.screenColorDepth,
@@ -74,7 +76,8 @@ const add = async (req, res) => {
 
 	const { domainId } = req.params
 	const clientId = identifier(req, domainId)
-	const data = { ...await json(req), clientId, domainId }
+	const clientCountry = countryFromIp(req)
+	const data = { ...await json(req), clientId, domainId, clientCountry }
 
 	const domain = await domains.get(domainId)
 
