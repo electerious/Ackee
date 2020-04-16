@@ -6,6 +6,7 @@ import {
 	ROUTE_REFERRERS,
 	ROUTE_DURATIONS,
 	ROUTE_LANGUAGES,
+	ROUTE_COUNTRIES,
 	ROUTE_SIZES,
 	ROUTE_SYSTEMS,
 	ROUTE_SETTINGS,
@@ -21,6 +22,7 @@ import RouteDurations from './routes/RouteDurations'
 import RouteBrowsers from './routes/RouteBrowsers'
 import RouteDevices from './routes/RouteDevices'
 import RouteLanguages from './routes/RouteLanguages'
+import RouteCountries from './routes/RouteCountries'
 import RouteSystems from './routes/RouteSystems'
 import RouteSizes from './routes/RouteSizes'
 import RouteSettings from './routes/RouteSettings'
@@ -36,6 +38,7 @@ const routesMap = {
 	[ROUTE_BROWSERS]: RouteBrowsers,
 	[ROUTE_SIZES]: RouteSizes,
 	[ROUTE_LANGUAGES]: RouteLanguages,
+	[ROUTE_COUNTRIES]: RouteCountries,
 	[ROUTE_SETTINGS]: RouteSettings
 }
 
@@ -56,7 +59,8 @@ const Dashboard = (props) => {
 						createDropdownButton('Devices', ROUTE_DEVICES, props),
 						createDropdownButton('Browsers', ROUTE_BROWSERS, props),
 						createDropdownButton('Sizes', ROUTE_SIZES, props),
-						createDropdownButton('Languages', ROUTE_LANGUAGES, props)
+						createDropdownButton('Languages', ROUTE_LANGUAGES, props),
+						createDropdownButton('Countries', ROUTE_COUNTRIES, props)
 					]),
 					createButton('Settings', ROUTE_SETTINGS, props)
 				]

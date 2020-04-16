@@ -10,6 +10,7 @@ import pages from './pages'
 import referrers from './referrers'
 import durations from './durations'
 import languages from './languages'
+import countries from './countries'
 import sizes from './sizes'
 import systems from './systems'
 import devices from './devices'
@@ -26,6 +27,7 @@ export default combineReducers({
 	referrers,
 	durations,
 	languages,
+	countries,
 	sizes,
 	systems,
 	devices,
