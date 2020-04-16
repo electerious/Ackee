@@ -88,6 +88,7 @@ Make sure to install and update all dependencies before you setup Ackee.
 - [/domains/:domainId/browsers](docs/browsers.md)
 - [/domains/:domainId/sizes](docs/sizes.md)
 - [/domains/:domainId/languages](docs/languages.md)
+- [/domains/:domainId/countries](docs/countries.md)
 
 ### Options
 

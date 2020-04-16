@@ -23,6 +23,7 @@ The following data is considered as "personal data":
 | Name | Description |
 |:-----------|:------------|
 | siteLanguage | Language version of the browser. |
+| clientCountry | The Country of the user |
 | screenWidth | The width of the screen in pixels. |
 | screenHeight | The height of the screen in pixels. |
 | screenColorDepth | The bit depth of the color palette for displaying images (in bits per pixel). |
