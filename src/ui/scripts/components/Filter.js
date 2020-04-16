@@ -7,6 +7,7 @@ import {
 	ROUTE_REFERRERS,
 	ROUTE_DURATIONS,
 	ROUTE_LANGUAGES,
+	ROUTE_COUNTRIES,
 	ROUTE_SIZES,
 	ROUTE_SYSTEMS,
 	ROUTE_DEVICES,
@@ -22,6 +23,7 @@ import * as devices from '../../../constants/devices'
 import * as browsers from '../../../constants/browsers'
 import * as sizes from '../../../constants/sizes'
 import * as languages from '../../../constants/languages'
+import * as countries from '../../../constants/countries'
 import * as ranges from '../../../constants/ranges'
 
 import Context, { BUTTON, SEPARATOR } from './Context'
@@ -57,7 +59,9 @@ const labels = {
 	[sizes.SIZES_TYPE_SCREEN_WIDTH]: 'Screen widths',
 	[sizes.SIZES_TYPE_SCREEN_HEIGHT]: 'Screen heights',
 	[languages.LANGUAGES_SORTING_TOP]: 'Top',
-	[languages.LANGUAGES_SORTING_RECENT]: 'Recent'
+	[languages.LANGUAGES_SORTING_RECENT]: 'Recent',
+	[countries.COUNTRIES_SORTING_TOP]: 'Top',
+	[countries.COUNTRIES_SORTING_RECENT]: 'Recent'
 }
 
 const FilterItem = (props) => {
@@ -107,6 +111,7 @@ const Filter = (props) => {
 		if (props.route.value === ROUTE_BROWSERS && props.browsers.sorting === browsers.BROWSERS_SORTING_TOP) return true
 		if (props.route.value === ROUTE_SIZES) return true
 		if (props.route.value === ROUTE_LANGUAGES && props.languages.sorting === languages.LANGUAGES_SORTING_TOP) return true
+		if (props.route.value === ROUTE_COUNTRIES && props.countries.sorting === countries.COUNTRIES_SORTING_TOP) return true
 
 		return false
 
@@ -228,6 +233,13 @@ const Filter = (props) => {
 			createItem(labels[props.languages.sorting], [
 				createButton('Top', 'Top languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_TOP),
 				createButton('Recent', 'Recent languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_RECENT)
+			]),
+			rangeButton
+		],
+		[ROUTE_COUNTRIES]: [
+			createItem(labels[props.countries.sorting], [
+				createButton('Top', 'Top countries', props.setCountriesSorting, props.countries.sorting, countries.COUNTRIES_SORTING_TOP),
+				createButton('Recent', 'Recent countries', props.setCountriesSorting, props.countries.sorting, countries.COUNTRIES_SORTING_RECENT)
 			]),
 			rangeButton
 		]
