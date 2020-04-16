@@ -59,6 +59,16 @@ const langauges = [
 	'ja'
 ]
 
+const countries = [
+	null,
+	'DE',
+	'FR',
+	'US',
+	'IT',
+	'CH',
+	'AU'
+]
+
 const resolutions = [
 	{
 		width: 1366,
@@ -183,6 +193,7 @@ const createRecord = () => {
 		siteLocation: randomItem(siteLocations),
 		siteReferrer: randomItem(referrers),
 		siteLanguage: randomItem(langauges),
+		clientCountry: randomItem(countries),
 		screenWidth: resolution.width,
 		screenHeight: resolution.height,
 		screenColorDepth: randomItem(screenColorDepths),

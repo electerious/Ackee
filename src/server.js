@@ -18,6 +18,7 @@ const views = require('./routes/views')
 const pages = require('./routes/pages')
 const referrers = require('./routes/referrers')
 const languages = require('./routes/languages')
+const countries = require('./routes/countries')
 const durations = require('./routes/durations')
 const sizes = require('./routes/sizes')
 const systems = require('./routes/systems')
@@ -107,6 +108,8 @@ const routes = [
 	get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
 
 	get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
+
+	get('/domains/:domainId/countries', pipe(requireAuth, countries.get)),
 
 	get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
 
