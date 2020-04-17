@@ -35,8 +35,7 @@ const schema = new mongoose.Schema({
 		maxlength: 2
 	},
 	clientCountry: {
-		type: String,
-		required: false
+		type: String
 	},
 	screenWidth: {
 		type: Number,
