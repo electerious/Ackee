@@ -7,5 +7,5 @@ export const setRouteValue = (payload) => ({
 })
 
 export const resetRoute = () => ({
-	type: SET_ROUTE_VALUE
+	type: RESET_ROUTE
 })
