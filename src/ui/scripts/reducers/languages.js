@@ -37,7 +37,7 @@ export default produce((draft, action) => {
 		case SET_LANGUAGES_SORTING:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.sorting = action.payload || initialState().sorting
+			draft.sorting = action.payload
 			break
 		case SET_LANGUAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

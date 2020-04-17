@@ -32,10 +32,10 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_VIEWS_TYPE:
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_VIEWS_INTERVAL:
-			draft.interval = action.payload || initialState().interval
+			draft.interval = action.payload
 			break
 		case SET_VIEWS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

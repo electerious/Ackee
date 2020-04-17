@@ -37,7 +37,7 @@ export default produce((draft, action) => {
 		case SET_SIZES_TYPE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_SIZES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value

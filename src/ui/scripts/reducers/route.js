@@ -15,7 +15,7 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_ROUTE_VALUE:
-			draft.value = action.payload || initialState().value
+			draft.value = action.payload
 			break
 		case RESET_ROUTE:
 			return initialState()
