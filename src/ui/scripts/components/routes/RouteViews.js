@@ -2,6 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 
+import selectViewsValue from '../../selectors/selectViewsValue'
 import enhanceViews from '../../enhancers/enhanceViews'
 import mergeViews from '../../utils/mergeViews'
 import useDidMountEffect from '../../utils/useDidMountEffect'
@@ -34,7 +35,7 @@ const RouteViews = (props) => {
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.views.type],
 				interval: props.views.interval,
-				items: mergeViews(props.domains, props.views)
+				items: mergeViews(props)
 			}),
 
 			props.domains.value.map(
@@ -43,7 +44,7 @@ const RouteViews = (props) => {
 						key: domain.data.id,
 						headline: domain.data.title,
 						interval: props.views.interval,
-						items: props.views.value[domain.data.id] == null ? [] : enhanceViews(props.views.value[domain.data.id].value, 7, props.views.interval)
+						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.views.interval)
 					})
 				)
 			)

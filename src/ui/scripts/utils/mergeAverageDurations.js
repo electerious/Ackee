@@ -1,16 +1,16 @@
+import selectDurationsValue from '../selectors/selectDurationsValue'
 import enhanceAverageDurations from '../enhancers/enhanceAverageDurations'
 import isDefined from '../../../utils/isDefined'
 
 // Turns the durations of multiple domains into one array of durations
-export default (domains, durations) => {
+export default (state) => {
 
 	// Enhance durations for all domains
-	const enhancedDurations = domains.value.map((domain) => {
+	const enhancedDurations = state.domains.value.map((domain) => {
 
-		const duration = durations.value[domain.data.id]
-		const exists = duration != null
+		const duration = selectDurationsValue(state, domain.data.id)
 
-		return exists === true ? enhanceAverageDurations(duration.value, 14) : undefined
+		return enhanceAverageDurations(duration.value, 14)
 
 	})
 

@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectSizesValue from '../../selectors/selectSizesValue'
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -30,8 +31,8 @@ const RouteSizes = (props) => {
 						key: domain.data.id,
 						range: props.filter.range,
 						headline: domain.data.title,
-						loading: props.sizes.value[domain.data.id] == null ? false : props.sizes.value[domain.data.id].fetching,
-						items: props.sizes.value[domain.data.id] == null ? [] : enhanceSizes(props.sizes.value[domain.data.id].value)
+						loading: selectSizesValue(props, domain.data.id).fetching,
+						items: enhanceSizes(selectSizesValue(props, domain.data.id).value)
 					})
 				)
 			)

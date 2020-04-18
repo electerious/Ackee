@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectReferrersValue from '../../selectors/selectReferrersValue'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -31,8 +32,8 @@ const RouteReferrers = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.referrers.sorting,
-						loading: props.referrers.value[domain.data.id] == null ? false : props.referrers.value[domain.data.id].fetching,
-						items: props.referrers.value[domain.data.id] == null ? [] : enhanceReferrers(props.referrers.value[domain.data.id].value)
+						loading: selectReferrersValue(props, domain.data.id).fetching,
+						items: enhanceReferrers(selectReferrersValue(props, domain.data.id).value)
 					})
 				)
 			)

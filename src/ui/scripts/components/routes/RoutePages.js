@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectPagesValue from '../../selectors/selectPagesValue'
 import enhancePages from '../../enhancers/enhancePages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -31,8 +32,8 @@ const RoutePages = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.pages.sorting,
-						loading: props.pages.value[domain.data.id] == null ? false : props.pages.value[domain.data.id].fetching,
-						items: props.pages.value[domain.data.id] == null ? [] : enhancePages(props.pages.value[domain.data.id].value)
+						loading: selectPagesValue(props, domain.data.id).fetching,
+						items: enhancePages(selectPagesValue(props, domain.data.id).value)
 					})
 				)
 			)
