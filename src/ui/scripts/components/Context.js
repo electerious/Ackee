@@ -53,6 +53,7 @@ const Context = (props) => {
 				)
 
 				if (item.type === SEPARATOR) return h('div', {
+					key: index,
 					className: 'context__separator'
 				})
 
