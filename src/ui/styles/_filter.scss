@@ -8,10 +8,18 @@
 	left: 50%;
 	padding: 0 $gutter*1.5;
 	border-radius: 100px;
-	background: $context;
-	backdrop-filter: blur(10px);
+	background: rgba($context, .98);
 	transform: translateX(-50%);
 	z-index: 2;
+
+	@supports (backdrop-filter: blur(10px)) {
+		background: $context;
+		backdrop-filter: blur(10px);
+	}
+
+	@media (max-width: 800px) {
+		font-size: .9em;
+	}
 
 	&__button {
 		display: flex;
