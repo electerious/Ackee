@@ -1,7 +1,6 @@
 import produce from 'immer'
 
 import {
-	SET_FILTER_RANGE,
 	SET_SYSTEMS_ERROR,
 	SET_SYSTEMS_FETCHING,
 	SET_SYSTEMS_SORTING,
@@ -31,10 +30,6 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_FILTER_RANGE:
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			break
 		case SET_SYSTEMS_TYPE:
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
