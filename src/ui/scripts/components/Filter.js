@@ -84,7 +84,8 @@ const FilterItem = (props) => {
 				targetRef: ref,
 				// Manually calculated works better on mobile when element is sticky to the bottom
 				bottom: () => `calc(4vh + 51px)`,
-				right: (measurement) => `${ measurement.scrollWidth - measurement.right }px`,
+				left: (measurement) => `${ measurement.left + measurement.width / 2 }px`,
+				x: '-50%',
 				y: '-10px',
 				floating: true,
 				items: props.items,
