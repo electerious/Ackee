@@ -157,18 +157,10 @@ const Filter = (props) => {
 				createButton('Top', 'Top systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_RECENT),
 				createSeparator(),
-				{
-					type: BUTTON,
-					label: ({
-						[systems.SYSTEMS_TYPE_NO_VERSION]: 'Show version',
-						[systems.SYSTEMS_TYPE_WITH_VERSION]: 'Hide version'
-					})[props.systems.type],
-					description: ({
-						[systems.SYSTEMS_TYPE_NO_VERSION]: 'Include system version',
-						[systems.SYSTEMS_TYPE_WITH_VERSION]: 'Don\'t include version'
-					})[props.systems.type],
-					onClick: () => props.setSystemsType(props.systems.type === systems.SYSTEMS_TYPE_NO_VERSION ? systems.SYSTEMS_TYPE_WITH_VERSION : systems.SYSTEMS_TYPE_NO_VERSION)
-				}
+				onlyInactiveButton(
+					createButton('Show version', 'Include system version', props.setSystemsType, props.systems.type, systems.SYSTEMS_TYPE_WITH_VERSION),
+					createButton('Hide version', 'Don\'t include version', props.setSystemsType, props.systems.type, systems.SYSTEMS_TYPE_NO_VERSION)
+				)
 			]),
 			rangeButton
 		],
@@ -177,18 +169,10 @@ const Filter = (props) => {
 				createButton('Top', 'Top systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_RECENT),
 				createSeparator(),
-				{
-					type: BUTTON,
-					label: ({
-						[devices.DEVICES_TYPE_NO_MODEL]: 'Show model',
-						[devices.DEVICES_TYPE_WITH_MODEL]: 'Hide model'
-					})[props.devices.type],
-					description: ({
-						[devices.DEVICES_TYPE_NO_MODEL]: 'Include device model',
-						[devices.DEVICES_TYPE_WITH_MODEL]: 'Don\'t include model'
-					})[props.devices.type],
-					onClick: () => props.setDevicesType(props.devices.type === devices.DEVICES_TYPE_NO_MODEL ? devices.DEVICES_TYPE_WITH_MODEL : devices.DEVICES_TYPE_NO_MODEL)
-				}
+				onlyInactiveButton(
+					createButton('Show model', 'Include device model', props.setDevicesType, props.devices.type, devices.DEVICES_TYPE_WITH_MODEL),
+					createButton('Hide model', 'Don\'t include model', props.setDevicesType, props.devices.type, devices.DEVICES_TYPE_NO_MODEL)
+				)
 			]),
 			rangeButton
 		],
@@ -197,18 +181,10 @@ const Filter = (props) => {
 				createButton('Top', 'Top systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_RECENT),
 				createSeparator(),
-				{
-					type: BUTTON,
-					label: ({
-						[browsers.BROWSERS_TYPE_NO_VERSION]: 'Show version',
-						[browsers.BROWSERS_TYPE_WITH_VERSION]: 'Hide version'
-					})[props.browsers.type],
-					description: ({
-						[browsers.BROWSERS_TYPE_NO_VERSION]: 'Include browser version',
-						[browsers.BROWSERS_TYPE_WITH_VERSION]: 'Don\'t include version'
-					})[props.browsers.type],
-					onClick: () => props.setBrowsersType(props.browsers.type === browsers.BROWSERS_TYPE_NO_VERSION ? browsers.BROWSERS_TYPE_WITH_VERSION : browsers.BROWSERS_TYPE_NO_VERSION)
-				}
+				onlyInactiveButton(
+					createButton('Show version', 'Include browser version', props.setBrowsersType, props.browsers.type, browsers.BROWSERS_TYPE_WITH_VERSION),
+					createButton('Hide version', 'Don\'t include version', props.setBrowsersType, props.browsers.type, browsers.BROWSERS_TYPE_NO_VERSION)
+				)
 			]),
 			rangeButton
 		],
@@ -263,5 +239,9 @@ const createButton = (label, description, setter, key, value) => ({
 const createSeparator = () => ({
 	type: SEPARATOR
 })
+
+const onlyInactiveButton = (...buttons) => {
+	return buttons.find((button) => button.active === false)
+}
 
 export default Filter
