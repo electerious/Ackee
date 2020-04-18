@@ -31,11 +31,13 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_BROWSERS_TYPE:
+			if (draft.type === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.type = action.payload
 			break
 		case SET_BROWSERS_SORTING:
+			if (draft.sorting === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
 			draft.sorting = action.payload
