@@ -4,13 +4,12 @@
 	grid-template-columns: 1fr 1fr;
 	gap: $gutter;
 	margin: 0 auto;
-	padding: $gutter*5 $gutter;
+	padding: 8vh $gutter;
 	width: 100%;
 	max-width: $maxWidth;
 
 	@media (max-width: 800px) {
 		grid-template-columns: 1fr;
-		padding: $gutter*2 $gutter;
 	}
 
 }
