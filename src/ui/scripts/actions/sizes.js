@@ -5,7 +5,6 @@ export const SET_SIZES_TYPE = Symbol()
 export const SET_SIZES_VALUE = Symbol()
 export const SET_SIZES_FETCHING = Symbol()
 export const SET_SIZES_ERROR = Symbol()
-export const RESET_SIZES = Symbol()
 
 export const setSizesType = (payload) => ({
 	type: SET_SIZES_TYPE,
@@ -28,10 +27,6 @@ export const setSizesError = (domainId, payload) => ({
 	type: SET_SIZES_ERROR,
 	domainId,
 	payload
-})
-
-export const resetSizes = () => ({
-	type: RESET_SIZES
 })
 
 export const fetchSizes = signalHandler((signal) => (props, domainId) => async (dispatch) => {

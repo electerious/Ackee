@@ -6,8 +6,7 @@ import {
 	SET_BROWSERS_FETCHING,
 	SET_BROWSERS_SORTING,
 	SET_BROWSERS_VALUE,
-	SET_BROWSERS_TYPE,
-	RESET_BROWSERS
+	SET_BROWSERS_TYPE
 } from '../actions'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_TYPE_NO_VERSION } from '../../../constants/browsers'
@@ -55,8 +54,6 @@ export default produce((draft, action) => {
 		case SET_BROWSERS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_BROWSERS:
-			return initialState()
 	}
 
 }, initialState())

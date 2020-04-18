@@ -5,8 +5,7 @@ import {
 	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
-	SET_REFERRERS_ERROR,
-	RESET_REFERRERS
+	SET_REFERRERS_ERROR
 } from '../actions'
 
 import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
@@ -48,8 +47,6 @@ export default produce((draft, action) => {
 		case SET_REFERRERS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_REFERRERS:
-			return initialState()
 	}
 
 }, initialState())

@@ -6,7 +6,6 @@ export const SET_DEVICES_SORTING = Symbol()
 export const SET_DEVICES_VALUE = Symbol()
 export const SET_DEVICES_FETCHING = Symbol()
 export const SET_DEVICES_ERROR = Symbol()
-export const RESET_DEVICES = Symbol()
 
 export const setDevicesSorting = (payload) => ({
 	type: SET_DEVICES_SORTING,
@@ -34,10 +33,6 @@ export const setDevicesError = (domainId, payload) => ({
 	type: SET_DEVICES_ERROR,
 	domainId,
 	payload
-})
-
-export const resetDevices = () => ({
-	type: RESET_DEVICES
 })
 
 export const fetchDevices = signalHandler((signal) => (props, domainId) => async (dispatch) => {

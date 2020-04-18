@@ -5,7 +5,6 @@ export const SET_PAGES_SORTING = Symbol()
 export const SET_PAGES_VALUE = Symbol()
 export const SET_PAGES_FETCHING = Symbol()
 export const SET_PAGES_ERROR = Symbol()
-export const RESET_PAGES = Symbol()
 
 export const setPagesSorting = (payload) => ({
 	type: SET_PAGES_SORTING,
@@ -28,10 +27,6 @@ export const setPagesError = (domainId, payload) => ({
 	type: SET_PAGES_ERROR,
 	domainId,
 	payload
-})
-
-export const resetPages = () => ({
-	type: RESET_PAGES
 })
 
 export const fetchPages = signalHandler((signal) => (props, domainId) => async (dispatch) => {

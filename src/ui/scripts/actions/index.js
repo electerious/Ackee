@@ -12,3 +12,9 @@ export * from './sizes'
 export * from './systems'
 export * from './devices'
 export * from './browsers'
+
+export const RESET_STATE = Symbol()
+
+export const resetState = () => ({
+	type: RESET_STATE
+})

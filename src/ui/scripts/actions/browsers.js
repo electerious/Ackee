@@ -6,7 +6,6 @@ export const SET_BROWSERS_SORTING = Symbol()
 export const SET_BROWSERS_VALUE = Symbol()
 export const SET_BROWSERS_FETCHING = Symbol()
 export const SET_BROWSERS_ERROR = Symbol()
-export const RESET_BROWSERS = Symbol()
 
 export const setBrowsersSorting = (payload) => ({
 	type: SET_BROWSERS_SORTING,
@@ -34,10 +33,6 @@ export const setBrowsersError = (domainId, payload) => ({
 	type: SET_BROWSERS_ERROR,
 	domainId,
 	payload
-})
-
-export const resetBrowsers = () => ({
-	type: RESET_BROWSERS
 })
 
 export const fetchBrowsers = signalHandler((signal) => (props, domainId) => async (dispatch) => {

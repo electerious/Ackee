@@ -4,8 +4,7 @@ import {
 	SET_DURATIONS_TYPE,
 	SET_DURATIONS_VALUE,
 	SET_DURATIONS_FETCHING,
-	SET_DURATIONS_ERROR,
-	RESET_DURATIONS
+	SET_DURATIONS_ERROR
 } from '../actions'
 
 import { DURATIONS_TYPE_AVERAGE } from '../../../constants/durations'
@@ -43,8 +42,6 @@ export default produce((draft, action) => {
 		case SET_DURATIONS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_DURATIONS:
-			return initialState()
 	}
 
 }, initialState())

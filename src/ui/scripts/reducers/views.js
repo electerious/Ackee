@@ -5,8 +5,7 @@ import {
 	SET_VIEWS_INTERVAL,
 	SET_VIEWS_VALUE,
 	SET_VIEWS_FETCHING,
-	SET_VIEWS_ERROR,
-	RESET_VIEWS
+	SET_VIEWS_ERROR
 } from '../actions'
 
 import { VIEWS_TYPE_UNIQUE, VIEWS_INTERVAL_DAILY } from '../../../constants/views'
@@ -46,8 +45,6 @@ export default produce((draft, action) => {
 		case SET_VIEWS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_VIEWS:
-			return initialState()
 	}
 
 }, initialState())

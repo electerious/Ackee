@@ -6,8 +6,7 @@ import {
 	SET_SYSTEMS_FETCHING,
 	SET_SYSTEMS_SORTING,
 	SET_SYSTEMS_VALUE,
-	SET_SYSTEMS_TYPE,
-	RESET_SYSTEMS
+	SET_SYSTEMS_TYPE
 } from '../actions'
 
 import { SYSTEMS_SORTING_TOP, SYSTEMS_TYPE_NO_VERSION } from '../../../constants/systems'
@@ -55,8 +54,6 @@ export default produce((draft, action) => {
 		case SET_SYSTEMS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_SYSTEMS:
-			return initialState()
 	}
 
 }, initialState())

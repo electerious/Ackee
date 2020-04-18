@@ -3,8 +3,7 @@ import produce from 'immer'
 import {
 	SET_TOKEN_VALUE,
 	SET_TOKEN_FETCHING,
-	SET_TOKEN_ERROR,
-	RESET_TOKEN
+	SET_TOKEN_ERROR
 } from '../actions'
 
 export const initialState = () => ({
@@ -25,8 +24,6 @@ export default produce((draft, action) => {
 		case SET_TOKEN_ERROR:
 			draft.error = action.payload || initialState().error
 			break
-		case RESET_TOKEN:
-			return initialState()
 	}
 
 }, initialState())

@@ -1,8 +1,7 @@
 import produce from 'immer'
 
 import {
-	SET_ROUTE_VALUE,
-	RESET_ROUTE
+	SET_ROUTE_VALUE
 } from '../actions'
 
 import { ROUTE_VIEWS } from '../constants/route'
@@ -17,8 +16,6 @@ export default produce((draft, action) => {
 		case SET_ROUTE_VALUE:
 			draft.value = action.payload
 			break
-		case RESET_ROUTE:
-			return initialState()
 	}
 
 }, initialState())

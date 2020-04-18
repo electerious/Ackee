@@ -6,8 +6,7 @@ import {
 	SET_DEVICES_FETCHING,
 	SET_DEVICES_SORTING,
 	SET_DEVICES_VALUE,
-	SET_DEVICES_TYPE,
-	RESET_DEVICES
+	SET_DEVICES_TYPE
 } from '../actions'
 
 import { DEVICES_SORTING_TOP, DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
@@ -55,8 +54,6 @@ export default produce((draft, action) => {
 		case SET_DEVICES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_DEVICES:
-			return initialState()
 	}
 
 }, initialState())

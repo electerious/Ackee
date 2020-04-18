@@ -5,8 +5,7 @@ import {
 	SET_SIZES_TYPE,
 	SET_SIZES_VALUE,
 	SET_SIZES_FETCHING,
-	SET_SIZES_ERROR,
-	RESET_SIZES
+	SET_SIZES_ERROR
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
@@ -48,8 +47,6 @@ export default produce((draft, action) => {
 		case SET_SIZES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_SIZES:
-			return initialState()
 	}
 
 }, initialState())

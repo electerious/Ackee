@@ -5,8 +5,7 @@ import {
 	SET_PAGES_SORTING,
 	SET_PAGES_VALUE,
 	SET_PAGES_FETCHING,
-	SET_PAGES_ERROR,
-	RESET_PAGES
+	SET_PAGES_ERROR
 } from '../actions'
 
 import { PAGES_SORTING_TOP } from '../../../constants/pages'
@@ -48,8 +47,6 @@ export default produce((draft, action) => {
 		case SET_PAGES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_PAGES:
-			return initialState()
 	}
 
 }, initialState())

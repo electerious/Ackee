@@ -5,8 +5,7 @@ import {
 	SET_LANGUAGES_SORTING,
 	SET_LANGUAGES_VALUE,
 	SET_LANGUAGES_FETCHING,
-	SET_LANGUAGES_ERROR,
-	RESET_LANGUAGES
+	SET_LANGUAGES_ERROR
 } from '../actions'
 
 import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'
@@ -48,8 +47,6 @@ export default produce((draft, action) => {
 		case SET_LANGUAGES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_LANGUAGES:
-			return initialState()
 	}
 
 }, initialState())
