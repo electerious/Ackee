@@ -4,13 +4,10 @@ import {
 	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
-	SET_REFERRERS_ERROR,
-	RESET_REFERRERS
+	SET_REFERRERS_ERROR
 } from '../actions'
 
-import {
-	REFERRERS_SORTING_TOP
-} from '../../../constants/referrers'
+import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
 
 export const initialState = () => ({
 	sorting: REFERRERS_SORTING_TOP,
@@ -32,10 +29,10 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_REFERRERS_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			if (draft.sorting === action.payload) break
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.sorting = action.payload || initialState().sorting
+			draft.sorting = action.payload
 			break
 		case SET_REFERRERS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -46,8 +43,6 @@ export default produce((draft, action) => {
 		case SET_REFERRERS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_REFERRERS:
-			return initialState()
 	}
 
 }, initialState())

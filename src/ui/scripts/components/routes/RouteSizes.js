@@ -1,17 +1,10 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import {
-	SIZES_TYPE_BROWSER_WIDTH,
-	SIZES_TYPE_BROWSER_HEIGHT,
-	SIZES_TYPE_SCREEN_WIDTH,
-	SIZES_TYPE_SCREEN_HEIGHT
-} from '../../../../constants/sizes'
-
+import selectSizesValue from '../../selectors/selectSizesValue'
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardSizes from '../cards/CardSizes'
-import Select from '../Select'
 
 const RouteSizes = (props) => {
 
@@ -27,31 +20,19 @@ const RouteSizes = (props) => {
 			props.fetchSizes(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.sizes.type ])
+	}, [ props.filter.range, props.domains.value, props.sizes.type ])
 
 	return (
 		h(Fragment, {},
-
-			h('div', { className: 'subHeader' },
-				h(Select, {
-					value: props.sizes.type,
-					onChange: (e) => props.setSizesType(e.target.value),
-					items: [
-						{ value: SIZES_TYPE_BROWSER_WIDTH, label: 'Browser widths' },
-						{ value: SIZES_TYPE_BROWSER_HEIGHT, label: 'Browser heights' },
-						{ value: SIZES_TYPE_SCREEN_WIDTH, label: 'Screen widths' },
-						{ value: SIZES_TYPE_SCREEN_HEIGHT, label: 'Screen heights' }
-					]
-				})
-			),
 
 			props.domains.value.map(
 				(domain) => (
 					h(CardSizes, {
 						key: domain.data.id,
+						range: props.filter.range,
 						headline: domain.data.title,
-						loading: props.sizes.value[domain.data.id] == null ? false : props.sizes.value[domain.data.id].fetching,
-						items: props.sizes.value[domain.data.id] == null ? [] : enhanceSizes(props.sizes.value[domain.data.id].value)
+						loading: selectSizesValue(props, domain.data.id).fetching,
+						items: enhanceSizes(selectSizesValue(props, domain.data.id).value)
 					})
 				)
 			)

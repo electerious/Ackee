@@ -1,35 +1,41 @@
 'use strict'
 
-const { subDays } = require('date-fns')
+const offsetByRange = require('../utils/offsetByRange')
 
-const zeroDate = require('../utils/zeroDate')
+module.exports = (id, property, range) => {
 
-module.exports = (id, property) => [
-	{
-		$match: {
-			domainId: id,
-			[property]: {
-				$ne: null
-			},
-			created: {
-				$gte: subDays(zeroDate(), 6)
+	const aggregate = [
+		{
+			$match: {
+				domainId: id,
+				[property]: {
+					$ne: null
+				}
 			}
-		}
-	},
-	{
-		$group: {
-			_id: `$${ property }`,
-			count: {
-				$sum: 1
+		},
+		{
+			$group: {
+				_id: `$${ property }`,
+				count: {
+					$sum: 1
+				}
 			}
+		},
+		{
+			$sort: {
+				count: -1
+			}
+		},
+		{
+			$limit: 30
 		}
-	},
-	{
-		$sort: {
-			count: -1
-		}
-	},
-	{
-		$limit: 25
+	]
+
+	const dateOffset = offsetByRange(range)
+	if (dateOffset != null) {
+		aggregate[0].$match.created = { $gte: dateOffset }
 	}
-]
+
+	return aggregate
+
+}

@@ -1,10 +1,11 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
+import { resetState } from './index'
+
 export const SET_TOKEN_VALUE = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
 export const SET_TOKEN_ERROR = Symbol()
-export const RESET_TOKEN = Symbol()
 
 export const setTokenValue = (payload) => ({
 	type: SET_TOKEN_VALUE,
@@ -19,10 +20,6 @@ export const setTokenFetching = (payload) => ({
 export const setTokenError = (payload) => ({
 	type: SET_TOKEN_ERROR,
 	payload
-})
-
-export const resetToken = () => ({
-	type: RESET_TOKEN
 })
 
 export const addToken = signalHandler((signal) => (props, state) => async (dispatch) => {
@@ -53,16 +50,7 @@ export const addToken = signalHandler((signal) => (props, state) => async (dispa
 
 export const deleteToken = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(resetToken())
-
-	props.resetDomains()
-	props.resetViews()
-	props.resetPages()
-	props.resetReferrers()
-	props.resetDurations()
-	props.resetLanguages()
-	props.resetSizes()
-	props.resetRoute()
+	dispatch(resetState())
 
 	try {
 

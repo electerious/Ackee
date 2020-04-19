@@ -6,7 +6,6 @@ export const SET_VIEWS_INTERVAL = Symbol()
 export const SET_VIEWS_VALUE = Symbol()
 export const SET_VIEWS_FETCHING = Symbol()
 export const SET_VIEWS_ERROR = Symbol()
-export const RESET_VIEWS = Symbol()
 
 export const setViewsType = (payload) => ({
 	type: SET_VIEWS_TYPE,
@@ -34,10 +33,6 @@ export const setViewsError = (domainId, payload) => ({
 	type: SET_VIEWS_ERROR,
 	domainId,
 	payload
-})
-
-export const resetViews = () => ({
-	type: RESET_VIEWS
 })
 
 export const fetchViews = signalHandler((signal) => (props, domainId) => async (dispatch) => {

@@ -1,0 +1,52 @@
+.filter {
+
+	position: fixed;
+	display: grid;
+	justify-content: center;
+	width: 100%;
+	bottom: 4vh;
+	z-index: 2;
+	pointer-events: none;
+
+	@media (max-width: 800px) {
+		font-size: .9em;
+	}
+
+	&__bar {
+		display: grid;
+		grid-auto-flow: column;
+		gap: $gutter;
+		padding: 0 $gutter*1.5;
+		border-radius: 100px;
+		background: rgba($context, .98);
+		pointer-events: all;
+
+		@supports (backdrop-filter: blur(10px)) {
+			background: $context;
+			backdrop-filter: blur(10px);
+		}
+	}
+
+	&__button {
+		display: flex;
+		align-items: center;
+		padding: $gutter/1.5 0;
+		white-space: nowrap;
+		color: $white;
+		outline: none;
+
+		&:focus {
+			color: $primary;
+		}
+	}
+
+	&__arrow {
+		$size: 12px;
+
+		margin-left: $gutter/2;
+		width: $size;
+		height: $size;
+		fill: $light;
+	}
+
+}

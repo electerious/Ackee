@@ -1,9 +1,9 @@
 # Durations
 
-- [Get average durations](#get-average-durations)
-- [Get detailed durations](#get-detailed-durations)
+- [Average durations](#average-durations)
+- [Detailed durations](#detailed-durations)
 
-## Get average durations
+## Average durations
 
 Get the average time users spend on your site per day for the last 14 days. Days without entries are omitted.
 
@@ -44,7 +44,7 @@ Status: 200 OK
 }
 ```
 
-## Get detailed durations
+## Detailed durations
 
 Get the time users spend on your sites, grouped by similar durations in an interval of 15s. Includes data from the last 7 days. Durations above 30m will be grouped together.
 

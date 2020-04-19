@@ -5,7 +5,6 @@ export const SET_DURATIONS_TYPE = Symbol()
 export const SET_DURATIONS_VALUE = Symbol()
 export const SET_DURATIONS_FETCHING = Symbol()
 export const SET_DURATIONS_ERROR = Symbol()
-export const RESET_DURATIONS = Symbol()
 
 export const setDurationsType = (payload) => ({
 	type: SET_DURATIONS_TYPE,
@@ -28,10 +27,6 @@ export const setDurationsError = (domainId, payload) => ({
 	type: SET_DURATIONS_ERROR,
 	domainId,
 	payload
-})
-
-export const resetDurations = () => ({
-	type: RESET_DURATIONS
 })
 
 export const fetchDurations = signalHandler((signal) => (props, domainId) => async (dispatch) => {
