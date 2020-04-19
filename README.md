@@ -99,7 +99,10 @@ More documentation and guides are located in [the /docs folder](docs/). Also tak
 
 #### Donate
 
-I am working hard on continuously developing and maintaining Ackee. Please consider making a donation [via PayPal](https://paypal.me/electerious) to keep the project going strong and me motivated.
+I am working hard on continuously developing and maintaining Ackee. Please consider making a donation to keep the project going strong and me motivated.
+
+- [Donate via PayPal](https://paypal.me/electerious)
+- [Buy me a coffee](https://www.buymeacoffee.com/electerious)
 
 #### Related
 
