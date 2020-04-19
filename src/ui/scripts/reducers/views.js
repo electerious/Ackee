@@ -5,14 +5,10 @@ import {
 	SET_VIEWS_INTERVAL,
 	SET_VIEWS_VALUE,
 	SET_VIEWS_FETCHING,
-	SET_VIEWS_ERROR,
-	RESET_VIEWS
+	SET_VIEWS_ERROR
 } from '../actions'
 
-import {
-	VIEWS_TYPE_UNIQUE,
-	VIEWS_INTERVAL_DAILY
-} from '../../../constants/views'
+import { VIEWS_TYPE_UNIQUE, VIEWS_INTERVAL_DAILY } from '../../../constants/views'
 
 export const initialState = () => ({
 	type: VIEWS_TYPE_UNIQUE,
@@ -35,10 +31,10 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_VIEWS_TYPE:
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_VIEWS_INTERVAL:
-			draft.interval = action.payload || initialState().interval
+			draft.interval = action.payload
 			break
 		case SET_VIEWS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -49,8 +45,6 @@ export default produce((draft, action) => {
 		case SET_VIEWS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_VIEWS:
-			return initialState()
 	}
 
 }, initialState())

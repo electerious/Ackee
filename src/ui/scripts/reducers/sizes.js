@@ -4,16 +4,13 @@ import {
 	SET_SIZES_TYPE,
 	SET_SIZES_VALUE,
 	SET_SIZES_FETCHING,
-	SET_SIZES_ERROR,
-	RESET_SIZES
+	SET_SIZES_ERROR
 } from '../actions'
 
-import {
-	SIZES_TYPE_BROWSER_WIDTH
-} from '../../../constants/sizes'
+import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
 
 export const initialState = () => ({
-	type: SIZES_TYPE_BROWSER_WIDTH,
+	type: SIZES_TYPE_BROWSER_RESOLUTION,
 	value: {}
 })
 
@@ -32,10 +29,10 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_SIZES_TYPE:
-			// Reset value because a different type results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			if (draft.type === action.payload) break
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_SIZES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -46,8 +43,6 @@ export default produce((draft, action) => {
 		case SET_SIZES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_SIZES:
-			return initialState()
 	}
 
 }, initialState())

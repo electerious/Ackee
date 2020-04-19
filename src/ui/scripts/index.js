@@ -13,11 +13,15 @@ import * as actions from './actions'
 
 import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
+import { initialState as initialFilterState } from './reducers/filter'
 import { initialState as initialViewsState } from './reducers/views'
 import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
 import { initialState as initialDurationsState } from './reducers/durations'
 import { initialState as initialLanguagesState } from './reducers/languages'
+import { initialState as initialSystemsState } from './reducers/systems'
+import { initialState as initialBrowsersState } from './reducers/browsers'
+import { initialState as initialDevicesState } from './reducers/devices'
 import { initialState as initialSizesState } from './reducers/sizes'
 
 import Main from './components/Main'
@@ -48,6 +52,10 @@ store.subscribe(() => {
 			...initialRouteState(),
 			value: currentState.route.value
 		},
+		filter: {
+			...initialFilterState(),
+			range: currentState.filter.range
+		},
 		views: {
 			...initialViewsState(),
 			type: currentState.views.type,
@@ -55,10 +63,11 @@ store.subscribe(() => {
 		},
 		pages: {
 			...initialPagesState(),
-			type: currentState.pages.type
+			sorting: currentState.pages.sorting
 		},
 		referrers: {
 			...initialReferrersState(),
+			range: currentState.referrers.range,
 			sorting: currentState.referrers.sorting
 		},
 		durations: {
@@ -67,10 +76,30 @@ store.subscribe(() => {
 		},
 		languages: {
 			...initialLanguagesState(),
+			range: currentState.languages.range,
 			sorting: currentState.languages.sorting
+		},
+		systems: {
+			...initialSystemsState(),
+			range: currentState.systems.range,
+			type: currentState.systems.type,
+			sorting: currentState.systems.sorting
+		},
+		browsers: {
+			...initialBrowsersState(),
+			range: currentState.browsers.range,
+			type: currentState.browsers.type,
+			sorting: currentState.browsers.sorting
+		},
+		devices: {
+			...initialDevicesState(),
+			range: currentState.devices.range,
+			type: currentState.devices.type,
+			sorting: currentState.devices.sorting
 		},
 		sizes: {
 			...initialSizesState(),
+			range: currentState.sizes.range,
 			type: currentState.sizes.type
 		}
 	})

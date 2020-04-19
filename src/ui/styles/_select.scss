@@ -9,4 +9,9 @@
 		color: black;
 	}
 
+	&:disabled {
+		opacity: .6;
+		background-image: none;
+	}
+
 }

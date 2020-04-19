@@ -4,13 +4,10 @@ import {
 	SET_LANGUAGES_SORTING,
 	SET_LANGUAGES_VALUE,
 	SET_LANGUAGES_FETCHING,
-	SET_LANGUAGES_ERROR,
-	RESET_LANGUAGES
+	SET_LANGUAGES_ERROR
 } from '../actions'
 
-import {
-	LANGUAGES_SORTING_TOP
-} from '../../../constants/languages'
+import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'
 
 export const initialState = () => ({
 	sorting: LANGUAGES_SORTING_TOP,
@@ -32,10 +29,10 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_LANGUAGES_SORTING:
-			// Reset value because a different sorting results in a different value strcuture
-			// and because the view shouldn't show the old data when switching.
+			if (draft.sorting === action.payload) break
+			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.sorting = action.payload || initialState().sorting
+			draft.sorting = action.payload
 			break
 		case SET_LANGUAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -46,8 +43,6 @@ export default produce((draft, action) => {
 		case SET_LANGUAGES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_LANGUAGES:
-			return initialState()
 	}
 
 }, initialState())

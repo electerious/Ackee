@@ -2,7 +2,7 @@ import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import Context from './Context'
+import Context, { BUTTON as DROPDOWN_BUTTON } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
 const BUTTON = Symbol()
@@ -14,7 +14,6 @@ const Spinner = (props) => {
 		h('div', {
 			className: classNames({
 				'header__spinner': true,
-				'header__spinner--black': props.color === 'black',
 				'header__spinner--white': props.color === 'white',
 				'header__spinner--primary': props.color === 'primary',
 				'header__spinner--visible': props.fetching === true
@@ -30,7 +29,6 @@ const Logo = (props) => {
 
 	return (
 		h('div', { className: 'header__logo' },
-			h(Spinner, { color: 'black', fetching }),
 			h(Spinner, { color: 'white', fetching }),
 			h(Spinner, { color: 'primary', fetching })
 		)
@@ -136,6 +134,13 @@ export const createButton = (label, route, props) => ({
 export const createDropdown = (label, items) => ({
 	type: DROPDOWN,
 	items,
+	label
+})
+
+export const createDropdownButton = (label, route, props) => ({
+	type: DROPDOWN_BUTTON,
+	onClick: () => props.setRouteValue(route),
+	active: props.route.value === route,
 	label
 })
 

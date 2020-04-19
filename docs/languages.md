@@ -1,16 +1,20 @@
 # Languages
 
-- [Get top languages](#get-top-languages)
-- [Get recent languages](#get-recent-languages)
+- [Top languages](#top-languages)
+- [Recent languages](#recent-languages)
 
-## Get top languages
+## Top languages
 
-Get the top 25 user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) of the last 7 days.
+Get the top 30 user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)).
 
 ### Request
 
 ```
 GET /domains/:domainId/languages?sorting=top
+GET /domains/:domainId/languages?sorting=top&range=daily
+GET /domains/:domainId/languages?sorting=top&range=weekly
+GET /domains/:domainId/languages?sorting=top&range=monthly
+GET /domains/:domainId/languages?sorting=top&range=allTime
 ```
 
 ### Headers
@@ -40,9 +44,9 @@ Status: 200 OK
 }
 ```
 
-## Get recent languages
+## Recent languages
 
-Get the 25 most recent user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)) of the last 7 days.
+Get the 30 most recent user languages ([ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)).
 
 ### Request
 

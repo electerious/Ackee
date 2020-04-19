@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const uuid = require('uuid/v4')
+const uuid = require('uuid').v4
 const isUrl = require('is-url')
 
 const isNullOrUrl = (value) => value == null || isUrl(value)

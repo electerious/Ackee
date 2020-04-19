@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const uuid = require('uuid/v4')
+const uuid = require('uuid').v4
 
 const schema = new mongoose.Schema({
 	id: {

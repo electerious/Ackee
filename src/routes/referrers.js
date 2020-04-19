@@ -4,6 +4,7 @@ const { createError } = require('micro')
 
 const referrers = require('../database/referrers')
 const constants = require('../constants/referrers')
+const ranges = require('../constants/ranges')
 
 const response = (entry) => ({
 	type: 'referrer',
@@ -22,7 +23,7 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { sorting } = req.query
+	const { sorting, range = ranges.RANGES_LAST_7_DAYS } = req.query
 
 	const sortings = [
 		constants.REFERRERS_SORTING_TOP,
@@ -31,8 +32,9 @@ const get = async (req) => {
 	]
 
 	if (sortings.includes(sorting) === false) throw createError(400, 'Unknown sorting')
+	if (ranges.toArray().includes(range) === false) throw createError(400, 'Unknown range')
 
-	const entries = await referrers.get(domainId, sorting)
+	const entries = await referrers.get(domainId, sorting, range)
 
 	return responses(entries)
 

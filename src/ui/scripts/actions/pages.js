@@ -5,7 +5,6 @@ export const SET_PAGES_SORTING = Symbol()
 export const SET_PAGES_VALUE = Symbol()
 export const SET_PAGES_FETCHING = Symbol()
 export const SET_PAGES_ERROR = Symbol()
-export const RESET_PAGES = Symbol()
 
 export const setPagesSorting = (payload) => ({
 	type: SET_PAGES_SORTING,
@@ -30,10 +29,6 @@ export const setPagesError = (domainId, payload) => ({
 	payload
 })
 
-export const resetPages = () => ({
-	type: RESET_PAGES
-})
-
 export const fetchPages = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
 	dispatch(setPagesFetching(domainId, true))
@@ -41,7 +36,7 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }`, {
+		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }&range=${ props.filter.range }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

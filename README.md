@@ -83,8 +83,11 @@ Make sure to install and update all dependencies before you setup Ackee.
 - [/domains/:domainId/pages](docs/pages.md)
 - [/domains/:domainId/referrers](docs/referrers.md)
 - [/domains/:domainId/durations](docs/durations.md)
-- [/domains/:domainId/languages](docs/languages.md)
+- [/domains/:domainId/systems](docs/systems.md)
+- [/domains/:domainId/devices](docs/devices.md)
+- [/domains/:domainId/browsers](docs/browsers.md)
 - [/domains/:domainId/sizes](docs/sizes.md)
+- [/domains/:domainId/languages](docs/languages.md)
 
 ### Options
 
@@ -94,10 +97,18 @@ Ackee uses environment variables and supports [`.env` files](https://www.npmjs.c
 
 More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
+#### Donate
+
+I am working hard on continuously developing and maintaining Ackee. Please consider making a donation to keep the project going strong and me motivated.
+
+- [Donate via PayPal](https://paypal.me/electerious)
+- [Buy me a coffee](https://www.buymeacoffee.com/electerious)
+
 #### Related
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
 - [Soapberry](https://wordpress.org/plugins/soapberry/) - WordPress plugin for Ackee
+- [Ackee-PHP](https://github.com/BrookeDot/ackee-php) - A PHP Class for Ackee
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee

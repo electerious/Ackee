@@ -1,17 +1,21 @@
 # Referrers
 
-- [Get top referrers](#get-top-referrers)
-- [Get new referrers](#get-new-referrers)
-- [Get recent referrers](#get-recent-referrers)
+- [Top referrers](#top-referrers)
+- [New referrers](#new-referrers)
+- [Recent referrers](#recent-referrers)
 
-## Get top referrers
+## Top referrers
 
-Get the top 25 referrers of the last 7 days.
+Get the top 30 referrers.
 
 ### Request
 
 ```
 GET /domains/:domainId/referrers?sorting=top
+GET /domains/:domainId/referrers?sorting=top&range=daily
+GET /domains/:domainId/referrers?sorting=top&range=weekly
+GET /domains/:domainId/referrers?sorting=top&range=monthly
+GET /domains/:domainId/referrers?sorting=top&range=allTime
 ```
 
 ### Headers
@@ -41,9 +45,9 @@ Status: 200 OK
 }
 ```
 
-## Get new referrers
+## New referrers
 
-Get the 25 most recent referrers who have linked to your site for the first time in the last 7 days.
+Get the 30 most recent referrers who have linked to your site for the first time.
 
 ### Request
 
@@ -79,9 +83,9 @@ Status: 200 OK
 }
 ```
 
-## Get recent referrers
+## Recent referrers
 
-Get the 25 most recent referrers of the last 7 days.
+Get the 30 most recent referrers.
 
 ### Request
 

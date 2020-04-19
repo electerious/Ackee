@@ -7,26 +7,71 @@
 	bottom: var(--bottom);
 	left: var(--left);
 	padding: $gutter/2 0;
-	min-width: 150px;
-	background: $card;
+	min-width: 170px;
+	background: rgba($context, .98);
 	border-radius: $radius;
 	transform: translate(var(--x, 0), var(--y, 0));
-	box-shadow: $shadow;
+	z-index: 3;
+
+	@supports (backdrop-filter: blur(10px)) {
+		background: $context;
+		backdrop-filter: blur(10px);
+	}
+
+	@media (max-width: 800px) {
+		font-size: .9em;
+	}
+
+	&--floating {
+		position: fixed;
+		min-width: 210px;
+		border-radius: 12px;
+	}
 
 	&.visible {
 		display: grid;
 	}
 
 	&__button {
-		padding: $gutter/6 $gutter;
-		padding-right: $gutter*2;
+		padding: $gutter/3 $gutter*1.2;
+		padding-right: $gutter*3;
 		color: currentColor;
 		text-align: left;
-		transition: color .3s ease;
+		transition: color .3s ease, background .2s ease;
+		line-height: 1.4;
+		outline: none;
 
-		&:hover {
+		&.active {
 			color: $white;
 		}
+
+		&:focus,
+		&:hover {
+			background: $dimmed;
+		}
+	}
+
+	&--floating &__button {
+		margin: 0 $gutter/2;
+		padding: $gutter/2 $gutter/1.6;
+		padding-right: $gutter*3;
+		color: $white;
+		border-radius: $radius;
+
+		&.active {
+			color: $primary;
+		}
+	}
+
+	&__description {
+		font-size: .86em;
+		color: $light;
+	}
+
+	&__separator {
+		height: 1px;
+		background: $dimmed;
+		margin: $gutter/2 0;
 	}
 
 }
