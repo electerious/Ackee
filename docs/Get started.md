@@ -22,7 +22,7 @@ Only those two are required to run Ackee with the existing `docker-compose.yml`.
 
 Run this command in the root of the project to use the predefined `docker-compose.yml`. It contains everything you need, including MongoDB and Ackee.
 
-```
+```sh
 docker-compose up
 ```
 
@@ -45,13 +45,13 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 Ackee requires a running MongoDB instance. The easiest way to install MongoDB is by using [Docker](https://www.docker.com). Skip this step if you have MongoDB installed or visit the [website of MongoDB](https://www.mongodb.com) for alternative setups.
 
-```
+```sh
 docker run -p 27017:27017 --name mongo mongo
 ```
 
 For persistent storage, mount a host directory to the container directory `/data/db`, which is identified as a potential mount point in the mongo Dockerfile. When starting a new container, Docker will use the volume of the previous container and copy it to the new container, ensuring that no data gets lost.
 
-```
+```sh
 docker run -p 27017:27017 -v /path/to/local/folder:/data/db --name mongo mongo
 ```
 
@@ -66,7 +66,7 @@ Explanation:
 
 ### 2. Run Ackee
 
-```
+```sh
 docker run -p 3000:3000 -e ACKEE_MONGODB='mongodb://mongo:27017/ackee' -e ACKEE_USERNAME='username' -e ACKEE_PASSWORD='password' --link mongo --name ackee electerious/ackee
 ```
 
@@ -123,7 +123,7 @@ The username and password variables are used to secure your Ackee interface/API.
 
 Install all required dependencies.
 
-```
+```sh
 yarn
 ```
 
@@ -131,7 +131,7 @@ yarn
 
 Ackee will output the URL it's listening on once the server is running. Visit the URL with your browser and complete the finial steps using the interface.
 
-```
+```sh
 yarn start
 ```
 
@@ -156,20 +156,16 @@ Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGI
 
 ### 3. Updating Ackee
 
-The easiest way to update Ackee once hosted on Heroku is to clone the repo down,
-pull the latest changes from Ackee, and then push them back up to Heroku. You'll
-need the Heroku CLI and git for this to work.
+The easiest way to update Ackee once hosted on Heroku is to clone the repo down, pull the latest changes from Ackee, and then push them back up to Heroku. You'll need the Heroku CLI and git for this to work.
 
-In your application view, you'll find instructions under the `Deploy` tab on
-how to clone down the project. It should look something like below:
+In your application view, you'll find instructions under the `Deploy` tab on how to clone down the project. It should look something like below:
 
 ```sh
 heroku login
 heroku git:clone -a <your ackee applicaton name>
 ```
 
-You'll then want to add the Ackee repo as origin, pull the latest changes, and
-push it back up to Heroku.
+You'll then want to add the Ackee repo as origin, pull the latest changes, and push it back up to Heroku.
 
 ```sh
 git remote add origin https://github.com/electerious/Ackee.git
