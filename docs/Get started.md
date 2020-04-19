@@ -156,7 +156,7 @@ Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGI
 
 ### 3. Updating Ackee
 
-The easiest way to update Ackee once hosted on Heroku is to clone the repo down, pull the latest changes from Ackee, and then push them back up to Heroku. You'll need the Heroku CLI and git for this to work.
+The easiest way to update Ackee once hosted on Heroku is to clone the repo down, pull the latest changes from Ackee, and then push them back up to Heroku. You'll need the Heroku CLI and Git for this to work.
 
 In your application view, you'll find instructions under the `Deploy` tab on how to clone down the project. It should look something like below:
 
@@ -173,4 +173,4 @@ git pull origin master
 git push origin heroku master
 ```
 
-After your application re-deploys you'll have the latest Ackee!
+After your application re-deploys you'll have the latest version of Ackee!
