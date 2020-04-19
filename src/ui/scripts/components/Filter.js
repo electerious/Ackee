@@ -217,7 +217,9 @@ const Filter = (props) => {
 	const buttons = currentButtons.map((button) => h(FilterItem, button))
 
 	return createPortal(
-		h('div', { className: 'filter' }, ...buttons),
+		h('div', { className: 'filter' },
+			h('div', { className: 'filter__bar' }, ...buttons)
+		),
 		document.body
 	)
 
