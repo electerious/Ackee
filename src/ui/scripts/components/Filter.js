@@ -60,6 +60,18 @@ const labels = {
 	[languages.LANGUAGES_SORTING_RECENT]: 'Recent'
 }
 
+const calculateX = (measurement) => {
+
+	return measurement.target.relative.x + measurement.target.width / 2 - measurement.element.width / 2
+
+}
+
+const calculateY = (measurement) => {
+
+	return measurement.target.relative.y - measurement.element.height - 10
+
+}
+
 const FilterItem = (props) => {
 
 	const ref = useRef()
@@ -82,11 +94,8 @@ const FilterItem = (props) => {
 			),
 			active === true && h(Context, {
 				targetRef: ref,
-				// Manually calculated works better on mobile when element is sticky to the bottom
-				bottom: () => `calc(4vh + 51px)`,
-				left: (measurement) => `${ measurement.left + measurement.width / 2 }px`,
-				x: '-50%',
-				y: '-10px',
+				x: calculateX,
+				y: calculateY,
 				floating: true,
 				items: props.items,
 				onItemClick: close,

@@ -8,6 +8,23 @@ import IconArrowDown from './icons/IconArrowDown'
 const BUTTON = Symbol()
 const DROPDOWN = Symbol()
 
+const calculateX = (measurement) => {
+
+	return Math.min(
+		// Ensure that the context stays on the screen
+		measurement.body.width - measurement.element.width - 10,
+		// Ensure that the context is pinned to the target
+		measurement.target.absolute.x + measurement.target.width - measurement.element.width
+	)
+
+}
+
+const calculateY = (measurement) => {
+
+	return measurement.target.absolute.y + measurement.target.height + 10
+
+}
+
 const Spinner = (props) => {
 
 	return (
@@ -80,9 +97,8 @@ const Dropdown = (props) => {
 			),
 			active === true && h(Context, {
 				targetRef: ref,
-				top: (measurement) => `${ measurement.bottom - measurement.scrollY }px`,
-				right: (measurement) => `${ Math.max(10, measurement.scrollWidth - measurement.right) }px`,
-				y: '10px',
+				x: calculateX,
+				y: calculateY,
 				items: props.items,
 				onItemClick: close,
 				onAwayClick: close
