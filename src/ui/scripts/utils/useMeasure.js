@@ -1,48 +1,69 @@
 import React, { useState } from 'react'
-import { useInterval } from 'react-use'
+import { useRafLoop } from 'react-use'
+import isEqual from 'react-fast-compare'
 
-const getMeasurement = (ref) => {
+const getMeasurement = (targetRef, elementRef) => {
 
-	const documentBoundingClientRect = document.scrollingElement.getBoundingClientRect()
-	const refBoundingClientRect = ref.current.getBoundingClientRect()
+	const scrollingBoundingClientRect = document.scrollingElement.getBoundingClientRect()
+	const targetBoundingClientRect = targetRef.current.getBoundingClientRect()
+	const elementBoundingClientRect = elementRef.current.getBoundingClientRect()
+
+	const body = {
+		width: scrollingBoundingClientRect.width,
+		height: scrollingBoundingClientRect.height,
+		relative: {
+			x: scrollingBoundingClientRect.left,
+			y: scrollingBoundingClientRect.top
+		},
+		absolute: {
+			x: scrollingBoundingClientRect.left,
+			y: scrollingBoundingClientRect.top
+		}
+	}
+
+	const target = {
+		width: targetBoundingClientRect.width,
+		height: targetBoundingClientRect.height,
+		relative: {
+			x: targetBoundingClientRect.left,
+			y: targetBoundingClientRect.top
+		},
+		absolute: {
+			x: targetBoundingClientRect.left + scrollingBoundingClientRect.left * -1,
+			y: targetBoundingClientRect.top + scrollingBoundingClientRect.top * -1
+		}
+	}
+
+	const element = {
+		width: elementBoundingClientRect.width,
+		height: elementBoundingClientRect.height
+	}
 
 	return {
-		top: refBoundingClientRect.top,
-		right: refBoundingClientRect.right,
-		bottom: refBoundingClientRect.bottom,
-		left: refBoundingClientRect.left,
-		width: refBoundingClientRect.width,
-		height: refBoundingClientRect.height,
-		x: refBoundingClientRect.x,
-		y: refBoundingClientRect.y,
-		scrollWidth: documentBoundingClientRect.width,
-		scrollHeight: documentBoundingClientRect.height,
-		scrollX: documentBoundingClientRect.x,
-		scrollY: documentBoundingClientRect.y
+		body,
+		target,
+		element
 	}
 
 }
 
-const shouldStateUpdate = (prevState = {}, nextState = {}) => {
-
-	return Object.keys(nextState).some((key) => prevState[key] !== nextState[key])
-
-}
-
-export default (ref) => {
+export default (targetRef, elementRef) => {
 
 	const [ measurement, setMeasurement ] = useState()
 
-	useInterval(() => {
+	useRafLoop(() => {
 
-		if (ref.current == null) return
+		if (targetRef.current == null) return
+		if (elementRef.current == null) return
 
-		const nextMeasurement = getMeasurement(ref)
-		const needUpdate = shouldStateUpdate(measurement, nextMeasurement)
+		const nextMeasurement = getMeasurement(targetRef, elementRef)
+		const needsStateUpdate = isEqual(measurement || {}, nextMeasurement) === false
 
-		if (needUpdate === true) setMeasurement(nextMeasurement)
+		if (needsStateUpdate === false) return
 
-	}, 10)
+		setMeasurement(nextMeasurement)
+
+	}, true)
 
 	return measurement
 

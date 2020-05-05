@@ -1,17 +1,17 @@
 .context {
 
 	position: absolute;
-	display: none;
-	top: var(--top);
-	right: var(--right);
-	bottom: var(--bottom);
-	left: var(--left);
+	display: grid;
+	top: 0;
+	left: 0;
 	padding: $gutter/2 0;
 	min-width: 170px;
 	background: rgba($context, .98);
 	border-radius: $radius;
-	transform: translate(var(--x, 0), var(--y, 0));
+	transform: translate(var(--x), var(--y));
 	z-index: 3;
+	opacity: 0;
+	pointer-events: none;
 
 	@supports (backdrop-filter: blur(10px)) {
 		background: $context;
@@ -29,7 +29,8 @@
 	}
 
 	&.visible {
-		display: grid;
+		opacity: 1;
+		pointer-events: all;
 	}
 
 	&__button {
