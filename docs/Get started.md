@@ -2,6 +2,7 @@
 
 - [With Docker Compose](#with-docker-compose)
 - [With Docker](#with-docker)
+- [With Helm](#with-helm)
 - [Without Docker](#without-docker)
 - [With Heroku](#with-heroku)
 
@@ -90,6 +91,22 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 - [SSL and HTTPS](SSL%20and%20HTTPS.md)
 - [CORS headers](CORS%20headers.md)
+
+## With Helm
+
+### 1. Create `values.yaml`
+
+Based on the [default `values.yaml`](https://github.com/suda/ackee-chart/blob/master/values.yaml) create your own with overrides as needed.
+
+### 2. Deploy with `helm`
+
+```
+helm repo add ackee https://raw.githubusercontent.com/suda/ackee-chart/master
+helm repo update
+helm install ackee-release ackee/ackee-chart -n ackee -f values.yaml
+```
+
+If you're using the `ingress-nginx`, enabling the ingress will set the necessary annotations to enable CORS.
 
 ## Without Docker
 
