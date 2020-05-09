@@ -25,7 +25,7 @@ const Main = (props) => {
 	if (showOverlayLogin === true) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
 
 	if (showDashboard === true) return h(Fragment, {},
-		h(Filter, props),
+		props.domains.value.length > 0 ? h(Filter, props) : null,
 		h(Dashboard, props)
 	)
 
