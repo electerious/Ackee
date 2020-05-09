@@ -4,8 +4,7 @@ import {
 	SET_DURATIONS_TYPE,
 	SET_DURATIONS_VALUE,
 	SET_DURATIONS_FETCHING,
-	SET_DURATIONS_ERROR,
-	RESET_DURATIONS
+	SET_DURATIONS_ERROR
 } from '../actions'
 
 import { DURATIONS_TYPE_AVERAGE } from '../../../constants/durations'
@@ -30,9 +29,10 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_DURATIONS_TYPE:
+			if (draft.type === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_DURATIONS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -43,8 +43,6 @@ export default produce((draft, action) => {
 		case SET_DURATIONS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_DURATIONS:
-			return initialState()
 	}
 
 }, initialState())

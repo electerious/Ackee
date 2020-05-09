@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectLanguagesValue from '../../selectors/selectLanguagesValue'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -32,8 +33,8 @@ const RouteLanguages = (props) => {
 							headline: domain.data.title,
 							range: props.filter.range,
 							sorting: props.languages.sorting,
-							loading: props.languages.value[domain.data.id] == null ? false : props.languages.value[domain.data.id].fetching,
-							items: props.languages.value[domain.data.id] == null ? [] : enhanceLanguages(props.languages.value[domain.data.id].value)
+							loading: selectLanguagesValue(props, domain.data.id).fetching,
+							items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value)
 						})
 					)
 				)

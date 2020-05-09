@@ -4,18 +4,22 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { useClickAway } from 'react-use'
 
-import runWhenDefined from '../utils/runWhenDefined'
 import useMeasure from '../utils/useMeasure'
 
 export const BUTTON = Symbol()
 export const SEPARATOR = Symbol()
 
+const toPixel = (num) => `${ Math.round(num) }px`
+
 const Context = (props) => {
 
 	const ref = useRef()
-	const measurement = useMeasure(props.targetRef)
+	const measurement = useMeasure(props.targetRef, ref)
 
 	useClickAway(ref, props.onAwayClick, [ 'click' ])
+
+	const x = measurement == null ? undefined : toPixel(props.x(measurement))
+	const y = measurement == null ? undefined : toPixel(props.y(measurement))
 
 	return createPortal(
 		h('div', {
@@ -26,12 +30,8 @@ const Context = (props) => {
 				'visible': measurement != null
 			}),
 			style: {
-				'--top': runWhenDefined(props.top, measurement),
-				'--right': runWhenDefined(props.right, measurement),
-				'--bottom': runWhenDefined(props.bottom, measurement),
-				'--left': runWhenDefined(props.left, measurement),
-				'--x': props.x,
-				'--y': props.y
+				'--x': x,
+				'--y': y
 			}
 		},
 			props.items.map((item, index) => {
@@ -53,6 +53,7 @@ const Context = (props) => {
 				)
 
 				if (item.type === SEPARATOR) return h('div', {
+					key: index,
 					className: 'context__separator'
 				})
 
@@ -67,12 +68,8 @@ Context.propTypes = {
 	targetRef: PropTypes.shape({
 		current: PropTypes.instanceOf(Element)
 	}),
-	top: PropTypes.func,
-	right: PropTypes.func,
-	bottom: PropTypes.func,
-	left: PropTypes.func,
-	x: PropTypes.string,
-	y: PropTypes.string,
+	x: PropTypes.func.isRequired,
+	y: PropTypes.func.isRequired,
 	floating: PropTypes.bool,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onItemClick: PropTypes.func.isRequired,

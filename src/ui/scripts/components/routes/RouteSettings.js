@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { version, homepage, funding } from '../../../../../package'
+import { version, homepage } from '../../../../../package'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
@@ -63,8 +63,6 @@ const RouteSettings = (props) => {
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: funding.url, target: '_blank', rel: 'noopener' }, 'Donate via PayPal'),
-				h(Line),
 				h(LinkItem, { type: 'button', onClick: () => props.deleteToken(props) }, 'Sign Out')
 			),
 
@@ -75,11 +73,19 @@ const RouteSettings = (props) => {
 			),
 
 			h(CardSetting, {
+				headline: 'Donate'
+			},
+				h(LinkItem, { type: 'a', href: 'https://paypal.me/electerious', target: '_blank', rel: 'noopener' }, 'Donate via PayPal'),
+				h(Line),
+				h(LinkItem, { type: 'a', href: 'https://www.buymeacoffee.com/electerious', target: '_blank', rel: 'noopener' }, 'Buy me a coffee')
+			),
+
+			h(CardSetting, {
 				headline: 'Help'
 			},
-				h(LinkItem, { type: 'a', href: homepage, target: '_blank', rel: 'noopener' }, 'Ackee on GitHub'),
+				h(LinkItem, { type: 'a', href: 'https://ackee.electerious.com', target: '_blank', rel: 'noopener' }, 'Website and documentation'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md', target: '_blank', rel: 'noopener' }, 'Get started'),
+				h(LinkItem, { type: 'a', href: homepage, target: '_blank', rel: 'noopener' }, 'Ackee on GitHub'),
 				h(Line),
 				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/ackee-tracker', target: '_blank', rel: 'noopener' }, 'Add Ackee to your sites')
 			)

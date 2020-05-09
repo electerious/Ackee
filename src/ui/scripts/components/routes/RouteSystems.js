@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectSystemsValue from '../../selectors/selectSystemsValue'
 import enhanceSystems from '../../enhancers/enhanceSystems'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -33,8 +34,8 @@ const RouteSystems = (props) => {
 							headline: domain.data.title,
 							range: props.filter.range,
 							sorting: props.systems.sorting,
-							loading: props.systems.value[domain.data.id] == null ? false : props.systems.value[domain.data.id].fetching,
-							items: props.systems.value[domain.data.id] == null ? [] : enhanceSystems(props.systems.value[domain.data.id].value)
+							loading: selectSystemsValue(props, domain.data.id).fetching,
+							items: enhanceSystems(selectSystemsValue(props, domain.data.id).value)
 						})
 					)
 				)

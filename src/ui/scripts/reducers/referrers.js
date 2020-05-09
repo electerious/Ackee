@@ -1,12 +1,10 @@
 import produce from 'immer'
 
 import {
-	SET_FILTER_RANGE,
 	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
-	SET_REFERRERS_ERROR,
-	RESET_REFERRERS
+	SET_REFERRERS_ERROR
 } from '../actions'
 
 import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
@@ -30,14 +28,11 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_FILTER_RANGE:
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			break
 		case SET_REFERRERS_SORTING:
+			if (draft.sorting === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.sorting = action.payload || initialState().sorting
+			draft.sorting = action.payload
 			break
 		case SET_REFERRERS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -48,8 +43,6 @@ export default produce((draft, action) => {
 		case SET_REFERRERS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_REFERRERS:
-			return initialState()
 	}
 
 }, initialState())

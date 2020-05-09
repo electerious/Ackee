@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectDevicesValue from '../../selectors/selectDevicesValue'
 import enhanceDevices from '../../enhancers/enhanceDevices'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -32,8 +33,8 @@ const RouteDevices = (props) => {
 							headline: domain.data.title,
 							range: props.filter.range,
 							sorting: props.devices.sorting,
-							loading: props.devices.value[domain.data.id] == null ? false : props.devices.value[domain.data.id].fetching,
-							items: props.devices.value[domain.data.id] == null ? [] : enhanceDevices(props.devices.value[domain.data.id].value)
+							loading: selectDevicesValue(props, domain.data.id).fetching,
+							items: enhanceDevices(selectDevicesValue(props, domain.data.id).value)
 						})
 					)
 				)

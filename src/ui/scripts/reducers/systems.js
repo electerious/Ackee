@@ -1,13 +1,11 @@
 import produce from 'immer'
 
 import {
-	SET_FILTER_RANGE,
 	SET_SYSTEMS_ERROR,
 	SET_SYSTEMS_FETCHING,
 	SET_SYSTEMS_SORTING,
 	SET_SYSTEMS_VALUE,
-	SET_SYSTEMS_TYPE,
-	RESET_SYSTEMS
+	SET_SYSTEMS_TYPE
 } from '../actions'
 
 import { SYSTEMS_SORTING_TOP, SYSTEMS_TYPE_NO_VERSION } from '../../../constants/systems'
@@ -32,19 +30,17 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_FILTER_RANGE:
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			break
 		case SET_SYSTEMS_TYPE:
+			if (draft.type === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_SYSTEMS_SORTING:
+			if (draft.sorting === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.sorting = action.payload || initialState().sorting
+			draft.sorting = action.payload
 			break
 		case SET_SYSTEMS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -55,8 +51,6 @@ export default produce((draft, action) => {
 		case SET_SYSTEMS_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_SYSTEMS:
-			return initialState()
 	}
 
 }, initialState())

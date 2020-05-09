@@ -14,7 +14,7 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_FILTER_RANGE:
-			draft.range = action.payload || initialState().range
+			draft.range = action.payload
 			break
 	}
 

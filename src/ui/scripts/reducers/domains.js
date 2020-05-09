@@ -3,8 +3,7 @@ import produce from 'immer'
 import {
 	SET_DOMAINS_VALUE,
 	SET_DOMAINS_FETCHING,
-	SET_DOMAINS_ERROR,
-	RESET_DOMAINS
+	SET_DOMAINS_ERROR
 } from '../actions'
 
 export const initialState = () => ({
@@ -25,8 +24,6 @@ export default produce((draft, action) => {
 		case SET_DOMAINS_ERROR:
 			draft.error = action.payload || initialState().error
 			break
-		case RESET_DOMAINS:
-			return initialState()
 	}
 
 }, initialState())

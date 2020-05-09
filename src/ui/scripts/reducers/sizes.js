@@ -1,12 +1,10 @@
 import produce from 'immer'
 
 import {
-	SET_FILTER_RANGE,
 	SET_SIZES_TYPE,
 	SET_SIZES_VALUE,
 	SET_SIZES_FETCHING,
-	SET_SIZES_ERROR,
-	RESET_SIZES
+	SET_SIZES_ERROR
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
@@ -30,14 +28,11 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_FILTER_RANGE:
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			break
 		case SET_SIZES_TYPE:
+			if (draft.type === action.payload) break
 			// Reset value because the view shouldn't show the old data when switching
 			draft.value = initialState().value
-			draft.type = action.payload || initialState().type
+			draft.type = action.payload
 			break
 		case SET_SIZES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
@@ -48,8 +43,6 @@ export default produce((draft, action) => {
 		case SET_SIZES_ERROR:
 			draft.value[action.domainId].error = action.payload || initialSubState().error
 			break
-		case RESET_SIZES:
-			return initialState()
 	}
 
 }, initialState())

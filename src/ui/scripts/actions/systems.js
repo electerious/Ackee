@@ -6,7 +6,6 @@ export const SET_SYSTEMS_SORTING = Symbol()
 export const SET_SYSTEMS_VALUE = Symbol()
 export const SET_SYSTEMS_FETCHING = Symbol()
 export const SET_SYSTEMS_ERROR = Symbol()
-export const RESET_SYSTEMS = Symbol()
 
 export const setSystemsSorting = (payload) => ({
 	type: SET_SYSTEMS_SORTING,
@@ -34,10 +33,6 @@ export const setSystemsError = (domainId, payload) => ({
 	type: SET_SYSTEMS_ERROR,
 	domainId,
 	payload
-})
-
-export const resetSystems = () => ({
-	type: RESET_SYSTEMS
 })
 
 export const fetchSystems = signalHandler((signal) => (props, domainId) => async (dispatch) => {

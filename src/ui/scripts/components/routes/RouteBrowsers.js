@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import selectBrowsersValue from '../../selectors/selectBrowsersValue'
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import useDidMountEffect from '../../utils/useDidMountEffect'
 
@@ -32,8 +33,8 @@ const RouteBrowsers = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.browsers.sorting,
-						loading: props.browsers.value[domain.data.id] == null ? false : props.browsers.value[domain.data.id].fetching,
-						items: props.browsers.value[domain.data.id] == null ? [] : enhanceBrowsers(props.browsers.value[domain.data.id].value)
+						loading: selectBrowsersValue(props, domain.data.id).fetching,
+						items: enhanceBrowsers(selectBrowsersValue(props, domain.data.id).value)
 					})
 				)
 			))

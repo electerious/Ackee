@@ -1,16 +1,16 @@
+import selectViewsValue from '../selectors/selectViewsValue'
 import enhanceViews from '../enhancers/enhanceViews'
 import isDefined from '../../../utils/isDefined'
 
 // Turns the views of multiple domains into one array of views
-export default (domains, views) => {
+export default (state) => {
 
 	// Enhance views for all domains
-	const enhancedViews = domains.value.map((domain) => {
+	const enhancedViews = state.domains.value.map((domain) => {
 
-		const view = views.value[domain.data.id]
-		const exists = view != null
+		const view = selectViewsValue(state, domain.data.id)
 
-		return exists === true ? enhanceViews(view.value, 14, views.interval) : undefined
+		return enhanceViews(view.value, 14, state.views.interval)
 
 	})
 
