@@ -1183,10 +1183,10 @@
   dependencies:
     arrify "^1.0.1"
 
-"@electerious/eslint-config@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@electerious/eslint-config/-/eslint-config-1.3.2.tgz#5b8070a60d83d08701353a754585a502f71f1afc"
-  integrity sha512-kMlnbuIeTEm/Q0cOVhhV5Nd78nXdqMDwr/bA2EtvYxEpTrxfxs5lauB2EHQnYnyPUryZf5D3TERaBZN/TncDeA==
+"@electerious/eslint-config@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@electerious/eslint-config/-/eslint-config-1.3.4.tgz#3043608a71bd51c5171b1776fa473b3efe4e964e"
+  integrity sha512-gPvT+tMVWMyJzxW9Qi8xIZgWqSRvY3GWQw7tWJUO3RU05h+csVBrArmO7gSk8SHnfAzmE1OiH8rRI76dMjJixQ==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
