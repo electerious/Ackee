@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Instructions for using Helm (#109, thanks @suda)
 - Instructions for using systemd (#112, thanks @LickABrick)
+- Instructions on how to update when hosting on Heroku (#107, thanks @ckipp01)
 
 ## [1.7.0] - 2020-04-19
 
