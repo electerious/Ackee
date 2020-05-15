@@ -21,6 +21,7 @@ Get Ackee up and running…
 
 - […with Docker Compose](docs/Get%20started.md#with-docker-compose)
 - […with Docker](docs/Get%20started.md#with-docker)
+- […with Helm](docs/Get%20started.md#with-helm)
 - […without Docker](docs/Get%20started.md#without-docker)
 - […with Heroku](docs/Get%20started.md#with-heroku)
 
@@ -112,3 +113,4 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [Ackee-PHP](https://github.com/BrookeDot/ackee-php) - A PHP Class for Ackee
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
+- [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
