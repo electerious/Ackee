@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 
 import Headline from '../Headline'
 import Text from '../Text'
+import Updating from '../Updating'
 import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import rangeLabel from '../../utils/rangeLabel'
+import status from '../../utils/status'
 
-const textLabel = (range) => {
+const textLabel = (range, isStale) => {
+
+	if (isStale === true) return h(Updating)
 
 	return rangeLabel(range)
 
@@ -15,15 +19,19 @@ const textLabel = (range) => {
 
 const CardSizes = (props) => {
 
+	const {
+		isEmpty,
+		isStale,
+		isLoading
+	} = status(props.items, props.loading)
+
 	const presentation = (() => {
 
-		if (props.loading === true) return h(PresentationEmptyState, {
+		if (isLoading === true) return h(PresentationEmptyState, {
 			icon: ICON_LOADING
 		}, 'Loading sizes')
 
-		const hasItems = props.items.length > 0
-
-		if (hasItems === true) return h(PresentationCounterList, {
+		if (isEmpty === false) return h(PresentationCounterList, {
 			items: props.items
 		})
 
@@ -45,7 +53,7 @@ const CardSizes = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, textLabel(props.range)),
+				}, textLabel(props.range, isStale)),
 				presentation
 			)
 		)
