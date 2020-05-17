@@ -35,6 +35,7 @@ const RouteViews = (props) => {
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.views.type],
 				interval: props.views.interval,
+				loading: props.fetching,
 				items: mergeViews(props)
 			}),
 
@@ -44,6 +45,7 @@ const RouteViews = (props) => {
 						key: domain.data.id,
 						headline: domain.data.title,
 						interval: props.views.interval,
+						loading: selectViewsValue(props, domain.data.id).fetching,
 						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.views.interval)
 					})
 				)

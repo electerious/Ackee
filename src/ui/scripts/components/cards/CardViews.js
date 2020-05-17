@@ -4,13 +4,14 @@ import classNames from 'classnames'
 
 import { VIEWS_INTERVAL_DAILY, VIEWS_INTERVAL_MONTHLY, VIEWS_INTERVAL_YEARLY } from '../../../../constants/views'
 
+import Headline from '../Headline'
+import Text from '../Text'
+import Updating from '../Updating'
+import PresentationBarChart from '../presentations/PresentationBarChart'
 import relativeDays from '../../utils/relativeDays'
 import relativeMonths from '../../utils/relativeMonths'
 import relativeYears from '../../utils/relativeYears'
-
-import Headline from '../Headline'
-import Text from '../Text'
-import PresentationBarChart from '../presentations/PresentationBarChart'
+import status from '../../utils/status'
 
 const relativeFn = (interval) => {
 
@@ -22,6 +23,14 @@ const relativeFn = (interval) => {
 
 }
 
+const textLabel = (active, interval, isStale) => {
+
+	if (isStale === true) return h(Updating)
+
+	return relativeFn(interval)(active)
+
+}
+
 const CardViews = (props) => {
 
 	// Index of the active element
@@ -29,6 +38,10 @@ const CardViews = (props) => {
 
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive(0)
+
+	const {
+		isStale
+	} = status(props.items, props.loading)
 
 	return (
 		h('div', {
@@ -45,7 +58,11 @@ const CardViews = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, relativeFn(props.interval)(active)),
+				}, textLabel(
+					active,
+					props.interval,
+					isStale
+				)),
 				h(PresentationBarChart, {
 					items: props.items,
 					active: active,
@@ -62,6 +79,7 @@ CardViews.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
 	interval: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 

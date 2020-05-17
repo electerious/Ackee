@@ -2,12 +2,21 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import relativeDays from '../../utils/relativeDays'
-import formatDuration from '../../utils/formatDuration'
-
 import Headline from '../Headline'
 import Text from '../Text'
+import Updating from '../Updating'
 import PresentationBarChart from '../presentations/PresentationBarChart'
+import relativeDays from '../../utils/relativeDays'
+import formatDuration from '../../utils/formatDuration'
+import status from '../../utils/status'
+
+const textLabel = (active, isStale) => {
+
+	if (isStale === true) return h(Updating)
+
+	return relativeDays(active)
+
+}
 
 const CardViews = (props) => {
 
@@ -18,6 +27,10 @@ const CardViews = (props) => {
 	const onLeave = () => setActive(0)
 
 	const formatter = (ms) => formatDuration(ms).toString()
+
+	const {
+		isStale
+	} = status(props.items, props.loading)
 
 	return (
 		h('div', {
@@ -34,7 +47,10 @@ const CardViews = (props) => {
 				}, props.headline),
 				h(Text, {
 					spacing: false
-				}, relativeDays(active)),
+				}, textLabel(
+					active,
+					isStale
+				)),
 				h(PresentationBarChart, {
 					items: props.items,
 					formatter,
@@ -51,6 +67,7 @@ const CardViews = (props) => {
 CardViews.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
+	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
 
