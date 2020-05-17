@@ -70,6 +70,7 @@ const CardPages = (props) => {
 					className: 'color-white'
 				}, props.headline),
 				h(Text, {
+					type: 'div',
 					spacing: false
 				}, textLabel(
 					props.items[active],

@@ -46,6 +46,7 @@ const CardViews = (props) => {
 					className: 'color-white'
 				}, props.headline),
 				h(Text, {
+					type: 'div',
 					spacing: false
 				}, textLabel(
 					active,

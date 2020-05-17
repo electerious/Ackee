@@ -41,7 +41,9 @@ const OverlayLogin = (props) => {
 					type: 'h1',
 					className: 'color-white'
 				}, 'Ackee'),
-				h(Text, {}, 'Welcome back, sign in to continue.'),
+				h(Text, {
+					type: 'p'
+				}, 'Welcome back, sign in to continue.'),
 
 				h(Spacer, { size: 2.5 }),
 

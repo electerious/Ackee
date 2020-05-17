@@ -28,7 +28,9 @@ const OverlayFailure = (props) => {
 					type: 'h1',
 					className: 'color-white'
 				}, 'Oops'),
-				h(Text, {}, 'Something went wrong.'),
+				h(Text, {
+					type: 'p'
+				}, 'Something went wrong.'),
 
 				h(Spacer, { size: 2.5 }),
 
