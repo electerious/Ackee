@@ -32,7 +32,7 @@ const RouteBrowsers = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.browsers.sorting,
-						loading: selectBrowsersValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectBrowsersValue(props, domain.data.id).fetching,
 						items: enhanceBrowsers(selectBrowsersValue(props, domain.data.id).value)
 					})
 				)

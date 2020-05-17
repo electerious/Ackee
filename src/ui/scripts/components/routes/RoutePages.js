@@ -32,7 +32,7 @@ const RoutePages = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.pages.sorting,
-						loading: selectPagesValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectPagesValue(props, domain.data.id).fetching,
 						items: enhancePages(selectPagesValue(props, domain.data.id).value)
 					})
 				)

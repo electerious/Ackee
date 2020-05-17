@@ -32,7 +32,7 @@ const RouteDevices = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.devices.sorting,
-						loading: selectDevicesValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectDevicesValue(props, domain.data.id).fetching,
 						items: enhanceDevices(selectDevicesValue(props, domain.data.id).value)
 					})
 				)

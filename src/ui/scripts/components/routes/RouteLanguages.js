@@ -32,7 +32,7 @@ const RouteLanguages = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.languages.sorting,
-						loading: selectLanguagesValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectLanguagesValue(props, domain.data.id).fetching,
 						items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value)
 					})
 				)

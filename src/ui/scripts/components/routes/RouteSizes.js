@@ -31,7 +31,7 @@ const RouteSizes = (props) => {
 						key: domain.data.id,
 						range: props.filter.range,
 						headline: domain.data.title,
-						loading: selectSizesValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectSizesValue(props, domain.data.id).fetching,
 						items: enhanceSizes(selectSizesValue(props, domain.data.id).value)
 					})
 				)

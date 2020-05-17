@@ -8,7 +8,7 @@ const Updating = () => {
 	return (
 		h(Stack, { direction: HORIZONTAL },
 			h(Updater, {}),
-			'Loading'
+			'Updating'
 		)
 	)
 

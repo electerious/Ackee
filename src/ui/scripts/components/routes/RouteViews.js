@@ -45,7 +45,7 @@ const RouteViews = (props) => {
 						key: domain.data.id,
 						headline: domain.data.title,
 						interval: props.views.interval,
-						loading: selectViewsValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectViewsValue(props, domain.data.id).fetching,
 						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.views.interval)
 					})
 				)

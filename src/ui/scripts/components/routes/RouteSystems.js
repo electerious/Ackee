@@ -32,7 +32,7 @@ const RouteSystems = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.systems.sorting,
-						loading: selectSystemsValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectSystemsValue(props, domain.data.id).fetching,
 						items: enhanceSystems(selectSystemsValue(props, domain.data.id).value)
 					})
 				)

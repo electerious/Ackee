@@ -32,7 +32,7 @@ const RouteReferrers = (props) => {
 						headline: domain.data.title,
 						range: props.filter.range,
 						sorting: props.referrers.sorting,
-						loading: selectReferrersValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectReferrersValue(props, domain.data.id).fetching,
 						items: enhanceReferrers(selectReferrersValue(props, domain.data.id).value)
 					})
 				)

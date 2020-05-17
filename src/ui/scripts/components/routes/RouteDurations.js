@@ -43,7 +43,7 @@ const RouteDurations = (props) => {
 					h(CardAverageDurations, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						loading: selectDurationsValue(props, domain.data.id).fetching,
+						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7)
 					})
 				)
@@ -57,7 +57,7 @@ const RouteDurations = (props) => {
 				h(CardDetailedDurations, {
 					key: domain.data.id,
 					headline: domain.data.title,
-					loading: selectDurationsValue(props, domain.data.id).fetching,
+					loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value)
 				})
 			)
