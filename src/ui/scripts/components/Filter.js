@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 
 import {
 	ROUTE_VIEWS,
+	ROUTE_DOMAIN,
 	ROUTE_PAGES,
 	ROUTE_REFERRERS,
 	ROUTE_DURATIONS,
@@ -26,6 +27,8 @@ import * as ranges from '../../../constants/ranges'
 
 import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
+
+import selectRouteKey from '../selectors/selectRouteKey'
 
 const labels = {
 	[ranges.RANGES_LAST_24_HOURS]: '24 hours',
@@ -108,15 +111,19 @@ const FilterItem = (props) => {
 
 const Filter = (props) => {
 
+	const routeKey = selectRouteKey(props)
+
 	const shouldShowRange = (() => {
 
-		if (props.route.value === ROUTE_PAGES && props.pages.sorting === pages.PAGES_SORTING_TOP) return true
-		if (props.route.value === ROUTE_REFERRERS && props.referrers.sorting === referrers.REFERRERS_SORTING_TOP) return true
-		if (props.route.value === ROUTE_SYSTEMS && props.systems.sorting === systems.SYSTEMS_SORTING_TOP) return true
-		if (props.route.value === ROUTE_DEVICES && props.devices.sorting === devices.DEVICES_SORTING_TOP) return true
-		if (props.route.value === ROUTE_BROWSERS && props.browsers.sorting === browsers.BROWSERS_SORTING_TOP) return true
-		if (props.route.value === ROUTE_SIZES) return true
-		if (props.route.value === ROUTE_LANGUAGES && props.languages.sorting === languages.LANGUAGES_SORTING_TOP) return true
+		if (routeKey === ROUTE_DOMAIN.key) return true
+		if (routeKey === ROUTE_PAGES.key && props.pages.sorting === pages.PAGES_SORTING_TOP) return true
+		if (routeKey === ROUTE_REFERRERS.key && props.referrers.sorting === referrers.REFERRERS_SORTING_TOP) return true
+		if (routeKey === ROUTE_DURATIONS.key && props.durations.type === durations.DURATIONS_TYPE_DETAILED) return true
+		if (routeKey === ROUTE_SYSTEMS.key && props.systems.sorting === systems.SYSTEMS_SORTING_TOP) return true
+		if (routeKey === ROUTE_DEVICES.key && props.devices.sorting === devices.DEVICES_SORTING_TOP) return true
+		if (routeKey === ROUTE_BROWSERS.key && props.browsers.sorting === browsers.BROWSERS_SORTING_TOP) return true
+		if (routeKey === ROUTE_SIZES.key) return true
+		if (routeKey === ROUTE_LANGUAGES.key && props.languages.sorting === languages.LANGUAGES_SORTING_TOP) return true
 
 		return false
 
@@ -130,7 +137,7 @@ const Filter = (props) => {
 	], shouldShowRange === true)
 
 	const routesMap = {
-		[ROUTE_VIEWS]: [
+		[ROUTE_VIEWS.key]: [
 			createItem(labels[props.views.type], [
 				createButton('Unique', 'Unique site views', props.setViewsType, props.views.type, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setViewsType, props.views.type, views.VIEWS_TYPE_TOTAL)
@@ -141,14 +148,17 @@ const Filter = (props) => {
 				createButton('Yearly', 'Grouped by year', props.setViewsInterval, props.views.interval, views.VIEWS_INTERVAL_YEARLY)
 			])
 		],
-		[ROUTE_PAGES]: [
+		[ROUTE_DOMAIN.key]: [
+			rangeButton
+		],
+		[ROUTE_PAGES.key]: [
 			createItem(labels[props.pages.sorting], [
 				createButton('Top', 'Top page visits', props.setPagesSorting, props.pages.sorting, pages.PAGES_SORTING_TOP),
 				createButton('Recent', 'Recent page visits', props.setPagesSorting, props.pages.sorting, pages.PAGES_SORTING_RECENT)
 			]),
 			rangeButton
 		],
-		[ROUTE_REFERRERS]: [
+		[ROUTE_REFERRERS.key]: [
 			createItem(labels[props.referrers.sorting], [
 				createButton('Top', 'Top referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_TOP),
 				createButton('New', 'New referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_NEW),
@@ -156,13 +166,14 @@ const Filter = (props) => {
 			]),
 			rangeButton
 		],
-		[ROUTE_DURATIONS]: [
+		[ROUTE_DURATIONS.key]: [
 			createItem(labels[props.durations.type], [
 				createButton('Average', 'Average durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_AVERAGE),
 				createButton('Detailed', 'Detailed durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_DETAILED)
-			])
+			]),
+			rangeButton
 		],
-		[ROUTE_SYSTEMS]: [
+		[ROUTE_SYSTEMS.key]: [
 			createItem(labels[props.systems.sorting], [
 				createButton('Top', 'Top systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_RECENT),
@@ -174,7 +185,7 @@ const Filter = (props) => {
 			]),
 			rangeButton
 		],
-		[ROUTE_DEVICES]: [
+		[ROUTE_DEVICES.key]: [
 			createItem(labels[props.devices.sorting], [
 				createButton('Top', 'Top systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_RECENT),
@@ -186,7 +197,7 @@ const Filter = (props) => {
 			]),
 			rangeButton
 		],
-		[ROUTE_BROWSERS]: [
+		[ROUTE_BROWSERS.key]: [
 			createItem(labels[props.browsers.sorting], [
 				createButton('Top', 'Top systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_RECENT),
@@ -198,7 +209,7 @@ const Filter = (props) => {
 			]),
 			rangeButton
 		],
-		[ROUTE_SIZES]: [
+		[ROUTE_SIZES.key]: [
 			createItem(labels[props.sizes.type], [
 				createButton('Browser sizes', 'Width and height combined', props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
 				createButton('↳ widths', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_WIDTH),
@@ -210,7 +221,7 @@ const Filter = (props) => {
 			]),
 			rangeButton
 		],
-		[ROUTE_LANGUAGES]: [
+		[ROUTE_LANGUAGES.key]: [
 			createItem(labels[props.languages.sorting], [
 				createButton('Top', 'Top languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_TOP),
 				createButton('Recent', 'Recent languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_RECENT)
@@ -219,7 +230,7 @@ const Filter = (props) => {
 		]
 	}
 
-	const currentButtons = routesMap[props.route.value]
+	const currentButtons = routesMap[routeKey]
 
 	if (currentButtons == null) return null
 

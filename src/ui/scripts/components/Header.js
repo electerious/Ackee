@@ -1,9 +1,13 @@
 import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import isEqual from 'react-fast-compare'
 
-import Context, { BUTTON as DROPDOWN_BUTTON } from './Context'
+import Context, { BUTTON as DROPDOWN_BUTTON, SEPARATOR as DROPDOWN_SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
+
+import selectRouteKey from '../selectors/selectRouteKey'
+import selectRouteParams from '../selectors/selectRouteParams'
 
 const BUTTON = Symbol()
 const DROPDOWN = Symbol()
@@ -143,7 +147,7 @@ Header.propTypes = {
 export const createButton = (label, route, props) => ({
 	type: BUTTON,
 	onClick: () => props.setRouteValue(route),
-	active: props.route.value === route,
+	active: selectRouteKey(props) === route.key,
 	label
 })
 
@@ -156,8 +160,12 @@ export const createDropdown = (label, items) => ({
 export const createDropdownButton = (label, route, props) => ({
 	type: DROPDOWN_BUTTON,
 	onClick: () => props.setRouteValue(route),
-	active: props.route.value === route,
+	active: selectRouteKey(props) === route.key && isEqual(selectRouteParams(props), route.params || {}),
 	label
+})
+
+export const createDropdownSeparator = () => ({
+	type: DROPDOWN_SEPARATOR
 })
 
 export default Header

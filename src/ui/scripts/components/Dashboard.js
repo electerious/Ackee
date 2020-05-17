@@ -1,6 +1,8 @@
 import { createElement as h } from 'react'
 
 import {
+	ROUTE_OVERVIEW,
+	ROUTE_DOMAIN,
 	ROUTE_VIEWS,
 	ROUTE_PAGES,
 	ROUTE_REFERRERS,
@@ -13,7 +15,9 @@ import {
 	ROUTE_BROWSERS
 } from '../constants/route'
 
-import Header, { createButton, createDropdown, createDropdownButton } from './Header'
+import Header, { createButton, createDropdown, createDropdownButton, createDropdownSeparator } from './Header'
+import RouteOverview from './routes/RouteOverview'
+import RouteDomain from './routes/RouteDomain'
 import RouteViews from './routes/RouteViews'
 import RoutePages from './routes/RoutePages'
 import RouteReferrers from './routes/RouteReferrers'
@@ -26,17 +30,21 @@ import RouteSizes from './routes/RouteSizes'
 import RouteSettings from './routes/RouteSettings'
 import Modals from './Modals'
 
+import selectRouteKey from '../selectors/selectRouteKey'
+
 const routesMap = {
-	[ROUTE_VIEWS]: RouteViews,
-	[ROUTE_PAGES]: RoutePages,
-	[ROUTE_REFERRERS]: RouteReferrers,
-	[ROUTE_DURATIONS]: RouteDurations,
-	[ROUTE_SYSTEMS]: RouteSystems,
-	[ROUTE_DEVICES]: RouteDevices,
-	[ROUTE_BROWSERS]: RouteBrowsers,
-	[ROUTE_SIZES]: RouteSizes,
-	[ROUTE_LANGUAGES]: RouteLanguages,
-	[ROUTE_SETTINGS]: RouteSettings
+	[ROUTE_OVERVIEW.key]: RouteOverview,
+	[ROUTE_DOMAIN.key]: RouteDomain,
+	[ROUTE_VIEWS.key]: RouteViews,
+	[ROUTE_PAGES.key]: RoutePages,
+	[ROUTE_REFERRERS.key]: RouteReferrers,
+	[ROUTE_DURATIONS.key]: RouteDurations,
+	[ROUTE_SYSTEMS.key]: RouteSystems,
+	[ROUTE_DEVICES.key]: RouteDevices,
+	[ROUTE_BROWSERS.key]: RouteBrowsers,
+	[ROUTE_SIZES.key]: RouteSizes,
+	[ROUTE_LANGUAGES.key]: RouteLanguages,
+	[ROUTE_SETTINGS.key]: RouteSettings
 }
 
 const Dashboard = (props) => {
@@ -47,11 +55,16 @@ const Dashboard = (props) => {
 			h(Header, {
 				fetching: props.fetching,
 				items: [
-					createButton('Views', ROUTE_VIEWS, props),
-					createButton('Pages', ROUTE_PAGES, props),
-					createButton('Referrers', ROUTE_REFERRERS, props),
-					createButton('Durations', ROUTE_DURATIONS, props),
-					createDropdown('Detailed', [
+					createButton('Overview', ROUTE_OVERVIEW, props),
+					createDropdown('Domains', props.domains.value.map((domain) =>
+						createDropdownButton(domain.data.title, { ...ROUTE_DOMAIN, params: { domain } }, props)
+					)),
+					createDropdown('Insights', [
+						createDropdownButton('Views', ROUTE_VIEWS, props),
+						createDropdownButton('Pages', ROUTE_PAGES, props),
+						createDropdownButton('Referrers', ROUTE_REFERRERS, props),
+						createDropdownButton('Durations', ROUTE_DURATIONS, props),
+						createDropdownSeparator(),
 						createDropdownButton('Systems', ROUTE_SYSTEMS, props),
 						createDropdownButton('Devices', ROUTE_DEVICES, props),
 						createDropdownButton('Browsers', ROUTE_BROWSERS, props),
@@ -62,7 +75,7 @@ const Dashboard = (props) => {
 				]
 			}),
 			h('main', { className: 'content' },
-				h(routesMap[props.route.value], props)
+				h(routesMap[selectRouteKey(props)], props)
 			)
 		)
 	)
