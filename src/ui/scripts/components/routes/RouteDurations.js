@@ -25,7 +25,7 @@ const RouteDurations = (props) => {
 			props.fetchDurations(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.durations.type ])
+	}, [ props.filter.range, props.domains.value, props.durations.type ])
 
 	const type = props.durations.type
 
@@ -57,6 +57,7 @@ const RouteDurations = (props) => {
 				h(CardDetailedDurations, {
 					key: domain.data.id,
 					headline: domain.data.title,
+					range: props.filter.range,
 					loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value)
 				})

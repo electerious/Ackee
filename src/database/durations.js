@@ -1,10 +1,8 @@
 'use strict'
 
-const { subDays } = require('date-fns')
-
 const Record = require('../schemas/Record')
 const constants = require('../constants/durations')
-const zeroDate = require('../utils/zeroDate')
+const offsetByRange = require('../utils/offsetByRange')
 
 // The time that elapsed between the creation and updating of records.
 const projectDuration = {
@@ -111,15 +109,14 @@ const getAverage = async (id) => {
 
 }
 
-const getDetailed = async (id) => {
+const getDetailed = async (id, range) => {
 
-	const averageEntries = await Record.aggregate([
+	const dateOffset = offsetByRange(range)
+
+	const aggregateAverageEntries = [
 		{
 			$match: {
-				domainId: id,
-				created: {
-					$gte: subDays(zeroDate(), 6)
-				}
+				domainId: id
 			}
 		},
 		projectDuration,
@@ -134,18 +131,21 @@ const getDetailed = async (id) => {
 				}
 			}
 		}
-	])
+	]
+
+	if (dateOffset != null) {
+		aggregateAverageEntries[0].$match.created = { $gte: dateOffset }
+	}
+
+	const averageEntries = await Record.aggregate(aggregateAverageEntries)
 
 	// No need to continue when there're no entries
 	if (averageEntries.length === 0) return []
 
-	const detailedEntries = await Record.aggregate([
+	const aggregateDetailedEntries = [
 		{
 			$match: {
-				domainId: id,
-				created: {
-					$gte: subDays(zeroDate(), 6)
-				}
+				domainId: id
 			}
 		},
 		projectDuration,
@@ -176,17 +176,23 @@ const getDetailed = async (id) => {
 				_id: 1
 			}
 		}
-	])
+	]
+
+	if (dateOffset != null) {
+		aggregateDetailedEntries[0].$match.created = { $gte: dateOffset }
+	}
+
+	const detailedEntries = await Record.aggregate(aggregateDetailedEntries)
 
 	return detailedEntries
 
 }
 
-const get = async (id, type) => {
+const get = async (id, type, range) => {
 
 	switch (type) {
 		case constants.DURATIONS_TYPE_AVERAGE: return getAverage(id)
-		case constants.DURATIONS_TYPE_DETAILED: return getDetailed(id)
+		case constants.DURATIONS_TYPE_DETAILED: return getDetailed(id, range)
 	}
 
 }

@@ -6,13 +6,14 @@ import Text from '../Text'
 import Updating from '../Updating'
 import PresentationValuesBar from '../presentations/PresentationValuesBar'
 import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
+import rangeLabel from '../../utils/rangeLabel'
 import status from '../../utils/status'
 
-const textLabel = (isStale) => {
+const textLabel = (range, isStale) => {
 
 	if (isStale === true) return h(Updating)
 
-	return 'Last 7 days'
+	return rangeLabel(range)
 
 }
 
@@ -54,6 +55,7 @@ const CardDetailedDurations = (props) => {
 					type: 'div',
 					spacing: false
 				}, textLabel(
+					props.range,
 					isStale
 				)),
 				presentation
@@ -65,6 +67,7 @@ const CardDetailedDurations = (props) => {
 
 CardDetailedDurations.propTypes = {
 	headline: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired
 }
