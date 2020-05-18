@@ -2,19 +2,12 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectSizesValue from '../../selectors/selectSizesValue'
 import enhanceSizes from '../../enhancers/enhanceSizes'
-import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardSizes from '../cards/CardSizes'
 
 const RouteSizes = (props) => {
 
 	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
-
-	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchSizes(props, domain.data.id)

@@ -1,4 +1,4 @@
-import { createElement as h } from 'react'
+import { createElement as h, useEffect } from 'react'
 
 import {
 	ROUTE_OVERVIEW,
@@ -48,6 +48,12 @@ const routesMap = {
 }
 
 const Dashboard = (props) => {
+
+	useEffect(() => {
+
+		props.fetchDomains(props)
+
+	}, [])
 
 	return (
 		h('div', {},

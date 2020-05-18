@@ -2,19 +2,12 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 // import selectBrowsersValue from '../../selectors/selectBrowsersValue'
 // import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
-// import useDidMountEffect from '../../utils/useDidMountEffect'
 
 // import CardBrowsers from '../cards/CardBrowsers'
 
 const RouteOverview = (props) => {
 
 	// useEffect(() => {
-
-	// 	props.fetchDomains(props)
-
-	// }, [])
-
-	// useDidMountEffect(() => {
 
 	// 	props.domains.value.map((domain) => {
 	// 		props.fetchBrowsers(props, domain.data.id)

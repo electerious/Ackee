@@ -2,19 +2,12 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectSystemsValue from '../../selectors/selectSystemsValue'
 import enhanceSystems from '../../enhancers/enhanceSystems'
-import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardSystems from '../cards/CardSystems'
 
 const RouteSystems = (props) => {
 
 	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
-
-	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchSystems(props, domain.data.id)

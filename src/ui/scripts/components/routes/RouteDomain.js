@@ -31,21 +31,11 @@ import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
-import useDidMountEffect from '../../utils/useDidMountEffect'
-
 const RouteDomain = (props) => {
 
 	const domain = selectRouteParams(props).domain
 
-	// if (domain == null) return null
-
 	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
-
-	useDidMountEffect(() => {
 
 		props.fetchViews(props, domain.data.id)
 		props.fetchPages(props, domain.data.id)

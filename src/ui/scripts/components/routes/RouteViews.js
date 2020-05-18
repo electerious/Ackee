@@ -5,19 +5,12 @@ import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views
 import selectViewsValue from '../../selectors/selectViewsValue'
 import enhanceViews from '../../enhancers/enhanceViews'
 import mergeViews from '../../utils/mergeViews'
-import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardViews from '../cards/CardViews'
 
 const RouteViews = (props) => {
 
 	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
-
-	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchViews(props, domain.data.id)

@@ -2,19 +2,12 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectPagesValue from '../../selectors/selectPagesValue'
 import enhancePages from '../../enhancers/enhancePages'
-import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardPages from '../cards/CardPages'
 
 const RoutePages = (props) => {
 
 	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
-
-	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchPages(props, domain.data.id)

@@ -2,19 +2,12 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectLanguagesValue from '../../selectors/selectLanguagesValue'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
-import useDidMountEffect from '../../utils/useDidMountEffect'
 
 import CardLanguages from '../cards/CardLanguages'
 
 const RouteLanguages = (props) => {
 
 	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
-
-	useDidMountEffect(() => {
 
 		props.domains.value.map((domain) => {
 			props.fetchLanguages(props, domain.data.id)
