@@ -2,6 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import { DURATIONS_TYPE_AVERAGE, DURATIONS_TYPE_DETAILED } from '../../../../constants/durations'
 
+import { ROUTE_DOMAIN } from '../../constants/route'
 import selectDurationsValue from '../../selectors/selectDurationsValue'
 import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
 import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'
@@ -37,7 +38,8 @@ const RouteDurations = (props) => {
 						key: domain.data.id,
 						headline: domain.data.title,
 						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7)
+						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7),
+						onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)
 			)
@@ -52,7 +54,8 @@ const RouteDurations = (props) => {
 					headline: domain.data.title,
 					range: props.filter.range,
 					loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value)
+					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value),
+					onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
 				})
 			)
 		)

@@ -49,7 +49,8 @@ const CardSizes = (props) => {
 				h(Headline, {
 					type: 'h2',
 					small: true,
-					className: 'color-white'
+					className: 'color-white',
+					onClick: props.onMore
 				}, props.headline),
 				h(Text, {
 					type: 'div',
@@ -66,7 +67,8 @@ CardSizes.propTypes = {
 	headline: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
-	items: PropTypes.array.isRequired
+	items: PropTypes.array.isRequired,
+	onMore: PropTypes.func
 }
 
 export default CardSizes

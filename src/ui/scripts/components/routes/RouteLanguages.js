@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import { ROUTE_DOMAIN } from '../../constants/route'
 import selectLanguagesValue from '../../selectors/selectLanguagesValue'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
@@ -26,7 +27,8 @@ const RouteLanguages = (props) => {
 						range: props.filter.range,
 						sorting: props.languages.sorting,
 						loading: props.domains.fetching || selectLanguagesValue(props, domain.data.id).fetching,
-						items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value)
+						items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value),
+						onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)
 			)

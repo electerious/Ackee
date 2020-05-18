@@ -12,4 +12,9 @@
 		line-height: 1.2;
 	}
 
+	&__button:focus {
+		color: $primary;
+		outline: none;
+	}
+
 }

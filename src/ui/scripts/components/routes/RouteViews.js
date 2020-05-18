@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import { ROUTE_DOMAIN } from '../../constants/route'
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
-
 import selectViewsValue from '../../selectors/selectViewsValue'
 import enhanceViews from '../../enhancers/enhanceViews'
 import mergeViews from '../../utils/mergeViews'
@@ -39,7 +39,8 @@ const RouteViews = (props) => {
 						headline: domain.data.title,
 						interval: props.views.interval,
 						loading: props.domains.fetching || selectViewsValue(props, domain.data.id).fetching,
-						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.views.interval)
+						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.views.interval),
+						onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)
 			)

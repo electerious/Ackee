@@ -54,7 +54,8 @@ const CardViews = (props) => {
 				h(Headline, {
 					type: 'h2',
 					small: true,
-					className: 'color-white'
+					className: 'color-white',
+					onClick: props.onMore
 				}, props.headline),
 				h(Text, {
 					type: 'div',
@@ -81,7 +82,8 @@ CardViews.propTypes = {
 	headline: PropTypes.string.isRequired,
 	interval: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
-	items: PropTypes.array.isRequired
+	items: PropTypes.array.isRequired,
+	onMore: PropTypes.func
 }
 
 export default CardViews
