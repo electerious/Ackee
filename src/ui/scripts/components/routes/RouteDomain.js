@@ -36,20 +36,23 @@ import enhanceLanguages from '../../enhancers/enhanceLanguages'
 const RouteDomain = (props) => {
 
 	const domain = selectRouteParams(props).domain
+	const domainId = domain.data.id
+	const domainsFetching = props.domains.fetching
+	const filterRange = props.filter.range
 
 	useEffect(() => {
 
-		props.fetchViews(props, domain.data.id)
-		props.fetchPages(props, domain.data.id)
-		props.fetchReferrers(props, domain.data.id)
-		props.fetchDurations(props, domain.data.id)
-		props.fetchSystems(props, domain.data.id)
-		props.fetchDevices(props, domain.data.id)
-		props.fetchBrowsers(props, domain.data.id)
-		props.fetchSizes(props, domain.data.id)
-		props.fetchLanguages(props, domain.data.id)
+		props.fetchViews(props, domainId)
+		props.fetchPages(props, domainId)
+		props.fetchReferrers(props, domainId)
+		props.fetchDurations(props, domainId)
+		props.fetchSystems(props, domainId)
+		props.fetchDevices(props, domainId)
+		props.fetchBrowsers(props, domainId)
+		props.fetchSizes(props, domainId)
+		props.fetchLanguages(props, domainId)
 
-	}, [ domain.data.id, props.filter.range, props.domains.value ])
+	}, [ domainId, filterRange ])
 
 	return (
 		h(Fragment, {},
@@ -58,78 +61,78 @@ const RouteDomain = (props) => {
 				wide: true,
 				headline: 'Views',
 				interval: props.views.interval,
-				loading: props.domains.fetching || selectViewsValue(props, domain.data.id).fetching,
-				items: enhanceViews(selectViewsValue(props, domain.data.id).value, 14, props.views.interval),
+				loading: domainsFetching || selectViewsValue(props, domainId).fetching,
+				items: enhanceViews(selectViewsValue(props, domainId).value, 14, props.views.interval),
 				onMore: () => props.setRouteValue(route.ROUTE_VIEWS)
 			}),
 
 			h(CardPages, {
 				headline: 'Pages',
-				range: props.filter.range,
+				range: filterRange,
 				sorting: props.pages.sorting,
-				loading: props.domains.fetching || selectPagesValue(props, domain.data.id).fetching,
-				items: enhancePages(selectPagesValue(props, domain.data.id).value),
+				loading: domainsFetching || selectPagesValue(props, domainId).fetching,
+				items: enhancePages(selectPagesValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_PAGES)
 			}),
 
 			h(CardReferrers, {
 				headline: 'Referrers',
-				range: props.filter.range,
+				range: filterRange,
 				sorting: props.referrers.sorting,
-				loading: props.domains.fetching || selectReferrersValue(props, domain.data.id).fetching,
-				items: enhanceReferrers(selectReferrersValue(props, domain.data.id).value),
+				loading: domainsFetching || selectReferrersValue(props, domainId).fetching,
+				items: enhanceReferrers(selectReferrersValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_REFERRERS)
 			}),
 
 			h(CardDetailedDurations, {
 				headline: 'Durations',
-				range: props.filter.range,
-				loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-				items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value),
+				range: filterRange,
+				loading: domainsFetching || selectDurationsValue(props, domainId).fetching,
+				items: enhanceDetailedDurations(selectDurationsValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_DURATIONS)
 			}),
 
 			h(CardSystems, {
 				headline: 'Systems',
-				range: props.filter.range,
+				range: filterRange,
 				sorting: props.systems.sorting,
-				loading: props.domains.fetching || selectSystemsValue(props, domain.data.id).fetching,
-				items: enhanceSystems(selectSystemsValue(props, domain.data.id).value),
+				loading: domainsFetching || selectSystemsValue(props, domainId).fetching,
+				items: enhanceSystems(selectSystemsValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_SYSTEMS)
 			}),
 
 			h(CardDevices, {
 				headline: 'Devices',
-				range: props.filter.range,
+				range: filterRange,
 				sorting: props.devices.sorting,
-				loading: props.domains.fetching || selectDevicesValue(props, domain.data.id).fetching,
-				items: enhanceDevices(selectDevicesValue(props, domain.data.id).value),
+				loading: domainsFetching || selectDevicesValue(props, domainId).fetching,
+				items: enhanceDevices(selectDevicesValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_DEVICES)
 			}),
 
 			h(CardBrowsers, {
 				headline: 'Browsers',
-				range: props.filter.range,
+				range: filterRange,
 				sorting: props.browsers.sorting,
-				loading: props.domains.fetching || selectBrowsersValue(props, domain.data.id).fetching,
-				items: enhanceBrowsers(selectBrowsersValue(props, domain.data.id).value),
+				loading: domainsFetching || selectBrowsersValue(props, domainId).fetching,
+				items: enhanceBrowsers(selectBrowsersValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_BROWSERS)
 			}),
 
 			h(CardSizes, {
 				headline: 'Sizes',
-				range: props.filter.range,
-				loading: props.domains.fetching || selectSizesValue(props, domain.data.id).fetching,
-				items: enhanceSizes(selectSizesValue(props, domain.data.id).value),
+				range: filterRange,
+				loading: domainsFetching || selectSizesValue(props, domainId).fetching,
+				items: enhanceSizes(selectSizesValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_SIZES)
 			}),
 
 			h(CardLanguages, {
 				headline: 'Languages',
-				range: props.filter.range,
+				range: filterRange,
 				sorting: props.languages.sorting,
-				loading: props.domains.fetching || selectLanguagesValue(props, domain.data.id).fetching,
-				items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value),
+				loading: domainsFetching || selectLanguagesValue(props, domainId).fetching,
+				items: enhanceLanguages(selectLanguagesValue(props, domainId).value),
 				onMore: () => props.setRouteValue(route.ROUTE_LANGUAGES)
 			})
 
