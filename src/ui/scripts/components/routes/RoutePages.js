@@ -28,7 +28,7 @@ const RoutePages = (props) => {
 						sorting: props.pages.sorting,
 						loading: props.domains.fetching || selectPagesValue(props, domain.data.id).fetching,
 						items: enhancePages(selectPagesValue(props, domain.data.id).value),
-						onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
+						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)
 			)

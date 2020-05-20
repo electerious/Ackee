@@ -39,7 +39,7 @@ const RouteDurations = (props) => {
 						headline: domain.data.title,
 						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7),
-						onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
+						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)
 			)
@@ -55,7 +55,7 @@ const RouteDurations = (props) => {
 					range: props.filter.range,
 					loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value),
-					onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
+					onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
 				})
 			)
 		)

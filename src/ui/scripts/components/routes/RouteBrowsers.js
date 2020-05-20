@@ -28,7 +28,7 @@ const RouteBrowsers = (props) => {
 						sorting: props.browsers.sorting,
 						loading: props.domains.fetching || selectBrowsersValue(props, domain.data.id).fetching,
 						items: enhanceBrowsers(selectBrowsersValue(props, domain.data.id).value),
-						onMore: () => props.setRouteValue({ ...ROUTE_DOMAIN, params: { domain } })
+						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)
 			)

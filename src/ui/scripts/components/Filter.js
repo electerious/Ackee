@@ -28,8 +28,6 @@ import * as ranges from '../../../constants/ranges'
 import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
-import selectRouteKey from '../selectors/selectRouteKey'
-
 const labels = {
 	[ranges.RANGES_LAST_24_HOURS]: '24 hours',
 	[ranges.RANGES_LAST_7_DAYS]: '7 days',
@@ -111,7 +109,7 @@ const FilterItem = (props) => {
 
 const Filter = (props) => {
 
-	const routeKey = selectRouteKey(props)
+	const routeKey = props.route.key
 
 	const shouldShowRange = (() => {
 

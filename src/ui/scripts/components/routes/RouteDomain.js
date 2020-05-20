@@ -21,7 +21,6 @@ import selectDevicesValue from '../../selectors/selectDevicesValue'
 import selectBrowsersValue from '../../selectors/selectBrowsersValue'
 import selectSizesValue from '../../selectors/selectSizesValue'
 import selectLanguagesValue from '../../selectors/selectLanguagesValue'
-import selectRouteParams from '../../selectors/selectRouteParams'
 
 import enhanceViews from '../../enhancers/enhanceViews'
 import enhancePages from '../../enhancers/enhancePages'
@@ -35,7 +34,7 @@ import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
 const RouteDomain = (props) => {
 
-	const domain = selectRouteParams(props).domain
+	const domain = props.route.params.domain
 	const domainId = domain.data.id
 	const domainsFetching = props.domains.fetching
 	const filterRange = props.filter.range
@@ -63,7 +62,7 @@ const RouteDomain = (props) => {
 				interval: props.views.interval,
 				loading: domainsFetching || selectViewsValue(props, domainId).fetching,
 				items: enhanceViews(selectViewsValue(props, domainId).value, 14, props.views.interval),
-				onMore: () => props.setRouteValue(route.ROUTE_VIEWS)
+				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
 			h(CardPages, {
@@ -72,7 +71,7 @@ const RouteDomain = (props) => {
 				sorting: props.pages.sorting,
 				loading: domainsFetching || selectPagesValue(props, domainId).fetching,
 				items: enhancePages(selectPagesValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_PAGES)
+				onMore: () => props.setRoute(route.ROUTE_PAGES)
 			}),
 
 			h(CardReferrers, {
@@ -81,7 +80,7 @@ const RouteDomain = (props) => {
 				sorting: props.referrers.sorting,
 				loading: domainsFetching || selectReferrersValue(props, domainId).fetching,
 				items: enhanceReferrers(selectReferrersValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_REFERRERS)
+				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
 			}),
 
 			h(CardDetailedDurations, {
@@ -89,7 +88,7 @@ const RouteDomain = (props) => {
 				range: filterRange,
 				loading: domainsFetching || selectDurationsValue(props, domainId).fetching,
 				items: enhanceDetailedDurations(selectDurationsValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_DURATIONS)
+				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 
 			h(CardSystems, {
@@ -98,7 +97,7 @@ const RouteDomain = (props) => {
 				sorting: props.systems.sorting,
 				loading: domainsFetching || selectSystemsValue(props, domainId).fetching,
 				items: enhanceSystems(selectSystemsValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_SYSTEMS)
+				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
 			}),
 
 			h(CardDevices, {
@@ -107,7 +106,7 @@ const RouteDomain = (props) => {
 				sorting: props.devices.sorting,
 				loading: domainsFetching || selectDevicesValue(props, domainId).fetching,
 				items: enhanceDevices(selectDevicesValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_DEVICES)
+				onMore: () => props.setRoute(route.ROUTE_DEVICES)
 			}),
 
 			h(CardBrowsers, {
@@ -116,7 +115,7 @@ const RouteDomain = (props) => {
 				sorting: props.browsers.sorting,
 				loading: domainsFetching || selectBrowsersValue(props, domainId).fetching,
 				items: enhanceBrowsers(selectBrowsersValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_BROWSERS)
+				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
 			}),
 
 			h(CardSizes, {
@@ -124,7 +123,7 @@ const RouteDomain = (props) => {
 				range: filterRange,
 				loading: domainsFetching || selectSizesValue(props, domainId).fetching,
 				items: enhanceSizes(selectSizesValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_SIZES)
+				onMore: () => props.setRoute(route.ROUTE_SIZES)
 			}),
 
 			h(CardLanguages, {
@@ -133,7 +132,7 @@ const RouteDomain = (props) => {
 				sorting: props.languages.sorting,
 				loading: domainsFetching || selectLanguagesValue(props, domainId).fetching,
 				items: enhanceLanguages(selectLanguagesValue(props, domainId).value),
-				onMore: () => props.setRouteValue(route.ROUTE_LANGUAGES)
+				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)
 			})
 
 		)

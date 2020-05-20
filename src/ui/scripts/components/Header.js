@@ -6,9 +6,6 @@ import isEqual from 'react-fast-compare'
 import Context, { BUTTON as DROPDOWN_BUTTON, SEPARATOR as DROPDOWN_SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
-import selectRouteKey from '../selectors/selectRouteKey'
-import selectRouteParams from '../selectors/selectRouteParams'
-
 const BUTTON = Symbol()
 const DROPDOWN = Symbol()
 
@@ -28,6 +25,8 @@ const calculateY = (measurement) => {
 	return measurement.target.absolute.y + measurement.target.height + 10
 
 }
+
+const containsActiveItem = (items) => items.some((item) => item.active === true)
 
 const Spinner = (props) => {
 
@@ -81,7 +80,7 @@ const Dropdown = (props) => {
 	const close = () => setActive(false)
 	const toggle = () => setActive(!active)
 
-	const containsActiveItem = props.items.some((item) => item.active === true)
+	const activeInside = containsActiveItem(props.items)
 
 	return (
 		h(Fragment, {},
@@ -90,9 +89,9 @@ const Dropdown = (props) => {
 				className: classNames({
 					'header__button': true,
 					'hovered': active === true,
-					'active': containsActiveItem === true,
+					'active': activeInside === true,
 					'link': true,
-					'color-white': containsActiveItem === true
+					'color-white': activeInside === true
 				}),
 				onClick: toggle
 			},
@@ -122,14 +121,14 @@ const Header = (props) => {
 					props.items.map((item, index) => {
 
 						if (item.type === BUTTON) return h(Button, {
-							key: item.label + index,
+							key: index,
 							...item
 						}, item.label)
 
 						if (item.type === DROPDOWN) return h(Dropdown, {
-							key: item.label + index,
+							key: index,
 							...item
-						}, item.label)
+						}, item.label(containsActiveItem(item.items)))
 
 					})
 				)
@@ -146,8 +145,8 @@ Header.propTypes = {
 
 export const createButton = (label, route, props) => ({
 	type: BUTTON,
-	onClick: () => props.setRouteValue(route),
-	active: selectRouteKey(props) === route.key,
+	onClick: () => props.setRoute(route),
+	active: props.route.key === route.key,
 	label
 })
 
@@ -159,8 +158,8 @@ export const createDropdown = (label, items) => ({
 
 export const createDropdownButton = (label, route, props) => ({
 	type: DROPDOWN_BUTTON,
-	onClick: () => props.setRouteValue(route),
-	active: selectRouteKey(props) === route.key && isEqual(selectRouteParams(props), route.params || {}),
+	onClick: () => props.setRoute(route),
+	active: props.route.key === route.key && isEqual(props.route.params, route.params || {}),
 	label
 })
 

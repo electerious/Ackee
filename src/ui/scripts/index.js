@@ -50,7 +50,8 @@ store.subscribe(() => {
 		},
 		route: {
 			...initialRouteState(),
-			value: currentState.route.value
+			key: currentState.route.key,
+			params: currentState.route.params
 		},
 		filter: {
 			...initialFilterState(),
