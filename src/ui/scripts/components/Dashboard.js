@@ -27,12 +27,12 @@ const Dashboard = (props) => {
 	const domainsLabel = (activeInside) => activeInside === true ? props.route.params.domain.data.title : route.ROUTE_DOMAIN.name
 	const insightsLabel = (activeInside) => activeInside === true ? routeByKey(props.route.key).name : 'Insights'
 
-	useHotkeys('o', () => props.setRoute(route.ROUTE_OVERVIEW), [ props ])
+	useHotkeys('o', () => props.setRoute(route.ROUTE_OVERVIEW))
 
-	useHotkeys('v', () => props.setRoute(route.ROUTE_VIEWS), [ props ])
-	useHotkeys('p', () => props.setRoute(route.ROUTE_PAGES), [ props ])
-	useHotkeys('r', () => props.setRoute(route.ROUTE_REFERRERS), [ props ])
-	useHotkeys('d', () => props.setRoute(route.ROUTE_DURATIONS), [ props ])
+	useHotkeys('v', () => props.setRoute(route.ROUTE_VIEWS))
+	useHotkeys('p', () => props.setRoute(route.ROUTE_PAGES))
+	useHotkeys('r', () => props.setRoute(route.ROUTE_REFERRERS))
+	useHotkeys('d', () => props.setRoute(route.ROUTE_DURATIONS))
 
 	useHotkeys('0', () => gotoDomainWhenAvailable(props, 0), [ props ])
 	useHotkeys('1', () => gotoDomainWhenAvailable(props, 1), [ props ])
