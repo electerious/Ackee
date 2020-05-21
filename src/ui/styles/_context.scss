@@ -5,7 +5,7 @@
 	top: 0;
 	left: 0;
 	padding: $gutter/2 0;
-	min-width: 170px;
+	min-width: 210px;
 	background: rgba($context, .98);
 	border-radius: $radius;
 	transform: translate(var(--x), var(--y));
@@ -63,16 +63,22 @@
 	}
 
 	&__head {
-		display: flex;
+		display: grid;
+		grid-auto-flow: column;
+		gap: $gutter;
 		align-items: center;
 		justify-content: space-between;
 	}
 
 	&__label {
-		padding-right: $gutter*3;
+		max-width: 240px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	&__description {
+		padding-right: $gutter;
 		font-size: .86em;
 		color: $light;
 	}

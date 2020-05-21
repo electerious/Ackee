@@ -98,6 +98,7 @@
 		margin: 0 $gutter/2;
 		padding: $gutter/1.5 2px;
 		outline: none;
+		white-space: nowrap;
 		transition: box-shadow .3s ease;
 
 		&.hovered,
