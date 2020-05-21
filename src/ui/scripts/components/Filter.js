@@ -62,15 +62,33 @@ const labels = {
 }
 
 const calculateX = (measurement) => {
-
 	return measurement.target.relative.x + measurement.target.width / 2 - measurement.element.width / 2
-
 }
 
 const calculateY = (measurement) => {
-
 	return measurement.target.relative.y - measurement.element.height - 10
+}
 
+const createItem = (label, items, visible = true) => ({
+	label,
+	items,
+	visible
+})
+
+const createButton = (label, description, setter, key, value) => ({
+	type: BUTTON,
+	label,
+	description,
+	active: key === value,
+	onClick: () => setter(value)
+})
+
+const createSeparator = () => ({
+	type: SEPARATOR
+})
+
+const onlyInactiveButton = (...buttons) => {
+	return buttons.find((button) => button.active === false)
 }
 
 const FilterItem = (props) => {
@@ -241,28 +259,6 @@ const Filter = (props) => {
 		document.body
 	)
 
-}
-
-const createItem = (label, items, visible = true) => ({
-	label,
-	items,
-	visible
-})
-
-const createButton = (label, description, setter, key, value) => ({
-	type: BUTTON,
-	label,
-	description,
-	active: key === value,
-	onClick: () => setter(value)
-})
-
-const createSeparator = () => ({
-	type: SEPARATOR
-})
-
-const onlyInactiveButton = (...buttons) => {
-	return buttons.find((button) => button.active === false)
 }
 
 export default Filter
