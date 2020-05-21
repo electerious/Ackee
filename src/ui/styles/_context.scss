@@ -35,7 +35,6 @@
 
 	&__button {
 		padding: $gutter/3 $gutter*1.2;
-		padding-right: $gutter*3;
 		color: currentColor;
 		text-align: left;
 		transition: color .3s ease, background .2s ease;
@@ -55,13 +54,22 @@
 	&--floating &__button {
 		margin: 0 $gutter/2;
 		padding: $gutter/2 $gutter/1.6;
-		padding-right: $gutter*3;
 		color: $white;
 		border-radius: $radius;
 
 		&.active {
 			color: $primary;
 		}
+	}
+
+	&__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__label {
+		padding-right: $gutter*3;
 	}
 
 	&__description {

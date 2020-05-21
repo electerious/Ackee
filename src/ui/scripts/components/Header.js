@@ -156,11 +156,12 @@ export const createDropdown = (label, items) => ({
 	label
 })
 
-export const createDropdownButton = (label, route, props) => ({
+export const createDropdownButton = (label, route, props, keyHint) => ({
 	type: DROPDOWN_BUTTON,
 	onClick: () => props.setRoute(route),
 	active: props.route.key === route.key && isEqual(props.route.params, route.params || {}),
-	label
+	label,
+	keyHint
 })
 
 export const createDropdownSeparator = () => ({
