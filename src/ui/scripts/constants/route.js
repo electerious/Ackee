@@ -13,7 +13,7 @@ import RouteSettings from '../components/routes/RouteSettings'
 
 export const ROUTE_OVERVIEW = { key: 'route_overview', name: 'Overview', component: RouteOverview }
 export const ROUTE_DOMAIN = { key: 'route_domain', name: 'Domains', component: RouteDomain }
-export const ROUTE_VIEWS = { key: 'route_views', name: 'View', component: RouteViews }
+export const ROUTE_VIEWS = { key: 'route_views', name: 'Views', component: RouteViews }
 export const ROUTE_PAGES = { key: 'route_pages', name: 'Pages', component: RoutePages }
 export const ROUTE_REFERRERS = { key: 'route_referrers', name: 'Referrers', component: RouteReferrers }
 export const ROUTE_DURATIONS = { key: 'route_durations', name: 'Durations', component: RouteDurations }
