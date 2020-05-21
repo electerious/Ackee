@@ -34,8 +34,7 @@ import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
 const RouteDomain = (props) => {
 
-	const domain = props.route.params.domain
-	const domainId = domain.data.id
+	const domainId = props.route.params.domainId
 	const domainsFetching = props.domains.fetching
 	const filterRange = props.filter.range
 

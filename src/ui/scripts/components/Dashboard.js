@@ -2,7 +2,7 @@ import { createElement as h, useEffect } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 import * as route from '../constants/route'
-import selectDomainsValue from '../selectors/selectDomainsValue'
+import * as selectDomainsValue from '../selectors/selectDomainsValue'
 import routeByKey from '../utils/routeByKey'
 import whenBelow from '../utils/whenBelow'
 
@@ -11,8 +11,12 @@ import Modals from './Modals'
 
 const gotoDomainWhenAvailable = (props, index) => {
 
-	const domain = selectDomainsValue(props, index)
-	if (domain != null) props.setRoute({ ...route.ROUTE_DOMAIN, params: { domain } })
+	const domain = selectDomainsValue.byIndex(props, index)
+
+	if (domain == null) return
+
+	const domainId = domain.data.id
+	props.setRoute({ ...route.ROUTE_DOMAIN, params: { domainId } })
 
 }
 
@@ -24,8 +28,8 @@ const Dashboard = (props) => {
 
 	}, [])
 
-	const domainsLabel = (activeInside) => activeInside === true ? props.route.params.domain.data.title : route.ROUTE_DOMAIN.name
-	const insightsLabel = (activeInside) => activeInside === true ? routeByKey(props.route.key).name : 'Insights'
+	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).data.title : route.ROUTE_DOMAIN.title
+	const insightsLabel = (activeInside) => activeInside === true ? routeByKey(props.route.key).title : 'Insights'
 
 	useHotkeys('o', () => props.setRoute(route.ROUTE_OVERVIEW))
 
@@ -51,23 +55,23 @@ const Dashboard = (props) => {
 			h(Header, {
 				fetching: props.fetching,
 				items: [
-					createButton(route.ROUTE_OVERVIEW.name, route.ROUTE_OVERVIEW, props),
+					createButton(route.ROUTE_OVERVIEW.title, route.ROUTE_OVERVIEW, props),
 					createDropdown(domainsLabel, props.domains.value.map((domain, index) =>
-						createDropdownButton(domain.data.title, { ...route.ROUTE_DOMAIN, params: { domain } }, props, whenBelow(index, 10))
+						createDropdownButton(domain.data.title, { ...route.ROUTE_DOMAIN, params: { domainId: domain.data.id } }, props, whenBelow(index, 10))
 					)),
 					createDropdown(insightsLabel, [
-						createDropdownButton(route.ROUTE_VIEWS.name, route.ROUTE_VIEWS, props, 'v'),
-						createDropdownButton(route.ROUTE_PAGES.name, route.ROUTE_PAGES, props, 'p'),
-						createDropdownButton(route.ROUTE_REFERRERS.name, route.ROUTE_REFERRERS, props, 'r'),
-						createDropdownButton(route.ROUTE_DURATIONS.name, route.ROUTE_DURATIONS, props, 'd'),
+						createDropdownButton(route.ROUTE_VIEWS.title, route.ROUTE_VIEWS, props, 'v'),
+						createDropdownButton(route.ROUTE_PAGES.title, route.ROUTE_PAGES, props, 'p'),
+						createDropdownButton(route.ROUTE_REFERRERS.title, route.ROUTE_REFERRERS, props, 'r'),
+						createDropdownButton(route.ROUTE_DURATIONS.title, route.ROUTE_DURATIONS, props, 'd'),
 						createDropdownSeparator(),
-						createDropdownButton(route.ROUTE_SYSTEMS.name, route.ROUTE_SYSTEMS, props),
-						createDropdownButton(route.ROUTE_DEVICES.name, route.ROUTE_DEVICES, props),
-						createDropdownButton(route.ROUTE_BROWSERS.name, route.ROUTE_BROWSERS, props),
-						createDropdownButton(route.ROUTE_SIZES.name, route.ROUTE_SIZES, props),
-						createDropdownButton(route.ROUTE_LANGUAGES.name, route.ROUTE_LANGUAGES, props)
+						createDropdownButton(route.ROUTE_SYSTEMS.title, route.ROUTE_SYSTEMS, props),
+						createDropdownButton(route.ROUTE_DEVICES.title, route.ROUTE_DEVICES, props),
+						createDropdownButton(route.ROUTE_BROWSERS.title, route.ROUTE_BROWSERS, props),
+						createDropdownButton(route.ROUTE_SIZES.title, route.ROUTE_SIZES, props),
+						createDropdownButton(route.ROUTE_LANGUAGES.title, route.ROUTE_LANGUAGES, props)
 					]),
-					createButton(route.ROUTE_SETTINGS.name, route.ROUTE_SETTINGS, props)
+					createButton(route.ROUTE_SETTINGS.title, route.ROUTE_SETTINGS, props)
 				]
 			}),
 			h('main', { className: 'content' },
