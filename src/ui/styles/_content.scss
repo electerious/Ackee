@@ -1,7 +1,9 @@
 .content {
 
+	--rows: 2;
+
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(var(--rows), minmax(0, 1fr));
 	gap: $gutter;
 	margin: 0 auto;
 	padding: 6vh $gutter;
@@ -9,7 +11,7 @@
 	max-width: $maxWidth;
 
 	@media (max-width: 800px) {
-		grid-template-columns: 1fr;
+		--rows: 1;
 	}
 
 }

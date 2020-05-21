@@ -12,6 +12,14 @@
 		line-height: 1.2;
 	}
 
+	&__button {
+		text-align: left;
+		max-width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
 	&__button:focus {
 		color: $primary;
 		outline: none;
