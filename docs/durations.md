@@ -11,6 +11,9 @@ Get the average time users spend on your site per day for the last 14 days. Days
 
 ```
 GET /domains/:domainId/durations?type=average
+GET /domains/:domainId/durations?type=average&interval=daily
+GET /domains/:domainId/durations?type=average&interval=monthly
+GET /domains/:domainId/durations?type=average&interval=yearly
 ```
 
 ### Headers
@@ -54,6 +57,10 @@ The included average is the average time users spend on your site for the last 7
 
 ```
 GET /domains/:domainId/durations?type=detailed
+GET /domains/:domainId/durations?sorting=top&range=daily
+GET /domains/:domainId/durations?sorting=top&range=weekly
+GET /domains/:domainId/durations?sorting=top&range=monthly
+GET /domains/:domainId/durations?sorting=top&range=allTime
 ```
 
 ### Headers
