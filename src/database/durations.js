@@ -2,6 +2,7 @@
 
 const Record = require('../schemas/Record')
 const constants = require('../constants/durations')
+const intervals = require('../constants/intervals')
 const offsetByRange = require('../utils/offsetByRange')
 
 // The time that elapsed between the creation and updating of records.
@@ -65,9 +66,9 @@ const matchLimit = {
 	}
 }
 
-const getAverage = async (id) => {
+const getAverage = async (id, interval) => {
 
-	return Record.aggregate([
+	const aggregation = [
 		{
 			$match: {
 				domainId: id
@@ -79,33 +80,42 @@ const getAverage = async (id) => {
 		matchLimit,
 		{
 			$group: {
-				_id: {
-					day: {
-						$dayOfMonth: '$created'
-					},
-					month: {
-						$month: '$created'
-					},
-					year: {
-						$year: '$created'
-					}
-				},
+				_id: {},
 				average: {
 					$avg: '$duration'
 				}
 			}
 		},
 		{
-			$sort: {
-				'_id.year': -1,
-				'_id.month': -1,
-				'_id.day': -1
-			}
+			$sort: {}
 		},
 		{
 			$limit: 14
 		}
-	])
+	]
+
+	if (interval === intervals.INTERVALS_DAILY) {
+		aggregation[5].$group._id.day = { $dayOfMonth: '$created' }
+		aggregation[5].$group._id.month = { $month: '$created' }
+		aggregation[5].$group._id.year = { $year: '$created' }
+		aggregation[6].$sort['_id.year'] = -1
+		aggregation[6].$sort['_id.month'] = -1
+		aggregation[6].$sort['_id.day'] = -1
+	}
+
+	if (interval === intervals.INTERVALS_MONTHLY) {
+		aggregation[5].$group._id.month = { $month: '$created' }
+		aggregation[5].$group._id.year = { $year: '$created' }
+		aggregation[6].$sort['_id.year'] = -1
+		aggregation[6].$sort['_id.month'] = -1
+	}
+
+	if (interval === intervals.INTERVALS_YEARLY) {
+		aggregation[5].$group._id.year = { $year: '$created' }
+		aggregation[6].$sort['_id.year'] = -1
+	}
+
+	return Record.aggregate(aggregation)
 
 }
 
@@ -188,10 +198,10 @@ const getDetailed = async (id, range) => {
 
 }
 
-const get = async (id, type, range) => {
+const get = async (id, type, range, interval) => {
 
 	switch (type) {
-		case constants.DURATIONS_TYPE_AVERAGE: return getAverage(id)
+		case constants.DURATIONS_TYPE_AVERAGE: return getAverage(id, interval)
 		case constants.DURATIONS_TYPE_DETAILED: return getDetailed(id, range)
 	}
 

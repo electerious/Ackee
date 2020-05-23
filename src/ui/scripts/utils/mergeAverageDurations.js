@@ -10,7 +10,7 @@ export default (state) => {
 
 		const duration = selectDurationsValue(state, domain.data.id)
 
-		return enhanceAverageDurations(duration.value, 14)
+		return enhanceAverageDurations(duration.value, 14, state.filter.interval)
 
 	})
 

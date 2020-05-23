@@ -55,12 +55,12 @@ store.subscribe(() => {
 		},
 		filter: {
 			...initialFilterState(),
-			range: currentState.filter.range
+			range: currentState.filter.range,
+			interval: currentState.filter.interval
 		},
 		views: {
 			...initialViewsState(),
-			type: currentState.views.type,
-			interval: currentState.views.interval
+			type: currentState.views.type
 		},
 		pages: {
 			...initialPagesState(),

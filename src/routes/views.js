@@ -4,6 +4,7 @@ const { createError } = require('micro')
 
 const views = require('../database/views')
 const constants = require('../constants/views')
+const intervals = require('../constants/intervals')
 
 const response = (entry) => ({
 	type: 'view',
@@ -25,21 +26,15 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { type, interval } = req.query
+	const { type, interval = intervals.INTERVALS_DAILY } = req.query
 
 	const types = [
 		constants.VIEWS_TYPE_UNIQUE,
 		constants.VIEWS_TYPE_TOTAL
 	]
 
-	const intervals = [
-		constants.VIEWS_INTERVAL_DAILY,
-		constants.VIEWS_INTERVAL_MONTHLY,
-		constants.VIEWS_INTERVAL_YEARLY
-	]
-
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
-	if (intervals.includes(interval) === false) throw createError(400, 'Unknown interval')
+	if (intervals.toArray().includes(interval) === false) throw createError(400, 'Unknown interval')
 
 	const entries = await views.get(domainId, type, interval)
 

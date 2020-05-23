@@ -5,6 +5,7 @@ const { createError } = require('micro')
 const durations = require('../database/durations')
 const constants = require('../constants/durations')
 const ranges = require('../constants/ranges')
+const intervals = require('../constants/intervals')
 
 const response = (entry) => ({
 	type: 'duration',
@@ -23,7 +24,7 @@ const responses = (entries) => ({
 const get = async (req) => {
 
 	const { domainId } = req.params
-	const { type, range = ranges.RANGES_LAST_7_DAYS } = req.query
+	const { type, range = ranges.RANGES_LAST_7_DAYS, interval = intervals.INTERVALS_DAILY } = req.query
 
 	const types = [
 		constants.DURATIONS_TYPE_AVERAGE,
@@ -32,8 +33,9 @@ const get = async (req) => {
 
 	if (types.includes(type) === false) throw createError(400, 'Unknown type')
 	if (ranges.toArray().includes(range) === false) throw createError(400, 'Unknown range')
+	if (intervals.toArray().includes(interval) === false) throw createError(400, 'Unknown interval')
 
-	const entries = await durations.get(domainId, type, range)
+	const entries = await durations.get(domainId, type, range, interval)
 
 	return responses(entries)
 

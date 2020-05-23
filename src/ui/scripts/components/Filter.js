@@ -24,6 +24,7 @@ import * as browsers from '../../../constants/browsers'
 import * as sizes from '../../../constants/sizes'
 import * as languages from '../../../constants/languages'
 import * as ranges from '../../../constants/ranges'
+import * as intervals from '../../../constants/intervals'
 
 import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
@@ -33,11 +34,11 @@ const labels = {
 	[ranges.RANGES_LAST_7_DAYS]: '7 days',
 	[ranges.RANGES_LAST_30_DAYS]: '30 days',
 	[ranges.RANGES_ALL_TIME]: 'All time',
+	[intervals.INTERVALS_DAILY]: 'Daily',
+	[intervals.INTERVALS_MONTHLY]: 'Monthly',
+	[intervals.INTERVALS_YEARLY]: 'Yearly',
 	[views.VIEWS_TYPE_UNIQUE]: 'Unique',
 	[views.VIEWS_TYPE_TOTAL]: 'Total',
-	[views.VIEWS_INTERVAL_DAILY]: 'Daily',
-	[views.VIEWS_INTERVAL_MONTHLY]: 'Monthly',
-	[views.VIEWS_INTERVAL_YEARLY]: 'Yearly',
 	[pages.PAGES_SORTING_TOP]: 'Top',
 	[pages.PAGES_SORTING_RECENT]: 'Recent',
 	[referrers.REFERRERS_SORTING_TOP]: 'Top',
@@ -145,6 +146,16 @@ const Filter = (props) => {
 
 	})()
 
+	const shouldShowInterval = (() => {
+
+		if (routeKey === ROUTE_DOMAIN.key) return true
+		if (routeKey === ROUTE_VIEWS.key) return true
+		if (routeKey === ROUTE_DURATIONS.key && props.durations.type === durations.DURATIONS_TYPE_AVERAGE) return true
+
+		return false
+
+	})()
+
 	const rangeButton = createItem(labels[props.filter.range], [
 		createButton('24 hours', 'Show last 24 hours', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_24_HOURS),
 		createButton('7 days', 'Show last 7 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_7_DAYS),
@@ -152,20 +163,23 @@ const Filter = (props) => {
 		createButton('All time', 'Show all data', props.setFilterRange, props.filter.range, ranges.RANGES_ALL_TIME)
 	], shouldShowRange === true)
 
+	const intervalsButton = createItem(labels[props.filter.interval], [
+		createButton('Daily', 'Grouped by day', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_DAILY),
+		createButton('Monthly', 'Grouped by month', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_MONTHLY),
+		createButton('Yearly', 'Grouped by year', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_YEARLY)
+	], shouldShowInterval === true)
+
 	const routesMap = {
 		[ROUTE_VIEWS.key]: [
 			createItem(labels[props.views.type], [
 				createButton('Unique', 'Unique site views', props.setViewsType, props.views.type, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setViewsType, props.views.type, views.VIEWS_TYPE_TOTAL)
 			]),
-			createItem(labels[props.views.interval], [
-				createButton('Daily', 'Grouped by day', props.setViewsInterval, props.views.interval, views.VIEWS_INTERVAL_DAILY),
-				createButton('Monthly', 'Grouped by month', props.setViewsInterval, props.views.interval, views.VIEWS_INTERVAL_MONTHLY),
-				createButton('Yearly', 'Grouped by year', props.setViewsInterval, props.views.interval, views.VIEWS_INTERVAL_YEARLY)
-			])
+			intervalsButton
 		],
 		[ROUTE_DOMAIN.key]: [
-			rangeButton
+			rangeButton,
+			intervalsButton
 		],
 		[ROUTE_PAGES.key]: [
 			createItem(labels[props.pages.sorting], [
@@ -187,7 +201,8 @@ const Filter = (props) => {
 				createButton('Average', 'Average durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_AVERAGE),
 				createButton('Detailed', 'Detailed durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_DETAILED)
 			]),
-			rangeButton
+			rangeButton,
+			intervalsButton
 		],
 		[ROUTE_SYSTEMS.key]: [
 			createItem(labels[props.systems.sorting], [

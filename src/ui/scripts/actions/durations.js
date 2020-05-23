@@ -36,7 +36,7 @@ export const fetchDurations = signalHandler((signal) => (props, domainId) => asy
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/durations?type=${ props.durations.type }&range=${ props.filter.range }`, {
+		const data = await api(`/domains/${ domainId }/durations?type=${ props.durations.type }&range=${ props.filter.range }&interval=${ props.filter.interval }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

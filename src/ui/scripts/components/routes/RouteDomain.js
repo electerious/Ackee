@@ -58,9 +58,9 @@ const RouteDomain = (props) => {
 			h(CardViews, {
 				wide: true,
 				headline: 'Views',
-				interval: props.views.interval,
+				interval: props.filter.interval,
 				loading: domainsFetching || selectViewsValue(props, domainId).fetching,
-				items: enhanceViews(selectViewsValue(props, domainId).value, 14, props.views.interval),
+				items: enhanceViews(selectViewsValue(props, domainId).value, 14, props.filter.interval),
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 

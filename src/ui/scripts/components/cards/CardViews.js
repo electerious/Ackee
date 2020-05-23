@@ -2,7 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { VIEWS_INTERVAL_DAILY, VIEWS_INTERVAL_MONTHLY, VIEWS_INTERVAL_YEARLY } from '../../../../constants/views'
+import { INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY } from '../../../../constants/intervals'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -16,9 +16,9 @@ import status from '../../utils/status'
 const relativeFn = (interval) => {
 
 	switch (interval) {
-		case VIEWS_INTERVAL_DAILY: return relativeDays
-		case VIEWS_INTERVAL_MONTHLY: return relativeMonths
-		case VIEWS_INTERVAL_YEARLY: return relativeYears
+		case INTERVALS_DAILY: return relativeDays
+		case INTERVALS_MONTHLY: return relativeMonths
+		case INTERVALS_YEARLY: return relativeYears
 	}
 
 }

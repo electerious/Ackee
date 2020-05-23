@@ -19,7 +19,7 @@ const RouteDurations = (props) => {
 			props.fetchDurations(props, domain.data.id)
 		})
 
-	}, [ props.filter.range, props.domains.value, props.durations.type ])
+	}, [ props.filter.range, props.filter.intervals, props.domains.value, props.durations.type ])
 
 	const type = props.durations.type
 
@@ -28,6 +28,7 @@ const RouteDurations = (props) => {
 			h(CardAverageDurations, {
 				wide: true,
 				headline: 'Average Durations',
+				interval: props.filter.interval,
 				loading: props.fetching,
 				items: mergeAverageDurations(props)
 			}),
@@ -37,8 +38,9 @@ const RouteDurations = (props) => {
 					h(CardAverageDurations, {
 						key: domain.data.id,
 						headline: domain.data.title,
+						interval: props.filter.interval,
 						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7),
+						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7, props.filter.interval),
 						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)

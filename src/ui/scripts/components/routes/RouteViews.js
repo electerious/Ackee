@@ -16,7 +16,7 @@ const RouteViews = (props) => {
 			props.fetchViews(props, domain.data.id)
 		})
 
-	}, [ props.domains.value, props.views.type, props.views.interval ])
+	}, [ props.filter.interval, props.domains.value, props.views.type ])
 
 	return (
 		h(Fragment, {},
@@ -27,7 +27,7 @@ const RouteViews = (props) => {
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.views.type],
-				interval: props.views.interval,
+				interval: props.filter.interval,
 				loading: props.fetching,
 				items: mergeViews(props)
 			}),
@@ -37,9 +37,9 @@ const RouteViews = (props) => {
 					h(CardViews, {
 						key: domain.data.id,
 						headline: domain.data.title,
-						interval: props.views.interval,
+						interval: props.filter.interval,
 						loading: props.domains.fetching || selectViewsValue(props, domain.data.id).fetching,
-						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.views.interval),
+						items: enhanceViews(selectViewsValue(props, domain.data.id).value, 7, props.filter.interval),
 						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
 					})
 				)

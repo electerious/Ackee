@@ -10,7 +10,7 @@ export default (state) => {
 
 		const view = selectViewsValue(state, domain.data.id)
 
-		return enhanceViews(view.value, 14, state.views.interval)
+		return enhanceViews(view.value, 14, state.filter.interval)
 
 	})
 

@@ -2,18 +2,12 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_VIEWS_TYPE = Symbol()
-export const SET_VIEWS_INTERVAL = Symbol()
 export const SET_VIEWS_VALUE = Symbol()
 export const SET_VIEWS_FETCHING = Symbol()
 export const SET_VIEWS_ERROR = Symbol()
 
 export const setViewsType = (payload) => ({
 	type: SET_VIEWS_TYPE,
-	payload
-})
-
-export const setViewsInterval = (payload) => ({
-	type: SET_VIEWS_INTERVAL,
 	payload
 })
 
@@ -42,7 +36,7 @@ export const fetchViews = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }&interval=${ props.views.interval }`, {
+		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }&interval=${ props.filter.interval }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)
