@@ -1,40 +1,22 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateDailyViews = require('../aggregations/aggregateDailyViews')
-const aggregateMonthlyViews = require('../aggregations/aggregateMonthlyViews')
-const aggregateYearlyViews = require('../aggregations/aggregateYearlyViews')
+const aggregateViews = require('../aggregations/aggregateViews')
 const constants = require('../constants/views')
 
 const getUnique = async (id, interval) => {
 
-	switch (interval) {
-		case constants.VIEWS_INTERVAL_DAILY: return Record.aggregate(
-			aggregateDailyViews(id, true)
-		)
-		case constants.VIEWS_INTERVAL_MONTHLY: return Record.aggregate(
-			aggregateMonthlyViews(id, true)
-		)
-		case constants.VIEWS_INTERVAL_YEARLY: return Record.aggregate(
-			aggregateYearlyViews(id, true)
-		)
-	}
+	return Record.aggregate(
+		aggregateViews(id, true, interval)
+	)
 
 }
 
 const getTotal = async (id, interval) => {
 
-	switch (interval) {
-		case constants.VIEWS_INTERVAL_DAILY: return Record.aggregate(
-			aggregateDailyViews(id, false)
-		)
-		case constants.VIEWS_INTERVAL_MONTHLY: return Record.aggregate(
-			aggregateMonthlyViews(id, false)
-		)
-		case constants.VIEWS_INTERVAL_YEARLY: return Record.aggregate(
-			aggregateYearlyViews(id, false)
-		)
-	}
+	return Record.aggregate(
+		aggregateViews(id, false, interval)
+	)
 
 }
 
