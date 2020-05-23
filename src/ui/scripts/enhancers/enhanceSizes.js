@@ -1,12 +1,15 @@
+import bestMatch from '../utils/bestMatch'
+
 const getText = ({ id }) => {
 
-	const isScreenResolution = id.screenWidth != null && id.screenHeight != null
-	const isBrowserResolution = id.browserWidth != null && id.browserHeight != null
-
-	if (isScreenResolution === true) return `${ id.screenWidth }px x ${ id.screenHeight }px`
-	if (isBrowserResolution === true) return `${ id.browserWidth }px x ${ id.browserHeight }px`
-
-	return `${ id }px`
+	return bestMatch([
+		[ `${ id.screenWidth }px x ${ id.screenHeight }px`, [ id.screenWidth, id.screenHeight ]],
+		[ `${ id.browserWidth }px x ${ id.browserHeight }px`, [ id.browserWidth, id.browserHeight ]],
+		[ `${ id.screenWidth }px`, [ id.screenWidth ]],
+		[ `${ id.screenHeight }px`, [ id.screenHeight ]],
+		[ `${ id.browserWidth }px`, [ id.browserWidth ]],
+		[ `${ id.browserHeight }px`, [ id.browserHeight ]]
+	])
 
 }
 

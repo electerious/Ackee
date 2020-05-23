@@ -1,10 +1,11 @@
+import bestMatch from '../utils/bestMatch'
+
 const getText = ({ id }) => {
 
-	const isWithModel = id.deviceName != null
-
-	if (isWithModel === true) return `${ id.deviceManufacturer } ${ id.deviceName }`
-
-	return id
+	return bestMatch([
+		[ `${ id.deviceManufacturer } ${ id.deviceName }`, [ id.deviceManufacturer, id.deviceName ]],
+		[ `${ id.deviceManufacturer }`, [ id.deviceManufacturer ]]
+	])
 
 }
 

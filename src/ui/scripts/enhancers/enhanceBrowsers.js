@@ -1,10 +1,11 @@
+import bestMatch from '../utils/bestMatch'
+
 const getText = ({ id }) => {
 
-	const isWithVersion = id.browserVersion != null
-
-	if (isWithVersion === true) return `${ id.browserName } ${ id.browserVersion }`
-
-	return id
+	return bestMatch([
+		[ `${ id.browserName } ${ id.browserVersion }`, [ id.browserName, id.browserVersion ]],
+		[ `${ id.browserName }`, [ id.browserName ]]
+	])
 
 }
 

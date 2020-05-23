@@ -3,8 +3,6 @@
 const Record = require('../schemas/Record')
 const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
 const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
-const aggregateTopFields = require('../aggregations/aggregateTopFields')
-const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const constants = require('../constants/devices')
 
 const getTopWithModel = async (id, range) => {
@@ -24,14 +22,14 @@ const getRecentWithModel = async (id) => {
 const getTopNoModel = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'deviceManufacturer', range)
+		aggregateTopFieldsMultiple(id, [ 'deviceManufacturer' ], range)
 	)
 }
 
 const getRecentNoModel = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFields(id, 'deviceManufacturer')
+		aggregateRecentFieldsMultiple(id, [ 'deviceManufacturer' ])
 	)
 }
 

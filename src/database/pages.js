@@ -1,14 +1,14 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateTopFields = require('../aggregations/aggregateTopFields')
-const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
+const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
 const constants = require('../constants/pages')
 
 const getTop = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'siteLocation', range)
+		aggregateTopFieldsMultiple(id, [ 'siteLocation' ], range)
 	)
 
 }
@@ -16,7 +16,7 @@ const getTop = async (id, range) => {
 const getRecent = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFields(id, 'siteLocation')
+		aggregateRecentFieldsMultiple(id, [ 'siteLocation' ])
 	)
 
 }

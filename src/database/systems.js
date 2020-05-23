@@ -3,8 +3,6 @@
 const Record = require('../schemas/Record')
 const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
 const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
-const aggregateTopFields = require('../aggregations/aggregateTopFields')
-const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const constants = require('../constants/systems')
 
 const getTopWithVersion = async (id, range) => {
@@ -24,14 +22,14 @@ const getRecentWithVersion = async (id) => {
 const getTopNoVersion = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFields(id, 'osName', range)
+		aggregateTopFieldsMultiple(id, [ 'osName' ], range)
 	)
 }
 
 const getRecentNoVersion = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFields(id, 'osName')
+		aggregateRecentFieldsMultiple(id, [ 'osName' ])
 	)
 }
 

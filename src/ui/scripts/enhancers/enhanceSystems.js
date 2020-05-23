@@ -1,10 +1,11 @@
+import bestMatch from '../utils/bestMatch'
+
 const getText = ({ id }) => {
 
-	const isWithVersion = id.osVersion != null
-
-	if (isWithVersion === true) return `${ id.osName } ${ id.osVersion }`
-
-	return id
+	return bestMatch([
+		[ `${ id.osName } ${ id.osVersion }`, [ id.osName, id.osVersion ]],
+		[ `${ id.osName }`, [ id.osName ]]
+	])
 
 }
 
