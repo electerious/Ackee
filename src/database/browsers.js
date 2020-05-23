@@ -1,35 +1,35 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
-const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
+const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const constants = require('../constants/browsers')
 
 const getTopWithVersion = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'browserName', 'browserVersion' ], range)
+		aggregateTopFields(id, [ 'browserName', 'browserVersion' ], range)
 	)
 }
 
 const getRecentWithVersion = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFieldsMultiple(id, [ 'browserName', 'browserVersion' ])
+		aggregateRecentFields(id, [ 'browserName', 'browserVersion' ])
 	)
 }
 
 const getTopNoVersion = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'browserName' ], range)
+		aggregateTopFields(id, [ 'browserName' ], range)
 	)
 }
 
 const getRecentNoVersion = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFieldsMultiple(id, [ 'browserName' ])
+		aggregateRecentFields(id, [ 'browserName' ])
 	)
 }
 

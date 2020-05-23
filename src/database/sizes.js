@@ -1,13 +1,13 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const constants = require('../constants/sizes')
 
 const getBrowserWidth = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'browserWidth' ], range)
+		aggregateTopFields(id, [ 'browserWidth' ], range)
 	)
 
 }
@@ -15,7 +15,7 @@ const getBrowserWidth = async (id, range) => {
 const getBrowserHeight = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'browserHeight' ], range)
+		aggregateTopFields(id, [ 'browserHeight' ], range)
 	)
 
 }
@@ -23,7 +23,7 @@ const getBrowserHeight = async (id, range) => {
 const getBrowserResolution = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'browserWidth', 'browserHeight' ], range)
+		aggregateTopFields(id, [ 'browserWidth', 'browserHeight' ], range)
 	)
 
 }
@@ -31,7 +31,7 @@ const getBrowserResolution = async (id, range) => {
 const getScreenWidth = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'screenWidth' ], range)
+		aggregateTopFields(id, [ 'screenWidth' ], range)
 	)
 
 }
@@ -39,7 +39,7 @@ const getScreenWidth = async (id, range) => {
 const getScreenHeight = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'screenHeight' ], range)
+		aggregateTopFields(id, [ 'screenHeight' ], range)
 	)
 
 }
@@ -47,7 +47,7 @@ const getScreenHeight = async (id, range) => {
 const getScreenResolution = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'screenWidth', 'screenHeight' ], range)
+		aggregateTopFields(id, [ 'screenWidth', 'screenHeight' ], range)
 	)
 
 }

@@ -1,15 +1,15 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
-const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
+const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const constants = require('../constants/referrers')
 
 const getTop = async (id, range) => {
 
 	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'siteReferrer' ], range)
+		aggregateTopFields(id, [ 'siteReferrer' ], range)
 	)
 
 }
@@ -17,7 +17,7 @@ const getTop = async (id, range) => {
 const getNew = async (id) => {
 
 	return Record.aggregate(
-		aggregateNewFields(id, 'siteReferrer')
+		aggregateNewFields(id, [ 'siteReferrer' ])
 	)
 
 }
@@ -25,7 +25,7 @@ const getNew = async (id) => {
 const getRecent = async (id) => {
 
 	return Record.aggregate(
-		aggregateRecentFieldsMultiple(id, [ 'siteReferrer' ])
+		aggregateRecentFields(id, [ 'siteReferrer' ])
 	)
 
 }
