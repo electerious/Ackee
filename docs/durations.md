@@ -5,7 +5,7 @@
 
 ## Average durations
 
-Get the average time users spend on your site per day for the last 14 days. Days without entries are omitted.
+Get the average time users spend on your site per day, month or year for the last 14 intervals. Entries without durations are omitted.
 
 ### Request
 
@@ -49,9 +49,9 @@ Status: 200 OK
 
 ## Detailed durations
 
-Get the time users spend on your sites, grouped by similar durations in an interval of 15s. Includes data from the last 7 days. Durations above 30m will be grouped together.
+Get the time users spend on your sites, grouped by similar durations in an interval of 15s. Durations above 30m will be grouped together.
 
-The included average is the average time users spend on your site for the last 7 days. Every item includes the same average.
+The included average is the average time users spend on your site during the chosen range. Every item in the response includes the same average.
 
 ### Request
 
