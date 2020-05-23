@@ -12,28 +12,14 @@ module.exports = (id, unique, interval) => {
 		},
 		{
 			$group: {
-				_id: {
-					day: {
-						$dayOfMonth: '$created'
-					},
-					month: {
-						$month: '$created'
-					},
-					year: {
-						$year: '$created'
-					}
-				},
+				_id: {},
 				count: {
 					$sum: 1
 				}
 			}
 		},
 		{
-			$sort: {
-				'_id.year': -1,
-				'_id.month': -1,
-				'_id.day': -1
-			}
+			$sort: {}
 		},
 		{
 			$limit: 14
