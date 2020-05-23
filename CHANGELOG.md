@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
 - View the last 24 hours, 7 days, last 30 days of detailed durations
+- Keyboard shortcuts
+
+### Fixed
+
+- Sorting of yearly views
 
 ## [1.7.1] - 2020-05-15
 
