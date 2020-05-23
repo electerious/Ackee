@@ -7,7 +7,7 @@ const aggregateTopFields = require('../../src/aggregations/aggregateTopFields')
 
 test('return array', async (t) => {
 
-	const result = aggregateTopFields(uuid(), 'siteReferrer')
+	const result = aggregateTopFields(uuid(), [ 'osName', 'osVersion' ])
 
 	t.true(Array.isArray(result))
 

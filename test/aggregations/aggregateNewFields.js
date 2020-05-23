@@ -7,7 +7,7 @@ const aggregateNewFields = require('../../src/aggregations/aggregateNewFields')
 
 test('return array', async (t) => {
 
-	const result = aggregateNewFields(uuid(), 'siteReferrer')
+	const result = aggregateNewFields(uuid(), [ 'siteReferrer' ])
 
 	t.true(Array.isArray(result))
 
