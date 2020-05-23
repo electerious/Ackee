@@ -2,7 +2,7 @@
 
 module.exports = (id, properties) => {
 
-	const aggregate = [
+	const aggregation = [
 		{
 			$match: {
 				domainId: id
@@ -25,10 +25,10 @@ module.exports = (id, properties) => {
 	]
 
 	properties.forEach((property) => {
-		aggregate[0].$match[property] = { $ne: null }
-		aggregate[2].$project._id[property] = `$${ property }`
+		aggregation[0].$match[property] = { $ne: null }
+		aggregation[2].$project._id[property] = `$${ property }`
 	})
 
-	return aggregate
+	return aggregation
 
 }

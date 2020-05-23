@@ -4,7 +4,7 @@ const offsetByRange = require('../utils/offsetByRange')
 
 module.exports = (id, properties, range) => {
 
-	const aggregate = [
+	const aggregation = [
 		{
 			$match: {
 				domainId: id
@@ -29,15 +29,15 @@ module.exports = (id, properties, range) => {
 	]
 
 	properties.forEach((property) => {
-		aggregate[0].$match[property] = { $ne: null }
-		aggregate[1].$group._id[property] = `$${ property }`
+		aggregation[0].$match[property] = { $ne: null }
+		aggregation[1].$group._id[property] = `$${ property }`
 	})
 
 	const dateOffset = offsetByRange(range)
 	if (dateOffset != null) {
-		aggregate[0].$match.created = { $gte: dateOffset }
+		aggregation[0].$match.created = { $gte: dateOffset }
 	}
 
-	return aggregate
+	return aggregation
 
 }
