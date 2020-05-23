@@ -22,7 +22,7 @@ module.exports = (id, unique) => {
 		},
 		{
 			$sort: {
-				'_id.day': -1
+				'_id.year': -1
 			}
 		},
 		{
