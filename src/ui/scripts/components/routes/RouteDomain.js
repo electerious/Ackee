@@ -1,15 +1,5 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import CardViews from '../cards/CardViews'
-import CardPages from '../cards/CardPages'
-import CardReferrers from '../cards/CardReferrers'
-import CardDetailedDurations from '../cards/CardDetailedDurations'
-import CardSystems from '../cards/CardSystems'
-import CardDevices from '../cards/CardDevices'
-import CardBrowsers from '../cards/CardBrowsers'
-import CardSizes from '../cards/CardSizes'
-import CardLanguages from '../cards/CardLanguages'
-
 import * as route from '../../constants/route'
 
 import selectViewsValue from '../../selectors/selectViewsValue'
@@ -25,12 +15,22 @@ import selectLanguagesValue from '../../selectors/selectLanguagesValue'
 import enhanceViews from '../../enhancers/enhanceViews'
 import enhancePages from '../../enhancers/enhancePages'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
-import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'
+import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
 import enhanceSystems from '../../enhancers/enhanceSystems'
 import enhanceDevices from '../../enhancers/enhanceDevices'
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
+
+import CardViews from '../cards/CardViews'
+import CardPages from '../cards/CardPages'
+import CardReferrers from '../cards/CardReferrers'
+import CardAverageDurations from '../cards/CardAverageDurations'
+import CardSystems from '../cards/CardSystems'
+import CardDevices from '../cards/CardDevices'
+import CardBrowsers from '../cards/CardBrowsers'
+import CardSizes from '../cards/CardSizes'
+import CardLanguages from '../cards/CardLanguages'
 
 const RouteDomain = (props) => {
 
@@ -64,6 +64,15 @@ const RouteDomain = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
+			h(CardAverageDurations, {
+				wide: true,
+				headline: 'Durations',
+				interval: props.filter.interval,
+				loading: props.domains.fetching || selectDurationsValue(props, domainId).fetching,
+				items: enhanceAverageDurations(selectDurationsValue(props, domainId).value, 14, props.filter.interval),
+				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
+			}),
+
 			h(CardPages, {
 				headline: 'Pages',
 				range: filterRange,
@@ -82,13 +91,7 @@ const RouteDomain = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
 			}),
 
-			h(CardDetailedDurations, {
-				headline: 'Durations',
-				range: filterRange,
-				loading: domainsFetching || selectDurationsValue(props, domainId).fetching,
-				items: enhanceDetailedDurations(selectDurationsValue(props, domainId).value),
-				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
-			}),
+			h('div', { className: 'content__spacer' }),
 
 			h(CardSystems, {
 				headline: 'Systems',

@@ -14,4 +14,9 @@
 		--rows: 1;
 	}
 
+	&__spacer {
+		height: 3vh;
+		grid-column: 1 / -1;
+	}
+
 }
