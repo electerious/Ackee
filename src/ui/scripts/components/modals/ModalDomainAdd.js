@@ -1,6 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 import Input from '../Input'
 import Label from '../Label'
@@ -8,6 +9,10 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
 const ModalDomainAdd = (props) => {
+
+	useHotkeys('esc', props.closeModal, {
+		filter: () => props.current === true
+	})
 
 	const [ inputs, setInputs ] = useState({
 		title: ''
@@ -69,6 +74,7 @@ const ModalDomainAdd = (props) => {
 }
 
 ModalDomainAdd.propTypes = {
+	current: PropTypes.bool.isRequired,
 	fetching: PropTypes.bool.isRequired,
 	addDomain: PropTypes.func.isRequired,
 	closeModal: PropTypes.func.isRequired
