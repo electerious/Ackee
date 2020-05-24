@@ -1,8 +1,8 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { ROUTE_DOMAIN } from '../../constants/route'
 import selectDevicesValue from '../../selectors/selectDevicesValue'
 import enhanceDevices from '../../enhancers/enhanceDevices'
+import domainRoute from '../../utils/domainRoute'
 
 import CardDevices from '../cards/CardDevices'
 
@@ -28,7 +28,7 @@ const RouteDevices = (props) => {
 						sorting: props.devices.sorting,
 						loading: props.domains.fetching || selectDevicesValue(props, domain.data.id).fetching,
 						items: enhanceDevices(selectDevicesValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
+						onMore: () => props.setRoute(domainRoute(domain))
 					})
 				)
 			)

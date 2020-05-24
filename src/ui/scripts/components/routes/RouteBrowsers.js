@@ -1,8 +1,8 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { ROUTE_DOMAIN } from '../../constants/route'
 import selectBrowsersValue from '../../selectors/selectBrowsersValue'
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
+import domainRoute from '../../utils/domainRoute'
 
 import CardBrowsers from '../cards/CardBrowsers'
 
@@ -28,7 +28,7 @@ const RouteBrowsers = (props) => {
 						sorting: props.browsers.sorting,
 						loading: props.domains.fetching || selectBrowsersValue(props, domain.data.id).fetching,
 						items: enhanceBrowsers(selectBrowsersValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
+						onMore: () => props.setRoute(domainRoute(domain))
 					})
 				)
 			)

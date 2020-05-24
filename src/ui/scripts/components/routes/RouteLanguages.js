@@ -1,8 +1,8 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { ROUTE_DOMAIN } from '../../constants/route'
 import selectLanguagesValue from '../../selectors/selectLanguagesValue'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
+import domainRoute from '../../utils/domainRoute'
 
 import CardLanguages from '../cards/CardLanguages'
 
@@ -28,7 +28,7 @@ const RouteLanguages = (props) => {
 						sorting: props.languages.sorting,
 						loading: props.domains.fetching || selectLanguagesValue(props, domain.data.id).fetching,
 						items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
+						onMore: () => props.setRoute(domainRoute(domain))
 					})
 				)
 			)

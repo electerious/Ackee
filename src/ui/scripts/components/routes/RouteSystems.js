@@ -1,8 +1,8 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { ROUTE_DOMAIN } from '../../constants/route'
 import selectSystemsValue from '../../selectors/selectSystemsValue'
 import enhanceSystems from '../../enhancers/enhanceSystems'
+import domainRoute from '../../utils/domainRoute'
 
 import CardSystems from '../cards/CardSystems'
 
@@ -28,7 +28,7 @@ const RouteSystems = (props) => {
 						sorting: props.systems.sorting,
 						loading: props.domains.fetching || selectSystemsValue(props, domain.data.id).fetching,
 						items: enhanceSystems(selectSystemsValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
+						onMore: () => props.setRoute(domainRoute(domain))
 					})
 				)
 			)

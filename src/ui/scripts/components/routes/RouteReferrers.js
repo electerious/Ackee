@@ -1,8 +1,8 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { ROUTE_DOMAIN } from '../../constants/route'
 import selectReferrersValue from '../../selectors/selectReferrersValue'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
+import domainRoute from '../../utils/domainRoute'
 
 import CardReferrers from '../cards/CardReferrers'
 
@@ -28,7 +28,7 @@ const RouteReferrers = (props) => {
 						sorting: props.referrers.sorting,
 						loading: props.domains.fetching || selectReferrersValue(props, domain.data.id).fetching,
 						items: enhanceReferrers(selectReferrersValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
+						onMore: () => props.setRoute(domainRoute(domain))
 					})
 				)
 			)

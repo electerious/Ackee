@@ -1,8 +1,8 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { ROUTE_DOMAIN } from '../../constants/route'
 import selectSizesValue from '../../selectors/selectSizesValue'
 import enhanceSizes from '../../enhancers/enhanceSizes'
+import domainRoute from '../../utils/domainRoute'
 
 import CardSizes from '../cards/CardSizes'
 
@@ -27,7 +27,7 @@ const RouteSizes = (props) => {
 						range: props.filter.range,
 						loading: props.domains.fetching || selectSizesValue(props, domain.data.id).fetching,
 						items: enhanceSizes(selectSizesValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
+						onMore: () => props.setRoute(domainRoute(domain))
 					})
 				)
 			)
