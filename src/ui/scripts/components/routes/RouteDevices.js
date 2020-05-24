@@ -28,7 +28,7 @@ const RouteDevices = (props) => {
 						sorting: props.devices.sorting,
 						loading: props.domains.fetching || selectDevicesValue(props, domain.data.id).fetching,
 						items: enhanceDevices(selectDevicesValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
+						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
 					})
 				)
 			)

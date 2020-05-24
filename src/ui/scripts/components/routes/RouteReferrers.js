@@ -28,7 +28,7 @@ const RouteReferrers = (props) => {
 						sorting: props.referrers.sorting,
 						loading: props.domains.fetching || selectReferrersValue(props, domain.data.id).fetching,
 						items: enhanceReferrers(selectReferrersValue(props, domain.data.id).value),
-						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain } })
+						onMore: () => props.setRoute({ ...ROUTE_DOMAIN, params: { domain: domain.data.id } })
 					})
 				)
 			)
