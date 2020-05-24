@@ -19,7 +19,7 @@ const RouteDurations = (props) => {
 			props.fetchDurations(props, domain.data.id)
 		})
 
-	}, [ props.filter.range, props.filter.intervals, props.domains.value, props.durations.type ])
+	}, [ props.filter.range, props.filter.interval, props.domains.value, props.durations.type ])
 
 	const type = props.durations.type
 
