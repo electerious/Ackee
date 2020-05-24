@@ -38,7 +38,9 @@ Status: 200 OK
 		{
 			"type": "browser",
 			"data": {
-				"id": "Safari",
+				"id": {
+					"browserName": "Safari"
+				},
 				"count": 1
 			}
 		}
@@ -119,7 +121,9 @@ Status: 200 OK
 		{
 			"type": "browser",
 			"data": {
-				"id": "Safari",
+				"id": {
+					"browserName": "Safari"
+				},
 				"created": "2019-09-19T15:54:00.020Z"
 			}
 		}

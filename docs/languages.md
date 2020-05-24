@@ -36,7 +36,9 @@ Status: 200 OK
 		{
 			"type": "language",
 			"data": {
-				"id": "de",
+				"id": {
+					"siteLanguage": "de"
+				},
 				"count": 1
 			}
 		}
@@ -73,7 +75,9 @@ Status: 200 OK
 		{
 			"type": "language",
 			"data": {
-				"id": "de",
+				"id": {
+					"siteLanguage": "de"
+				},
 				"created": "2019-09-19T15:54:00.020Z"
 			}
 		}

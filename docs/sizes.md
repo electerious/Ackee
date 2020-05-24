@@ -84,7 +84,9 @@ Status: 200 OK
 		{
 			"type": "size",
 			"data": {
-				"id": "1920",
+				"id": {
+					"browserWidth": "1920"
+				},
 				"count": 1
 			}
 		}
@@ -125,7 +127,9 @@ Status: 200 OK
 		{
 			"type": "size",
 			"data": {
-				"id": "1080",
+				"id": {
+					"browserHeight": "1080"
+				},
 				"count": 1
 			}
 		}
@@ -210,7 +214,9 @@ Status: 200 OK
 		{
 			"type": "size",
 			"data": {
-				"id": "1920",
+				"id": {
+					"screenWidth": "1920"
+				},
 				"count": 1
 			}
 		}
@@ -251,7 +257,9 @@ Status: 200 OK
 		{
 			"type": "size",
 			"data": {
-				"id": "1080",
+				"id": {
+					"screenHeight": "1080"
+				},
 				"count": 1
 			}
 		}

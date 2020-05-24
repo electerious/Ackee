@@ -36,7 +36,9 @@ Status: 200 OK
 		{
 			"type": "page",
 			"data": {
-				"id": "https://example.com/",
+				"id": {
+					"siteLocation": "https://example.com/"
+				},
 				"count": 1
 			}
 		}
@@ -73,7 +75,9 @@ Status: 200 OK
 		{
 			"type": "page",
 			"data": {
-				"id": "https://example.com/",
+				"id": {
+					"siteLocation": "https://example.com/"
+				},
 				"created": "2019-09-19T15:54:00.020Z"
 			}
 		}

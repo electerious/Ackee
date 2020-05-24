@@ -37,7 +37,9 @@ Status: 200 OK
 		{
 			"type": "referrer",
 			"data": {
-				"id": "https://www.example.com/",
+				"id": {
+					"siteReferrer": "https://www.example.com/"
+				},
 				"count": 1
 			}
 		}
@@ -74,7 +76,9 @@ Status: 200 OK
 		{
 			"type": "referrer",
 			"data": {
-				"id": "https://www.example.com/",
+				"id": {
+					"siteReferrer": "https://www.example.com/"
+				},
 				"count": 1,
 				"created": "2019-09-19T15:54:00.020Z"
 			}
@@ -112,7 +116,9 @@ Status: 200 OK
 		{
 			"type": "referrer",
 			"data": {
-				"id": "https://www.example.com/",
+				"id": {
+					"siteReferrer": "https://www.example.com/"
+				},
 				"created": "2019-09-19T15:54:00.020Z"
 			}
 		}

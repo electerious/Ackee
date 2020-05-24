@@ -38,7 +38,9 @@ Status: 200 OK
 		{
 			"type": "system",
 			"data": {
-				"id": "Windows",
+				"id": {
+					"osName": "Windows"
+				},
 				"count": 1
 			}
 		}
@@ -119,7 +121,9 @@ Status: 200 OK
 		{
 			"type": "system",
 			"data": {
-				"id": "Windows",
+				"id": {
+					"osName": "Windows"
+				},
 				"created": "2019-09-19T15:54:00.020Z"
 			}
 		}
