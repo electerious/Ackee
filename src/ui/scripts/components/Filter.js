@@ -30,36 +30,58 @@ import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
 const labels = {
-	[ranges.RANGES_LAST_24_HOURS]: '24 hours',
-	[ranges.RANGES_LAST_7_DAYS]: '7 days',
-	[ranges.RANGES_LAST_30_DAYS]: '30 days',
-	[ranges.RANGES_ALL_TIME]: 'All time',
-	[intervals.INTERVALS_DAILY]: 'Daily',
-	[intervals.INTERVALS_MONTHLY]: 'Monthly',
-	[intervals.INTERVALS_YEARLY]: 'Yearly',
-	[views.VIEWS_TYPE_UNIQUE]: 'Unique',
-	[views.VIEWS_TYPE_TOTAL]: 'Total',
-	[pages.PAGES_SORTING_TOP]: 'Top',
-	[pages.PAGES_SORTING_RECENT]: 'Recent',
-	[referrers.REFERRERS_SORTING_TOP]: 'Top',
-	[referrers.REFERRERS_SORTING_NEW]: 'New',
-	[referrers.REFERRERS_SORTING_RECENT]: 'Recent',
-	[durations.DURATIONS_TYPE_AVERAGE]: 'Average',
-	[durations.DURATIONS_TYPE_DETAILED]: 'Detailed',
-	[systems.SYSTEMS_SORTING_TOP]: 'Top',
-	[systems.SYSTEMS_SORTING_RECENT]: 'Recent',
-	[devices.DEVICES_SORTING_TOP]: 'Top',
-	[devices.DEVICES_SORTING_RECENT]: 'Recent',
-	[browsers.BROWSERS_SORTING_TOP]: 'Top',
-	[browsers.BROWSERS_SORTING_RECENT]: 'Recent',
-	[sizes.SIZES_TYPE_BROWSER_RESOLUTION]: 'Browser sizes',
-	[sizes.SIZES_TYPE_BROWSER_WIDTH]: 'Browser widths',
-	[sizes.SIZES_TYPE_BROWSER_HEIGHT]: 'Browser heights',
-	[sizes.SIZES_TYPE_SCREEN_RESOLUTION]: 'Screen sizes',
-	[sizes.SIZES_TYPE_SCREEN_WIDTH]: 'Screen widths',
-	[sizes.SIZES_TYPE_SCREEN_HEIGHT]: 'Screen heights',
-	[languages.LANGUAGES_SORTING_TOP]: 'Top',
-	[languages.LANGUAGES_SORTING_RECENT]: 'Recent'
+	ranges: {
+		[ranges.RANGES_LAST_24_HOURS]: '24 hours',
+		[ranges.RANGES_LAST_7_DAYS]: '7 days',
+		[ranges.RANGES_LAST_30_DAYS]: '30 days',
+		[ranges.RANGES_ALL_TIME]: 'All time'
+	},
+	intervals: {
+		[intervals.INTERVALS_DAILY]: 'Daily',
+		[intervals.INTERVALS_MONTHLY]: 'Monthly',
+		[intervals.INTERVALS_YEARLY]: 'Yearly'
+	},
+	views: {
+		[views.VIEWS_TYPE_UNIQUE]: 'Unique',
+		[views.VIEWS_TYPE_TOTAL]: 'Total'
+	},
+	pages: {
+		[pages.PAGES_SORTING_TOP]: 'Top',
+		[pages.PAGES_SORTING_RECENT]: 'Recent'
+	},
+	referrers: {
+		[referrers.REFERRERS_SORTING_TOP]: 'Top',
+		[referrers.REFERRERS_SORTING_NEW]: 'New',
+		[referrers.REFERRERS_SORTING_RECENT]: 'Recent'
+	},
+	durations: {
+		[durations.DURATIONS_TYPE_AVERAGE]: 'Average',
+		[durations.DURATIONS_TYPE_DETAILED]: 'Detailed'
+	},
+	systems: {
+		[systems.SYSTEMS_SORTING_TOP]: 'Top',
+		[systems.SYSTEMS_SORTING_RECENT]: 'Recent'
+	},
+	devices: {
+		[devices.DEVICES_SORTING_TOP]: 'Top',
+		[devices.DEVICES_SORTING_RECENT]: 'Recent'
+	},
+	browsers: {
+		[browsers.BROWSERS_SORTING_TOP]: 'Top',
+		[browsers.BROWSERS_SORTING_RECENT]: 'Recent'
+	},
+	sizes: {
+		[sizes.SIZES_TYPE_BROWSER_RESOLUTION]: 'Browser sizes',
+		[sizes.SIZES_TYPE_BROWSER_WIDTH]: 'Browser widths',
+		[sizes.SIZES_TYPE_BROWSER_HEIGHT]: 'Browser heights',
+		[sizes.SIZES_TYPE_SCREEN_RESOLUTION]: 'Screen sizes',
+		[sizes.SIZES_TYPE_SCREEN_WIDTH]: 'Screen widths',
+		[sizes.SIZES_TYPE_SCREEN_HEIGHT]: 'Screen heights'
+	},
+	languages: {
+		[languages.LANGUAGES_SORTING_TOP]: 'Top',
+		[languages.LANGUAGES_SORTING_RECENT]: 'Recent'
+	}
 }
 
 const calculateX = (measurement) => {
@@ -156,14 +178,14 @@ const Filter = (props) => {
 
 	})()
 
-	const rangeButton = createItem(labels[props.filter.range], [
+	const rangeButton = createItem(labels.ranges[props.filter.range], [
 		createButton('24 hours', 'Show last 24 hours', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_24_HOURS),
 		createButton('7 days', 'Show last 7 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_7_DAYS),
 		createButton('30 days', 'Show last 30 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_30_DAYS),
 		createButton('All time', 'Show all data', props.setFilterRange, props.filter.range, ranges.RANGES_ALL_TIME)
 	], shouldShowRange === true)
 
-	const intervalsButton = createItem(labels[props.filter.interval], [
+	const intervalsButton = createItem(labels.intervals[props.filter.interval], [
 		createButton('Daily', 'Grouped by day', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_DAILY),
 		createButton('Monthly', 'Grouped by month', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_MONTHLY),
 		createButton('Yearly', 'Grouped by year', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_YEARLY)
@@ -171,7 +193,7 @@ const Filter = (props) => {
 
 	const routesMap = {
 		[ROUTE_VIEWS.key]: [
-			createItem(labels[props.views.type], [
+			createItem(labels.views[props.views.type], [
 				createButton('Unique', 'Unique site views', props.setViewsType, props.views.type, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setViewsType, props.views.type, views.VIEWS_TYPE_TOTAL)
 			]),
@@ -182,14 +204,14 @@ const Filter = (props) => {
 			intervalsButton
 		],
 		[ROUTE_PAGES.key]: [
-			createItem(labels[props.pages.sorting], [
+			createItem(labels.pages[props.pages.sorting], [
 				createButton('Top', 'Top page visits', props.setPagesSorting, props.pages.sorting, pages.PAGES_SORTING_TOP),
 				createButton('Recent', 'Recent page visits', props.setPagesSorting, props.pages.sorting, pages.PAGES_SORTING_RECENT)
 			]),
 			rangeButton
 		],
 		[ROUTE_REFERRERS.key]: [
-			createItem(labels[props.referrers.sorting], [
+			createItem(labels.referrers[props.referrers.sorting], [
 				createButton('Top', 'Top referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_TOP),
 				createButton('New', 'New referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_NEW),
 				createButton('Recent', 'Recent referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_RECENT)
@@ -197,7 +219,7 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_DURATIONS.key]: [
-			createItem(labels[props.durations.type], [
+			createItem(labels.durations[props.durations.type], [
 				createButton('Average', 'Average durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_AVERAGE),
 				createButton('Detailed', 'Detailed durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_DETAILED)
 			]),
@@ -205,7 +227,7 @@ const Filter = (props) => {
 			intervalsButton
 		],
 		[ROUTE_SYSTEMS.key]: [
-			createItem(labels[props.systems.sorting], [
+			createItem(labels.systems[props.systems.sorting], [
 				createButton('Top', 'Top systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_RECENT),
 				createSeparator(),
@@ -217,7 +239,7 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_DEVICES.key]: [
-			createItem(labels[props.devices.sorting], [
+			createItem(labels.devices[props.devices.sorting], [
 				createButton('Top', 'Top systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_RECENT),
 				createSeparator(),
@@ -229,7 +251,7 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_BROWSERS.key]: [
-			createItem(labels[props.browsers.sorting], [
+			createItem(labels.browsers[props.browsers.sorting], [
 				createButton('Top', 'Top systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_TOP),
 				createButton('Recent', 'Recent systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_RECENT),
 				createSeparator(),
@@ -241,7 +263,7 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_SIZES.key]: [
-			createItem(labels[props.sizes.type], [
+			createItem(labels.sizes[props.sizes.type], [
 				createButton('Browser sizes', 'Width and height combined', props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
 				createButton('↳ widths', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_WIDTH),
 				createButton('↳ heights', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_HEIGHT),
@@ -253,7 +275,7 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_LANGUAGES.key]: [
-			createItem(labels[props.languages.sorting], [
+			createItem(labels.languages[props.languages.sorting], [
 				createButton('Top', 'Top languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_TOP),
 				createButton('Recent', 'Recent languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_RECENT)
 			]),
