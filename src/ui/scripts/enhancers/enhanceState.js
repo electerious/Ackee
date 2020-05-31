@@ -3,6 +3,7 @@ import isDefined from '../../../utils/isDefined'
 export default (state) => {
 
 	const fetching = (
+		Object.values(state.overview.value).some((value) => value.fetching) === true ||
 		Object.values(state.views.value).some((value) => value.fetching) === true ||
 		Object.values(state.pages.value).some((value) => value.fetching) === true ||
 		Object.values(state.referrers.value).some((value) => value.fetching) === true ||
@@ -17,6 +18,7 @@ export default (state) => {
 	)
 
 	const errors = [
+		...Object.values(state.overview.value).map((value) => value.error),
 		...Object.values(state.views.value).map((value) => value.error),
 		...Object.values(state.pages.value).map((value) => value.error),
 		...Object.values(state.referrers.value).map((value) => value.error),
