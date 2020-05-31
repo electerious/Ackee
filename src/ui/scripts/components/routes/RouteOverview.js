@@ -28,6 +28,7 @@ const RouteOverview = (props) => {
 
 	const domainId = props.route.params.domainId || ALL_DOMAINS
 	const filterRange = props.filter.range
+	const filterInterval = props.filter.interval
 	const isLoading = props.domains.fetching || selectOverviewValue.withoutType(props, domainId).fetching
 
 	useEffect(() => {
@@ -42,18 +43,18 @@ const RouteOverview = (props) => {
 			h(CardViews, {
 				wide: true,
 				headline: 'Views',
-				interval: props.filter.interval,
+				interval: filterInterval,
 				loading: isLoading,
-				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14, props.filter.interval),
+				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14, filterInterval),
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
 			h(CardDurations, {
 				wide: true,
 				headline: 'Durations',
-				interval: props.filter.interval,
+				interval: filterInterval,
 				loading: isLoading,
-				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14, props.filter.interval),
+				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14, filterInterval),
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 
