@@ -6,7 +6,7 @@ import selectDurationsValue from '../../selectors/selectDurationsValue'
 import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
 import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'
 import mergeAverageDurations from '../../utils/mergeAverageDurations'
-import domainRoute from '../../utils/domainRoute'
+import overviewRoute from '../../utils/overviewRoute'
 
 import CardAverageDurations from '../cards/CardAverageDurations'
 import CardDetailedDurations from '../cards/CardDetailedDurations'
@@ -41,7 +41,7 @@ const RouteDurations = (props) => {
 						interval: props.filter.interval,
 						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7, props.filter.interval),
-						onMore: () => props.setRoute(domainRoute(domain))
+						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
 			)
@@ -57,7 +57,7 @@ const RouteDurations = (props) => {
 					range: props.filter.range,
 					loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
 					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value),
-					onMore: () => props.setRoute(domainRoute(domain))
+					onMore: () => props.setRoute(overviewRoute(domain))
 				})
 			)
 		)

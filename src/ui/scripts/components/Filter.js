@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom'
 
 import {
 	ROUTE_VIEWS,
-	ROUTE_DOMAIN,
 	ROUTE_PAGES,
 	ROUTE_REFERRERS,
 	ROUTE_DURATIONS,
@@ -154,7 +153,6 @@ const Filter = (props) => {
 
 	const shouldShowRange = (() => {
 
-		if (routeKey === ROUTE_DOMAIN.key) return true
 		if (routeKey === ROUTE_PAGES.key && props.pages.sorting === pages.PAGES_SORTING_TOP) return true
 		if (routeKey === ROUTE_REFERRERS.key && props.referrers.sorting === referrers.REFERRERS_SORTING_TOP) return true
 		if (routeKey === ROUTE_DURATIONS.key && props.durations.type === durations.DURATIONS_TYPE_DETAILED) return true
@@ -170,7 +168,6 @@ const Filter = (props) => {
 
 	const shouldShowInterval = (() => {
 
-		if (routeKey === ROUTE_DOMAIN.key) return true
 		if (routeKey === ROUTE_VIEWS.key) return true
 		if (routeKey === ROUTE_DURATIONS.key && props.durations.type === durations.DURATIONS_TYPE_AVERAGE) return true
 
@@ -197,10 +194,6 @@ const Filter = (props) => {
 				createButton('Unique', 'Unique site views', props.setViewsType, props.views.type, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setViewsType, props.views.type, views.VIEWS_TYPE_TOTAL)
 			]),
-			intervalsButton
-		],
-		[ROUTE_DOMAIN.key]: [
-			rangeButton,
 			intervalsButton
 		],
 		[ROUTE_PAGES.key]: [

@@ -1,7 +1,8 @@
 import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import isEqual from 'react-fast-compare'
+
+import isSameRoute from '../utils/isSameRoute'
 
 import Context, { BUTTON as DROPDOWN_BUTTON, SEPARATOR as DROPDOWN_SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
@@ -146,7 +147,7 @@ Header.propTypes = {
 export const createButton = (label, route, props) => ({
 	type: BUTTON,
 	onClick: () => props.setRoute(route),
-	active: props.route.key === route.key,
+	active: isSameRoute(props.route, route) === true,
 	label
 })
 
@@ -159,7 +160,7 @@ export const createDropdown = (label, items) => ({
 export const createDropdownButton = (label, route, props, keyHint) => ({
 	type: DROPDOWN_BUTTON,
 	onClick: () => props.setRoute(route),
-	active: props.route.key === route.key && isEqual(props.route.params, route.params || {}),
+	active: isSameRoute(props.route, route) === true,
 	label,
 	keyHint
 })

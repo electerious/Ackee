@@ -5,7 +5,7 @@ import * as route from '../constants/route'
 import * as selectDomainsValue from '../selectors/selectDomainsValue'
 import routeByKey from '../utils/routeByKey'
 import whenBelow from '../utils/whenBelow'
-import domainRoute from '../utils/domainRoute'
+import overviewRoute from '../utils/overviewRoute'
 
 import Header, { createButton, createDropdown, createDropdownButton, createDropdownSeparator } from './Header'
 import Modals from './Modals'
@@ -13,7 +13,7 @@ import Modals from './Modals'
 const gotoDomainWhenAvailable = (props, index) => {
 
 	const domain = selectDomainsValue.byIndex(props, index)
-	if (domain != null) props.setRoute(domainRoute(domain))
+	if (domain != null) props.setRoute(overviewRoute(domain))
 
 }
 
@@ -25,7 +25,7 @@ const Dashboard = (props) => {
 
 	}, [])
 
-	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).data.title : route.ROUTE_DOMAIN.title
+	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).data.title : 'Domains'
 	const insightsLabel = (activeInside) => activeInside === true ? routeByKey(props.route.key).title : 'Insights'
 
 	useHotkeys('o', () => props.setRoute(route.ROUTE_OVERVIEW))
@@ -54,7 +54,7 @@ const Dashboard = (props) => {
 				items: [
 					createButton(route.ROUTE_OVERVIEW.title, route.ROUTE_OVERVIEW, props),
 					createDropdown(domainsLabel, props.domains.value.map((domain, index) =>
-						createDropdownButton(domain.data.title, domainRoute(domain), props, whenBelow(index, 10))
+						createDropdownButton(domain.data.title, overviewRoute(domain), props, whenBelow(index, 10))
 					)),
 					createDropdown(insightsLabel, [
 						createDropdownButton(route.ROUTE_VIEWS.title, route.ROUTE_VIEWS, props, 'v'),

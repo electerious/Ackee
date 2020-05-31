@@ -2,7 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectPagesValue from '../../selectors/selectPagesValue'
 import enhancePages from '../../enhancers/enhancePages'
-import domainRoute from '../../utils/domainRoute'
+import overviewRoute from '../../utils/overviewRoute'
 
 import CardPages from '../cards/CardPages'
 
@@ -28,7 +28,7 @@ const RoutePages = (props) => {
 						sorting: props.pages.sorting,
 						loading: props.domains.fetching || selectPagesValue(props, domain.data.id).fetching,
 						items: enhancePages(selectPagesValue(props, domain.data.id).value),
-						onMore: () => props.setRoute(domainRoute(domain))
+						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
 			)
