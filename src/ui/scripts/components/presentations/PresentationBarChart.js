@@ -9,7 +9,10 @@ const max = (items) => round(Math.max.apply(Math, items))
 const mid = (items) => max(items) / 2
 const min = () => 0
 
-const percentage = (amount, max) => (amount / max) * 100
+const percentage = (amount, max) => {
+	if (amount === 0 && max === 0) return 0
+	return (amount / max) * 100
+}
 
 const Row = (props) => {
 
