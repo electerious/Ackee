@@ -14,11 +14,9 @@ import * as actions from './actions'
 import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
-import { initialState as initialOverviewState } from './reducers/overview'
 import { initialState as initialViewsState } from './reducers/views'
 import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
-import { initialState as initialDurationsState } from './reducers/durations'
 import { initialState as initialLanguagesState } from './reducers/languages'
 import { initialState as initialSystemsState } from './reducers/systems'
 import { initialState as initialBrowsersState } from './reducers/browsers'
@@ -59,9 +57,6 @@ store.subscribe(() => {
 			range: currentState.filter.range,
 			interval: currentState.filter.interval
 		},
-		overview: {
-			...initialOverviewState()
-		},
 		views: {
 			...initialViewsState(),
 			type: currentState.views.type
@@ -74,10 +69,6 @@ store.subscribe(() => {
 			...initialReferrersState(),
 			range: currentState.referrers.range,
 			sorting: currentState.referrers.sorting
-		},
-		durations: {
-			...initialDurationsState(),
-			type: currentState.durations.type
 		},
 		languages: {
 			...initialLanguagesState(),

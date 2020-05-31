@@ -1,15 +1,9 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_DURATIONS_TYPE = Symbol()
 export const SET_DURATIONS_VALUE = Symbol()
 export const SET_DURATIONS_FETCHING = Symbol()
 export const SET_DURATIONS_ERROR = Symbol()
-
-export const setDurationsType = (payload) => ({
-	type: SET_DURATIONS_TYPE,
-	payload
-})
 
 export const setDurationsValue = (domainId, payload) => ({
 	type: SET_DURATIONS_VALUE,
@@ -36,7 +30,7 @@ export const fetchDurations = signalHandler((signal) => (props, domainId) => asy
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/durations?type=${ props.durations.type }&range=${ props.filter.range }&interval=${ props.filter.interval }`, {
+		const data = await api(`/domains/${ domainId }/durations?interval=${ props.filter.interval }`, {
 			method: 'get',
 			props,
 			signal: signal(domainId)

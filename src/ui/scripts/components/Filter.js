@@ -16,7 +16,6 @@ import {
 import * as views from '../../../constants/views'
 import * as pages from '../../../constants/pages'
 import * as referrers from '../../../constants/referrers'
-import * as durations from '../../../constants/durations'
 import * as systems from '../../../constants/systems'
 import * as devices from '../../../constants/devices'
 import * as browsers from '../../../constants/browsers'
@@ -52,10 +51,6 @@ const labels = {
 		[referrers.REFERRERS_SORTING_TOP]: 'Top',
 		[referrers.REFERRERS_SORTING_NEW]: 'New',
 		[referrers.REFERRERS_SORTING_RECENT]: 'Recent'
-	},
-	durations: {
-		[durations.DURATIONS_TYPE_AVERAGE]: 'Average',
-		[durations.DURATIONS_TYPE_DETAILED]: 'Detailed'
 	},
 	systems: {
 		[systems.SYSTEMS_SORTING_TOP]: 'Top',
@@ -155,7 +150,7 @@ const Filter = (props) => {
 
 		if (routeKey === ROUTE_PAGES.key && props.pages.sorting === pages.PAGES_SORTING_TOP) return true
 		if (routeKey === ROUTE_REFERRERS.key && props.referrers.sorting === referrers.REFERRERS_SORTING_TOP) return true
-		if (routeKey === ROUTE_DURATIONS.key && props.durations.type === durations.DURATIONS_TYPE_DETAILED) return true
+		if (routeKey === ROUTE_DURATIONS.key) return true
 		if (routeKey === ROUTE_SYSTEMS.key && props.systems.sorting === systems.SYSTEMS_SORTING_TOP) return true
 		if (routeKey === ROUTE_DEVICES.key && props.devices.sorting === devices.DEVICES_SORTING_TOP) return true
 		if (routeKey === ROUTE_BROWSERS.key && props.browsers.sorting === browsers.BROWSERS_SORTING_TOP) return true
@@ -169,7 +164,7 @@ const Filter = (props) => {
 	const shouldShowInterval = (() => {
 
 		if (routeKey === ROUTE_VIEWS.key) return true
-		if (routeKey === ROUTE_DURATIONS.key && props.durations.type === durations.DURATIONS_TYPE_AVERAGE) return true
+		if (routeKey === ROUTE_DURATIONS.key) return true
 
 		return false
 
@@ -212,11 +207,6 @@ const Filter = (props) => {
 			rangeButton
 		],
 		[ROUTE_DURATIONS.key]: [
-			createItem(labels.durations[props.durations.type], [
-				createButton('Average', 'Average durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_AVERAGE),
-				createButton('Detailed', 'Detailed durations', props.setDurationsType, props.durations.type, durations.DURATIONS_TYPE_DETAILED)
-			]),
-			rangeButton,
 			intervalsButton
 		],
 		[ROUTE_SYSTEMS.key]: [

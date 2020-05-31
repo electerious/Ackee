@@ -93,6 +93,8 @@ const routes = [
 	post('/tokens', tokens.add),
 	del('/tokens/:tokenId', tokens.del),
 
+	get('/overview', pipe(requireAuth, overview.all)),
+
 	post('/domains', pipe(requireAuth, blockDemo, domains.add)),
 	get('/domains', pipe(requireAuth, domains.all)),
 	put('/domains/:domainId', pipe(requireAuth, blockDemo, domains.update)),
@@ -102,23 +104,14 @@ const routes = [
 	patch('/domains/:domainId/records/:recordId', records.update),
 
 	get('/domains/:domainId/overview', pipe(requireAuth, overview.get)),
-
 	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
-
 	get('/domains/:domainId/pages', pipe(requireAuth, pages.get)),
-
 	get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
-
 	get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
-
 	get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
-
 	get('/domains/:domainId/sizes', pipe(requireAuth, sizes.get)),
-
 	get('/domains/:domainId/systems', pipe(requireAuth, systems.get)),
-
 	get('/domains/:domainId/devices', pipe(requireAuth, devices.get)),
-
 	get('/domains/:domainId/browsers', pipe(requireAuth, browsers.get)),
 
 	get('/*', notFound),

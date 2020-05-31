@@ -17,35 +17,42 @@ const responses = (responses) => ({
 	data: responses
 })
 
+const enhanceRequest = (req, key) => ({
+	...req,
+	query: (() => {
+		try {
+			return JSON.parse(req.query[key])
+		} catch (err) {
+			throw createError(400, `Query for ${ key } is missing or invalid`)
+		}
+	})()
+})
+
 const get = async (req) => {
 
-	const enhanceRequest = (key) => ({
-		...req,
-		query: (() => {
-			try {
-				return JSON.parse(req.query[key])
-			} catch (err) {
-				throw createError(400, `Query for ${ key } is missing or invalid`)
-			}
-		})()
-	})
-
 	const results = await Promise.all([
-		views.get(enhanceRequest('views')),
-		pages.get(enhanceRequest('pages')),
-		referrers.get(enhanceRequest('referrers')),
-		durations.get(enhanceRequest('durations')),
-		systems.get(enhanceRequest('systems')),
-		devices.get(enhanceRequest('devices')),
-		browsers.get(enhanceRequest('browsers')),
-		sizes.get(enhanceRequest('sizes')),
-		languages.get(enhanceRequest('languages'))
+		views.get(enhanceRequest(req, 'views')),
+		pages.get(enhanceRequest(req, 'pages')),
+		referrers.get(enhanceRequest(req, 'referrers')),
+		durations.get(enhanceRequest(req, 'durations')),
+		systems.get(enhanceRequest(req, 'systems')),
+		devices.get(enhanceRequest(req, 'devices')),
+		browsers.get(enhanceRequest(req, 'browsers')),
+		sizes.get(enhanceRequest(req, 'sizes')),
+		languages.get(enhanceRequest(req, 'languages'))
 	])
 
 	return responses(results)
 
 }
 
+const all = async (req) => {
+
+	return get(req)
+
+}
+
 module.exports = {
-	get
+	get,
+	all
 }

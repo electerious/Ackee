@@ -1,7 +1,7 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import * as route from '../../constants/route'
-
+import { ALL_DOMAINS } from '../../actions/overview'
 import * as selectOverviewValue from '../../selectors/selectOverviewValue'
 
 import enhanceViews from '../../enhancers/enhanceViews'
@@ -26,7 +26,7 @@ import CardLanguages from '../cards/CardLanguages'
 
 const RouteOverview = (props) => {
 
-	const domainId = props.route.params.domainId
+	const domainId = props.route.params.domainId || ALL_DOMAINS
 	const filterRange = props.filter.range
 	const isLoading = props.domains.fetching || selectOverviewValue.withoutType(props, domainId).fetching
 

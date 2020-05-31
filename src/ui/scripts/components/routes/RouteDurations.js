@@ -1,15 +1,11 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { DURATIONS_TYPE_AVERAGE, DURATIONS_TYPE_DETAILED } from '../../../../constants/durations'
-
 import selectDurationsValue from '../../selectors/selectDurationsValue'
 import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
-import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'
 import mergeAverageDurations from '../../utils/mergeAverageDurations'
 import overviewRoute from '../../utils/overviewRoute'
 
 import CardAverageDurations from '../cards/CardAverageDurations'
-import CardDetailedDurations from '../cards/CardDetailedDurations'
 
 const RouteDurations = (props) => {
 
@@ -19,11 +15,9 @@ const RouteDurations = (props) => {
 			props.fetchDurations(props, domain.data.id)
 		})
 
-	}, [ props.filter.range, props.filter.interval, props.domains.value, props.durations.type ])
+	}, [ props.filter.interval, props.domains.value ])
 
-	const type = props.durations.type
-
-	if (type === DURATIONS_TYPE_AVERAGE) return (
+	return (
 		h(Fragment, {},
 			h(CardAverageDurations, {
 				wide: true,
@@ -44,21 +38,6 @@ const RouteDurations = (props) => {
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
-			)
-		)
-	)
-
-	if (type === DURATIONS_TYPE_DETAILED) return (
-		props.domains.value.map(
-			(domain) => (
-				h(CardDetailedDurations, {
-					key: domain.data.id,
-					headline: domain.data.title,
-					range: props.filter.range,
-					loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value),
-					onMore: () => props.setRoute(overviewRoute(domain))
-				})
 			)
 		)
 	)
