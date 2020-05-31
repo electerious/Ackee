@@ -14,6 +14,7 @@ const ui = require('./routes/ui')
 const tokens = require('./routes/tokens')
 const domains = require('./routes/domains')
 const records = require('./routes/records')
+const overview = require('./routes/overview')
 const views = require('./routes/views')
 const pages = require('./routes/pages')
 const referrers = require('./routes/referrers')
@@ -99,6 +100,8 @@ const routes = [
 
 	post('/domains/:domainId/records', records.add),
 	patch('/domains/:domainId/records/:recordId', records.update),
+
+	get('/domains/:domainId/overview', pipe(requireAuth, overview.get)),
 
 	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
 
