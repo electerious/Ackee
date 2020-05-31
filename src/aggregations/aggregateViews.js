@@ -6,9 +6,7 @@ module.exports = (id, unique, interval) => {
 
 	const aggregation = [
 		{
-			$match: {
-				domainId: id
-			}
+			$match: {}
 		},
 		{
 			$group: {
@@ -25,6 +23,10 @@ module.exports = (id, unique, interval) => {
 			$limit: 14
 		}
 	]
+
+	if (id != null) {
+		aggregation[0].$match.domainId = id
+	}
 
 	if (unique === true) aggregation[0].$match.clientId = {
 		$exists: true,

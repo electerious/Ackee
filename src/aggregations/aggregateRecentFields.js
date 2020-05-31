@@ -4,9 +4,7 @@ module.exports = (id, properties) => {
 
 	const aggregation = [
 		{
-			$match: {
-				domainId: id
-			}
+			$match: {}
 		},
 		{
 			$sort: {
@@ -23,6 +21,10 @@ module.exports = (id, properties) => {
 			$limit: 30
 		}
 	]
+
+	if (id != null) {
+		aggregation[0].$match.domainId = id
+	}
 
 	properties.forEach((property) => {
 		aggregation[0].$match[property] = { $ne: null }
