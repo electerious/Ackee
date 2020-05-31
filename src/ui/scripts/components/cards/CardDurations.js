@@ -32,7 +32,7 @@ const textLabel = (active, interval, isStale) => {
 
 }
 
-const CardViews = (props) => {
+const CardDurations = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState(0)
@@ -81,7 +81,7 @@ const CardViews = (props) => {
 
 }
 
-CardViews.propTypes = {
+CardDurations.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
 	interval: PropTypes.string.isRequired,
@@ -90,4 +90,4 @@ CardViews.propTypes = {
 	onMore: PropTypes.func
 }
 
-export default CardViews
+export default CardDurations

@@ -7,7 +7,7 @@ import * as selectOverviewValue from '../../selectors/selectOverviewValue'
 import enhanceViews from '../../enhancers/enhanceViews'
 import enhancePages from '../../enhancers/enhancePages'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
-import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
+import enhanceDurations from '../../enhancers/enhanceDurations'
 import enhanceSystems from '../../enhancers/enhanceSystems'
 import enhanceDevices from '../../enhancers/enhanceDevices'
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
@@ -17,7 +17,7 @@ import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import CardViews from '../cards/CardViews'
 import CardPages from '../cards/CardPages'
 import CardReferrers from '../cards/CardReferrers'
-import CardAverageDurations from '../cards/CardAverageDurations'
+import CardDurations from '../cards/CardDurations'
 import CardSystems from '../cards/CardSystems'
 import CardDevices from '../cards/CardDevices'
 import CardBrowsers from '../cards/CardBrowsers'
@@ -48,12 +48,12 @@ const RouteOverview = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
-			h(CardAverageDurations, {
+			h(CardDurations, {
 				wide: true,
 				headline: 'Durations',
 				interval: props.filter.interval,
 				loading: isLoading,
-				items: enhanceAverageDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14, props.filter.interval),
+				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14, props.filter.interval),
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 

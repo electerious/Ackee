@@ -1,5 +1,5 @@
 import selectDurationsValue from '../selectors/selectDurationsValue'
-import enhanceAverageDurations from '../enhancers/enhanceAverageDurations'
+import enhanceDurations from '../enhancers/enhanceDurations'
 import isDefined from '../../../utils/isDefined'
 
 // Turns the durations of multiple domains into one array of durations
@@ -10,7 +10,7 @@ export default (state) => {
 
 		const duration = selectDurationsValue(state, domain.data.id)
 
-		return enhanceAverageDurations(duration.value, 14, state.filter.interval)
+		return enhanceDurations(duration.value, 14, state.filter.interval)
 
 	})
 

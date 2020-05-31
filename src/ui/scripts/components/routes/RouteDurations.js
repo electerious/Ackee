@@ -1,11 +1,11 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectDurationsValue from '../../selectors/selectDurationsValue'
-import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
-import mergeAverageDurations from '../../utils/mergeAverageDurations'
+import enhanceDurations from '../../enhancers/enhanceDurations'
+import mergeDurations from '../../utils/mergeDurations'
 import overviewRoute from '../../utils/overviewRoute'
 
-import CardAverageDurations from '../cards/CardAverageDurations'
+import CardDurations from '../cards/CardDurations'
 
 const RouteDurations = (props) => {
 
@@ -19,22 +19,22 @@ const RouteDurations = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardAverageDurations, {
+			h(CardDurations, {
 				wide: true,
-				headline: 'Average Durations',
+				headline: 'Durations',
 				interval: props.filter.interval,
 				loading: props.fetching,
-				items: mergeAverageDurations(props)
+				items: mergeDurations(props)
 			}),
 
 			props.domains.value.map(
 				(domain) => (
-					h(CardAverageDurations, {
+					h(CardDurations, {
 						key: domain.data.id,
 						headline: domain.data.title,
 						interval: props.filter.interval,
 						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7, props.filter.interval),
+						items: enhanceDurations(selectDurationsValue(props, domain.data.id).value, 7, props.filter.interval),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
