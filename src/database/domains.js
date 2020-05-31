@@ -1,6 +1,7 @@
 'use strict'
 
 const Domain = require('../schemas/Domain')
+const aggregateDomains = require('../aggregations/aggregateDomains')
 const runUpdate = require('../utils/runUpdate')
 
 const add = async (data) => {
@@ -11,20 +12,7 @@ const add = async (data) => {
 
 const all = async () => {
 
-	return Domain.aggregate([
-		{
-			$addFields: {
-				insensitive: {
-					$toLower: '$title'
-				}
-			}
-		},
-		{
-			$sort: {
-				insensitive: 1
-			}
-		}
-	])
+	return Domain.aggregate(aggregateDomains())
 
 }
 
