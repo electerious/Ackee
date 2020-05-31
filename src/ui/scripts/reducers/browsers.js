@@ -9,6 +9,7 @@ import {
 } from '../actions'
 
 import { BROWSERS_SORTING_TOP, BROWSERS_TYPE_NO_VERSION } from '../../../constants/browsers'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: BROWSERS_TYPE_NO_VERSION,
@@ -16,11 +17,7 @@ export const initialState = () => ({
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 

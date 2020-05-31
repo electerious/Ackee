@@ -8,17 +8,14 @@ import {
 } from '../actions'
 
 import { VIEWS_TYPE_UNIQUE } from '../../../constants/views'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: VIEWS_TYPE_UNIQUE,
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 

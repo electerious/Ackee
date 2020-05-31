@@ -8,17 +8,14 @@ import {
 } from '../actions'
 
 import { PAGES_SORTING_TOP } from '../../../constants/pages'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	sorting: PAGES_SORTING_TOP,
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 

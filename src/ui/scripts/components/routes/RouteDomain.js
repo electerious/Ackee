@@ -2,15 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import * as route from '../../constants/route'
 
-import selectViewsValue from '../../selectors/selectViewsValue'
-import selectPagesValue from '../../selectors/selectPagesValue'
-import selectReferrersValue from '../../selectors/selectReferrersValue'
-import selectDurationsValue from '../../selectors/selectDurationsValue'
-import selectSystemsValue from '../../selectors/selectSystemsValue'
-import selectDevicesValue from '../../selectors/selectDevicesValue'
-import selectBrowsersValue from '../../selectors/selectBrowsersValue'
-import selectSizesValue from '../../selectors/selectSizesValue'
-import selectLanguagesValue from '../../selectors/selectLanguagesValue'
+import * as selectOverviewValue from '../../selectors/selectOverviewValue'
 
 import enhanceViews from '../../enhancers/enhanceViews'
 import enhancePages from '../../enhancers/enhancePages'
@@ -35,20 +27,12 @@ import CardLanguages from '../cards/CardLanguages'
 const RouteDomain = (props) => {
 
 	const domainId = props.route.params.domainId
-	const domainsFetching = props.domains.fetching
 	const filterRange = props.filter.range
+	const isLoading = props.domains.fetching || selectOverviewValue.withoutType(props, domainId).fetching
 
 	useEffect(() => {
 
-		props.fetchViews(props, domainId)
-		props.fetchPages(props, domainId)
-		props.fetchReferrers(props, domainId)
-		props.fetchDurations(props, domainId)
-		props.fetchSystems(props, domainId)
-		props.fetchDevices(props, domainId)
-		props.fetchBrowsers(props, domainId)
-		props.fetchSizes(props, domainId)
-		props.fetchLanguages(props, domainId)
+		props.fetchOverview(props, domainId)
 
 	}, [ domainId, filterRange ])
 
@@ -59,8 +43,8 @@ const RouteDomain = (props) => {
 				wide: true,
 				headline: 'Views',
 				interval: props.filter.interval,
-				loading: domainsFetching || selectViewsValue(props, domainId).fetching,
-				items: enhanceViews(selectViewsValue(props, domainId).value, 14, props.filter.interval),
+				loading: isLoading,
+				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14, props.filter.interval),
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
@@ -68,8 +52,8 @@ const RouteDomain = (props) => {
 				wide: true,
 				headline: 'Durations',
 				interval: props.filter.interval,
-				loading: props.domains.fetching || selectDurationsValue(props, domainId).fetching,
-				items: enhanceAverageDurations(selectDurationsValue(props, domainId).value, 14, props.filter.interval),
+				loading: isLoading,
+				items: enhanceAverageDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14, props.filter.interval),
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 
@@ -77,8 +61,8 @@ const RouteDomain = (props) => {
 				headline: 'Pages',
 				range: filterRange,
 				sorting: props.pages.sorting,
-				loading: domainsFetching || selectPagesValue(props, domainId).fetching,
-				items: enhancePages(selectPagesValue(props, domainId).value),
+				loading: isLoading,
+				items: enhancePages(selectOverviewValue.withType(props, domainId, 'pages')),
 				onMore: () => props.setRoute(route.ROUTE_PAGES)
 			}),
 
@@ -86,8 +70,8 @@ const RouteDomain = (props) => {
 				headline: 'Referrers',
 				range: filterRange,
 				sorting: props.referrers.sorting,
-				loading: domainsFetching || selectReferrersValue(props, domainId).fetching,
-				items: enhanceReferrers(selectReferrersValue(props, domainId).value),
+				loading: isLoading,
+				items: enhanceReferrers(selectOverviewValue.withType(props, domainId, 'referrers')),
 				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
 			}),
 
@@ -97,8 +81,8 @@ const RouteDomain = (props) => {
 				headline: 'Systems',
 				range: filterRange,
 				sorting: props.systems.sorting,
-				loading: domainsFetching || selectSystemsValue(props, domainId).fetching,
-				items: enhanceSystems(selectSystemsValue(props, domainId).value),
+				loading: isLoading,
+				items: enhanceSystems(selectOverviewValue.withType(props, domainId, 'systems')),
 				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
 			}),
 
@@ -106,8 +90,8 @@ const RouteDomain = (props) => {
 				headline: 'Devices',
 				range: filterRange,
 				sorting: props.devices.sorting,
-				loading: domainsFetching || selectDevicesValue(props, domainId).fetching,
-				items: enhanceDevices(selectDevicesValue(props, domainId).value),
+				loading: isLoading,
+				items: enhanceDevices(selectOverviewValue.withType(props, domainId, 'devices')),
 				onMore: () => props.setRoute(route.ROUTE_DEVICES)
 			}),
 
@@ -115,16 +99,16 @@ const RouteDomain = (props) => {
 				headline: 'Browsers',
 				range: filterRange,
 				sorting: props.browsers.sorting,
-				loading: domainsFetching || selectBrowsersValue(props, domainId).fetching,
-				items: enhanceBrowsers(selectBrowsersValue(props, domainId).value),
+				loading: isLoading,
+				items: enhanceBrowsers(selectOverviewValue.withType(props, domainId, 'browsers')),
 				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
 			}),
 
 			h(CardSizes, {
 				headline: 'Sizes',
 				range: filterRange,
-				loading: domainsFetching || selectSizesValue(props, domainId).fetching,
-				items: enhanceSizes(selectSizesValue(props, domainId).value),
+				loading: isLoading,
+				items: enhanceSizes(selectOverviewValue.withType(props, domainId, 'sizes')),
 				onMore: () => props.setRoute(route.ROUTE_SIZES)
 			}),
 
@@ -132,8 +116,8 @@ const RouteDomain = (props) => {
 				headline: 'Languages',
 				range: filterRange,
 				sorting: props.languages.sorting,
-				loading: domainsFetching || selectLanguagesValue(props, domainId).fetching,
-				items: enhanceLanguages(selectLanguagesValue(props, domainId).value),
+				loading: isLoading,
+				items: enhanceLanguages(selectOverviewValue.withType(props, domainId, 'languages')),
 				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)
 			})
 

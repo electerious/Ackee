@@ -8,17 +8,14 @@ import {
 } from '../actions'
 
 import { DURATIONS_TYPE_AVERAGE } from '../../../constants/durations'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: DURATIONS_TYPE_AVERAGE,
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 

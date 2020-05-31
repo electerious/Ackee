@@ -14,6 +14,7 @@ import * as actions from './actions'
 import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
+import { initialState as initialOverviewState } from './reducers/overview'
 import { initialState as initialViewsState } from './reducers/views'
 import { initialState as initialPagesState } from './reducers/pages'
 import { initialState as initialReferrersState } from './reducers/referrers'
@@ -57,6 +58,9 @@ store.subscribe(() => {
 			...initialFilterState(),
 			range: currentState.filter.range,
 			interval: currentState.filter.interval
+		},
+		overview: {
+			...initialOverviewState()
 		},
 		views: {
 			...initialViewsState(),

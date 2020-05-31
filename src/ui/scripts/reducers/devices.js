@@ -9,6 +9,7 @@ import {
 } from '../actions'
 
 import { DEVICES_SORTING_TOP, DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: DEVICES_TYPE_WITH_MODEL,
@@ -16,11 +17,7 @@ export const initialState = () => ({
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 

@@ -8,17 +8,14 @@ import {
 } from '../actions'
 
 import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	sorting: LANGUAGES_SORTING_TOP,
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
