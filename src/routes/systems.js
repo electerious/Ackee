@@ -7,7 +7,7 @@ const constants = require('../constants/systems')
 const ranges = require('../constants/ranges')
 
 const response = (entry) => ({
-	type: 'systems',
+	type: 'system',
 	data: {
 		id: entry._id,
 		count: entry.count,
@@ -16,7 +16,7 @@ const response = (entry) => ({
 })
 
 const responses = (entries) => ({
-	type: 'system',
+	type: 'systems',
 	data: entries.map(response)
 })
 
