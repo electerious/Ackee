@@ -2,17 +2,16 @@
 
 const test = require('ava')
 
-const { subDays } = require('date-fns')
+const { startOfDay, subDays } = require('date-fns')
 
 const ranges = require('../../src/constants/ranges')
-const zeroDate = require('../../src/utils/zeroDate')
 const offsetByRange = require('../../src/utils/offsetByRange')
 
 test('return correct offset for RANGES_LAST_24_HOURS', async (t) => {
 
 	const result = offsetByRange(ranges.RANGES_LAST_24_HOURS)
 
-	t.deepEqual(result, subDays(zeroDate(), 1))
+	t.deepEqual(result, subDays(startOfDay(new Date()), 1))
 
 })
 
@@ -20,7 +19,7 @@ test('return correct offset for RANGES_LAST_7_DAYS', async (t) => {
 
 	const result = offsetByRange(ranges.RANGES_LAST_7_DAYS)
 
-	t.deepEqual(result, subDays(zeroDate(), 6))
+	t.deepEqual(result, subDays(startOfDay(new Date()), 6))
 
 })
 
@@ -28,7 +27,7 @@ test('return correct offset for RANGES_LAST_30_DAYS', async (t) => {
 
 	const result = offsetByRange(ranges.RANGES_LAST_30_DAYS)
 
-	t.deepEqual(result, subDays(zeroDate(), 29))
+	t.deepEqual(result, subDays(startOfDay(new Date()), 29))
 
 })
 
