@@ -2,6 +2,7 @@
 
 const { createError } = require('micro')
 
+const facts = require('./facts')
 const views = require('./views')
 const pages = require('./pages')
 const referrers = require('./referrers')
@@ -31,6 +32,7 @@ const enhanceRequest = (req, key) => ({
 const get = async (req) => {
 
 	const results = await Promise.all([
+		facts.get(enhanceRequest(req, 'facts')),
 		views.get(enhanceRequest(req, 'views')),
 		pages.get(enhanceRequest(req, 'pages')),
 		referrers.get(enhanceRequest(req, 'referrers')),
