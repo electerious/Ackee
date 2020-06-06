@@ -11,7 +11,6 @@ const getText = ({ id }) => {
 
 export default (browsers) => {
 
-	// Extract and enhance the data from the API
 	return browsers.map((browser) => ({
 		text: getText(browser.data),
 		count: browser.data.count,

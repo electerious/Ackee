@@ -11,7 +11,6 @@ const getText = ({ id }) => {
 
 export default (devices) => {
 
-	// Extract and enhance the data from the API
 	return devices.map((device) => ({
 		text: getText(device.data),
 		count: device.data.count,

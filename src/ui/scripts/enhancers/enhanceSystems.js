@@ -11,7 +11,6 @@ const getText = ({ id }) => {
 
 export default (systems) => {
 
-	// Extract and enhance the data from the API
 	return systems.map((system) => ({
 		text: getText(system.data),
 		count: system.data.count,

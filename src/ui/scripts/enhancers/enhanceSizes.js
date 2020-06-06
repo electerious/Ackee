@@ -15,7 +15,6 @@ const getText = ({ id }) => {
 
 export default (sizes) => {
 
-	// Extract and enhance the data from the API
 	return sizes.map((size) => ({
 		text: getText(size.data),
 		count: size.data.count
