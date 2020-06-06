@@ -101,7 +101,7 @@ const ModalDomainEdit = (props) => {
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator card__separator--vertical'
 				}),
 
 				h('button', {
@@ -111,7 +111,7 @@ const ModalDomainEdit = (props) => {
 				}, 'Delete'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator card__separator--vertical'
 				}),
 
 				h('button', {

@@ -15,8 +15,13 @@
 		grid-column: 1 / -1;
 	}
 
+	&__facts {
+		display: flex;
+	}
+
 	&__inner {
 		padding: $gutter*1.6 $gutter*1.5 $gutter*1.5;
+		width: 100%;
 	}
 
 	&__footer {
@@ -52,8 +57,15 @@
 
 	&__separator {
 		flex-shrink: 0;
-		width: 1px;
 		background: $black;
+
+		&--vertical {
+			width: 1px;
+		}
+
+		&--horizontal {
+			height: 1px;
+		}
 	}
 
 }

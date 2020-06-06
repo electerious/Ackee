@@ -53,8 +53,7 @@ const CardViews = (props) => {
 			h('div', { className: 'card__inner' },
 				h(Headline, {
 					type: 'h2',
-					small: true,
-					className: 'color-white',
+					size: 'medium',
 					onClick: props.onMore
 				}, props.headline),
 				h(Text, {

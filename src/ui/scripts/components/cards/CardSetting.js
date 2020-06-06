@@ -12,8 +12,7 @@ const CardSetting = (props) => {
 
 				h(Headline, {
 					type: 'h2',
-					small: true,
-					className: 'color-white'
+					size: 'medium'
 				}, props.headline),
 
 				h(Spacer, { size: 1.6 }),

@@ -14,6 +14,7 @@ import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
+import CardFacts from '../cards/CardFacts'
 import CardViews from '../cards/CardViews'
 import CardPages from '../cards/CardPages'
 import CardReferrers from '../cards/CardReferrers'
@@ -39,6 +40,10 @@ const RouteOverview = (props) => {
 
 	return (
 		h(Fragment, {},
+
+			h(CardFacts, {}),
+
+			h('div', { className: 'content__spacer' }),
 
 			h(CardViews, {
 				wide: true,
