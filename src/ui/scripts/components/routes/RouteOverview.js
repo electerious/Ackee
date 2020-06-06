@@ -4,6 +4,7 @@ import * as route from '../../constants/route'
 import { ALL_DOMAINS } from '../../actions/overview'
 import * as selectOverviewValue from '../../selectors/selectOverviewValue'
 
+import enhanceFacts from '../../enhancers/enhanceFacts'
 import enhanceViews from '../../enhancers/enhanceViews'
 import enhancePages from '../../enhancers/enhancePages'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
@@ -41,7 +42,10 @@ const RouteOverview = (props) => {
 	return (
 		h(Fragment, {},
 
-			h(CardFacts, {}),
+			h(CardFacts, {
+				loading: isLoading,
+				items: enhanceFacts(selectOverviewValue.withType(props, domainId, 'facts'))
+			}),
 
 			h('div', { className: 'content__spacer' }),
 
