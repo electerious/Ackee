@@ -14,6 +14,8 @@ import relativeYears from '../../utils/relativeYears'
 import formatDuration from '../../utils/formatDuration'
 import status from '../../utils/status'
 
+const formatter = (ms) => formatDuration(ms).toString()
+
 const relativeFn = (interval) => {
 
 	switch (interval) {
@@ -39,8 +41,6 @@ const CardDurations = (props) => {
 
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive(0)
-
-	const formatter = (ms) => formatDuration(ms).toString()
 
 	const {
 		isStale
