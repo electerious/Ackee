@@ -10,7 +10,14 @@ const defaults = {
 export default (items) => {
 
 	const overwrites = items.reduce((acc, item) => {
-		acc[item.data.id] = item.data.count || item.data.average
+		const id = item.data.id
+
+		const hasCount = item.data.count != null
+		const hasAverage = item.data.average != null
+
+		if (hasCount === true) acc[id] = item.data.count
+		if (hasAverage === true) acc[id] = item.data.average
+
 		return acc
 	}, {})
 
