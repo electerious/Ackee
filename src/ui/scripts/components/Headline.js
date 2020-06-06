@@ -14,8 +14,9 @@ const Headline = (props) => {
 	return (
 		h(props.type, {
 			className: classNames({
-				headline: true,
-				[`headline--${ props.size }`]: props.size != null
+				'headline': true,
+				[`headline--${ props.size }`]: props.size != null,
+				'headline--no-spacing': props.spacing === false
 			}, props.className)
 		}, hasClick === true ? button : props.children)
 	)
@@ -23,8 +24,9 @@ const Headline = (props) => {
 }
 
 Headline.propTypes = {
-	type: PropTypes.oneOf([ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ]).isRequired,
+	type: PropTypes.oneOf([ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div' ]).isRequired,
 	size: PropTypes.oneOf([ 'medium', 'small' ]),
+	spacing: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
 	onClick: PropTypes.func

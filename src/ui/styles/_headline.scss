@@ -19,6 +19,10 @@
 		line-height: inherit;
 	}
 
+	&--no-spacing {
+		margin-bottom: 0;
+	}
+
 	&__button {
 		text-align: left;
 		max-width: 100%;
