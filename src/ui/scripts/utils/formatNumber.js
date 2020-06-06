@@ -2,7 +2,10 @@ import humanNumber from 'human-number'
 
 export default (num) => {
 
-	return humanNumber(num, (n) => Number.parseFloat(n).toFixed(1))
-		.replace('.0', '')
+	const roundedNum = Math.round(num)
+	const formattedNum = humanNumber(roundedNum, (num) => Number.parseFloat(num).toFixed(1))
+	const cleanNum = formattedNum.replace('.0', '')
+
+	return cleanNum
 
 }
