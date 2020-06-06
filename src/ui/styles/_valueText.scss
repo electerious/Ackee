@@ -5,5 +5,10 @@
 	justify-content: start;
 	align-items: end;
 	gap: $gutter/2;
+	opacity: 0;
+
+	&.visible {
+		opacity: 1;
+	}
 
 }

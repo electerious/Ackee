@@ -1,5 +1,6 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -7,7 +8,12 @@ import Text from '../Text'
 const PresentationValueText = (props) => {
 
 	return (
-		h('div', { className: 'valueText' },
+		h('div', {
+			className: classNames({
+				valueText: true,
+				visible: props.visible === true
+			})
+		},
 			h(Headline, {
 				type: 'div',
 				spacing: false
@@ -22,6 +28,7 @@ const PresentationValueText = (props) => {
 }
 
 PresentationValueText.propTypes = {
+	visible: PropTypes.bool.isRequired,
 	value: PropTypes.oneOfType([
 		PropTypes.number,
 		PropTypes.string
