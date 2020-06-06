@@ -1,5 +1,5 @@
-export default (number, max) => {
+export default (num, max) => {
 
-	return number < max ? number : undefined
+	return num < max ? num : undefined
 
 }
