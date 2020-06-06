@@ -4,7 +4,7 @@ const test = require('ava')
 
 const aggregateDomains = require('../../src/aggregations/aggregateDomains')
 
-test('return unique aggregation', async (t) => {
+test('return aggregation', async (t) => {
 
 	const result = aggregateDomains()
 

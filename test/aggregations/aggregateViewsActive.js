@@ -3,11 +3,11 @@
 const test = require('ava')
 const uuid = require('uuid').v4
 
-const aggregateTopFields = require('../../src/aggregations/aggregateTopFields')
+const aggregateViewsActive = require('../../src/aggregations/aggregateViewsActive')
 
 test('return aggregation', async (t) => {
 
-	const result = aggregateTopFields(uuid(), [ 'osName', 'osVersion' ])
+	const result = aggregateViewsActive(uuid())
 
 	t.true(Array.isArray(result))
 
