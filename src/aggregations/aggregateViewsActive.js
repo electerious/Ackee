@@ -2,23 +2,19 @@
 
 const { subSeconds } = require('date-fns')
 
+const matchDomainId = require('../stages/matchDomainId')
+
 module.exports = (id) => {
 
 	const aggregation = [
-		{
-			$match: {
-				updated: {
-					$gte: subSeconds(new Date(), 30)
-				}
-			}
-		},
+		matchDomainId(id),
 		{
 			$count: 'count'
 		}
 	]
 
-	if (id != null) {
-		aggregation[0].$match.domainId = id
+	aggregation[0].$match.updated = {
+		$gte: subSeconds(new Date(), 30)
 	}
 
 	return aggregation

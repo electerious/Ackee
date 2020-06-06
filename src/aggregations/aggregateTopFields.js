@@ -1,13 +1,12 @@
 'use strict'
 
+const matchDomainId = require('../stages/matchDomainId')
 const offsetByRange = require('../utils/offsetByRange')
 
 module.exports = (id, properties, range) => {
 
 	const aggregation = [
-		{
-			$match: {}
-		},
+		matchDomainId(id),
 		{
 			$group: {
 				_id: {},
@@ -25,10 +24,6 @@ module.exports = (id, properties, range) => {
 			$limit: 30
 		}
 	]
-
-	if (id != null) {
-		aggregation[0].$match.domainId = id
-	}
 
 	properties.forEach((property) => {
 		aggregation[0].$match[property] = { $ne: null }

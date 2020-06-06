@@ -1,11 +1,11 @@
 'use strict'
 
+const matchDomainId = require('../stages/matchDomainId')
+
 module.exports = (id, unique) => {
 
 	const aggregation = [
-		{
-			$match: {}
-		},
+		matchDomainId(id),
 		{
 			$group: {
 				_id: {
@@ -39,10 +39,6 @@ module.exports = (id, unique) => {
 			}
 		}
 	]
-
-	if (id != null) {
-		aggregation[0].$match.domainId = id
-	}
 
 	if (unique === true) aggregation[0].$match.clientId = {
 		$exists: true,

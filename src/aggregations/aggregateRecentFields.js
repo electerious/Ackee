@@ -1,11 +1,11 @@
 'use strict'
 
+const matchDomainId = require('../stages/matchDomainId')
+
 module.exports = (id, properties) => {
 
 	const aggregation = [
-		{
-			$match: {}
-		},
+		matchDomainId(id),
 		{
 			$sort: {
 				created: -1
@@ -21,10 +21,6 @@ module.exports = (id, properties) => {
 			$limit: 30
 		}
 	]
-
-	if (id != null) {
-		aggregation[0].$match.domainId = id
-	}
 
 	properties.forEach((property) => {
 		aggregation[0].$match[property] = { $ne: null }
