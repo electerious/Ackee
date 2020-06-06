@@ -3843,6 +3843,13 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
+human-number@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/human-number/-/human-number-1.0.5.tgz#ab4b184f488f2237eeecac52d695ffbd0fe278de"
+  integrity sha512-U0vVDQuPGvvHKWAhI89rmiGChRTGCWRQ86J//zQDtlhyFFgKmJ7ehmAiUOXQBKUHGO7XZ3Z1bbhKE8zTuh5iVw==
+  dependencies:
+    round-to "~4.1.0"
+
 hyphenate-style-name@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.3.tgz#097bb7fa0b8f1a9cf0bd5c734cf95899981a9b48"
@@ -6712,6 +6719,11 @@ rosid-handler-sass@^7.0.0:
     cssnano "^4.1.10"
     node-sass "^4.11.0"
     postcss "^7.0.14"
+
+round-to@~4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/round-to/-/round-to-4.1.0.tgz#148d768d18b2f127f78e6648cb8b0a5943c416bf"
+  integrity sha512-H/4z+4QdWS82iMZ23+5St302Mv2jJws0hUvEogrD6gC8NN6Z5TalDtbg51owCrVy4V/4c8ePvwVLNtlhEfPo5g==
 
 rtl-css-js@^1.9.0:
   version "1.14.0"

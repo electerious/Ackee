@@ -11,6 +11,7 @@ import PresentationBarChart from '../presentations/PresentationBarChart'
 import relativeDays from '../../utils/relativeDays'
 import relativeMonths from '../../utils/relativeMonths'
 import relativeYears from '../../utils/relativeYears'
+import formatNumber from '../../utils/formatNumber'
 import status from '../../utils/status'
 
 const relativeFn = (interval) => {
@@ -66,6 +67,7 @@ const CardViews = (props) => {
 				)),
 				h(PresentationBarChart, {
 					items: props.items,
+					formatter: formatNumber,
 					active: active,
 					onEnter,
 					onLeave
