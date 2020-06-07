@@ -1,6 +1,6 @@
 'use strict'
 
-const constants = require('../constants/durations')
+const { DURATIONS_INTERVAL } = require('../constants/durations')
 
 module.exports = () => {
 
@@ -16,11 +16,11 @@ module.exports = () => {
 					{
 						$floor: [
 							{
-								$divide: [ '$duration', constants.DURATIONS_INTERVAL ]
+								$divide: [ '$duration', DURATIONS_INTERVAL ]
 							}
 						]
 					},
-					constants.DURATIONS_INTERVAL
+					DURATIONS_INTERVAL
 				]
 			}
 		}

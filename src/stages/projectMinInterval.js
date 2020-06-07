@@ -1,6 +1,6 @@
 'use strict'
 
-const constants = require('../constants/durations')
+const { DURATIONS_INTERVAL } = require('../constants/durations')
 
 module.exports = () => {
 
@@ -14,9 +14,9 @@ module.exports = () => {
 			duration: {
 				$cond: {
 					if: {
-						$lt: [ '$duration', constants.DURATIONS_INTERVAL ]
+						$lt: [ '$duration', DURATIONS_INTERVAL ]
 					},
-					then: constants.DURATIONS_INTERVAL / 2,
+					then: DURATIONS_INTERVAL / 2,
 					else: '$duration'
 				}
 			}

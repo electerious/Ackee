@@ -1,6 +1,6 @@
 'use strict'
 
-const constants = require('../constants/durations')
+const { DURATIONS_LIMIT } = require('../constants/durations')
 
 module.exports = () => {
 
@@ -9,7 +9,7 @@ module.exports = () => {
 	return {
 		$match: {
 			duration: {
-				$lt: constants.DURATIONS_LIMIT
+				$lt: DURATIONS_LIMIT
 			}
 		}
 	}
