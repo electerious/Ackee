@@ -24,7 +24,6 @@ const PresentationValueText = (props) => {
 }
 
 PresentationValueText.propTypes = {
-	visible: PropTypes.bool.isRequired,
 	value: PropTypes.oneOfType([
 		PropTypes.number,
 		PropTypes.string
