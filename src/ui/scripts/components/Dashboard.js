@@ -10,7 +10,7 @@ import overviewRoute from '../utils/overviewRoute'
 import Header, { createButton, createDropdown, createDropdownButton, createDropdownSeparator } from './Header'
 import Modals from './Modals'
 
-const gotoDomainWhenAvailable = (props, index) => {
+const gotoDomainWhenDefined = (props, index) => {
 
 	const domain = selectDomainsValue.byIndex(props, index)
 	if (domain != null) props.setRoute(overviewRoute(domain))
@@ -35,16 +35,16 @@ const Dashboard = (props) => {
 	useHotkeys('r', () => props.setRoute(route.ROUTE_REFERRERS))
 	useHotkeys('d', () => props.setRoute(route.ROUTE_DURATIONS))
 
-	useHotkeys('0', () => gotoDomainWhenAvailable(props, 0), [ props ])
-	useHotkeys('1', () => gotoDomainWhenAvailable(props, 1), [ props ])
-	useHotkeys('2', () => gotoDomainWhenAvailable(props, 2), [ props ])
-	useHotkeys('3', () => gotoDomainWhenAvailable(props, 3), [ props ])
-	useHotkeys('4', () => gotoDomainWhenAvailable(props, 4), [ props ])
-	useHotkeys('5', () => gotoDomainWhenAvailable(props, 5), [ props ])
-	useHotkeys('6', () => gotoDomainWhenAvailable(props, 6), [ props ])
-	useHotkeys('7', () => gotoDomainWhenAvailable(props, 7), [ props ])
-	useHotkeys('8', () => gotoDomainWhenAvailable(props, 8), [ props ])
-	useHotkeys('9', () => gotoDomainWhenAvailable(props, 9), [ props ])
+	useHotkeys('0', () => gotoDomainWhenDefined(props, 0), [ props ])
+	useHotkeys('1', () => gotoDomainWhenDefined(props, 1), [ props ])
+	useHotkeys('2', () => gotoDomainWhenDefined(props, 2), [ props ])
+	useHotkeys('3', () => gotoDomainWhenDefined(props, 3), [ props ])
+	useHotkeys('4', () => gotoDomainWhenDefined(props, 4), [ props ])
+	useHotkeys('5', () => gotoDomainWhenDefined(props, 5), [ props ])
+	useHotkeys('6', () => gotoDomainWhenDefined(props, 6), [ props ])
+	useHotkeys('7', () => gotoDomainWhenDefined(props, 7), [ props ])
+	useHotkeys('8', () => gotoDomainWhenDefined(props, 8), [ props ])
+	useHotkeys('9', () => gotoDomainWhenDefined(props, 9), [ props ])
 
 	return (
 		h('div', {},
