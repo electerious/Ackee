@@ -21,7 +21,6 @@ const Presentation = (props) => {
 				size: 1
 			}),
 			h(PresentationValueText, {
-				visible: props.loading === false,
 				value: props.value,
 				text: props.text
 			})
@@ -40,7 +39,6 @@ const CardFacts = (props) => {
 				h('div', { className: 'card__inner' },
 					h(Presentation, {
 						headline: 'Active visitors',
-						loading: props.loading,
 						value: props.items.views_active,
 						text: pluralize([ 'visitors', 'visitor', 'visitors' ], props.items.views_active)
 					})
@@ -49,7 +47,6 @@ const CardFacts = (props) => {
 				h('div', { className: 'card__inner' },
 					h(Presentation, {
 						headline: 'Average views',
-						loading: props.loading,
 						value: formatNumber(props.items.views_average),
 						text: 'per day'
 					})
@@ -58,7 +55,6 @@ const CardFacts = (props) => {
 				h('div', { className: 'card__inner' },
 					h(Presentation, {
 						headline: 'Average duration',
-						loading: props.loading,
 						value: formatDuration(props.items.durations_average).value,
 						text: formatDuration(props.items.durations_average).unit
 					})
@@ -69,7 +65,6 @@ const CardFacts = (props) => {
 				h('div', { className: 'card__inner' },
 					h(Presentation, {
 						headline: 'Views today',
-						loading: props.loading,
 						value: formatNumber(props.items.views_today),
 						text: pluralize([ 'views', 'view', 'views' ], props.items.views_today)
 					})
@@ -78,7 +73,6 @@ const CardFacts = (props) => {
 				h('div', { className: 'card__inner' },
 					h(Presentation, {
 						headline: 'Views this month',
-						loading: props.loading,
 						value: formatNumber(props.items.views_month),
 						text: pluralize([ 'views', 'view', 'views' ], props.items.views_month)
 					})
@@ -87,7 +81,6 @@ const CardFacts = (props) => {
 				h('div', { className: 'card__inner' },
 					h(Presentation, {
 						headline: 'Views this year',
-						loading: props.loading,
 						value: formatNumber(props.items.views_year),
 						text: pluralize([ 'views', 'view', 'views' ], props.items.views_year)
 					})

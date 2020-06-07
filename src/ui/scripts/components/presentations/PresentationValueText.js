@@ -1,6 +1,5 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -9,10 +8,7 @@ const PresentationValueText = (props) => {
 
 	return (
 		h('div', {
-			className: classNames({
-				valueText: true,
-				visible: props.visible === true
-			})
+			className: 'valueText'
 		},
 			h(Headline, {
 				type: 'div',

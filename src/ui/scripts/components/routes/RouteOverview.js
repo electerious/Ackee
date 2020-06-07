@@ -1,4 +1,5 @@
 import { createElement as h, Fragment, useEffect } from 'react'
+import useInterval from 'use-interval'
 
 import * as route from '../../constants/route'
 import { ALL_DOMAINS } from '../../actions/overview'
@@ -33,11 +34,11 @@ const RouteOverview = (props) => {
 	const filterInterval = props.filter.interval
 	const isLoading = props.domains.fetching || selectOverviewValue.withoutType(props, domainId).fetching
 
-	useEffect(() => {
+	useInterval(() => {
 
 		props.fetchOverview(props, domainId)
 
-	}, [ domainId, filterRange ])
+	}, 15000, true)
 
 	return (
 		h(Fragment, {},
