@@ -44,8 +44,17 @@ const anonymize = async (clientId, ignoreId) => {
 
 }
 
+const del = async (domainId) => {
+
+	return Record.deleteMany({
+		domainId
+	})
+
+}
+
 module.exports = {
 	add,
 	update,
-	anonymize
+	anonymize,
+	del
 }
