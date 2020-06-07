@@ -1,4 +1,4 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment } from 'react'
 
 import { version, homepage } from '../../../../../package'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
@@ -9,12 +9,6 @@ import Line from '../Line'
 import Message from '../Message'
 
 const RouteSettings = (props) => {
-
-	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
 
 	const showDomainEditModal = (id, title) => {
 
