@@ -69,7 +69,6 @@
     "s-ago": "^2.1.0",
     "shortid": "^2.2.15",
     "signale": "^1.4.0",
-    "use-interval": "^1.2.1",
     "uuid": "^8.0.0"
   },
   "devDependencies": {
