@@ -2,7 +2,6 @@
 
 const matchDomainId = require('../stages/matchDomainId')
 const projectDuration = require('../stages/projectDuration')
-const projectInterval = require('../stages/projectInterval')
 const projectMinInterval = require('../stages/projectMinInterval')
 const matchLimit = require('../stages/matchLimit')
 
@@ -11,7 +10,6 @@ module.exports = (id) => {
 	const aggregation = [
 		matchDomainId(id),
 		projectDuration(),
-		projectInterval(),
 		projectMinInterval(),
 		matchLimit(),
 		{
