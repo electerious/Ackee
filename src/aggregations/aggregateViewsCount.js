@@ -21,19 +21,19 @@ module.exports = (id, unique, interval) => {
 
 	if (interval === intervals.INTERVALS_DAILY) {
 		aggregation[0].$match.created = {
-			$gt: startOfDay(new Date())
+			$gte: startOfDay(new Date())
 		}
 	}
 
 	if (interval === intervals.INTERVALS_MONTHLY) {
 		aggregation[0].$match.created = {
-			$gt: startOfMonth(new Date())
+			$gte: startOfMonth(new Date())
 		}
 	}
 
 	if (interval === intervals.INTERVALS_YEARLY) {
 		aggregation[0].$match.created = {
-			$gt: startOfYear(new Date())
+			$gte: startOfYear(new Date())
 		}
 	}
 

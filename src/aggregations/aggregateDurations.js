@@ -1,5 +1,7 @@
 'use strict'
 
+const { subDays, subMonths, subYears, startOfDay, startOfMonth, startOfYear } = require('date-fns')
+
 const intervals = require('../constants/intervals')
 const matchDomainId = require('../stages/matchDomainId')
 const projectDuration = require('../stages/projectDuration')
@@ -22,32 +24,30 @@ module.exports = (id, interval) => {
 			}
 		},
 		{
-			$sort: {}
-		},
-		{
-			$limit: 14
+			$sort: {
+				'_id.year': -1,
+				'_id.month': -1,
+				'_id.day': -1
+			}
 		}
 	]
 
 	if (interval === intervals.INTERVALS_DAILY) {
+		aggregation[0].$match.created = { $gte: subDays(startOfDay(new Date()), 13) }
 		aggregation[4].$group._id.day = { $dayOfMonth: '$created' }
 		aggregation[4].$group._id.month = { $month: '$created' }
 		aggregation[4].$group._id.year = { $year: '$created' }
-		aggregation[5].$sort['_id.year'] = -1
-		aggregation[5].$sort['_id.month'] = -1
-		aggregation[5].$sort['_id.day'] = -1
 	}
 
 	if (interval === intervals.INTERVALS_MONTHLY) {
+		aggregation[0].$match.created = { $gte: subMonths(startOfMonth(new Date()), 13) }
 		aggregation[4].$group._id.month = { $month: '$created' }
 		aggregation[4].$group._id.year = { $year: '$created' }
-		aggregation[5].$sort['_id.year'] = -1
-		aggregation[5].$sort['_id.month'] = -1
 	}
 
 	if (interval === intervals.INTERVALS_YEARLY) {
+		aggregation[0].$match.created = { $gte: subYears(startOfYear(new Date()), 13) }
 		aggregation[4].$group._id.year = { $year: '$created' }
-		aggregation[5].$sort['_id.year'] = -1
 	}
 
 	return aggregation

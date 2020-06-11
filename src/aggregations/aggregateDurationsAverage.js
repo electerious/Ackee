@@ -1,5 +1,7 @@
 'use strict'
 
+const { subDays, startOfDay } = require('date-fns')
+
 const matchDomainId = require('../stages/matchDomainId')
 const projectDuration = require('../stages/projectDuration')
 const projectMinInterval = require('../stages/projectMinInterval')
@@ -45,6 +47,8 @@ module.exports = (id) => {
 			}
 		}
 	]
+
+	aggregation[0].$match.created = { $gte: subDays(startOfDay(new Date()), 13) }
 
 	return aggregation
 
