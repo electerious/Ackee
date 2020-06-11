@@ -70,18 +70,33 @@ const normalizeSiteReferrer = (siteReferrer) => {
 
 }
 
+const polish = (obj) => {
+
+	return Object.entries(obj).reduce((acc, [ key, value ]) => {
+
+		value = typeof value === 'string' ? value.trim() : value
+		value = value == null ? undefined : value
+		value = value === '' ? undefined : value
+
+		if (key === 'siteLocation') value = normalizeSiteLocation(value)
+		if (key === 'siteReferrer') value = normalizeSiteReferrer(value)
+
+		acc[key] = value
+		return acc
+
+	}, {})
+
+}
+
 const add = async (req, res) => {
 
 	const { domainId } = req.params
 	const clientId = identifier(req, domainId)
-	const data = { ...await json(req), clientId, domainId }
+	const data = polish({ ...await json(req), clientId, domainId })
 
 	const domain = await domains.get(domainId)
 
 	if (domain == null) throw createError(404, 'Unknown domain')
-
-	data.siteLocation = normalizeSiteLocation(data.siteLocation)
-	data.siteReferrer = normalizeSiteReferrer(data.siteReferrer)
 
 	let entry
 
