@@ -15,7 +15,7 @@ export const initialState = () => ({
 	value: {}
 })
 
-export const initialSubState = () => genericSubState
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
