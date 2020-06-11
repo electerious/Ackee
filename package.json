@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "NODE_ENV=development nodemon",
+    "start:dev": "NODE_ENV=development nodemon",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
     "lint": "eslint '{src,test}/**/*.js'"
