@@ -2,8 +2,8 @@ type Domain {
 	id: ID!
 	title: String!
 	statistics: Statistics!
-	created: Int!
-	updated: Int!
+	created: DateTime!
+	updated: DateTime!
 }
 
 input CreateDomainInput {

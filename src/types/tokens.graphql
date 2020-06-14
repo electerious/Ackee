@@ -1,7 +1,7 @@
 type Token {
 	id: ID!
-	created: Int!
-	updated: Int!
+	created: DateTime!
+	updated: DateTime!
 }
 
 input CreateTokenInput {

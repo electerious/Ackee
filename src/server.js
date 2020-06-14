@@ -9,6 +9,8 @@ const { router, get, post, put, patch, del } = require('microrouter')
 const signale = require('./utils/signale')
 const pipe = require('./utils/pipe')
 const isDefined = require('./utils/isDefined')
+const isAuthenticated = require('./utils/isAuthenticated')
+const isDemo = require('./utils/isDemo')
 const customTrackerUrl = require('./utils/customTrackerUrl')
 const requireAuth = require('./middlewares/requireAuth')
 const blockDemo = require('./middlewares/blockDemo')
@@ -91,7 +93,12 @@ const apolloServer = new ApolloServer({
 	resolvers: {
 		...scalars.resolvers,
 		...require('./resolvers')
-	}
+	},
+	context: async (integrationContext) => ({
+		isDemo,
+		isAuthenticated: await isAuthenticated(integrationContext.req),
+		req: integrationContext.req
+	})
 })
 
 const graphqlPath = '/graphql'

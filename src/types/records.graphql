@@ -15,8 +15,8 @@ type Record {
 	browserVersion: String
 	browserWidth: Int
 	browserHeight: Int
-	created: Int!
-	updated: Int!
+	created: DateTime!
+	updated: DateTime!
 }
 
 input CreateRecordInput {
