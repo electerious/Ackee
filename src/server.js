@@ -1,5 +1,7 @@
 'use strict'
 
+const { ApolloServer } = require('apollo-server-micro')
+const scalars = require('graphql-scalars')
 const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
@@ -81,6 +83,20 @@ const notFound = async (req) => {
 
 }
 
+const apolloServer = new ApolloServer({
+	typeDefs: [
+		...scalars.typeDefs,
+		require('./types')
+	],
+	resolvers: {
+		...scalars.resolvers,
+		...require('./resolvers')
+	}
+})
+
+const graphqlPath = '/graphql'
+const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
+
 const routes = [
 
 	get('/', ui.index),
@@ -115,6 +131,9 @@ const routes = [
 	get('/domains/:domainId/systems', pipe(requireAuth, systems.get)),
 	get('/domains/:domainId/devices', pipe(requireAuth, devices.get)),
 	get('/domains/:domainId/browsers', pipe(requireAuth, browsers.get)),
+
+	post(graphqlPath, graphqlHandler),
+	get(graphqlPath, graphqlHandler),
 
 	get('/*', notFound),
 	post('/*', notFound),
