@@ -1,0 +1,130 @@
+enum Interval {
+	DAILY,
+	MONTHLY,
+	YEARLY
+}
+
+enum Sorting {
+	TOP,
+	RECENT,
+	NEW
+}
+
+enum Range {
+	RANGES_LAST_24_HOURS,
+	RANGES_LAST_7_DAYS,
+	RANGES_LAST_30_DAYS,
+	RANGES_ALL_TIME
+}
+
+type View {
+	date: DateTime!
+	count: UnsignedInt!
+}
+
+type Page {
+	id: URL!
+	count: UnsignedInt
+	created: DateTime
+}
+
+type Referrer {
+	id: URL!
+	count: UnsignedInt
+	created: DateTime
+}
+
+type Duration {
+	date: DateTime!
+	count: UnsignedInt!
+}
+
+type System {
+	id: String!
+	count: UnsignedInt
+	created: DateTime
+}
+
+type Device {
+	id: String!
+	count: UnsignedInt
+	created: DateTime
+}
+
+type Browser {
+	id: String!
+	count: UnsignedInt
+	created: DateTime
+}
+
+enum SizeType {
+	BROWSER_HEIGHT,
+	BROWSER_RESOLUTION,
+	BROWSER_WIDTH,
+	SCREEN_HEIGHT,
+	SCREEN_RESOLUTION,
+	SCREEN_WIDTH
+}
+
+type Size {
+	id: String!
+	count: Int
+	created: DateTime
+}
+
+type Language {
+	id: String!
+	count: Int
+	created: DateTime
+}
+
+type Statistics {
+	views(
+		unique: Boolean!,
+		interval: Interval!
+		limit: UnsignedInt = 14
+	): [View!]
+	pages(
+		sorting: Sorting!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [Page!]
+	referrers(
+		sorting: Sorting!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [Referrer!]
+	durations(
+		interval: Interval!,
+		limit: UnsignedInt = 14
+	): [Duration!]
+	systems(
+		sorting: Sorting!,
+		includeVersion: Boolean!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [System!]
+	devices(
+		sorting: Sorting!,
+		includeModel: Boolean!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [Device!]
+	browsers(
+		sorting: Sorting!,
+		includeVersion: Boolean!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [Browser!]
+	sizes(
+		sorting: Sorting!,
+		type: SizeType!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [Size!]
+	languages(
+		sorting: Sorting!,
+		range: Range,
+		limit: UnsignedInt = 30
+	): [Language!]
+}

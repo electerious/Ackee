@@ -1,0 +1,53 @@
+type Record {
+	id: ID!
+	domainId: ID!
+	siteLocation: String!
+	siteReferrer: String
+	siteLanguage: String
+	screenWidth: Int
+	screenHeight: Int
+	screenColorDepth: Int
+	deviceName: String
+	deviceManufacturer: String
+	osName: String
+	osVersion: String
+	browserName: String
+	browserVersion: String
+	browserWidth: Int
+	browserHeight: Int
+	created: Int!
+	updated: Int!
+}
+
+input CreateRecordInput {
+	domainId: ID!
+	siteLocation: String!
+	siteReferrer: String
+	siteLanguage: String
+	screenWidth: Int
+	screenHeight: Int
+	screenColorDepth: Int
+	deviceName: String
+	deviceManufacturer: String
+	osName: String
+	osVersion: String
+	browserName: String
+	browserVersion: String
+	browserWidth: Int
+	browserHeight: Int
+}
+
+type CreateRecordPayload {
+	payload: Record
+	success: Boolean!
+}
+
+type UpdateRecordPayload {
+	payload: Record
+	success: Boolean!
+}
+
+type Mutation {
+	createRecord(input: CreateRecordInput): CreateRecordPayload!
+	updateRecord(id: ID!): UpdateRecordPayload!
+}

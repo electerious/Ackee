@@ -1,0 +1,24 @@
+type Token {
+	id: ID!
+	created: Int!
+	updated: Int!
+}
+
+input CreateTokenInput {
+	username: String!
+	password: String!
+}
+
+type CreateTokenPayload {
+	payload: Token
+	success: Boolean!
+}
+
+type DeleteTokenPayload {
+	success: Boolean!
+}
+
+type Mutation {
+	createToken(input: CreateTokenInput!): CreateTokenPayload!
+	deleteToken(id: ID!): DeleteTokenPayload!
+}

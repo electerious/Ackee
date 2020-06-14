@@ -1,0 +1,40 @@
+type Domain {
+	id: ID!
+	title: String!
+	statistics: Statistics!
+	created: Int!
+	updated: Int!
+}
+
+input CreateDomainInput {
+	title: String!
+}
+
+type CreateDomainPayload {
+	payload: Domain
+	success: Boolean!
+}
+
+input UpdateDomainInput {
+	title: String!
+}
+
+type UpdateDomainPayload {
+	payload: Domain
+	success: Boolean!
+}
+
+type DeleteDomainPayload {
+	success: Boolean!
+}
+
+type Query {
+	domain(id: ID!): Domain
+	domains(ids: [ID!]): [Domain]
+}
+
+type Mutation {
+	createDomain(input: CreateDomainInput): CreateDomainPayload!
+	updateDomain(id: ID!, input: UpdateDomainInput): UpdateDomainPayload!
+	deleteDomain(id: ID!): DeleteDomainPayload!
+}
