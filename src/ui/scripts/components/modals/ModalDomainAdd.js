@@ -1,7 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
-import { useHotkeys } from 'react-hotkeys-hook'
+// import { useHotkeys } from 'react-hotkeys-hook'
 
 import Input from '../Input'
 import Label from '../Label'
@@ -10,9 +10,11 @@ import Spacer from '../Spacer'
 
 const ModalDomainAdd = (props) => {
 
-	useHotkeys('esc', props.closeModal, {
-		filter: () => props.current === true
-	})
+	// Currently not possible:
+	// https://github.com/JohannesKlauss/react-hotkeys-hook/issues/276
+	// useHotkeys('esc', props.closeModal, {
+	// 	filter: () => props.current === true
+	// })
 
 	const [ inputs, setInputs ] = useState({
 		title: ''
