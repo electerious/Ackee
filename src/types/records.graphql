@@ -38,13 +38,13 @@ input CreateRecordInput {
 }
 
 type CreateRecordPayload {
+	success: Boolean
 	payload: Record
-	success: Boolean!
 }
 
 type UpdateRecordPayload {
+	success: Boolean
 	payload: Record
-	success: Boolean!
 }
 
 type Mutation {

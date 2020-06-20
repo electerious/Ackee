@@ -2,6 +2,7 @@
 
 const domains = require('../database/domains')
 const pipe = require('../utils/pipe')
+const messages = require('../utils/messages')
 const requireAuth = require('../middlewares/requireAuth_new')
 const blockDemo = require('../middlewares/blockDemo_new')
 
@@ -42,18 +43,10 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					// Log error
-					// throw createError(400, messages(err.errors), err)
-					return {
-						success: false
-					}
+					throw new Error(messages(err.errors))
 				}
 
-				// Log error
-				// throw err
-				return {
-					success: false
-				}
+				throw err
 
 			}
 
@@ -74,27 +67,15 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					// Log error
-					// throw createError(400, messages(err.errors), err)
-					return {
-						success: false
-					}
+					throw new Error(messages(err.errors))
 				}
 
-				// Log error
-				// throw err
-				return {
-					success: false
-				}
+				throw err
 
 			}
 
 			if (entry == null) {
-				// Log error
-				// throw createError(404, 'Unknown domain')
-				return {
-					success: false
-				}
+				throw new Error('Unknown domain')
 			}
 
 			return {

@@ -10,12 +10,12 @@ input CreateTokenInput {
 }
 
 type CreateTokenPayload {
+	success: Boolean
 	payload: Token
-	success: Boolean!
 }
 
 type DeleteTokenPayload {
-	success: Boolean!
+	success: Boolean
 }
 
 type Mutation {

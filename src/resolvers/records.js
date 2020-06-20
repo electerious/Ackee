@@ -2,7 +2,7 @@
 
 const normalizeUrl = require('../utils/normalizeUrl')
 const identifier = require('../utils/identifier')
-// const messages = require('../utils/messages')
+const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
 
@@ -93,12 +93,7 @@ module.exports = {
 
 			const domain = await domains.get(domainId)
 
-			if (domain == null) {
-				// Log error
-				return {
-					success: false
-				}
-			}
+			if (domain == null) throw new Error('Unknown domain')
 
 			let entry
 
@@ -109,18 +104,10 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					// Log error
-					// throw createError(400, messages(err.errors), err)
-					return {
-						success: false
-					}
+					throw new Error(messages(err.errors))
 				}
 
-				// Log error
-				// throw err
-				return {
-					success: false
-				}
+				throw err
 
 			}
 
@@ -129,8 +116,8 @@ module.exports = {
 			await records.anonymize(clientId, entry.id)
 
 			return {
-				payload: response(entry),
-				success: true
+				success: true,
+				payload: response(entry)
 			}
 
 		},
@@ -145,32 +132,20 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					// Log error
-					// throw createError(400, messages(err.errors), err)
-					return {
-						success: false
-					}
+					throw new Error(messages(err.errors))
 				}
 
-				// Log error
-				// throw err
-				return {
-					success: false
-				}
+				throw err
 
 			}
 
 			if (entry == null) {
-				// Log error
-				// throw createError(404, 'Unknown record')
-				return {
-					success: false
-				}
+				throw new Error('Unknown record')
 			}
 
 			return {
-				payload: response(entry),
-				success: true
+				success: true,
+				payload: response(entry)
 			}
 
 		}

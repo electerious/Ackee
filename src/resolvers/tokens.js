@@ -16,37 +16,17 @@ module.exports = {
 
 			const { username, password } = input
 
-			if (process.env.ACKEE_USERNAME == null) {
-				// Log error
-				// throw new Error('Ackee username missing in environment')
-				return {
-					success: false
-				}
-			}
-			if (process.env.ACKEE_PASSWORD == null) {
-				// Log error
-				// throw new Error('Ackee password missing in environment')
-				return {
-					success: false
-				}
-			}
+			if (process.env.ACKEE_USERNAME == null) throw new Error('Ackee username missing in environment')
+			if (process.env.ACKEE_PASSWORD == null) throw new Error('Ackee username missing in environment')
 
-			if (username !== process.env.ACKEE_USERNAME) {
-				// Log error
-				// throw createError(400, 'Username or password incorrect')
-				return { success: false }
-			}
-			if (password !== process.env.ACKEE_PASSWORD) {
-				// Log error
-				// throw createError(400, 'Username or password incorrect')
-				return { success: false }
-			}
+			if (username !== process.env.ACKEE_USERNAME) throw new Error('Username or password incorrect')
+			if (password !== process.env.ACKEE_PASSWORD) throw new Error('Username or password incorrect')
 
 			const entry = await tokens.add()
 
 			return {
-				payload: response(entry),
-				success: true
+				success: true,
+				payload: response(entry)
 			}
 
 		},

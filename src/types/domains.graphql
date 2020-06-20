@@ -11,8 +11,8 @@ input CreateDomainInput {
 }
 
 type CreateDomainPayload {
+	success: Boolean
 	payload: Domain
-	success: Boolean!
 }
 
 input UpdateDomainInput {
@@ -20,12 +20,12 @@ input UpdateDomainInput {
 }
 
 type UpdateDomainPayload {
+	success: Boolean
 	payload: Domain
-	success: Boolean!
 }
 
 type DeleteDomainPayload {
-	success: Boolean!
+	success: Boolean
 }
 
 type Query {
