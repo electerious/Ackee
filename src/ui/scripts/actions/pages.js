@@ -47,8 +47,10 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 
 	} catch (err) {
 
-		dispatch(setPagesError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setPagesFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setPagesError(domainId, err))
 
 	}
 

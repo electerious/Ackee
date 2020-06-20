@@ -47,8 +47,10 @@ export const fetchLanguages = signalHandler((signal) => (props, domainId) => asy
 
 	} catch (err) {
 
-		dispatch(setLanguagesError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setLanguagesFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setLanguagesError(domainId, err))
 
 	}
 

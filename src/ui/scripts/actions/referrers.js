@@ -47,8 +47,10 @@ export const fetchReferrers = signalHandler((signal) => (props, domainId) => asy
 
 	} catch (err) {
 
-		dispatch(setReferrersError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setReferrersFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setReferrersError(domainId, err))
 
 	}
 

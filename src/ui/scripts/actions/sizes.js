@@ -47,8 +47,10 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 
 	} catch (err) {
 
-		dispatch(setSizesError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setSizesFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setSizesError(domainId, err))
 
 	}
 

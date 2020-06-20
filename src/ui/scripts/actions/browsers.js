@@ -53,8 +53,10 @@ export const fetchBrowsers = signalHandler((signal) => (props, domainId) => asyn
 
 	} catch (err) {
 
-		dispatch(setBrowsersError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setBrowsersFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setBrowsersError(domainId, err))
 
 	}
 

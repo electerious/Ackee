@@ -53,8 +53,10 @@ export const fetchDevices = signalHandler((signal) => (props, domainId) => async
 
 	} catch (err) {
 
-		dispatch(setDevicesError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setDevicesFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setDevicesError(domainId, err))
 
 	}
 

@@ -38,8 +38,10 @@ export const fetchDomains = signalHandler((signal) => (props) => async (dispatch
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 
@@ -63,8 +65,10 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 
@@ -89,8 +93,10 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 
@@ -115,8 +121,10 @@ export const deleteDomain = signalHandler((signal) => (props, domainId, state) =
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 

@@ -47,8 +47,10 @@ export const fetchViews = signalHandler((signal) => (props, domainId) => async (
 
 	} catch (err) {
 
-		dispatch(setViewsError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setViewsFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setViewsError(domainId, err))
 
 	}
 

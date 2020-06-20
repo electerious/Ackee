@@ -41,8 +41,10 @@ export const fetchDurations = signalHandler((signal) => (props, domainId) => asy
 
 	} catch (err) {
 
-		dispatch(setDurationsError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setDurationsFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setDurationsError(domainId, err))
 
 	}
 

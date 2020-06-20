@@ -46,8 +46,10 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 	} catch (err) {
 
-		dispatch(setOverviewError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setOverviewFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setOverviewError(domainId, err))
 
 	}
 

@@ -41,8 +41,10 @@ export const addToken = signalHandler((signal) => (props, state) => async (dispa
 
 	} catch (err) {
 
-		dispatch(setTokenError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setTokenFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setTokenError(err))
 
 	}
 
@@ -62,6 +64,8 @@ export const deleteToken = signalHandler((signal) => (props) => async (dispatch)
 
 	} catch (err) {
 
+		if (err.name === 'AbortError') return
+		if (err.name === 'HandledError') return
 		dispatch(setTokenError(err))
 
 	}

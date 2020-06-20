@@ -1,4 +1,5 @@
 import timeout from './timeout'
+import HandledError from './HandledError'
 
 export default async (url, { props, method, body, signal }) => {
 
@@ -43,17 +44,14 @@ export default async (url, { props, method, body, signal }) => {
 
 		console.error(err)
 
-		if (err.name === 'AbortError') {
-			// Request has been canceled => Do nothing
-			return
-		}
-
 		if (err.message === 'Token invalid') {
 			// Reset token and show login
 			props.deleteToken(props)
+			throw new HandledError(err.message)
 		}
 
-		// Re-throw error so the caller can handle it, too
+		// Re-throw error so the caller can handle it.
+		// Make sure to do nothing when a AbortError occurs.
 		throw err
 
 	}
