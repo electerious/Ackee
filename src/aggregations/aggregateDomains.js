@@ -1,8 +1,11 @@
 'use strict'
 
-module.exports = () => {
+const matchIds = require('../stages/matchIds')
+
+module.exports = (ids) => {
 
 	const aggregation = [
+		matchIds(ids),
 		{
 			$addFields: {
 				insensitive: {

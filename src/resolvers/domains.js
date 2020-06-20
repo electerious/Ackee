@@ -14,20 +14,24 @@ const response = (entry) => ({
 })
 
 module.exports = {
+	Domain: {
+		statistics: (obj) => obj
+	},
 	Query: {
 		domain: pipe(requireAuth, async (parent, { id }) => {
 
-			const entry = await domains.get(id)
+			const entries = await domains.get([ id ])
+			const entry = entries[0]
 
 			return entry == null ? null : response(entry)
 
 		}),
 		domains: pipe(requireAuth, async (parent, { ids }) => {
 
-			// Filter by ids
-			const entries = await domains.all()
+			const entries = await domains.get(ids)
 
-			return entries.map(response)
+			if (ids == null) return entries.map(response)
+			return ids.map((id) => entries.find((entity) => entity.id === id))
 
 		})
 	},

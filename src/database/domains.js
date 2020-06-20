@@ -11,17 +11,16 @@ const add = async (data) => {
 
 }
 
+// TODO: Remove this fn
 const all = async () => {
 
 	return Domain.aggregate(aggregateDomains())
 
 }
 
-const get = async (id) => {
+const get = async (ids) => {
 
-	return Domain.findOne({
-		id
-	})
+	return Domain.aggregate(aggregateDomains(ids))
 
 }
 

@@ -6,6 +6,9 @@ const domains = require('./domains')
 const statistics = require('./statistics')
 
 module.exports = {
+	...tokens,
+	...records,
+	...domains,
 	...statistics,
 	Query: {
 		...domains.Query
