@@ -14,21 +14,21 @@ const response = (entry) => ({
 
 module.exports = {
 	Query: {
-		domain: async (parent, { id }) => {
+		domain: pipe(requireAuth, async (parent, { id }) => {
 
 			const entry = await domains.get(id)
 
 			return entry == null ? null : response(entry)
 
-		},
-		domains: async (parent, { ids }) => {
+		}),
+		domains: pipe(requireAuth, async (parent, { ids }) => {
 
 			// Filter by ids
 			const entries = await domains.all()
 
 			return entries.map(response)
 
-		}
+		})
 	},
 	Mutation: {
 		createDomain: pipe(requireAuth, blockDemo, async (parent, { input }) => {
