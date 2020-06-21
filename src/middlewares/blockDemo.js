@@ -1,5 +1,7 @@
 'use strict'
 
+// TODO: Delete this file
+
 const { createError } = require('micro')
 
 const isDemo = require('../utils/isDemo')
