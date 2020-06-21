@@ -8,7 +8,6 @@ const records = require('../database/records')
 
 const response = (entry) => ({
 	id: entry.id,
-	domainId: entry.domainId,
 	siteLocation: entry.siteLocation,
 	siteReferrer: entry.siteReferrer,
 	siteLanguage: entry.siteLanguage,
@@ -85,9 +84,8 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createRecord: async (parent, { input }, { req }) => {
+		createRecord: async (parent, { domainId, input }, { req }) => {
 
-			const { domainId } = input
 			const clientId = identifier(req, domainId)
 			const data = polish({ ...input, clientId, domainId })
 

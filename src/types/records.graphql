@@ -1,7 +1,5 @@
 type Record {
 	id: ID!
-	# TODO: Return domain instead of domainId
-	domainId: ID!
 	siteLocation: String!
 	siteReferrer: String
 	siteLanguage: String
@@ -21,8 +19,6 @@ type Record {
 }
 
 input CreateRecordInput {
-	# TODO: Remove domainId here
-	domainId: ID!
 	siteLocation: String!
 	siteReferrer: String
 	siteLanguage: String
@@ -50,7 +46,6 @@ type UpdateRecordPayload {
 }
 
 type Mutation {
-	# TODO: Seperate input and domainid
-	createRecord(input: CreateRecordInput): CreateRecordPayload!
+	createRecord(domainId: ID!, input: CreateRecordInput): CreateRecordPayload!
 	updateRecord(id: ID!): UpdateRecordPayload!
 }
