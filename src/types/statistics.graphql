@@ -1,29 +1,29 @@
 enum Interval {
-	DAILY,
-	MONTHLY,
+	DAILY
+	MONTHLY
 	YEARLY
 }
 
 enum Sorting {
-	TOP,
-	RECENT,
+	TOP
+	RECENT
 	NEW
 }
 
 enum Range {
-	LAST_24_HOURS,
-	LAST_7_DAYS,
-	LAST_30_DAYS,
+	LAST_24_HOURS
+	LAST_7_DAYS
+	LAST_30_DAYS
 	ALL_TIME
 }
 
 enum ViewType {
-	UNIQUE,
+	UNIQUE
 	TOTAL
 }
 
 type View {
-	date: DateTime!
+	id: DateTime!
 	count: UnsignedInt!
 }
 
@@ -40,12 +40,12 @@ type Referrer {
 }
 
 type Duration {
-	date: DateTime!
+	id: DateTime!
 	count: UnsignedInt!
 }
 
 enum SystemType {
-	WITH_VERSION,
+	WITH_VERSION
 	NO_VERSION
 }
 
@@ -56,7 +56,7 @@ type System {
 }
 
 enum DeviceType {
-	WITH_MODEL,
+	WITH_MODEL
 	NO_MODEL
 }
 
@@ -67,7 +67,7 @@ type Device {
 }
 
 enum BrowserType {
-	WITH_VERSION,
+	WITH_VERSION
 	NO_VERSION
 }
 
@@ -78,11 +78,11 @@ type Browser {
 }
 
 enum SizeType {
-	BROWSER_HEIGHT,
-	BROWSER_RESOLUTION,
-	BROWSER_WIDTH,
-	SCREEN_HEIGHT,
-	SCREEN_RESOLUTION,
+	BROWSER_HEIGHT
+	BROWSER_RESOLUTION
+	BROWSER_WIDTH
+	SCREEN_HEIGHT
+	SCREEN_RESOLUTION
 	SCREEN_WIDTH
 }
 
@@ -100,7 +100,7 @@ type Language {
 
 type Statistics {
 	views(
-		interval: Interval!
+		interval: Interval!,
 		type: ViewType!,
 		limit: UnsignedInt = 14
 	): [View!]
