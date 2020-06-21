@@ -1,5 +1,7 @@
 'use strict'
 
+// TODO: Delete this file
+
 const { startOfDay, startOfMonth, startOfYear } = require('date-fns')
 
 const intervals = require('../constants/intervals')

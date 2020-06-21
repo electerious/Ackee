@@ -66,20 +66,20 @@ module.exports = {
 
 		},
 		// TODO: Add limit and enhancer
-		pages: async (domain, { sorting, range }) => {
+		pages: async (domain, { sorting, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.siteLocation,
 				count: entry.count
 			})
 
-			const entries = await pages.get(domain.id, sorting, range)
+			const entries = await pages.get(domain.id, sorting, range, limit)
 
 			return entries.map(response)
 
 		},
 		// TODO: Add limit and enhancer
-		referrers: async (domain, { sorting, range }) => {
+		referrers: async (domain, { sorting, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.siteReferrer,
@@ -87,7 +87,7 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await referrers.get(domain.id, sorting, range)
+			const entries = await referrers.get(domain.id, sorting, range, limit)
 
 			return entries.map(response)
 
@@ -106,7 +106,7 @@ module.exports = {
 
 		},
 		// TODO: Add limit and enhancer and fix id response
-		systems: async (domain, { sorting, type, range }) => {
+		systems: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.osName,
@@ -114,13 +114,13 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await systems.get(domain.id, sorting, type, range)
+			const entries = await systems.get(domain.id, sorting, type, range, limit)
 
 			return entries.map(response)
 
 		},
 		// TODO: Add limit and enhancer and fix id response
-		devices: async (domain, { sorting, type, range }) => {
+		devices: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.deviceManufacturer,
@@ -128,13 +128,13 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await devices.get(domain.id, sorting, type, range)
+			const entries = await devices.get(domain.id, sorting, type, range, limit)
 
 			return entries.map(response)
 
 		},
 		// TODO: Add limit and enhancer and fix id response
-		browsers: async (domain, { sorting, type, range }) => {
+		browsers: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.browserName,
@@ -142,13 +142,13 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await browsers.get(domain.id, sorting, type, range)
+			const entries = await browsers.get(domain.id, sorting, type, range, limit)
 
 			return entries.map(response)
 
 		},
 		// TODO: Add limit and enhancer and fix id response
-		sizes: async (domain, { sorting, type, range }) => {
+		sizes: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.screenWidth,
@@ -156,13 +156,13 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await sizes.get(domain.id, sorting, type, range)
+			const entries = await sizes.get(domain.id, sorting, type, range, limit)
 
 			return entries.map(response)
 
 		},
 		// TODO: Add limit and enhancer
-		languages: async (domain, { sorting, range }) => {
+		languages: async (domain, { sorting, range, limit }) => {
 
 			const response = (entry) => ({
 				id: entry._id.siteLanguage,
@@ -170,7 +170,7 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await languages.get(domain.id, sorting, range)
+			const entries = await languages.get(domain.id, sorting, range, limit)
 
 			return entries.map(response)
 

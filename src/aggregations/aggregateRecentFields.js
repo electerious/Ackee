@@ -2,7 +2,7 @@
 
 const matchDomainId = require('../stages/matchDomainId')
 
-module.exports = (id, properties) => {
+module.exports = (id, properties, limit) => {
 
 	const aggregation = [
 		matchDomainId(id),
@@ -18,7 +18,7 @@ module.exports = (id, properties) => {
 			}
 		},
 		{
-			$limit: 30
+			$limit: limit
 		}
 	]
 

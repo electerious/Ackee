@@ -3,7 +3,7 @@
 const matchDomainId = require('../stages/matchDomainId')
 const offsetByRange = require('../utils/offsetByRange')
 
-module.exports = (id, properties, range) => {
+module.exports = (id, properties, range, limit) => {
 
 	const aggregation = [
 		matchDomainId(id),
@@ -21,7 +21,7 @@ module.exports = (id, properties, range) => {
 			}
 		},
 		{
-			$limit: 30
+			$limit: limit
 		}
 	]
 

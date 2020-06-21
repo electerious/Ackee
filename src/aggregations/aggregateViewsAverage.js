@@ -1,5 +1,7 @@
 'use strict'
 
+// TODO: Delete this file
+
 const { subDays, startOfDay } = require('date-fns')
 
 const matchDomainId = require('../stages/matchDomainId')
