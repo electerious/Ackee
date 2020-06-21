@@ -1,8 +1,6 @@
 'use strict'
 
 const Domain = require('../schemas/Domain')
-const records = require('../database/records')
-// const aggregateDomains = require('../aggregations/aggregateDomains')
 const runUpdate = require('../utils/runUpdate')
 
 const add = async (data) => {
@@ -34,8 +32,6 @@ const update = async (id, data) => {
 }
 
 const del = async (id) => {
-
-	await records.del(id)
 
 	return Domain.findOneAndDelete({
 		id

@@ -5,7 +5,11 @@ const aggregateDurations = require('../aggregations/aggregateDurations')
 
 const get = async (id, interval) => {
 
-	return Record.aggregate(aggregateDurations(id, interval))
+	const aggregation = (() => {
+		return aggregateDurations(id, interval)
+	})()
+
+	return Record.aggregate(aggregation)
 
 }
 

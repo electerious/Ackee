@@ -6,37 +6,15 @@ const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const sortings = require('../constants/sortings')
 
-const getTop = async (id, range) => {
-
-	return Record.aggregate(
-		aggregateTopFields(id, [ 'siteReferrer' ], range)
-	)
-
-}
-
-const getNew = async (id) => {
-
-	return Record.aggregate(
-		aggregateNewFields(id, [ 'siteReferrer' ])
-	)
-
-}
-
-const getRecent = async (id) => {
-
-	return Record.aggregate(
-		aggregateRecentFields(id, [ 'siteReferrer' ])
-	)
-
-}
-
 const get = async (id, sorting, range) => {
 
-	switch (sorting) {
-		case sortings.SORTINGS_TOP: return getTop(id, range)
-		case sortings.SORTINGS_NEW: return getNew(id)
-		case sortings.SORTINGS_RECENT: return getRecent(id)
-	}
+	const aggregation = (() => {
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(id, [ 'siteReferrer' ], range)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(id, [ 'siteReferrer' ])
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(id, [ 'siteReferrer' ])
+	})()
+
+	return Record.aggregate(aggregation)
 
 }
 

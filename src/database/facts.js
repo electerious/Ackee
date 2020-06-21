@@ -1,5 +1,7 @@
 'use strict'
 
+// TODO: Delete this file
+
 const Record = require('../schemas/Record')
 const intervals = require('../constants/intervals')
 const aggregateViewsActive = require('../aggregations/aggregateViewsActive')

@@ -1,5 +1,6 @@
 'use strict'
 
+const records = require('../database/records')
 const domains = require('../database/domains')
 const pipe = require('../utils/pipe')
 const messages = require('../utils/messages')
@@ -89,6 +90,7 @@ module.exports = {
 		}),
 		deleteDomain: pipe(requireAuth, blockDemo, async (parent, { id }) => {
 
+			await records.del(id)
 			await domains.del(id)
 
 			return {
