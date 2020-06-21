@@ -30,7 +30,7 @@ type DeleteDomainPayload {
 
 type Query {
 	domain(id: ID!): Domain
-	domains(ids: [ID!]): [Domain]
+	domains: [Domain!]
 }
 
 type Mutation {

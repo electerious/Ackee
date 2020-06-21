@@ -20,18 +20,17 @@ module.exports = {
 	Query: {
 		domain: pipe(requireAuth, async (parent, { id }) => {
 
-			const entries = await domains.get([ id ])
-			const entry = entries[0]
+			const entry = await domains.get(id)
 
 			return entry == null ? null : response(entry)
 
 		}),
-		domains: pipe(requireAuth, async (parent, { ids }) => {
+		// TODO: enhance => sort by title lowercase
+		domains: pipe(requireAuth, async () => {
 
-			const entries = await domains.get(ids)
+			const entries = await domains.all()
 
-			if (ids == null) return entries.map(response)
-			return ids.map((id) => entries.find((entity) => entity.id === id))
+			return entries.map(response)
 
 		})
 	},

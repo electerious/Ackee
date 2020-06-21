@@ -2,7 +2,7 @@
 
 const Domain = require('../schemas/Domain')
 const records = require('../database/records')
-const aggregateDomains = require('../aggregations/aggregateDomains')
+// const aggregateDomains = require('../aggregations/aggregateDomains')
 const runUpdate = require('../utils/runUpdate')
 
 const add = async (data) => {
@@ -11,16 +11,17 @@ const add = async (data) => {
 
 }
 
-// TODO: Remove this fn
 const all = async () => {
 
-	return Domain.aggregate(aggregateDomains())
+	return Domain.find({})
 
 }
 
-const get = async (ids) => {
+const get = async (id) => {
 
-	return Domain.aggregate(aggregateDomains(ids))
+	return Domain.findOne({
+		id
+	})
 
 }
 
