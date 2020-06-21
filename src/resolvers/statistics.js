@@ -147,8 +147,8 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer and fix id response + Add support for sorting
-		sizes: async (domain, { type, range }) => {
+		// TODO: Add limit and enhancer and fix id response
+		sizes: async (domain, { sorting, type, range }) => {
 
 			console.log(range)
 
@@ -158,7 +158,7 @@ module.exports = {
 				created: entry.created
 			})
 
-			const entries = await sizes.get(domain.id, type, range)
+			const entries = await sizes.get(domain.id, sorting, type, range)
 
 			return entries.map(response)
 
