@@ -52,6 +52,7 @@ const getScreenResolution = async (id, range) => {
 
 }
 
+// TODO: Add support for sorting
 const get = async (id, type, range) => {
 
 	switch (type) {

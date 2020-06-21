@@ -21,12 +21,12 @@ module.exports = {
 		RECENT: require('../constants/sortings').SORTINGS_RECENT,
 		NEW: require('../constants/sortings').SORTINGS_NEW
 	},
-	Range: {
-		LAST_24_HOURS: require('../constants/ranges').RANGES_LAST_24_HOURS,
-		LAST_7_DAYS: require('../constants/ranges').RANGES_LAST_7_DAYS,
-		LAST_30_DAYS: require('../constants/ranges').RANGES_LAST_30_DAYS,
-		ALL_TIME: require('../constants/ranges').RANGES_ALL_TIME
-	},
+	// Range: {
+	// 	LAST_24_HOURS: require('../constants/ranges').RANGES_LAST_24_HOURS,
+	// 	LAST_7_DAYS: require('../constants/ranges').RANGES_LAST_7_DAYS,
+	// 	LAST_30_DAYS: require('../constants/ranges').RANGES_LAST_30_DAYS,
+	// 	ALL_TIME: require('../constants/ranges').RANGES_ALL_TIME
+	// },
 	ViewType: {
 		UNIQUE: require('../constants/views').VIEWS_TYPE_UNIQUE,
 		TOTAL: require('../constants/views').VIEWS_TYPE_TOTAL

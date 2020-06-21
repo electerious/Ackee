@@ -2,13 +2,22 @@
 
 const Record = require('../schemas/Record')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
-const constants = require('../constants/languages')
+const sortings = require('../constants/sortings')
 
 const getTop = async (id, range) => {
 
 	return Record.aggregate(
 		aggregateTopFields(id, [ 'siteLanguage' ], range)
+	)
+
+}
+
+const getNew = async (id) => {
+
+	return Record.aggregate(
+		aggregateNewFields(id, [ 'siteLanguage' ])
 	)
 
 }
@@ -24,8 +33,9 @@ const getRecent = async (id) => {
 const get = async (id, sorting, range) => {
 
 	switch (sorting) {
-		case constants.LANGUAGES_SORTING_TOP: return getTop(id, range)
-		case constants.LANGUAGES_SORTING_RECENT: return getRecent(id)
+		case sortings.SORTINGS_TOP: return getTop(id, range)
+		case sortings.SORTINGS_NEW: return getNew(id)
+		case sortings.SORTINGS_RECENT: return getRecent(id)
 	}
 
 }
