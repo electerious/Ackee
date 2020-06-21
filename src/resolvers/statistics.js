@@ -150,8 +150,6 @@ module.exports = {
 		// TODO: Add limit and enhancer and fix id response
 		sizes: async (domain, { sorting, type, range }) => {
 
-			console.log(range)
-
 			const response = (entry) => ({
 				id: entry._id.screenWidth,
 				count: entry.count,
