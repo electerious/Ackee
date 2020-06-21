@@ -3,12 +3,14 @@
 const tokens = require('./tokens')
 const records = require('./records')
 const domains = require('./domains')
+const facts = require('./facts')
 const statistics = require('./statistics')
 
 module.exports = {
 	...tokens,
 	...records,
 	...domains,
+	...facts,
 	...statistics,
 	Query: {
 		...domains.Query

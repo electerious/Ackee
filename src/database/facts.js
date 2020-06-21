@@ -1,6 +1,6 @@
 'use strict'
 
-// TODO: Delete this file
+// TODO: Delete most parts of this file
 
 const Record = require('../schemas/Record')
 const intervals = require('../constants/intervals')
@@ -87,5 +87,11 @@ const get = async (id) => {
 }
 
 module.exports = {
-	get
+	get,
+	getViewsActive,
+	getViewsAverage,
+	getDurationsAverage,
+	getViewsToday,
+	getViewsMonth,
+	getViewsYear
 }

@@ -16,6 +16,7 @@ const response = (entry) => ({
 
 module.exports = {
 	Domain: {
+		facts: (obj) => obj,
 		statistics: (obj) => obj
 	},
 	Query: {

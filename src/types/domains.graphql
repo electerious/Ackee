@@ -1,6 +1,7 @@
 type Domain {
 	id: ID!
 	title: String!
+	facts: Facts!
 	statistics: Statistics!
 	created: DateTime!
 	updated: DateTime!
