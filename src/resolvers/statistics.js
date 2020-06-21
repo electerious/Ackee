@@ -2,6 +2,13 @@
 
 const views = require('../database/views')
 const pages = require('../database/pages')
+const referrers = require('../database/referrers')
+const durations = require('../database/durations')
+const systems = require('../database/systems')
+const devices = require('../database/devices')
+const browsers = require('../database/browsers')
+const sizes = require('../database/sizes')
+const languages = require('../database/languages')
 
 module.exports = {
 	Interval: {
@@ -9,16 +16,16 @@ module.exports = {
 		MONTHLY: require('../constants/intervals').INTERVALS_MONTHLY,
 		YEARLY: require('../constants/intervals').INTERVALS_YEARLY
 	},
+	Sorting: {
+		TOP: require('../constants/sortings').SORTINGS_TOP,
+		RECENT: require('../constants/sortings').SORTINGS_RECENT,
+		NEW: require('../constants/sortings').SORTINGS_NEW
+	},
 	Range: {
 		LAST_24_HOURS: require('../constants/ranges').RANGES_LAST_24_HOURS,
 		LAST_7_DAYS: require('../constants/ranges').RANGES_LAST_7_DAYS,
 		LAST_30_DAYS: require('../constants/ranges').RANGES_LAST_30_DAYS,
 		ALL_TIME: require('../constants/ranges').RANGES_ALL_TIME
-	},
-	Sorting: {
-		TOP: require('../constants/sortings').SORTINGS_TOP,
-		RECENT: require('../constants/sortings').SORTINGS_RECENT,
-		NEW: require('../constants/sortings').SORTINGS_NEW
 	},
 	ViewType: {
 		UNIQUE: require('../constants/views').VIEWS_TYPE_UNIQUE,
@@ -49,7 +56,7 @@ module.exports = {
 		views: async (domain, { type, interval }) => {
 
 			const response = (entry) => ({
-				date: new Date(entry._id.year, entry._id.month == null ? 0 : entry._id.month - 1, entry._id.day == null ? 1 : entry._id.day),
+				id: new Date(entry._id.year, entry._id.month == null ? 0 : entry._id.month - 1, entry._id.day == null ? 1 : entry._id.day),
 				count: entry.count
 			})
 
@@ -67,6 +74,105 @@ module.exports = {
 			})
 
 			const entries = await pages.get(domain.id, sorting, range)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer
+		referrers: async (domain, { sorting, range }) => {
+
+			const response = (entry) => ({
+				id: entry._id.siteReferrer,
+				count: entry.count,
+				created: entry.created
+			})
+
+			const entries = await referrers.get(domain.id, sorting, range)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer
+		durations: async (domain, { interval }) => {
+
+			const response = (entry) => ({
+				id: new Date(entry._id.year, entry._id.month == null ? 0 : entry._id.month - 1, entry._id.day == null ? 1 : entry._id.day),
+				count: entry.average
+			})
+
+			const entries = await durations.get(domain.id, interval)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer and fix id response
+		systems: async (domain, { sorting, type, range }) => {
+
+			const response = (entry) => ({
+				id: entry._id.osName,
+				count: entry.count,
+				created: entry.created
+			})
+
+			const entries = await systems.get(domain.id, sorting, type, range)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer and fix id response
+		devices: async (domain, { sorting, type, range }) => {
+
+			const response = (entry) => ({
+				id: entry._id.deviceManufacturer,
+				count: entry.count,
+				created: entry.created
+			})
+
+			const entries = await devices.get(domain.id, sorting, type, range)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer and fix id response
+		browsers: async (domain, { sorting, type, range }) => {
+
+			const response = (entry) => ({
+				id: entry._id.browserName,
+				count: entry.count,
+				created: entry.created
+			})
+
+			const entries = await browsers.get(domain.id, sorting, type, range)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer and fix id response + Add support for sorting
+		sizes: async (domain, { type, range }) => {
+
+			console.log(range)
+
+			const response = (entry) => ({
+				id: entry._id.screenWidth,
+				count: entry.count,
+				created: entry.created
+			})
+
+			const entries = await sizes.get(domain.id, type, range)
+
+			return entries.map(response)
+
+		},
+		// TODO: Add limit and enhancer
+		languages: async (domain, { sorting, range }) => {
+
+			const response = (entry) => ({
+				id: entry._id.siteLanguage,
+				count: entry.count,
+				created: entry.created
+			})
+
+			const entries = await languages.get(domain.id, sorting, range)
 
 			return entries.map(response)
 
