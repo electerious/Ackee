@@ -1,7 +1,6 @@
 'use strict'
 
 const Token = require('../schemas/Token')
-const runUpdate = require('../utils/runUpdate')
 
 const add = async () => {
 
@@ -19,7 +18,15 @@ const get = async (id) => {
 
 const update = async (id) => {
 
-	return runUpdate(Token, id)
+	return Token.findOneAndUpdate({
+		id
+	}, {
+		$set: {
+			updated: Date.now()
+		}
+	}, {
+		new: true
+	})
 
 }
 

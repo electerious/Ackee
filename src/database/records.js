@@ -1,7 +1,6 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const runUpdate = require('../utils/runUpdate')
 
 const add = async (data) => {
 
@@ -11,7 +10,15 @@ const add = async (data) => {
 
 const update = async (id) => {
 
-	return runUpdate(Record, id)
+	return Record.findOneAndUpdate({
+		id
+	}, {
+		$set: {
+			updated: Date.now()
+		}
+	}, {
+		new: true
+	})
 
 }
 
