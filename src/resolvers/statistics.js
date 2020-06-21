@@ -52,7 +52,7 @@ module.exports = {
 		SCREEN_WIDTH: require('../constants/sizes').SIZES_TYPE_SCREEN_WIDTH
 	},
 	Statistics: {
-		// TODO: Add limit and enhancer
+		// TODO: Add enhancer
 		views: async (domain, { type, interval }) => {
 
 			const response = (entry) => ({
@@ -65,7 +65,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer
+		// TODO: Add enhancer
 		pages: async (domain, { sorting, range, limit }) => {
 
 			const response = (entry) => ({
@@ -78,7 +78,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer
+		// TODO: Add enhancer
 		referrers: async (domain, { sorting, range, limit }) => {
 
 			const response = (entry) => ({
@@ -92,7 +92,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer
+		// TODO: Add enhancer
 		durations: async (domain, { interval }) => {
 
 			const response = (entry) => ({
@@ -105,7 +105,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer and fix id response
+		// TODO: Add enhancer and fix id response
 		systems: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
@@ -119,7 +119,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer and fix id response
+		// TODO: Add enhancer and fix id response
 		devices: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
@@ -133,7 +133,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer and fix id response
+		// TODO: Add enhancer and fix id response
 		browsers: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
@@ -147,7 +147,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer and fix id response
+		// TODO: Add enhancer and fix id response
 		sizes: async (domain, { sorting, type, range, limit }) => {
 
 			const response = (entry) => ({
@@ -161,7 +161,7 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add limit and enhancer
+		// TODO: Add enhancer
 		languages: async (domain, { sorting, range, limit }) => {
 
 			const response = (entry) => ({
