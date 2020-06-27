@@ -1,4 +1,7 @@
 type Record {
+	"""
+	Record identifier.
+	"""
 	id: ID!
 	siteLocation: String!
 	siteReferrer: String
@@ -14,7 +17,13 @@ type Record {
 	browserVersion: String
 	browserWidth: Int
 	browserHeight: Int
+	"""
+	Identifies the date and time when the object was created.
+	"""
 	created: DateTime!
+	"""
+	Identifies the date and time when the object was updated.
+	"""
 	updated: DateTime!
 }
 

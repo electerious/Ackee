@@ -1,6 +1,15 @@
 type Token {
+	"""
+	Token identifier. Use this value for authentication.
+	"""
 	id: ID!
+	"""
+	Identifies the date and time when the object was created.
+	"""
 	created: DateTime!
+	"""
+	Identifies the date and time when the object was updated.
+	"""
 	updated: DateTime!
 }
 

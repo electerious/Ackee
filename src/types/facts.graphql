@@ -1,3 +1,6 @@
+"""
+Facts about a domain. Usually simple data that can be represented in one value.
+"""
 type Facts {
 	activeVisitors: UnsignedInt!
 }

@@ -245,6 +245,9 @@ type Language {
 	created: DateTime
 }
 
+"""
+Statistics of a domain. Usually data that needs to be represented in a list or chart.
+"""
 type Statistics {
 	"""
 	Amount of views grouped by day, month or year.
