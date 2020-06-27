@@ -5,7 +5,7 @@ const { subDays, subMonths, subYears, startOfDay, startOfMonth, startOfYear } = 
 const intervals = require('../constants/intervals')
 const matchDomainId = require('../stages/matchDomainId')
 
-module.exports = (id, unique, interval) => {
+module.exports = (id, unique, interval, limit) => {
 
 	const aggregation = [
 		matchDomainId(id),
@@ -26,26 +26,29 @@ module.exports = (id, unique, interval) => {
 		}
 	]
 
+	// Because the current day, month or year is always included
+	const offset = limit - 1
+
 	if (unique === true) aggregation[0].$match.clientId = {
 		$exists: true,
 		$ne: null
 	}
 
 	if (interval === intervals.INTERVALS_DAILY) {
-		aggregation[0].$match.created = { $gte: subDays(startOfDay(new Date()), 13) }
+		aggregation[0].$match.created = { $gte: subDays(startOfDay(new Date()), offset) }
 		aggregation[1].$group._id.day = { $dayOfMonth: '$created' }
 		aggregation[1].$group._id.month = { $month: '$created' }
 		aggregation[1].$group._id.year = { $year: '$created' }
 	}
 
 	if (interval === intervals.INTERVALS_MONTHLY) {
-		aggregation[0].$match.created = { $gte: subMonths(startOfMonth(new Date()), 13) }
+		aggregation[0].$match.created = { $gte: subMonths(startOfMonth(new Date()), offset) }
 		aggregation[1].$group._id.month = { $month: '$created' }
 		aggregation[1].$group._id.year = { $year: '$created' }
 	}
 
 	if (interval === intervals.INTERVALS_YEARLY) {
-		aggregation[0].$match.created = { $gte: subYears(startOfYear(new Date()), 13) }
+		aggregation[0].$match.created = { $gte: subYears(startOfYear(new Date()), offset) }
 		aggregation[1].$group._id.year = { $year: '$created' }
 	}
 

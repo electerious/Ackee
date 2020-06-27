@@ -54,17 +54,9 @@ module.exports = {
 		SCREEN_WIDTH: require('../constants/sizes').SIZES_TYPE_SCREEN_WIDTH
 	},
 	Statistics: {
-		// TODO: Add enhancer
-		views: async (domain, { type, interval }) => {
+		views: async (domain, { type, interval, limit }) => {
 
-			const response = (entry) => ({
-				id: new Date(entry._id.year, entry._id.month == null ? 0 : entry._id.month - 1, entry._id.day == null ? 1 : entry._id.day),
-				count: entry.count
-			})
-
-			const entries = await views.get(domain.id, type, interval)
-
-			return entries.map(response)
+			return views.get(domain.id, type, interval, limit)
 
 		},
 		pages: async (domain, { sorting, range, limit }) => {
@@ -77,17 +69,9 @@ module.exports = {
 			return referrers.get(domain.id, sorting, range, limit)
 
 		},
-		// TODO: Add enhancer
-		durations: async (domain, { interval }) => {
+		durations: async (domain, { interval, limit }) => {
 
-			const response = (entry) => ({
-				id: new Date(entry._id.year, entry._id.month == null ? 0 : entry._id.month - 1, entry._id.day == null ? 1 : entry._id.day),
-				count: entry.average
-			})
-
-			const entries = await durations.get(domain.id, interval)
-
-			return entries.map(response)
+			return durations.get(domain.id, interval, limit)
 
 		},
 		systems: async (domain, { sorting, type, range, limit }) => {

@@ -1,5 +1,4 @@
-// TODO: Remove from FE scripts
-export default (day, month, year, date) => {
+module.exports = (day, month, year, date) => {
 
 	const isDay = day === date.getDate() || day == null
 	const isMonth = month === date.getMonth() + 1 || month == null
