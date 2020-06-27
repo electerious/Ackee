@@ -102,49 +102,49 @@ type Statistics {
 	views(
 		interval: Interval!,
 		type: ViewType!,
-		limit: UnsignedInt = 14
+		limit: Int = 14
 	): [View!]
 	pages(
 		sorting: Sorting!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [Page!]
 	referrers(
 		sorting: Sorting!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [Referrer!]
 	durations(
 		interval: Interval!,
-		limit: UnsignedInt = 14
+		limit: Int = 14
 	): [Duration!]
 	systems(
 		sorting: Sorting!,
 		type: SystemType!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [System!]
 	devices(
 		sorting: Sorting!,
 		type: DeviceType!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [Device!]
 	browsers(
 		sorting: Sorting!,
 		type: BrowserType!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [Browser!]
 	sizes(
 		sorting: Sorting!,
 		type: SizeType!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [Size!]
 	languages(
 		sorting: Sorting!,
 		range: Range = LAST_7_DAYS,
-		limit: UnsignedInt = 30
+		limit: Int = 30
 	): [Language!]
 }
