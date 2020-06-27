@@ -6,20 +6,16 @@ import formatNumber from '../../utils/formatNumber'
 import pluralize from '../../utils/pluralize'
 
 import Headline from '../Headline'
-import Spacer from '../Spacer'
 import PresentationValueText from '../presentations/PresentationValueText'
 
 const Presentation = (props) => {
 
 	return (
-		h('div', { className: 'card__inner' },
+		h('div', { className: 'facts__card' },
 			h(Headline, {
 				type: 'h2',
 				size: 'small'
 			}, props.headline),
-			h(Spacer, {
-				size: 1
-			}),
 			h(PresentationValueText, {
 				value: props.value,
 				text: props.text
@@ -33,47 +29,38 @@ const CardFacts = (props) => {
 
 	return (
 		h('div', {
-			className: 'card card--wide'
+			className: 'facts'
 		},
-			h('div', { className: 'card__facts' },
-				h(Presentation, {
-					headline: 'Active visitors',
-					value: props.items.views_active,
-					text: pluralize([ 'visitors', 'visitor', 'visitors' ], props.items.views_active)
-				}),
-				h('div', { className: 'card__separator card__separator--vertical' }),
-				h(Presentation, {
-					headline: 'Average views',
-					value: formatNumber(props.items.views_average),
-					text: 'per day'
-				}),
-				h('div', { className: 'card__separator card__separator--vertical' }),
-				h(Presentation, {
-					headline: 'Average duration',
-					value: formatDuration(props.items.durations_average).value,
-					text: formatDuration(props.items.durations_average).unit
-				})
-			),
-			h('div', { className: 'card__separator card__separator--horizontal' }),
-			h('div', { className: 'card__facts' },
-				h(Presentation, {
-					headline: 'Views today',
-					value: formatNumber(props.items.views_today),
-					text: pluralize([ 'views', 'view', 'views' ], props.items.views_today)
-				}),
-				h('div', { className: 'card__separator card__separator--vertical' }),
-				h(Presentation, {
-					headline: 'Views this month',
-					value: formatNumber(props.items.views_month),
-					text: pluralize([ 'views', 'view', 'views' ], props.items.views_month)
-				}),
-				h('div', { className: 'card__separator card__separator--vertical' }),
-				h(Presentation, {
-					headline: 'Views this year',
-					value: formatNumber(props.items.views_year),
-					text: pluralize([ 'views', 'view', 'views' ], props.items.views_year)
-				})
-			)
+			h(Presentation, {
+				headline: 'Active visitors',
+				value: props.items.views_active,
+				text: pluralize([ 'visitors', 'visitor', 'visitors' ], props.items.views_active)
+			}),
+			h(Presentation, {
+				headline: 'Average views',
+				value: formatNumber(props.items.views_average),
+				text: 'per day'
+			}),
+			h(Presentation, {
+				headline: 'Average duration',
+				value: formatDuration(props.items.durations_average).value,
+				text: formatDuration(props.items.durations_average).unit
+			}),
+			h(Presentation, {
+				headline: 'Views today',
+				value: formatNumber(props.items.views_today),
+				text: pluralize([ 'views', 'view', 'views' ], props.items.views_today)
+			}),
+			h(Presentation, {
+				headline: 'Views this month',
+				value: formatNumber(props.items.views_month),
+				text: pluralize([ 'views', 'view', 'views' ], props.items.views_month)
+			}),
+			h(Presentation, {
+				headline: 'Views this year',
+				value: formatNumber(props.items.views_year),
+				text: pluralize([ 'views', 'view', 'views' ], props.items.views_year)
+			})
 		)
 	)
 

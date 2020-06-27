@@ -79,7 +79,7 @@ const OverlayLogin = (props) => {
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator card__separator--vertical'
+					className: 'card__separator '
 				}),
 
 				h('button', {

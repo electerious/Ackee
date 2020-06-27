@@ -1,9 +1,9 @@
 .content {
 
-	--rows: 2;
+	--columns: 2;
 
 	display: grid;
-	grid-template-columns: repeat(var(--rows), minmax(0, 1fr));
+	grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 	gap: $gutter;
 	margin: 0 auto;
 	padding: 6vh $gutter;
@@ -11,7 +11,7 @@
 	max-width: $maxWidth;
 
 	@media (max-width: 800px) {
-		--rows: 1;
+		--columns: 1;
 	}
 
 	&__spacer {
