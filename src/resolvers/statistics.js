@@ -21,6 +21,8 @@ module.exports = {
 		RECENT: require('../constants/sortings').SORTINGS_RECENT,
 		NEW: require('../constants/sortings').SORTINGS_NEW
 	},
+	// TODO: Enable when bug is fixed
+	// https://github.com/apollographql/apollo-server/issues/2908
 	// Range: {
 	// 	LAST_24_HOURS: require('../constants/ranges').RANGES_LAST_24_HOURS,
 	// 	LAST_7_DAYS: require('../constants/ranges').RANGES_LAST_7_DAYS,
