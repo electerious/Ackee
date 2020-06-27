@@ -6,26 +6,6 @@ const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
 
-const response = (entry) => ({
-	id: entry.id,
-	siteLocation: entry.siteLocation,
-	siteReferrer: entry.siteReferrer,
-	siteLanguage: entry.siteLanguage,
-	screenWidth: entry.screenWidth,
-	screenHeight: entry.screenHeight,
-	screenColorDepth: entry.screenColorDepth,
-	deviceName: entry.deviceName,
-	deviceManufacturer: entry.deviceManufacturer,
-	osName: entry.osName,
-	osVersion: entry.osVersion,
-	browserName: entry.browserName,
-	browserVersion: entry.browserVersion,
-	browserWidth: entry.browserWidth,
-	browserHeight: entry.browserHeight,
-	created: entry.created,
-	updated: entry.updated
-})
-
 const normalizeSiteLocation = (siteLocation) => {
 
 	if (siteLocation == null) {
@@ -115,7 +95,7 @@ module.exports = {
 
 			return {
 				success: true,
-				payload: response(entry)
+				payload: entry
 			}
 
 		},
@@ -142,8 +122,7 @@ module.exports = {
 			}
 
 			return {
-				success: true,
-				payload: response(entry)
+				success: true
 			}
 
 		}

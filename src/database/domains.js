@@ -13,7 +13,6 @@ const response = (entry) => ({
 const add = async (data) => {
 
 	const enhance = (entry) => {
-		// Is empty when data is empty
 		return entry == null ? entry : response(entry)
 	}
 
@@ -52,7 +51,7 @@ const get = async (id) => {
 const update = async (id, data) => {
 
 	const enhance = (entry) => {
-		return response(entry)
+		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(

@@ -42,7 +42,6 @@ type CreateRecordPayload {
 
 type UpdateRecordPayload {
 	success: Boolean
-	payload: Record
 }
 
 type Mutation {
