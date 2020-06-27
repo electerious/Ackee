@@ -65,31 +65,14 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add enhancer
 		pages: async (domain, { sorting, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.siteLocation,
-				count: entry.count
-			})
-
-			const entries = await pages.get(domain.id, sorting, range, limit)
-
-			return entries.map(response)
+			return pages.get(domain.id, sorting, range, limit)
 
 		},
-		// TODO: Add enhancer
 		referrers: async (domain, { sorting, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.siteReferrer,
-				count: entry.count,
-				created: entry.created
-			})
-
-			const entries = await referrers.get(domain.id, sorting, range, limit)
-
-			return entries.map(response)
+			return referrers.get(domain.id, sorting, range, limit)
 
 		},
 		// TODO: Add enhancer
@@ -105,74 +88,29 @@ module.exports = {
 			return entries.map(response)
 
 		},
-		// TODO: Add enhancer and fix id response
 		systems: async (domain, { sorting, type, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.osName,
-				count: entry.count,
-				created: entry.created
-			})
-
-			const entries = await systems.get(domain.id, sorting, type, range, limit)
-
-			return entries.map(response)
+			return systems.get(domain.id, sorting, type, range, limit)
 
 		},
-		// TODO: Add enhancer and fix id response
 		devices: async (domain, { sorting, type, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.deviceManufacturer,
-				count: entry.count,
-				created: entry.created
-			})
-
-			const entries = await devices.get(domain.id, sorting, type, range, limit)
-
-			return entries.map(response)
+			return devices.get(domain.id, sorting, type, range, limit)
 
 		},
-		// TODO: Add enhancer and fix id response
 		browsers: async (domain, { sorting, type, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.browserName,
-				count: entry.count,
-				created: entry.created
-			})
-
-			const entries = await browsers.get(domain.id, sorting, type, range, limit)
-
-			return entries.map(response)
+			return browsers.get(domain.id, sorting, type, range, limit)
 
 		},
-		// TODO: Add enhancer and fix id response
 		sizes: async (domain, { sorting, type, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.screenWidth,
-				count: entry.count,
-				created: entry.created
-			})
-
-			const entries = await sizes.get(domain.id, sorting, type, range, limit)
-
-			return entries.map(response)
+			return sizes.get(domain.id, sorting, type, range, limit)
 
 		},
-		// TODO: Add enhancer
 		languages: async (domain, { sorting, range, limit }) => {
 
-			const response = (entry) => ({
-				id: entry._id.siteLanguage,
-				count: entry.count,
-				created: entry.created
-			})
-
-			const entries = await languages.get(domain.id, sorting, range, limit)
-
-			return entries.map(response)
+			return languages.get(domain.id, sorting, range, limit)
 
 		}
 	}

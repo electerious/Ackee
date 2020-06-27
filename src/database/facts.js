@@ -9,6 +9,22 @@ const aggregateViewsAverage = require('../aggregations/aggregateViewsAverage')
 const aggregateDurationsAverage = require('../aggregations/aggregateDurationsAverage')
 const aggregateViewsCount = require('../aggregations/aggregateViewsCount')
 
+const getActiveVisitors = async (id) => {
+
+	const enhance = (entries) => {
+		const entry = entries[0]
+		return entry == null ? 0 : entry.count
+	}
+
+	return enhance(
+		// TODO: Rename
+		await Record.aggregate(
+			aggregateViewsActive(id)
+		)
+	)
+
+}
+
 const getViewsActive = async (id) => {
 
 	return Record.aggregate(
@@ -88,6 +104,7 @@ const get = async (id) => {
 
 module.exports = {
 	get,
+	getActiveVisitors,
 	getViewsActive,
 	getViewsAverage,
 	getDurationsAverage,

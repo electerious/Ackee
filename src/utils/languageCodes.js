@@ -1,6 +1,4 @@
-// TODO: Remove from FE scripts
-
-export default {
+module.exports = {
 	aa: 'Afar',
 	ab: 'Abkhazian',
 	ae: 'Avestan',

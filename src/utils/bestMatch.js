@@ -1,8 +1,6 @@
-import isDefined from '../../../utils/isDefined'
+const isDefined = require('./isDefined')
 
-// TODO: Remove this file from FE scripts
-
-export default (matches) => {
+module.exports = (matches) => {
 
 	// Find the first item that only consists if defined values
 	return matches.reduce((prev, [ key, values ]) => {
