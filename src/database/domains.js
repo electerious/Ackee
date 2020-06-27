@@ -1,39 +1,72 @@
 'use strict'
 
 const Domain = require('../schemas/Domain')
+const sortByProp = require('../utils/sortByProp')
+
+const response = (entry) => ({
+	id: entry.id,
+	title: entry.title,
+	created: entry.created,
+	updated: entry.updated
+})
 
 const add = async (data) => {
 
-	return Domain.create(data)
+	const enhance = (entry) => {
+		// Can be empty when data is empty
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Domain.create(data)
+	)
 
 }
 
 const all = async () => {
 
-	return Domain.find({})
+	const enhance = (entries) => {
+		return entries
+			.map(response)
+			.sort(sortByProp('title'))
+	}
+
+	return enhance(
+		await Domain.find({})
+	)
 
 }
 
 const get = async (id) => {
 
-	return Domain.findOne({
-		id
-	})
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Domain.findOne({ id })
+	)
 
 }
 
 const update = async (id, data) => {
 
-	return Domain.findOneAndUpdate({
-		id
-	}, {
-		$set: {
-			title: data.title,
-			updated: Date.now()
-		}
-	}, {
-		new: true
-	})
+	const enhance = (entry) => {
+		return response(entry)
+	}
+
+	return enhance(
+		await Domain.findOneAndUpdate({
+			id
+		}, {
+			$set: {
+				title: data.title,
+				updated: Date.now()
+			}
+		}, {
+			new: true
+		})
+	)
 
 }
 

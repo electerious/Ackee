@@ -7,13 +7,6 @@ const messages = require('../utils/messages')
 const requireAuth = require('../middlewares/requireAuth')
 const blockDemo = require('../middlewares/blockDemo')
 
-const response = (entry) => ({
-	id: entry.id,
-	title: entry.title,
-	created: entry.created,
-	updated: entry.updated
-})
-
 module.exports = {
 	Domain: {
 		facts: (obj) => obj,
@@ -22,17 +15,12 @@ module.exports = {
 	Query: {
 		domain: pipe(requireAuth, async (parent, { id }) => {
 
-			const entry = await domains.get(id)
-
-			return entry == null ? null : response(entry)
+			return domains.get(id)
 
 		}),
-		// TODO: enhance => sort by title lowercase
 		domains: pipe(requireAuth, async () => {
 
-			const entries = await domains.all()
-
-			return entries.map(response)
+			return domains.all()
 
 		})
 	},
@@ -56,7 +44,7 @@ module.exports = {
 			}
 
 			return {
-				payload: response(entry),
+				payload: entry,
 				success: true
 			}
 
@@ -84,7 +72,7 @@ module.exports = {
 			}
 
 			return {
-				payload: response(entry),
+				payload: entry,
 				success: true
 			}
 
