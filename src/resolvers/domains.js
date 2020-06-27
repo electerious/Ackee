@@ -2,8 +2,8 @@
 
 const records = require('../database/records')
 const domains = require('../database/domains')
-const pipe = require('../utils/pipe')
 const messages = require('../utils/messages')
+const pipe = require('../utils/pipe')
 const requireAuth = require('../middlewares/requireAuth')
 const blockDemo = require('../middlewares/blockDemo')
 
