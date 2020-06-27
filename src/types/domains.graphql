@@ -35,7 +35,7 @@ type Query {
 }
 
 type Mutation {
-	createDomain(input: CreateDomainInput): CreateDomainPayload!
-	updateDomain(id: ID!, input: UpdateDomainInput): UpdateDomainPayload!
+	createDomain(input: CreateDomainInput!): CreateDomainPayload!
+	updateDomain(id: ID!, input: UpdateDomainInput!): UpdateDomainPayload!
 	deleteDomain(id: ID!): DeleteDomainPayload!
 }

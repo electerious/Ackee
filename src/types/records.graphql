@@ -46,6 +46,6 @@ type UpdateRecordPayload {
 }
 
 type Mutation {
-	createRecord(domainId: ID!, input: CreateRecordInput): CreateRecordPayload!
+	createRecord(domainId: ID!, input: CreateRecordInput!): CreateRecordPayload!
 	updateRecord(id: ID!): UpdateRecordPayload!
 }
