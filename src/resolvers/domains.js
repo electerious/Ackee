@@ -4,8 +4,8 @@ const records = require('../database/records')
 const domains = require('../database/domains')
 const pipe = require('../utils/pipe')
 const messages = require('../utils/messages')
-const requireAuth = require('../middlewares/requireAuth_new')
-const blockDemo = require('../middlewares/blockDemo_new')
+const requireAuth = require('../middlewares/requireAuth')
+const blockDemo = require('../middlewares/blockDemo')
 
 const response = (entry) => ({
 	id: entry.id,

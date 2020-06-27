@@ -2,7 +2,7 @@
 
 const tokens = require('../database/tokens')
 const pipe = require('../utils/pipe')
-const requireAuth = require('../middlewares/requireAuth_new')
+const requireAuth = require('../middlewares/requireAuth')
 
 const response = (entry) => ({
 	id: entry.id,

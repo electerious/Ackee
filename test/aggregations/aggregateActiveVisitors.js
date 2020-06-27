@@ -3,11 +3,11 @@
 const test = require('ava')
 const uuid = require('uuid').v4
 
-const aggregateDurationsAverage = require('../../src/aggregations/aggregateDurationsAverage')
+const aggregateActiveVisitors = require('../../src/aggregations/aggregateActiveVisitors')
 
 test('return aggregation', async (t) => {
 
-	const result = aggregateDurationsAverage(uuid())
+	const result = aggregateActiveVisitors(uuid())
 
 	t.true(Array.isArray(result))
 

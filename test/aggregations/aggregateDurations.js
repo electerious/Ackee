@@ -8,7 +8,7 @@ const intervals = require('../../src/constants/intervals')
 
 test('return aggregation', async (t) => {
 
-	const result = aggregateDurations(uuid(), intervals.INTERVALS_DAILY)
+	const result = aggregateDurations(uuid(), intervals.INTERVALS_DAILY, 14)
 
 	t.true(Array.isArray(result))
 

@@ -7,28 +7,11 @@ const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 
 const signale = require('./utils/signale')
-const pipe = require('./utils/pipe')
 const isDefined = require('./utils/isDefined')
 const isAuthenticated = require('./utils/isAuthenticated')
 const isDemo = require('./utils/isDemo')
 const customTrackerUrl = require('./utils/customTrackerUrl')
-const requireAuth = require('./middlewares/requireAuth')
-const blockDemo = require('./middlewares/blockDemo')
 const ui = require('./routes/ui')
-const tokens = require('./routes/tokens')
-const domains = require('./routes/domains')
-const records = require('./routes/records')
-const overview = require('./routes/overview')
-const facts = require('./routes/facts')
-const views = require('./routes/views')
-const pages = require('./routes/pages')
-const referrers = require('./routes/referrers')
-const languages = require('./routes/languages')
-const durations = require('./routes/durations')
-const sizes = require('./routes/sizes')
-const systems = require('./routes/systems')
-const devices = require('./routes/devices')
-const browsers = require('./routes/browsers')
 
 const catchError = (fn) => async (req, res) => {
 
@@ -113,31 +96,6 @@ const routes = [
 	get('/index.js', ui.scripts),
 	get('/tracker.js', ui.tracker),
 	customTrackerUrl != null ? get(customTrackerUrl, ui.tracker) : undefined,
-
-	post('/tokens', tokens.add),
-	del('/tokens/:tokenId', tokens.del),
-
-	get('/overview', pipe(requireAuth, overview.all)),
-
-	post('/domains', pipe(requireAuth, blockDemo, domains.add)),
-	get('/domains', pipe(requireAuth, domains.all)),
-	put('/domains/:domainId', pipe(requireAuth, blockDemo, domains.update)),
-	del('/domains/:domainId', pipe(requireAuth, blockDemo, domains.del)),
-
-	post('/domains/:domainId/records', records.add),
-	patch('/domains/:domainId/records/:recordId', records.update),
-
-	get('/domains/:domainId/overview', pipe(requireAuth, overview.get)),
-	get('/domains/:domainId/facts', pipe(requireAuth, facts.get)),
-	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
-	get('/domains/:domainId/pages', pipe(requireAuth, pages.get)),
-	get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
-	get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
-	get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
-	get('/domains/:domainId/sizes', pipe(requireAuth, sizes.get)),
-	get('/domains/:domainId/systems', pipe(requireAuth, systems.get)),
-	get('/domains/:domainId/devices', pipe(requireAuth, devices.get)),
-	get('/domains/:domainId/browsers', pipe(requireAuth, browsers.get)),
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),

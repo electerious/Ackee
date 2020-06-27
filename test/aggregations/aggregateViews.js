@@ -8,7 +8,7 @@ const intervals = require('../../src/constants/intervals')
 
 test('return unique aggregation', async (t) => {
 
-	const result = aggregateViews(uuid(), true, intervals.INTERVALS_DAILY)
+	const result = aggregateViews(uuid(), true, intervals.INTERVALS_DAILY, 14)
 
 	t.true(Array.isArray(result))
 
@@ -16,7 +16,7 @@ test('return unique aggregation', async (t) => {
 
 test('return non-unique aggregation', async (t) => {
 
-	const result = aggregateViews(uuid(), false, intervals.INTERVALS_DAILY)
+	const result = aggregateViews(uuid(), false, intervals.INTERVALS_DAILY, 14)
 
 	t.true(Array.isArray(result))
 
