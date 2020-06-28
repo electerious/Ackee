@@ -1,3 +1,6 @@
+"""
+Domains are required to track views. You can create as many domains as you want, but it's recommended to create on domain per project/site. This allows you to view facts and statistics separately.
+"""
 type Domain {
 	"""
 	Domain identifier.
@@ -26,34 +29,70 @@ type Domain {
 }
 
 input CreateDomainInput {
+	"""
+	Title of the domain.
+	"""
 	title: String!
 }
 
 type CreateDomainPayload {
+	"""
+	Indicates that the domain creation was successful. Might be `null` otherwise.
+	"""
 	success: Boolean
+	"""
+	The newly created domain.
+	"""
 	payload: Domain
 }
 
 input UpdateDomainInput {
+	"""
+	Title of the domain.
+	"""
 	title: String!
 }
 
 type UpdateDomainPayload {
+	"""
+	Indicates that the domain update was successful. Might be `null` otherwise.
+	"""
 	success: Boolean
+	"""
+	The updated domain.
+	"""
 	payload: Domain
 }
 
 type DeleteDomainPayload {
+	"""
+	Indicates that the domain deletion was successful. Might be `null` otherwise.
+	"""
 	success: Boolean
 }
 
 type Query {
+	"""
+	Data of a specific domain.
+	"""
 	domain(id: ID!): Domain
+	"""
+	Data of all existing domains.
+	"""
 	domains: [Domain!]
 }
 
 type Mutation {
+	"""
+	Create a new domain.
+	"""
 	createDomain(input: CreateDomainInput!): CreateDomainPayload!
+	"""
+	Update an existing domain.
+	"""
 	updateDomain(id: ID!, input: UpdateDomainInput!): UpdateDomainPayload!
+	"""
+	Delete an existing domain.
+	"""
 	deleteDomain(id: ID!): DeleteDomainPayload!
 }

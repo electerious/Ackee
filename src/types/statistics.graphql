@@ -223,7 +223,7 @@ type Size {
 	"""
 	Amount of occurrences.
 	"""
-	count: Int
+	count: UnsignedInt
 	"""
 	Identifies the date and time when the object was created.
 	"""
@@ -238,7 +238,7 @@ type Language {
 	"""
 	Amount of occurrences.
 	"""
-	count: Int
+	count: UnsignedInt
 	"""
 	Identifies the date and time when the object was created.
 	"""

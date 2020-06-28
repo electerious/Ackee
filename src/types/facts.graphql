@@ -2,5 +2,8 @@
 Facts about a domain. Usually simple data that can be represented in one value.
 """
 type Facts {
+	"""
+	Number of visitors currently on your site.
+	"""
 	activeVisitors: UnsignedInt!
 }
