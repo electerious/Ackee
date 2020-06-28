@@ -14,7 +14,7 @@ const RouteReferrers = (props) => {
 			props.fetchReferrers(props, domain.id)
 		})
 
-	}, [ props.filter.range, props.domains.value, props.referrers.sorting ])
+	}, [ props.filter.range, props.domains.value, props.filter.sorting ])
 
 	return (
 		h(Fragment, {},
@@ -25,7 +25,7 @@ const RouteReferrers = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						range: props.filter.range,
-						sorting: props.referrers.sorting,
+						sorting: props.filter.sorting,
 						loading: props.domains.fetching || selectReferrersValue(props, domain.id).fetching,
 						items: enhanceReferrers(selectReferrersValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))

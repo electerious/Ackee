@@ -52,7 +52,7 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 			`,
 			variables: {
 				id: domainId,
-				sorting: props.sizes.sorting,
+				sorting: props.filter.sorting,
 				type: props.sizes.type,
 				range: props.filter.range
 			},

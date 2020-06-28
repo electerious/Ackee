@@ -1,15 +1,9 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_PAGES_SORTING = Symbol()
 export const SET_PAGES_VALUE = Symbol()
 export const SET_PAGES_FETCHING = Symbol()
 export const SET_PAGES_ERROR = Symbol()
-
-export const setPagesSorting = (payload) => ({
-	type: SET_PAGES_SORTING,
-	payload
-})
 
 export const setPagesValue = (domainId, payload) => ({
 	type: SET_PAGES_VALUE,
@@ -52,7 +46,7 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 			`,
 			variables: {
 				id: domainId,
-				sorting: props.pages.sorting,
+				sorting: props.filter.sorting,
 				range: props.filter.range
 			},
 			props,

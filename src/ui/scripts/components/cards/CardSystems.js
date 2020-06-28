@@ -1,7 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { SYSTEMS_SORTING_TOP, SYSTEMS_SORTING_RECENT } from '../../../../constants/systems'
+import { SORTINGS_TOP, SORTINGS_RECENT } from '../../../../constants/sortings'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -43,11 +43,11 @@ const CardSystems = (props) => {
 			icon: ICON_LOADING
 		}, 'Loading systems')
 
-		if (isEmpty === false && props.sorting === SYSTEMS_SORTING_TOP) return h(PresentationCounterList, {
+		if (isEmpty === false && props.sorting === SORTINGS_TOP) return h(PresentationCounterList, {
 			items: props.items
 		})
 
-		if (isEmpty === false && props.sorting === SYSTEMS_SORTING_RECENT) return h(PresentationList, {
+		if (isEmpty === false && props.sorting === SORTINGS_RECENT) return h(PresentationList, {
 			items: props.items,
 			onEnter,
 			onLeave
@@ -75,7 +75,7 @@ const CardSystems = (props) => {
 				}, textLabel(
 					props.items[active],
 					props.range,
-					props.sorting === SYSTEMS_SORTING_RECENT,
+					props.sorting === SORTINGS_RECENT,
 					isStale
 				)),
 				presentation

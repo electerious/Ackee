@@ -14,7 +14,7 @@ const RouteLanguages = (props) => {
 			props.fetchLanguages(props, domain.id)
 		})
 
-	}, [ props.filter.range, props.domains.value, props.languages.sorting ])
+	}, [ props.filter.range, props.domains.value, props.filter.sorting ])
 
 	return (
 		h(Fragment, {},
@@ -25,7 +25,7 @@ const RouteLanguages = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						range: props.filter.range,
-						sorting: props.languages.sorting,
+						sorting: props.filter.sorting,
 						loading: props.domains.fetching || selectLanguagesValue(props, domain.id).fetching,
 						items: enhanceLanguages(selectLanguagesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))

@@ -1,17 +1,14 @@
 import produce from 'immer'
 
 import {
-	SET_LANGUAGES_SORTING,
 	SET_LANGUAGES_VALUE,
 	SET_LANGUAGES_FETCHING,
 	SET_LANGUAGES_ERROR
 } from '../actions'
 
-import { LANGUAGES_SORTING_TOP } from '../../../constants/languages'
 import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
-	sorting: LANGUAGES_SORTING_TOP,
 	value: {}
 })
 
@@ -25,12 +22,6 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_LANGUAGES_SORTING:
-			if (draft.sorting === action.payload) break
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			draft.sorting = action.payload
-			break
 		case SET_LANGUAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break

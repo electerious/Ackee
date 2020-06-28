@@ -15,9 +15,6 @@ import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
 import { initialState as initialViewsState } from './reducers/views'
-import { initialState as initialPagesState } from './reducers/pages'
-import { initialState as initialReferrersState } from './reducers/referrers'
-import { initialState as initialLanguagesState } from './reducers/languages'
 import { initialState as initialSystemsState } from './reducers/systems'
 import { initialState as initialBrowsersState } from './reducers/browsers'
 import { initialState as initialDevicesState } from './reducers/devices'
@@ -54,6 +51,7 @@ store.subscribe(() => {
 		},
 		filter: {
 			...initialFilterState(),
+			sorting: currentState.filter.sorting,
 			range: currentState.filter.range,
 			interval: currentState.filter.interval
 		},
@@ -61,41 +59,20 @@ store.subscribe(() => {
 			...initialViewsState(),
 			type: currentState.views.type
 		},
-		pages: {
-			...initialPagesState(),
-			sorting: currentState.pages.sorting
-		},
-		referrers: {
-			...initialReferrersState(),
-			range: currentState.referrers.range,
-			sorting: currentState.referrers.sorting
-		},
-		languages: {
-			...initialLanguagesState(),
-			range: currentState.languages.range,
-			sorting: currentState.languages.sorting
-		},
 		systems: {
 			...initialSystemsState(),
-			range: currentState.systems.range,
-			type: currentState.systems.type,
-			sorting: currentState.systems.sorting
+			type: currentState.systems.type
 		},
 		browsers: {
 			...initialBrowsersState(),
-			range: currentState.browsers.range,
-			type: currentState.browsers.type,
-			sorting: currentState.browsers.sorting
+			type: currentState.browsers.type
 		},
 		devices: {
 			...initialDevicesState(),
-			range: currentState.devices.range,
-			type: currentState.devices.type,
-			sorting: currentState.devices.sorting
+			type: currentState.devices.type
 		},
 		sizes: {
 			...initialSizesState(),
-			range: currentState.sizes.range,
 			type: currentState.sizes.type
 		}
 	})

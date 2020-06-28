@@ -14,7 +14,7 @@ const RouteDevices = (props) => {
 			props.fetchDevices(props, domain.id)
 		})
 
-	}, [ props.filter.range, props.domains.value, props.devices.sorting, props.devices.type ])
+	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.devices.type ])
 
 	return (
 		h(Fragment, {},
@@ -25,7 +25,7 @@ const RouteDevices = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						range: props.filter.range,
-						sorting: props.devices.sorting,
+						sorting: props.filter.sorting,
 						loading: props.domains.fetching || selectDevicesValue(props, domain.id).fetching,
 						items: enhanceDevices(selectDevicesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))

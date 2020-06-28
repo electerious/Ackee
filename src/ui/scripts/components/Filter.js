@@ -14,13 +14,11 @@ import {
 } from '../constants/route'
 
 import * as views from '../../../constants/views'
-import * as pages from '../../../constants/pages'
-import * as referrers from '../../../constants/referrers'
 import * as systems from '../../../constants/systems'
 import * as devices from '../../../constants/devices'
 import * as browsers from '../../../constants/browsers'
 import * as sizes from '../../../constants/sizes'
-import * as languages from '../../../constants/languages'
+import * as sortings from '../../../constants/sortings'
 import * as ranges from '../../../constants/ranges'
 import * as intervals from '../../../constants/intervals'
 
@@ -28,6 +26,11 @@ import Context, { BUTTON, SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
 const labels = {
+	sortings: {
+		[sortings.SORTINGS_TOP]: 'Top',
+		[sortings.SORTINGS_NEW]: 'New',
+		[sortings.SORTINGS_RECENT]: 'Recent'
+	},
 	ranges: {
 		[ranges.RANGES_LAST_24_HOURS]: '24 hours',
 		[ranges.RANGES_LAST_7_DAYS]: '7 days',
@@ -43,27 +46,6 @@ const labels = {
 		[views.VIEWS_TYPE_UNIQUE]: 'Unique',
 		[views.VIEWS_TYPE_TOTAL]: 'Total'
 	},
-	pages: {
-		[pages.PAGES_SORTING_TOP]: 'Top',
-		[pages.PAGES_SORTING_RECENT]: 'Recent'
-	},
-	referrers: {
-		[referrers.REFERRERS_SORTING_TOP]: 'Top',
-		[referrers.REFERRERS_SORTING_NEW]: 'New',
-		[referrers.REFERRERS_SORTING_RECENT]: 'Recent'
-	},
-	systems: {
-		[systems.SYSTEMS_SORTING_TOP]: 'Top',
-		[systems.SYSTEMS_SORTING_RECENT]: 'Recent'
-	},
-	devices: {
-		[devices.DEVICES_SORTING_TOP]: 'Top',
-		[devices.DEVICES_SORTING_RECENT]: 'Recent'
-	},
-	browsers: {
-		[browsers.BROWSERS_SORTING_TOP]: 'Top',
-		[browsers.BROWSERS_SORTING_RECENT]: 'Recent'
-	},
 	sizes: {
 		[sizes.SIZES_TYPE_BROWSER_RESOLUTION]: 'Browser sizes',
 		[sizes.SIZES_TYPE_BROWSER_WIDTH]: 'Browser widths',
@@ -71,10 +53,6 @@ const labels = {
 		[sizes.SIZES_TYPE_SCREEN_RESOLUTION]: 'Screen sizes',
 		[sizes.SIZES_TYPE_SCREEN_WIDTH]: 'Screen widths',
 		[sizes.SIZES_TYPE_SCREEN_HEIGHT]: 'Screen heights'
-	},
-	languages: {
-		[languages.LANGUAGES_SORTING_TOP]: 'Top',
-		[languages.LANGUAGES_SORTING_RECENT]: 'Recent'
 	}
 }
 
@@ -148,14 +126,14 @@ const Filter = (props) => {
 
 	const shouldShowRange = (() => {
 
-		if (routeKey === ROUTE_PAGES.key && props.pages.sorting === pages.PAGES_SORTING_TOP) return true
-		if (routeKey === ROUTE_REFERRERS.key && props.referrers.sorting === referrers.REFERRERS_SORTING_TOP) return true
+		if (routeKey === ROUTE_PAGES.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
+		if (routeKey === ROUTE_REFERRERS.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
 		if (routeKey === ROUTE_DURATIONS.key) return true
-		if (routeKey === ROUTE_SYSTEMS.key && props.systems.sorting === systems.SYSTEMS_SORTING_TOP) return true
-		if (routeKey === ROUTE_DEVICES.key && props.devices.sorting === devices.DEVICES_SORTING_TOP) return true
-		if (routeKey === ROUTE_BROWSERS.key && props.browsers.sorting === browsers.BROWSERS_SORTING_TOP) return true
+		if (routeKey === ROUTE_SYSTEMS.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
+		if (routeKey === ROUTE_DEVICES.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
+		if (routeKey === ROUTE_BROWSERS.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
 		if (routeKey === ROUTE_SIZES.key) return true
-		if (routeKey === ROUTE_LANGUAGES.key && props.languages.sorting === languages.LANGUAGES_SORTING_TOP) return true
+		if (routeKey === ROUTE_LANGUAGES.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
 
 		return false
 
@@ -170,18 +148,28 @@ const Filter = (props) => {
 
 	})()
 
-	const rangeButton = createItem(labels.ranges[props.filter.range], [
+	const sortingButtons = [
+		createButton('Top', 'Top entries first', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_TOP),
+		createButton('New', 'New entries only', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_NEW),
+		createButton('Recent', 'Entries sorted by time', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_RECENT)
+	]
+
+	const rangeButtons = [
 		createButton('24 hours', 'Show last 24 hours', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_24_HOURS),
 		createButton('7 days', 'Show last 7 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_7_DAYS),
 		createButton('30 days', 'Show last 30 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_30_DAYS),
 		createButton('All time', 'Show all data', props.setFilterRange, props.filter.range, ranges.RANGES_ALL_TIME)
-	], shouldShowRange === true)
+	]
 
-	const intervalsButton = createItem(labels.intervals[props.filter.interval], [
+	const intervalsButtons = [
 		createButton('Daily', 'Grouped by day', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_DAILY),
 		createButton('Monthly', 'Grouped by month', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_MONTHLY),
 		createButton('Yearly', 'Grouped by year', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_YEARLY)
-	], shouldShowInterval === true)
+	]
+
+	const sortingItem = createItem(labels.sortings[props.filter.sorting], sortingButtons)
+	const rangeItem = createItem(labels.ranges[props.filter.range], rangeButtons, shouldShowRange === true)
+	const intervalsItem = createItem(labels.intervals[props.filter.interval], intervalsButtons, shouldShowInterval === true)
 
 	const routesMap = {
 		[ROUTE_VIEWS.key]: [
@@ -189,63 +177,54 @@ const Filter = (props) => {
 				createButton('Unique', 'Unique site views', props.setViewsType, props.views.type, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setViewsType, props.views.type, views.VIEWS_TYPE_TOTAL)
 			]),
-			intervalsButton
+			intervalsItem
 		],
 		[ROUTE_PAGES.key]: [
-			createItem(labels.pages[props.pages.sorting], [
-				createButton('Top', 'Top page visits', props.setPagesSorting, props.pages.sorting, pages.PAGES_SORTING_TOP),
-				createButton('Recent', 'Recent page visits', props.setPagesSorting, props.pages.sorting, pages.PAGES_SORTING_RECENT)
-			]),
-			rangeButton
+			sortingItem,
+			rangeItem
 		],
 		[ROUTE_REFERRERS.key]: [
-			createItem(labels.referrers[props.referrers.sorting], [
-				createButton('Top', 'Top referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_TOP),
-				createButton('New', 'New referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_NEW),
-				createButton('Recent', 'Recent referrers', props.setReferrersSorting, props.referrers.sorting, referrers.REFERRERS_SORTING_RECENT)
-			]),
-			rangeButton
+			sortingItem,
+			rangeItem
 		],
 		[ROUTE_DURATIONS.key]: [
-			intervalsButton
+			intervalsItem
 		],
 		[ROUTE_SYSTEMS.key]: [
-			createItem(labels.systems[props.systems.sorting], [
-				createButton('Top', 'Top systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_TOP),
-				createButton('Recent', 'Recent systems', props.setSystemsSorting, props.systems.sorting, systems.SYSTEMS_SORTING_RECENT),
+			createItem(labels.sortings[props.filter.sorting], [
+				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
 					createButton('Show version', 'Include system version', props.setSystemsType, props.systems.type, systems.SYSTEMS_TYPE_WITH_VERSION),
 					createButton('Hide version', 'Don\'t include version', props.setSystemsType, props.systems.type, systems.SYSTEMS_TYPE_NO_VERSION)
 				)
 			]),
-			rangeButton
+			rangeItem
 		],
 		[ROUTE_DEVICES.key]: [
-			createItem(labels.devices[props.devices.sorting], [
-				createButton('Top', 'Top systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_TOP),
-				createButton('Recent', 'Recent systems', props.setDevicesSorting, props.devices.sorting, devices.DEVICES_SORTING_RECENT),
+			createItem(labels.sortings[props.filter.sorting], [
+				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
 					createButton('Show model', 'Include device model', props.setDevicesType, props.devices.type, devices.DEVICES_TYPE_WITH_MODEL),
 					createButton('Hide model', 'Don\'t include model', props.setDevicesType, props.devices.type, devices.DEVICES_TYPE_NO_MODEL)
 				)
 			]),
-			rangeButton
+			rangeItem
 		],
 		[ROUTE_BROWSERS.key]: [
-			createItem(labels.browsers[props.browsers.sorting], [
-				createButton('Top', 'Top systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_TOP),
-				createButton('Recent', 'Recent systems', props.setBrowsersSorting, props.browsers.sorting, browsers.BROWSERS_SORTING_RECENT),
+			createItem(labels.sortings[props.filter.sorting], [
+				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
 					createButton('Show version', 'Include browser version', props.setBrowsersType, props.browsers.type, browsers.BROWSERS_TYPE_WITH_VERSION),
 					createButton('Hide version', 'Don\'t include version', props.setBrowsersType, props.browsers.type, browsers.BROWSERS_TYPE_NO_VERSION)
 				)
 			]),
-			rangeButton
+			rangeItem
 		],
 		[ROUTE_SIZES.key]: [
+			sortingItem,
 			createItem(labels.sizes[props.sizes.type], [
 				createButton('Browser sizes', 'Width and height combined', props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
 				createButton('↳ widths', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_WIDTH),
@@ -255,14 +234,11 @@ const Filter = (props) => {
 				createButton('↳ widths', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_SCREEN_WIDTH),
 				createButton('↳ heights', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_SCREEN_HEIGHT)
 			]),
-			rangeButton
+			rangeItem
 		],
 		[ROUTE_LANGUAGES.key]: [
-			createItem(labels.languages[props.languages.sorting], [
-				createButton('Top', 'Top languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_TOP),
-				createButton('Recent', 'Recent languages', props.setLanguagesSorting, props.languages.sorting, languages.LANGUAGES_SORTING_RECENT)
-			]),
-			rangeButton
+			sortingItem,
+			rangeItem
 		]
 	}
 

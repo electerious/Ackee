@@ -1,7 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { REFERRERS_SORTING_NEW, REFERRERS_SORTING_RECENT } from '../../../../constants/referrers'
+import { SORTINGS_NEW, SORTINGS_RECENT } from '../../../../constants/sortings'
 
 import Headline from '../Headline'
 import Text from '../Text'
@@ -74,8 +74,8 @@ const CardReferrers = (props) => {
 				}, textLabel(
 					props.items[active],
 					props.range,
-					props.sorting === REFERRERS_SORTING_RECENT,
-					props.sorting === REFERRERS_SORTING_NEW,
+					props.sorting === SORTINGS_RECENT,
+					props.sorting === SORTINGS_NEW,
 					isStale
 				)),
 				presentation

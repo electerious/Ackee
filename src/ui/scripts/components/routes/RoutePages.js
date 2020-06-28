@@ -14,7 +14,7 @@ const RoutePages = (props) => {
 			props.fetchPages(props, domain.id)
 		})
 
-	}, [ props.filter.range, props.domains.value, props.pages.sorting ])
+	}, [ props.filter.range, props.domains.value, props.filter.sorting ])
 
 	return (
 		h(Fragment, {},
@@ -25,7 +25,7 @@ const RoutePages = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						range: props.filter.range,
-						sorting: props.pages.sorting,
+						sorting: props.filter.sorting,
 						loading: props.domains.fetching || selectPagesValue(props, domain.id).fetching,
 						items: enhancePages(selectPagesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))

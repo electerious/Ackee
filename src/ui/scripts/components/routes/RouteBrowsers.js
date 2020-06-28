@@ -14,7 +14,7 @@ const RouteBrowsers = (props) => {
 			props.fetchBrowsers(props, domain.id)
 		})
 
-	}, [ props.filter.range, props.domains.value, props.browsers.sorting, props.browsers.type ])
+	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.browsers.type ])
 
 	return (
 		h(Fragment, {},
@@ -25,7 +25,7 @@ const RouteBrowsers = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						range: props.filter.range,
-						sorting: props.browsers.sorting,
+						sorting: props.filter.sorting,
 						loading: props.domains.fetching || selectBrowsersValue(props, domain.id).fetching,
 						items: enhanceBrowsers(selectBrowsersValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))

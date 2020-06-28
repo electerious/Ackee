@@ -2,15 +2,9 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_DEVICES_TYPE = Symbol()
-export const SET_DEVICES_SORTING = Symbol()
 export const SET_DEVICES_VALUE = Symbol()
 export const SET_DEVICES_FETCHING = Symbol()
 export const SET_DEVICES_ERROR = Symbol()
-
-export const setDevicesSorting = (payload) => ({
-	type: SET_DEVICES_SORTING,
-	payload
-})
 
 export const setDevicesType = (payload) => ({
 	type: SET_DEVICES_TYPE,
@@ -58,7 +52,7 @@ export const fetchDevices = signalHandler((signal) => (props, domainId) => async
 			`,
 			variables: {
 				id: domainId,
-				sorting: props.devices.sorting,
+				sorting: props.filter.sorting,
 				type: props.devices.type,
 				range: props.filter.range
 			},
