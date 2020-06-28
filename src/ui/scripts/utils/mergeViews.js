@@ -8,7 +8,7 @@ export default (state) => {
 	// Enhance views for all domains
 	const enhancedViews = state.domains.value.map((domain) => {
 
-		const view = selectViewsValue(state, domain.data.id)
+		const view = selectViewsValue(state, domain.id)
 
 		return enhanceViews(view.value, 14, state.filter.interval)
 

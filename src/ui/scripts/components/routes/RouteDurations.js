@@ -12,7 +12,7 @@ const RouteDurations = (props) => {
 	useEffect(() => {
 
 		props.domains.value.map((domain) => {
-			props.fetchDurations(props, domain.data.id)
+			props.fetchDurations(props, domain.id)
 		})
 
 	}, [ props.filter.interval, props.domains.value ])
@@ -30,11 +30,11 @@ const RouteDurations = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardDurations, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						interval: props.filter.interval,
-						loading: props.domains.fetching || selectDurationsValue(props, domain.data.id).fetching,
-						items: enhanceDurations(selectDurationsValue(props, domain.data.id).value, 7, props.filter.interval),
+						loading: props.domains.fetching || selectDurationsValue(props, domain.id).fetching,
+						items: enhanceDurations(selectDurationsValue(props, domain.id).value, 7, props.filter.interval),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)

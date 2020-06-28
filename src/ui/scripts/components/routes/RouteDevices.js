@@ -11,7 +11,7 @@ const RouteDevices = (props) => {
 	useEffect(() => {
 
 		props.domains.value.map((domain) => {
-			props.fetchDevices(props, domain.data.id)
+			props.fetchDevices(props, domain.id)
 		})
 
 	}, [ props.filter.range, props.domains.value, props.devices.sorting, props.devices.type ])
@@ -22,12 +22,12 @@ const RouteDevices = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardDevices, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.devices.sorting,
-						loading: props.domains.fetching || selectDevicesValue(props, domain.data.id).fetching,
-						items: enhanceDevices(selectDevicesValue(props, domain.data.id).value),
+						loading: props.domains.fetching || selectDevicesValue(props, domain.id).fetching,
+						items: enhanceDevices(selectDevicesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)

@@ -1,8 +1,9 @@
 export default (sizes) => {
 
 	return sizes.map((size) => ({
-		text: size.data.id,
-		count: size.data.count
+		text: size.id,
+		count: size.count,
+		date: size.created == null ? null : new Date(size.created)
 	}))
 
 }

@@ -11,7 +11,7 @@ const RouteSizes = (props) => {
 	useEffect(() => {
 
 		props.domains.value.map((domain) => {
-			props.fetchSizes(props, domain.data.id)
+			props.fetchSizes(props, domain.id)
 		})
 
 	}, [ props.filter.range, props.domains.value, props.sizes.type ])
@@ -22,11 +22,11 @@ const RouteSizes = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardSizes, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
-						loading: props.domains.fetching || selectSizesValue(props, domain.data.id).fetching,
-						items: enhanceSizes(selectSizesValue(props, domain.data.id).value),
+						loading: props.domains.fetching || selectSizesValue(props, domain.id).fetching,
+						items: enhanceSizes(selectSizesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)

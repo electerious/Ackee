@@ -42,12 +42,31 @@ export const fetchSystems = signalHandler((signal) => (props, domainId) => async
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/systems?sorting=${ props.systems.sorting }&type=${ props.systems.type }&range=${ props.filter.range }`, {
+		const data = await api({
+			query: `
+				query fetchSystems($id: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							systems(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.systems.sorting,
+				type: props.systems.type,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setSystemsValue(domainId, data))
+		dispatch(setSystemsValue(domainId, data.domain.statistics.systems))
 		dispatch(setSystemsFetching(domainId, false))
 
 	} catch (err) {

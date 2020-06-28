@@ -40,9 +40,9 @@ const RouteSettings = (props) => {
 			(domain) => [
 				h(LinkItem, {
 					type: 'button',
-					text: domain.data.id,
-					onClick: () => showDomainEditModal(domain.data.id, domain.data.title)
-				}, domain.data.title),
+					text: domain.id,
+					onClick: () => showDomainEditModal(domain.id, domain.title)
+				}, domain.title),
 				h(Line)
 			]
 		).flat(),

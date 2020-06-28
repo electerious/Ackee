@@ -3,5 +3,5 @@ export const byIndex = (state, index) => {
 }
 
 export const byId = (state, domainId) => {
-	return state.domains.value.find((domain) => domain.data.id === domainId)
+	return state.domains.value.find((domain) => domain.id === domainId)
 }

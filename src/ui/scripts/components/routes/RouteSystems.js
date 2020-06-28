@@ -11,7 +11,7 @@ const RouteSystems = (props) => {
 	useEffect(() => {
 
 		props.domains.value.map((domain) => {
-			props.fetchSystems(props, domain.data.id)
+			props.fetchSystems(props, domain.id)
 		})
 
 	}, [ props.filter.range, props.domains.value, props.systems.sorting, props.systems.type ])
@@ -22,12 +22,12 @@ const RouteSystems = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardSystems, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.systems.sorting,
-						loading: props.domains.fetching || selectSystemsValue(props, domain.data.id).fetching,
-						items: enhanceSystems(selectSystemsValue(props, domain.data.id).value),
+						loading: props.domains.fetching || selectSystemsValue(props, domain.id).fetching,
+						items: enhanceSystems(selectSystemsValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)

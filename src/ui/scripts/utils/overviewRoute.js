@@ -5,7 +5,7 @@ export default (domain) => {
 	return {
 		...ROUTE_OVERVIEW,
 		params: {
-			domainId: domain.data.id
+			domainId: domain.id
 		}
 	}
 

@@ -8,7 +8,7 @@ export default (state) => {
 	// Enhance durations for all domains
 	const enhancedDurations = state.domains.value.map((domain) => {
 
-		const duration = selectDurationsValue(state, domain.data.id)
+		const duration = selectDurationsValue(state, domain.id)
 
 		return enhanceDurations(duration.value, 14, state.filter.interval)
 

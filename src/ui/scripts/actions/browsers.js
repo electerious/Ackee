@@ -42,12 +42,31 @@ export const fetchBrowsers = signalHandler((signal) => (props, domainId) => asyn
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/browsers?sorting=${ props.browsers.sorting }&type=${ props.browsers.type }&range=${ props.filter.range }`, {
+		const data = await api({
+			query: `
+				query fetchBrowsers($id: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							browsers(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.browsers.sorting,
+				type: props.browsers.type,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setBrowsersValue(domainId, data))
+		dispatch(setBrowsersValue(domainId, data.domain.statistics.browsers))
 		dispatch(setBrowsersFetching(domainId, false))
 
 	} catch (err) {

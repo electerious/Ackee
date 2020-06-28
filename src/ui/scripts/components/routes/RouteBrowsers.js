@@ -11,7 +11,7 @@ const RouteBrowsers = (props) => {
 	useEffect(() => {
 
 		props.domains.value.map((domain) => {
-			props.fetchBrowsers(props, domain.data.id)
+			props.fetchBrowsers(props, domain.id)
 		})
 
 	}, [ props.filter.range, props.domains.value, props.browsers.sorting, props.browsers.type ])
@@ -22,12 +22,12 @@ const RouteBrowsers = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardBrowsers, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.browsers.sorting,
-						loading: props.domains.fetching || selectBrowsersValue(props, domain.data.id).fetching,
-						items: enhanceBrowsers(selectBrowsersValue(props, domain.data.id).value),
+						loading: props.domains.fetching || selectBrowsersValue(props, domain.id).fetching,
+						items: enhanceBrowsers(selectBrowsersValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)

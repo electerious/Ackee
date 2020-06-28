@@ -46,11 +46,11 @@ const Dashboard = (props) => {
 
 	const hasDomains = props.domains.value.length > 0
 
-	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).data.title : 'Domains'
+	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).title : 'Domains'
 	const insightsLabel = (activeInside) => activeInside === true ? routeByKey(props.route.key).title : 'Insights'
 
 	const domainsItems = props.domains.value.map((domain, index) =>
-		createDropdownButton(domain.data.title, overviewRoute(domain), props, whenBelow(index, 10))
+		createDropdownButton(domain.title, overviewRoute(domain), props, whenBelow(index, 10))
 	)
 
 	const insightsItems = [

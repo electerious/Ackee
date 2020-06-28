@@ -36,12 +36,30 @@ export const fetchReferrers = signalHandler((signal) => (props, domainId) => asy
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }&range=${ props.filter.range }`, {
+		const data = await api({
+			query: `
+				query fetchReferrers($id: ID!, $sorting: Sorting!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							referrers(sorting: $sorting, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.referrers.sorting,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setReferrersValue(domainId, data))
+		dispatch(setReferrersValue(domainId, data.domain.statistics.referrers))
 		dispatch(setReferrersFetching(domainId, false))
 
 	} catch (err) {

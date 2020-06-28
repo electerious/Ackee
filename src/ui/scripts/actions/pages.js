@@ -36,12 +36,30 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }&range=${ props.filter.range }`, {
+		const data = await api({
+			query: `
+				query fetchPages($id: ID!, $sorting: Sorting!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							pages(sorting: $sorting, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.pages.sorting,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setPagesValue(domainId, data))
+		dispatch(setPagesValue(domainId, data.domain.statistics.pages))
 		dispatch(setPagesFetching(domainId, false))
 
 	} catch (err) {

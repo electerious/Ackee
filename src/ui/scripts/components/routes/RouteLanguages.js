@@ -11,7 +11,7 @@ const RouteLanguages = (props) => {
 	useEffect(() => {
 
 		props.domains.value.map((domain) => {
-			props.fetchLanguages(props, domain.data.id)
+			props.fetchLanguages(props, domain.id)
 		})
 
 	}, [ props.filter.range, props.domains.value, props.languages.sorting ])
@@ -22,12 +22,12 @@ const RouteLanguages = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardLanguages, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.languages.sorting,
-						loading: props.domains.fetching || selectLanguagesValue(props, domain.data.id).fetching,
-						items: enhanceLanguages(selectLanguagesValue(props, domain.data.id).value),
+						loading: props.domains.fetching || selectLanguagesValue(props, domain.id).fetching,
+						items: enhanceLanguages(selectLanguagesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
