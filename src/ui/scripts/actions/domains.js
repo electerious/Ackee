@@ -27,13 +27,20 @@ export const fetchDomains = signalHandler((signal) => (props) => async (dispatch
 
 	try {
 
-		const data = await api('/domains', {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchDomains {
+					domains {
+						id
+						title
+					}
+				}
+			`,
 			props,
 			signal: signal()
 		})
 
-		dispatch(setDomainsValue(data))
+		dispatch(setDomainsValue(data.domains))
 		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
@@ -55,7 +62,6 @@ export const addDomain = (props, state) => async (dispatch) => {
 	try {
 
 		await api(`/domains`, {
-			method: 'post',
 			body: JSON.stringify(state),
 			props
 		})
@@ -82,7 +88,6 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 	try {
 
 		await api(`/domains/${ domainId }`, {
-			method: 'put',
 			body: JSON.stringify(state),
 			props,
 			signal: signal(domainId)
@@ -110,7 +115,6 @@ export const deleteDomain = signalHandler((signal) => (props, domainId, state) =
 	try {
 
 		await api(`/domains/${ domainId }`, {
-			method: 'delete',
 			body: JSON.stringify(state),
 			props,
 			signal: signal(domainId)

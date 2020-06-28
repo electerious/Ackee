@@ -37,7 +37,6 @@ export const fetchReferrers = signalHandler((signal) => (props, domainId) => asy
 	try {
 
 		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }&range=${ props.filter.range }`, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})

@@ -37,7 +37,6 @@ export const fetchViews = signalHandler((signal) => (props, domainId) => async (
 	try {
 
 		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }&interval=${ props.filter.interval }`, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})

@@ -37,7 +37,6 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 	try {
 
 		const data = await api(`/domains/${ domainId }/sizes?type=${ props.sizes.type }&range=${ props.filter.range }`, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})

@@ -36,13 +36,32 @@ export const fetchLanguages = signalHandler((signal) => (props, domainId) => asy
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/languages?sorting=${ props.languages.sorting }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchLanguages($id: ID!, $sorting: Sorting!, range: Range) {
+					domain(id: $id) {
+						statistics {
+							languages(sorting: $sorting, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.languages.sorting,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setLanguagesValue(domainId, data))
+		console.log(data)
+
+		dispatch(setLanguagesValue(domainId, data.domain.statistics.languages))
 		dispatch(setLanguagesFetching(domainId, false))
 
 	} catch (err) {

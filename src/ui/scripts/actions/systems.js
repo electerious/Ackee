@@ -43,7 +43,6 @@ export const fetchSystems = signalHandler((signal) => (props, domainId) => async
 	try {
 
 		const data = await api(`/domains/${ domainId }/systems?sorting=${ props.systems.sorting }&type=${ props.systems.type }&range=${ props.filter.range }`, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})

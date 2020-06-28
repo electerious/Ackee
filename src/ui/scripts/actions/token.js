@@ -29,14 +29,28 @@ export const addToken = signalHandler((signal) => (props, state) => async (dispa
 
 	try {
 
-		const data = await api('/tokens', {
-			method: 'post',
-			body: JSON.stringify(state),
+		const data = await api({
+			query: `
+				mutation createToken($input: CreateTokenInput!) {
+					createToken(input: $input) {
+						payload {
+							id
+						}
+					}
+				}
+			`,
+			variables: {
+				input: {
+					username: state.username,
+					password: state.password
+				}
+			},
 			props,
 			signal: signal()
 		})
 
-		dispatch(setTokenValue(data))
+		// TODO: Maybe just same the id instead of the payload
+		dispatch(setTokenValue(data.createToken.payload))
 		dispatch(setTokenFetching(false))
 
 	} catch (err) {
@@ -56,8 +70,17 @@ export const deleteToken = signalHandler((signal) => (props) => async (dispatch)
 
 	try {
 
-		await api(`/tokens/${ props.token.value.id }`, {
-			method: 'delete',
+		await api({
+			query: `
+				mutation deleteToken($id: ID!) {
+					deleteToken(id: $id) {
+						success
+					}
+				}
+			`,
+			variables: {
+				id: props.token.value.id
+			},
 			props,
 			signal: signal()
 		})

@@ -36,7 +36,6 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 		const path = domainId === ALL_DOMAINS ? `/overview?${ query }` : `/domains/${ domainId }/overview?${ query }`
 
 		const data = await api(path, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})

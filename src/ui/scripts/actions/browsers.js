@@ -43,7 +43,6 @@ export const fetchBrowsers = signalHandler((signal) => (props, domainId) => asyn
 	try {
 
 		const data = await api(`/domains/${ domainId }/browsers?sorting=${ props.browsers.sorting }&type=${ props.browsers.type }&range=${ props.filter.range }`, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})

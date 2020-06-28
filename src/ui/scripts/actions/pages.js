@@ -37,7 +37,6 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 	try {
 
 		const data = await api(`/domains/${ domainId }/pages?sorting=${ props.pages.sorting }&range=${ props.filter.range }`, {
-			method: 'get',
 			props,
 			signal: signal(domainId)
 		})
