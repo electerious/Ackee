@@ -13,7 +13,9 @@ module.exports = {
 	...facts,
 	...statistics,
 	Query: {
-		...domains.Query
+		...domains.Query,
+		...facts.Query,
+		...statistics.Query
 	},
 	Mutation: {
 		...tokens.Mutation,

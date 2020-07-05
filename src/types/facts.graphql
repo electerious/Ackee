@@ -27,3 +27,10 @@ type Facts {
 	"""
 	viewsYear: UnsignedInt!
 }
+
+type Query {
+	"""
+	Facts of all domains combined. Usually simple data that can be represented in one value.
+	"""
+	facts: Facts!
+}
