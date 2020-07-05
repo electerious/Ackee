@@ -38,7 +38,7 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 
 		const data = await api({
 			query: `
-				query fetchSizes($id: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
+				query fetchSizes($id: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {
 					domain(id: $id) {
 						statistics {
 							sizes(sorting: $sorting, type: $type, range: $range) {
