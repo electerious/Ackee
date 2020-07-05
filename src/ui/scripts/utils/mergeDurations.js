@@ -1,6 +1,5 @@
 import selectDurationsValue from '../selectors/selectDurationsValue'
 import enhanceDurations from '../enhancers/enhanceDurations'
-import isDefined from '../../../utils/isDefined'
 
 // Turns the durations of multiple domains into one array of durations
 export default (state) => {
@@ -10,15 +9,12 @@ export default (state) => {
 
 		const duration = selectDurationsValue(state, domain.id)
 
-		return enhanceDurations(duration.value, 14, state.filter.interval)
+		return enhanceDurations(duration.value, 14)
 
 	})
 
-	// Remove durations of domains that are still loading
-	const filteredDurations = enhancedDurations.filter(isDefined)
-
 	// Merge all durations to one array of durations
-	const mergedDurations = filteredDurations.reduce((acc, durations) => {
+	const mergedDurations = enhancedDurations.reduce((acc, durations) => {
 
 		// Durations is an array. Each item represents the average duration of one day.
 		durations.forEach((duration, index) => {
@@ -35,10 +31,10 @@ export default (state) => {
 
 	}, [])
 
+	const totalDomains = enhancedDurations.length
+
 	// Convert merged, total durations into average durations
 	return mergedDurations.map((duration) => {
-
-		const totalDomains = filteredDurations.length
 
 		return duration / totalDomains
 

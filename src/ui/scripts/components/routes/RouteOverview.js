@@ -60,7 +60,7 @@ const RouteOverview = (props) => {
 				headline: 'Views',
 				interval: filterInterval,
 				loading: isLoading,
-				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14, filterInterval),
+				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14),
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
@@ -69,7 +69,7 @@ const RouteOverview = (props) => {
 				headline: 'Durations',
 				interval: filterInterval,
 				loading: isLoading,
-				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14, filterInterval),
+				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14),
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 

@@ -34,7 +34,7 @@ const RouteDurations = (props) => {
 						headline: domain.title,
 						interval: props.filter.interval,
 						loading: props.domains.fetching || selectDurationsValue(props, domain.id).fetching,
-						items: enhanceDurations(selectDurationsValue(props, domain.id).value, 7, props.filter.interval),
+						items: enhanceDurations(selectDurationsValue(props, domain.id).value, 7),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)

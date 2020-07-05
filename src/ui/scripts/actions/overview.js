@@ -35,13 +35,36 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 		const query = 'views=%7B%22type%22:%22unique%22%7D&pages=%7B%22sorting%22:%22top%22%7D&referrers=%7B%22sorting%22:%22top%22%7D&durations=%7B%22type%22:%22average%22%7D&systems=%7B%22type%22:%22withVersion%22,%22sorting%22:%22top%22%7D&devices=%7B%22type%22:%22withModel%22,%22sorting%22:%22top%22%7D&browsers=%7B%22type%22:%22withVersion%22,%20%22sorting%22:%22top%22%7D&sizes=%7B%22type%22:%22browser_height%22%7D&languages=%7B%22sorting%22:%22top%22%7D&facts=%7B%7D'
 		const path = domainId === ALL_DOMAINS ? `/overview?${ query }` : `/domains/${ domainId }/overview?${ query }`
 
-		const data = await api(path, {
-			props,
-			signal: signal(domainId)
-		})
+		if (domainId === ALL_DOMAINS) {
 
-		dispatch(setOverviewValue(domainId, data))
-		dispatch(setOverviewFetching(domainId, false))
+			dispatch(setOverviewValue(domainId, undefined))
+			dispatch(setOverviewFetching(domainId, false))
+
+		} else {
+
+			const data = await api(path, {
+				query: `
+					query fetchOverview($id: ID!, $sorting: Sorting!, $range: Range, $interval: Interval) {
+						domain(id: $id) {
+							statistics {
+
+							}
+						}
+					}
+				`,
+				props: {
+					id: domainId,
+					sorting: props.filter.sorting,
+					range: props.filter.range,
+					interval: props.filter.interval
+				},
+				signal: signal(domainId)
+			})
+
+			dispatch(setOverviewValue(domainId, undefined))
+			dispatch(setOverviewFetching(domainId, false))
+
+		}
 
 	} catch (err) {
 

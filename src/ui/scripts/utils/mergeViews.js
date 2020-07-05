@@ -1,6 +1,5 @@
 import selectViewsValue from '../selectors/selectViewsValue'
 import enhanceViews from '../enhancers/enhanceViews'
-import isDefined from '../../../utils/isDefined'
 
 // Turns the views of multiple domains into one array of views
 export default (state) => {
@@ -10,15 +9,12 @@ export default (state) => {
 
 		const view = selectViewsValue(state, domain.id)
 
-		return enhanceViews(view.value, 14, state.filter.interval)
+		return enhanceViews(view.value, 14)
 
 	})
 
-	// Remove views of domains that are still loading
-	const filteredViews = enhancedViews.filter(isDefined)
-
 	// Merge all views to one array of views
-	return filteredViews.reduce((acc, views) => {
+	return enhancedViews.reduce((acc, views) => {
 
 		// Views is an array. Each item represents the visit count of one day, month or year.
 		views.forEach((view, index) => {

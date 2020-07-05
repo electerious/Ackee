@@ -36,12 +36,29 @@ export const fetchViews = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }&interval=${ props.filter.interval }`, {
+		const data = await api({
+			query: `
+				query fetchViews($id: ID!, $interval: Interval!, $type: ViewType!) {
+					domain(id: $id) {
+						statistics {
+							views(interval: $interval, type: $type) {
+								id
+								count
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				interval: props.filter.interval,
+				type: props.views.type
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setViewsValue(domainId, data))
+		dispatch(setViewsValue(domainId, data.domain.statistics.views))
 		dispatch(setViewsFetching(domainId, false))
 
 	} catch (err) {
