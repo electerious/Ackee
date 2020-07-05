@@ -32,9 +32,6 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 	try {
 
-		const query = 'views=%7B%22type%22:%22unique%22%7D&pages=%7B%22sorting%22:%22top%22%7D&referrers=%7B%22sorting%22:%22top%22%7D&durations=%7B%22type%22:%22average%22%7D&systems=%7B%22type%22:%22withVersion%22,%22sorting%22:%22top%22%7D&devices=%7B%22type%22:%22withModel%22,%22sorting%22:%22top%22%7D&browsers=%7B%22type%22:%22withVersion%22,%20%22sorting%22:%22top%22%7D&sizes=%7B%22type%22:%22browser_height%22%7D&languages=%7B%22sorting%22:%22top%22%7D&facts=%7B%7D'
-		const path = domainId === ALL_DOMAINS ? `/overview?${ query }` : `/domains/${ domainId }/overview?${ query }`
-
 		if (domainId === ALL_DOMAINS) {
 
 			dispatch(setOverviewValue(domainId, undefined))
@@ -42,26 +39,69 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 		} else {
 
-			const data = await api(path, {
+			const data = await api({
 				query: `
-					query fetchOverview($id: ID!, $sorting: Sorting!, $range: Range, $interval: Interval) {
+					query fetchOverview($id: ID!, $interval: Interval!, $sorting: Sorting!, $range: Range, ) {
 						domain(id: $id) {
 							statistics {
-
+								views(interval: $interval, type: UNIQUE) {
+									id
+									count
+								}
+								pages(sorting: $sorting, range: $range) {
+									id
+									count
+									created
+								}
+								referrers(sorting: $sorting, range: $range) {
+									id
+									count
+									created
+								}
+								durations(interval: $interval) {
+									id
+									count
+								}
+								systems(sorting: $sorting, type: WITH_VERSION, range: $range) {
+									id
+									count
+									created
+								}
+								devices(sorting: $sorting, type: WITH_MODEL, range: $range) {
+									id
+									count
+									created
+								}
+								browsers(sorting: $sorting, type: WITH_VERSION, range: $range) {
+									id
+									count
+									created
+								}
+								sizes(sorting: $sorting, type: BROWSER_RESOLUTION, range: $range) {
+									id
+									count
+									created
+								}
+								languages(sorting: $sorting, range: $range) {
+									id
+									count
+									created
+								}
 							}
 						}
 					}
 				`,
-				props: {
+				variables: {
 					id: domainId,
+					interval: props.filter.interval,
 					sorting: props.filter.sorting,
-					range: props.filter.range,
-					interval: props.filter.interval
+					range: props.filter.range
 				},
+				props,
 				signal: signal(domainId)
 			})
 
-			dispatch(setOverviewValue(domainId, undefined))
+			dispatch(setOverviewValue(domainId, data.domain.statistics))
 			dispatch(setOverviewFetching(domainId, false))
 
 		}

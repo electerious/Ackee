@@ -6,13 +6,15 @@ import {
 	SET_OVERVIEW_ERROR
 } from '../actions'
 
-import genericSubState from '../utils/genericSubState'
-
 export const initialState = () => ({
 	value: {}
 })
 
-export const initialSubState = genericSubState
+export const initialSubState = () => ({
+	value: {},
+	fetching: false,
+	error: undefined
+})
 
 export default produce((draft, action) => {
 

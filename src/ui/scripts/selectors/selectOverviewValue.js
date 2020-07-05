@@ -7,6 +7,6 @@ export const withoutType = (state, domainId) => {
 }
 
 export const withType = (state, domainId, type) => {
-	const value = withoutType(state, domainId).value.find((value) => value.type === type)
-	return value == null ? genericSubState().value : value.data
+	const value = withoutType(state, domainId).value[type]
+	return value == null ? genericSubState().value : value
 }
