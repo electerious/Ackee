@@ -3,12 +3,19 @@ import signalHandler from '../utils/signalHandler'
 
 export const ALL_DOMAINS = Symbol()
 
-export const SET_OVERVIEW_VALUE = Symbol()
+export const SET_OVERVIEW_FACTS = Symbol()
+export const SET_OVERVIEW_STATISTICS = Symbol()
 export const SET_OVERVIEW_FETCHING = Symbol()
 export const SET_OVERVIEW_ERROR = Symbol()
 
-export const setOverviewValue = (domainId, payload) => ({
-	type: SET_OVERVIEW_VALUE,
+export const setOverviewFacts = (domainId, payload) => ({
+	type: SET_OVERVIEW_FACTS,
+	domainId,
+	payload
+})
+
+export const setOverviewStatistics = (domainId, payload) => ({
+	type: SET_OVERVIEW_STATISTICS,
 	domainId,
 	payload
 })
@@ -34,7 +41,8 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 		if (domainId === ALL_DOMAINS) {
 
-			dispatch(setOverviewValue(domainId, undefined))
+			dispatch(setOverviewFacts(domainId, undefined))
+			dispatch(setOverviewStatistics(domainId, undefined))
 			dispatch(setOverviewFetching(domainId, false))
 
 		} else {
@@ -43,6 +51,14 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				query: `
 					query fetchOverview($id: ID!, $interval: Interval!, $sorting: Sorting!, $range: Range, ) {
 						domain(id: $id) {
+							facts {
+								activeVisitors
+								averageViews
+								averageDuration
+								viewsToday
+								viewsMonth
+								viewsYear
+							}
 							statistics {
 								views(interval: $interval, type: UNIQUE) {
 									id
@@ -101,7 +117,8 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				signal: signal(domainId)
 			})
 
-			dispatch(setOverviewValue(domainId, data.domain.statistics))
+			dispatch(setOverviewFacts(domainId, data.domain.facts))
+			dispatch(setOverviewStatistics(domainId, data.domain.statistics))
 			dispatch(setOverviewFetching(domainId, false))
 
 		}

@@ -33,33 +33,33 @@ const CardFacts = (props) => {
 		},
 			h(Presentation, {
 				headline: 'Active visitors',
-				value: props.items.views_active,
-				text: pluralize([ 'visitors', 'visitor', 'visitors' ], props.items.views_active)
+				value: props.items.activeVisitors,
+				text: pluralize([ 'visitors', 'visitor', 'visitors' ], props.items.activeVisitors)
 			}),
 			h(Presentation, {
 				headline: 'Average views',
-				value: formatNumber(props.items.views_average),
+				value: formatNumber(props.items.averageViews),
 				text: 'per day'
 			}),
 			h(Presentation, {
 				headline: 'Average duration',
-				value: formatDuration(props.items.durations_average).value,
-				text: formatDuration(props.items.durations_average).unit
+				value: formatDuration(props.items.averageDuration).value,
+				text: formatDuration(props.items.averageDuration).unit
 			}),
 			h(Presentation, {
 				headline: 'Views today',
-				value: formatNumber(props.items.views_today),
-				text: pluralize([ 'views', 'view', 'views' ], props.items.views_today)
+				value: formatNumber(props.items.viewsToday),
+				text: pluralize([ 'views', 'view', 'views' ], props.items.viewsToday)
 			}),
 			h(Presentation, {
 				headline: 'Views this month',
-				value: formatNumber(props.items.views_month),
-				text: pluralize([ 'views', 'view', 'views' ], props.items.views_month)
+				value: formatNumber(props.items.viewsMonth),
+				text: pluralize([ 'views', 'view', 'views' ], props.items.viewsMonth)
 			}),
 			h(Presentation, {
 				headline: 'Views this year',
-				value: formatNumber(props.items.views_year),
-				text: pluralize([ 'views', 'view', 'views' ], props.items.views_year)
+				value: formatNumber(props.items.viewsYear),
+				text: pluralize([ 'views', 'view', 'views' ], props.items.viewsYear)
 			})
 		)
 	)
@@ -68,7 +68,14 @@ const CardFacts = (props) => {
 
 CardFacts.propTypes = {
 	loading: PropTypes.bool.isRequired,
-	items: PropTypes.object.isRequired
+	items: PropTypes.exact({
+		activeVisitors: PropTypes.number.isRequired,
+		averageViews: PropTypes.number.isRequired,
+		averageDuration: PropTypes.number.isRequired,
+		viewsToday: PropTypes.number.isRequired,
+		viewsMonth: PropTypes.number.isRequired,
+		viewsYear: PropTypes.number.isRequired
+	}).isRequired
 }
 
 export default CardFacts

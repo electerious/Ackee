@@ -7,6 +7,6 @@ export const withoutType = (state, domainId) => {
 }
 
 export const withType = (state, domainId, type) => {
-	const value = withoutType(state, domainId).value[type]
+	const value = withoutType(state, domainId).statistics[type]
 	return value == null ? genericSubState().value : value
 }

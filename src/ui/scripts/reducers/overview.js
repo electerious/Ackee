@@ -1,7 +1,8 @@
 import produce from 'immer'
 
 import {
-	SET_OVERVIEW_VALUE,
+	SET_OVERVIEW_FACTS,
+	SET_OVERVIEW_STATISTICS,
 	SET_OVERVIEW_FETCHING,
 	SET_OVERVIEW_ERROR
 } from '../actions'
@@ -11,7 +12,8 @@ export const initialState = () => ({
 })
 
 export const initialSubState = () => ({
-	value: {},
+	facts: {},
+	statistics: {},
 	fetching: false,
 	error: undefined
 })
@@ -24,8 +26,11 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_OVERVIEW_VALUE:
-			draft.value[action.domainId].value = action.payload || initialSubState().value
+		case SET_OVERVIEW_FACTS:
+			draft.value[action.domainId].facts = action.payload || initialSubState().facts
+			break
+		case SET_OVERVIEW_STATISTICS:
+			draft.value[action.domainId].statistics = action.payload || initialSubState().statistics
 			break
 		case SET_OVERVIEW_FETCHING:
 			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching

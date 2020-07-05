@@ -51,7 +51,7 @@ const RouteOverview = (props) => {
 
 			h(CardFacts, {
 				loading: isLoading,
-				items: enhanceFacts(selectOverviewValue.withType(props, domainId, 'facts'))
+				items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
 			}),
 
 			h('div', { className: 'content__spacer' }),
