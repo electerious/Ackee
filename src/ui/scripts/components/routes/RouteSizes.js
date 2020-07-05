@@ -25,6 +25,7 @@ const RouteSizes = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						range: props.filter.range,
+						sorting: props.filter.sorting,
 						loading: props.domains.fetching || selectSizesValue(props, domain.id).fetching,
 						items: enhanceSizes(selectSizesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
