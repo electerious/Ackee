@@ -124,30 +124,6 @@ const Filter = (props) => {
 
 	const routeKey = props.route.key
 
-	const shouldShowRange = (() => {
-
-		if (routeKey === ROUTE_PAGES.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
-		if (routeKey === ROUTE_REFERRERS.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
-		if (routeKey === ROUTE_DURATIONS.key) return true
-		if (routeKey === ROUTE_SYSTEMS.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
-		if (routeKey === ROUTE_DEVICES.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
-		if (routeKey === ROUTE_BROWSERS.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
-		if (routeKey === ROUTE_SIZES.key) return true
-		if (routeKey === ROUTE_LANGUAGES.key && props.filter.sorting === sortings.SORTINGS_TOP) return true
-
-		return false
-
-	})()
-
-	const shouldShowInterval = (() => {
-
-		if (routeKey === ROUTE_VIEWS.key) return true
-		if (routeKey === ROUTE_DURATIONS.key) return true
-
-		return false
-
-	})()
-
 	const sortingButtons = [
 		createButton('Top', 'Top entries first', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_TOP),
 		createButton('New', 'New entries only', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_NEW),
@@ -168,8 +144,8 @@ const Filter = (props) => {
 	]
 
 	const sortingItem = createItem(labels.sortings[props.filter.sorting], sortingButtons)
-	const rangeItem = createItem(labels.ranges[props.filter.range], rangeButtons, shouldShowRange === true)
-	const intervalsItem = createItem(labels.intervals[props.filter.interval], intervalsButtons, shouldShowInterval === true)
+	const rangeItem = createItem(labels.ranges[props.filter.range], rangeButtons, props.filter.sorting === sortings.SORTINGS_TOP)
+	const intervalsItem = createItem(labels.intervals[props.filter.interval], intervalsButtons)
 
 	const routesMap = {
 		[ROUTE_VIEWS.key]: [
