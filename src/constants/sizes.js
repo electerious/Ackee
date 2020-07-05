@@ -1,5 +1,3 @@
-// Constants will be shared between client and server.
-// They will be used as values in the DOM and in the URL of the referrer calls.
 const SIZES_TYPE_BROWSER_HEIGHT = 'BROWSER_HEIGHT'
 const SIZES_TYPE_BROWSER_RESOLUTION = 'BROWSER_RESOLUTION'
 const SIZES_TYPE_BROWSER_WIDTH = 'BROWSER_WIDTH'
