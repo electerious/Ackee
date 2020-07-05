@@ -3,15 +3,15 @@
 const { subDays, subMonths, subYears, startOfDay, startOfMonth, startOfYear } = require('date-fns')
 
 const intervals = require('../constants/intervals')
-const matchDomainId = require('../stages/matchDomainId')
+const matchDomains = require('../stages/matchDomains')
 const projectDuration = require('../stages/projectDuration')
 const projectMinInterval = require('../stages/projectMinInterval')
 const matchLimit = require('../stages/matchLimit')
 
-module.exports = (id, interval, limit) => {
+module.exports = (ids, interval, limit) => {
 
 	const aggregation = [
-		matchDomainId(id),
+		matchDomains(ids),
 		projectDuration(),
 		projectMinInterval(),
 		matchLimit(),

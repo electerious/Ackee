@@ -2,13 +2,13 @@
 
 const { subMilliseconds } = require('date-fns')
 
-const matchDomainId = require('../stages/matchDomainId')
 const { DURATIONS_LIMIT, DURATIONS_INTERVAL } = require('../constants/durations')
+const matchDomains = require('../stages/matchDomains')
 
-module.exports = (id) => {
+module.exports = (ids) => {
 
 	const aggregation = [
-		matchDomainId(id),
+		matchDomains(ids),
 		{
 			$count: 'count'
 		}

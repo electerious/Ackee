@@ -8,7 +8,7 @@ const sortings = require('../constants/sortings')
 const constants = require('../constants/systems')
 const bestMatch = require('../utils/bestMatch')
 
-const get = async (id, sorting, type, range, limit) => {
+const get = async (ids, sorting, type, range, limit) => {
 
 	const enhance = (entries) => {
 
@@ -26,14 +26,14 @@ const get = async (id, sorting, type, range, limit) => {
 	const aggregation = (() => {
 
 		if (type === constants.SYSTEMS_TYPE_NO_VERSION) {
-			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(id, [ 'osName' ], range, limit)
-			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(id, [ 'osName' ], limit)
-			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(id, [ 'osName' ], limit)
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'osName' ], range, limit)
+			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'osName' ], limit)
+			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'osName' ], limit)
 		}
 		if (type === constants.SYSTEMS_TYPE_WITH_VERSION) {
-			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(id, [ 'osName', 'osVersion' ], range, limit)
-			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(id, [ 'osName', 'osVersion' ], limit)
-			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(id, [ 'osName', 'osVersion' ], limit)
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'osName', 'osVersion' ], range, limit)
+			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'osName', 'osVersion' ], limit)
+			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'osName', 'osVersion' ], limit)
 		}
 
 	})()

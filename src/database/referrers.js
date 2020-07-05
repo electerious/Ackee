@@ -6,7 +6,7 @@ const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const sortings = require('../constants/sortings')
 
-const get = async (id, sorting, range, limit) => {
+const get = async (ids, sorting, range, limit) => {
 
 	const enhance = (entries) => {
 
@@ -20,9 +20,9 @@ const get = async (id, sorting, range, limit) => {
 
 	const aggregation = (() => {
 
-		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(id, [ 'siteReferrer' ], range, limit)
-		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(id, [ 'siteReferrer' ], limit)
-		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(id, [ 'siteReferrer' ], limit)
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteReferrer' ], range, limit)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteReferrer' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteReferrer' ], limit)
 
 	})()
 

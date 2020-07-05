@@ -3,12 +3,12 @@
 const { subDays, subMonths, subYears, startOfDay, startOfMonth, startOfYear } = require('date-fns')
 
 const intervals = require('../constants/intervals')
-const matchDomainId = require('../stages/matchDomainId')
+const matchDomains = require('../stages/matchDomains')
 
-module.exports = (id, unique, interval, limit) => {
+module.exports = (ids, unique, interval, limit) => {
 
 	const aggregation = [
-		matchDomainId(id),
+		matchDomains(ids),
 		{
 			$group: {
 				_id: {},

@@ -16,47 +16,47 @@ module.exports = {
 	Statistics: {
 		views: pipe(requireAuth, async (domain, { type, interval, limit }) => {
 
-			return views.get(domain.id, type, interval, limit)
+			return views.get([ domain.id ], type, interval, limit)
 
 		}),
 		pages: pipe(requireAuth, async (domain, { sorting, range, limit }) => {
 
-			return pages.get(domain.id, sorting, range, limit)
+			return pages.get([ domain.id ], sorting, range, limit)
 
 		}),
 		referrers: pipe(requireAuth, async (domain, { sorting, range, limit }) => {
 
-			return referrers.get(domain.id, sorting, range, limit)
+			return referrers.get([ domain.id ], sorting, range, limit)
 
 		}),
 		durations: pipe(requireAuth, async (domain, { interval, limit }) => {
 
-			return durations.get(domain.id, interval, limit)
+			return durations.get([ domain.id ], interval, limit)
 
 		}),
 		systems: pipe(requireAuth, async (domain, { sorting, type, range, limit }) => {
 
-			return systems.get(domain.id, sorting, type, range, limit)
+			return systems.get([ domain.id ], sorting, type, range, limit)
 
 		}),
 		devices: pipe(requireAuth, async (domain, { sorting, type, range, limit }) => {
 
-			return devices.get(domain.id, sorting, type, range, limit)
+			return devices.get([ domain.id ], sorting, type, range, limit)
 
 		}),
 		browsers: pipe(requireAuth, async (domain, { sorting, type, range, limit }) => {
 
-			return browsers.get(domain.id, sorting, type, range, limit)
+			return browsers.get([ domain.id ], sorting, type, range, limit)
 
 		}),
 		sizes: pipe(requireAuth, async (domain, { sorting, type, range, limit }) => {
 
-			return sizes.get(domain.id, sorting, type, range, limit)
+			return sizes.get([ domain.id ], sorting, type, range, limit)
 
 		}),
 		languages: pipe(requireAuth, async (domain, { sorting, range, limit }) => {
 
-			return languages.get(domain.id, sorting, range, limit)
+			return languages.get([ domain.id ], sorting, range, limit)
 
 		})
 	}

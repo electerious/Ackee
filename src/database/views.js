@@ -28,7 +28,7 @@ const startFn = (interval) => {
 
 }
 
-const get = async (id, type, interval, limit) => {
+const get = async (ids, type, interval, limit) => {
 
 	const enhance = (entries) => {
 
@@ -64,8 +64,8 @@ const get = async (id, type, interval, limit) => {
 
 	const aggregation = (() => {
 
-		if (type === constants.VIEWS_TYPE_UNIQUE) return aggregateViews(id, true, interval, limit)
-		if (type === constants.VIEWS_TYPE_TOTAL) return aggregateViews(id, false, interval, limit)
+		if (type === constants.VIEWS_TYPE_UNIQUE) return aggregateViews(ids, true, interval, limit)
+		if (type === constants.VIEWS_TYPE_TOTAL) return aggregateViews(ids, false, interval, limit)
 
 	})()
 

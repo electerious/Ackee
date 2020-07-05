@@ -7,7 +7,7 @@ const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const sortings = require('../constants/sortings')
 const languageCodes = require('../utils/languageCodes')
 
-const get = async (id, sorting, range, limit) => {
+const get = async (ids, sorting, range, limit) => {
 
 	const enhance = (entries) => {
 
@@ -21,9 +21,9 @@ const get = async (id, sorting, range, limit) => {
 
 	const aggregation = (() => {
 
-		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(id, [ 'siteLanguage' ], range, limit)
-		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(id, [ 'siteLanguage' ], limit)
-		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(id, [ 'siteLanguage' ], limit)
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteLanguage' ], range, limit)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteLanguage' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteLanguage' ], limit)
 
 	})()
 

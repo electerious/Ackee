@@ -1,11 +1,11 @@
 'use strict'
 
-const matchDomainId = require('../stages/matchDomainId')
+const matchDomains = require('../stages/matchDomains')
 
-module.exports = (id, properties, limit) => {
+module.exports = (ids, properties, limit) => {
 
 	const aggregation = [
-		matchDomainId(id),
+		matchDomains(ids),
 		{
 			$sort: {
 				created: -1

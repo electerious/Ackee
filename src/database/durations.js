@@ -27,7 +27,7 @@ const startFn = (interval) => {
 
 }
 
-const get = async (id, interval, limit) => {
+const get = async (ids, interval, limit) => {
 
 	const enhance = (entries) => {
 
@@ -63,7 +63,7 @@ const get = async (id, interval, limit) => {
 
 	const aggregation = (() => {
 
-		return aggregateDurations(id, interval, limit)
+		return aggregateDurations(ids, interval, limit)
 
 	})()
 

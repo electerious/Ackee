@@ -1,12 +1,12 @@
 'use strict'
 
-const matchDomainId = require('../stages/matchDomainId')
+const matchDomains = require('../stages/matchDomains')
 const offsetByRange = require('../utils/offsetByRange')
 
-module.exports = (id, properties, range, limit) => {
+module.exports = (ids, properties, range, limit) => {
 
 	const aggregation = [
-		matchDomainId(id),
+		matchDomains(ids),
 		{
 			$group: {
 				_id: {},

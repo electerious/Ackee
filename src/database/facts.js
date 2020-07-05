@@ -3,7 +3,7 @@
 const Record = require('../schemas/Record')
 const aggregateActiveVisitors = require('../aggregations/aggregateActiveVisitors')
 
-const getActiveVisitors = async (id) => {
+const getActiveVisitors = async (ids) => {
 
 	const enhance = (entries) => {
 		const entry = entries[0]
@@ -12,7 +12,7 @@ const getActiveVisitors = async (id) => {
 
 	return enhance(
 		await Record.aggregate(
-			aggregateActiveVisitors(id)
+			aggregateActiveVisitors(ids)
 		)
 	)
 
