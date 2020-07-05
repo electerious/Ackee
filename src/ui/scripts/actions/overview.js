@@ -39,10 +39,85 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 	try {
 
+		const facts = `
+			facts {
+				activeVisitors
+				averageViews
+				averageDuration
+				viewsToday
+				viewsMonth
+				viewsYear
+			}
+		`
+
+		const statistics = `
+			statistics {
+				views(interval: $interval, type: UNIQUE) {
+					id
+					count
+				}
+				pages(sorting: $sorting, range: $range) {
+					id
+					count
+					created
+				}
+				referrers(sorting: $sorting, range: $range) {
+					id
+					count
+					created
+				}
+				durations(interval: $interval) {
+					id
+					count
+				}
+				systems(sorting: $sorting, type: WITH_VERSION, range: $range) {
+					id
+					count
+					created
+				}
+				devices(sorting: $sorting, type: WITH_MODEL, range: $range) {
+					id
+					count
+					created
+				}
+				browsers(sorting: $sorting, type: WITH_VERSION, range: $range) {
+					id
+					count
+					created
+				}
+				sizes(sorting: $sorting, type: BROWSER_RESOLUTION, range: $range) {
+					id
+					count
+					created
+				}
+				languages(sorting: $sorting, range: $range) {
+					id
+					count
+					created
+				}
+			}
+		`
+
 		if (domainId === ALL_DOMAINS) {
 
-			dispatch(setOverviewFacts(domainId, undefined))
-			dispatch(setOverviewStatistics(domainId, undefined))
+			const data = await api({
+				query: `
+					query fetchOverview($interval: Interval!, $sorting: Sorting!, $range: Range, ) {
+						${ facts }
+						${ statistics }
+					}
+				`,
+				variables: {
+					interval: props.filter.interval,
+					sorting: props.filter.sorting,
+					range: props.filter.range
+				},
+				props,
+				signal: signal(domainId)
+			})
+
+			dispatch(setOverviewFacts(domainId, data.facts))
+			dispatch(setOverviewStatistics(domainId, data.statistics))
 			dispatch(setOverviewFetching(domainId, false))
 
 		} else {
@@ -51,59 +126,8 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				query: `
 					query fetchOverview($id: ID!, $interval: Interval!, $sorting: Sorting!, $range: Range, ) {
 						domain(id: $id) {
-							facts {
-								activeVisitors
-								averageViews
-								averageDuration
-								viewsToday
-								viewsMonth
-								viewsYear
-							}
-							statistics {
-								views(interval: $interval, type: UNIQUE) {
-									id
-									count
-								}
-								pages(sorting: $sorting, range: $range) {
-									id
-									count
-									created
-								}
-								referrers(sorting: $sorting, range: $range) {
-									id
-									count
-									created
-								}
-								durations(interval: $interval) {
-									id
-									count
-								}
-								systems(sorting: $sorting, type: WITH_VERSION, range: $range) {
-									id
-									count
-									created
-								}
-								devices(sorting: $sorting, type: WITH_MODEL, range: $range) {
-									id
-									count
-									created
-								}
-								browsers(sorting: $sorting, type: WITH_VERSION, range: $range) {
-									id
-									count
-									created
-								}
-								sizes(sorting: $sorting, type: BROWSER_RESOLUTION, range: $range) {
-									id
-									count
-									created
-								}
-								languages(sorting: $sorting, range: $range) {
-									id
-									count
-									created
-								}
-							}
+							${ facts }
+							${ statistics }
 						}
 					}
 				`,
