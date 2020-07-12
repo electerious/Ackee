@@ -112,7 +112,8 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 					title: state.title
 				}
 			},
-			props
+			props,
+			signal: signal(domainId)
 		})
 
 		await dispatch(fetchDomains(props))
@@ -136,8 +137,19 @@ export const deleteDomain = signalHandler((signal) => (props, domainId, state) =
 
 	try {
 
-		await api(`/domains/${ domainId }`, {
-			body: JSON.stringify(state),
+		console.log(state)
+
+		await api({
+			query: `
+				mutation deleteDomain($id: ID!) {
+					deleteDomain(id: $id) {
+						success
+					}
+				}
+			`,
+			variables: {
+				id: domainId
+			},
 			props,
 			signal: signal(domainId)
 		})
