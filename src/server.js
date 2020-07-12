@@ -1,7 +1,7 @@
 'use strict'
 
 const { ApolloServer } = require('apollo-server-micro')
-const scalars = require('graphql-scalars')
+const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
@@ -70,11 +70,13 @@ const notFound = async (req) => {
 
 const apolloServer = new ApolloServer({
 	typeDefs: [
-		...scalars.typeDefs,
+		UnsignedIntTypeDefinition,
+		DateTimeTypeDefinition,
 		require('./types')
 	],
 	resolvers: {
-		...scalars.resolvers,
+		UnsignedInt: UnsignedIntResolver,
+		DateTime: DateTimeResolver,
 		...require('./resolvers')
 	},
 	context: async (integrationContext) => ({
