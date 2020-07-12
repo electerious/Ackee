@@ -56,36 +56,31 @@ const update = async (id) => {
 
 const anonymize = async (clientId, ignoreId) => {
 
-	const enhance = (entries) => {
-		return entries.map(response)
-	}
-
-	return enhance(
-		await Record.updateMany({
-			$and: [
-				{ clientId },
-				{
-					id: {
-						$ne: ignoreId
-					}
+	// Don't return anything about the update
+	await Record.updateMany({
+		$and: [
+			{ clientId },
+			{
+				id: {
+					$ne: ignoreId
 				}
-			]
-		}, {
-			clientId: undefined,
-			siteLanguage: undefined,
-			screenWidth: undefined,
-			screenHeight: undefined,
-			screenColorDepth: undefined,
-			deviceName: undefined,
-			deviceManufacturer: undefined,
-			osName: undefined,
-			osVersion: undefined,
-			browserName: undefined,
-			browserVersion: undefined,
-			browserWidth: undefined,
-			browserHeight: undefined
-		})
-	)
+			}
+		]
+	}, {
+		clientId: undefined,
+		siteLanguage: undefined,
+		screenWidth: undefined,
+		screenHeight: undefined,
+		screenColorDepth: undefined,
+		deviceName: undefined,
+		deviceManufacturer: undefined,
+		osName: undefined,
+		osVersion: undefined,
+		browserName: undefined,
+		browserVersion: undefined,
+		browserWidth: undefined,
+		browserHeight: undefined
+	})
 
 }
 
