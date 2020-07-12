@@ -61,8 +61,19 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 	try {
 
-		await api(`/domains`, {
-			body: JSON.stringify(state),
+		await api({
+			query: `
+				mutation createDomain($input: CreateDomainInput!) {
+					createDomain(input: $input) {
+						success
+					}
+			  	}
+			`,
+			variables: {
+				input: {
+					title: state.title
+				}
+			},
 			props
 		})
 
@@ -87,10 +98,21 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 
 	try {
 
-		await api(`/domains/${ domainId }`, {
-			body: JSON.stringify(state),
-			props,
-			signal: signal(domainId)
+		await api({
+			query: `
+				mutation updateDomain($id: ID!, $input: UpdateDomainInput!) {
+					updateDomain(id: $id, input: $input) {
+						success
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				input: {
+					title: state.title
+				}
+			},
+			props
 		})
 
 		await dispatch(fetchDomains(props))
