@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 'use strict'
 
 require('dotenv').config()
@@ -32,7 +33,8 @@ mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	reconnectTries: Number.MAX_VALUE,
-	reconnectInterval: 1000
+	reconnectInterval: 1000,
+	useUnifiedTopology: true,
 
 }).then(() => {
 
