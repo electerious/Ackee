@@ -1,5 +1,5 @@
-'use strict'
+"use strict";
 
 module.exports = (url) => {
-    return url.split(":")[0].includes("srv")
-}
+  return url.split(":")[0].includes("srv");
+};
