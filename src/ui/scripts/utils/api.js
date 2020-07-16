@@ -1,18 +1,23 @@
 import timeout from './timeout'
+import HandledError from './HandledError'
 
-export default async (url, { props, method, body, signal }) => {
+export default async ({ query, variables, props, signal }) => {
 
 	try {
 
 		const headers = new Headers()
 		const token = props.token.value.id
 
+		headers.append('Content-Type', 'application/json')
 		if (token) headers.append('Authorization', `Bearer ${ token }`)
 
-		const request = fetch(url, {
+		const request = fetch('/graphql', {
+			method: 'post',
 			headers,
-			method,
-			body,
+			body: JSON.stringify({
+				query,
+				variables
+			}),
 			signal
 		})
 
@@ -23,37 +28,28 @@ export default async (url, { props, method, body, signal }) => {
 			throw new Error(text)
 		}
 
-		const type = response.headers.get('content-type')
+		const json = await response.json()
 
-		const isEmpty = type == null
-		const isJSON = isEmpty === false && type.includes('application/json') === true
-
-		if (isEmpty === true) {
-			return undefined
+		if (json.errors != null) {
+			// TODO: Log all errors and throw the first
+			const message = json.errors[0].message
+			throw new Error(message)
 		}
 
-		if (isJSON === true) {
-			const json = await response.json()
-			return json.data
-		}
-
-		throw new Error('Unknown response content-type')
+		return json.data
 
 	} catch (err) {
 
 		console.error(err)
 
-		if (err.name === 'AbortError') {
-			// Request has been canceled => Do nothing
-			return
-		}
-
 		if (err.message === 'Token invalid') {
 			// Reset token and show login
 			props.deleteToken(props)
+			throw new HandledError(err.message)
 		}
 
-		// Re-throw error so the caller can handle it, too
+		// Re-throw error so the caller can handle it.
+		// Make sure to do nothing when a AbortError occurs.
 		throw err
 
 	}

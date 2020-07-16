@@ -1,13 +1,9 @@
 'use strict'
 
-const { createError } = require('micro')
-
-const isDemo = require('../utils/isDemo')
-
-module.exports = async () => {
+module.exports = (parent, args, { isDemo }) => {
 
 	if (isDemo === true) {
-		throw createError(403, 'Forbidden in demo mode')
+		throw new Error('Forbidden in demo mode')
 	}
 
 }

@@ -1,20 +1,22 @@
 import produce from 'immer'
 
 import {
-	SET_ROUTE_VALUE
+	SET_ROUTE
 } from '../actions'
 
-import { ROUTE_VIEWS } from '../constants/route'
+import { ROUTE_OVERVIEW } from '../constants/route'
 
 export const initialState = () => ({
-	value: ROUTE_VIEWS
+	key: ROUTE_OVERVIEW.key,
+	params: {}
 })
 
 export default produce((draft, action) => {
 
 	switch (action.type) {
-		case SET_ROUTE_VALUE:
-			draft.value = action.payload
+		case SET_ROUTE:
+			draft.key = action.key
+			draft.params = action.params
 			break
 	}
 

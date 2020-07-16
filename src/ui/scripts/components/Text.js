@@ -5,7 +5,7 @@ import classNames from 'classnames'
 const Text = (props) => {
 
 	return (
-		h('p', {
+		h(props.type, {
 			className: classNames({
 				'text': true,
 				'text--no-spacing': props.spacing === false
@@ -16,6 +16,7 @@ const Text = (props) => {
 }
 
 Text.propTypes = {
+	type: PropTypes.oneOf([ 'p', 'div' ]).isRequired,
 	spacing: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired

@@ -187,7 +187,7 @@ You'll then want to add the Ackee repo as origin, pull the latest changes, and p
 ```sh
 git remote add origin https://github.com/electerious/Ackee.git
 git pull origin master
-git push origin heroku master
+git push heroku master
 ```
 
 After your application re-deploys you'll have the latest version of Ackee!

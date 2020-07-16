@@ -2,6 +2,10 @@ const removeLeadingZero = (str) => str.replace(/^0/, '')
 const removeTrailingZeros = (str) => str.replace(/(:00:00|:00)$/, '')
 const cleanZeros = (str) => removeLeadingZero(removeTrailingZeros(str))
 
+const toString = function() {
+	return `${ this.value }${ this.unit }`
+}
+
 export default (ms) => {
 
 	const date = new Date(ms)
@@ -11,21 +15,21 @@ export default (ms) => {
 	const hasHours = duration.match(/^00:/) == null
 
 	if (hasMinutes === false) return {
-		toString: () => `${ cleanZeros(duration.substr(6)) }s`,
 		value: cleanZeros(duration.substr(6)),
-		unit: 's'
+		unit: 's',
+		toString
 	}
 
 	if (hasHours === false) return {
-		toString: () => `${ cleanZeros(duration.substr(3)) }m`,
 		value: cleanZeros(duration.substr(3)),
-		unit: 'm'
+		unit: 'm',
+		toString
 	}
 
 	return {
-		toString: () => `${ cleanZeros(duration) }h`,
 		value: cleanZeros(duration),
-		unit: 'h'
+		unit: 'h',
+		toString
 	}
 
 }

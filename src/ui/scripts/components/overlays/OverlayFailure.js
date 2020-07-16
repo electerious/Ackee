@@ -25,10 +25,11 @@ const OverlayFailure = (props) => {
 				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
-					type: 'h1',
-					className: 'color-white'
+					type: 'h1'
 				}, 'Oops'),
-				h(Text, {}, 'Something went wrong.'),
+				h(Text, {
+					type: 'p'
+				}, 'Something went wrong.'),
 
 				h(Spacer, { size: 2.5 }),
 
@@ -53,7 +54,7 @@ const OverlayFailure = (props) => {
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator '
 				}),
 
 				h('button', {

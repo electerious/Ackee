@@ -27,19 +27,28 @@ export const fetchDomains = signalHandler((signal) => (props) => async (dispatch
 
 	try {
 
-		const data = await api('/domains', {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchDomains {
+					domains {
+						id
+						title
+					}
+				}
+			`,
 			props,
 			signal: signal()
 		})
 
-		dispatch(setDomainsValue(data))
+		dispatch(setDomainsValue(data.domains))
 		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 
@@ -52,9 +61,19 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 	try {
 
-		await api(`/domains`, {
-			method: 'post',
-			body: JSON.stringify(state),
+		await api({
+			query: `
+				mutation createDomain($input: CreateDomainInput!) {
+					createDomain(input: $input) {
+						success
+					}
+			  	}
+			`,
+			variables: {
+				input: {
+					title: state.title
+				}
+			},
 			props
 		})
 
@@ -63,8 +82,10 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 
@@ -77,9 +98,20 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 
 	try {
 
-		await api(`/domains/${ domainId }`, {
-			method: 'put',
-			body: JSON.stringify(state),
+		await api({
+			query: `
+				mutation updateDomain($id: ID!, $input: UpdateDomainInput!) {
+					updateDomain(id: $id, input: $input) {
+						success
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				input: {
+					title: state.title
+				}
+			},
 			props,
 			signal: signal(domainId)
 		})
@@ -89,8 +121,10 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 
@@ -103,9 +137,19 @@ export const deleteDomain = signalHandler((signal) => (props, domainId, state) =
 
 	try {
 
-		await api(`/domains/${ domainId }`, {
-			method: 'delete',
-			body: JSON.stringify(state),
+		console.log(state)
+
+		await api({
+			query: `
+				mutation deleteDomain($id: ID!) {
+					deleteDomain(id: $id) {
+						success
+					}
+				}
+			`,
+			variables: {
+				id: domainId
+			},
 			props,
 			signal: signal(domainId)
 		})
@@ -115,8 +159,10 @@ export const deleteDomain = signalHandler((signal) => (props, domainId, state) =
 
 	} catch (err) {
 
-		dispatch(setDomainsError(err))
+		if (err.name === 'AbortError') return
 		dispatch(setDomainsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDomainsError(err))
 
 	}
 

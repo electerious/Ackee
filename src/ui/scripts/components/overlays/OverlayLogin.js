@@ -38,10 +38,11 @@ const OverlayLogin = (props) => {
 				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
-					type: 'h1',
-					className: 'color-white'
+					type: 'h1'
 				}, 'Ackee'),
-				h(Text, {}, 'Welcome back, sign in to continue.'),
+				h(Text, {
+					type: 'p'
+				}, 'Welcome back, sign in to continue.'),
 
 				h(Spacer, { size: 2.5 }),
 
@@ -78,7 +79,7 @@ const OverlayLogin = (props) => {
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator '
 				}),
 
 				h('button', {

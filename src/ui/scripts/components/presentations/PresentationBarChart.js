@@ -9,7 +9,10 @@ const max = (items) => round(Math.max.apply(Math, items))
 const mid = (items) => max(items) / 2
 const min = () => 0
 
-const percentage = (amount, max) => (amount / max) * 100
+const percentage = (amount, max) => {
+	if (amount === 0 && max === 0) return 0
+	return (amount / max) * 100
+}
 
 const Row = (props) => {
 
@@ -50,17 +53,14 @@ const Column = (props) => {
 
 const PresentationBarChart = (props) => {
 
-	const defaultFormatter = (_) => _
-
 	const hasItems = props.items.length > 0
-	const formatter = props.formatter || defaultFormatter
 
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
-				h(Row, { position: 'top' }, hasItems === true ? formatter(max(props.items)) : ''),
-				h(Row, { position: 'middle' }, hasItems === true ? formatter(mid(props.items)) : ''),
-				h(Row, { position: 'bottom' }, hasItems === true ? formatter(min()) : '')
+				h(Row, { position: 'top' }, hasItems === true ? props.formatter(max(props.items)) : ''),
+				h(Row, { position: 'middle' }, hasItems === true ? props.formatter(mid(props.items)) : ''),
+				h(Row, { position: 'bottom' }, hasItems === true ? props.formatter(min()) : '')
 			),
 			h('div', { className: 'barChart__columns' },
 				props.items.map((item, index) => (
@@ -70,7 +70,7 @@ const PresentationBarChart = (props) => {
 						size: `${ percentage(item, max(props.items)) }%`,
 						onEnter: () => props.onEnter(index),
 						onLeave: () => props.onLeave(index),
-						label: formatter(item)
+						label: props.formatter(item)
 					})
 				))
 			)
@@ -81,7 +81,7 @@ const PresentationBarChart = (props) => {
 
 PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,
-	formatter: PropTypes.func,
+	formatter: PropTypes.func.isRequired,
 	onEnter: PropTypes.func.isRequired,
 	onLeave: PropTypes.func.isRequired
 }

@@ -2,31 +2,33 @@
 
 const Record = require('../schemas/Record')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
-const constants = require('../constants/pages')
+const sortings = require('../constants/sortings')
 
-const getTop = async (id, range) => {
+const get = async (ids, sorting, range, limit) => {
 
-	return Record.aggregate(
-		aggregateTopFields(id, 'siteLocation', range)
-	)
+	const enhance = (entries) => {
 
-}
+		return entries.map((entry) => ({
+			id: entry._id.siteLocation,
+			count: entry.count,
+			created: entry.created
+		}))
 
-const getRecent = async (id) => {
-
-	return Record.aggregate(
-		aggregateRecentFields(id, 'siteLocation')
-	)
-
-}
-
-const get = async (id, sorting, range) => {
-
-	switch (sorting) {
-		case constants.PAGES_SORTING_TOP: return getTop(id, range)
-		case constants.PAGES_SORTING_RECENT: return getRecent(id)
 	}
+
+	const aggregation = (() => {
+
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteLocation' ], range, limit)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteLocation' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteLocation' ], limit)
+
+	})()
+
+	return enhance(
+		await Record.aggregate(aggregation)
+	)
 
 }
 

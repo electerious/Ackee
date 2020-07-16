@@ -2,18 +2,12 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_VIEWS_TYPE = Symbol()
-export const SET_VIEWS_INTERVAL = Symbol()
 export const SET_VIEWS_VALUE = Symbol()
 export const SET_VIEWS_FETCHING = Symbol()
 export const SET_VIEWS_ERROR = Symbol()
 
 export const setViewsType = (payload) => ({
 	type: SET_VIEWS_TYPE,
-	payload
-})
-
-export const setViewsInterval = (payload) => ({
-	type: SET_VIEWS_INTERVAL,
 	payload
 })
 
@@ -42,19 +36,37 @@ export const fetchViews = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/views?type=${ props.views.type }&interval=${ props.views.interval }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchViews($id: ID!, $interval: Interval!, $type: ViewType!) {
+					domain(id: $id) {
+						statistics {
+							views(interval: $interval, type: $type) {
+								id
+								count
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				interval: props.filter.interval,
+				type: props.views.type
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setViewsValue(domainId, data))
+		dispatch(setViewsValue(domainId, data.domain.statistics.views))
 		dispatch(setViewsFetching(domainId, false))
 
 	} catch (err) {
 
-		dispatch(setViewsError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setViewsFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setViewsError(domainId, err))
 
 	}
 

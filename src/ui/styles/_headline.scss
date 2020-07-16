@@ -1,15 +1,39 @@
 .headline {
 
 	margin: 0 0 $gutter/2;
+	color: $white;
 	font-weight: 400;
 	font-size: 2.2em;
 	text-rendering: optimizeLegibility;
 	line-height: 1;
 
-	&--small {
+	&--medium {
 		margin: 0 0 $gutter/3;
 		font-size: 1.5em;
 		line-height: 1.2;
+	}
+
+	&--small {
+		margin: 0 0 $gutter/3;
+		font-size: inherit;
+		line-height: inherit;
+	}
+
+	&--no-spacing {
+		margin-bottom: 0;
+	}
+
+	&__button {
+		text-align: left;
+		max-width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	&__button:focus {
+		color: $primary;
+		outline: none;
 	}
 
 }

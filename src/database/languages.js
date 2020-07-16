@@ -2,31 +2,34 @@
 
 const Record = require('../schemas/Record')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
-const constants = require('../constants/languages')
+const sortings = require('../constants/sortings')
+const languageCodes = require('../utils/languageCodes')
 
-const getTop = async (id, range) => {
+const get = async (ids, sorting, range, limit) => {
 
-	return Record.aggregate(
-		aggregateTopFields(id, 'siteLanguage', range)
-	)
+	const enhance = (entries) => {
 
-}
+		return entries.map((entry) => ({
+			id: languageCodes[entry._id.siteLanguage] || entry._id.siteLanguage,
+			count: entry.count,
+			created: entry.created
+		}))
 
-const getRecent = async (id) => {
-
-	return Record.aggregate(
-		aggregateRecentFields(id, 'siteLanguage')
-	)
-
-}
-
-const get = async (id, sorting, range) => {
-
-	switch (sorting) {
-		case constants.LANGUAGES_SORTING_TOP: return getTop(id, range)
-		case constants.LANGUAGES_SORTING_RECENT: return getRecent(id)
 	}
+
+	const aggregation = (() => {
+
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteLanguage' ], range, limit)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteLanguage' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteLanguage' ], limit)
+
+	})()
+
+	return enhance(
+		await Record.aggregate(aggregation)
+	)
 
 }
 

@@ -1,21 +1,15 @@
 'use strict'
 
+const matchDomains = require('../stages/matchDomains')
 const offsetByRange = require('../utils/offsetByRange')
 
-module.exports = (id, property, range) => {
+module.exports = (ids, properties, range, limit) => {
 
-	const aggregate = [
-		{
-			$match: {
-				domainId: id,
-				[property]: {
-					$ne: null
-				}
-			}
-		},
+	const aggregation = [
+		matchDomains(ids),
 		{
 			$group: {
-				_id: `$${ property }`,
+				_id: {},
 				count: {
 					$sum: 1
 				}
@@ -27,15 +21,20 @@ module.exports = (id, property, range) => {
 			}
 		},
 		{
-			$limit: 30
+			$limit: limit
 		}
 	]
 
+	properties.forEach((property) => {
+		aggregation[0].$match[property] = { $ne: null }
+		aggregation[1].$group._id[property] = `$${ property }`
+	})
+
 	const dateOffset = offsetByRange(range)
 	if (dateOffset != null) {
-		aggregate[0].$match.created = { $gte: dateOffset }
+		aggregation[0].$match.created = { $gte: dateOffset }
 	}
 
-	return aggregate
+	return aggregation
 
 }

@@ -2,7 +2,9 @@ import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import Context, { BUTTON as DROPDOWN_BUTTON } from './Context'
+import isSameRoute from '../utils/isSameRoute'
+
+import Context, { BUTTON as DROPDOWN_BUTTON, SEPARATOR as DROPDOWN_SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
 const BUTTON = Symbol()
@@ -24,6 +26,8 @@ const calculateY = (measurement) => {
 	return measurement.target.absolute.y + measurement.target.height + 10
 
 }
+
+const containsActiveItem = (items) => items.some((item) => item.active === true)
 
 const Spinner = (props) => {
 
@@ -77,7 +81,7 @@ const Dropdown = (props) => {
 	const close = () => setActive(false)
 	const toggle = () => setActive(!active)
 
-	const containsActiveItem = props.items.some((item) => item.active === true)
+	const activeInside = containsActiveItem(props.items)
 
 	return (
 		h(Fragment, {},
@@ -86,9 +90,9 @@ const Dropdown = (props) => {
 				className: classNames({
 					'header__button': true,
 					'hovered': active === true,
-					'active': containsActiveItem === true,
+					'active': activeInside === true,
 					'link': true,
-					'color-white': containsActiveItem === true
+					'color-white': activeInside === true
 				}),
 				onClick: toggle
 			},
@@ -118,14 +122,14 @@ const Header = (props) => {
 					props.items.map((item, index) => {
 
 						if (item.type === BUTTON) return h(Button, {
-							key: item.label + index,
+							key: index,
 							...item
 						}, item.label)
 
 						if (item.type === DROPDOWN) return h(Dropdown, {
-							key: item.label + index,
+							key: index,
 							...item
-						}, item.label)
+						}, item.label(containsActiveItem(item.items)))
 
 					})
 				)
@@ -142,8 +146,8 @@ Header.propTypes = {
 
 export const createButton = (label, route, props) => ({
 	type: BUTTON,
-	onClick: () => props.setRouteValue(route),
-	active: props.route.value === route,
+	onClick: () => props.setRoute(route),
+	active: isSameRoute(props.route, route) === true,
 	label
 })
 
@@ -153,11 +157,16 @@ export const createDropdown = (label, items) => ({
 	label
 })
 
-export const createDropdownButton = (label, route, props) => ({
+export const createDropdownButton = (label, route, props, keyHint) => ({
 	type: DROPDOWN_BUTTON,
-	onClick: () => props.setRouteValue(route),
-	active: props.route.value === route,
-	label
+	onClick: () => props.setRoute(route),
+	active: isSameRoute(props.route, route) === true,
+	label,
+	keyHint
+})
+
+export const createDropdownSeparator = () => ({
+	type: DROPDOWN_SEPARATOR
 })
 
 export default Header

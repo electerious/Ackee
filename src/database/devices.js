@@ -1,49 +1,46 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const aggregateRecentFieldsMultiple = require('../aggregations/aggregateRecentFieldsMultiple')
-const aggregateTopFieldsMultiple = require('../aggregations/aggregateTopFieldsMultiple')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
+const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const sortings = require('../constants/sortings')
 const constants = require('../constants/devices')
+const bestMatch = require('../utils/bestMatch')
 
-const getTopWithModel = async (id, range) => {
+const get = async (ids, sorting, type, range, limit) => {
 
-	return Record.aggregate(
-		aggregateTopFieldsMultiple(id, [ 'deviceManufacturer', 'deviceName' ], range)
-	)
-}
+	const enhance = (entries) => {
 
-const getRecentWithModel = async (id) => {
+		return entries.map((entry) => ({
+			id: bestMatch([
+				[ `${ entry._id.deviceManufacturer } ${ entry._id.deviceName }`, [ entry._id.deviceManufacturer, entry._id.deviceName ]],
+				[ `${ entry._id.deviceManufacturer }`, [ entry._id.deviceManufacturer ]]
+			]),
+			count: entry.count,
+			created: entry.created
+		}))
 
-	return Record.aggregate(
-		aggregateRecentFieldsMultiple(id, [ 'deviceManufacturer', 'deviceName' ])
-	)
-}
-
-const getTopNoModel = async (id, range) => {
-
-	return Record.aggregate(
-		aggregateTopFields(id, 'deviceManufacturer', range)
-	)
-}
-
-const getRecentNoModel = async (id) => {
-
-	return Record.aggregate(
-		aggregateRecentFields(id, 'deviceManufacturer')
-	)
-}
-
-
-const get = async (id, sorting, type, range) => {
-
-	switch (sorting) {
-		case constants.DEVICES_SORTING_TOP:
-			return type === constants.DEVICES_TYPE_NO_MODEL ? getTopNoModel(id, range) : getTopWithModel(id, range)
-		case constants.DEVICES_SORTING_RECENT:
-			return type === constants.DEVICES_TYPE_NO_MODEL ? getRecentNoModel(id) : getRecentWithModel(id)
 	}
+
+	const aggregation = (() => {
+
+		if (type === constants.DEVICES_TYPE_NO_MODEL) {
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'deviceManufacturer' ], range, limit)
+			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'deviceManufacturer' ], limit)
+			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'deviceManufacturer' ], limit)
+		}
+		if (type === constants.DEVICES_TYPE_WITH_MODEL) {
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'deviceManufacturer', 'deviceName' ], range, limit)
+			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'deviceManufacturer', 'deviceName' ], limit)
+			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'deviceManufacturer', 'deviceName' ], limit)
+		}
+
+	})()
+
+	return enhance(
+		await Record.aggregate(aggregation)
+	)
 
 }
 
