@@ -1,3 +1,5 @@
+'use strict'
+
 const DEVICES_TYPE_WITH_MODEL = 'WITH_MODEL'
 const DEVICES_TYPE_NO_MODEL = 'NO_MODEL'
 

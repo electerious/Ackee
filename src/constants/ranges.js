@@ -1,3 +1,5 @@
+'use strict'
+
 const RANGES_LAST_24_HOURS = 'LAST_24_HOURS'
 const RANGES_LAST_7_DAYS = 'LAST_7_DAYS'
 const RANGES_LAST_30_DAYS = 'LAST_30_DAYS'

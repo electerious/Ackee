@@ -1,3 +1,5 @@
+'use strict'
+
 const SORTINGS_TOP = 'TOP'
 const SORTINGS_NEW = 'NEW'
 const SORTINGS_RECENT = 'RECENT'

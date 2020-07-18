@@ -1,3 +1,5 @@
+'use strict'
+
 const { hour } = require('../utils/times')
 
 const DURATIONS_INTERVAL = 15000
