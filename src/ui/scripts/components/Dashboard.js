@@ -26,6 +26,12 @@ const Dashboard = (props) => {
 
 	}, [])
 
+	useEffect(() => {
+
+		document.scrollingElement.scrollTop = 0
+
+	}, [ props.route.key ])
+
 	useHotkeys('o', () => props.setRoute(route.ROUTE_OVERVIEW))
 
 	useHotkeys('v', () => props.setRoute(route.ROUTE_VIEWS))
