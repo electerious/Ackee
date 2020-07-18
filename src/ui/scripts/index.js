@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
 
-import isDemo from '../../utils/isDemo'
+import isDemoMode from '../../utils/isDemoMode'
 
 import enhanceState from './enhancers/enhanceState'
 import createStore from './utils/createStore'
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main)
 const container = document.querySelector('#main')
 
-if (isDemo === true) {
+if (isDemoMode === true) {
 	console.warn('Ackee runs in demo mode')
 }
 

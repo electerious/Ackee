@@ -9,7 +9,8 @@ const { router, get, post, put, patch, del } = require('microrouter')
 const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
 const isAuthenticated = require('./utils/isAuthenticated')
-const isDemo = require('./utils/isDemo')
+const isDemoMode = require('./utils/isDemoMode')
+const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTrackerUrl = require('./utils/customTrackerUrl')
 const ui = require('./routes/ui')
 
@@ -69,6 +70,8 @@ const notFound = async (req) => {
 }
 
 const apolloServer = new ApolloServer({
+	introspection: isDemoMode === true || isDevelopmentMode === true,
+	playground: isDemoMode === true || isDevelopmentMode === true,
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
@@ -80,7 +83,7 @@ const apolloServer = new ApolloServer({
 		...require('./resolvers')
 	},
 	context: async (integrationContext) => ({
-		isDemo,
+		isDemoMode,
 		isAuthenticated: await isAuthenticated(integrationContext.req),
 		req: integrationContext.req
 	})

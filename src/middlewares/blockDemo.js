@@ -1,8 +1,8 @@
 'use strict'
 
-module.exports = (parent, args, { isDemo }) => {
+module.exports = (parent, args, { isDemoMode }) => {
 
-	if (isDemo === true) {
+	if (isDemoMode === true) {
 		throw new Error('Forbidden in demo mode')
 	}
 

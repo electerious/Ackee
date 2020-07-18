@@ -2,7 +2,7 @@ import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package'
-import isDemo from '../../../../utils/isDemo'
+import isDemoMode from '../../../../utils/isDemoMode'
 
 import Input from '../Input'
 import Spacer from '../Spacer'
@@ -14,8 +14,8 @@ import Message from '../Message'
 const OverlayLogin = (props) => {
 
 	const [ inputs, setInputs ] = useState({
-		username: isDemo === true ? 'admin' : '',
-		password: isDemo === true ? '123456' : ''
+		username: isDemoMode === true ? 'admin' : '',
+		password: isDemoMode === true ? '123456' : ''
 	})
 
 	const onChange = (key) => (e) => setInputs({

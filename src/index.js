@@ -6,7 +6,8 @@ const mongoose = require('mongoose')
 
 const server = require('./server')
 const signale = require('./utils/signale')
-const isDemo = require('./utils/isDemo')
+const isDemoMode = require('./utils/isDemoMode')
+const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const isSrvUrl = require('./utils/isSrvUrl')
 const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
@@ -40,7 +41,7 @@ mongoose.connect(dbUrl, {
 
 	server.listen(port)
 
-	if (isDemo === true) {
+	if (isDemoMode === true) {
 
 		const job = fillDatabase(serverUrl)
 		const date = job.nextInvocation()
@@ -51,6 +52,12 @@ mongoose.connect(dbUrl, {
 		signale.info('Demo mode enabled')
 		signale.info('New records will be added minutely')
 		signale.info(`Next record fill on ${ formattedDate } at ${ formattedTime } o'clock`)
+
+	}
+
+	if (isDevelopmentMode === true) {
+
+		signale.info('Development mode enabled')
 
 	}
 
