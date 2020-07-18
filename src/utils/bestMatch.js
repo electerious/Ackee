@@ -1,3 +1,5 @@
+'use strict'
+
 const isDefined = require('./isDefined')
 
 module.exports = (matches) => {

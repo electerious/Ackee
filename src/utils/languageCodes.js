@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = {
 	aa: 'Afar',
 	ab: 'Abkhazian',
