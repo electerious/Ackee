@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Keyboard shortcuts
 - Switch between daily, monthly and yearly durations
 - Click on a card headline to view more of this domain or insight
+- Support `+srv` connection string modifier for MongoDB urls (#132, thanks @ericsandine)
 
 ### Changed
 
