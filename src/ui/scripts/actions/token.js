@@ -49,7 +49,7 @@ export const addToken = signalHandler((signal) => (props, state) => async (dispa
 			signal: signal()
 		})
 
-		// TODO: Maybe just same the id instead of the payload
+		// TODO: Maybe just store the id instead of the payload
 		dispatch(setTokenValue(data.createToken.payload))
 		dispatch(setTokenFetching(false))
 
