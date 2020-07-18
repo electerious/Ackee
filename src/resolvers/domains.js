@@ -5,7 +5,7 @@ const domains = require('../database/domains')
 const messages = require('../utils/messages')
 const pipe = require('../utils/pipe')
 const requireAuth = require('../middlewares/requireAuth')
-const blockDemo = require('../middlewares/blockDemo')
+const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
 	Domain: {
@@ -25,7 +25,7 @@ module.exports = {
 		})
 	},
 	Mutation: {
-		createDomain: pipe(requireAuth, blockDemo, async (parent, { input }) => {
+		createDomain: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
 
 			let entry
 
@@ -49,7 +49,7 @@ module.exports = {
 			}
 
 		}),
-		updateDomain: pipe(requireAuth, blockDemo, async (parent, { id, input }) => {
+		updateDomain: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
 
 			let entry
 
@@ -77,7 +77,7 @@ module.exports = {
 			}
 
 		}),
-		deleteDomain: pipe(requireAuth, blockDemo, async (parent, { id }) => {
+		deleteDomain: pipe(requireAuth, blockDemoMode, async (parent, { id }) => {
 
 			await records.del(id)
 			await domains.del(id)
