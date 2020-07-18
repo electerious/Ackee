@@ -27,18 +27,13 @@ if (dbUrl == null) {
 
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
-const mongooseConfig = {
+mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	reconnectTries: Number.MAX_VALUE,
 	reconnectInterval: 1000,
-}
-
-if (isSrvUrl(dbUrl)) {
-	mongooseConfig.useUnifiedTopology = true
-};
-
-mongoose.connect(dbUrl, mongooseConfig).then(() => {
+	useUnifiedTopology: isSrvUrl(dbUrl) === true
+}).then(() => {
 
 	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
 	signale.start(`Starting the server`)
