@@ -31,7 +31,6 @@ export default async ({ query, variables, props, signal }) => {
 		const json = await response.json()
 
 		if (json.errors != null) {
-			// TODO: Log all errors and throw the first
 			const message = json.errors[0].message
 			throw new Error(message)
 		}
