@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 'use strict'
-
 require('dotenv').config()
 
 const mongoose = require('mongoose')
@@ -8,6 +7,7 @@ const mongoose = require('mongoose')
 const server = require('./server')
 const signale = require('./utils/signale')
 const isDemo = require('./utils/isDemo')
+const isSrvUrl = require('./utils/isSrvUrl')
 const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
 
@@ -27,14 +27,18 @@ if (dbUrl == null) {
 
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
-mongoose.connect(dbUrl, {
-
+const mongooseConfig = {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	reconnectTries: Number.MAX_VALUE,
-	reconnectInterval: 1000
+	reconnectInterval: 1000,
+}
 
-}).then(() => {
+if (isSrvUrl(dbUrl)) {
+	mongooseConfig.useUnifiedTopology = true
+};
+
+mongoose.connect(dbUrl, mongooseConfig).then(() => {
 
 	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
 	signale.start(`Starting the server`)
