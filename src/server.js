@@ -12,7 +12,7 @@ const isAuthenticated = require('./utils/isAuthenticated')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTrackerUrl = require('./utils/customTrackerUrl')
-const dateDetails = require('./utils/dateDetails')
+const createDate = require('./utils/createDate')
 const ui = require('./routes/ui')
 
 const catchError = (fn) => async (req, res) => {
@@ -86,7 +86,7 @@ const apolloServer = new ApolloServer({
 	context: async (integrationContext) => ({
 		isDemoMode,
 		isAuthenticated: await isAuthenticated(integrationContext.req),
-		dateDetails: dateDetails(integrationContext.req.headers['time-zone']),
+		dateDetails: createDate(integrationContext.req.headers['time-zone']),
 		req: integrationContext.req
 	})
 })

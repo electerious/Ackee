@@ -5,6 +5,7 @@ const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const sortings = require('../constants/sortings')
+const createDate = require('../utils/createDate')
 
 const get = async (ids, sorting, range, limit, dateDetails) => {
 
@@ -13,7 +14,7 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 		return entries.map((entry) => ({
 			id: entry._id.siteReferrer,
 			count: entry.count,
-			date: entry.created
+			date: createDate(dateDetails.userTimeZone, entry.created).userZonedDate
 		}))
 
 	}

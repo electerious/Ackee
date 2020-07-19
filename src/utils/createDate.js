@@ -19,8 +19,8 @@ module.exports = (userTimeZone = serverTimeZone, customServerZonedDate = new Dat
 	// Most operations are based on the server zoned date because MongoDB works with UTC
 	// and removes the server offset before writing dates to the database. Same applies
 	// when getting data via aggregations. It would be wrong to use a user zoned date,
-	// because MongoDB would try to remove the server time zone from it instead of the
-	// user time zone it contains.
+	// because MongoDB would try to remove the server time zone offset from it instead
+	// of the user time zone offset it contains.
 
 	return {
 		userZonedDate,
