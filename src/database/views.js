@@ -1,6 +1,5 @@
 'use strict'
 
-const { subDays, subMonths, subYears, startOfDay, startOfMonth, startOfYear } = require('date-fns')
 const Record = require('../schemas/Record')
 const aggregateViews = require('../aggregations/aggregateViews')
 const constants = require('../constants/views')
@@ -8,22 +7,12 @@ const intervals = require('../constants/intervals')
 const createArray = require('../utils/createArray')
 const matchesDate = require('../utils/matchesDate')
 
-const subFn = (interval) => {
+const includeFn = (dateDetails, interval) => {
 
 	switch (interval) {
-		case intervals.INTERVALS_DAILY: return subDays
-		case intervals.INTERVALS_MONTHLY: return subMonths
-		case intervals.INTERVALS_YEARLY: return subYears
-	}
-
-}
-
-const startFn = (interval) => {
-
-	switch (interval) {
-		case intervals.INTERVALS_DAILY: return startOfDay
-		case intervals.INTERVALS_MONTHLY: return startOfMonth
-		case intervals.INTERVALS_YEARLY: return startOfYear
+		case intervals.INTERVALS_DAILY: return dateDetails.includeDays
+		case intervals.INTERVALS_MONTHLY: return dateDetails.includeMonths
+		case intervals.INTERVALS_YEARLY: return dateDetails.includeYears
 	}
 
 }
@@ -36,15 +25,12 @@ const get = async (ids, type, interval, limit, dateDetails) => {
 		const matchMonth = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY ].includes(interval)
 		const matchYear = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY, intervals.INTERVALS_YEARLY ].includes(interval)
 
-		const sub = subFn(interval)
-		const start = startFn(interval)
-
 		return createArray(limit).map((_, index) => {
 
-			const date = sub(start(new Date()), index)
+			const date = includeFn(dateDetails, interval)(index + 1)
 
-			// Find a view that matches the date
-			const view = entries.find((entry) => {
+			// Find a entry that matches the date
+			const entry = entries.find((entry) => {
 				return matchesDate(
 					matchDay === true ? entry._id.day : undefined,
 					matchMonth === true ? entry._id.month : undefined,
@@ -55,7 +41,7 @@ const get = async (ids, type, interval, limit, dateDetails) => {
 
 			return {
 				id: date,
-				count: view == null ? 0 : view.count
+				count: entry == null ? 0 : entry.count
 			}
 
 		})
