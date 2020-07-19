@@ -38,7 +38,7 @@ export const fetchDevices = signalHandler((signal) => (props, domainId) => async
 
 		const data = await api({
 			query: `
-				query fetchDevices($id: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
+				query fetchDevices($id: ID!, $sorting: Sorting!, $type: DeviceType!, $range: Range) {
 					domain(id: $id) {
 						statistics {
 							devices(sorting: $sorting, type: $type, range: $range) {
