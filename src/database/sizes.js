@@ -8,7 +8,7 @@ const sortings = require('../constants/sortings')
 const constants = require('../constants/sizes')
 const bestMatch = require('../utils/bestMatch')
 
-const get = async (ids, sorting, type, range, limit) => {
+const get = async (ids, sorting, type, range, limit, dateDetails) => {
 
 	const enhance = (entries) => {
 
@@ -30,12 +30,12 @@ const get = async (ids, sorting, type, range, limit) => {
 	const aggregation = (() => {
 
 		if (sorting === sortings.SORTINGS_TOP) {
-			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateTopFields(ids, [ 'browserWidth' ], range, limit)
-			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateTopFields(ids, [ 'browserHeight' ], range, limit)
-			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateTopFields(ids, [ 'browserWidth', 'browserHeight' ], range, limit)
-			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateTopFields(ids, [ 'screenWidth' ], range, limit)
-			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateTopFields(ids, [ 'screenHeight' ], range, limit)
-			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateTopFields(ids, [ 'screenWidth', 'screenHeight' ], range, limit)
+			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateTopFields(ids, [ 'browserWidth' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateTopFields(ids, [ 'browserHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateTopFields(ids, [ 'browserWidth', 'browserHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateTopFields(ids, [ 'screenWidth' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateTopFields(ids, [ 'screenHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateTopFields(ids, [ 'screenWidth', 'screenHeight' ], range, limit, dateDetails)
 		}
 		if (sorting === sortings.SORTINGS_NEW) {
 			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateNewFields(ids, [ 'browserWidth' ], limit)

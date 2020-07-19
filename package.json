@@ -40,6 +40,7 @@
     "apollo-server-micro": "^2.16.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.15.0",
+    "date-fns-tz": "^1.0.10",
     "dotenv": "^8.2.0",
     "formbase": "^12.0.1",
     "graphql": "^15.3.0",

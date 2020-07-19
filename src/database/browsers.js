@@ -8,7 +8,7 @@ const sortings = require('../constants/sortings')
 const constants = require('../constants/browsers')
 const bestMatch = require('../utils/bestMatch')
 
-const get = async (ids, sorting, type, range, limit) => {
+const get = async (ids, sorting, type, range, limit, dateDetails) => {
 
 	const enhance = (entries) => {
 
@@ -26,12 +26,12 @@ const get = async (ids, sorting, type, range, limit) => {
 	const aggregation = (() => {
 
 		if (type === constants.BROWSERS_TYPE_NO_VERSION) {
-			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'browserName' ], range, limit)
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'browserName' ], range, limit, dateDetails)
 			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'browserName' ], limit)
 			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'browserName' ], limit)
 		}
 		if (type === constants.BROWSERS_TYPE_WITH_VERSION) {
-			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'browserName', 'browserVersion' ], range, limit)
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'browserName', 'browserVersion' ], range, limit, dateDetails)
 			if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'browserName', 'browserVersion' ], limit)
 			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'browserName', 'browserVersion' ], limit)
 		}

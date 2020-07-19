@@ -1,9 +1,9 @@
 'use strict'
 
+const ranges = require('../constants/ranges')
 const matchDomains = require('../stages/matchDomains')
-const offsetByRange = require('../utils/offsetByRange')
 
-module.exports = (ids, properties, range, limit) => {
+module.exports = (ids, properties, range, limit, dateDetails) => {
 
 	const aggregation = [
 		matchDomains(ids),
@@ -30,9 +30,16 @@ module.exports = (ids, properties, range, limit) => {
 		aggregation[1].$group._id[property] = `$${ property }`
 	})
 
-	const dateOffset = offsetByRange(range)
-	if (dateOffset != null) {
-		aggregation[0].$match.created = { $gte: dateOffset }
+	if (range === ranges.RANGES_LAST_24_HOURS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastHours(24) }
+	}
+
+	if (range === ranges.RANGES_LAST_7_DAYS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastDays(7) }
+	}
+
+	if (range === ranges.RANGES_LAST_30_DAYS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastDays(30) }
 	}
 
 	return aggregation
