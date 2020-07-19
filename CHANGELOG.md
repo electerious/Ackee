@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Show stale data while loading new data
 - Removed detailed durations
 - Delete records of a domain when deleting a domain
-- Updated the required Node.js version and Docker Node.js version to v12
+- Updated the required Node.js version and Docker Node.js version to v14
 
 ### Fixed
 

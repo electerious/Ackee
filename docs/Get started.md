@@ -114,7 +114,7 @@ If you're using the `ingress-nginx`, enabling the ingress will set the necessary
 
 Ackee dependents on …
 
-- [Node.js](https://nodejs.org/en/) (v10.16 or newer)
+- [Node.js](https://nodejs.org/en/) (v14 or newer)
 - [yarn](https://yarnpkg.com/en/)
 - [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
 
