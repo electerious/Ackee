@@ -41,6 +41,12 @@ mongoose.connect(dbUrl, {
 
 	server.listen(port)
 
+	if (isDevelopmentMode === true) {
+
+		signale.info('Development mode enabled')
+
+	}
+
 	if (isDemoMode === true) {
 
 		const job = fillDatabase(serverUrl)
@@ -52,12 +58,6 @@ mongoose.connect(dbUrl, {
 		signale.info('Demo mode enabled')
 		signale.info('New records will be added minutely')
 		signale.info(`Next record fill on ${ formattedDate } at ${ formattedTime } o'clock`)
-
-	}
-
-	if (isDevelopmentMode === true) {
-
-		signale.info('Development mode enabled')
 
 	}
 
