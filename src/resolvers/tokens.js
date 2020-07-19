@@ -30,7 +30,7 @@ module.exports = {
 			}
 
 		},
-		deleteToken: pipe(requireAuth, async (parent, { id }) => {
+		deleteToken: async (parent, { id }) => {
 
 			await tokens.del(id)
 
@@ -38,6 +38,6 @@ module.exports = {
 				success: true
 			}
 
-		})
+		}
 	}
 }
