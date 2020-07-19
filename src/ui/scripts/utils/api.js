@@ -1,5 +1,6 @@
 import timeout from './timeout'
 import HandledError from './HandledError'
+import userTimeZone from '../../../utils/timeZone'
 
 export default async ({ query, variables, props, signal }) => {
 
@@ -9,6 +10,7 @@ export default async ({ query, variables, props, signal }) => {
 		const token = props.token.value.id
 
 		headers.append('Content-Type', 'application/json')
+		headers.append('Time-Zone', userTimeZone)
 		if (token) headers.append('Authorization', `Bearer ${ token }`)
 
 		const request = fetch('/graphql', {
