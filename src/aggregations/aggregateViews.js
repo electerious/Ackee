@@ -30,7 +30,7 @@ module.exports = (ids, unique, interval, limit, dateDetails) => {
 		$ne: null
 	}
 
-	const dateExpression = { date: '$created', timezone: dateDetails.timeZone }
+	const dateExpression = { date: '$created', timezone: dateDetails.userTimeZone }
 
 	if (interval === intervals.INTERVALS_DAILY) {
 		aggregation[0].$match.created = { $gte: dateDetails.includeDays(limit) }

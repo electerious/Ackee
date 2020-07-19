@@ -86,7 +86,7 @@ const apolloServer = new ApolloServer({
 	context: async (integrationContext) => ({
 		isDemoMode,
 		isAuthenticated: await isAuthenticated(integrationContext.req),
-		dateDetails: dateDetails(new Date(), integrationContext.req.headers['time-zone']),
+		dateDetails: dateDetails(integrationContext.req.headers['time-zone']),
 		req: integrationContext.req
 	})
 })
