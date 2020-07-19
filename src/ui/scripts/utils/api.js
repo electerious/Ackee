@@ -44,8 +44,8 @@ export default async ({ query, variables, props, signal }) => {
 		console.error(err)
 
 		if (err.message === 'Token invalid') {
-			// Reset token and show login
-			props.deleteToken(props)
+			// Reset state to show login
+			props.resetState()
 			throw new HandledError(err.message)
 		}
 
