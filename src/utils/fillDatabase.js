@@ -291,9 +291,7 @@ const updateRecord = async (endpoint, headers, record) => {
 			query: `
 				mutation updateRecord($id: ID!) {
 					updateRecord(id: $id) {
-						payload {
-							id
-						}
+						success
 					}
 				}
 			`,
@@ -305,7 +303,7 @@ const updateRecord = async (endpoint, headers, record) => {
 
 	const data = await response.json()
 
-	return data.data.updateRecord.payload
+	return data.data.updateRecord.success
 
 }
 
