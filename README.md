@@ -41,7 +41,7 @@ Ackee is a web app you install on your server to analyse the traffic of your sit
 
 ### Why Ackee?
 
-Ackee is lightweight, easy to install and has a good balance between analytics and privacy. It features an API and web interface and tracks only what's necessary.
+Ackee is lightweight, easy to install and has a good balance between analytics and privacy. It features a GraphQL API and web interface and tracks only what's necessary.
 
 It's is the right tool for you if you care about privacy and don't need a full-features marketing analytics platform like Google Analytics or Matomo.
 
@@ -52,7 +52,7 @@ It's is the right tool for you if you care about privacy and don't need a full-f
 - Modern and fast architecture
 - Beautiful and focused interface
 - No unique user tracking and no cookies
-- Fully documented API
+- Fully documented GraphQL API
 
 ### How does it work?
 
@@ -68,7 +68,7 @@ The interface of Ackee lets you view and analyse your tracked information.
 
 Ackee depends on...
 
-- [Node.js](https://nodejs.org/en/) (v10.16 or newer)
+- [Node.js](https://nodejs.org/en/) (v14 or newer)
 - [yarn](https://yarnpkg.com/en/)
 - [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
 
@@ -76,19 +76,7 @@ Make sure to install and update all dependencies before you setup Ackee.
 
 ### API
 
-- [/](docs/UI.md)
-- [/tokens](docs/tokens.md)
-- [/domains](docs/domains.md)
-- [/domains/:domainId/records](docs/records.md)
-- [/domains/:domainId/views](docs/views.md)
-- [/domains/:domainId/pages](docs/pages.md)
-- [/domains/:domainId/referrers](docs/referrers.md)
-- [/domains/:domainId/durations](docs/durations.md)
-- [/domains/:domainId/systems](docs/systems.md)
-- [/domains/:domainId/devices](docs/devices.md)
-- [/domains/:domainId/browsers](docs/browsers.md)
-- [/domains/:domainId/sizes](docs/sizes.md)
-- [/domains/:domainId/languages](docs/languages.md)
+// TODO
 
 ### Options
 

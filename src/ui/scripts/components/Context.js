@@ -6,10 +6,52 @@ import { useClickAway } from 'react-use'
 
 import useMeasure from '../utils/useMeasure'
 
+import KeyHint from './KeyHint'
+
 export const BUTTON = Symbol()
 export const SEPARATOR = Symbol()
 
 const toPixel = (num) => `${ Math.round(num) }px`
+
+const Button = (props) => {
+
+	const hasKeyHint = props.keyHint != null
+	const hasKeyDescription = props.description != null
+
+	return (
+		h('button', {
+			className: classNames({
+				context__button: true,
+				active: props.active === true,
+				link: true
+			}),
+			onClick: props.onClick
+		},
+			h('div', { className: 'context__head' },
+				h('div', { className: 'context__label' }, props.label),
+				hasKeyHint === true && h(KeyHint, {}, props.keyHint)
+			),
+			hasKeyDescription === true && h('div', { className: 'context__description' }, props.description)
+		)
+	)
+
+}
+
+Button.propTypes = {
+	label: PropTypes.string.isRequired,
+	description: PropTypes.string,
+	active: PropTypes.bool.isRequired,
+	onClick: PropTypes.func.isRequired,
+	keyHint: PropTypes.node
+}
+
+const Separator = () => {
+
+	return (
+		h('div', { className: 'context__separator' })
+	)
+
+}
 
 const Context = (props) => {
 
@@ -36,25 +78,17 @@ const Context = (props) => {
 		},
 			props.items.map((item, index) => {
 
-				if (item.type === BUTTON) return h('button', {
+				if (item.type === BUTTON) return h(Button, {
 					key: item.label + index,
-					className: classNames({
-						context__button: true,
-						active: item.active === true,
-						link: true
-					}),
+					...item,
 					onClick: (e) => {
 						item.onClick(e)
 						props.onItemClick(e)
 					}
-				},
-					h('div', {}, item.label),
-					item.description != null && h('div', { className: 'context__description' }, item.description)
-				)
+				})
 
-				if (item.type === SEPARATOR) return h('div', {
-					key: index,
-					className: 'context__separator'
+				if (item.type === SEPARATOR) return h(Separator, {
+					key: index
 				})
 
 			})

@@ -7,8 +7,8 @@ const js = require('rosid-handler-js')
 
 const html = require('../ui/index')
 
-const isDemo = require('../utils/isDemo')
-const isProductionEnv = require('../utils/isProductionEnv')
+const isDemoMode = require('../utils/isDemoMode')
+const isDevelopmentMode = require('../utils/isDevelopmentMode')
 
 const index = () => {
 
@@ -40,7 +40,7 @@ const favicon = () => {
 const styles = () => {
 
 	const filePath = resolve(__dirname, '../ui/styles/index.scss')
-	const data = sass(filePath, { optimize: isProductionEnv === true })
+	const data = sass(filePath, { optimize: isDevelopmentMode === false })
 
 	return async (req, res) => {
 
@@ -74,11 +74,11 @@ const scripts = () => {
 	}
 
 	const data = js(filePath, {
-		optimize: isProductionEnv === true,
+		optimize: isDevelopmentMode === false,
 		env: {
 			ACKEE_TRACKER: process.env.ACKEE_TRACKER,
-			ACKEE_DEMO: isDemo === true ? 'true' : 'false',
-			NODE_ENV: isProductionEnv === true ? 'production' : 'development'
+			ACKEE_DEMO: isDemoMode === true ? 'true' : 'false',
+			NODE_ENV: isDevelopmentMode === true ? 'development' : 'production'
 		},
 		babel
 	})
@@ -107,9 +107,9 @@ const tracker = () => {
 }
 
 module.exports = {
-	index: isProductionEnv === true ? index() : (req, res) => index()(req, res),
-	favicon: isProductionEnv === true ? favicon() : (req, res) => favicon()(req, res),
-	styles: isProductionEnv === true ? styles() : (req, res) => styles()(req, res),
-	scripts: isProductionEnv === true ? scripts() : (req, res) => scripts()(req, res),
-	tracker: isProductionEnv === true ? tracker() : (req, res) => tracker()(req, res)
+	index: isDevelopmentMode === true ? (req, res) => index()(req, res) : index(),
+	favicon: isDevelopmentMode === true ? (req, res) => favicon()(req, res) : favicon(),
+	styles: isDevelopmentMode === true ? (req, res) => styles()(req, res) : styles(),
+	scripts: isDevelopmentMode === true ? (req, res) => scripts()(req, res) : scripts(),
+	tracker: isDevelopmentMode === true ? (req, res) => tracker()(req, res) : tracker()
 }

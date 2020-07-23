@@ -1,0 +1,30 @@
+.facts {
+
+	--columns: 3;
+
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+	gap: 1px;
+	border-radius: $radius;
+	width: 100%;
+	overflow: hidden;
+
+	@media (max-width: 900px) {
+		--columns: 2;
+	}
+
+	@media (max-width: 560px) {
+		--columns: 1;
+	}
+
+	&__card {
+		display: grid;
+		align-content: space-between;
+		gap: $gutter;
+		background: $card;
+		padding: $gutter*1.6 $gutter*1.5 $gutter*1.5;
+		width: 100%;
+	}
+
+}

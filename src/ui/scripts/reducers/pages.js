@@ -1,24 +1,18 @@
 import produce from 'immer'
 
 import {
-	SET_PAGES_SORTING,
 	SET_PAGES_VALUE,
 	SET_PAGES_FETCHING,
 	SET_PAGES_ERROR
 } from '../actions'
 
-import { PAGES_SORTING_TOP } from '../../../constants/pages'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
-	sorting: PAGES_SORTING_TOP,
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
@@ -28,12 +22,6 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_PAGES_SORTING:
-			if (draft.sorting === action.payload) break
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			draft.sorting = action.payload
-			break
 		case SET_PAGES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break

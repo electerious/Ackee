@@ -36,19 +36,39 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/sizes?type=${ props.sizes.type }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchSizes($id: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							sizes(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.filter.sorting,
+				type: props.sizes.type,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setSizesValue(domainId, data))
+		dispatch(setSizesValue(domainId, data.domain.statistics.sizes))
 		dispatch(setSizesFetching(domainId, false))
 
 	} catch (err) {
 
-		dispatch(setSizesError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setSizesFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setSizesError(domainId, err))
 
 	}
 

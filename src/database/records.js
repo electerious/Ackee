@@ -1,23 +1,63 @@
 'use strict'
 
 const Record = require('../schemas/Record')
-const runUpdate = require('../utils/runUpdate')
+
+const response = (entry) => ({
+	id: entry.id,
+	siteLocation: entry.siteLocation,
+	siteReferrer: entry.siteReferrer,
+	siteLanguage: entry.siteLanguage,
+	screenWidth: entry.screenWidth,
+	screenHeight: entry.screenHeight,
+	screenColorDepth: entry.screenColorDepth,
+	deviceName: entry.deviceName,
+	deviceManufacturer: entry.deviceManufacturer,
+	osName: entry.osName,
+	osVersion: entry.osVersion,
+	browserName: entry.browserName,
+	browserVersion: entry.browserVersion,
+	browserWidth: entry.browserWidth,
+	browserHeight: entry.browserHeight,
+	created: entry.created,
+	updated: entry.updated
+})
 
 const add = async (data) => {
 
-	return Record.create(data)
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Record.create(data)
+	)
 
 }
 
 const update = async (id) => {
 
-	return runUpdate(Record, id)
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Record.findOneAndUpdate({
+			id
+		}, {
+			$set: {
+				updated: Date.now()
+			}
+		}, {
+			new: true
+		})
+	)
 
 }
 
 const anonymize = async (clientId, ignoreId) => {
 
-	return Record.updateMany({
+	// Don't return anything about the update
+	await Record.updateMany({
 		$and: [
 			{ clientId },
 			{
@@ -27,19 +67,27 @@ const anonymize = async (clientId, ignoreId) => {
 			}
 		]
 	}, {
-		clientId: null,
-		siteLanguage: null,
-		screenWidth: null,
-		screenHeight: null,
-		screenColorDepth: null,
-		deviceName: null,
-		deviceManufacturer: null,
-		osName: null,
-		osVersion: null,
-		browserName: null,
-		browserVersion: null,
-		browserWidth: null,
-		browserHeight: null
+		clientId: undefined,
+		siteLanguage: undefined,
+		screenWidth: undefined,
+		screenHeight: undefined,
+		screenColorDepth: undefined,
+		deviceName: undefined,
+		deviceManufacturer: undefined,
+		osName: undefined,
+		osVersion: undefined,
+		browserName: undefined,
+		browserVersion: undefined,
+		browserWidth: undefined,
+		browserHeight: undefined
+	})
+
+}
+
+const del = async (domainId) => {
+
+	return Record.deleteMany({
+		domainId
 	})
 
 }
@@ -47,5 +95,6 @@ const anonymize = async (clientId, ignoreId) => {
 module.exports = {
 	add,
 	update,
-	anonymize
+	anonymize,
+	del
 }

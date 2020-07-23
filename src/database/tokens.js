@@ -1,25 +1,54 @@
 'use strict'
 
 const Token = require('../schemas/Token')
-const runUpdate = require('../utils/runUpdate')
+
+const response = (entry) => ({
+	id: entry.id,
+	created: entry.created,
+	updated: entry.updated
+})
 
 const add = async () => {
 
-	return Token.create({})
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Token.create({})
+	)
 
 }
 
 const get = async (id) => {
 
-	return Token.findOne({
-		id
-	})
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Token.findOne({ id })
+	)
 
 }
 
 const update = async (id) => {
 
-	return runUpdate(Token, id)
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Token.findOneAndUpdate({
+			id
+		}, {
+			$set: {
+				updated: Date.now()
+			}
+		}, {
+			new: true
+		})
+	)
 
 }
 

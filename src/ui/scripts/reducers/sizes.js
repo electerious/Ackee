@@ -8,17 +8,14 @@ import {
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: SIZES_TYPE_BROWSER_RESOLUTION,
 	value: {}
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 

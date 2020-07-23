@@ -2,15 +2,9 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_DEVICES_TYPE = Symbol()
-export const SET_DEVICES_SORTING = Symbol()
 export const SET_DEVICES_VALUE = Symbol()
 export const SET_DEVICES_FETCHING = Symbol()
 export const SET_DEVICES_ERROR = Symbol()
-
-export const setDevicesSorting = (payload) => ({
-	type: SET_DEVICES_SORTING,
-	payload
-})
 
 export const setDevicesType = (payload) => ({
 	type: SET_DEVICES_TYPE,
@@ -42,19 +36,39 @@ export const fetchDevices = signalHandler((signal) => (props, domainId) => async
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/devices?sorting=${ props.devices.sorting }&type=${ props.devices.type }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchDevices($id: ID!, $sorting: Sorting!, $type: DeviceType!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							devices(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.filter.sorting,
+				type: props.devices.type,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setDevicesValue(domainId, data))
+		dispatch(setDevicesValue(domainId, data.domain.statistics.devices))
 		dispatch(setDevicesFetching(domainId, false))
 
 	} catch (err) {
 
-		dispatch(setDevicesError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setDevicesFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setDevicesError(domainId, err))
 
 	}
 

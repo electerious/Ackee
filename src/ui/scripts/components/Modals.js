@@ -11,13 +11,15 @@ import ModalDomainAdd from './modals/ModalDomainAdd'
 
 const Modals = (props) => {
 
-	const modals = Object.entries(props.modals.value).map(([ modalId, modalData ]) => {
+	const modals = Object.entries(props.modals.value).map(([ modalId, modalData ], index, modals) => {
 
+		const current = modals.length - 1 === index
 		const closeModal = props.removeModalsModal.bind(null, modalId)
 
 		return (
 			h(Modal, { key: modalId, visible: modalData.visible },
 				modalData.type === MODALS_DOMAIN_EDIT && h(ModalDomainEdit, {
+					current,
 					id: modalData.props.id,
 					title: modalData.props.title,
 					fetching: props.domains.fetching,
@@ -26,6 +28,7 @@ const Modals = (props) => {
 					closeModal
 				}),
 				modalData.type === MODALS_DOMAIN_ADD && h(ModalDomainAdd, {
+					current,
 					fetching: props.domains.fetching,
 					addDomain: props.addDomain.bind(null, props),
 					closeModal

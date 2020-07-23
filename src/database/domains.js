@@ -1,46 +1,71 @@
 'use strict'
 
 const Domain = require('../schemas/Domain')
-const runUpdate = require('../utils/runUpdate')
+const sortByProp = require('../utils/sortByProp')
+
+const response = (entry) => ({
+	id: entry.id,
+	title: entry.title,
+	created: entry.created,
+	updated: entry.updated
+})
 
 const add = async (data) => {
 
-	return Domain.create(data)
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Domain.create(data)
+	)
 
 }
 
 const all = async () => {
 
-	return Domain.aggregate([
-		{
-			$addFields: {
-				insensitive: {
-					$toLower: '$title'
-				}
-			}
-		},
-		{
-			$sort: {
-				insensitive: 1
-			}
-		}
-	])
+	const enhance = (entries) => {
+		return entries
+			.map(response)
+			.sort(sortByProp('title'))
+	}
+
+	return enhance(
+		await Domain.find({})
+	)
 
 }
 
 const get = async (id) => {
 
-	return Domain.findOne({
-		id
-	})
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Domain.findOne({ id })
+	)
 
 }
 
 const update = async (id, data) => {
 
-	return runUpdate(Domain, id, data, [
-		'title'
-	])
+	const enhance = (entry) => {
+		return entry == null ? entry : response(entry)
+	}
+
+	return enhance(
+		await Domain.findOneAndUpdate({
+			id
+		}, {
+			$set: {
+				title: data.title,
+				updated: Date.now()
+			}
+		}, {
+			new: true
+		})
+	)
 
 }
 

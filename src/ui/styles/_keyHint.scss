@@ -1,0 +1,16 @@
+.keyHint {
+
+	$size: 1.5em;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: $size;
+	height: $size;
+	font-size: .8em;
+	background: rgba(255, 255, 255, .05);
+	border-radius: 3px;
+	border: 1px solid $tertiary;
+	color: $light;
+
+}

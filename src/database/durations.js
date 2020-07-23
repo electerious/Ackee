@@ -1,193 +1,61 @@
 'use strict'
 
-const { subDays } = require('date-fns')
-
 const Record = require('../schemas/Record')
-const constants = require('../constants/durations')
-const zeroDate = require('../utils/zeroDate')
+const aggregateDurations = require('../aggregations/aggregateDurations')
+const intervals = require('../constants/intervals')
+const createArray = require('../utils/createArray')
+const matchesDate = require('../utils/matchesDate')
 
-// The time that elapsed between the creation and updating of records.
-const projectDuration = {
-	$project: {
-		created: '$created',
-		duration: {
-			$subtract: [ '$updated', '$created' ]
-		}
+const includeFn = (dateDetails, interval) => {
+
+	switch (interval) {
+		case intervals.INTERVALS_DAILY: return dateDetails.includeDays
+		case intervals.INTERVALS_MONTHLY: return dateDetails.includeMonths
+		case intervals.INTERVALS_YEARLY: return dateDetails.includeYears
 	}
+
 }
 
-// Ackee tracks durations in an interval, but some durations are between
-// possible interval times. This could be caused by a network delay or the
-// browser who's throttling JS execution. This step rounds all durations
-// down to the nearest possible interval to get rid of inaccuracy.
-const projectInterval = {
-	$project: {
-		created: '$created',
-		duration: {
-			$multiply: [
-				{
-					$floor: [
-						{
-							$divide: [ '$duration', constants.DURATIONS_INTERVAL ]
-						}
-					]
-				},
-				constants.DURATIONS_INTERVAL
-			]
-		}
+const get = async (ids, interval, limit, dateDetails) => {
+
+	const enhance = (entries) => {
+
+		const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
+		const matchMonth = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY ].includes(interval)
+		const matchYear = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY, intervals.INTERVALS_YEARLY ].includes(interval)
+
+		return createArray(limit).map((_, index) => {
+
+			const date = includeFn(dateDetails, interval)(index + 1)
+
+			// Find a entry that matches the date
+			const entry = entries.find((entry) => {
+				return matchesDate(
+					matchDay === true ? entry._id.day : undefined,
+					matchMonth === true ? entry._id.month : undefined,
+					matchYear === true ? entry._id.year : undefined,
+					date
+				)
+			})
+
+			return {
+				id: date,
+				count: entry == null ? 0 : entry.count
+			}
+
+		})
+
 	}
-}
 
-// Visits below the tracking interval will have a duration of zero. That's
-// incorrect as visitors spent time on the site, but just not enough. This
-// step sets the minimum duration to the half of the tracking interval.
-// This value is a compromise that doesn't influence the average too much.
-const projectMinInterval = {
-	$project: {
-		created: '$created',
-		duration: {
-			$cond: {
-				if: {
-					$lt: [ '$duration', constants.DURATIONS_INTERVAL ]
-				},
-				then: constants.DURATIONS_INTERVAL / 2,
-				else: '$duration'
-			}
-		}
-	}
-}
+	const aggregation = (() => {
 
-// Some visitors keep sites open in the background. Their duration is often
-// way above the limit. This distorts the average and should be omitted.
-const matchLimit = {
-	$match: {
-		duration: {
-			$lt: constants.DURATIONS_LIMIT
-		}
-	}
-}
+		return aggregateDurations(ids, interval, limit, dateDetails)
 
-const getAverage = async (id) => {
+	})()
 
-	return Record.aggregate([
-		{
-			$match: {
-				domainId: id
-			}
-		},
-		projectDuration,
-		projectInterval,
-		projectMinInterval,
-		matchLimit,
-		{
-			$group: {
-				_id: {
-					day: {
-						$dayOfMonth: '$created'
-					},
-					month: {
-						$month: '$created'
-					},
-					year: {
-						$year: '$created'
-					}
-				},
-				average: {
-					$avg: '$duration'
-				}
-			}
-		},
-		{
-			$sort: {
-				'_id.year': -1,
-				'_id.month': -1,
-				'_id.day': -1
-			}
-		},
-		{
-			$limit: 14
-		}
-	])
-
-}
-
-const getDetailed = async (id) => {
-
-	const averageEntries = await Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				created: {
-					$gte: subDays(zeroDate(), 6)
-				}
-			}
-		},
-		projectDuration,
-		projectInterval,
-		projectMinInterval,
-		matchLimit,
-		{
-			$group: {
-				_id: null,
-				average: {
-					$avg: '$duration'
-				}
-			}
-		}
-	])
-
-	// No need to continue when there're no entries
-	if (averageEntries.length === 0) return []
-
-	const detailedEntries = await Record.aggregate([
-		{
-			$match: {
-				domainId: id,
-				created: {
-					$gte: subDays(zeroDate(), 6)
-				}
-			}
-		},
-		projectDuration,
-		projectInterval,
-		{
-			$group: {
-				_id: {
-					$cond: {
-						if: {
-							$gte: [ '$duration', constants.DURATIONS_LIMIT ]
-						},
-						then: constants.DURATIONS_LIMIT,
-						else: '$duration'
-					}
-				},
-				count: {
-					$sum: 1
-				}
-			}
-		},
-		{
-			$addFields: {
-				average: averageEntries[0].average
-			}
-		},
-		{
-			$sort: {
-				_id: 1
-			}
-		}
-	])
-
-	return detailedEntries
-
-}
-
-const get = async (id, type) => {
-
-	switch (type) {
-		case constants.DURATIONS_TYPE_AVERAGE: return getAverage(id)
-		case constants.DURATIONS_TYPE_DETAILED: return getDetailed(id)
-	}
+	return enhance(
+		await Record.aggregate(aggregation)
+	)
 
 }
 

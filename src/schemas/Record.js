@@ -14,11 +14,13 @@ const schema = new mongoose.Schema({
 		default: uuid
 	},
 	clientId: {
-		type: String
+		type: String,
+		index: true
 	},
 	domainId: {
 		type: String,
-		required: true
+		required: true,
+		index: true
 	},
 	siteLocation: {
 		type: String,
@@ -80,11 +82,13 @@ const schema = new mongoose.Schema({
 	created: {
 		type: Date,
 		required: true,
+		index: true,
 		default: Date.now
 	},
 	updated: {
 		type: Date,
 		required: true,
+		index: true,
 		default: Date.now
 	}
 })

@@ -2,15 +2,9 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_BROWSERS_TYPE = Symbol()
-export const SET_BROWSERS_SORTING = Symbol()
 export const SET_BROWSERS_VALUE = Symbol()
 export const SET_BROWSERS_FETCHING = Symbol()
 export const SET_BROWSERS_ERROR = Symbol()
-
-export const setBrowsersSorting = (payload) => ({
-	type: SET_BROWSERS_SORTING,
-	payload
-})
 
 export const setBrowsersType = (payload) => ({
 	type: SET_BROWSERS_TYPE,
@@ -42,19 +36,39 @@ export const fetchBrowsers = signalHandler((signal) => (props, domainId) => asyn
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/browsers?sorting=${ props.browsers.sorting }&type=${ props.browsers.type }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchBrowsers($id: ID!, $sorting: Sorting!, $type: BrowserType!, $range: Range) {
+					domain(id: $id) {
+						statistics {
+							browsers(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				id: domainId,
+				sorting: props.filter.sorting,
+				type: props.browsers.type,
+				range: props.filter.range
+			},
 			props,
 			signal: signal(domainId)
 		})
 
-		dispatch(setBrowsersValue(domainId, data))
+		dispatch(setBrowsersValue(domainId, data.domain.statistics.browsers))
 		dispatch(setBrowsersFetching(domainId, false))
 
 	} catch (err) {
 
-		dispatch(setBrowsersError(domainId, err))
+		if (err.name === 'AbortError') return
 		dispatch(setBrowsersFetching(domainId, false))
+		if (err.name === 'HandledError') return
+		dispatch(setBrowsersError(domainId, err))
 
 	}
 

@@ -1,31 +1,37 @@
 'use strict'
 
-module.exports = (id, property) => [
-	{
-		$match: {
-			domainId: id,
-			[property]: {
-				$ne: null
+const matchDomains = require('../stages/matchDomains')
+
+module.exports = (ids, properties, limit) => {
+
+	const aggregation = [
+		matchDomains(ids),
+		{
+			$group: {
+				_id: {},
+				count: {
+					$sum: 1
+				},
+				created: {
+					$first: '$created'
+				}
 			}
-		}
-	},
-	{
-		$group: {
-			_id: `$${ property }`,
-			count: {
-				$sum: 1
-			},
-			created: {
-				$first: '$created'
+		},
+		{
+			$sort: {
+				created: -1
 			}
+		},
+		{
+			$limit: limit
 		}
-	},
-	{
-		$sort: {
-			created: -1
-		}
-	},
-	{
-		$limit: 30
-	}
-]
+	]
+
+	properties.forEach((property) => {
+		aggregation[0].$match[property] = { $ne: null }
+		aggregation[1].$group._id[property] = `$${ property }`
+	})
+
+	return aggregation
+
+}

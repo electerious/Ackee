@@ -1,6 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
+// import { useHotkeys } from 'react-hotkeys-hook'
 
 import customTrackerUrl from '../../../../utils/customTrackerUrl'
 
@@ -11,6 +12,12 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
 const ModalDomainEdit = (props) => {
+
+	// Currently not possible:
+	// https://github.com/JohannesKlauss/react-hotkeys-hook/issues/276
+	// useHotkeys('esc', props.closeModal, {
+	// 	filter: () => props.current === true
+	// })
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -96,7 +103,7 @@ const ModalDomainEdit = (props) => {
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator '
 				}),
 
 				h('button', {
@@ -106,7 +113,7 @@ const ModalDomainEdit = (props) => {
 				}, 'Delete'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator '
 				}),
 
 				h('button', {
@@ -121,6 +128,7 @@ const ModalDomainEdit = (props) => {
 }
 
 ModalDomainEdit.propTypes = {
+	current: PropTypes.bool.isRequired,
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	fetching: PropTypes.bool.isRequired,

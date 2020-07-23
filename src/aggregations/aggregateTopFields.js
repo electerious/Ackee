@@ -1,21 +1,15 @@
 'use strict'
 
-const offsetByRange = require('../utils/offsetByRange')
+const ranges = require('../constants/ranges')
+const matchDomains = require('../stages/matchDomains')
 
-module.exports = (id, property, range) => {
+module.exports = (ids, properties, range, limit, dateDetails) => {
 
-	const aggregate = [
-		{
-			$match: {
-				domainId: id,
-				[property]: {
-					$ne: null
-				}
-			}
-		},
+	const aggregation = [
+		matchDomains(ids),
 		{
 			$group: {
-				_id: `$${ property }`,
+				_id: {},
 				count: {
 					$sum: 1
 				}
@@ -27,15 +21,27 @@ module.exports = (id, property, range) => {
 			}
 		},
 		{
-			$limit: 30
+			$limit: limit
 		}
 	]
 
-	const dateOffset = offsetByRange(range)
-	if (dateOffset != null) {
-		aggregate[0].$match.created = { $gte: dateOffset }
+	properties.forEach((property) => {
+		aggregation[0].$match[property] = { $ne: null }
+		aggregation[1].$group._id[property] = `$${ property }`
+	})
+
+	if (range === ranges.RANGES_LAST_24_HOURS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastHours(24) }
 	}
 
-	return aggregate
+	if (range === ranges.RANGES_LAST_7_DAYS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastDays(7) }
+	}
+
+	if (range === ranges.RANGES_LAST_30_DAYS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastDays(30) }
+	}
+
+	return aggregation
 
 }

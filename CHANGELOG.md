@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- GraphQL API
+- Overview with facts and data from all domains
+- Facts card with live visitor counter, average visits and durations and the total number of visits today, this month and year
+- New navigation that allows you to view stats by domain
+- Keyboard shortcuts
+- Switch between daily, monthly and yearly durations
+- Click on a card headline to view more of this domain or insight
+- Support `+srv` connection string modifier for MongoDB urls (#132, thanks @ericsandine)
+
+### Changed
+
+- Improved performance for all aggregations
+- Show stale data while loading new data
+- Removed detailed durations
+- Delete records of a domain when deleting a domain
+- Updated the required Node.js version and Docker Node.js version to v14
+
+### Fixed
+
+- Sorting of yearly views
+
 ## [1.7.1] - 2020-05-15
 
 ### Added
