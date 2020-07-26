@@ -76,7 +76,7 @@ Make sure to install and update all dependencies before you setup Ackee.
 
 ### API
 
-// TODO
+Ackee features a [GraphQL API](docs/API.md) that allows you to build custom tools upon Ackee. Everything you see in the UI is made from data delivered by the API.
 
 ### Options
 
