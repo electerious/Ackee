@@ -10,9 +10,7 @@ const RouteBrowsers = (props) => {
 
 	useEffect(() => {
 
-		props.domains.value.map((domain) => {
-			props.fetchBrowsers(props, domain.id)
-		})
+		props.fetchBrowsers(props)
 
 	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.browsers.type ])
 
@@ -26,7 +24,7 @@ const RouteBrowsers = (props) => {
 						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.filter.sorting,
-						loading: props.domains.fetching || selectBrowsersValue(props, domain.id).fetching,
+						loading: props.browsers.fetching,
 						items: enhanceBrowsers(selectBrowsersValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})

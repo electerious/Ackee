@@ -12,7 +12,9 @@ import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: DEVICES_TYPE_WITH_MODEL,
-	value: {}
+	value: {},
+	fetching: false,
+	error: undefined
 })
 
 export const initialSubState = genericSubState
@@ -35,10 +37,10 @@ export default produce((draft, action) => {
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_DEVICES_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_DEVICES_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

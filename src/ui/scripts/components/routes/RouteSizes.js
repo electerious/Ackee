@@ -10,9 +10,7 @@ const RouteSizes = (props) => {
 
 	useEffect(() => {
 
-		props.domains.value.map((domain) => {
-			props.fetchSizes(props, domain.id)
-		})
+		props.fetchSizes(props)
 
 	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.sizes.type ])
 
@@ -26,7 +24,7 @@ const RouteSizes = (props) => {
 						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.filter.sorting,
-						loading: props.domains.fetching || selectSizesValue(props, domain.id).fetching,
+						loading: props.sizes.fetching,
 						items: enhanceSizes(selectSizesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})

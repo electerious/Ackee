@@ -10,9 +10,7 @@ const RouteDevices = (props) => {
 
 	useEffect(() => {
 
-		props.domains.value.map((domain) => {
-			props.fetchDevices(props, domain.id)
-		})
+		props.fetchDevices(props)
 
 	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.devices.type ])
 
@@ -26,7 +24,7 @@ const RouteDevices = (props) => {
 						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.filter.sorting,
-						loading: props.domains.fetching || selectDevicesValue(props, domain.id).fetching,
+						loading: props.devices.fetching,
 						items: enhanceDevices(selectDevicesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})

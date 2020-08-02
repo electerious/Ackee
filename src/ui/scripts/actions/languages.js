@@ -11,29 +11,28 @@ export const setLanguagesValue = (domainId, payload) => ({
 	payload
 })
 
-export const setLanguagesFetching = (domainId, payload) => ({
+export const setLanguagesFetching = (payload) => ({
 	type: SET_LANGUAGES_FETCHING,
-	domainId,
 	payload
 })
 
-export const setLanguagesError = (domainId, payload) => ({
+export const setLanguagesError = (payload) => ({
 	type: SET_LANGUAGES_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchLanguages = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchLanguages = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setLanguagesFetching(domainId, true))
-	dispatch(setLanguagesError(domainId))
+	dispatch(setLanguagesFetching(true))
+	dispatch(setLanguagesError())
 
 	try {
 
 		const data = await api({
 			query: `
-				query fetchLanguages($id: ID!, $sorting: Sorting!, $range: Range) {
-					domain(id: $id) {
+				query fetchLanguages($sorting: Sorting!, $range: Range) {
+					domains {
+						id
 						statistics {
 							languages(sorting: $sorting, range: $range) {
 								id
@@ -45,23 +44,24 @@ export const fetchLanguages = signalHandler((signal) => (props, domainId) => asy
 				}
 			`,
 			variables: {
-				id: domainId,
 				sorting: props.filter.sorting,
 				range: props.filter.range
 			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setLanguagesValue(domainId, data.domain.statistics.languages))
-		dispatch(setLanguagesFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setLanguagesValue(domain.id, domain.statistics.languages))
+		})
+		dispatch(setLanguagesFetching(false))
 
 	} catch (err) {
 
 		if (err.name === 'AbortError') return
-		dispatch(setLanguagesFetching(domainId, false))
+		dispatch(setLanguagesFetching(false))
 		if (err.name === 'HandledError') return
-		dispatch(setLanguagesError(domainId, err))
+		dispatch(setLanguagesError(err))
 
 	}
 

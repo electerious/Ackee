@@ -11,29 +11,28 @@ export const setPagesValue = (domainId, payload) => ({
 	payload
 })
 
-export const setPagesFetching = (domainId, payload) => ({
+export const setPagesFetching = (payload) => ({
 	type: SET_PAGES_FETCHING,
-	domainId,
 	payload
 })
 
-export const setPagesError = (domainId, payload) => ({
+export const setPagesError = (payload) => ({
 	type: SET_PAGES_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchPages = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchPages = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setPagesFetching(domainId, true))
-	dispatch(setPagesError(domainId))
+	dispatch(setPagesFetching(true))
+	dispatch(setPagesError())
 
 	try {
 
 		const data = await api({
 			query: `
-				query fetchPages($id: ID!, $sorting: Sorting!, $range: Range) {
-					domain(id: $id) {
+				query fetchPages($sorting: Sorting!, $range: Range) {
+					domains {
+						id
 						statistics {
 							pages(sorting: $sorting, range: $range) {
 								id
@@ -45,23 +44,24 @@ export const fetchPages = signalHandler((signal) => (props, domainId) => async (
 				}
 			`,
 			variables: {
-				id: domainId,
 				sorting: props.filter.sorting,
 				range: props.filter.range
 			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setPagesValue(domainId, data.domain.statistics.pages))
-		dispatch(setPagesFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setPagesValue(domain.id, domain.statistics.pages))
+		})
+		dispatch(setPagesFetching(false))
 
 	} catch (err) {
 
 		if (err.name === 'AbortError') return
-		dispatch(setPagesFetching(domainId, false))
+		dispatch(setPagesFetching(false))
 		if (err.name === 'HandledError') return
-		dispatch(setPagesError(domainId, err))
+		dispatch(setPagesError(err))
 
 	}
 

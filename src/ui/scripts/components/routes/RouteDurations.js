@@ -11,9 +11,7 @@ const RouteDurations = (props) => {
 
 	useEffect(() => {
 
-		props.domains.value.map((domain) => {
-			props.fetchDurations(props, domain.id)
-		})
+		props.fetchDurations(props)
 
 	}, [ props.filter.interval, props.domains.value ])
 
@@ -33,7 +31,7 @@ const RouteDurations = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						interval: props.filter.interval,
-						loading: props.domains.fetching || selectDurationsValue(props, domain.id).fetching,
+						loading: props.durations.fetching,
 						items: enhanceDurations(selectDurationsValue(props, domain.id).value, 7),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})

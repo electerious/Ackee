@@ -12,9 +12,7 @@ const RouteViews = (props) => {
 
 	useEffect(() => {
 
-		props.domains.value.map((domain) => {
-			props.fetchViews(props, domain.id)
-		})
+		props.fetchViews(props)
 
 	}, [ props.filter.interval, props.domains.value, props.views.type ])
 
@@ -38,7 +36,7 @@ const RouteViews = (props) => {
 						key: domain.id,
 						headline: domain.title,
 						interval: props.filter.interval,
-						loading: props.domains.fetching || selectViewsValue(props, domain.id).fetching,
+						loading: props.views.fetching,
 						items: enhanceViews(selectViewsValue(props, domain.id).value, 7),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})

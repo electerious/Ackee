@@ -17,29 +17,28 @@ export const setSystemsValue = (domainId, payload) => ({
 	payload
 })
 
-export const setSystemsFetching = (domainId, payload) => ({
+export const setSystemsFetching = (payload) => ({
 	type: SET_SYSTEMS_FETCHING,
-	domainId,
 	payload
 })
 
-export const setSystemsError = (domainId, payload) => ({
+export const setSystemsError = (payload) => ({
 	type: SET_SYSTEMS_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchSystems = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchSystems = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setSystemsFetching(domainId, true))
-	dispatch(setSystemsError(domainId))
+	dispatch(setSystemsFetching(true))
+	dispatch(setSystemsError())
 
 	try {
 
 		const data = await api({
 			query: `
-				query fetchSystems($id: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
-					domain(id: $id) {
+				query fetchSystems($sorting: Sorting!, $type: SystemType!, $range: Range) {
+					domains {
+						id
 						statistics {
 							systems(sorting: $sorting, type: $type, range: $range) {
 								id
@@ -51,24 +50,25 @@ export const fetchSystems = signalHandler((signal) => (props, domainId) => async
 				}
 			`,
 			variables: {
-				id: domainId,
 				sorting: props.filter.sorting,
 				type: props.systems.type,
 				range: props.filter.range
 			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setSystemsValue(domainId, data.domain.statistics.systems))
-		dispatch(setSystemsFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setSystemsValue(domain.id, domain.statistics.systems))
+		})
+		dispatch(setSystemsFetching(false))
 
 	} catch (err) {
 
 		if (err.name === 'AbortError') return
-		dispatch(setSystemsFetching(domainId, false))
+		dispatch(setSystemsFetching(false))
 		if (err.name === 'HandledError') return
-		dispatch(setSystemsError(domainId, err))
+		dispatch(setSystemsError(err))
 
 	}
 

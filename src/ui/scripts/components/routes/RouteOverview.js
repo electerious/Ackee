@@ -33,7 +33,7 @@ const RouteOverview = (props) => {
 	const filterSorting = props.filter.sorting
 	const filterRange = props.filter.range
 	const filterInterval = props.filter.interval
-	const isLoading = props.domains.fetching || selectOverviewValue.withoutType(props, domainId).fetching
+	const isLoading = selectOverviewValue.withoutType(props, domainId).fetching
 
 	useEffect(() => {
 

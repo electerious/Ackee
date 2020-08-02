@@ -17,29 +17,28 @@ export const setViewsValue = (domainId, payload) => ({
 	payload
 })
 
-export const setViewsFetching = (domainId, payload) => ({
+export const setViewsFetching = (payload) => ({
 	type: SET_VIEWS_FETCHING,
-	domainId,
 	payload
 })
 
-export const setViewsError = (domainId, payload) => ({
+export const setViewsError = (payload) => ({
 	type: SET_VIEWS_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchViews = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchViews = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setViewsFetching(domainId, true))
-	dispatch(setViewsError(domainId))
+	dispatch(setViewsFetching(true))
+	dispatch(setViewsError())
 
 	try {
 
 		const data = await api({
 			query: `
-				query fetchViews($id: ID!, $interval: Interval!, $type: ViewType!) {
-					domain(id: $id) {
+				query fetchViews($interval: Interval!, $type: ViewType!) {
+					domains {
+						id
 						statistics {
 							views(interval: $interval, type: $type) {
 								id
@@ -50,23 +49,24 @@ export const fetchViews = signalHandler((signal) => (props, domainId) => async (
 				}
 			`,
 			variables: {
-				id: domainId,
 				interval: props.filter.interval,
 				type: props.views.type
 			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setViewsValue(domainId, data.domain.statistics.views))
-		dispatch(setViewsFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setViewsValue(domain.id, domain.statistics.views))
+		})
+		dispatch(setViewsFetching(false))
 
 	} catch (err) {
 
 		if (err.name === 'AbortError') return
-		dispatch(setViewsFetching(domainId, false))
+		dispatch(setViewsFetching(false))
 		if (err.name === 'HandledError') return
-		dispatch(setViewsError(domainId, err))
+		dispatch(setViewsError(err))
 
 	}
 

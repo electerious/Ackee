@@ -17,29 +17,28 @@ export const setSizesValue = (domainId, payload) => ({
 	payload
 })
 
-export const setSizesFetching = (domainId, payload) => ({
+export const setSizesFetching = (payload) => ({
 	type: SET_SIZES_FETCHING,
-	domainId,
 	payload
 })
 
-export const setSizesError = (domainId, payload) => ({
+export const setSizesError = (payload) => ({
 	type: SET_SIZES_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchSizes = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchSizes = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setSizesFetching(domainId, true))
-	dispatch(setSizesError(domainId))
+	dispatch(setSizesFetching(true))
+	dispatch(setSizesError())
 
 	try {
 
 		const data = await api({
 			query: `
-				query fetchSizes($id: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {
-					domain(id: $id) {
+				query fetchSizes($sorting: Sorting!, $type: SizeType!, $range: Range) {
+					domains {
+						id
 						statistics {
 							sizes(sorting: $sorting, type: $type, range: $range) {
 								id
@@ -51,24 +50,25 @@ export const fetchSizes = signalHandler((signal) => (props, domainId) => async (
 				}
 			`,
 			variables: {
-				id: domainId,
 				sorting: props.filter.sorting,
 				type: props.sizes.type,
 				range: props.filter.range
 			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setSizesValue(domainId, data.domain.statistics.sizes))
-		dispatch(setSizesFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setSizesValue(domain.id, domain.statistics.sizes))
+		})
+		dispatch(setSizesFetching(false))
 
 	} catch (err) {
 
 		if (err.name === 'AbortError') return
-		dispatch(setSizesFetching(domainId, false))
+		dispatch(setSizesFetching(false))
 		if (err.name === 'HandledError') return
-		dispatch(setSizesError(domainId, err))
+		dispatch(setSizesError(err))
 
 	}
 

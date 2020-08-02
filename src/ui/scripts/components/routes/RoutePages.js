@@ -10,9 +10,7 @@ const RoutePages = (props) => {
 
 	useEffect(() => {
 
-		props.domains.value.map((domain) => {
-			props.fetchPages(props, domain.id)
-		})
+		props.fetchPages(props)
 
 	}, [ props.filter.range, props.domains.value, props.filter.sorting ])
 
@@ -26,7 +24,7 @@ const RoutePages = (props) => {
 						headline: domain.title,
 						range: props.filter.range,
 						sorting: props.filter.sorting,
-						loading: props.domains.fetching || selectPagesValue(props, domain.id).fetching,
+						loading: props.pages.fetching,
 						items: enhancePages(selectPagesValue(props, domain.id).value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
