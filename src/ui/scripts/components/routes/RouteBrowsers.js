@@ -12,7 +12,7 @@ const RouteBrowsers = (props) => {
 
 		props.fetchBrowsers(props)
 
-	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.browsers.type ])
+	}, [ props.filter.range, props.filter.sorting, props.browsers.type ])
 
 	return (
 		h(Fragment, {},

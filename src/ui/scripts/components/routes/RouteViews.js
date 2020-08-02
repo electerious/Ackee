@@ -14,7 +14,7 @@ const RouteViews = (props) => {
 
 		props.fetchViews(props)
 
-	}, [ props.filter.interval, props.domains.value, props.views.type ])
+	}, [ props.filter.interval, props.views.type ])
 
 	return (
 		h(Fragment, {},

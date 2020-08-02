@@ -12,7 +12,7 @@ const RouteSizes = (props) => {
 
 		props.fetchSizes(props)
 
-	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.sizes.type ])
+	}, [ props.filter.range, props.filter.sorting, props.sizes.type ])
 
 	return (
 		h(Fragment, {},

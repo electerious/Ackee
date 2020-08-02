@@ -12,7 +12,7 @@ const RouteReferrers = (props) => {
 
 		props.fetchReferrers(props)
 
-	}, [ props.filter.range, props.domains.value, props.filter.sorting ])
+	}, [ props.filter.range, props.filter.sorting ])
 
 	return (
 		h(Fragment, {},

@@ -12,7 +12,7 @@ const RouteSystems = (props) => {
 
 		props.fetchSystems(props)
 
-	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.systems.type ])
+	}, [ props.filter.range, props.filter.sorting, props.systems.type ])
 
 	return (
 		h(Fragment, {},

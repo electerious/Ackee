@@ -12,7 +12,7 @@ const RouteDevices = (props) => {
 
 		props.fetchDevices(props)
 
-	}, [ props.filter.range, props.domains.value, props.filter.sorting, props.devices.type ])
+	}, [ props.filter.range, props.filter.sorting, props.devices.type ])
 
 	return (
 		h(Fragment, {},

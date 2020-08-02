@@ -13,7 +13,7 @@ const RouteDurations = (props) => {
 
 		props.fetchDurations(props)
 
-	}, [ props.filter.interval, props.domains.value ])
+	}, [ props.filter.interval ])
 
 	return (
 		h(Fragment, {},

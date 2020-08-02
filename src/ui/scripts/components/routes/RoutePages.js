@@ -12,7 +12,7 @@ const RoutePages = (props) => {
 
 		props.fetchPages(props)
 
-	}, [ props.filter.range, props.domains.value, props.filter.sorting ])
+	}, [ props.filter.range, props.filter.sorting ])
 
 	return (
 		h(Fragment, {},
