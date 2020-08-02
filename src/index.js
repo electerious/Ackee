@@ -8,7 +8,6 @@ const server = require('./server')
 const signale = require('./utils/signale')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
-const isSrvUrl = require('./utils/isSrvUrl')
 const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
 
@@ -31,9 +30,7 @@ signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
-	reconnectTries: Number.MAX_VALUE,
-	reconnectInterval: 1000,
-	useUnifiedTopology: isSrvUrl(dbUrl) === true
+	useUnifiedTopology: true
 }).then(() => {
 
 	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
