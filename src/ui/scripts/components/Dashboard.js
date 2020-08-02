@@ -20,6 +20,8 @@ const gotoDomainWhenDefined = (props, index) => {
 
 const Dashboard = (props) => {
 
+	const routeIdentifier = JSON.stringify(props.route)
+
 	useEffect(() => {
 
 		props.fetchDomains(props)
@@ -30,7 +32,7 @@ const Dashboard = (props) => {
 
 		document.scrollingElement.scrollTop = 0
 
-	}, [ props.route.key ])
+	}, [ routeIdentifier ])
 
 	useHotkeys('o', () => props.setRoute(route.ROUTE_OVERVIEW))
 
