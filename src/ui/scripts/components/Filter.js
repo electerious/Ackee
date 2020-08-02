@@ -57,7 +57,19 @@ const labels = {
 }
 
 const calculateX = (measurement) => {
-	return measurement.target.relative.x + measurement.target.width / 2 - measurement.element.width / 2
+
+	const padding = 10
+
+	return Math.max(
+		padding,
+		Math.min(
+			// Ensure that the context stays on the screen
+			measurement.body.width - measurement.element.width - padding,
+			// Ensure that the context is pinned to the target
+			measurement.target.relative.x + measurement.target.width / 2 - measurement.element.width / 2
+		)
+	)
+
 }
 
 const calculateY = (measurement) => {

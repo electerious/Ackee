@@ -12,11 +12,16 @@ const DROPDOWN = Symbol()
 
 const calculateX = (measurement) => {
 
-	return Math.min(
-		// Ensure that the context stays on the screen
-		measurement.body.width - measurement.element.width - 10,
-		// Ensure that the context is pinned to the target
-		measurement.target.absolute.x + measurement.target.width - measurement.element.width
+	const padding = 10
+
+	return Math.max(
+		padding,
+		Math.min(
+			// Ensure that the context stays on the screen
+			measurement.body.width - measurement.element.width - padding,
+			// Ensure that the context is pinned to the target
+			measurement.target.absolute.x + measurement.target.width - measurement.element.width
+		)
 	)
 
 }
