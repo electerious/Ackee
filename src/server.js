@@ -73,6 +73,7 @@ const notFound = async (req) => {
 const apolloServer = new ApolloServer({
 	introspection: isDemoMode === true || isDevelopmentMode === true,
 	playground: isDemoMode === true || isDevelopmentMode === true,
+	debug: isDevelopmentMode === true,
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
