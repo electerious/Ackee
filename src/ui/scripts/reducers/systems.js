@@ -8,13 +8,12 @@ import {
 } from '../actions'
 
 import { SYSTEMS_TYPE_NO_VERSION } from '../../../constants/systems'
+import genericState from '../utils/genericState'
 import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: SYSTEMS_TYPE_NO_VERSION,
-	value: {},
-	fetching: false,
-	error: undefined
+	...genericState()
 })
 
 export const initialSubState = genericSubState

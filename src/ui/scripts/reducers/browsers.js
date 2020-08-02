@@ -8,13 +8,12 @@ import {
 } from '../actions'
 
 import { BROWSERS_TYPE_NO_VERSION } from '../../../constants/browsers'
+import genericState from '../utils/genericState'
 import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: BROWSERS_TYPE_NO_VERSION,
-	value: {},
-	fetching: false,
-	error: undefined
+	...genericState()
 })
 
 export const initialSubState = genericSubState

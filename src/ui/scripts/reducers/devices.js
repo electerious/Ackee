@@ -8,13 +8,12 @@ import {
 } from '../actions'
 
 import { DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
+import genericState from '../utils/genericState'
 import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: DEVICES_TYPE_WITH_MODEL,
-	value: {},
-	fetching: false,
-	error: undefined
+	...genericState()
 })
 
 export const initialSubState = genericSubState

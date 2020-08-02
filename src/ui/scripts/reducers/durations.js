@@ -6,13 +6,10 @@ import {
 	SET_DURATIONS_ERROR
 } from '../actions'
 
+import genericState from '../utils/genericState'
 import genericSubState from '../utils/genericSubState'
 
-export const initialState = () => ({
-	value: {},
-	fetching: false,
-	error: undefined
-})
+export const initialState = genericState
 
 export const initialSubState = genericSubState
 
