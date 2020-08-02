@@ -1,6 +1,7 @@
 'use strict'
 
 const tokens = require('../database/tokens')
+const KnownError = require('../utils/KnownError')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -14,11 +15,11 @@ module.exports = {
 
 			const { username, password } = input
 
-			if (process.env.ACKEE_USERNAME == null) throw new Error('Ackee username missing in environment')
-			if (process.env.ACKEE_PASSWORD == null) throw new Error('Ackee username missing in environment')
+			if (process.env.ACKEE_USERNAME == null) throw new KnownError('Ackee username missing in environment')
+			if (process.env.ACKEE_PASSWORD == null) throw new KnownError('Ackee username missing in environment')
 
-			if (username !== process.env.ACKEE_USERNAME) throw new Error('Username or password incorrect')
-			if (password !== process.env.ACKEE_PASSWORD) throw new Error('Username or password incorrect')
+			if (username !== process.env.ACKEE_USERNAME) throw new KnownError('Username or password incorrect')
+			if (password !== process.env.ACKEE_PASSWORD) throw new KnownError('Username or password incorrect')
 
 			const entry = await tokens.add()
 

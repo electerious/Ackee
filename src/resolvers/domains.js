@@ -2,6 +2,7 @@
 
 const records = require('../database/records')
 const domains = require('../database/domains')
+const KnownError = require('../utils/KnownError')
 const messages = require('../utils/messages')
 const pipe = require('../utils/pipe')
 const requireAuth = require('../middlewares/requireAuth')
@@ -14,8 +15,6 @@ module.exports = {
 	},
 	Query: {
 		domain: pipe(requireAuth, async (parent, { id }) => {
-
-			throw new Error('test')
 
 			return domains.get(id)
 
@@ -38,7 +37,7 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					throw new Error(messages(err.errors))
+					throw new KnownError(messages(err.errors))
 				}
 
 				throw err
@@ -62,7 +61,7 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					throw new Error(messages(err.errors))
+					throw new KnownError(messages(err.errors))
 				}
 
 				throw err
@@ -70,7 +69,7 @@ module.exports = {
 			}
 
 			if (entry == null) {
-				throw new Error('Unknown domain')
+				throw new KnownError('Unknown domain')
 			}
 
 			return {

@@ -1,5 +1,6 @@
 'use strict'
 
+const KnownError = require('../utils/KnownError')
 const normalizeUrl = require('../utils/normalizeUrl')
 const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
@@ -11,7 +12,7 @@ const normalizeSiteLocation = (siteLocation) => {
 	if (siteLocation == null) {
 
 		// Pre-validate siteLocation and imitate MongoDB error
-		throw new Error(`Path \`siteLocation\` is required`)
+		throw new KnownError(`Path \`siteLocation\` is required`)
 
 	}
 
@@ -21,7 +22,7 @@ const normalizeSiteLocation = (siteLocation) => {
 
 	} catch (err) {
 
-		throw new Error(`Failed to normalize \`siteLocation\``, err)
+		throw new KnownError(`Failed to normalize \`siteLocation\``, err)
 
 	}
 
@@ -38,7 +39,7 @@ const normalizeSiteReferrer = (siteReferrer) => {
 
 	} catch (err) {
 
-		throw new Error(`Failed to normalize \`siteReferrer\``, err)
+		throw new KnownError(`Failed to normalize \`siteReferrer\``, err)
 
 	}
 
@@ -71,7 +72,7 @@ module.exports = {
 
 			const domain = await domains.get(domainId)
 
-			if (domain == null) throw new Error('Unknown domain')
+			if (domain == null) throw new KnownError('Unknown domain')
 
 			let entry
 
@@ -82,7 +83,7 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					throw new Error(messages(err.errors))
+					throw new KnownError(messages(err.errors))
 				}
 
 				throw err
@@ -110,7 +111,7 @@ module.exports = {
 			} catch (err) {
 
 				if (err.name === 'ValidationError') {
-					throw new Error(messages(err.errors))
+					throw new KnownError(messages(err.errors))
 				}
 
 				throw err
@@ -118,7 +119,7 @@ module.exports = {
 			}
 
 			if (entry == null) {
-				throw new Error('Unknown record')
+				throw new KnownError('Unknown record')
 			}
 
 			return {

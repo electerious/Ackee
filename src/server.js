@@ -6,6 +6,7 @@ const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 
+const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
 const isAuthenticated = require('./utils/isAuthenticated')
@@ -15,26 +16,56 @@ const customTrackerUrl = require('./utils/customTrackerUrl')
 const createDate = require('./utils/createDate')
 const ui = require('./routes/ui')
 
+const handleMicroError = (err, res) => {
+
+	// This part is for micro errors and errors outside of GraphQL.
+	// Most errors won't be caught here, but some error can still
+	// happen outside of GraphQL. In this case wer distinguish
+	// between unknown errors and known errors. Known errors are
+	// created with the createError function while unknown errors
+	// are simply errors thrown somewhere in the application.
+
+	const isUnknownError = err.statusCode == null
+	const hasOriginalError = err.originalError != null
+
+	// Only log the full error stack when the error isn't a known response
+	if (isUnknownError === true) {
+		signale.fatal(err)
+		return send(res, 500, err.message)
+	}
+
+	signale.warn(hasOriginalError === true ? err.originalError.message : err.message)
+	send(res, err.statusCode, err.message)
+
+}
+
+const handleGraphError = (err) => {
+
+	// This part is for error that happen inside GraphQL resolvers.
+	// All known errors should be thrown as a KnownError as those
+	// errors will only show up in the response and as a warning
+	// in the console output.
+
+	const originalError = err.originalError
+	const isKnownError = originalError instanceof KnownError
+
+	// Only log the full error stack when the error isn't a known response
+	if (isKnownError === false) {
+		signale.fatal(originalError)
+		return err
+	}
+
+	signale.warn(err.originalError.message)
+	return err
+
+}
+
 const catchError = (fn) => async (req, res) => {
 
 	try {
-
 		return await fn(req, res)
-
 	} catch (err) {
-
-		const isUnknownError = err.statusCode == null
-		const hasOriginalError = err.originalError != null
-
-		// Only log the full error stack when the error isn't a known API response
-		if (isUnknownError === true) {
-			signale.fatal(err)
-			return send(res, 500, err.message)
-		}
-
-		signale.warn(hasOriginalError === true ? err.originalError.message : err.message)
-		send(res, err.statusCode, err.message)
-
+		handleMicroError(err, res)
 	}
 
 }
@@ -74,6 +105,7 @@ const apolloServer = new ApolloServer({
 	introspection: isDemoMode === true || isDevelopmentMode === true,
 	playground: isDemoMode === true || isDevelopmentMode === true,
 	debug: isDevelopmentMode === true,
+	formatError: handleGraphError,
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
