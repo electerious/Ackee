@@ -137,8 +137,6 @@ export const deleteDomain = signalHandler((signal) => (props, domainId, state) =
 
 	try {
 
-		console.log(state)
-
 		await api({
 			query: `
 				mutation deleteDomain($id: ID!) {

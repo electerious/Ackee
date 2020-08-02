@@ -53,8 +53,6 @@ export const fetchLanguages = signalHandler((signal) => (props, domainId) => asy
 			signal: signal(domainId)
 		})
 
-		console.log(data)
-
 		dispatch(setLanguagesValue(domainId, data.domain.statistics.languages))
 		dispatch(setLanguagesFetching(domainId, false))
 
