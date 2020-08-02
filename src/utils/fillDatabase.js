@@ -311,7 +311,7 @@ const job = (url) => async () => {
 
 	try {
 
-		const endpoint = `${ url }/graphql`
+		const endpoint = `${ url }/api`
 
 		const currentDate = new Date()
 		const currentWeekday = currentDate.getDay()

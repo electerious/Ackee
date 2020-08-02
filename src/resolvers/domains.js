@@ -15,6 +15,8 @@ module.exports = {
 	Query: {
 		domain: pipe(requireAuth, async (parent, { id }) => {
 
+			throw new Error('test')
+
 			return domains.get(id)
 
 		}),

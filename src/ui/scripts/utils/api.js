@@ -13,7 +13,7 @@ export default async ({ query, variables, props, signal }) => {
 		headers.append('Time-Zone', userTimeZone)
 		if (token) headers.append('Authorization', `Bearer ${ token }`)
 
-		const request = fetch('/graphql', {
+		const request = fetch('/api', {
 			method: 'post',
 			headers,
 			body: JSON.stringify({

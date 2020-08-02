@@ -91,7 +91,7 @@ const apolloServer = new ApolloServer({
 	})
 })
 
-const graphqlPath = '/graphql'
+const graphqlPath = '/api'
 const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
 
 const routes = [
