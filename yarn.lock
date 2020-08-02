@@ -2732,10 +2732,10 @@ accept@^3.0.2:
     boom "7.x.x"
     hoek "6.x.x"
 
-ackee-tracker@^4.0.0-0:
-  version "4.0.0-0"
-  resolved "https://registry.yarnpkg.com/ackee-tracker/-/ackee-tracker-4.0.0-0.tgz#87fa652738868403f7b845bb09136bab35c235c8"
-  integrity sha512-woJVE6Q4kP/9ik+u8g0pqk30iezB8TWH6V82KSlJG/Nx105eY6f8bNJiSFmV2yKxeeh8vpMN89eyjPf8Mot90Q==
+ackee-tracker@^4.0.0-1:
+  version "4.0.0-1"
+  resolved "https://registry.yarnpkg.com/ackee-tracker/-/ackee-tracker-4.0.0-1.tgz#715af4004220ff722bbe0b2f5fbc00a43bd51312"
+  integrity sha512-FTDCCOhtiVudMRda3mA2Jy/klM4PX65gvn+0c3z5HHx1r+yzVUiCG4nYnVGZYTBfMwTu4ABfaP/VdHptoVetxA==
   dependencies:
     platform "^1.3.6"
 
