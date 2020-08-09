@@ -11,9 +11,9 @@ const matchesDate = require('../utils/matchesDate')
 const includeFn = (dateDetails, interval) => {
 
 	switch (interval) {
-		case intervals.INTERVALS_DAILY: return dateDetails.offsetDays
-		case intervals.INTERVALS_MONTHLY: return dateDetails.offsetMonths
-		case intervals.INTERVALS_YEARLY: return dateDetails.offsetYears
+		case intervals.INTERVALS_DAILY: return dateDetails.lastDays
+		case intervals.INTERVALS_MONTHLY: return dateDetails.lastMonths
+		case intervals.INTERVALS_YEARLY: return dateDetails.lastYears
 	}
 
 }
@@ -28,9 +28,7 @@ const get = async (ids, interval, limit, dateDetails) => {
 
 		return createArray(limit).map((_, index) => {
 
-			// Add +1 to the index, because the index starts at zero and
-			// the date fn must include at least one day.
-			const date = includeFn(dateDetails, interval)(index + 1)
+			const date = includeFn(dateDetails, interval)(index)
 
 			// Views and durations are returning day, month and year in the
 			// timezone of the user. We therefore need to match it against a

@@ -25,10 +25,7 @@ module.exports = (userTimeZone = serverTimeZone) => {
 		lastHours: (hours) => subHours(currentDate, hours),
 		lastDays: (days) => subDays(currentDate, days),
 		lastMonths: (months) => subMonths(currentDate, months),
-		// Get a date with an offset that always includes the whole unit of the given interval
-		offsetDays: (days) => subDays(startOfDay(currentDate), days - 1),
-		offsetMonths: (months) => subMonths(startOfMonth(currentDate), months - 1),
-		offsetYears: (years) => subYears(startOfYear(currentDate), years - 1),
+		lastYears: (years) => subYears(currentDate, years),
 		// Get a date with an offset that always includes the whole unit of the given interval and a timezone toleranz
 		includeDays: (days) => subHours(subDays(startOfDay(currentDate), days - 1), timeZoneToleranz),
 		includeMonths: (months) => subHours(subMonths(startOfMonth(currentDate), months - 1), timeZoneToleranz),
