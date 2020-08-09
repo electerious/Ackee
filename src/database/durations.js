@@ -26,6 +26,8 @@ const get = async (ids, interval, limit, dateDetails) => {
 
 		return createArray(limit).map((_, index) => {
 
+			// Add +1 to the index, because the index starts at zero and
+			// the date fn must include at least one day.
 			const date = includeFn(dateDetails, interval)(index + 1)
 
 			// Find a entry that matches the date
