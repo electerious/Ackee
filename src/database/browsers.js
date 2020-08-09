@@ -7,7 +7,6 @@ const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const sortings = require('../constants/sortings')
 const constants = require('../constants/browsers')
 const bestMatch = require('../utils/bestMatch')
-const createDate = require('../utils/createDate')
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
 
@@ -19,7 +18,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 				[ `${ entry._id.browserName }`, [ entry._id.browserName ]]
 			]),
 			count: entry.count,
-			created: createDate(dateDetails.userTimeZone, entry.created).userZonedDate
+			created: entry.created
 		}))
 
 	}

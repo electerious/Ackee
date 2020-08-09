@@ -6,7 +6,6 @@ const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const sortings = require('../constants/sortings')
 const languageCodes = require('../utils/languageCodes')
-const createDate = require('../utils/createDate')
 
 const get = async (ids, sorting, range, limit, dateDetails) => {
 
@@ -15,7 +14,7 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 		return entries.map((entry) => ({
 			id: languageCodes[entry._id.siteLanguage] || entry._id.siteLanguage,
 			count: entry.count,
-			created: createDate(dateDetails.userTimeZone, entry.created).userZonedDate
+			created: entry.created
 		}))
 
 	}
