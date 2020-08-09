@@ -11,9 +11,9 @@ const matchesDate = require('../utils/matchesDate')
 const includeFn = (dateDetails, interval) => {
 
 	switch (interval) {
-		case intervals.INTERVALS_DAILY: return dateDetails.includeDays
-		case intervals.INTERVALS_MONTHLY: return dateDetails.includeMonths
-		case intervals.INTERVALS_YEARLY: return dateDetails.includeYears
+		case intervals.INTERVALS_DAILY: return dateDetails.offsetDays
+		case intervals.INTERVALS_MONTHLY: return dateDetails.offsetMonths
+		case intervals.INTERVALS_YEARLY: return dateDetails.offsetYears
 	}
 
 }
