@@ -42,9 +42,9 @@ enum Range {
 	"""
 	LAST_30_DAYS
 	"""
-	All data available.
+	Data of the last 6 months.
 	"""
-	ALL_TIME
+	LAST_6_MONTHS
 }
 
 enum ViewType {
