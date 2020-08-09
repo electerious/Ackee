@@ -14,7 +14,7 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 		return entries.map((entry) => ({
 			id: entry._id.siteReferrer,
 			count: entry.count,
-			date: createDate(dateDetails.userTimeZone, entry.created).userZonedDate
+			created: createDate(dateDetails.userTimeZone, entry.created).userZonedDate
 		}))
 
 	}
