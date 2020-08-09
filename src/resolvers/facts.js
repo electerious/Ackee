@@ -40,7 +40,7 @@ module.exports = {
 		viewsToday: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 
 			const ids = await domainIds(domain)
-			const entries = await views.get(ids, viewsType.VIEWS_TYPE_UNIQUE, intervals.INTERVALS_DAILY, 2, dateDetails)
+			const entries = await views.get(ids, viewsType.VIEWS_TYPE_UNIQUE, intervals.INTERVALS_DAILY, 1, dateDetails)
 
 			return entries[0].count
 
