@@ -130,7 +130,7 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 
 })
 
-export const deleteDomain = signalHandler((signal) => (props, domainId, state) => async (dispatch) => {
+export const deleteDomain = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
 	dispatch(setDomainsFetching(true))
 	dispatch(setDomainsError())
