@@ -1,5 +1,6 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
+import { initialState as initialFilterState } from '../reducers/filter'
 
 export const ALL_DOMAINS = Symbol()
 
@@ -36,6 +37,8 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 	dispatch(setOverviewFetching(domainId, true))
 	dispatch(setOverviewError(domainId))
+
+	const filterState = initialFilterState()
 
 	try {
 
@@ -108,9 +111,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 					}
 				`,
 				variables: {
-					interval: props.filter.interval,
-					sorting: props.filter.sorting,
-					range: props.filter.range
+					interval: filterState.interval,
+					sorting: filterState.sorting,
+					range: filterState.range
 				},
 				props,
 				signal: signal(domainId)
@@ -118,13 +121,12 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 			dispatch(setOverviewFacts(domainId, data.facts))
 			dispatch(setOverviewStatistics(domainId, data.statistics))
-			dispatch(setOverviewFetching(domainId, false))
 
 		} else {
 
 			const data = await api({
 				query: `
-					query fetchOverview($id: ID!, $interval: Interval!, $sorting: Sorting!, $range: Range, ) {
+					query fetchOverview($id: ID!, $interval: Interval!, $sorting: Sorting!, $range: Range) {
 						domain(id: $id) {
 							${ facts }
 							${ statistics }
@@ -133,9 +135,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				`,
 				variables: {
 					id: domainId,
-					interval: props.filter.interval,
-					sorting: props.filter.sorting,
-					range: props.filter.range
+					interval: filterState.interval,
+					sorting: filterState.sorting,
+					range: filterState.range
 				},
 				props,
 				signal: signal(domainId)
@@ -143,9 +145,10 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 			dispatch(setOverviewFacts(domainId, data.domain.facts))
 			dispatch(setOverviewStatistics(domainId, data.domain.statistics))
-			dispatch(setOverviewFetching(domainId, false))
 
 		}
+
+		dispatch(setOverviewFetching(domainId, false))
 
 	} catch (err) {
 
