@@ -1,5 +1,7 @@
 'use strict'
 
+const { utcToZonedTime } = require('date-fns-tz')
+
 const Record = require('../schemas/Record')
 const aggregateViews = require('../aggregations/aggregateViews')
 const constants = require('../constants/views')
@@ -31,13 +33,18 @@ const get = async (ids, type, interval, limit, dateDetails) => {
 			// the date fn must include at least one day.
 			const date = includeFn(dateDetails, interval)(index + 1)
 
+			// Views and durations are returning day, month and year in the
+			// timezone of the user. We therefore need to match it against a
+			// date in the timezone of the user.
+			const userZonedDate = utcToZonedTime(date, dateDetails.userTimeZone)
+
 			// Find a entry that matches the date
 			const entry = entries.find((entry) => {
 				return matchesDate(
 					matchDay === true ? entry._id.day : undefined,
 					matchMonth === true ? entry._id.month : undefined,
 					matchYear === true ? entry._id.year : undefined,
-					date
+					userZonedDate
 				)
 			})
 
