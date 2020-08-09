@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Removed detailed durations
 - Delete records of a domain when deleting a domain
 - Updated the required Node.js version and Docker Node.js version to v14
+- Removed "All time" and replaced it with "Last 6 months" for performance reasons
 
 ### Fixed
 
