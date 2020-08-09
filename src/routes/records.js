@@ -57,6 +57,7 @@ const normalizeSiteReferrer = (siteReferrer) => {
 
 	// The siteReferrer is optional
 	if (siteReferrer == null) return siteReferrer
+	if (siteReferrer === '') return null
 
 	try {
 
