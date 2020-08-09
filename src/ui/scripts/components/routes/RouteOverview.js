@@ -1,6 +1,5 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { DURATIONS_INTERVAL } from '../../../../constants/durations'
 import * as route from '../../constants/route'
 import { ALL_DOMAINS } from '../../actions/overview'
 import * as selectOverviewValue from '../../selectors/selectOverviewValue'
@@ -37,12 +36,7 @@ const RouteOverview = (props) => {
 
 	useEffect(() => {
 
-		const fn = () => props.fetchOverview(props, domainId)
-		const interval = setInterval(fn, DURATIONS_INTERVAL)
-
-		fn()
-
-		return () => clearInterval(interval)
+		props.fetchOverview(props, domainId)
 
 	}, [ domainId, filterRange, filterInterval ])
 
