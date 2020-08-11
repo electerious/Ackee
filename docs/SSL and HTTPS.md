@@ -6,7 +6,7 @@ Ackee runs a simple server that doesn't support TSL/SSL. This means it's not pos
 
 > A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the proxy server itself.
 
-A reverse proxy makes it easy for you to run Ackee on your server along with other services. It also allows you to secure connections using TSL/SSL.
+A reverse proxy makes it easy for you to run Ackee on your server along with other services. It also allows you to secure connections using TLS/SSL.
 
 I highly recommend [this article](https://medium.com/intrinsic/why-should-i-use-a-reverse-proxy-if-node-js-is-production-ready-5a079408b2ca) if you want to lean more about reverse proxies.
 
