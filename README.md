@@ -1,21 +1,29 @@
+<div align="center">
+
+<img src="https://s.electerious.com/images/ackee/icon.png" title="Ackee" alt="Ackee logo" width="128">
+
 # Ackee
 
-[![Travis Build Status](https://travis-ci.org/electerious/Ackee.svg?branch=master)](https://travis-ci.org/electerious/Ackee) [![Coverage Status](https://coveralls.io/repos/github/electerious/Ackee/badge.svg?branch=master)](https://coveralls.io/github/electerious/Ackee?branch=master) [![Dependencies](https://david-dm.org/electerious/Ackee.svg)](https://david-dm.org/electerious/Ackee#info=dependencies) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
+[![Travis Build Status](https://travis-ci.org/electerious/Ackee.svg?branch=master)](https://travis-ci.org/electerious/Ackee) [![Coverage Status](https://coveralls.io/repos/github/electerious/Ackee/badge.svg?branch=master)](https://coveralls.io/github/electerious/Ackee?branch=master) [![Dependencies](https://david-dm.org/electerious/Ackee.svg)](https://david-dm.org/electerious/Ackee#info=dependencies) [![Mentioned in Awesome Selfhosted](https://awesome.re/mentioned-badge.svg)](https://github.com/awesome-selfhosted/awesome-selfhosted) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
 
 Self-hosted, Node.js based analytics tool for those who care about privacy. Ackee runs on your own server, analyses the traffic of your websites and provides useful statistics in a minimal interface.
 
-Try the [🔮 live demo](https://demo.ackee.electerious.com) or learn more about Ackee on our [🌍 website](https://ackee.electerious.com).
+[🌍 Website](https://ackee.electerious.com) | [🔮 Live Demo](https://demo.ackee.electerious.com) | [🧸 GraphQL Playground](https://demo.ackee.electerious.com/api)
+
+<br/>
 
 ![Ackee in a browser](https://s.electerious.com/images/ackee/readme.png)
 
+</div>
+
 ## Contents
 
-- 🏃 [Get started](#get-started)
-- 📄 [Introduction](#introduction)
-- ⚙️ [Documentation](#documentation)
-- ➕ [More](#more)
+- [Get started](#get-started)
+- [Introduction](#introduction)
+- [Documentation](#documentation)
+- [Miscellaneous](#more)
 
-## Get started
+## 🚀 Get started
 
 Get Ackee up and running…
 
@@ -24,6 +32,7 @@ Get Ackee up and running…
 - […with Helm](docs/Get%20started.md#with-helm)
 - […without Docker](docs/Get%20started.md#without-docker)
 - […with Heroku](docs/Get%20started.md#with-heroku)
+- […with Render](docs/Get%20started.md#with-render)
 
 And configure Ackee and your server correctly…
 
@@ -33,7 +42,7 @@ And configure Ackee and your server correctly…
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
-## Introduction
+## 👋 Introduction
 
 ### What is Ackee?
 
@@ -62,17 +71,9 @@ The API of Ackee accepts information about your visitors sent to it using [ackee
 
 The interface of Ackee lets you view and analyse your tracked information.
 
-## Documentation
+## 📚 Documentation
 
-### Requirements
-
-Ackee depends on...
-
-- [Node.js](https://nodejs.org/en/) (v14 or newer)
-- [yarn](https://yarnpkg.com/en/)
-- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
-
-Make sure to install and update all dependencies before you setup Ackee.
+Documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
 ### API
 
@@ -82,18 +83,23 @@ Ackee features a [GraphQL API](docs/API.md) that allows you to build custom tool
 
 Ackee uses environment variables and supports [`.env` files](https://www.npmjs.com/package/dotenv) in the root of the project if you want to store all variables in one file. [Options &#187;](docs/Options.md)
 
-### More
+## Miscellaneous
 
-More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
-
-#### Donate
+### Donate
 
 I am working hard on continuously developing and maintaining Ackee. Please consider making a donation to keep the project going strong and me motivated.
 
+- [Become a GitHub sponsor](https://github.com/sponsors/electerious)
 - [Donate via PayPal](https://paypal.me/electerious)
 - [Buy me a coffee](https://www.buymeacoffee.com/electerious)
 
-#### Related
+### Articles
+
+- [Quit Google Analytics, Self-hosted Gatsby Statistics with Ackee](https://dev.to/aleccool213/quit-google-analytics-self-hosted-gatsby-statistics-with-ackee-4011)
+- [Getting Ackee up and running with Heroku 🇪🇸](https://rubenr.dev/blog/ackee-analitica-web-sencilla/)
+- [Why I Self-Host My Website Analytics](https://mbuffett.com/posts/why-i-self-host-my-analytics/)
+
+### Related
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
@@ -102,3 +108,8 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
 - [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
+
+### Links
+
+- [Follow us on Twitter](https://twitter.com/getackee)
+- [Vote for Ackee on ProductHunt](https://www.producthunt.com/posts/ackee)
