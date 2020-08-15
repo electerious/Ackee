@@ -73,6 +73,8 @@ The interface of Ackee lets you view and analyse your tracked information.
 
 ## 📚 Documentation
 
+Documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
+
 ### API
 
 Ackee features a [GraphQL API](docs/API.md) that allows you to build custom tools upon Ackee. Everything you see in the UI is made from data delivered by the API.
@@ -82,8 +84,6 @@ Ackee features a [GraphQL API](docs/API.md) that allows you to build custom tool
 Ackee uses environment variables and supports [`.env` files](https://www.npmjs.com/package/dotenv) in the root of the project if you want to store all variables in one file. [Options &#187;](docs/Options.md)
 
 ## Miscellaneous
-
-More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
 ### Donate
 
