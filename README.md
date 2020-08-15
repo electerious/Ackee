@@ -1,18 +1,26 @@
+<div align="center">
+
+<img src="https://s.electerious.com/images/ackee/icon.png" title="Ackee" alt="Ackee logo" width="128">
+
 # Ackee
 
 [![Travis Build Status](https://travis-ci.org/electerious/Ackee.svg?branch=master)](https://travis-ci.org/electerious/Ackee) [![Coverage Status](https://coveralls.io/repos/github/electerious/Ackee/badge.svg?branch=master)](https://coveralls.io/github/electerious/Ackee?branch=master) [![Dependencies](https://david-dm.org/electerious/Ackee.svg)](https://david-dm.org/electerious/Ackee#info=dependencies) [![Mentioned in Awesome Selfhosted](https://awesome.re/mentioned-badge.svg)](https://github.com/awesome-selfhosted/awesome-selfhosted) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
 
 Self-hosted, Node.js based analytics tool for those who care about privacy. Ackee runs on your own server, analyses the traffic of your websites and provides useful statistics in a minimal interface.
 
-Try the [🔮 live demo](https://demo.ackee.electerious.com) or learn more about Ackee on our [🌍 website](https://ackee.electerious.com).
+[🌍 Website](https://ackee.electerious.com) | [🔮 Live Demo](https://demo.ackee.electerious.com) | [🧸 GraphQL Playground](https://demo.ackee.electerious.com/api)
+
+<br/>
 
 ![Ackee in a browser](https://s.electerious.com/images/ackee/readme.png)
 
+</div>
+
 ## Contents
 
-- 🏃 [Get started](#get-started)
+- 🚀 [Get started](#get-started)
 - 📄 [Introduction](#introduction)
-- ⚙️ [Documentation](#documentation)
+- 📚 [Documentation](#documentation)
 - ➕ [More](#more)
 
 ## Get started
@@ -90,6 +98,7 @@ More documentation and guides are located in [the /docs folder](docs/). Also tak
 
 I am working hard on continuously developing and maintaining Ackee. Please consider making a donation to keep the project going strong and me motivated.
 
+- [Become a GitHub sponsor](https://github.com/sponsors/electerious)
 - [Donate via PayPal](https://paypal.me/electerious)
 - [Buy me a coffee](https://www.buymeacoffee.com/electerious)
 
