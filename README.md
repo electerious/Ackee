@@ -21,9 +21,9 @@ Self-hosted, Node.js based analytics tool for those who care about privacy. Acke
 - [Get started](#get-started)
 - [Introduction](#introduction)
 - [Documentation](#documentation)
-- [More](#more)
+- [Miscellaneous](#more)
 
-## Get started 🚀
+## 🚀 Get started
 
 Get Ackee up and running…
 
@@ -42,7 +42,7 @@ And configure Ackee and your server correctly…
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
-## Introduction 👋
+## 👋 Introduction
 
 ### What is Ackee?
 
@@ -71,7 +71,7 @@ The API of Ackee accepts information about your visitors sent to it using [ackee
 
 The interface of Ackee lets you view and analyse your tracked information.
 
-## Documentation 📚
+## 📚 Documentation
 
 ### API
 
@@ -81,7 +81,7 @@ Ackee features a [GraphQL API](docs/API.md) that allows you to build custom tool
 
 Ackee uses environment variables and supports [`.env` files](https://www.npmjs.com/package/dotenv) in the root of the project if you want to store all variables in one file. [Options &#187;](docs/Options.md)
 
-## More
+## Miscellaneous
 
 More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
