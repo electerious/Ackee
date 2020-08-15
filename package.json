@@ -1,7 +1,7 @@
 {
   "name": "ackee",
   "private": true,
-  "version": "2.0.0-1",
+  "version": "2.0.0",
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
