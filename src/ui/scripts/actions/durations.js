@@ -1,15 +1,9 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_DURATIONS_TYPE = Symbol()
 export const SET_DURATIONS_VALUE = Symbol()
 export const SET_DURATIONS_FETCHING = Symbol()
 export const SET_DURATIONS_ERROR = Symbol()
-
-export const setDurationsType = (payload) => ({
-	type: SET_DURATIONS_TYPE,
-	payload
-})
 
 export const setDurationsValue = (domainId, payload) => ({
 	type: SET_DURATIONS_VALUE,
@@ -17,38 +11,55 @@ export const setDurationsValue = (domainId, payload) => ({
 	payload
 })
 
-export const setDurationsFetching = (domainId, payload) => ({
+export const setDurationsFetching = (payload) => ({
 	type: SET_DURATIONS_FETCHING,
-	domainId,
 	payload
 })
 
-export const setDurationsError = (domainId, payload) => ({
+export const setDurationsError = (payload) => ({
 	type: SET_DURATIONS_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchDurations = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchDurations = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setDurationsFetching(domainId, true))
-	dispatch(setDurationsError(domainId))
+	dispatch(setDurationsFetching(true))
+	dispatch(setDurationsError())
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/durations?type=${ props.durations.type }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchDurations($interval: Interval!) {
+					domains {
+						id
+						statistics {
+							durations(interval: $interval) {
+								id
+								count
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				interval: props.filter.interval
+			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setDurationsValue(domainId, data))
-		dispatch(setDurationsFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setDurationsValue(domain.id, domain.statistics.durations))
+		})
+		dispatch(setDurationsFetching(false))
 
 	} catch (err) {
 
-		dispatch(setDurationsError(domainId, err))
-		dispatch(setDurationsFetching(domainId, false))
+		if (err.name === 'AbortError') return
+		dispatch(setDurationsFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDurationsError(err))
 
 	}
 

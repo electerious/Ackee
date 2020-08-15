@@ -2,7 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectSystemsValue from '../../selectors/selectSystemsValue'
 import enhanceSystems from '../../enhancers/enhanceSystems'
-import useDidMountEffect from '../../utils/useDidMountEffect'
+import overviewRoute from '../../utils/overviewRoute'
 
 import CardSystems from '../cards/CardSystems'
 
@@ -10,17 +10,9 @@ const RouteSystems = (props) => {
 
 	useEffect(() => {
 
-		props.fetchDomains(props)
+		props.fetchSystems(props)
 
-	}, [])
-
-	useDidMountEffect(() => {
-
-		props.domains.value.map((domain) => {
-			props.fetchSystems(props, domain.data.id)
-		})
-
-	}, [ props.filter.range, props.domains.value, props.systems.sorting, props.systems.type ])
+	}, [ props.filter.range, props.filter.sorting, props.systems.type ])
 
 	return (
 		h(Fragment, {},
@@ -28,12 +20,13 @@ const RouteSystems = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardSystems, {
-						key: domain.data.id,
-						headline: domain.data.title,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
-						sorting: props.systems.sorting,
-						loading: selectSystemsValue(props, domain.data.id).fetching,
-						items: enhanceSystems(selectSystemsValue(props, domain.data.id).value)
+						sorting: props.filter.sorting,
+						loading: props.systems.fetching,
+						items: enhanceSystems(selectSystemsValue(props, domain.id).value),
+						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
 			)

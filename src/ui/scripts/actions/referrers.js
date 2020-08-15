@@ -1,15 +1,9 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_REFERRERS_SORTING = Symbol()
 export const SET_REFERRERS_VALUE = Symbol()
 export const SET_REFERRERS_FETCHING = Symbol()
 export const SET_REFERRERS_ERROR = Symbol()
-
-export const setReferrersSorting = (payload) => ({
-	type: SET_REFERRERS_SORTING,
-	payload
-})
 
 export const setReferrersValue = (domainId, payload) => ({
 	type: SET_REFERRERS_VALUE,
@@ -17,38 +11,57 @@ export const setReferrersValue = (domainId, payload) => ({
 	payload
 })
 
-export const setReferrersFetching = (domainId, payload) => ({
+export const setReferrersFetching = (payload) => ({
 	type: SET_REFERRERS_FETCHING,
-	domainId,
 	payload
 })
 
-export const setReferrersError = (domainId, payload) => ({
+export const setReferrersError = (payload) => ({
 	type: SET_REFERRERS_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchReferrers = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchReferrers = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setReferrersFetching(domainId, true))
-	dispatch(setReferrersError(domainId))
+	dispatch(setReferrersFetching(true))
+	dispatch(setReferrersError())
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/referrers?sorting=${ props.referrers.sorting }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchReferrers($sorting: Sorting!, $range: Range) {
+					domains {
+						id
+						statistics {
+							referrers(sorting: $sorting, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				sorting: props.filter.sorting,
+				range: props.filter.range
+			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setReferrersValue(domainId, data))
-		dispatch(setReferrersFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setReferrersValue(domain.id, domain.statistics.referrers))
+		})
+		dispatch(setReferrersFetching(false))
 
 	} catch (err) {
 
-		dispatch(setReferrersError(domainId, err))
-		dispatch(setReferrersFetching(domainId, false))
+		if (err.name === 'AbortError') return
+		dispatch(setReferrersFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setReferrersError(err))
 
 	}
 

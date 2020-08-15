@@ -2,15 +2,9 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_BROWSERS_TYPE = Symbol()
-export const SET_BROWSERS_SORTING = Symbol()
 export const SET_BROWSERS_VALUE = Symbol()
 export const SET_BROWSERS_FETCHING = Symbol()
 export const SET_BROWSERS_ERROR = Symbol()
-
-export const setBrowsersSorting = (payload) => ({
-	type: SET_BROWSERS_SORTING,
-	payload
-})
 
 export const setBrowsersType = (payload) => ({
 	type: SET_BROWSERS_TYPE,
@@ -23,38 +17,58 @@ export const setBrowsersValue = (domainId, payload) => ({
 	payload
 })
 
-export const setBrowsersFetching = (domainId, payload) => ({
+export const setBrowsersFetching = (payload) => ({
 	type: SET_BROWSERS_FETCHING,
-	domainId,
 	payload
 })
 
-export const setBrowsersError = (domainId, payload) => ({
+export const setBrowsersError = (payload) => ({
 	type: SET_BROWSERS_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchBrowsers = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchBrowsers = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setBrowsersFetching(domainId, true))
-	dispatch(setBrowsersError(domainId))
+	dispatch(setBrowsersFetching(true))
+	dispatch(setBrowsersError())
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/browsers?sorting=${ props.browsers.sorting }&type=${ props.browsers.type }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchBrowsers($sorting: Sorting!, $type: BrowserType!, $range: Range) {
+					domains {
+						id
+						statistics {
+							browsers(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				sorting: props.filter.sorting,
+				type: props.browsers.type,
+				range: props.filter.range
+			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setBrowsersValue(domainId, data))
-		dispatch(setBrowsersFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setBrowsersValue(domain.id, domain.statistics.browsers))
+		})
+		dispatch(setBrowsersFetching(false))
 
 	} catch (err) {
 
-		dispatch(setBrowsersError(domainId, err))
-		dispatch(setBrowsersFetching(domainId, false))
+		if (err.name === 'AbortError') return
+		dispatch(setBrowsersFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setBrowsersError(err))
 
 	}
 

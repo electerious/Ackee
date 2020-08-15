@@ -1,15 +1,9 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_LANGUAGES_SORTING = Symbol()
 export const SET_LANGUAGES_VALUE = Symbol()
 export const SET_LANGUAGES_FETCHING = Symbol()
 export const SET_LANGUAGES_ERROR = Symbol()
-
-export const setLanguagesSorting = (payload) => ({
-	type: SET_LANGUAGES_SORTING,
-	payload
-})
 
 export const setLanguagesValue = (domainId, payload) => ({
 	type: SET_LANGUAGES_VALUE,
@@ -17,38 +11,57 @@ export const setLanguagesValue = (domainId, payload) => ({
 	payload
 })
 
-export const setLanguagesFetching = (domainId, payload) => ({
+export const setLanguagesFetching = (payload) => ({
 	type: SET_LANGUAGES_FETCHING,
-	domainId,
 	payload
 })
 
-export const setLanguagesError = (domainId, payload) => ({
+export const setLanguagesError = (payload) => ({
 	type: SET_LANGUAGES_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchLanguages = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchLanguages = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setLanguagesFetching(domainId, true))
-	dispatch(setLanguagesError(domainId))
+	dispatch(setLanguagesFetching(true))
+	dispatch(setLanguagesError())
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/languages?sorting=${ props.languages.sorting }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchLanguages($sorting: Sorting!, $range: Range) {
+					domains {
+						id
+						statistics {
+							languages(sorting: $sorting, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				sorting: props.filter.sorting,
+				range: props.filter.range
+			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setLanguagesValue(domainId, data))
-		dispatch(setLanguagesFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setLanguagesValue(domain.id, domain.statistics.languages))
+		})
+		dispatch(setLanguagesFetching(false))
 
 	} catch (err) {
 
-		dispatch(setLanguagesError(domainId, err))
-		dispatch(setLanguagesFetching(domainId, false))
+		if (err.name === 'AbortError') return
+		dispatch(setLanguagesFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setLanguagesError(err))
 
 	}
 

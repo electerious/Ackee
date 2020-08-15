@@ -1,49 +1,70 @@
 'use strict'
 
+const { utcToZonedTime } = require('date-fns-tz')
+
 const Record = require('../schemas/Record')
-const aggregateDailyViews = require('../aggregations/aggregateDailyViews')
-const aggregateMonthlyViews = require('../aggregations/aggregateMonthlyViews')
-const aggregateYearlyViews = require('../aggregations/aggregateYearlyViews')
+const aggregateViews = require('../aggregations/aggregateViews')
 const constants = require('../constants/views')
+const intervals = require('../constants/intervals')
+const createArray = require('../utils/createArray')
+const matchesDate = require('../utils/matchesDate')
 
-const getUnique = async (id, interval) => {
+const includeFn = (dateDetails, interval) => {
 
 	switch (interval) {
-		case constants.VIEWS_INTERVAL_DAILY: return Record.aggregate(
-			aggregateDailyViews(id, true)
-		)
-		case constants.VIEWS_INTERVAL_MONTHLY: return Record.aggregate(
-			aggregateMonthlyViews(id, true)
-		)
-		case constants.VIEWS_INTERVAL_YEARLY: return Record.aggregate(
-			aggregateYearlyViews(id, true)
-		)
+		case intervals.INTERVALS_DAILY: return dateDetails.lastDays
+		case intervals.INTERVALS_MONTHLY: return dateDetails.lastMonths
+		case intervals.INTERVALS_YEARLY: return dateDetails.lastYears
 	}
 
 }
 
-const getTotal = async (id, interval) => {
+const get = async (ids, type, interval, limit, dateDetails) => {
 
-	switch (interval) {
-		case constants.VIEWS_INTERVAL_DAILY: return Record.aggregate(
-			aggregateDailyViews(id, false)
-		)
-		case constants.VIEWS_INTERVAL_MONTHLY: return Record.aggregate(
-			aggregateMonthlyViews(id, false)
-		)
-		case constants.VIEWS_INTERVAL_YEARLY: return Record.aggregate(
-			aggregateYearlyViews(id, false)
-		)
+	const enhance = (entries) => {
+
+		const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
+		const matchMonth = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY ].includes(interval)
+		const matchYear = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY, intervals.INTERVALS_YEARLY ].includes(interval)
+
+		return createArray(limit).map((_, index) => {
+
+			const date = includeFn(dateDetails, interval)(index)
+
+			// Views and durations are returning day, month and year in the
+			// timezone of the user. We therefore need to match it against a
+			// date in the timezone of the user.
+			const userZonedDate = utcToZonedTime(date, dateDetails.userTimeZone)
+
+			// Find a entry that matches the date
+			const entry = entries.find((entry) => {
+				return matchesDate(
+					matchDay === true ? entry._id.day : undefined,
+					matchMonth === true ? entry._id.month : undefined,
+					matchYear === true ? entry._id.year : undefined,
+					userZonedDate
+				)
+			})
+
+			return {
+				id: date,
+				count: entry == null ? 0 : entry.count
+			}
+
+		})
+
 	}
 
-}
+	const aggregation = (() => {
 
-const get = async (id, type, interval) => {
+		if (type === constants.VIEWS_TYPE_UNIQUE) return aggregateViews(ids, true, interval, limit, dateDetails)
+		if (type === constants.VIEWS_TYPE_TOTAL) return aggregateViews(ids, false, interval, limit, dateDetails)
 
-	switch (type) {
-		case constants.VIEWS_TYPE_UNIQUE: return getUnique(id, interval)
-		case constants.VIEWS_TYPE_TOTAL: return getTotal(id, interval)
-	}
+	})()
+
+	return enhance(
+		await Record.aggregate(aggregation)
+	)
 
 }
 

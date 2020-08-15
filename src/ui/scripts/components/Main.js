@@ -31,4 +31,6 @@ const Main = (props) => {
 
 }
 
-export default withErrorBoundary(Main, ErrorFallback)
+export default withErrorBoundary(Main, {
+	FallbackComponent: ErrorFallback
+})

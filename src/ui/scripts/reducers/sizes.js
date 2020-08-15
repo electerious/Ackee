@@ -8,17 +8,15 @@ import {
 } from '../actions'
 
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
+import genericState from '../utils/genericState'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: SIZES_TYPE_BROWSER_RESOLUTION,
-	value: {}
+	...genericState()
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
@@ -38,10 +36,10 @@ export default produce((draft, action) => {
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_SIZES_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_SIZES_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

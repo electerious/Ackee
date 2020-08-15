@@ -203,62 +203,107 @@ const createRecord = () => {
 
 }
 
-const addToken = async (url) => {
+const addToken = async (endpoint) => {
 
-	const response = await fetch(`${ url }/tokens`, {
+	const response = await fetch(endpoint, {
 		method: 'post',
 		body: JSON.stringify({
-			username: process.env.ACKEE_USERNAME,
-			password: process.env.ACKEE_PASSWORD
+			query: `
+				mutation createToken($input: CreateTokenInput!) {
+					createToken(input: $input) {
+						payload {
+							id
+						}
+					}
+				}
+			`,
+			variables: {
+				input: {
+					username: process.env.ACKEE_USERNAME,
+					password: process.env.ACKEE_PASSWORD
+				}
+			}
 		})
 	})
 
 	const data = await response.json()
 
-	return data.data.id
+	return data.data.createToken.payload
 
 }
 
-const fetchDomains = async (url, token) => {
+const fetchDomains = async (endpoint, headers) => {
 
-	const headers = new Headers({
-		Authorization: `Bearer ${ token }`
-	})
-
-	const response = await fetch(`${ url }/domains`, {
-		headers
-	})
-
-	const data = await response.json()
-
-	return data.data
-
-}
-
-const addRecord = async (url, headers, domain, record) => {
-
-	const response = await fetch(`${ url }/domains/${ domain.id }/records`, {
+	const response = await fetch(endpoint, {
 		method: 'post',
 		headers,
-		body: JSON.stringify(record)
+		body: JSON.stringify({
+			query: `
+				query fetchDomains {
+					domains {
+						id
+					}
+				}
+			`
+		})
 	})
 
 	const data = await response.json()
 
-	return data.data
+	return data.data.domains
 
 }
 
-const updateRecord = async (url, headers, domain, record) => {
+const addRecord = async (endpoint, headers, domain, record) => {
 
-	const response = await fetch(`${ url }/domains/${ domain.id }/records/${ record.id }`, {
-		method: 'patch',
-		headers
+	const response = await fetch(endpoint, {
+		method: 'post',
+		headers,
+		body: JSON.stringify({
+			query: `
+				mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
+					createRecord(domainId: $domainId, input: $input) {
+						payload {
+							id
+						}
+					}
+				}
+			`,
+			variables: {
+				domainId: domain.id,
+				input: record
+			}
+		})
 	})
 
 	const data = await response.json()
 
-	return data.data
+	return data.data.createRecord.payload
+
+}
+
+const updateRecord = async (endpoint, headers, record) => {
+
+	const response = await fetch(endpoint, {
+		method: 'post',
+		headers,
+		body: JSON.stringify({
+			query: `
+				mutation updateRecord($id: ID!) {
+					updateRecord(id: $id) {
+						success
+					}
+				}
+			`,
+			variables: {
+				id: record.id
+			}
+		})
+	})
+
+	const data = await response.json()
+
+	return data.data.updateRecord.success
 
 }
 
@@ -266,27 +311,29 @@ const job = (url) => async () => {
 
 	try {
 
+		const endpoint = `${ url }/api`
+
 		const currentDate = new Date()
 		const currentWeekday = currentDate.getDay()
 		const updateDelay = randomInt(0, hour * 1.5)
 
-		const token = await addToken(url)
-		const domains = await fetchDomains(url, token)
-
-		const domain = randomItem([ ...domains, ...weekdayDuds[currentWeekday] ])
-		const record = createRecord()
+		const token = await addToken(endpoint)
 
 		const headers = new Headers({
-			'Authorization': `Bearer ${ token }`,
+			'Authorization': `Bearer ${ token.id }`,
 			'User-Agent': randomItem(userAgents)
 		})
 
+		const domains = await fetchDomains(endpoint, headers)
+		const domain = randomItem([ ...domains, ...weekdayDuds[currentWeekday] ])
+
 		if (domain == null) return
 
-		const response = await addRecord(url, headers, domain.data, record)
+		const record = createRecord()
+		const response = await addRecord(endpoint, headers, domain, record)
 
 		await sleep(updateDelay)
-		await updateRecord(url, headers, domain.data, response)
+		await updateRecord(endpoint, headers, response)
 
 	} catch (err) {
 

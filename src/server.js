@@ -1,49 +1,71 @@
 'use strict'
 
+const { ApolloServer } = require('apollo-server-micro')
+const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 const micro = require('micro')
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 
+const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
-const pipe = require('./utils/pipe')
 const isDefined = require('./utils/isDefined')
+const isAuthenticated = require('./utils/isAuthenticated')
+const isDemoMode = require('./utils/isDemoMode')
+const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTrackerUrl = require('./utils/customTrackerUrl')
-const requireAuth = require('./middlewares/requireAuth')
-const blockDemo = require('./middlewares/blockDemo')
+const createDate = require('./utils/createDate')
 const ui = require('./routes/ui')
-const tokens = require('./routes/tokens')
-const domains = require('./routes/domains')
-const records = require('./routes/records')
-const views = require('./routes/views')
-const pages = require('./routes/pages')
-const referrers = require('./routes/referrers')
-const languages = require('./routes/languages')
-const durations = require('./routes/durations')
-const sizes = require('./routes/sizes')
-const systems = require('./routes/systems')
-const devices = require('./routes/devices')
-const browsers = require('./routes/browsers')
+
+const handleMicroError = (err, res) => {
+
+	// This part is for micro errors and errors outside of GraphQL.
+	// Most errors won't be caught here, but some error can still
+	// happen outside of GraphQL. In this case wer distinguish
+	// between unknown errors and known errors. Known errors are
+	// created with the createError function while unknown errors
+	// are simply errors thrown somewhere in the application.
+
+	const isUnknownError = err.statusCode == null
+	const hasOriginalError = err.originalError != null
+
+	// Only log the full error stack when the error isn't a known response
+	if (isUnknownError === true) {
+		signale.fatal(err)
+		return send(res, 500, err.message)
+	}
+
+	signale.warn(hasOriginalError === true ? err.originalError.message : err.message)
+	send(res, err.statusCode, err.message)
+
+}
+
+const handleGraphError = (err) => {
+
+	// This part is for error that happen inside GraphQL resolvers.
+	// All known errors should be thrown as a KnownError as those
+	// errors will only show up in the response and as a warning
+	// in the console output.
+
+	const originalError = err.originalError
+	const isKnownError = originalError instanceof KnownError
+
+	// Only log the full error stack when the error isn't a known response
+	if (isKnownError === false) {
+		signale.fatal(originalError)
+		return err
+	}
+
+	signale.warn(err.originalError.message)
+	return err
+
+}
 
 const catchError = (fn) => async (req, res) => {
 
 	try {
-
 		return await fn(req, res)
-
 	} catch (err) {
-
-		const isUnknownError = err.statusCode == null
-		const hasOriginalError = err.originalError != null
-
-		// Only log the full error stack when the error isn't a known API response
-		if (isUnknownError === true) {
-			signale.fatal(err)
-			return send(res, 500, err.message)
-		}
-
-		signale.warn(hasOriginalError === true ? err.originalError.message : err.message)
-		send(res, err.statusCode, err.message)
-
+		handleMicroError(err, res)
 	}
 
 }
@@ -79,6 +101,32 @@ const notFound = async (req) => {
 
 }
 
+const apolloServer = new ApolloServer({
+	introspection: isDemoMode === true || isDevelopmentMode === true,
+	playground: isDemoMode === true || isDevelopmentMode === true,
+	debug: isDevelopmentMode === true,
+	formatError: handleGraphError,
+	typeDefs: [
+		UnsignedIntTypeDefinition,
+		DateTimeTypeDefinition,
+		require('./types')
+	],
+	resolvers: {
+		UnsignedInt: UnsignedIntResolver,
+		DateTime: DateTimeResolver,
+		...require('./resolvers')
+	},
+	context: async (integrationContext) => ({
+		isDemoMode,
+		isAuthenticated: await isAuthenticated(integrationContext.req),
+		dateDetails: createDate(integrationContext.req.headers['time-zone']),
+		req: integrationContext.req
+	})
+})
+
+const graphqlPath = '/api'
+const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
+
 const routes = [
 
 	get('/', ui.index),
@@ -89,34 +137,8 @@ const routes = [
 	get('/tracker.js', ui.tracker),
 	customTrackerUrl != null ? get(customTrackerUrl, ui.tracker) : undefined,
 
-	post('/tokens', tokens.add),
-	del('/tokens/:tokenId', tokens.del),
-
-	post('/domains', pipe(requireAuth, blockDemo, domains.add)),
-	get('/domains', pipe(requireAuth, domains.all)),
-	put('/domains/:domainId', pipe(requireAuth, blockDemo, domains.update)),
-	del('/domains/:domainId', pipe(requireAuth, blockDemo, domains.del)),
-
-	post('/domains/:domainId/records', records.add),
-	patch('/domains/:domainId/records/:recordId', records.update),
-
-	get('/domains/:domainId/views', pipe(requireAuth, views.get)),
-
-	get('/domains/:domainId/pages', pipe(requireAuth, pages.get)),
-
-	get('/domains/:domainId/referrers', pipe(requireAuth, referrers.get)),
-
-	get('/domains/:domainId/languages', pipe(requireAuth, languages.get)),
-
-	get('/domains/:domainId/durations', pipe(requireAuth, durations.get)),
-
-	get('/domains/:domainId/sizes', pipe(requireAuth, sizes.get)),
-
-	get('/domains/:domainId/systems', pipe(requireAuth, systems.get)),
-
-	get('/domains/:domainId/devices', pipe(requireAuth, devices.get)),
-
-	get('/domains/:domainId/browsers', pipe(requireAuth, browsers.get)),
+	post(graphqlPath, graphqlHandler),
+	get(graphqlPath, graphqlHandler),
 
 	get('/*', notFound),
 	post('/*', notFound),

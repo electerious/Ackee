@@ -1,24 +1,17 @@
 import produce from 'immer'
 
 import {
-	SET_REFERRERS_SORTING,
 	SET_REFERRERS_VALUE,
 	SET_REFERRERS_FETCHING,
 	SET_REFERRERS_ERROR
 } from '../actions'
 
-import { REFERRERS_SORTING_TOP } from '../../../constants/referrers'
+import genericState from '../utils/genericState'
+import genericSubState from '../utils/genericSubState'
 
-export const initialState = () => ({
-	sorting: REFERRERS_SORTING_TOP,
-	value: {}
-})
+export const initialState = genericState
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
@@ -28,20 +21,14 @@ export default produce((draft, action) => {
 	if (hasDomainId() === true && hasDomainValue() === false) draft.value[action.domainId] = initialSubState()
 
 	switch (action.type) {
-		case SET_REFERRERS_SORTING:
-			if (draft.sorting === action.payload) break
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			draft.sorting = action.payload
-			break
 		case SET_REFERRERS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_REFERRERS_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_REFERRERS_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

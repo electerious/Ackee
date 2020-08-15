@@ -3,24 +3,20 @@ import produce from 'immer'
 import {
 	SET_DEVICES_ERROR,
 	SET_DEVICES_FETCHING,
-	SET_DEVICES_SORTING,
 	SET_DEVICES_VALUE,
 	SET_DEVICES_TYPE
 } from '../actions'
 
-import { DEVICES_SORTING_TOP, DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
+import { DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
+import genericState from '../utils/genericState'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: DEVICES_TYPE_WITH_MODEL,
-	sorting: DEVICES_SORTING_TOP,
-	value: {}
+	...genericState()
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
@@ -36,20 +32,14 @@ export default produce((draft, action) => {
 			draft.value = initialState().value
 			draft.type = action.payload
 			break
-		case SET_DEVICES_SORTING:
-			if (draft.sorting === action.payload) break
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			draft.sorting = action.payload
-			break
 		case SET_DEVICES_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_DEVICES_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_DEVICES_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

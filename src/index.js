@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 'use strict'
-
 require('dotenv').config()
 
 const mongoose = require('mongoose')
 
 const server = require('./server')
 const signale = require('./utils/signale')
-const isDemo = require('./utils/isDemo')
+const isDemoMode = require('./utils/isDemoMode')
+const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
 
@@ -28,12 +28,9 @@ if (dbUrl == null) {
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
 mongoose.connect(dbUrl, {
-
 	useNewUrlParser: true,
 	useCreateIndex: true,
-	reconnectTries: Number.MAX_VALUE,
-	reconnectInterval: 1000
-
+	useUnifiedTopology: true
 }).then(() => {
 
 	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
@@ -41,7 +38,13 @@ mongoose.connect(dbUrl, {
 
 	server.listen(port)
 
-	if (isDemo === true) {
+	if (isDevelopmentMode === true) {
+
+		signale.info('Development mode enabled')
+
+	}
+
+	if (isDemoMode === true) {
 
 		const job = fillDatabase(serverUrl)
 		const date = job.nextInvocation()

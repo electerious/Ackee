@@ -5,6 +5,7 @@
 - [With Helm](#with-helm)
 - [Without Docker](#without-docker)
 - [With Heroku](#with-heroku)
+- [With Render](#with-render)
 
 ## With Docker Compose
 
@@ -114,7 +115,7 @@ If you're using the `ingress-nginx`, enabling the ingress will set the necessary
 
 Ackee dependents on …
 
-- [Node.js](https://nodejs.org/en/) (v10.16 or newer)
+- [Node.js](https://nodejs.org/en/) (v14 or newer)
 - [yarn](https://yarnpkg.com/en/)
 - [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
 
@@ -169,7 +170,9 @@ Simply deploy to Heroku by clicking this button:
 
 ### 2. Configure Ackee
 
-Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#heroku-or-platforms-as-a-service-configuration).
+- You need to have a MongoDB instance running, either hosting it yourself or using a (paid) add-on like [ObjectRocket MongoDB](https://elements.heroku.com/addons/ormongo). This is as simple as typing `heroku addons:create ormongo:2-wt --app <YOUR_APP_NAME>` using the CLI, or using the web dashboard; more details at the [official documentation](https://devcenter.heroku.com/articles/managing-add-ons). You'll need to provide connection details to Ackee dyno, either from the web dashboard or via command line, e.g. `heroku config:add "ACKEE_MONGODB=mongodb://<host>:<port>/<db>"`
+
+- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#heroku-or-platforms-as-a-service-configuration).
 
 ### 3. Updating Ackee
 
@@ -187,7 +190,17 @@ You'll then want to add the Ackee repo as origin, pull the latest changes, and p
 ```sh
 git remote add origin https://github.com/electerious/Ackee.git
 git pull origin master
-git push origin heroku master
+git push heroku master
 ```
 
 After your application re-deploys you'll have the latest version of Ackee!
+
+## With Render
+
+You can use [Render's](https://render.com/) one-click deploy button to get up and running with Ackee in minutes.
+
+Click **Deploy to Render** below and follow the prompts to set up Ackee on Render.
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/ackee)
+
+Once your deploy has finished, you are ready to start using Ackee! Visit the URL for your service to login. You can get your login credentials from the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables in the **Environment** tab of your service. By default, your username will be `render` and your password will be a randomly generated string.

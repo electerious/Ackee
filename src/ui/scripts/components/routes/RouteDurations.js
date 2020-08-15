@@ -1,63 +1,41 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { DURATIONS_TYPE_AVERAGE, DURATIONS_TYPE_DETAILED } from '../../../../constants/durations'
-
 import selectDurationsValue from '../../selectors/selectDurationsValue'
-import enhanceAverageDurations from '../../enhancers/enhanceAverageDurations'
-import enhanceDetailedDurations from '../../enhancers/enhanceDetailedDurations'
-import mergeAverageDurations from '../../utils/mergeAverageDurations'
-import useDidMountEffect from '../../utils/useDidMountEffect'
+import enhanceDurations from '../../enhancers/enhanceDurations'
+import mergeDurations from '../../utils/mergeDurations'
+import overviewRoute from '../../utils/overviewRoute'
 
-import CardAverageDurations from '../cards/CardAverageDurations'
-import CardDetailedDurations from '../cards/CardDetailedDurations'
+import CardDurations from '../cards/CardDurations'
 
 const RouteDurations = (props) => {
 
 	useEffect(() => {
 
-		props.fetchDomains(props)
+		props.fetchDurations(props)
 
-	}, [])
+	}, [ props.filter.interval ])
 
-	useDidMountEffect(() => {
-
-		props.domains.value.map((domain) => {
-			props.fetchDurations(props, domain.data.id)
-		})
-
-	}, [ props.domains.value, props.durations.type ])
-
-	const type = props.durations.type
-
-	if (type === DURATIONS_TYPE_AVERAGE) return (
+	return (
 		h(Fragment, {},
-			h(CardAverageDurations, {
+			h(CardDurations, {
 				wide: true,
-				headline: 'Average Durations',
-				items: mergeAverageDurations(props)
+				headline: 'Durations',
+				interval: props.filter.interval,
+				loading: props.fetching,
+				items: mergeDurations(props)
 			}),
 
 			props.domains.value.map(
 				(domain) => (
-					h(CardAverageDurations, {
-						key: domain.data.id,
-						headline: domain.data.title,
-						items: enhanceAverageDurations(selectDurationsValue(props, domain.data.id).value, 7)
+					h(CardDurations, {
+						key: domain.id,
+						headline: domain.title,
+						interval: props.filter.interval,
+						loading: props.durations.fetching,
+						items: enhanceDurations(selectDurationsValue(props, domain.id).value, 7),
+						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
-			)
-		)
-	)
-
-	if (type === DURATIONS_TYPE_DETAILED) return (
-		props.domains.value.map(
-			(domain) => (
-				h(CardDetailedDurations, {
-					key: domain.data.id,
-					headline: domain.data.title,
-					loading: selectDurationsValue(props, domain.data.id).fetching,
-					items: enhanceDetailedDurations(selectDurationsValue(props, domain.data.id).value)
-				})
 			)
 		)
 	)

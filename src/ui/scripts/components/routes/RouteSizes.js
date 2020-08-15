@@ -2,7 +2,7 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 import selectSizesValue from '../../selectors/selectSizesValue'
 import enhanceSizes from '../../enhancers/enhanceSizes'
-import useDidMountEffect from '../../utils/useDidMountEffect'
+import overviewRoute from '../../utils/overviewRoute'
 
 import CardSizes from '../cards/CardSizes'
 
@@ -10,17 +10,9 @@ const RouteSizes = (props) => {
 
 	useEffect(() => {
 
-		props.fetchDomains(props)
+		props.fetchSizes(props)
 
-	}, [])
-
-	useDidMountEffect(() => {
-
-		props.domains.value.map((domain) => {
-			props.fetchSizes(props, domain.data.id)
-		})
-
-	}, [ props.filter.range, props.domains.value, props.sizes.type ])
+	}, [ props.filter.range, props.filter.sorting, props.sizes.type ])
 
 	return (
 		h(Fragment, {},
@@ -28,11 +20,13 @@ const RouteSizes = (props) => {
 			props.domains.value.map(
 				(domain) => (
 					h(CardSizes, {
-						key: domain.data.id,
+						key: domain.id,
+						headline: domain.title,
 						range: props.filter.range,
-						headline: domain.data.title,
-						loading: selectSizesValue(props, domain.data.id).fetching,
-						items: enhanceSizes(selectSizesValue(props, domain.data.id).value)
+						sorting: props.filter.sorting,
+						loading: props.sizes.fetching,
+						items: enhanceSizes(selectSizesValue(props, domain.id).value),
+						onMore: () => props.setRoute(overviewRoute(domain))
 					})
 				)
 			)

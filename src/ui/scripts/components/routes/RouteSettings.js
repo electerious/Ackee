@@ -1,4 +1,4 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment } from 'react'
 
 import { version, homepage } from '../../../../../package'
 import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
@@ -9,12 +9,6 @@ import Line from '../Line'
 import Message from '../Message'
 
 const RouteSettings = (props) => {
-
-	useEffect(() => {
-
-		props.fetchDomains(props)
-
-	}, [])
 
 	const showDomainEditModal = (id, title) => {
 
@@ -46,9 +40,9 @@ const RouteSettings = (props) => {
 			(domain) => [
 				h(LinkItem, {
 					type: 'button',
-					text: domain.data.id,
-					onClick: () => showDomainEditModal(domain.data.id, domain.data.title)
-				}, domain.data.title),
+					text: domain.id,
+					onClick: () => showDomainEditModal(domain.id, domain.title)
+				}, domain.title),
 				h(Line)
 			]
 		).flat(),
@@ -75,9 +69,11 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Donate'
 			},
-				h(LinkItem, { type: 'a', href: 'https://paypal.me/electerious', target: '_blank', rel: 'noopener' }, 'Donate via PayPal'),
+				h(LinkItem, { type: 'a', href: 'https://github.com/sponsors/electerious', target: '_blank', rel: 'noopener' }, 'Become a GitHub sponsor'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: 'https://www.buymeacoffee.com/electerious', target: '_blank', rel: 'noopener' }, 'Buy me a coffee')
+				h(LinkItem, { type: 'a', href: 'https://www.buymeacoffee.com/electerious', target: '_blank', rel: 'noopener' }, 'Buy me a coffee'),
+				h(Line),
+				h(LinkItem, { type: 'a', href: 'https://paypal.me/electerious', target: '_blank', rel: 'noopener' }, 'Donate via PayPal')
 			),
 
 			h(CardSetting, {

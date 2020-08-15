@@ -9,6 +9,7 @@ import token from './token'
 import route from './route'
 import filter from './filter'
 import domains from './domains'
+import overview from './overview'
 import views from './views'
 import pages from './pages'
 import referrers from './referrers'
@@ -25,6 +26,7 @@ const reducers = combineReducers({
 	route,
 	filter,
 	domains,
+	overview,
 	views,
 	pages,
 	referrers,

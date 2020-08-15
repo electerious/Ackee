@@ -2,25 +2,21 @@ import produce from 'immer'
 
 import {
 	SET_VIEWS_TYPE,
-	SET_VIEWS_INTERVAL,
 	SET_VIEWS_VALUE,
 	SET_VIEWS_FETCHING,
 	SET_VIEWS_ERROR
 } from '../actions'
 
-import { VIEWS_TYPE_UNIQUE, VIEWS_INTERVAL_DAILY } from '../../../constants/views'
+import { VIEWS_TYPE_UNIQUE } from '../../../constants/views'
+import genericState from '../utils/genericState'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: VIEWS_TYPE_UNIQUE,
-	interval: VIEWS_INTERVAL_DAILY,
-	value: {}
+	...genericState()
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
@@ -33,17 +29,14 @@ export default produce((draft, action) => {
 		case SET_VIEWS_TYPE:
 			draft.type = action.payload
 			break
-		case SET_VIEWS_INTERVAL:
-			draft.interval = action.payload
-			break
 		case SET_VIEWS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_VIEWS_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_VIEWS_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

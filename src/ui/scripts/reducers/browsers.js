@@ -3,24 +3,20 @@ import produce from 'immer'
 import {
 	SET_BROWSERS_ERROR,
 	SET_BROWSERS_FETCHING,
-	SET_BROWSERS_SORTING,
 	SET_BROWSERS_VALUE,
 	SET_BROWSERS_TYPE
 } from '../actions'
 
-import { BROWSERS_SORTING_TOP, BROWSERS_TYPE_NO_VERSION } from '../../../constants/browsers'
+import { BROWSERS_TYPE_NO_VERSION } from '../../../constants/browsers'
+import genericState from '../utils/genericState'
+import genericSubState from '../utils/genericSubState'
 
 export const initialState = () => ({
 	type: BROWSERS_TYPE_NO_VERSION,
-	sorting: BROWSERS_SORTING_TOP,
-	value: {}
+	...genericState()
 })
 
-export const initialSubState = () => ({
-	value: [],
-	fetching: false,
-	error: undefined
-})
+export const initialSubState = genericSubState
 
 export default produce((draft, action) => {
 
@@ -36,20 +32,14 @@ export default produce((draft, action) => {
 			draft.value = initialState().value
 			draft.type = action.payload
 			break
-		case SET_BROWSERS_SORTING:
-			if (draft.sorting === action.payload) break
-			// Reset value because the view shouldn't show the old data when switching
-			draft.value = initialState().value
-			draft.sorting = action.payload
-			break
 		case SET_BROWSERS_VALUE:
 			draft.value[action.domainId].value = action.payload || initialSubState().value
 			break
 		case SET_BROWSERS_FETCHING:
-			draft.value[action.domainId].fetching = action.payload || initialSubState().fetching
+			draft.fetching = action.payload || initialState().fetching
 			break
 		case SET_BROWSERS_ERROR:
-			draft.value[action.domainId].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

@@ -4,39 +4,31 @@ const Record = require('../schemas/Record')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
-const constants = require('../constants/referrers')
+const sortings = require('../constants/sortings')
 
-const getTop = async (id, range) => {
+const get = async (ids, sorting, range, limit, dateDetails) => {
 
-	return Record.aggregate(
-		aggregateTopFields(id, 'siteReferrer', range)
-	)
+	const enhance = (entries) => {
 
-}
+		return entries.map((entry) => ({
+			id: entry._id.siteReferrer,
+			count: entry.count,
+			created: entry.created
+		}))
 
-const getNew = async (id) => {
-
-	return Record.aggregate(
-		aggregateNewFields(id, 'siteReferrer')
-	)
-
-}
-
-const getRecent = async (id) => {
-
-	return Record.aggregate(
-		aggregateRecentFields(id, 'siteReferrer')
-	)
-
-}
-
-const get = async (id, sorting, range) => {
-
-	switch (sorting) {
-		case constants.REFERRERS_SORTING_TOP: return getTop(id, range)
-		case constants.REFERRERS_SORTING_NEW: return getNew(id)
-		case constants.REFERRERS_SORTING_RECENT: return getRecent(id)
 	}
+
+	const aggregation = (() => {
+
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteReferrer' ], range, limit, dateDetails)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteReferrer' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteReferrer' ], limit)
+
+	})()
+
+	return enhance(
+		await Record.aggregate(aggregation)
+	)
 
 }
 

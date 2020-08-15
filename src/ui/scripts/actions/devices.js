@@ -2,15 +2,9 @@ import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
 export const SET_DEVICES_TYPE = Symbol()
-export const SET_DEVICES_SORTING = Symbol()
 export const SET_DEVICES_VALUE = Symbol()
 export const SET_DEVICES_FETCHING = Symbol()
 export const SET_DEVICES_ERROR = Symbol()
-
-export const setDevicesSorting = (payload) => ({
-	type: SET_DEVICES_SORTING,
-	payload
-})
 
 export const setDevicesType = (payload) => ({
 	type: SET_DEVICES_TYPE,
@@ -23,38 +17,58 @@ export const setDevicesValue = (domainId, payload) => ({
 	payload
 })
 
-export const setDevicesFetching = (domainId, payload) => ({
+export const setDevicesFetching = (payload) => ({
 	type: SET_DEVICES_FETCHING,
-	domainId,
 	payload
 })
 
-export const setDevicesError = (domainId, payload) => ({
+export const setDevicesError = (payload) => ({
 	type: SET_DEVICES_ERROR,
-	domainId,
 	payload
 })
 
-export const fetchDevices = signalHandler((signal) => (props, domainId) => async (dispatch) => {
+export const fetchDevices = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setDevicesFetching(domainId, true))
-	dispatch(setDevicesError(domainId))
+	dispatch(setDevicesFetching(true))
+	dispatch(setDevicesError())
 
 	try {
 
-		const data = await api(`/domains/${ domainId }/devices?sorting=${ props.devices.sorting }&type=${ props.devices.type }&range=${ props.filter.range }`, {
-			method: 'get',
+		const data = await api({
+			query: `
+				query fetchDevices($sorting: Sorting!, $type: DeviceType!, $range: Range) {
+					domains {
+						id
+						statistics {
+							devices(sorting: $sorting, type: $type, range: $range) {
+								id
+								count
+								created
+							}
+						}
+					}
+				}
+			`,
+			variables: {
+				sorting: props.filter.sorting,
+				type: props.devices.type,
+				range: props.filter.range
+			},
 			props,
-			signal: signal(domainId)
+			signal: signal()
 		})
 
-		dispatch(setDevicesValue(domainId, data))
-		dispatch(setDevicesFetching(domainId, false))
+		data.domains.forEach((domain) => {
+			dispatch(setDevicesValue(domain.id, domain.statistics.devices))
+		})
+		dispatch(setDevicesFetching(false))
 
 	} catch (err) {
 
-		dispatch(setDevicesError(domainId, err))
-		dispatch(setDevicesFetching(domainId, false))
+		if (err.name === 'AbortError') return
+		dispatch(setDevicesFetching(false))
+		if (err.name === 'HandledError') return
+		dispatch(setDevicesError(err))
 
 	}
 
