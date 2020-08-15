@@ -36,7 +36,7 @@
   "dependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
-    "ackee-tracker": "^4.0.0-1",
+    "ackee-tracker": "^4.0.0",
     "apollo-server-micro": "^2.16.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.15.0",
