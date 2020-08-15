@@ -43,9 +43,9 @@ Ackee and Fathom are very similar. Both in the way they display data and how the
 
 ## Definitions
 
-### Views > Unique site views
+### What is a unique site view?
 
-The unique amount of site views. Each user increases this value when visiting a domain for the first time a day.
+Each user increases the unique site view counter when visiting a domain for the first time a day.
 
 Examples:
 
@@ -53,32 +53,20 @@ Examples:
 - The same user visits your page at the end of the day => The count won't increase because the user is a returning user
 - The same user visits two pages a on the next day => The count increases by one because new day = new user
 
-### Views > Total page views
+### What are total page views?
 
-The total amount of page views. Each visit or reload of a page will increase this value.
+Each visit or reload of a page will increase the total page views counter.
 
 Examples:
 
 - User views three pages of a domain => The count increases by three
 - User reloads the same page two times => The count increases by three (initial visit + first reload + second reload)
 
-### Pages > Top pages
+### Are page views unique?
 
-The 30 pages of a domain with the most views. Each visit or reload of a page will increase this value. The views aren't unique, because Ackee can't track returning users for individual pages.
+No, the views aren't unique, because Ackee can't track returning users for individual pages. This is because Ackee isn't storing a browsing history of your users.
 
 Examples:
 
 - User visits three pages of a domain => The count of each page increases by one
 - User reloads the same page two times => The count of the page increases by three (initial visit + first reload + second reload)
-
-### Pages > Recent pages
-
-The last 30 page visits of the last 7 days. Sorted by time.
-
-### Durations > Average durations
-
-The average time users spend on your sites. Tracked in an interval of 15s. Visits above 30m won't be added to the average, because some visitors keep sites open in the background. This distorts the average and will be omitted.
-
-### Durations > Detailed durations
-
-The time users spend on your sites, grouped by similar durations in an interval of 15s. This view shows the first 30m and gives you more insides.
