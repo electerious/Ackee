@@ -18,12 +18,12 @@ Self-hosted, Node.js based analytics tool for those who care about privacy. Acke
 
 ## Contents
 
-- 🚀 [Get started](#get-started)
-- 📄 [Introduction](#introduction)
-- 📚 [Documentation](#documentation)
-- ➕ [More](#more)
+- [Get started](#get-started)
+- [Introduction](#introduction)
+- [Documentation](#documentation)
+- [More](#more)
 
-## Get started
+## Get started 🚀
 
 Get Ackee up and running…
 
@@ -32,6 +32,7 @@ Get Ackee up and running…
 - […with Helm](docs/Get%20started.md#with-helm)
 - […without Docker](docs/Get%20started.md#without-docker)
 - […with Heroku](docs/Get%20started.md#with-heroku)
+- […with Render](docs/Get%20started.md#with-render)
 
 And configure Ackee and your server correctly…
 
@@ -41,7 +42,7 @@ And configure Ackee and your server correctly…
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
-## Introduction
+## Introduction 👋
 
 ### What is Ackee?
 
@@ -70,17 +71,7 @@ The API of Ackee accepts information about your visitors sent to it using [ackee
 
 The interface of Ackee lets you view and analyse your tracked information.
 
-## Documentation
-
-### Installation
-
-Get Ackee up and running…
-
-- […with Docker Compose](docs/Get%20started.md#with-docker-compose)
-- […with Docker](docs/Get%20started.md#with-docker)
-- […with Helm](docs/Get%20started.md#with-helm)
-- […without Docker](docs/Get%20started.md#without-docker)
-- […with Heroku](docs/Get%20started.md#with-heroku)
+## Documentation 📚
 
 ### API
 
