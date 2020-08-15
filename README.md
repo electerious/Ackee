@@ -93,6 +93,12 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [Donate via PayPal](https://paypal.me/electerious)
 - [Buy me a coffee](https://www.buymeacoffee.com/electerious)
 
+### Articles
+
+- [Quit Google Analytics, Self-hosted Gatsby Statistics with Ackee](https://dev.to/aleccool213/quit-google-analytics-self-hosted-gatsby-statistics-with-ackee-4011)
+- [Getting Ackee up and running with Heroku 🇪🇸](https://rubenr.dev/blog/ackee-analitica-web-sencilla/)
+- [Why I Self-Host My Website Analytics](https://mbuffett.com/posts/why-i-self-host-my-analytics/)
+
 ### Related
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
@@ -102,3 +108,8 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
 - [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
+
+### Links
+
+- [Follow us on Twitter](https://twitter.com/getackee)
+- [Vote for Ackee on ProductHunt](https://www.producthunt.com/posts/ackee)
