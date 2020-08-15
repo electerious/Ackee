@@ -38,7 +38,7 @@ Ackee is the right tool for you if Matomo offers more than you need and when you
 Ackee and Fathom are very similar. Both in the way they display data and how they process it. The biggest advantages at the moment of writing:
 
 - Ackee is free and open-source
-- Ackee offers a documented REST API that lets you build upon it. The API can be used for custom import scripts or apps that display your current visitor stats in the menu bar. The possibilities are endless.
+- Ackee offers a documented GraphQL API that lets you build upon it. The API can be used for custom import scripts or apps that display your current visitor stats in the menu bar. The possibilities are endless.
 - Ackee allows you to track more than just page/site views (browser, system, etc.). This is optional and off by default, but great for people/companies that need more insights.
 
 ## Definitions
