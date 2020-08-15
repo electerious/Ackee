@@ -72,15 +72,15 @@ The interface of Ackee lets you view and analyse your tracked information.
 
 ## Documentation
 
-### Requirements
+### Installation
 
-Ackee depends on...
+Get Ackee up and running…
 
-- [Node.js](https://nodejs.org/en/) (v14 or newer)
-- [yarn](https://yarnpkg.com/en/)
-- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
-
-Make sure to install and update all dependencies before you setup Ackee.
+- […with Docker Compose](docs/Get%20started.md#with-docker-compose)
+- […with Docker](docs/Get%20started.md#with-docker)
+- […with Helm](docs/Get%20started.md#with-helm)
+- […without Docker](docs/Get%20started.md#without-docker)
+- […with Heroku](docs/Get%20started.md#with-heroku)
 
 ### API
 
@@ -90,11 +90,11 @@ Ackee features a [GraphQL API](docs/API.md) that allows you to build custom tool
 
 Ackee uses environment variables and supports [`.env` files](https://www.npmjs.com/package/dotenv) in the root of the project if you want to store all variables in one file. [Options &#187;](docs/Options.md)
 
-### More
+## More
 
 More documentation and guides are located in [the /docs folder](docs/). Also take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
-#### Donate
+### Donate
 
 I am working hard on continuously developing and maintaining Ackee. Please consider making a donation to keep the project going strong and me motivated.
 
@@ -102,7 +102,7 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [Donate via PayPal](https://paypal.me/electerious)
 - [Buy me a coffee](https://www.buymeacoffee.com/electerious)
 
-#### Related
+### Related
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
