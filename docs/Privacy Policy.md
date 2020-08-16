@@ -4,7 +4,7 @@ Ackee is a privacy first product that keeps tracked data anonymized. It's theref
 
 Although, we recommend to mention Ackee in your privacy policy. Let your visitors know that you're using a privacy friendly analytics tool which doesn't collect personal identifiable information.
 
-> ⚠️ Make sure to ask you users before activating the `detailed` mode of Ackee. The detailed mode tracks more data and also includes data [we're considering as personal data](Anonymization.md#personal-data). In this case it's highly recommended to add Ackee to your privacy policy.
+> ⚠️ Make sure to ask your users before activating the `detailed` mode of Ackee. The detailed mode tracks more data and also includes data [we're considering as personal data](Anonymization.md#personal-data). In this case it's highly recommended to add Ackee to your privacy policy.
 
 ## HTML privacy policy example
 
