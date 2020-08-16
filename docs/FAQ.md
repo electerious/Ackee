@@ -1,9 +1,20 @@
 # FAQ
 
+- [Basics](#basics)
 - [Features](#features)
 - [Configuration](#configuration)
 - [Comparison](#comparison)
 - [Definitions](#definitions)
+
+## Basics
+
+### How does it work?
+
+You run the Ackee server which then waits for requests through its API.
+
+The API of Ackee accepts information about your visitors sent to it using [ackee-tracker](https://github.com/electerious/ackee-tracker). It's a small script you add to your sites, similar to the JavaScript tracking snippet provided by Google Analytics.
+
+The interface of Ackee lets you view and analyse your tracked information.
 
 ## Features
 

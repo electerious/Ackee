@@ -54,6 +54,18 @@ Protected queries and mutations need to include the `Authorization` HTTP header.
 }
 ```
 
+## Time Zone
+
+It's sometimes necessary to know the time zone of the user to accurately group stats by day, month or year. We therefore recommend to include a `Time-Zone` header when requesting data. The time zone should be formatted as a [tz database time zone string](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+The time zone of the server will be used as a fallback.
+
+```json
+{
+  "Time-Zone": "Europe/Berlin"
+}
+```
+
 ## Queries
 
 Queries are used to receive data. Here are a few examples:

@@ -16,12 +16,15 @@ Self-hosted, Node.js based analytics tool for those who care about privacy. Acke
 
 </div>
 
-## Contents
+## 👋 Introduction
 
-- [Get started](#get-started)
-- [Introduction](#introduction)
-- [Documentation](#documentation)
-- [Miscellaneous](#more)
+Ackee is a self-hosted analytics tool that cares about privacy. We believe that you don't need to track every aspect of your visitors. Ackee keeps tracked data anonymized to avoid that users are identifiable, while still providing helpful insights. It's is the right tool for everyone who doesn't need a full-featured marketing analytics platform like Google Analytics or Matomo.
+
+- **Self-hosted**: Ackee runs on your own server and is 100% open-source
+- **Modern technologies**: Lightweight Node.js and MongoDB architecture
+- **Beautiful**: Minimal and focused interface
+- **No cookies**: No unique user tracking and therefore no required cookie message
+- **GraphQL API**: Fully documented GraphQL API that allows you to build new tools upon Ackee
 
 ## 🚀 Get started
 
@@ -41,35 +44,6 @@ And configure Ackee and your server correctly…
 - […with CORS headers](docs/CORS%20headers.md)
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
-
-## 👋 Introduction
-
-### What is Ackee?
-
-Ackee is a web app you install on your server to analyse the traffic of your sites.
-
-### Why Ackee?
-
-Ackee is lightweight, easy to install and has a good balance between analytics and privacy. It features a GraphQL API and web interface and tracks only what's necessary.
-
-It's is the right tool for you if you care about privacy and don't need a full-features marketing analytics platform like Google Analytics or Matomo.
-
-### Benefits of Ackee?
-
-- Self-hosted
-- Lightweight and easy to install
-- Modern and fast architecture
-- Beautiful and focused interface
-- No unique user tracking and no cookies
-- Fully documented GraphQL API
-
-### How does it work?
-
-You run the Ackee server which then waits for requests through its API.
-
-The API of Ackee accepts information about your visitors sent to it using [ackee-tracker](https://github.com/electerious/ackee-tracker). It's a small script you add to your sites, similar to the JavaScript tracking snippet provided by Google Analytics.
-
-The interface of Ackee lets you view and analyse your tracked information.
 
 ## 📚 Documentation
 
