@@ -44,32 +44,13 @@ Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
 
 ## 👋 Introduction
 
-### What is Ackee?
+Ackee is a self-hosted analytics tool that cares about privacy. It's lightweight, easy to install, features a GraphQL API, web interface and tracks only what's necessary. It's is the right tool for everyone who doesn't need a full-featured marketing analytics platform like Google Analytics or Matomo.
 
-Ackee is a web app you install on your server to analyse the traffic of your sites.
-
-### Why Ackee?
-
-Ackee is lightweight, easy to install and has a good balance between analytics and privacy. It features a GraphQL API and web interface and tracks only what's necessary.
-
-It's is the right tool for you if you care about privacy and don't need a full-features marketing analytics platform like Google Analytics or Matomo.
-
-### Benefits of Ackee?
-
-- Self-hosted
-- Lightweight and easy to install
-- Modern and fast architecture
-- Beautiful and focused interface
-- No unique user tracking and no cookies
-- Fully documented GraphQL API
-
-### How does it work?
-
-You run the Ackee server which then waits for requests through its API.
-
-The API of Ackee accepts information about your visitors sent to it using [ackee-tracker](https://github.com/electerious/ackee-tracker). It's a small script you add to your sites, similar to the JavaScript tracking snippet provided by Google Analytics.
-
-The interface of Ackee lets you view and analyse your tracked information.
+- **Self-hosted**: Ackee runs on your own server and is 100% open-source
+- **Modern technologies**: Lightweight Node.js and MongoDB architecture
+- **Beautiful**: Minimal and focused interface
+- **No cookies**: No unique user tracking and therefore no required cookie message
+- **GraphQL API**: Fully documented GraphQL API that allows you to build new tools upon Ackee
 
 ## 📚 Documentation
 
