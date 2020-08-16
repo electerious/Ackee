@@ -16,12 +16,15 @@ Self-hosted, Node.js based analytics tool for those who care about privacy. Acke
 
 </div>
 
-## Contents
+## 👋 Introduction
 
-- [Get started](#get-started)
-- [Introduction](#introduction)
-- [Documentation](#documentation)
-- [Miscellaneous](#more)
+Ackee is a self-hosted analytics tool that cares about privacy. It's lightweight, easy to install, features a GraphQL API, web interface and tracks only what's necessary. It's is the right tool for everyone who doesn't need a full-featured marketing analytics platform like Google Analytics or Matomo.
+
+- **Self-hosted**: Ackee runs on your own server and is 100% open-source
+- **Modern technologies**: Lightweight Node.js and MongoDB architecture
+- **Beautiful**: Minimal and focused interface
+- **No cookies**: No unique user tracking and therefore no required cookie message
+- **GraphQL API**: Fully documented GraphQL API that allows you to build new tools upon Ackee
 
 ## 🚀 Get started
 
@@ -41,16 +44,6 @@ And configure Ackee and your server correctly…
 - […with CORS headers](docs/CORS%20headers.md)
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
-
-## 👋 Introduction
-
-Ackee is a self-hosted analytics tool that cares about privacy. It's lightweight, easy to install, features a GraphQL API, web interface and tracks only what's necessary. It's is the right tool for everyone who doesn't need a full-featured marketing analytics platform like Google Analytics or Matomo.
-
-- **Self-hosted**: Ackee runs on your own server and is 100% open-source
-- **Modern technologies**: Lightweight Node.js and MongoDB architecture
-- **Beautiful**: Minimal and focused interface
-- **No cookies**: No unique user tracking and therefore no required cookie message
-- **GraphQL API**: Fully documented GraphQL API that allows you to build new tools upon Ackee
 
 ## 📚 Documentation
 
