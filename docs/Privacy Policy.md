@@ -6,10 +6,8 @@ Although, we recommend to mention Ackee in your privacy policy. Let your visitor
 
 > ⚠️ Make sure to ask you users before activating the `detailed` mode of Ackee. The detailed mode tracks more data and also includes data [we're considering as personal data](Anonymization.md#personal-data). In this case it's highly recommended to add Ackee to your privacy policy.
 
-<details open>
-<summary>HTML privacy policy example</summary>
+## HTML privacy policy example
 
-<p>
 ```html
 To get information about the behavior of our visitors, we use
 <a href="https://ackee.electerious.com" target="_blank">Ackee</a>. This
@@ -19,13 +17,9 @@ personal identifiable information.
 <a href="https://docs.ackee.electerious.com/#/docs/Anonymization" target="_blank">Go
 to their documentation</a> to find out what Ackee collects.
 ```
-</p>
-</details>
 
-<details open>
-<summary>Markdown privacy policy example</summary>
+## Markdown privacy policy example
 
-<p>
 ```md
 To get information about the behavior of our visitors, we use
 [Ackee](https://ackee.electerious.com). This
@@ -35,5 +29,3 @@ personal identifiable information.
 [Go
 to their documentation](https://docs.ackee.electerious.com/#/docs/Anonymization) to find out what Ackee collects.
 ```
-</p>
-</details>
