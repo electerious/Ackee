@@ -3,7 +3,7 @@ env:
   - YARN_GPG=no
 node_js:
   - 'node'
-  - '10'
+  - '14'
 os:
   - windows
   - linux
