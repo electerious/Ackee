@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+This updates improves the look of the README and adds some missing pieces of documentation.
+
 ## [2.0.0] - 2020-08-15
 
 The first major back-end and front-end rewrite of Ackee with new API, dashboard, active visitors counter and more. Updating is as easy as ever. Simple grab the newest version, ensure that you're using Node.js v14 or higher and start Ackee. That's it!
