@@ -18,7 +18,7 @@ Self-hosted, Node.js based analytics tool for those who care about privacy. Acke
 
 ## 👋 Introduction
 
-Ackee is a self-hosted analytics tool that cares about privacy. We believe that you don't need to track every aspect of your visitors. Ackee keeps tracked data anonymized to avoid that users are identifiable, while still providing helpful insights. It's is the right tool for everyone who doesn't need a full-featured marketing analytics platform like Google Analytics or Matomo.
+Ackee is a self-hosted analytics tool that cares about privacy. We believe that you don't need to track every aspect of your visitors. Ackee keeps tracked data anonymized to avoid that users are identifiable, while still providing helpful insights. It's the right tool for everyone who doesn't need a full-featured marketing analytics platform like Google Analytics or Matomo.
 
 - **Self-hosted**: Ackee runs on your own server and is 100% open-source
 - **Modern technologies**: Lightweight Node.js and MongoDB architecture
