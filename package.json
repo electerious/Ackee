@@ -29,10 +29,6 @@
     "test": "nyc ava",
     "lint": "eslint '{src,test}/**/*.js'"
   },
-  "eslintConfig": {
-    "root": true,
-    "extends": "@electerious/eslint-config"
-  },
   "dependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
@@ -97,6 +93,10 @@
     "environmentVariables": {
       "ACKEE_TRACKER": "custom name"
     }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "@electerious/eslint-config"
   },
   "nodemonConfig": {
     "ext": "js,json,graphql",
