@@ -1,0 +1,21 @@
+// Chromium ------------------------------------------------------ //
+
+::-webkit-scrollbar {
+  width: 6px;
+} 
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $light;
+  border-radius: 3px;
+}
+
+// Firefox ------------------------------------------------------- //
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, .5) transparent;
+}
