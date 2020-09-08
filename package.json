@@ -35,6 +35,7 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "ackee-tracker": "^4.0.0",
+    "apollo-server-lambda": "^2.17.0",
     "apollo-server-micro": "^2.16.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.15.0",
@@ -83,11 +84,11 @@
     "eslint-plugin-react-native": "^3.8.1",
     "mocked-env": "^1.3.2",
     "nodemon": "^2.0.4",
+    "normalize.css": "^8.0.0",
     "nyc": "^15.1.0",
-    "test-listen": "^1.1.0",
     "rosid-handler-js": "^13.0.0",
     "rosid-handler-sass": "^7.0.0",
-    "normalize.css": "^8.0.0"
+    "test-listen": "^1.1.0"
   },
   "ava": {
     "verbose": true,
