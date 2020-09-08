@@ -3,10 +3,10 @@
 const { ApolloServer } = require('apollo-server-lambda')
 const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 
-const isAuthenticated = require('./utils/isAuthenticated')
-const isDemoMode = require('./utils/isDemoMode')
-const isDevelopmentMode = require('./utils/isDevelopmentMode')
-const createDate = require('./utils/createDate')
+const isAuthenticated = require('../src/utils/isAuthenticated')
+const isDemoMode = require('../src/utils/isDemoMode')
+const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
+const createDate = require('../src/utils/createDate')
 
 const apolloServer = new ApolloServer({
 	introspection: isDemoMode === true || isDevelopmentMode === true,
@@ -16,12 +16,12 @@ const apolloServer = new ApolloServer({
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
-		require('./types')
+		require('../src//types')
 	],
 	resolvers: {
 		UnsignedInt: UnsignedIntResolver,
 		DateTime: DateTimeResolver,
-		...require('./resolvers')
+		...require('../src/resolvers')
 	},
 	context: async (integrationContext) => ({
 		isDemoMode,
