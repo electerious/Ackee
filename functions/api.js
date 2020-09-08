@@ -15,13 +15,13 @@ const apolloServer = new ApolloServer({
 	// formatError: handleGraphError,
 	typeDefs: [
 		UnsignedIntTypeDefinition,
-		DateTimeTypeDefinition
-		// require('../src/types')
+		DateTimeTypeDefinition,
+		require('../src/types')
 	],
 	resolvers: {
 		UnsignedInt: UnsignedIntResolver,
-		DateTime: DateTimeResolver
-		// ...require('../src/resolvers')
+		DateTime: DateTimeResolver,
+		...require('../src/resolvers')
 	},
 	context: async (integrationContext) => ({
 		isDemoMode,
