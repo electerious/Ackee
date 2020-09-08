@@ -1,6 +1,7 @@
 [build]
   functions = "functions/"
   publish = "dist"
+  command = "yarn"
 [[redirects]]
   from = "/api"
   to = "/.netlify/functions/api.js"
