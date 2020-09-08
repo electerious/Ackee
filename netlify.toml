@@ -5,6 +5,6 @@
   environment = { NODE_VERSION = "14.9.0" }
 [[redirects]]
   from = "/api"
-  to = "/.netlify/functions/api.js"
+  to = "/.netlify/functions/api"
   status = 200
   force = true
