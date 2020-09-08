@@ -79,21 +79,21 @@ const tracker = async () => {
 }
 
 index().then((data) => {
-	return writeFile('build/index.html', data)
+	return writeFile('dist/index.html', data)
 })
 
 favicon().then((data) => {
-	return writeFile('build/favicon.ico', data)
+	return writeFile('dist/favicon.ico', data)
 })
 
 styles().then((data) => {
-	return writeFile('build/index.css', data)
+	return writeFile('dist/index.css', data)
 })
 
 scripts().then((data) => {
-	return writeFile('build/index.js', data)
+	return writeFile('dist/index.js', data)
 })
 
 tracker().then((data) => {
-	return writeFile('build/tracker.js', data)
+	return writeFile('dist/tracker.js', data)
 })
