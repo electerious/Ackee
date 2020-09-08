@@ -5,13 +5,13 @@ const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTi
 
 const isAuthenticated = require('../src/utils/isAuthenticated')
 const isDemoMode = require('../src/utils/isDemoMode')
-const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
+// const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
 const createDate = require('../src/utils/createDate')
 
 const apolloServer = new ApolloServer({
-	introspection: isDemoMode === true || isDevelopmentMode === true,
-	playground: isDemoMode === true || isDevelopmentMode === true,
-	debug: isDevelopmentMode === true,
+	introspection: false,
+	playground: false,
+	debug: false,
 	// formatError: handleGraphError,
 	typeDefs: [
 		UnsignedIntTypeDefinition,
