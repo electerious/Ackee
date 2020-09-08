@@ -3,6 +3,8 @@
 const { ApolloServer } = require('apollo-server-micro')
 const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 const micro = require('micro')
+const { resolve } = require('path')
+const { readFile } = require('fs').promises
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 
@@ -14,7 +16,12 @@ const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTrackerUrl = require('./utils/customTrackerUrl')
 const createDate = require('./utils/createDate')
-const ui = require('./routes/ui')
+
+const index = readFile(resolve(__dirname, '../build/index.html'))
+const favicon = readFile(resolve(__dirname, '../build/favicon.ico'))
+const styles = readFile(resolve(__dirname, '../build/index.css'))
+const scripts = readFile(resolve(__dirname, '../build/index.js'))
+const tracker = readFile(resolve(__dirname, '../build/tracker.js'))
 
 const handleMicroError = (err, res) => {
 
@@ -129,13 +136,34 @@ const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
 
 const routes = [
 
-	get('/', ui.index),
-	get('/index.html', ui.index),
-	get('/favicon.ico', ui.favicon),
-	get('/index.css', ui.styles),
-	get('/index.js', ui.scripts),
-	get('/tracker.js', ui.tracker),
-	customTrackerUrl != null ? get(customTrackerUrl, ui.tracker) : undefined,
+	get('/', async (req, res) => {
+		res.setHeader('Content-Type', 'text/html; charset=utf-8')
+		res.end(await index)
+	}),
+	get('/index.html', async (req, res) => {
+		res.setHeader('Content-Type', 'text/html; charset=utf-8')
+		res.end(await index)
+	}),
+	get('/favicon.ico', async (req, res) => {
+		res.setHeader('Content-Type', 'image/vnd.microsoft.icon')
+		res.end(await favicon)
+	}),
+	get('/index.css', async (req, res) => {
+		res.setHeader('Content-Type', 'text/css; charset=utf-8')
+		res.end(await styles)
+	}),
+	get('/index.js', async (req, res) => {
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await scripts)
+	}),
+	get('/tracker.js', async (req, res) => {
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await tracker)
+	}),
+	customTrackerUrl != null ? get(customTrackerUrl, async (req, res) => {
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await tracker)
+	}) : undefined,
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),

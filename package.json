@@ -25,6 +25,8 @@
   "scripts": {
     "start": "node src/index.js",
     "start:dev": "NODE_ENV=development nodemon",
+    "build": "node build.js",
+    "build:dev": "NODE_ENV=development node build.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
     "lint": "eslint '{src,test}/**/*.js'"
@@ -52,7 +54,6 @@
     "node-fetch": "^2.6.0",
     "node-schedule": "^1.3.2",
     "normalize-url": "^5.0.0",
-    "normalize.css": "^8.0.0",
     "permit": "^0.2.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -66,8 +67,6 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "request-ip": "^2.1.3",
-    "rosid-handler-js": "^13.0.0",
-    "rosid-handler-sass": "^7.0.0",
     "s-ago": "^2.2.0",
     "shortid": "^2.2.15",
     "signale": "^1.4.0",
@@ -85,7 +84,10 @@
     "mocked-env": "^1.3.2",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
-    "test-listen": "^1.1.0"
+    "test-listen": "^1.1.0",
+    "rosid-handler-js": "^13.0.0",
+    "rosid-handler-sass": "^7.0.0",
+    "normalize.css": "^8.0.0"
   },
   "ava": {
     "verbose": true,
