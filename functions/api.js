@@ -16,7 +16,7 @@ const apolloServer = new ApolloServer({
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
-		require('../src//types')
+		require('../src/types')
 	],
 	resolvers: {
 		UnsignedInt: UnsignedIntResolver,
