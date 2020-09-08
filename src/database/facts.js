@@ -1,6 +1,6 @@
 'use strict'
 
-const Record = require('../schemas/Record')
+const Record = require('../models/Record')
 const aggregateActiveVisitors = require('../aggregations/aggregateActiveVisitors')
 
 const getActiveVisitors = async (ids, dateDetails) => {

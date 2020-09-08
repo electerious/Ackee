@@ -1,6 +1,6 @@
 'use strict'
 
-const Record = require('../schemas/Record')
+const Record = require('../models/Record')
 const aggregateTopFields = require('../aggregations/aggregateTopFields')
 const aggregateNewFields = require('../aggregations/aggregateNewFields')
 const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
