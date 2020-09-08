@@ -2,6 +2,7 @@
   publish = "dist"
   command = "yarn"
   functions = "functions/"
+  environment = { NODE_VERSION = "14.9.0" }
 [[redirects]]
   from = "/api"
   to = "/.netlify/functions/api.js"
