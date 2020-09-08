@@ -17,11 +17,11 @@ const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTrackerUrl = require('./utils/customTrackerUrl')
 const createDate = require('./utils/createDate')
 
-const index = readFile(resolve(__dirname, '../build/index.html'))
-const favicon = readFile(resolve(__dirname, '../build/favicon.ico'))
-const styles = readFile(resolve(__dirname, '../build/index.css'))
-const scripts = readFile(resolve(__dirname, '../build/index.js'))
-const tracker = readFile(resolve(__dirname, '../build/tracker.js'))
+const index = readFile(resolve(__dirname, '../dist/index.html'))
+const favicon = readFile(resolve(__dirname, '../dist/favicon.ico'))
+const styles = readFile(resolve(__dirname, '../dist/index.css'))
+const scripts = readFile(resolve(__dirname, '../dist/index.js'))
+const tracker = readFile(resolve(__dirname, '../dist/tracker.js'))
 
 const handleMicroError = (err, res) => {
 
