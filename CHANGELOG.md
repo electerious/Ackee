@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - More relevant data on the dashboard: Ackee now shows the top data of the last 24 hours instead of last 7 days
+- Heroku installation docs (#154, thanks @Go-Merk and @aleccool213)
 
 ## [2.0.1] - 2020-08-16
 
