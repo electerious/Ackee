@@ -82,6 +82,7 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
 - [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
+- [VuePress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress-plugin for Ackee
 
 ### Links
 
