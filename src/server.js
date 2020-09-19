@@ -20,7 +20,7 @@ const handleMicroError = (err, res) => {
 
 	// This part is for micro errors and errors outside of GraphQL.
 	// Most errors won't be caught here, but some error can still
-	// happen outside of GraphQL. In this case wer distinguish
+	// happen outside of GraphQL. In this case we distinguish
 	// between unknown errors and known errors. Known errors are
 	// created with the createError function while unknown errors
 	// are simply errors thrown somewhere in the application.

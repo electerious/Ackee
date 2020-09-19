@@ -16,11 +16,22 @@
     "ACKEE_PASSWORD": {
       "description": "Password which will be used to log in to Ackee",
       "required": true
+    },
+    "ACKEE_MONGODB": {
+      "description": "MongoDB URI which will be used to connect a database to Ackee",
+      "required": true
+    },
+    "ACKEE_ALLOW_ORIGIN": {
+      "description": "Tracked domains which will be used on Ackee (CORS headers)",
+      "required": true
+    },
+    "ACKEE_TTL": {
+      "description": "Specifies how long an Ackee TTL token is valid (Default: 3600000)",
+      "required": false
+    },
+    "ACKEE_TRACKER": {
+      "description": "Specifies a custom name for the tracking script (Default: tracker.js)",
+      "required": false
     }
-  },
-  "addons": [
-    {
-      "plan": "mongolab"
-    }
-  ]
+  }
 }

@@ -1,6 +1,9 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
-import { initialState as initialFilterState } from '../reducers/filter'
+
+import { SORTINGS_TOP } from '../../../constants/sortings'
+import { RANGES_LAST_24_HOURS } from '../../../constants/ranges'
+import { INTERVALS_DAILY } from '../../../constants/intervals'
 
 export const ALL_DOMAINS = Symbol()
 
@@ -37,8 +40,6 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 
 	dispatch(setOverviewFetching(domainId, true))
 	dispatch(setOverviewError(domainId))
-
-	const filterState = initialFilterState()
 
 	try {
 
@@ -111,9 +112,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 					}
 				`,
 				variables: {
-					interval: filterState.interval,
-					sorting: filterState.sorting,
-					range: filterState.range
+					interval: SORTINGS_TOP,
+					sorting: RANGES_LAST_24_HOURS,
+					range: INTERVALS_DAILY
 				},
 				props,
 				signal: signal(domainId)
@@ -135,9 +136,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				`,
 				variables: {
 					id: domainId,
-					interval: filterState.interval,
-					sorting: filterState.sorting,
-					range: filterState.range
+					interval: SORTINGS_TOP,
+					sorting: RANGES_LAST_24_HOURS,
+					range: INTERVALS_DAILY
 				},
 				props,
 				signal: signal(domainId)

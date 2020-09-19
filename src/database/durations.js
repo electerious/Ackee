@@ -2,7 +2,7 @@
 
 const { utcToZonedTime } = require('date-fns-tz')
 
-const Record = require('../schemas/Record')
+const Record = require('../models/Record')
 const aggregateDurations = require('../aggregations/aggregateDurations')
 const intervals = require('../constants/intervals')
 const createArray = require('../utils/createArray')
