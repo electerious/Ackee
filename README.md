@@ -88,5 +88,5 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 
 ### Links
 
-- [Follow us on Twitter](https://twitter.com/getackee)
+- [Follow Ackee on Twitter](https://twitter.com/getackee)
 - [Vote for Ackee on ProductHunt](https://www.producthunt.com/posts/ackee)
