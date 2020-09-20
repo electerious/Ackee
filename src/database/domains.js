@@ -1,6 +1,6 @@
 'use strict'
 
-const Domain = require('../schemas/Domain')
+const Domain = require('../models/Domain')
 const sortByProp = require('../utils/sortByProp')
 
 const response = (entry) => ({

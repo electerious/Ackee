@@ -1,6 +1,6 @@
 'use strict'
 
-const Token = require('../schemas/Token')
+const Token = require('../models/Token')
 
 const response = (entry) => ({
 	id: entry.id,

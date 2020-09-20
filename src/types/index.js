@@ -1,7 +1,12 @@
 'use strict'
 
-const { loadFilesSync, mergeTypeDefs } = require('graphql-tools')
+const { mergeTypeDefs } = require('graphql-tools')
 
-const typesArray = loadFilesSync(__dirname)
-
-module.exports = mergeTypeDefs(typesArray, { all: true })
+module.exports = mergeTypeDefs([
+	require('./domains'),
+	require('./facts'),
+	require('./miscellaneous'),
+	require('./records'),
+	require('./statistics'),
+	require('./tokens')
+], { all: true })

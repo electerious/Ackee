@@ -1,6 +1,6 @@
 'use strict'
 
-const Record = require('../schemas/Record')
+const Record = require('../models/Record')
 
 const response = (entry) => ({
 	id: entry.id,
