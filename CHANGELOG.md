@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Added
+
+- [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee)
+- [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee)
+
 ### Changed
 
 - More relevant data on the dashboard: Ackee now shows the top data of the last 24 hours instead of last 7 days
