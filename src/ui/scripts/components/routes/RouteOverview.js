@@ -1,9 +1,12 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
+import { SORTINGS_TOP } from '../../../../constants/sortings'
+import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
+import { INTERVALS_DAILY } from '../../../../constants/intervals'
+
 import * as route from '../../constants/route'
 import { ALL_DOMAINS } from '../../actions/overview'
 import * as selectOverviewValue from '../../selectors/selectOverviewValue'
-import { initialState as initialFilterState } from '../../reducers/filter'
 
 import enhanceFacts from '../../enhancers/enhanceFacts'
 import enhanceViews from '../../enhancers/enhanceViews'
@@ -30,7 +33,6 @@ import CardLanguages from '../cards/CardLanguages'
 const RouteOverview = (props) => {
 
 	const domainId = props.route.params.domainId || ALL_DOMAINS
-	const filterState = initialFilterState()
 	const isLoading = selectOverviewValue.withoutType(props, domainId).fetching
 
 	useEffect(() => {
@@ -52,7 +54,7 @@ const RouteOverview = (props) => {
 			h(CardViews, {
 				wide: true,
 				headline: 'Views',
-				interval: filterState.interval,
+				interval: INTERVALS_DAILY,
 				loading: isLoading,
 				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14),
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
@@ -61,7 +63,7 @@ const RouteOverview = (props) => {
 			h(CardDurations, {
 				wide: true,
 				headline: 'Durations',
-				interval: filterState.interval,
+				interval: INTERVALS_DAILY,
 				loading: isLoading,
 				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14),
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
@@ -69,8 +71,8 @@ const RouteOverview = (props) => {
 
 			h(CardPages, {
 				headline: 'Pages',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhancePages(selectOverviewValue.withType(props, domainId, 'pages')),
 				onMore: () => props.setRoute(route.ROUTE_PAGES)
@@ -78,8 +80,8 @@ const RouteOverview = (props) => {
 
 			h(CardReferrers, {
 				headline: 'Referrers',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhanceReferrers(selectOverviewValue.withType(props, domainId, 'referrers')),
 				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
@@ -89,8 +91,8 @@ const RouteOverview = (props) => {
 
 			h(CardSystems, {
 				headline: 'Systems',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhanceSystems(selectOverviewValue.withType(props, domainId, 'systems')),
 				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
@@ -98,8 +100,8 @@ const RouteOverview = (props) => {
 
 			h(CardDevices, {
 				headline: 'Devices',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhanceDevices(selectOverviewValue.withType(props, domainId, 'devices')),
 				onMore: () => props.setRoute(route.ROUTE_DEVICES)
@@ -107,8 +109,8 @@ const RouteOverview = (props) => {
 
 			h(CardBrowsers, {
 				headline: 'Browsers',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhanceBrowsers(selectOverviewValue.withType(props, domainId, 'browsers')),
 				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
@@ -116,8 +118,8 @@ const RouteOverview = (props) => {
 
 			h(CardSizes, {
 				headline: 'Sizes',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhanceSizes(selectOverviewValue.withType(props, domainId, 'sizes')),
 				onMore: () => props.setRoute(route.ROUTE_SIZES)
@@ -125,8 +127,8 @@ const RouteOverview = (props) => {
 
 			h(CardLanguages, {
 				headline: 'Languages',
-				range: filterState.range,
-				sorting: filterState.sorting,
+				range: RANGES_LAST_24_HOURS,
+				sorting: SORTINGS_TOP,
 				loading: isLoading,
 				items: enhanceLanguages(selectOverviewValue.withType(props, domainId, 'languages')),
 				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)

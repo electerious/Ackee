@@ -84,9 +84,9 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
 - [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
 - [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee) - Gridsome plugin for Ackee
-- [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress-plugin for Ackee
+- [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress plugin for Ackee
 
 ### Links
 
-- [Follow us on Twitter](https://twitter.com/getackee)
+- [Follow Ackee on Twitter](https://twitter.com/getackee)
 - [Vote for Ackee on ProductHunt](https://www.producthunt.com/posts/ackee)
