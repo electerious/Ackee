@@ -112,9 +112,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 					}
 				`,
 				variables: {
-					interval: SORTINGS_TOP,
-					sorting: RANGES_LAST_24_HOURS,
-					range: INTERVALS_DAILY
+					interval: INTERVALS_DAILY,
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				},
 				props,
 				signal: signal(domainId)
@@ -136,9 +136,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				`,
 				variables: {
 					id: domainId,
-					interval: SORTINGS_TOP,
-					sorting: RANGES_LAST_24_HOURS,
-					range: INTERVALS_DAILY
+					interval: INTERVALS_DAILY,
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				},
 				props,
 				signal: signal(domainId)
