@@ -4,6 +4,7 @@
 - [With Docker](#with-docker)
 - [With Helm](#with-helm)
 - [Without Docker](#without-docker)
+- [With Netlify](#with-netlify)
 - [With Heroku](#with-heroku)
 - [With Render](#with-render)
 
@@ -159,6 +160,18 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 - [SSL and HTTPS](SSL%20and%20HTTPS.md)
 - [CORS headers](CORS%20headers.md)
+
+## With Netlify
+
+### 1. Deploy to Netlify
+
+[![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/electerious/Ackee)
+
+### 2. Configure Ackee
+
+- You need to have a MongoDB instance running (e.g. [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
+- Set a username and password to protect your interface
+- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#heroku-or-platforms-as-a-service-configuration).
 
 ## With Heroku
 

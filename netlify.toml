@@ -11,3 +11,8 @@
   to = "/.netlify/functions/api"
   status = 200
   force = true
+[template.environment]
+  ACKEE_ACKEE_MONGODB = "MongoDB connection URI"
+  ACKEE_USERNAME = "Username used to protect the interface"
+  ACKEE_PASSWORD = "Password used to protect the interface"
+  ACKEE_ALLOW_ORIGIN = "Custom CORS headers like 'https://a.example.com,https://b.example.com'"
