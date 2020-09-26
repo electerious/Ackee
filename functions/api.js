@@ -14,9 +14,8 @@ if (dbUrl == null) {
 	throw new Error('MongoDB connection URI missing in environment')
 }
 
-mongoose.set('useFindAndModify', false)
-
 mongoose.connect(dbUrl, {
+	useFindAndModify: false,
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true
