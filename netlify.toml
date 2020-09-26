@@ -14,7 +14,7 @@
   force = true
 
 [template.environment]
-  ACKEE_ACKEE_MONGODB = "MongoDB connection URI"
-  ACKEE_USERNAME = "Username used to protect the interface"
-  ACKEE_PASSWORD = "Password used to protect the interface"
-  ACKEE_ALLOW_ORIGIN = "Custom CORS headers like 'https://a.example.com,https://b.example.com'"
+  ACKEE_MONGODB = "ACKEE_MONGODB"
+  ACKEE_USERNAME = "ACKEE_USERNAME"
+  ACKEE_PASSWORD = "ACKEE_PASSWORD"
+  ACKEE_ALLOW_ORIGIN = "ACKEE_ALLOW_ORIGIN"
