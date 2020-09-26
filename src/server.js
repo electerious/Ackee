@@ -16,11 +16,11 @@ const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTracker = require('./utils/customTracker')
 const { createMicroContext } = require('./utils/createContext')
 
-const index = readFile(resolve(__dirname, '../dist/index.html'))
-const favicon = readFile(resolve(__dirname, '../dist/favicon.ico'))
-const styles = readFile(resolve(__dirname, '../dist/index.css'))
-const scripts = readFile(resolve(__dirname, '../dist/index.js'))
-const tracker = readFile(resolve(__dirname, '../dist/tracker.js'))
+const index = readFile(resolve(__dirname, '../dist/index.html')).catch(signale.fatal)
+const favicon = readFile(resolve(__dirname, '../dist/favicon.ico')).catch(signale.fatal)
+const styles = readFile(resolve(__dirname, '../dist/index.css')).catch(signale.fatal)
+const scripts = readFile(resolve(__dirname, '../dist/index.js')).catch(signale.fatal)
+const tracker = readFile(resolve(__dirname, '../dist/tracker.js')).catch(signale.fatal)
 
 const handleMicroError = (err, res) => {
 
