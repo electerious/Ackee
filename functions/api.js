@@ -25,7 +25,7 @@ const apolloServer = new ApolloServer({
 	},
 	context: async (integrationContext) => ({
 		isDemoMode,
-		isAuthenticated: await isAuthenticated(integrationContext.event),
+		isAuthenticated: await isAuthenticated(integrationContext.event.headers['authorization']),
 		dateDetails: createDate(integrationContext.event.headers['time-zone']),
 		req: integrationContext.req
 	})
