@@ -6,6 +6,7 @@ const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTi
 
 const isAuthenticated = require('../src/utils/isAuthenticated')
 const isDemoMode = require('../src/utils/isDemoMode')
+const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
 const createDate = require('../src/utils/createDate')
 
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
@@ -22,10 +23,9 @@ mongoose.connect(dbUrl, {
 })
 
 const apolloServer = new ApolloServer({
-	introspection: false,
-	playground: false,
-	debug: false,
-	// formatError: handleGraphError,
+	introspection: isDemoMode === true || isDevelopmentMode === true,
+	playground: isDemoMode === true || isDevelopmentMode === true,
+	debug: isDevelopmentMode === true,
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
