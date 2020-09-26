@@ -6687,11 +6687,6 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-permit@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/permit/-/permit-0.2.4.tgz#3af2c8f5bd798f771be50eb59cecd1da6459a383"
-  integrity sha512-Mp2XTEMD3mPsZIWq3bp0claE4IxXKa4C6nhSDPZgGri8Q4CLjEjAQrP/xGKq2548a2KFENmA1V7W0Lob8kTuzw==
-
 picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1, picomatch@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
