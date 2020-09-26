@@ -15,8 +15,6 @@ const port = process.env.ACKEE_PORT || process.env.PORT || 3000
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 const serverUrl = `http://localhost:${ port }`
 
-mongoose.set('useFindAndModify', false)
-
 server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
 server.on('error', (err) => signale.fatal(err))
 
@@ -28,6 +26,7 @@ if (dbUrl == null) {
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
 mongoose.connect(dbUrl, {
+	useFindAndModify: false,
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true
