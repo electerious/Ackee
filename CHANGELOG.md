@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] - 2020-09-20
+
+### Fixed
+
+- Invalid value error (#165)
+
+## [2.0.2] - 2020-09-20
+
+### Added
+
+- [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee)
+- [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee)
+
+### Changed
+
+- More relevant data on the dashboard: Ackee now shows the top data of the last 24 hours instead of last 7 days
+- Heroku installation docs (#154, thanks @Go-Merk and @aleccool213)
+
 ## [2.0.1] - 2020-08-16
 
 This updates improves the look of the README and adds some missing pieces of documentation.
