@@ -6,6 +6,7 @@ const js = require('rosid-handler-js')
 const html = require('./src/ui/index')
 const isDemoMode = require('./src/utils/isDemoMode')
 const isDevelopmentMode = require('./src/utils/isDevelopmentMode')
+const signale = require('./src/utils/signale')
 
 const index = async () => {
 
@@ -78,22 +79,22 @@ const tracker = async () => {
 
 }
 
-index().then((data) => {
-	return writeFile('dist/index.html', data)
-})
+const build = async (path, fn) => {
 
-favicon().then((data) => {
-	return writeFile('dist/favicon.ico', data)
-})
+	try {
+		signale.await(`Building and writing '${ path }'`)
+		const data = await fn()
+		await writeFile(path, data)
+		signale.success(`Finished building '${ path }'`)
+	} catch (err) {
+		signale.fatal(err)
+		process.exit(1)
+	}
 
-styles().then((data) => {
-	return writeFile('dist/index.css', data)
-})
+}
 
-scripts().then((data) => {
-	return writeFile('dist/index.js', data)
-})
-
-tracker().then((data) => {
-	return writeFile('dist/tracker.js', data)
-})
+build('dist/index.html', index)
+build('dist/favicon.ico', favicon)
+build('dist/index.css', styles)
+build('dist/index.js', scripts)
+build('dist/tracker.js', tracker)
