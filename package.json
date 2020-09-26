@@ -23,10 +23,12 @@
     "url": "https://paypal.me/electerious"
   },
   "scripts": {
-    "start": "npm run build && node src/index.js",
+    "start": "npm run build && npm run server",
     "start:dev": "NODE_ENV=development nodemon",
     "build": "node build.js",
-    "build:dev": "NODE_ENV=development node build.js",
+    "build:dev": "NODE_ENV=development npm run build",
+    "server": "node src/index.js",
+    "server:dev": "NODE_ENV=development npm run server",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
     "lint": "eslint '{functions,src,test}/**/*.js'"
