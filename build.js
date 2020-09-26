@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+'use strict'
+require('dotenv').config()
+
 const { resolve } = require('path')
 const { writeFile, readFile } = require('fs').promises
 const sass = require('rosid-handler-sass')
@@ -6,6 +10,7 @@ const js = require('rosid-handler-js')
 const html = require('./src/ui/index')
 const isDemoMode = require('./src/utils/isDemoMode')
 const isDevelopmentMode = require('./src/utils/isDevelopmentMode')
+const customTracker = require('./src/utils/customTracker')
 const signale = require('./src/utils/signale')
 
 const index = async () => {
@@ -98,3 +103,4 @@ build('dist/favicon.ico', favicon)
 build('dist/index.css', styles)
 build('dist/index.js', scripts)
 build('dist/tracker.js', tracker)
+if (customTracker.exists === true) build(`dist/${ customTracker.path }`, tracker)

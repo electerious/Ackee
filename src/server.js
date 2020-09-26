@@ -13,7 +13,7 @@ const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
-const customTrackerUrl = require('./utils/customTrackerUrl')
+const customTracker = require('./utils/customTracker')
 const { createMicroContext } = require('./utils/createContext')
 
 const index = readFile(resolve(__dirname, '../dist/index.html'))
@@ -154,7 +154,7 @@ const routes = [
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}),
-	customTrackerUrl != null ? get(customTrackerUrl, async (req, res) => {
+	customTracker.exists === true ? get(customTracker.url, async (req, res) => {
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}) : undefined,
