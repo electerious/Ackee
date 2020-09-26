@@ -4,10 +4,9 @@ const mongoose = require('mongoose')
 const { ApolloServer } = require('apollo-server-lambda')
 const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 
-const isAuthenticated = require('../src/utils/isAuthenticated')
 const isDemoMode = require('../src/utils/isDemoMode')
 const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
-const createDate = require('../src/utils/createDate')
+const { createServerlessContext } = require('../src/utils/createContext')
 
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 
@@ -36,12 +35,7 @@ const apolloServer = new ApolloServer({
 		DateTime: DateTimeResolver,
 		...require('../src/resolvers')
 	},
-	context: async (integrationContext) => ({
-		isDemoMode,
-		isAuthenticated: await isAuthenticated(integrationContext.event.headers['authorization']),
-		dateDetails: createDate(integrationContext.event.headers['time-zone']),
-		req: integrationContext.req
-	})
+	context: createServerlessContext
 })
 
 exports.handler = apolloServer.createHandler()

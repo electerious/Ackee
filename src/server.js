@@ -11,11 +11,10 @@ const { router, get, post, put, patch, del } = require('microrouter')
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
-const isAuthenticated = require('./utils/isAuthenticated')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const customTrackerUrl = require('./utils/customTrackerUrl')
-const createDate = require('./utils/createDate')
+const { createMicroContext } = require('./utils/createContext')
 
 const index = readFile(resolve(__dirname, '../dist/index.html'))
 const favicon = readFile(resolve(__dirname, '../dist/favicon.ico'))
@@ -123,12 +122,7 @@ const apolloServer = new ApolloServer({
 		DateTime: DateTimeResolver,
 		...require('./resolvers')
 	},
-	context: async (integrationContext) => ({
-		isDemoMode,
-		isAuthenticated: await isAuthenticated(integrationContext.req.headers['authorization']),
-		dateDetails: createDate(integrationContext.req.headers['time-zone']),
-		req: integrationContext.req
-	})
+	context: createMicroContext
 })
 
 const graphqlPath = '/api'
