@@ -15,13 +15,13 @@ const port = process.env.ACKEE_PORT || process.env.PORT || 3000
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 const serverUrl = `http://localhost:${ port }`
 
-server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
-server.on('error', (err) => signale.fatal(err))
-
 if (dbUrl == null) {
 	signale.fatal('MongoDB connection URI missing in environment')
 	process.exit(1)
 }
+
+server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
+server.on('error', (err) => signale.fatal(err))
 
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 

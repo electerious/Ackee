@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import shortid from 'shortid'
 // import { useHotkeys } from 'react-hotkeys-hook'
 
-import customTrackerUrl from '../../../../utils/customTrackerUrl'
+import customTracker from '../../../../utils/customTracker'
 
 import Input from '../Input'
 import Textarea from '../Textarea'
@@ -48,7 +48,7 @@ const ModalDomainEdit = (props) => {
 	const idId = shortid.generate()
 	const embedId = shortid.generate()
 
-	const trackerUrl = customTrackerUrl || '/tracker.js'
+	const trackerUrl = customTracker.url || '/tracker.js'
 	const srcUrl = (new URL(trackerUrl, location.href)).href
 	const serverUrl = location.origin
 

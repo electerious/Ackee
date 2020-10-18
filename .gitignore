@@ -1,4 +1,6 @@
 data/
+dist/*
+!dist/.gitkeep
 node_modules/
 coverage/
 .nyc_output/

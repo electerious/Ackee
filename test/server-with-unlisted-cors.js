@@ -11,14 +11,13 @@ const base = listen(server)
 
 test('return cors headers with no origin if hostname not whitelisted in env var', async (t) => {
 
-	const url = new URL(await base)
+	const url = new URL('/api', await base)
 
 	const restore = mockedEnv({
-		ACKEE_ALLOW_ORIGIN: `https://example.com`
+		ACKEE_ALLOW_ORIGIN: 'https://example.com'
 	})
 
-	const res = await fetch(url.href)
-	const headers = res.headers
+	const { headers } = await fetch(url.href)
 
 	t.is(headers.get('Access-Control-Allow-Origin'), null)
 	t.is(headers.get('Access-Control-Allow-Methods'), null)
