@@ -19,6 +19,7 @@ This release introduces support for serverless functions. You can now deploy Ack
 
 - Reduce high memory usage by building files in a different step (#170)
 - Show only active records in visitor counter (#161)
+- Labels in modals sometimes not clickable because of invalid ids
 
 ## [2.0.3] - 2020-09-20
 
