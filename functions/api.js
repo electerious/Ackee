@@ -1,9 +1,9 @@
 'use strict'
 
-const mongoose = require('mongoose')
 const { ApolloServer } = require('apollo-server-lambda')
 const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 
+const connect = require('../src/utils/connect')
 const isDemoMode = require('../src/utils/isDemoMode')
 const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
 const { createServerlessContext } = require('../src/utils/createContext')
@@ -14,12 +14,7 @@ if (dbUrl == null) {
 	throw new Error('MongoDB connection URI missing in environment')
 }
 
-mongoose.connect(dbUrl, {
-	useFindAndModify: false,
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true
-})
+connect(dbUrl)
 
 const apolloServer = new ApolloServer({
 	introspection: isDemoMode === true || isDevelopmentMode === true,

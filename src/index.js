@@ -2,10 +2,9 @@
 'use strict'
 require('dotenv').config()
 
-const mongoose = require('mongoose')
-
 const server = require('./server')
 const signale = require('./utils/signale')
+const connect = require('./utils/connect')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const fillDatabase = require('./utils/fillDatabase')
@@ -25,12 +24,7 @@ server.on('error', (err) => signale.fatal(err))
 
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
-mongoose.connect(dbUrl, {
-	useFindAndModify: false,
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true
-}).then(() => {
+connect(dbUrl).then(() => {
 
 	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
 	signale.start(`Starting the server`)
