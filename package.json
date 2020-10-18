@@ -105,7 +105,7 @@
   },
   "nodemonConfig": {
     "exec": "npm start",
-    "ext": "js,json,graphql",
+    "ext": "js,json,graphql,scss",
     "watch": [
       "src"
     ]
