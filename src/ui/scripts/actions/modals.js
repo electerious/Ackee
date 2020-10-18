@@ -1,6 +1,5 @@
-import shortid from 'shortid'
-
 import wait from '../utils/wait'
+import shortId from '../utils/shortId'
 
 export const SET_MODALS_STATE = Symbol()
 export const REMOVE_MODALS_STATE = Symbol()
@@ -25,7 +24,7 @@ export const setModalsVisible = (modalId, payload) => ({
 
 export const addModalsModal = (payload) => async (dispatch) => {
 
-	const modalId = shortid.generate()
+	const modalId = shortId()
 
 	dispatch(setModalsState(modalId, payload))
 

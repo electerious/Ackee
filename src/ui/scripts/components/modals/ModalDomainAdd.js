@@ -1,12 +1,13 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 // import { useHotkeys } from 'react-hotkeys-hook'
 
 import Input from '../Input'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
+
+import shortId from '../../utils/shortId'
 
 const ModalDomainAdd = (props) => {
 
@@ -30,7 +31,7 @@ const ModalDomainAdd = (props) => {
 		props.addDomain(inputs).then(props.closeModal)
 	}
 
-	const titleId = shortid.generate()
+	const titleId = shortId()
 
 	return (
 		h('form', { className: 'card', onSubmit: addDomain },
