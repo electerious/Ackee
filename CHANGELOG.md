@@ -18,6 +18,7 @@ This release introduces support for serverless functions. You can now deploy Ack
 ### Fixed
 
 - Reduce high memory usage by building files in a different step (#170)
+- Show only active records in visitor counter (#161)
 
 ## [2.0.3] - 2020-09-20
 
