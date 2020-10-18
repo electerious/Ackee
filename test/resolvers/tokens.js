@@ -4,24 +4,16 @@ const test = require('ava')
 const listen = require('test-listen')
 const fetch = require('node-fetch')
 const mockedEnv = require('mocked-env')
-const { MongoMemoryServer } = require('mongodb-memory-server')
-const mongoose = require('mongoose')
 
+const {before, beforeEach, afterEach, after} = require('./utils')
 const server = require('../../src/server')
 
 const base = listen(server)
 
-// Start MongoDB Instance
-const mongod = new MongoMemoryServer()
-
-// Create connection to mongoose before all tests
-test.before(async t => mongoose.connect(await mongod.getUri(), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-}))
-
 let loginId = null;
+test.before(before)
+test.beforeEach(beforeEach)
+test.afterEach.always(afterEach)
 
 test.serial('return login token and cookie after successful login', async (t) => {
 
@@ -60,7 +52,7 @@ test.serial('return login token and cookie after successful login', async (t) =>
     })
 
     const headers = res.headers
-    t.is(headers.get('Set-Cookie'), 'ackee_login=1; SameSite=None; Secure; Max-Age=31536000; Domain=example.com')
+    t.is(headers.get('Set-Cookie'), 'ackee_login=1; SameSite=None; Secure; Max-Age=31536000')
 
     const resJson = await res.json();
     loginId = resJson.data.createToken.payload.id
@@ -84,10 +76,6 @@ test.serial('clear login cookie after successful logout', async (t) => {
         }
     }
 
-    const restore = mockedEnv({
-        ACKEE_ALLOW_ORIGIN: `https://badexample.com,https://bad.example.com,https://example.com`
-    })
-
     const res = await fetch(`${url.href}api`, {
         method: 'post',
         body:    JSON.stringify(body),
@@ -98,17 +86,11 @@ test.serial('clear login cookie after successful logout', async (t) => {
     })
 
     const headers = res.headers
-    t.is(headers.get('Set-Cookie'), 'ackee_login=0; SameSite=None; Secure; Max-Age=-1; Domain=example.com')
+    t.is(headers.get('Set-Cookie'), 'ackee_login=0; SameSite=None; Secure; Max-Age=-1')
 
     const resJson = await res.json();
     t.true(resJson.data.deleteToken.success)
 
-    restore()
-
 })
 
-// Disconnect MongoDB and mongoose after all tests are done
-test.after.always(async t => {
-    mongoose.disconnect()
-    mongod.stop()
-})
+test.after.always(after)

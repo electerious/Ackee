@@ -67,6 +67,16 @@ module.exports = {
 	Mutation: {
 		createRecord: async (parent, { domainId, input }, { req }) => {
 
+			// in case of own site, return fake entry and don't track
+			if (req.cookies && req.cookies.ackee_login === "1") {
+				return {
+					success: true,
+					payload: {
+						"id": "88888888-8888-8888-8888-888888888888"
+					}
+				}
+			}
+
 			const clientId = identifier(req, domainId)
 			const data = polish({ ...input, clientId, domainId })
 
@@ -100,8 +110,15 @@ module.exports = {
 			}
 
 		},
-		updateRecord: async (parent, { id }) => {
+		updateRecord: async (parent, { id },  { req }) => {
 
+			// in case of own site don't update
+			if (req.cookies && req.cookies.ackee_login === "1") {
+				return {
+					success: true
+				}
+			}
+			
 			let entry
 
 			try {
