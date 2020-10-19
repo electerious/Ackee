@@ -3,6 +3,8 @@
 const { ApolloServer } = require('apollo-server-micro')
 const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 const micro = require('micro')
+const { resolve } = require('path')
+const { readFile } = require('fs').promises
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
 const cookieParse = require('micro-cookie')
@@ -10,12 +12,16 @@ const cookieParse = require('micro-cookie')
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
-const isAuthenticated = require('./utils/isAuthenticated')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
-const customTrackerUrl = require('./utils/customTrackerUrl')
-const createDate = require('./utils/createDate')
-const ui = require('./routes/ui')
+const customTracker = require('./utils/customTracker')
+const { createMicroContext } = require('./utils/createContext')
+
+const index = readFile(resolve(__dirname, '../dist/index.html')).catch(signale.fatal)
+const favicon = readFile(resolve(__dirname, '../dist/favicon.ico')).catch(signale.fatal)
+const styles = readFile(resolve(__dirname, '../dist/index.css')).catch(signale.fatal)
+const scripts = readFile(resolve(__dirname, '../dist/index.js')).catch(signale.fatal)
+const tracker = readFile(resolve(__dirname, '../dist/tracker.js')).catch(signale.fatal)
 
 const handleMicroError = (err, res) => {
 
@@ -118,13 +124,7 @@ const apolloServer = new ApolloServer({
 		DateTime: DateTimeResolver,
 		...require('./resolvers')
 	},
-	context: async (integrationContext) => ({
-		isDemoMode,
-		isAuthenticated: await isAuthenticated(integrationContext.req.headers['authorization']),
-		dateDetails: createDate(integrationContext.req.headers['time-zone']),
-		req: integrationContext.req,
-		res: integrationContext.res
-	})
+	context: createMicroContext
 })
 
 const graphqlPath = '/api'
@@ -132,13 +132,34 @@ const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
 
 const routes = [
 
-	get('/', ui.index),
-	get('/index.html', ui.index),
-	get('/favicon.ico', ui.favicon),
-	get('/index.css', ui.styles),
-	get('/index.js', ui.scripts),
-	get('/tracker.js', ui.tracker),
-	customTrackerUrl != null ? get(customTrackerUrl, ui.tracker) : undefined,
+	get('/', async (req, res) => {
+		res.setHeader('Content-Type', 'text/html; charset=utf-8')
+		res.end(await index)
+	}),
+	get('/index.html', async (req, res) => {
+		res.setHeader('Content-Type', 'text/html; charset=utf-8')
+		res.end(await index)
+	}),
+	get('/favicon.ico', async (req, res) => {
+		res.setHeader('Content-Type', 'image/vnd.microsoft.icon')
+		res.end(await favicon)
+	}),
+	get('/index.css', async (req, res) => {
+		res.setHeader('Content-Type', 'text/css; charset=utf-8')
+		res.end(await styles)
+	}),
+	get('/index.js', async (req, res) => {
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await scripts)
+	}),
+	get('/tracker.js', async (req, res) => {
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await tracker)
+	}),
+	customTracker.exists === true ? get(customTracker.url, async (req, res) => {
+		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		res.end(await tracker)
+	}) : undefined,
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),

@@ -1,15 +1,15 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 // import { useHotkeys } from 'react-hotkeys-hook'
-
-import customTrackerUrl from '../../../../utils/customTrackerUrl'
 
 import Input from '../Input'
 import Textarea from '../Textarea'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
+
+import customTracker from '../../../../utils/customTracker'
+import shortId from '../../utils/shortId'
 
 const ModalDomainEdit = (props) => {
 
@@ -44,11 +44,11 @@ const ModalDomainEdit = (props) => {
 		if (c === true) props.deleteDomain(props.id, inputs).then(props.closeModal)
 	}
 
-	const titleId = shortid.generate()
-	const idId = shortid.generate()
-	const embedId = shortid.generate()
+	const titleId = shortId()
+	const idId = shortId()
+	const embedId = shortId()
 
-	const trackerUrl = customTrackerUrl || '/tracker.js'
+	const trackerUrl = customTracker.url || '/tracker.js'
 	const srcUrl = (new URL(trackerUrl, location.href)).href
 	const serverUrl = location.origin
 

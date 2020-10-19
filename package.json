@@ -23,16 +23,19 @@
     "url": "https://paypal.me/electerious"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "npm run build && npm run server",
     "start:dev": "NODE_ENV=development nodemon",
+    "build": "node build.js",
+    "build:dev": "NODE_ENV=development npm run build",
+    "server": "node src/index.js",
+    "server:dev": "NODE_ENV=development npm run server",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
-    "lint": "eslint '{src,test}/**/*.js'"
+    "lint": "eslint '{functions,src,test}/**/*.js'"
   },
   "dependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
     "ackee-tracker": "^4.0.1",
+    "apollo-server-lambda": "^2.17.0",
     "apollo-server-micro": "^2.17.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
@@ -53,7 +56,7 @@
     "node-fetch": "^2.6.1",
     "node-schedule": "^1.3.2",
     "normalize-url": "^5.0.0",
-    "normalize.css": "^8.0.0",
+    "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -66,16 +69,15 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "request-ip": "^2.1.3",
-    "rosid-handler-js": "^13.0.0",
-    "rosid-handler-sass": "^7.0.0",
     "s-ago": "^2.2.0",
+    "sanitize-filename": "^1.6.3",
     "shortid": "^2.2.15",
     "signale": "^1.4.0",
     "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@electerious/eslint-config": "^1.3.4",
-    "ava": "3.12.1",
+    "ava": "3.13.0",
     "coveralls": "^3.1.0",
     "eslint": "^7.9.0",
     "eslint-plugin-import": "^2.22.0",
@@ -86,12 +88,14 @@
     "mongodb-memory-server": "^6.9.2",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
+    "rosid-handler-js": "^13.0.1",
+    "rosid-handler-sass": "^7.0.0",
     "test-listen": "^1.1.0"
   },
   "ava": {
     "files": [
-			"!test/**/utils.js"
-		],
+      "!test/**/utils.js"
+    ],
     "verbose": true,
     "timeout": "20s",
     "environmentVariables": {
@@ -103,12 +107,10 @@
     "extends": "@electerious/eslint-config"
   },
   "nodemonConfig": {
-    "ext": "js,json,graphql",
-    "ignore": [
-      "data/*",
-      "docs/*",
-      "test/*",
-      "src/ui/*"
+    "exec": "npm start",
+    "ext": "js,json,graphql,scss",
+    "watch": [
+      "src"
     ]
   },
   "engines": {

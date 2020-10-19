@@ -1,0 +1,17 @@
+[build]
+  publish = "dist"
+  command = "yarn build"
+  functions = "functions/"
+  environment = { NODE_VERSION = "14.9.0", NODE_ENV = "production" }
+
+[[redirects]]
+  from = "/api"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true
+
+[template.environment]
+  ACKEE_MONGODB = "ACKEE_MONGODB"
+  ACKEE_USERNAME = "ACKEE_USERNAME"
+  ACKEE_PASSWORD = "ACKEE_PASSWORD"
+  ACKEE_ALLOW_ORIGIN = "ACKEE_ALLOW_ORIGIN"

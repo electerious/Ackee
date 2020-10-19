@@ -11,13 +11,13 @@ const base = listen(server)
 
 test('return no cors headers if env var specifies none', async (t) => {
 
+	const url = new URL('/api', await base)
+
 	const restore = mockedEnv({
 		ACKEE_ALLOW_ORIGIN: undefined
 	})
 
-	const url = new URL(await base)
-	const res = await fetch(url.href)
-	const headers = res.headers
+	const { headers } = await fetch(url.href)
 
 	t.is(headers.get('Access-Control-Allow-Origin'), null)
 	t.is(headers.get('Access-Control-Allow-Methods'), null)
