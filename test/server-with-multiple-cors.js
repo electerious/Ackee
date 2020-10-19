@@ -23,6 +23,7 @@ test('return cors headers with corresponding origin if env var specifies multipl
 	t.is(headers.get('Access-Control-Allow-Origin'), url.origin)
 	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
 	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type')
+	t.is(headers.get('Access-Control-Allow-Credentials'), 'true')
 
 	restore()
 
