@@ -67,7 +67,7 @@ module.exports = {
 	Mutation: {
 		createRecord: async (parent, { domainId, input }, { req }) => {
 
-			// in case of own site, return fake entry and don't track
+			// In case of own site, return fake entry and don't track
 			if (req.cookies && req.cookies.ackee_login === "1") {
 				return {
 					success: true,
@@ -112,7 +112,7 @@ module.exports = {
 		},
 		updateRecord: async (parent, { id },  { req }) => {
 
-			// in case of own site don't update
+			// In case of own site don't update
 			if (req.cookies && req.cookies.ackee_login === "1") {
 				return {
 					success: true
