@@ -10,13 +10,16 @@ const {before, beforeEach, afterEach, after} = require('./utils')
 const base = listen(server)
 
 let visitRecordId = null;
+
 test.before(before)
 test.beforeEach(beforeEach)
 test.afterEach.always(afterEach)
+test.after.always(after)
 
 test.serial('record first visit', async (t) => {
 
-    const url = new URL(await base)
+    const url = new URL('/api', await base)
+    
     const body = {
         "query":
             `mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
@@ -32,9 +35,9 @@ test.serial('record first visit', async (t) => {
         }
     }
 
-    const res = await fetch(`${url.href}api`, {
+    const res = await fetch(url.href, {
         method: 'post',
-        body:    JSON.stringify(body),
+        body: JSON.stringify(body),
         headers: { 
             'authorization': `Bearer ${t.context.token.id}`,
             'Content-Type': 'application/json'
@@ -44,10 +47,13 @@ test.serial('record first visit', async (t) => {
     const resJson = await res.json()
     visitRecordId = resJson.data.createRecord.payload.id
     t.true(/^[-0-9a-f]{36}$/.test(visitRecordId))
+    
 })
 
 test.serial('update subsequent visits', async (t) => {
-    const url = new URL(await base)
+    
+    const url = new URL('/api', await base)
+    
     const body = {
         "query":
             `mutation updateRecord($id: ID!) {
@@ -60,9 +66,9 @@ test.serial('update subsequent visits', async (t) => {
         }
     }
 
-    const res = await fetch(`${url.href}api`, {
+    const res = await fetch(url.href, {
         method: 'post',
-        body:    JSON.stringify(body),
+        body: JSON.stringify(body),
         headers: { 
             'authorization': `Bearer ${t.context.token.id}`,
             'Content-Type': 'application/json'
@@ -76,7 +82,8 @@ test.serial('update subsequent visits', async (t) => {
 
 test.serial('ignore first visit if own site', async (t) => {
 
-    const url = new URL(await base)
+    const url = new URL('/api', await base)
+    
     const body = {
         "query":
             `mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
@@ -92,9 +99,9 @@ test.serial('ignore first visit if own site', async (t) => {
         }
     }
 
-    const res = await fetch(`${url.href}api`, {
+    const res = await fetch(url.href, {
         method: 'post',
-        body:    JSON.stringify(body),
+        body: JSON.stringify(body),
         headers: { 
             'authorization': `Bearer ${t.context.token.id}`,
             'Content-Type': 'application/json',
@@ -105,10 +112,13 @@ test.serial('ignore first visit if own site', async (t) => {
     const resJson = await res.json()
     const visitRecordId = resJson.data.createRecord.payload.id
     t.is(visitRecordId, '88888888-8888-8888-8888-888888888888')
+    
 })
 
 test.serial('ignore subsequent visits if own site', async (t) => {
-    const url = new URL(await base)
+    
+    const url = new URL('/api', await base)
+    
     const body = {
         "query":
             `mutation updateRecord($id: ID!) {
@@ -121,9 +131,9 @@ test.serial('ignore subsequent visits if own site', async (t) => {
         }
     }
 
-    const res = await fetch(`${url.href}api`, {
+    const res = await fetch(url.href, {
         method: 'post',
-        body:    JSON.stringify(body),
+        body: JSON.stringify(body),
         headers: { 
             'authorization': `Bearer ${t.context.token.id}`,
             'Content-Type': 'application/json',
@@ -135,5 +145,3 @@ test.serial('ignore subsequent visits if own site', async (t) => {
     t.true(resJson.data.updateRecord.success)
 
 })
-
-test.after.always(after)
