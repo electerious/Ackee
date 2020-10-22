@@ -14,10 +14,12 @@ let loginId = null;
 test.before(before)
 test.beforeEach(beforeEach)
 test.afterEach.always(afterEach)
+test.after.always(after)
 
 test.serial('return login token and cookie after successful login', async (t) => {
 
-    const url = new URL(await base)
+    const url = new URL('/api', await base)
+    
     const body = {
         "query":
             `mutation createToken($input: CreateTokenInput!) {
@@ -42,9 +44,9 @@ test.serial('return login token and cookie after successful login', async (t) =>
         ACKEE_ALLOW_ORIGIN: `https://badexample.com,https://bad.example.com,https://example.com`
     })
 
-    const res = await fetch(`${url.href}api`, {
+    const res = await fetch(url.href, {
         method: 'post',
-        body:    JSON.stringify(body),
+        body: JSON.stringify(body),
         headers: { 
             'Content-Type': 'application/json',
             'Host': 'ackee.example.com'
@@ -63,7 +65,9 @@ test.serial('return login token and cookie after successful login', async (t) =>
 })
 
 test.serial('clear login cookie after successful logout', async (t) => {
-    const url = new URL(await base)
+    
+    const url = new URL('/api', await base)
+    
     const body = {
         "query":
             `mutation deleteToken($id: ID!) {
@@ -76,9 +80,9 @@ test.serial('clear login cookie after successful logout', async (t) => {
         }
     }
 
-    const res = await fetch(`${url.href}api`, {
+    const res = await fetch(url.href, {
         method: 'post',
-        body:    JSON.stringify(body),
+        body:  JSON.stringify(body),
         headers: { 
             'Content-Type': 'application/json',
             'Host': 'ackee.example.com'
@@ -92,5 +96,3 @@ test.serial('clear login cookie after successful logout', async (t) => {
     t.true(resJson.data.deleteToken.success)
 
 })
-
-test.after.always(after)
