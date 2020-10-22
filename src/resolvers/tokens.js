@@ -9,8 +9,6 @@ const response = (entry) => ({
 	updated: entry.updated
 })
 
-const cookieMaxAge = 365*24*60*60
-
 module.exports = {
 	Mutation: {
 		createToken: async (parent, { input }, { res }) => {
@@ -25,7 +23,8 @@ module.exports = {
 
 			const entry = await tokens.add()
 
-			// set cockie for 1 year to avoid reporting own visits
+			// Set cookie for one year to avoid reporting own visits
+			const cookieMaxAge = 365*24*60*60
 			res.setHeader('Set-Cookie', `ackee_login=1; SameSite=None; Secure; Max-Age=${cookieMaxAge}`)
 
 			return {
@@ -38,6 +37,7 @@ module.exports = {
 
 			await tokens.del(id)
 
+			// Report own visits, again
 			res.setHeader('Set-Cookie', 'ackee_login=0; SameSite=None; Secure; Max-Age=-1')
 
 			return {
