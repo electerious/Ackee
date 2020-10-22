@@ -24,8 +24,8 @@ module.exports = {
 			const entry = await tokens.add()
 
 			// Set cookie for one year to avoid reporting own visits
-			const cookieMaxAge = 365*24*60*60
-			res.setHeader('Set-Cookie', `ackee_login=1; SameSite=None; Secure; Max-Age=${cookieMaxAge}`)
+			const cookieMaxAge = 365 * 24 * 60 * 60
+			res.setHeader('Set-Cookie', `ackee_login=1; SameSite=None; Secure; Max-Age=${ cookieMaxAge }`)
 
 			return {
 				success: true,

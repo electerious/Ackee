@@ -6,6 +6,7 @@ const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
+const isLoggedIn = require('../../src/utils/isLoggedIn')
 
 const normalizeSiteLocation = (siteLocation) => {
 
@@ -68,11 +69,11 @@ module.exports = {
 		createRecord: async (parent, { domainId, input }, { req }) => {
 
 			// In case of own site, return fake entry and don't track
-			if (req.cookies && req.cookies.ackee_login === "1") {
+			if (isLoggedIn(req)) {
 				return {
 					success: true,
 					payload: {
-						"id": "88888888-8888-8888-8888-888888888888"
+						id: '88888888-8888-8888-8888-888888888888'
 					}
 				}
 			}
@@ -110,15 +111,15 @@ module.exports = {
 			}
 
 		},
-		updateRecord: async (parent, { id },  { req }) => {
+		updateRecord: async (parent, { id }, { req }) => {
 
 			// In case of own site don't update
-			if (req.cookies && req.cookies.ackee_login === "1") {
+			if (isLoggedIn(req)) {
 				return {
 					success: true
 				}
 			}
-			
+
 			let entry
 
 			try {
