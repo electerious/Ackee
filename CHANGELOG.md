@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.1.0] - 2020-10-24
 
 This release introduces support for serverless functions. You can now deploy Ackee to Netlify 🚀 It also reduces the memory usage and allows you to build all static files into `/dist` by running `yarn build`. Run `yarn server` to start the server without building those files, again. This reduces the initial startup time. `yarn start` combines both commands for convenience and is still the recommended way to run Ackee.
 
@@ -19,6 +19,7 @@ This release introduces support for serverless functions. You can now deploy Ack
 
 - Reduce high memory usage by building files in a different step (#170)
 - Show only active records in visitor counter (#161)
+- Labels in modals sometimes not clickable because of invalid ids
 
 ## [2.0.3] - 2020-09-20
 

@@ -23,7 +23,7 @@ const index = async () => {
 
 const favicon = async () => {
 
-	const filePath = resolve(__dirname, './src/ui/images/favicon.ico')
+	const filePath = resolve(__dirname, 'src/ui/images/favicon.ico')
 	const data = readFile(filePath)
 
 	return data
@@ -32,7 +32,7 @@ const favicon = async () => {
 
 const styles = async () => {
 
-	const filePath = resolve(__dirname, './src/ui/styles/index.scss')
+	const filePath = resolve(__dirname, 'src/ui/styles/index.scss')
 	const data = sass(filePath, { optimize: isDevelopmentMode === false })
 
 	return data
@@ -41,7 +41,7 @@ const styles = async () => {
 
 const scripts = async () => {
 
-	const filePath = resolve(__dirname, './src/ui/scripts/index.js')
+	const filePath = resolve(__dirname, 'src/ui/scripts/index.js')
 
 	const babel = {
 		presets: [
@@ -98,9 +98,14 @@ const build = async (path, fn) => {
 
 }
 
+// Required files
 build('dist/index.html', index)
 build('dist/favicon.ico', favicon)
 build('dist/index.css', styles)
 build('dist/index.js', scripts)
 build('dist/tracker.js', tracker)
-if (customTracker.exists === true) build(`dist/${ customTracker.path }`, tracker)
+
+// Optional files
+if (customTracker.exists === true) {
+	build(`dist/${ customTracker.path }`, tracker)
+}
