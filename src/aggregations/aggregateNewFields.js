@@ -2,7 +2,7 @@
 
 const matchDomains = require('../stages/matchDomains')
 
-module.exports = (ids, properties, limit, or = false) => {
+module.exports = (ids, properties, limit, or) => {
 
 	const aggregation = [
 		matchDomains(ids),

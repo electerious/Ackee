@@ -3,7 +3,7 @@
 const ranges = require('../constants/ranges')
 const matchDomains = require('../stages/matchDomains')
 
-module.exports = (ids, properties, range, limit, dateDetails, or = false) => {
+module.exports = (ids, properties, range, limit, dateDetails, or) => {
 
 	const aggregation = [
 		matchDomains(ids),
