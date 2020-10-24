@@ -47,6 +47,7 @@
     "graphql-scalars": "^1.2.7",
     "graphql-tools": "^6.2.2",
     "human-number": "^1.0.5",
+    "husky": "^4.3.0",
     "immer": "^7.0.9",
     "is-url": "^1.2.4",
     "micro": "^9.3.4",
@@ -107,6 +108,11 @@
     "watch": [
       "src"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "engines": {
     "node": ">= 14"
