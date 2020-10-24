@@ -13,7 +13,8 @@ const createMicroContext = async (integrationContext) => ({
 	isDemoMode,
 	isAuthenticated: await isAuthenticated(integrationContext.req.headers['authorization']),
 	dateDetails: createDate(integrationContext.req.headers['time-zone']),
-	req: integrationContext.req
+	req: integrationContext.req,
+	res: integrationContext.res
 })
 
 module.exports = {

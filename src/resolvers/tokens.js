@@ -11,7 +11,7 @@ const response = (entry) => ({
 
 module.exports = {
 	Mutation: {
-		createToken: async (parent, { input }) => {
+		createToken: async (parent, { input }, { res }) => {
 
 			const { username, password } = input
 
@@ -23,15 +23,22 @@ module.exports = {
 
 			const entry = await tokens.add()
 
+			// Set cookie for one year to avoid reporting own visits
+			const cookieMaxAge = 365 * 24 * 60 * 60
+			res.setHeader('Set-Cookie', `ackee_login=1; SameSite=None; Secure; Max-Age=${ cookieMaxAge }`)
+
 			return {
 				success: true,
 				payload: response(entry)
 			}
 
 		},
-		deleteToken: async (parent, { id }) => {
+		deleteToken: async (parent, { id }, { res }) => {
 
 			await tokens.del(id)
+
+			// Report own visits, again
+			res.setHeader('Set-Cookie', 'ackee_login=0; SameSite=None; Secure; Max-Age=-1')
 
 			return {
 				success: true

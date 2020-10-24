@@ -15,6 +15,7 @@ When a site wants to send data to a different domain it needs the permissions to
 Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Credentials: true
 ```
 
 ### Origin

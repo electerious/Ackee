@@ -7,6 +7,7 @@ const { resolve } = require('path')
 const { readFile } = require('fs').promises
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
+const cookieParse = require('micro-cookie')
 
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
@@ -93,6 +94,7 @@ const attachCorsHeaders = (fn) => async (req, res) => {
 		res.setHeader('Access-Control-Allow-Origin', allowOrigin)
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
 		res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+		res.setHeader('Access-Control-Allow-Credentials', 'true')
 	}
 
 	return fn(req, res)
@@ -172,8 +174,10 @@ const routes = [
 
 module.exports = micro(
 	attachCorsHeaders(
-		catchError(
-			router(...routes)
+		cookieParse(
+			catchError(
+				router(...routes)
+			)
 		)
 	)
 )
