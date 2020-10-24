@@ -3,9 +3,11 @@
 const mongoose = require('mongoose')
 const uuid = require('uuid').v4
 
+const events = require('../constants/events')
+
 const isKnownType = (value) => [
-	'CHART',
-	'LIST'
+	events.EVENTS_TYPE_CHART,
+	events.EVENTS_TYPE_LIST
 ].includes(value)
 
 const schema = new mongoose.Schema({
