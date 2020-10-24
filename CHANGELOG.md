@@ -15,6 +15,10 @@ This release introduces support for serverless functions. You can now deploy Ack
 - Build all static files into `/dist` by running `yarn build`
 - Start the server without rebuilding static files using `yarn server`
 
+### Changed
+
+- Improved scrollbars on Windows (#153, thanks @Go-Merk)
+
 ### Fixed
 
 - Reduce high memory usage by building files in a different step (#170)
