@@ -11,7 +11,7 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 	const enhance = (entries) => {
 
 		return entries.map((entry) => ({
-			id: entry._id.siteReferrer,
+			id: entry._id.siteReferrer || entry._id.source,
 			count: entry.count,
 			created: entry.created
 		}))
@@ -20,9 +20,9 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 
 	const aggregation = (() => {
 
-		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteReferrer' ], range, limit, dateDetails)
-		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteReferrer' ], limit)
-		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteReferrer' ], limit)
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteReferrer', 'source' ], range, limit, dateDetails, true)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteReferrer', 'source' ], limit, true)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteReferrer', 'source' ], limit, true)
 
 	})()
 
