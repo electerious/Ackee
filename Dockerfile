@@ -23,4 +23,4 @@ COPY . /srv/app/
 
 # Wait for external service and start Ackee
 
-CMD /wait && yarn run start
+CMD /wait && yarn start

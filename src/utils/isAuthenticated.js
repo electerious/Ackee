@@ -1,19 +1,21 @@
 'use strict'
 
-const { Bearer } = require('permit')
-
 const KnownError = require('../utils/KnownError')
 const ttl = require('../utils/ttl')
 const tokens = require('../database/tokens')
 
-const permit = new Bearer({ query: 'token' })
-
-module.exports = async (req) => {
-
-	const token = permit.check(req)
+module.exports = async (authorization) => {
 
 	// Token not in request
-	if (token == null) {
+	if (authorization == null) {
+		return new KnownError('Token missing')
+	}
+
+	const key = authorization.split(' ')[0]
+	const token = authorization.split(' ')[1]
+
+	// Token not in header
+	if (key !== 'Bearer' || token == null) {
 		return new KnownError('Token missing')
 	}
 

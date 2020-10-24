@@ -12,6 +12,13 @@ module.exports = (ids, dateDetails) => {
 		}
 	]
 
+	// A user that navigates between pages will increase the counter temporary.
+	// It's therefore importend to count unique views only.
+	aggregation[0].$match.clientId = {
+		$exists: true,
+		$ne: null
+	}
+
 	// Ignore users that are on the page for too long
 	aggregation[0].$match.created = { $gte: dateDetails.lastMilliseconds(DURATIONS_LIMIT) }
 

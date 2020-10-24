@@ -16,14 +16,23 @@
 **/Network Trash Folder
 **/Temporary Items
 
+# Test artifacts
+coverage
+.nyc_output
+
 # Package Managers
+package-lock.json
 npm-debug.log
 node_modules
 
-# Dist folder
-dist
+# User data
+/data
+.env
 
-# Miscellaneous
+# Dist folder
+dist/*
+!dist/.gitkeep
+
+# Files not required by Docker
 Dockerfile
 .git
-.env

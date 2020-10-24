@@ -1,4 +1,4 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h, Fragment, useEffect } from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 
 import isUnknownError from '../utils/isUnknownError'
@@ -10,6 +10,15 @@ import Filter from './Filter'
 import Dashboard from './Dashboard'
 
 const Main = (props) => {
+
+	useEffect(() => {
+		const isWindows = navigator.platform.includes('Win') === true
+		if (isWindows === false) return
+
+		// Use custom scrollbars on Windows because they look ugly
+		document.body.classList.add('customScrollbar')
+		return () => document.body.classList.remove('customScrollbar')
+	}, [])
 
 	// Only handle errors not handled by other components
 	const unknownErrors = props.errors.filter(isUnknownError)

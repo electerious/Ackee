@@ -2,10 +2,9 @@
 'use strict'
 require('dotenv').config()
 
-const mongoose = require('mongoose')
-
 const server = require('./server')
 const signale = require('./utils/signale')
+const connect = require('./utils/connect')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const fillDatabase = require('./utils/fillDatabase')
@@ -15,23 +14,17 @@ const port = process.env.ACKEE_PORT || process.env.PORT || 3000
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 const serverUrl = `http://localhost:${ port }`
 
-mongoose.set('useFindAndModify', false)
-
-server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
-server.on('error', (err) => signale.fatal(err))
-
 if (dbUrl == null) {
 	signale.fatal('MongoDB connection URI missing in environment')
 	process.exit(1)
 }
 
+server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
+server.on('error', (err) => signale.fatal(err))
+
 signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
 
-mongoose.connect(dbUrl, {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true
-}).then(() => {
+connect(dbUrl).then(() => {
 
 	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
 	signale.start(`Starting the server`)
