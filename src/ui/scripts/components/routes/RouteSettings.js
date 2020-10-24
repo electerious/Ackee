@@ -1,7 +1,7 @@
 import { createElement as h, Fragment } from 'react'
 
 import { version, homepage } from '../../../../../package'
-import { MODALS_DOMAIN_EDIT, MODALS_DOMAIN_ADD } from '../../constants/modals'
+import { MODALS_DOMAIN_ADD, MODALS_DOMAIN_EDIT, MODALS_EVENT_ADD, MODALS_EVENT_EDIT } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
 import LinkItem from '../LinkItem'
@@ -10,23 +10,20 @@ import Message from '../Message'
 
 const RouteSettings = (props) => {
 
-	const showDomainEditModal = (id, title) => {
-
-		props.addModalsModal({
-			type: MODALS_DOMAIN_EDIT,
-			props: {
-				id,
-				title
-			}
-		})
-
-	}
-
 	const showDomainAddModal = () => {
 
 		props.addModalsModal({
 			type: MODALS_DOMAIN_ADD,
 			props: {}
+		})
+
+	}
+
+	const showDomainEditModal = (domain) => {
+
+		props.addModalsModal({
+			type: MODALS_DOMAIN_EDIT,
+			props: domain
 		})
 
 	}
@@ -41,12 +38,48 @@ const RouteSettings = (props) => {
 				h(LinkItem, {
 					type: 'button',
 					text: domain.id,
-					onClick: () => showDomainEditModal(domain.id, domain.title)
+					onClick: () => showDomainEditModal(domain)
 				}, domain.title),
 				h(Line)
 			]
 		).flat(),
 		h(LinkItem, { type: 'button', onClick: showDomainAddModal }, 'New domain')
+	]
+
+	const showEventAddModal = () => {
+
+		props.addModalsModal({
+			type: MODALS_EVENT_ADD,
+			props: {}
+		})
+
+	}
+
+	const showEventEditModal = (event) => {
+
+		props.addModalsModal({
+			type: MODALS_EVENT_EDIT,
+			props: event
+		})
+
+	}
+
+	const eventsFetching = [
+		h(Message, { status: 'warning' }, 'Fetching events...')
+	]
+
+	const eventsItems = [
+		...props.events.value.map(
+			(event) => [
+				h(LinkItem, {
+					type: 'button',
+					text: event.id,
+					onClick: () => showEventEditModal(event)
+				}, event.title),
+				h(Line)
+			]
+		).flat(),
+		h(LinkItem, { type: 'button', onClick: showEventAddModal }, 'New event')
 	]
 
 	return (
@@ -64,6 +97,12 @@ const RouteSettings = (props) => {
 				headline: 'Domains'
 			},
 				...(props.domains.fetching === true ? domainsFetching : domainsItems)
+			),
+
+			h(CardSetting, {
+				headline: 'Events'
+			},
+				...(props.events.fetching === true ? eventsFetching : eventsItems)
 			),
 
 			h(CardSetting, {

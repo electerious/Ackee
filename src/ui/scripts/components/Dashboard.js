@@ -25,6 +25,7 @@ const Dashboard = (props) => {
 	useEffect(() => {
 
 		props.fetchDomains(props)
+		props.fetchEvents(props)
 
 	}, [])
 
@@ -40,6 +41,8 @@ const Dashboard = (props) => {
 	useHotkeys('p', () => props.setRoute(route.ROUTE_PAGES))
 	useHotkeys('r', () => props.setRoute(route.ROUTE_REFERRERS))
 	useHotkeys('d', () => props.setRoute(route.ROUTE_DURATIONS))
+
+	useHotkeys('e', () => props.setRoute(route.ROUTE_EVENTS))
 
 	useHotkeys('0', () => gotoDomainWhenDefined(props, 0), [ props ])
 	useHotkeys('1', () => gotoDomainWhenDefined(props, 1), [ props ])
@@ -66,6 +69,8 @@ const Dashboard = (props) => {
 		createDropdownButton(route.ROUTE_PAGES.title, route.ROUTE_PAGES, props, 'p'),
 		createDropdownButton(route.ROUTE_REFERRERS.title, route.ROUTE_REFERRERS, props, 'r'),
 		createDropdownButton(route.ROUTE_DURATIONS.title, route.ROUTE_DURATIONS, props, 'd'),
+		createDropdownSeparator(),
+		createDropdownButton(route.ROUTE_EVENTS.title, route.ROUTE_EVENTS, props, 'e'),
 		createDropdownSeparator(),
 		createDropdownButton(route.ROUTE_SYSTEMS.title, route.ROUTE_SYSTEMS, props),
 		createDropdownButton(route.ROUTE_DEVICES.title, route.ROUTE_DEVICES, props),
