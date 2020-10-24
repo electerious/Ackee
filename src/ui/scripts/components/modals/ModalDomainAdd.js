@@ -62,7 +62,7 @@ const ModalDomainAdd = (props) => {
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator '
+					className: 'card__separator'
 				}),
 
 				h('button', {
