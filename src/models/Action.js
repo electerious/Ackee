@@ -3,16 +3,27 @@
 const mongoose = require('mongoose')
 const uuid = require('uuid').v4
 
-const totalSumActionSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
 	id: {
 		type: String,
 		required: true,
 		unique: true,
 		default: uuid
 	},
+	eventId: {
+		type: String,
+		required: true,
+		index: true
+	},
+	key: {
+		type: String
+	},
 	value: {
 		type: Number,
 		required: true
+	},
+	details: {
+		type: String
 	},
 	created: {
 		type: Date,
@@ -28,66 +39,4 @@ const totalSumActionSchema = new mongoose.Schema({
 	}
 })
 
-// const keySumActionSchema = new mongoose.Schema({
-// 	id: {
-// 		type: String,
-// 		required: true,
-// 		unique: true,
-// 		default: uuid
-// 	},
-// 	key: {
-// 		type: String,
-// 		required: true
-// 	},
-// 	value: {
-// 		type: Number,
-// 		required: true
-// 	},
-// 	created: {
-// 		type: Date,
-// 		required: true,
-// 		index: true,
-// 		default: Date.now
-// 	},
-// 	updated: {
-// 		type: Date,
-// 		required: true,
-// 		index: true,
-// 		default: Date.now
-// 	}
-// })
-
-// const logActionSchema = new mongoose.Schema({
-// 	id: {
-// 		type: String,
-// 		required: true,
-// 		unique: true,
-// 		default: uuid
-// 	},
-// 	summary: {
-// 		type: String,
-// 		required: true
-// 	},
-// 	details: {
-// 		type: String,
-// 		required: true
-// 	},
-// 	created: {
-// 		type: Date,
-// 		required: true,
-// 		index: true,
-// 		default: Date.now
-// 	},
-// 	updated: {
-// 		type: Date,
-// 		required: true,
-// 		index: true,
-// 		default: Date.now
-// 	}
-// })
-
-module.exports = {
-	TotalSumAction: mongoose.model('TotalSumAction', totalSumActionSchema)
-	// KeySumAction: mongoose.model('KeySumAction', keySumActionSchema),
-	// LongAction: mongoose.model('LogAction', logActionSchema)
-}
+module.exports = mongoose.model('Action', schema)

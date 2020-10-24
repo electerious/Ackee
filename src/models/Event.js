@@ -4,9 +4,8 @@ const mongoose = require('mongoose')
 const uuid = require('uuid').v4
 
 const isKnownType = (value) => [
-	'TotalSum'
-	// 'KeySum',
-	// 'Log'
+	'CHART',
+	'LIST'
 ].includes(value)
 
 const schema = new mongoose.Schema({

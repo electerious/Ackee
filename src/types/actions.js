@@ -82,10 +82,6 @@ module.exports = gql`
 		Indicates that the action update was successful. Might be 'null' otherwise.
 		"""
 		success: Boolean
-		"""
-		The updated action.
-		"""
-		payload: Action
 	}
 
 	type Mutation {
