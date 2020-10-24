@@ -99,13 +99,13 @@ const build = async (path, fn) => {
 }
 
 // Required files
-build(resolve(__dirname, 'dist/index.html'), index)
-build(resolve(__dirname, 'dist/favicon.ico'), favicon)
-build(resolve(__dirname, 'dist/index.css'), styles)
-build(resolve(__dirname, 'dist/index.js'), scripts)
-build(resolve(__dirname, 'dist/tracker.js'), tracker)
+build('dist/index.html', index)
+build('dist/favicon.ico', favicon)
+build('dist/index.css', styles)
+build('dist/index.js', scripts)
+build('dist/tracker.js', tracker)
 
 // Optional files
 if (customTracker.exists === true) {
-	build(resolve(__dirname, `dist/${ customTracker.path }`), tracker)
+	build(`dist/${ customTracker.path }`, tracker)
 }
