@@ -4,13 +4,26 @@ const { gql } = require('apollo-server-micro')
 
 module.exports = gql`
 	"""
-	Event entries will be stored as actions. The TotalSumAction contains data for a TotalSum type event.
+	Event entries will be stored as actions.
 	"""
-	type TotalSumAction {
+	type Action {
 		"""
 		Action identifier.
 		"""
 		id: ID!
+		"""
+		Optional key that will be used to group similar actions in the UI.
+		"""
+		key: String
+		"""
+		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
+		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
+		"""
+		value: Float!
+		"""
+		Details allow you to store more data along with the associated action.
+		"""
+		details: String
 		"""
 		Identifies the date and time when the object was created.
 		"""
@@ -21,14 +34,23 @@ module.exports = gql`
 		updated: DateTime!
 	}
 
-	input CreateTotalSumActionInput {
+	input CreateActionInput {
 		"""
-		Numerical value that is added to all other numerical values of the same day, month or year.
+		Optional key that will be used to group similar actions in the UI.
+		"""
+		key: String
+		"""
+		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
+		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
 		"""
 		value: Float!
+		"""
+		Details allow you to store more data along with the associated action.
+		"""
+		details: String
 	}
 
-	type CreateTotalSumActionPayload {
+	type CreateActionPayload {
 		"""
 		Indicates that the action creation was successful. Might be 'null' otherwise.
 		"""
@@ -36,17 +58,26 @@ module.exports = gql`
 		"""
 		The newly created action.
 		"""
-		payload: TotalSumAction
+		payload: Action
 	}
 
-	input UpdateTotalSumActionInput {
+	input UpdateActionInput {
 		"""
-		Numerical value that is added to all other numerical values of the same day, month or year.
+		Optional key that will be used to group similar actions in the UI.
+		"""
+		key: String
+		"""
+		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
+		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
 		"""
 		value: Float!
+		"""
+		Details allow you to store more data along with the associated action.
+		"""
+		details: String
 	}
 
-	type UpdateTotalSumActionPayload {
+	type UpdateActionPayload {
 		"""
 		Indicates that the action update was successful. Might be 'null' otherwise.
 		"""
@@ -54,17 +85,17 @@ module.exports = gql`
 		"""
 		The updated action.
 		"""
-		payload: TotalSumAction
+		payload: Action
 	}
 
 	type Mutation {
 		"""
-		Create a new action for a TotalSum type event.
+		Create a new action to track an event.
 		"""
-		createTotalSumAction(eventId: ID!, input: CreateTotalSumActionInput!): CreateTotalSumActionPayload!
+		createAction(eventId: ID!, input: CreateActionInput!): CreateActionPayload!
 		"""
-		Update an existing action for a TotalSum type event.
+		Update an existing action.
 		"""
-		updateTotalSumAction(id: ID!, input: UpdateTotalSumActionInput!): UpdateTotalSumActionPayload!
+		updateAction(id: ID!, input: UpdateActionInput!): UpdateActionPayload!
 	}
 `

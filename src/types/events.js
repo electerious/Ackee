@@ -5,17 +5,13 @@ const { gql } = require('apollo-server-micro')
 module.exports = gql`
 	enum EventType {
 		"""
-		Event that calculates the sum of all action values grouped by day, month or year.
+		The UI will display the data of this event as bar chart.
 		"""
-		TOTAL_SUM
+		CHART
 		"""
-		Event that calculates the sum of all action values of a key, grouped by day, month or year.
+		The UI will display the data of this event as a list of entries.
 		"""
-		KEY_SUM
-		"""
-		Event that shows all actions in a chronic order.
-		"""
-		LOG
+		LIST
 	}
 
 	"""
@@ -31,7 +27,7 @@ module.exports = gql`
 		"""
 		title: String!
 		"""
-		Type of the event.
+		Type of the event. Allows you to decide how Ackee should display the data of this event in the UI.
 		"""
 		type: EventType!
 		"""
