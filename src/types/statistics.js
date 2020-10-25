@@ -91,9 +91,9 @@ module.exports = gql`
 
 	type Referrer {
 		"""
-		URL of the page.
+		Either the URL of the referrer or the ref, source or utm_source parameter of the page to indicate where the visit comes from.
 		"""
-		id: URL!
+		id: String!
 		"""
 		Amount of occurrences.
 		"""
