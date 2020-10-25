@@ -22,11 +22,11 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createAction: async (parent, { recordId, input }) => {
+		createAction: async (parent, { eventId, input }) => {
 
-			const data = polish({ ...input, recordId })
+			const data = polish({ ...input, eventId })
 
-			const event = await events.get(recordId)
+			const event = await events.get(eventId)
 
 			if (event == null) throw new KnownError('Unknown event')
 
