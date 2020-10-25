@@ -5,30 +5,31 @@ const listen = require('test-listen')
 const fetch = require('node-fetch')
 
 const server = require('../../src/server')
-const { before, beforeEach, afterEach, after } = require('./utils')
+const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase } = require('./_utils')
 
 const base = listen(server)
 
 let visitRecordId = null
 
-test.before(before)
-test.beforeEach(beforeEach)
-test.afterEach.always(afterEach)
-test.after.always(after)
+test.before(connectToDatabase)
+test.beforeEach(fillDatabase)
+test.afterEach.always(cleanupDatabase)
+test.after.always(disconnectFromDatabase)
 
 test.serial('record first visit', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
-		query:
-			`mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
+		query: `
+			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
 				createRecord(domainId: $domainId, input: $input) {
 					payload {
 						id
 					}
 				}
-			}`,
+			}
+		`,
 		variables: {
 			domainId: t.context.domain.id,
 			input: { siteLocation: 'https://example.com/' }
@@ -55,12 +56,13 @@ test.serial('update subsequent visits', async (t) => {
 	const url = new URL('/api', await base)
 
 	const body = {
-		query:
-			`mutation updateRecord($id: ID!) {
+		query: `
+			mutation updateRecord($id: ID!) {
 				updateRecord(id: $id) {
 					success
 				}
-			}`,
+			}
+		`,
 		variables: {
 			id: visitRecordId
 		}
@@ -85,14 +87,15 @@ test.serial('ignore first visit if own site', async (t) => {
 	const url = new URL('/api', await base)
 
 	const body = {
-		query:
-			`mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
+		query: `
+			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
 				createRecord(domainId: $domainId, input: $input) {
 					payload {
 						id
 					}
 				}
-			}`,
+			}
+		`,
 		variables: {
 			domainId: t.context.domain.id,
 			input: { siteLocation: 'https://example.com/' }
@@ -120,12 +123,13 @@ test.serial('ignore subsequent visits if own site', async (t) => {
 	const url = new URL('/api', await base)
 
 	const body = {
-		query:
-			`mutation updateRecord($id: ID!) {
-				updateRecord(id: $id) {
-					success
-				}
-			}`,
+		query: `
+			mutation updateRecord($id: ID!) {
+					updateRecord(id: $id) {
+						success
+					}
+			}
+		`,
 		variables: {
 			id: '88888888-8888-8888-8888-888888888888'
 		}

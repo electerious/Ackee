@@ -94,9 +94,6 @@
     "test-listen": "^1.1.0"
   },
   "ava": {
-    "files": [
-      "!test/**/utils.js"
-    ],
     "verbose": true,
     "timeout": "20s",
     "environmentVariables": {

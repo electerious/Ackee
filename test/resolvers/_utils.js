@@ -2,26 +2,25 @@
 
 const { MongoMemoryServer } = require('mongodb-memory-server')
 const mongoose = require('mongoose')
+
 const Token = require('../../src/models/Token')
 const Domain = require('../../src/models/Domain')
 const connect = require('../../src/utils/connect')
 
-// Start MongoDB Instance
-const mongod = new MongoMemoryServer()
+const mongoDb = new MongoMemoryServer()
 
-// Create connection to mongoose before all tests
-exports.before = async () =>
-	connect(await mongod.getUri())
+const connectToDatabase = async () => {
+	const dbUrl = await mongoDb.getUri()
+	return connect(dbUrl)
+}
 
-// Create fixtures before each test
-exports.beforeEach = async (t) => {
-	// Saves t.context so tests can access IDs
+const fillDatabase = async (t) => {
+	// Saves to context so tests can access IDs
 	t.context.token = await Token.create({})
 	t.context.domain = await Domain.create({ title: 'example.com' })
 }
 
-// Clean up database after every test
-exports.afterEach = async (t) => {
+const cleanupDatabase = async (t) => {
 	await Token.findOneAndDelete({
 		id: t.context.token.id
 	})
@@ -30,8 +29,14 @@ exports.afterEach = async (t) => {
 	})
 }
 
-// Disconnect MongoDB and mongoose after all tests are done
-exports.after = async () => {
+const disconnectFromDatabase = async () => {
 	mongoose.disconnect()
-	mongod.stop()
+	mongoDb.stop()
+}
+
+module.exports = {
+	connectToDatabase,
+	fillDatabase,
+	cleanupDatabase,
+	disconnectFromDatabase
 }

@@ -5,30 +5,32 @@ const listen = require('test-listen')
 const fetch = require('node-fetch')
 const mockedEnv = require('mocked-env')
 
-const { before, beforeEach, afterEach, after } = require('./utils')
+const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase } = require('./_utils')
 const server = require('../../src/server')
 
 const base = listen(server)
 
 let loginId = null
-test.before(before)
-test.beforeEach(beforeEach)
-test.afterEach.always(afterEach)
-test.after.always(after)
+
+test.before(connectToDatabase)
+test.beforeEach(fillDatabase)
+test.afterEach.always(cleanupDatabase)
+test.after.always(disconnectFromDatabase)
 
 test.serial('return login token and cookie after successful login', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
-		query:
-			`mutation createToken($input: CreateTokenInput!) {
+		query: `
+			mutation createToken($input: CreateTokenInput!) {
 				createToken(input: $input) {
 					payload {
 						id
 					}
 				}
-			}`,
+			}
+		`,
 		variables: {
 			input:
 				{
@@ -69,12 +71,13 @@ test.serial('clear login cookie after successful logout', async (t) => {
 	const url = new URL('/api', await base)
 
 	const body = {
-		query:
-			`mutation deleteToken($id: ID!) {
-				deleteToken(id: $id) {
-					success
-				}
-			}`,
+		query: `
+			mutation deleteToken($id: ID!) {
+					deleteToken(id: $id) {
+						success
+					}
+			}
+		`,
 		variables: {
 			id: loginId
 		}
