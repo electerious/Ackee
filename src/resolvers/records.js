@@ -6,7 +6,7 @@ const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
-const isLoggedIn = require('../../src/utils/isLoggedIn')
+const loginCookie = require('../../src/utils/loginCookie')
 
 const normalizeSiteLocation = (siteLocation) => {
 
@@ -68,8 +68,8 @@ module.exports = {
 	Mutation: {
 		createRecord: async (parent, { domainId, input }, { req }) => {
 
-			// In case of own site, return fake entry and don't track
-			if (isLoggedIn(req)) {
+			// Ignore your own visit when logged in
+			if (loginCookie.isSet(req)) {
 				return {
 					success: true,
 					payload: {
@@ -113,8 +113,8 @@ module.exports = {
 		},
 		updateRecord: async (parent, { id }, { req }) => {
 
-			// In case of own site don't update
-			if (isLoggedIn(req)) {
+			// Ignore your own visit when logged in
+			if (loginCookie.isSet(req)) {
 				return {
 					success: true
 				}

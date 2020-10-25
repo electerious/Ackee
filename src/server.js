@@ -7,7 +7,6 @@ const { resolve } = require('path')
 const { readFile } = require('fs').promises
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
-const cookieParse = require('micro-cookie')
 
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
@@ -174,10 +173,8 @@ const routes = [
 
 module.exports = micro(
 	attachCorsHeaders(
-		cookieParse(
-			catchError(
-				router(...routes)
-			)
+		catchError(
+			router(...routes)
 		)
 	)
 )

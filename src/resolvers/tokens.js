@@ -2,6 +2,7 @@
 
 const tokens = require('../database/tokens')
 const KnownError = require('../utils/KnownError')
+const loginCookie = require('../utils/loginCookie')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -23,9 +24,8 @@ module.exports = {
 
 			const entry = await tokens.add()
 
-			// Set cookie for one year to avoid reporting own visits
-			const cookieMaxAge = 365 * 24 * 60 * 60
-			res.setHeader('Set-Cookie', `ackee_login=1; SameSite=None; Secure; Max-Age=${ cookieMaxAge }`)
+			// Set cookie to avoid reporting your own visits
+			loginCookie.set(res)
 
 			return {
 				success: true,
@@ -37,8 +37,8 @@ module.exports = {
 
 			await tokens.del(id)
 
-			// Report own visits, again
-			res.setHeader('Set-Cookie', 'ackee_login=0; SameSite=None; Secure; Max-Age=-1')
+			// Remove cookie to report your own visits, again
+			loginCookie.unset(res)
 
 			return {
 				success: true

@@ -6,7 +6,8 @@ const createServerlessContext = async (integrationContext) => ({
 	isDemoMode,
 	isAuthenticated: await isAuthenticated(integrationContext.event.headers['authorization']),
 	dateDetails: createDate(integrationContext.event.headers['time-zone']),
-	req: integrationContext.req
+	req: integrationContext.req,
+	res: integrationContext.res
 })
 
 const createMicroContext = async (integrationContext) => ({
