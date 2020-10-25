@@ -20,7 +20,7 @@ const get = async (ids, interval, limit, dateDetails) => {
 
 			const date = dateDetails.lastFnByInterval(interval)(index)
 
-			// Views and durations are returning day, month and year in the
+			// Database entries include the day, month and year in the
 			// timezone of the user. We therefore need to match it against a
 			// date in the timezone of the user.
 			const userZonedDate = utcToZonedTime(date, dateDetails.userTimeZone)
