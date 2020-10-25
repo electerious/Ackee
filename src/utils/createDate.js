@@ -2,6 +2,7 @@
 
 const { subMilliseconds, subHours, subDays, subMonths, subYears, startOfDay, startOfMonth, startOfYear } = require('date-fns')
 const serverTimeZone = require('./timeZone')
+const intervals = require('../constants/intervals')
 
 module.exports = (userTimeZone = serverTimeZone) => {
 
@@ -18,7 +19,7 @@ module.exports = (userTimeZone = serverTimeZone) => {
 	// things more complicated. The max offset does the job.
 	const timeZoneToleranz = 14
 
-	return {
+	const instance = {
 		userTimeZone,
 		// Get a date with an offset
 		lastMilliseconds: (milliseconds) => subMilliseconds(currentDate, milliseconds),
@@ -30,6 +31,20 @@ module.exports = (userTimeZone = serverTimeZone) => {
 		includeDays: (days) => subHours(subDays(startOfDay(currentDate), days - 1), timeZoneToleranz),
 		includeMonths: (months) => subHours(subMonths(startOfMonth(currentDate), months - 1), timeZoneToleranz),
 		includeYears: (years) => subHours(subYears(startOfYear(currentDate), years - 1), timeZoneToleranz)
+	}
+
+	// Get the function that matches the interval
+	const lastFnByInterval = (interval) => {
+		switch (interval) {
+			case intervals.INTERVALS_DAILY: return instance.lastDays
+			case intervals.INTERVALS_MONTHLY: return instance.lastMonths
+			case intervals.INTERVALS_YEARLY: return instance.lastYears
+		}
+	}
+
+	return {
+		...instance,
+		lastFnByInterval
 	}
 
 }
