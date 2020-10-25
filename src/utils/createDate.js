@@ -33,7 +33,7 @@ module.exports = (userTimeZone = serverTimeZone) => {
 		includeYears: (years) => subHours(subYears(startOfYear(currentDate), years - 1), timeZoneToleranz)
 	}
 
-	// Get the function that matches the interval
+	// Get the last-function that matches the interval
 	const lastFnByInterval = (interval) => {
 		switch (interval) {
 			case intervals.INTERVALS_DAILY: return instance.lastDays
@@ -42,9 +42,19 @@ module.exports = (userTimeZone = serverTimeZone) => {
 		}
 	}
 
+	// Get the include-function that matches the interval
+	const includeFnByInterval = (interval) => {
+		switch (interval) {
+			case intervals.INTERVALS_DAILY: return instance.includeDays
+			case intervals.INTERVALS_MONTHLY: return instance.includeMonths
+			case intervals.INTERVALS_YEARLY: return instance.includeYears
+		}
+	}
+
 	return {
 		...instance,
-		lastFnByInterval
+		lastFnByInterval,
+		includeFnByInterval
 	}
 
 }
