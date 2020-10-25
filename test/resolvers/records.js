@@ -9,14 +9,15 @@ const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase
 
 const base = listen(server)
 
-let visitRecordId = null
+let validRecord = null
+let ignoredRecord = null
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-test.serial('record first visit', async (t) => {
+test.serial('create record', async (t) => {
 
 	const url = new URL('/api', await base)
 
@@ -45,13 +46,16 @@ test.serial('record first visit', async (t) => {
 		}
 	})
 
-	const resJson = await res.json()
-	visitRecordId = resJson.data.createRecord.payload.id
-	t.true((/^[-0-9a-f]{36}$/).test(visitRecordId))
+	const json = await res.json()
+
+	// Save record for the next test
+	validRecord = json.data.createRecord.payload
+
+	t.true((/^[-0-9a-f]{36}$/).test(validRecord.id))
 
 })
 
-test.serial('update subsequent visits', async (t) => {
+test.serial('update record', async (t) => {
 
 	const url = new URL('/api', await base)
 
@@ -64,7 +68,7 @@ test.serial('update subsequent visits', async (t) => {
 			}
 		`,
 		variables: {
-			id: visitRecordId
+			id: validRecord.id
 		}
 	}
 
@@ -77,12 +81,13 @@ test.serial('update subsequent visits', async (t) => {
 		}
 	})
 
-	const resJson = await res.json()
-	t.true(resJson.data.updateRecord.success)
+	const json = await res.json()
+
+	t.true(json.data.updateRecord.success)
 
 })
 
-test.serial('ignore first visit if own site', async (t) => {
+test.serial('ignore visit when logged in', async (t) => {
 
 	const url = new URL('/api', await base)
 
@@ -112,26 +117,29 @@ test.serial('ignore first visit if own site', async (t) => {
 		}
 	})
 
-	const resJson = await res.json()
-	const visitRecordId = resJson.data.createRecord.payload.id
-	t.is(visitRecordId, '88888888-8888-8888-8888-888888888888')
+	const json = await res.json()
+
+	// Save record for the next test
+	ignoredRecord = json.data.createRecord.payload
+
+	t.is(ignoredRecord.id, '88888888-8888-8888-8888-888888888888')
 
 })
 
-test.serial('ignore subsequent visits if own site', async (t) => {
+test.serial('ignore visit update when logged in', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
 			mutation updateRecord($id: ID!) {
-					updateRecord(id: $id) {
-						success
-					}
+				updateRecord(id: $id) {
+					success
+				}
 			}
 		`,
 		variables: {
-			id: '88888888-8888-8888-8888-888888888888'
+			id: ignoredRecord.id
 		}
 	}
 
@@ -145,7 +153,8 @@ test.serial('ignore subsequent visits if own site', async (t) => {
 		}
 	})
 
-	const resJson = await res.json()
-	t.true(resJson.data.updateRecord.success)
+	const json = await res.json()
+
+	t.true(json.data.updateRecord.success)
 
 })

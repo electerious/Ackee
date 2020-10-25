@@ -10,16 +10,19 @@ const server = require('../../src/server')
 
 const base = listen(server)
 
-let loginId = null
+let validToken = null
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-test.serial('return login token and cookie after successful login', async (t) => {
+test.serial('return token and cookie after successful login', async (t) => {
 
 	const url = new URL('/api', await base)
+
+	const username = 'admin'
+	const password = '123456'
 
 	const body = {
 		query: `
@@ -32,17 +35,16 @@ test.serial('return login token and cookie after successful login', async (t) =>
 			}
 		`,
 		variables: {
-			input:
-				{
-					username: 'mockuser',
-					password: 'mockpw'
-				}
+			input: {
+				username,
+				password
+			}
 		}
 	}
 
 	const restore = mockedEnv({
-		ACKEE_USERNAME: 'mockuser',
-		ACKEE_PASSWORD: 'mockpw',
+		ACKEE_USERNAME: username,
+		ACKEE_PASSWORD: password,
 		ACKEE_ALLOW_ORIGIN: 'https://badexample.com,https://bad.example.com,https://example.com'
 	})
 
@@ -56,11 +58,13 @@ test.serial('return login token and cookie after successful login', async (t) =>
 	})
 
 	const headers = res.headers
-	t.is(headers.get('Set-Cookie'), 'ackee_login=1; SameSite=None; Secure; Max-Age=31536000')
+	const json = await res.json()
 
-	const resJson = await res.json()
-	loginId = resJson.data.createToken.payload.id
-	t.true((/^[-0-9a-f]{36}$/).test(loginId))
+	// Save token for the next test
+	validToken = json.data.createToken.payload
+
+	t.is(headers.get('Set-Cookie'), 'ackee_login=1; SameSite=None; Secure; Max-Age=31536000')
+	t.true((/^[-0-9a-f]{36}$/).test(validToken.id))
 
 	restore()
 
@@ -79,7 +83,7 @@ test.serial('clear login cookie after successful logout', async (t) => {
 			}
 		`,
 		variables: {
-			id: loginId
+			id: validToken.id
 		}
 	}
 
@@ -93,9 +97,9 @@ test.serial('clear login cookie after successful logout', async (t) => {
 	})
 
 	const headers = res.headers
-	t.is(headers.get('Set-Cookie'), 'ackee_login=0; SameSite=None; Secure; Max-Age=-1')
+	const json = await res.json()
 
-	const resJson = await res.json()
-	t.true(resJson.data.deleteToken.success)
+	t.is(headers.get('Set-Cookie'), 'ackee_login=0; SameSite=None; Secure; Max-Age=-1')
+	t.true(json.data.deleteToken.success)
 
 })
