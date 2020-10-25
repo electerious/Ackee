@@ -9,6 +9,9 @@ const requireAuth = require('../middlewares/requireAuth')
 const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
+	Event: {
+		statistics: (obj) => obj
+	},
 	Query: {
 		event: pipe(requireAuth, async (parent, { id }) => {
 

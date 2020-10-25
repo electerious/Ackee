@@ -31,6 +31,10 @@ module.exports = gql`
 		"""
 		type: EventType!
 		"""
+		Statistics of an event. The data is available in different types, depending on whether they are to be shown in a chart or list.
+		"""
+		statistics: EventStatistics!
+		"""
 		Identifies the date and time when the object was created.
 		"""
 		created: DateTime!

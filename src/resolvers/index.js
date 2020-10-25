@@ -6,8 +6,9 @@ module.exports = mergeResolvers([
 	require('./tokens'),
 	require('./records'),
 	require('./domains'),
-	require('./actions'),
 	require('./events'),
+	require('./actions'),
 	require('./facts'),
-	require('./statistics')
+	require('./domainStatistics'),
+	require('./eventStatistics')
 ])

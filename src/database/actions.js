@@ -1,6 +1,16 @@
 'use strict'
 
+const { utcToZonedTime } = require('date-fns-tz')
+
 const Action = require('../models/Action')
+const aggregateTopActions = require('../aggregations/aggregateTopActions')
+const aggregateNewActions = require('../aggregations/aggregateNewActions')
+const aggregateRecentActions = require('../aggregations/aggregateRecentActions')
+const aggregateActions = require('../aggregations/aggregateActions')
+const sortings = require('../constants/sortings')
+const intervals = require('../constants/intervals')
+const createArray = require('../utils/createArray')
+const matchesDate = require('../utils/matchesDate')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -46,6 +56,80 @@ const update = async (id, data) => {
 
 }
 
+const getChart = async (ids, interval, limit, dateDetails) => {
+
+	const enhance = (entries) => {
+
+		const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
+		const matchMonth = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY ].includes(interval)
+		const matchYear = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY, intervals.INTERVALS_YEARLY ].includes(interval)
+
+		return createArray(limit).map((_, index) => {
+
+			const date = dateDetails.lastFnByInterval(interval)(index)
+
+			// Database entries include the day, month and year in the
+			// timezone of the user. We therefore need to match it against a
+			// date in the timezone of the user.
+			const userZonedDate = utcToZonedTime(date, dateDetails.userTimeZone)
+
+			// Find a entry that matches the date
+			const entry = entries.find((entry) => {
+				return matchesDate(
+					matchDay === true ? entry._id.day : undefined,
+					matchMonth === true ? entry._id.month : undefined,
+					matchYear === true ? entry._id.year : undefined,
+					userZonedDate
+				)
+			})
+
+			return {
+				id: date,
+				count: entry == null ? 0 : entry.count
+			}
+
+		})
+
+	}
+
+	const aggregation = (() => {
+
+		return aggregateActions(ids, interval, limit, dateDetails)
+
+	})()
+
+	return enhance(
+		await Action.aggregate(aggregation)
+	)
+
+}
+
+const getList = async (ids, sorting, range, limit, dateDetails) => {
+
+	const enhance = (entries) => {
+
+		return entries.map((entry) => ({
+			id: entry._id.key,
+			count: entry.count,
+			created: entry.created
+		}))
+
+	}
+
+	const aggregation = (() => {
+
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopActions(ids, range, limit, dateDetails)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewActions(ids, limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
+
+	})()
+
+	return enhance(
+		await Action.aggregate(aggregation)
+	)
+
+}
+
 const del = async (eventId) => {
 
 	return Action.deleteMany({
@@ -57,5 +141,7 @@ const del = async (eventId) => {
 module.exports = {
 	add,
 	update,
+	getChart,
+	getList,
 	del
 }

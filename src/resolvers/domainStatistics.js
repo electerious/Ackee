@@ -14,7 +14,7 @@ const domainIds = require('../utils/domainIds')
 const requireAuth = require('../middlewares/requireAuth')
 
 module.exports = {
-	Statistics: {
+	DomainStatistics: {
 		views: pipe(requireAuth, async (domain, { type, interval, limit }, { dateDetails }) => {
 
 			const ids = await domainIds(domain)

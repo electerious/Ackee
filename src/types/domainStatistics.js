@@ -204,7 +204,7 @@ module.exports = gql`
 	"""
 	Statistics of a domain. Usually data that needs to be represented in a list or chart.
 	"""
-	type Statistics {
+	type DomainStatistics {
 		"""
 		Amount of views grouped by day, month or year.
 		"""
@@ -313,6 +313,6 @@ module.exports = gql`
 		"""
 		Statistics of all domains combined. Usually data that needs to be represented in a list or chart.
 		"""
-		statistics: Statistics!
+		statistics: DomainStatistics!
 	}
 `
