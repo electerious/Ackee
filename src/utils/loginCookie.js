@@ -6,7 +6,6 @@ module.exports = {
 		return cookies.includes('ackee_login=1')
 	},
 	set: (res) => {
-		// Set cookie for one year to avoid reporting own visits
 		res.setHeader('Set-Cookie', `ackee_login=1; SameSite=None; Secure; Max-Age=${ 365 * 24 * 60 * 60 }`)
 	},
 	unset: (res) => {
