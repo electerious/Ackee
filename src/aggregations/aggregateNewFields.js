@@ -28,8 +28,11 @@ module.exports = (ids, properties, limit, or) => {
 	]
 
 	properties.forEach((property) => {
-		if (or) {
-			(aggregation[0].$match['$or'] = aggregation[0].$match['$or'] || []).push({ [property]: { $ne: null } })
+		if (or === true) {
+			aggregation[0].$match['$or'] = [
+				...(aggregation[0].$match['$or'] || []),
+				{ [property]: { $ne: null } }
+			]
 		} else {
 			aggregation[0].$match[property] = { $ne: null }
 		}
