@@ -36,6 +36,9 @@ const schema = new mongoose.Schema({
 		minlength: 2,
 		maxlength: 2
 	},
+	source: {
+		type: String
+	},
 	screenWidth: {
 		type: Number,
 		min: 0,
