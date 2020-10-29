@@ -10,6 +10,13 @@ const schema = new mongoose.Schema({
 		unique: true,
 		default: uuid
 	},
+	title: {
+		type: String
+	},
+	permanent: {
+		type: Boolean,
+		default: false
+	},
 	created: {
 		type: Date,
 		required: true,
