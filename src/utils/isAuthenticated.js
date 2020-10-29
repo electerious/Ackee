@@ -26,7 +26,10 @@ module.exports = async (authorization) => {
 		return new KnownError('Token invalid')
 	}
 
-	const valid = ttl(entry.updated, process.env.ACKEE_TTL)
+	let valid = true
+	if (entry.permanent === undefined || entry.permanent === false) {
+		valid = ttl(entry.updated, process.env.ACKEE_TTL)
+	}
 
 	// Token too old
 	if (valid === false) {
