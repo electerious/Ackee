@@ -13,7 +13,7 @@ module.exports = {
 	Mutation: {
 		createToken: async (parent, { input }) => {
 
-			const { username, password } = input
+			const { username, password, permanent, title } = input
 
 			if (process.env.ACKEE_USERNAME == null) throw new KnownError('Ackee username missing in environment')
 			if (process.env.ACKEE_PASSWORD == null) throw new KnownError('Ackee username missing in environment')
@@ -21,7 +21,7 @@ module.exports = {
 			if (username !== process.env.ACKEE_USERNAME) throw new KnownError('Username or password incorrect')
 			if (password !== process.env.ACKEE_PASSWORD) throw new KnownError('Username or password incorrect')
 
-			const entry = await tokens.add()
+			const entry = await tokens.add({ permanent, title })
 
 			return {
 				success: true,

@@ -4,18 +4,20 @@ const Token = require('../models/Token')
 
 const response = (entry) => ({
 	id: entry.id,
+	title: entry.title,
+	permanent: entry.permanent,
 	created: entry.created,
 	updated: entry.updated
 })
 
-const add = async () => {
+const add = async (data) => {
 
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
-		await Token.create({})
+		await Token.create(data)
 	)
 
 }

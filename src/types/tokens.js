@@ -9,6 +9,14 @@ module.exports = gql`
 		"""
 		id: ID!
 		"""
+		Identifies if the token has a TTL or is a permanent token.
+		"""
+		permanent: Boolean
+		"""
+		Title of the token.
+		"""
+		title: String
+		"""
 		Identifies the date and time when the object was created.
 		"""
 		created: DateTime!
@@ -27,6 +35,14 @@ module.exports = gql`
 		Password used to protect the Ackee instance.
 		"""
 		password: String!
+		"""
+		Specifies if the token should be permanent or have a TTL.
+		"""
+		permanent: Boolean
+		"""
+		Title of the token.
+		"""
+		title: String
 	}
 
 	type CreateTokenPayload {
