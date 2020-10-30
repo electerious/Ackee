@@ -21,17 +21,29 @@ const fillDatabase = async (t) => {
 	t.context.domain = await Domain.create({ title: 'example.com' })
 	t.context.factsDomain = await Domain.create({ title: 'facts.example.com' })
 	const now = Date.now()
-	await Record.create({
+	const oneDay = 24 * 60 * 60 * 1000
+
+	// add fake 1 minute visit per day for the last 14 days
+	await Promise.all([ ...Array(14).keys() ].map((i) => Record.create({
+		clientId: `client-${ i }`,
 		domainId: t.context.factsDomain.id,
 		siteLocation: 'https://facts.example.com/',
-		screenWidth: 1024,
-		screenHeight: 768,
-		screenColorDepth: 24,
-		browserName: 'Chrome',
-		browserVersion: '85.0',
-		created: now - 60 * 1000,
-		updated: now
-	})
+		siteReferrer: 'https://google.com/',
+		siteLanguage: 'en',
+		screenWidth: 414,
+		screenHeight: 896,
+		screenColorDepth: 32,
+		deviceName: 'iPhone',
+		deviceManufacturer: 'Apple',
+		osName: 'iOS',
+		osVersion: '14.0',
+		browserName: 'Safari',
+		browserVersion: '14.0',
+		browserWidth: 414,
+		browserHeight: 719,
+		created: now - i * oneDay - 60 * 1000,
+		updated: now - i * oneDay
+	})))
 }
 
 const cleanupDatabase = async (t) => {

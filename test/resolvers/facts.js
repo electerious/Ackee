@@ -54,11 +54,11 @@ test.serial('fetch facts', async (t) => {
 
 	const json = await res.json()
 	const domainFacts = json.data.domain.facts
-	t.true(domainFacts.activeVisitors >= 0)
-	t.true(domainFacts.averageViews >= 0)
-	t.true(domainFacts.averageDuration >= 0)
-	t.true(domainFacts.viewsToday >= 0)
-	t.true(domainFacts.viewsMonth >= 0)
-	t.true(domainFacts.viewsYear >= 0)
+	t.is(domainFacts.activeVisitors, 1)
+	t.is(domainFacts.averageViews, 1)
+	t.is(domainFacts.averageDuration, 60000)
+	t.is(domainFacts.viewsToday, 1)
+	t.is(domainFacts.viewsMonth, 14)
+	t.is(domainFacts.viewsYear, 14)
 
 })

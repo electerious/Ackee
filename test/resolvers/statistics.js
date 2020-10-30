@@ -14,8 +14,7 @@ test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-test.serial('fetch facts', async (t) => {
-
+const getStats = async (t, sorting) => {
 	const url = new URL('/api', await base)
 
 	const statistics = `
@@ -77,7 +76,7 @@ test.serial('fetch facts', async (t) => {
 		variables: {
 			id: t.context.factsDomain.id,
 			interval: 'DAILY',
-			sorting: 'TOP',
+			sorting: sorting,
 			range: 'LAST_24_HOURS'
 		}
 	}
@@ -93,15 +92,77 @@ test.serial('fetch facts', async (t) => {
 	})
 
 	const json = await res.json()
-	const domainStatistics = json.data.domain.statistics
-	t.true(domainStatistics.views.length >= 0)
-	t.true(domainStatistics.pages.length >= 0)
-	t.true(domainStatistics.referrers.length >= 0)
-	t.true(domainStatistics.durations.length >= 0)
-	t.true(domainStatistics.systems.length >= 0)
-	t.true(domainStatistics.devices.length >= 0)
-	t.true(domainStatistics.browsers.length >= 0)
-	t.true(domainStatistics.sizes.length >= 0)
-	t.true(domainStatistics.languages.length >= 0)
+	return json.data.domain.statistics
+}
+
+test.serial('fetch TOP statistics', async (t) => {
+	const domainStatistics = await getStats(t, 'TOP')
+
+	t.is(domainStatistics.views.length, 14)
+	t.is(domainStatistics.views[0].count, 1)
+	t.is(domainStatistics.pages.length, 1)
+	t.is(domainStatistics.pages[0].id, 'https://facts.example.com/')
+	t.is(domainStatistics.referrers.length, 1)
+	t.is(domainStatistics.referrers[0].id, 'https://google.com/')
+	t.is(domainStatistics.durations.length, 14)
+	t.is(domainStatistics.durations[0].count, 60 * 1000)
+	t.is(domainStatistics.systems.length, 1)
+	t.is(domainStatistics.systems[0].id, 'iOS 14.0')
+	t.is(domainStatistics.devices.length, 1)
+	t.is(domainStatistics.devices[0].id, 'Apple iPhone')
+	t.is(domainStatistics.browsers.length, 1)
+	t.is(domainStatistics.browsers[0].id, 'Safari 14.0')
+	t.is(domainStatistics.sizes.length, 1)
+	t.is(domainStatistics.sizes[0].id, '414px x 719px')
+	t.is(domainStatistics.languages.length, 1)
+	t.is(domainStatistics.languages[0].id, 'English')
+
+})
+
+test.serial('fetch RECENT statistics', async (t) => {
+	const domainStatistics = await getStats(t, 'RECENT')
+
+	t.is(domainStatistics.views.length, 14)
+	t.is(domainStatistics.views[0].count, 1)
+	t.is(domainStatistics.pages.length, 14)
+	t.is(domainStatistics.pages[0].id, 'https://facts.example.com/')
+	t.is(domainStatistics.referrers.length, 14)
+	t.is(domainStatistics.referrers[0].id, 'https://google.com/')
+	t.is(domainStatistics.durations.length, 14)
+	t.is(domainStatistics.durations[0].count, 60 * 1000)
+	t.is(domainStatistics.systems.length, 14)
+	t.is(domainStatistics.systems[0].id, 'iOS 14.0')
+	t.is(domainStatistics.devices.length, 14)
+	t.is(domainStatistics.devices[0].id, 'Apple iPhone')
+	t.is(domainStatistics.browsers.length, 14)
+	t.is(domainStatistics.browsers[0].id, 'Safari 14.0')
+	t.is(domainStatistics.sizes.length, 14)
+	t.is(domainStatistics.sizes[0].id, '414px x 719px')
+	t.is(domainStatistics.languages.length, 14)
+	t.is(domainStatistics.languages[0].id, 'English')
+
+})
+
+test.serial('fetch NEW statistics', async (t) => {
+	const domainStatistics = await getStats(t, 'NEW')
+
+	t.is(domainStatistics.views.length, 14)
+	t.is(domainStatistics.views[0].count, 1)
+	t.is(domainStatistics.pages.length, 1)
+	t.is(domainStatistics.pages[0].id, 'https://facts.example.com/')
+	t.is(domainStatistics.referrers.length, 1)
+	t.is(domainStatistics.referrers[0].id, 'https://google.com/')
+	t.is(domainStatistics.durations.length, 14)
+	t.is(domainStatistics.durations[0].count, 60 * 1000)
+	t.is(domainStatistics.systems.length, 1)
+	t.is(domainStatistics.systems[0].id, 'iOS 14.0')
+	t.is(domainStatistics.devices.length, 1)
+	t.is(domainStatistics.devices[0].id, 'Apple iPhone')
+	t.is(domainStatistics.browsers.length, 1)
+	t.is(domainStatistics.browsers[0].id, 'Safari 14.0')
+	t.is(domainStatistics.sizes.length, 1)
+	t.is(domainStatistics.sizes[0].id, '414px x 719px')
+	t.is(domainStatistics.languages.length, 1)
+	t.is(domainStatistics.languages[0].id, 'English')
 
 })
