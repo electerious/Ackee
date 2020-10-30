@@ -10,14 +10,14 @@ const response = (entry) => ({
 	updated: entry.updated
 })
 
-const add = async (permanent, title) => {
+const add = async (data) => {
 
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
-		await Token.create({ permanent, title })
+		await Token.create(data)
 	)
 
 }
