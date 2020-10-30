@@ -23,8 +23,9 @@ const fillDatabase = async (t) => {
 	const now = Date.now()
 	const oneDay = 24 * 60 * 60 * 1000
 
-	// add fake 1 minute visit per day for the last 14 days
-	await Promise.all([ ...Array(14).keys() ].map((i) => Record.create({
+	// Add fake 1 minute visit per day for the last 14 days with some
+	// variations so that different statistics sorting can be verified
+	await Record.insertMany([ ...Array(14).keys() ].map((i) => ({
 		clientId: `client-${ i }`,
 		domainId: t.context.factsDomain.id,
 		siteLocation: 'https://facts.example.com/',
@@ -36,9 +37,9 @@ const fillDatabase = async (t) => {
 		deviceName: 'iPhone',
 		deviceManufacturer: 'Apple',
 		osName: 'iOS',
-		osVersion: '14.0',
+		osVersion: i > 7 ? '13.0' : '14.0',
 		browserName: 'Safari',
-		browserVersion: '14.0',
+		browserVersion: i > 7 ? '13.0' : '14.0',
 		browserWidth: 414,
 		browserHeight: 719,
 		created: now - i * oneDay - 60 * 1000,

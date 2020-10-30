@@ -33,7 +33,10 @@ test.serial('create record', async (t) => {
 		`,
 		variables: {
 			domainId: t.context.domain.id,
-			input: { siteLocation: 'https://example.com/' }
+			input: {
+				siteLocation: 'https://example.com/',
+				siteReferrer: 'https://google.com/'
+			}
 		}
 	}
 
