@@ -15,6 +15,7 @@ const schema = new mongoose.Schema({
 	},
 	permanent: {
 		type: Boolean,
+		required: true,
 		default: false
 	},
 	created: {
