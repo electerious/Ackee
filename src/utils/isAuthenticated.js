@@ -26,11 +26,8 @@ module.exports = async (authorization) => {
 		return new KnownError('Token invalid')
 	}
 
-	// Skip ttl validation if permanent token
-	let valid = true
-	if (entry.permanent === undefined || entry.permanent === false) {
-		valid = ttl(entry.updated, process.env.ACKEE_TTL)
-	}
+	// Tokens can expire when they're not permanent
+	const valid = entry.permanent === true || ttl(entry.updated, process.env.ACKEE_TTL) === true
 
 	// Token too old
 	if (valid === false) {
