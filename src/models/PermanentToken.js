@@ -10,6 +10,10 @@ const schema = new mongoose.Schema({
 		unique: true,
 		default: uuid
 	},
+	title: {
+		type: String,
+		required: true
+	},
 	created: {
 		type: Date,
 		required: true,
@@ -22,4 +26,4 @@ const schema = new mongoose.Schema({
 	}
 })
 
-module.exports = mongoose.model('Token', schema)
+module.exports = mongoose.model('PermanentToken', schema)
