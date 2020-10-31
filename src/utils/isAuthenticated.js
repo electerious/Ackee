@@ -40,7 +40,9 @@ module.exports = async (authorization) => {
 
 	if (permanentTokenEntry != null) {
 		// Update token to indicate the last time it was used
-		await permanentTokens.update(token)
+		await permanentTokens.update(token, {
+			title: permanentTokenEntry.title
+		})
 
 		return true
 	}
