@@ -17,7 +17,9 @@ const add = async (data) => {
 	}
 
 	return enhance(
-		await PermanentToken.create(data)
+		await PermanentToken.create({
+			title: data.title
+		})
 	)
 
 }

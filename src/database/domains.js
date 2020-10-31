@@ -17,7 +17,9 @@ const add = async (data) => {
 	}
 
 	return enhance(
-		await Domain.create(data)
+		await Domain.create({
+			title: data.title
+		})
 	)
 
 }
