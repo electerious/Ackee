@@ -3,11 +3,11 @@ const isAuthenticated = require('./isAuthenticated')
 const createDate = require('./createDate')
 
 const createServerlessContext = async (integrationContext) => {
-	return createContext(integrationContext.event.headers, integrationContext.req)
+	return createContext(integrationContext.req, integrationContext.event.headers)
 }
 
 const createMicroContext = async (integrationContext) => {
-	return createContext(integrationContext.req.headers, integrationContext.req)
+	return createContext(integrationContext.req, integrationContext.req.headers)
 }
 
 const createContext = async (req, headers) => {
