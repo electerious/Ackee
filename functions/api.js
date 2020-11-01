@@ -35,7 +35,9 @@ const apolloServer = new ApolloServer({
 })
 
 exports.handler = apolloServer.createHandler({
-	origin: allowOrigin === '*' ? true : allowOrigin.split(','),
-	methods: 'GET,POST,PATCH,OPTIONS',
-	allowedHeaders: 'Content-Type'
+	cors: {
+		origin: allowOrigin === '*' ? true : allowOrigin.split(','),
+		methods: 'GET,POST,PATCH,OPTIONS',
+		allowedHeaders: 'Content-Type'
+	}
 })
