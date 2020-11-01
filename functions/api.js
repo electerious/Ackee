@@ -22,7 +22,7 @@ const apolloServer = new ApolloServer({
 	playground: isDemoMode === true || isDevelopmentMode === true,
 	debug: isDevelopmentMode === true,
 	cors: {
-		origin: allowOrigin.split(','),
+		origin: allowOrigin === '*' ? true : allowOrigin.split(','),
 		methods: 'GET,POST,PATCH,OPTIONS',
 		allowedHeaders: 'Content-Type'
 	},
