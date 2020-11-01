@@ -3,10 +3,10 @@
 const { ApolloServer } = require('apollo-server-lambda')
 const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 
-const connect = require('../src/utils/connect')
-const isDemoMode = require('../src/utils/isDemoMode')
-const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
-const { createServerlessContext } = require('../src/utils/createContext')
+const connect = require('./utils/connect')
+const isDemoMode = require('./utils/isDemoMode')
+const isDevelopmentMode = require('./utils/isDevelopmentMode')
+const { createServerlessContext } = require('./utils/createContext')
 
 const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN || ''
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
@@ -24,12 +24,12 @@ const apolloServer = new ApolloServer({
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
-		require('../src/types')
+		require('./types')
 	],
 	resolvers: {
 		UnsignedInt: UnsignedIntResolver,
 		DateTime: DateTimeResolver,
-		...require('../src/resolvers')
+		...require('./resolvers')
 	},
 	context: createServerlessContext
 })
