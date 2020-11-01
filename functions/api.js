@@ -21,11 +21,6 @@ const apolloServer = new ApolloServer({
 	introspection: isDemoMode === true || isDevelopmentMode === true,
 	playground: isDemoMode === true || isDevelopmentMode === true,
 	debug: isDevelopmentMode === true,
-	cors: {
-		origin: allowOrigin === '*' ? true : allowOrigin.split(','),
-		methods: 'GET,POST,PATCH,OPTIONS',
-		allowedHeaders: 'Content-Type'
-	},
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
@@ -39,4 +34,8 @@ const apolloServer = new ApolloServer({
 	context: createServerlessContext
 })
 
-exports.handler = apolloServer.createHandler()
+exports.handler = apolloServer.createHandler({
+	origin: allowOrigin === '*' ? true : allowOrigin.split(','),
+	methods: 'GET,POST,PATCH,OPTIONS',
+	allowedHeaders: 'Content-Type'
+})
