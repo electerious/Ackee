@@ -1,5 +1,7 @@
 'use strict'
 
+const { getClientIp } = require('request-ip')
+
 const KnownError = require('../utils/KnownError')
 const normalizeUrl = require('../utils/normalizeUrl')
 const identifier = require('../utils/identifier')
@@ -65,9 +67,12 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createRecord: async (parent, { domainId, input }, { req }) => {
+		createRecord: async (parent, { domainId, input }, { req, headers }) => {
 
-			const clientId = identifier(req, domainId)
+			const ip = getClientIp(req)
+			const userAgent = headers['user-agent']
+			const clientId = identifier(ip, userAgent, domainId)
+
 			const data = polish({ ...input, clientId, domainId })
 
 			const domain = await domains.get(domainId)
