@@ -8,6 +8,7 @@ const isDemoMode = require('../src/utils/isDemoMode')
 const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
 const { createServerlessContext } = require('../src/utils/createContext')
 
+const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN || ''
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 
 if (dbUrl == null) {
@@ -20,6 +21,11 @@ const apolloServer = new ApolloServer({
 	introspection: isDemoMode === true || isDevelopmentMode === true,
 	playground: isDemoMode === true || isDevelopmentMode === true,
 	debug: isDevelopmentMode === true,
+	cors: {
+		origin: allowOrigin.split(','),
+		methods: 'GET,POST,PATCH,OPTIONS',
+		allowedHeaders: 'Content-Type'
+	},
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
