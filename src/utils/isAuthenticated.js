@@ -3,6 +3,7 @@
 const KnownError = require('../utils/KnownError')
 const ttl = require('../utils/ttl')
 const tokens = require('../database/tokens')
+const permanentTokens = require('../database/permanentTokens')
 
 module.exports = async (authorization) => {
 
@@ -19,22 +20,34 @@ module.exports = async (authorization) => {
 		return new KnownError('Token missing')
 	}
 
-	const entry = await tokens.get(token)
+	const tokenEntry = await tokens.get(token)
+	const permanentTokenEntry = await permanentTokens.get(token)
+
+	if (tokenEntry != null) {
+		// Tokens can expire
+		const valid = ttl(tokenEntry.updated, process.env.ACKEE_TTL) === true
+
+		// Token too old
+		if (valid === false) {
+			return new KnownError('Token invalid')
+		}
+
+		// Update token to ensure that the token stays valid
+		await tokens.update(token)
+
+		return true
+	}
+
+	if (permanentTokenEntry != null) {
+		// Update token to indicate the last time it was used
+		await permanentTokens.update(token, {
+			title: permanentTokenEntry.title
+		})
+
+		return true
+	}
 
 	// Token not in database
-	if (entry == null) {
-		return new KnownError('Token invalid')
-	}
-
-	const valid = ttl(entry.updated, process.env.ACKEE_TTL)
-
-	// Token too old
-	if (valid === false) {
-		return new KnownError('Token invalid')
-	}
-
-	await tokens.update(token)
-
-	return true
+	return new KnownError('Token invalid')
 
 }

@@ -4,6 +4,7 @@ const { mergeTypeDefs } = require('graphql-tools')
 
 module.exports = mergeTypeDefs([
 	require('./tokens'),
+	require('./permanentTokens'),
 	require('./records'),
 	require('./domains'),
 	require('./events'),

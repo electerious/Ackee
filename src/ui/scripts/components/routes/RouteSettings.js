@@ -1,7 +1,14 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h, Fragment, useEffect } from 'react'
 
 import { version, homepage } from '../../../../../package'
-import { MODALS_DOMAIN_ADD, MODALS_DOMAIN_EDIT, MODALS_EVENT_ADD, MODALS_EVENT_EDIT } from '../../constants/modals'
+import {
+	MODALS_DOMAIN_ADD,
+	MODALS_DOMAIN_EDIT,
+	MODALS_EVENT_ADD,
+	MODALS_EVENT_EDIT,
+	MODALS_PERMANENT_TOKEN_ADD,
+	MODALS_PERMANENT_TOKEN_EDIT
+} from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
 import LinkItem from '../LinkItem'
@@ -9,6 +16,12 @@ import Line from '../Line'
 import Message from '../Message'
 
 const RouteSettings = (props) => {
+
+	useEffect(() => {
+
+		props.fetchPermanentTokens(props)
+
+	}, [])
 
 	const showDomainAddModal = () => {
 
@@ -24,6 +37,42 @@ const RouteSettings = (props) => {
 		props.addModalsModal({
 			type: MODALS_DOMAIN_EDIT,
 			props: domain
+		})
+
+	}
+
+	const showEventAddModal = () => {
+
+		props.addModalsModal({
+			type: MODALS_EVENT_ADD,
+			props: {}
+		})
+
+	}
+
+	const showEventEditModal = (event) => {
+
+		props.addModalsModal({
+			type: MODALS_EVENT_EDIT,
+			props: event
+		})
+
+	}
+
+	const showPermanentTokenAddModal = () => {
+
+		props.addModalsModal({
+			type: MODALS_PERMANENT_TOKEN_ADD,
+			props: {}
+		})
+
+	}
+
+	const showPermanentTokenEditModal = (permanentToken) => {
+
+		props.addModalsModal({
+			type: MODALS_PERMANENT_TOKEN_EDIT,
+			props: permanentToken
 		})
 
 	}
@@ -46,24 +95,6 @@ const RouteSettings = (props) => {
 		h(LinkItem, { type: 'button', onClick: showDomainAddModal }, 'New domain')
 	]
 
-	const showEventAddModal = () => {
-
-		props.addModalsModal({
-			type: MODALS_EVENT_ADD,
-			props: {}
-		})
-
-	}
-
-	const showEventEditModal = (event) => {
-
-		props.addModalsModal({
-			type: MODALS_EVENT_EDIT,
-			props: event
-		})
-
-	}
-
 	const eventsFetching = [
 		h(Message, { status: 'warning' }, 'Fetching events...')
 	]
@@ -80,6 +111,24 @@ const RouteSettings = (props) => {
 			]
 		).flat(),
 		h(LinkItem, { type: 'button', onClick: showEventAddModal }, 'New event')
+	]
+
+	const permanentTokensFetching = [
+		h(Message, { status: 'warning' }, 'Fetching permanent tokens...')
+	]
+
+	const permanentTokensItems = [
+		...props.permanentTokens.value.map(
+			(permanentToken) => [
+				h(LinkItem, {
+					type: 'button',
+					text: permanentToken.id,
+					onClick: () => showPermanentTokenEditModal(permanentToken.id, permanentToken.title)
+				}, permanentToken.title),
+				h(Line)
+			]
+		).flat(),
+		h(LinkItem, { type: 'button', onClick: showPermanentTokenAddModal }, 'New permanent token')
 	]
 
 	return (
@@ -103,6 +152,12 @@ const RouteSettings = (props) => {
 				headline: 'Events'
 			},
 				...(props.events.fetching === true ? eventsFetching : eventsItems)
+			),
+
+			h(CardSetting, {
+				headline: 'Permanent Tokens'
+			},
+				...(props.permanentTokens.fetching === true ? permanentTokensFetching : permanentTokensItems)
 			),
 
 			h(CardSetting, {

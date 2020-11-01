@@ -4,7 +4,9 @@ import {
 	MODALS_DOMAIN_ADD,
 	MODALS_DOMAIN_EDIT,
 	MODALS_EVENT_ADD,
-	MODALS_EVENT_EDIT
+	MODALS_EVENT_EDIT,
+	MODALS_PERMANENT_TOKEN_ADD,
+	MODALS_PERMANENT_TOKEN_EDIT
 } from '../constants/modals'
 
 import Modal from './modals/Modal'
@@ -12,6 +14,8 @@ import ModalDomainAdd from './modals/ModalDomainAdd'
 import ModalDomainEdit from './modals/ModalDomainEdit'
 import ModalEventAdd from './modals/ModalEventAdd'
 import ModalEventEdit from './modals/ModalEventEdit'
+import ModalPermanentTokenAdd from './modals/ModalPermanentTokenAdd'
+import ModalPermanentTokenEdit from './modals/ModalPermanentTokenEdit'
 
 const Modals = (props) => {
 
@@ -51,6 +55,21 @@ const Modals = (props) => {
 					fetching: props.events.fetching,
 					updateEvent: props.updateEvent.bind(null, props),
 					deleteEvent: props.deleteEvent.bind(null, props),
+					closeModal
+				}),
+				modalData.type === MODALS_PERMANENT_TOKEN_ADD && h(ModalPermanentTokenAdd, {
+					current,
+					fetching: props.permanentTokens.fetching,
+					addPermanentToken: props.addPermanentToken.bind(null, props),
+					closeModal
+				}),
+				modalData.type === MODALS_PERMANENT_TOKEN_EDIT && h(ModalPermanentTokenEdit, {
+					current,
+					id: modalData.props.id,
+					title: modalData.props.title,
+					fetching: props.permanentTokens.fetching,
+					updatePermanentToken: props.updatePermanentToken.bind(null, props),
+					deletePermanentToken: props.deletePermanentToken.bind(null, props),
 					closeModal
 				})
 			)

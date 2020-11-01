@@ -2,9 +2,9 @@ import { createElement as h, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { useClickAway } from 'react-use'
 
 import useMeasure from '../utils/useMeasure'
+import useClickAway from '../utils/useClickAway'
 
 import KeyHint from './KeyHint'
 
@@ -58,7 +58,7 @@ const Context = (props) => {
 	const ref = useRef()
 	const measurement = useMeasure(props.targetRef, ref)
 
-	useClickAway(ref, props.onAwayClick, [ 'click' ])
+	useClickAway(ref, props.onAwayClick)
 
 	const x = measurement == null ? undefined : toPixel(props.x(measurement))
 	const y = measurement == null ? undefined : toPixel(props.y(measurement))
