@@ -8,6 +8,7 @@ const isDemoMode = require('../src/utils/isDemoMode')
 const isDevelopmentMode = require('../src/utils/isDevelopmentMode')
 const { createServerlessContext } = require('../src/utils/createContext')
 
+const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN || ''
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
 
 if (dbUrl == null) {
@@ -33,4 +34,10 @@ const apolloServer = new ApolloServer({
 	context: createServerlessContext
 })
 
-exports.handler = apolloServer.createHandler()
+exports.handler = apolloServer.createHandler({
+	cors: {
+		origin: allowOrigin === '*' ? true : allowOrigin.split(','),
+		methods: 'GET,POST,PATCH,OPTIONS',
+		allowedHeaders: 'Content-Type'
+	}
+})

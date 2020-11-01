@@ -42,9 +42,9 @@ mutation createToken($input: CreateTokenInput!) {
 }
 ```
 
-The token is valid for one day and will be renewed on every request made with it. You can modify the TTL (time to live) in [the options](Options.md#ttl).
+The token is valid for one day and will be renewed on every request made with it. You can modify the TTL (time to live) in [the options](Options.md#ttl). [Create a permanent token]() if you need a token that doesn't expire.
 
-### Use token
+### Use a token
 
 Protected queries and mutations need to include the `Authorization` HTTP header. Replace `tokenId` with the token `id` from the previous step.
 
@@ -53,6 +53,34 @@ Protected queries and mutations need to include the `Authorization` HTTP header.
   "Authorization": "Bearer tokenId"
 }
 ```
+
+### Creating a permanent token
+
+Permanent tokens don't expire and are perfect for tools that run periodically in the background. In this case you want a token that is always valid so you don't have to enter your credentials over and over again.
+
+You can create permanent tokens in the settings of Ackee or via the API. Creating a permanent token requires a valid [Authorization header](#use-a-token). This means that you can only create permanent tokens with a valid (non-permanent) token.
+
+```graphql
+mutation createPermanentToken($input: CreatePermanentTokenInput!) {
+	createPermanentToken(input: $input) {
+		payload {
+			id
+		}
+	}
+}
+```
+
+```json
+{
+  "input": {
+    "title": "iOS widget"
+  }
+}
+```
+
+### Use a permanent token
+
+Using a permanent token is the same as [using a (non-permanent) token](#use-a-token).
 
 ## Time Zone
 

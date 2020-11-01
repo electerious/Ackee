@@ -78,6 +78,7 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [ackee-bitbar](https://github.com/electerious/ackee-bitbar) - Ackee stats in your macOS menu bar
+- [ackee-report](https://github.com/BetaHuhn/ackee-report) - CLI tool to generate performance reports
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
 - [Soapberry](https://wordpress.org/plugins/soapberry/) - WordPress plugin for Ackee
 - [Ackee-PHP](https://github.com/BrookeDot/ackee-php) - A PHP Class for Ackee
