@@ -8,5 +8,6 @@ module.exports = mergeTypeDefs([
 	require('./miscellaneous'),
 	require('./records'),
 	require('./statistics'),
-	require('./tokens')
+	require('./tokens'),
+	require('./permanentTokens')
 ], { all: true })

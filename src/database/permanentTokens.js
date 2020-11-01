@@ -1,6 +1,6 @@
 'use strict'
 
-const Domain = require('../models/Domain')
+const PermanentToken = require('../models/PermanentToken')
 const sortByProp = require('../utils/sortByProp')
 
 const response = (entry) => ({
@@ -17,7 +17,7 @@ const add = async (data) => {
 	}
 
 	return enhance(
-		await Domain.create({
+		await PermanentToken.create({
 			title: data.title
 		})
 	)
@@ -33,7 +33,7 @@ const all = async () => {
 	}
 
 	return enhance(
-		await Domain.find({})
+		await PermanentToken.find({})
 	)
 
 }
@@ -45,7 +45,7 @@ const get = async (id) => {
 	}
 
 	return enhance(
-		await Domain.findOne({ id })
+		await PermanentToken.findOne({ id })
 	)
 
 }
@@ -57,7 +57,7 @@ const update = async (id, data) => {
 	}
 
 	return enhance(
-		await Domain.findOneAndUpdate({
+		await PermanentToken.findOneAndUpdate({
 			id
 		}, {
 			$set: {
@@ -73,7 +73,7 @@ const update = async (id, data) => {
 
 const del = async (id) => {
 
-	return Domain.findOneAndDelete({
+	return PermanentToken.findOneAndDelete({
 		id
 	})
 
