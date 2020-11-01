@@ -12,6 +12,10 @@ New tools like [ackee-report](https://github.com/BetaHuhn/ackee-report), [ackee-
 
 - Permanent tokens (#176, thanks @BetaHuhn)
 
+### Fixed
+
+- Serverless function CORS headers (#175)
+
 ## [2.1.1] - 2020-10-28
 
 ### Fixed
