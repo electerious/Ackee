@@ -35,6 +35,7 @@ Get Ackee up and running…
 - […with Helm](docs/Get%20started.md#with-helm)
 - […without Docker](docs/Get%20started.md#without-docker)
 - […with Netlify](docs/Get%20started.md#with-netlify)
+- […with Vercel](docs/Get%20started.md#with-vercel)
 - […with Heroku](docs/Get%20started.md#with-heroku)
 - […with Render](docs/Get%20started.md#with-render)
 
