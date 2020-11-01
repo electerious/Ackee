@@ -13,6 +13,7 @@ const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
 const isDemoMode = require('./utils/isDemoMode')
 const isDevelopmentMode = require('./utils/isDevelopmentMode')
+const findMatchingOrigin = require('./utils/findMatchingOrigin')
 const customTracker = require('./utils/customTracker')
 const { createMicroContext } = require('./utils/createContext')
 
@@ -78,16 +79,7 @@ const catchError = (fn) => async (req, res) => {
 
 const attachCorsHeaders = (fn) => async (req, res) => {
 
-	const allowOrigin = (() => {
-
-		if (process.env.ACKEE_ALLOW_ORIGIN === '*') return '*'
-
-		if (process.env.ACKEE_ALLOW_ORIGIN) {
-			const origins = process.env.ACKEE_ALLOW_ORIGIN.split(',')
-			return origins.find((origin) => origin.includes(req.headers.origin) || origin.includes(req.headers.host))
-		}
-
-	})()
+	const allowOrigin = findMatchingOrigin(req, process.env.ACKEE_ALLOW_ORIGIN)
 
 	if (allowOrigin != null) {
 		res.setHeader('Access-Control-Allow-Origin', allowOrigin)
