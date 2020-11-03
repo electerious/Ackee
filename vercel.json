@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "NODEJS_AWS_HANDLER_NAME": "handler"
+    }
+  }
+}
