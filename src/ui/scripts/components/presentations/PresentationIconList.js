@@ -9,11 +9,13 @@ import sumByProp from '../../utils/sumByProp'
 const Row = (props) => {
 
 	const hasBar = props.barWidth != null
+	const hasUrl = props.url != null
 
-	const faviconUrl = props.url !== null ? (new URL('/favicon.ico', props.url)).href : props.text
-	const hostnameUrl = props.url !== null ? props.url.hostname : props.text
-	const pathnameUrl = props.url !== null ? props.url.pathname : ''
-
+	// TODO: Favicon fallback
+	const faviconUrl = hasUrl === true ? (new URL('/favicon.ico', props.url)).href : undefined
+	const permanentText = hasUrl === true ? props.url.hostname : props.text
+	const obscuredText = hasUrl === true ? props.url.pathname : undefined
+	
 	return (
 		h(props.url !== null ? 'a' : 'div', {
 			className: 'flexList__row',
@@ -30,8 +32,8 @@ const Row = (props) => {
 				h(Favicon, { url: faviconUrl })
 			),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
-				h('span', {}, hostnameUrl),
-				h('span', { className: 'flexList__obscured' }, pathnameUrl)
+				h('span', {}, permanentText),
+				obscuredText && h('span', { className: 'flexList__obscured' }, obscuredText)
 			)
 		)
 	)
