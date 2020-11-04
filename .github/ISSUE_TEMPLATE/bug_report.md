@@ -21,10 +21,9 @@ A clear and concise description of what you expected to happen.
 
 If applicable, add screenshots to help explain your problem.
 
-**⚙️ Environment (please complete the following information)**
- - Installation: [e.g. Docker/Netlify/Bare-Metal]
- - OS: [e.g. Ubuntu 18.04]
- - Ackee version [e.g. v2.1.0]
+**⚙️ Environment**
+ - Installation: [e.g. Docker/Docker-Compose/Netlify/Vercel/Manually]
+ - Ackee version: [e.g. v2.1.0]
 
 **📋 Additional context**
 
