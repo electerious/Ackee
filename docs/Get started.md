@@ -5,6 +5,7 @@
 - [With Helm](#with-helm)
 - [Without Docker](#without-docker)
 - [With Netlify](#with-netlify)
+- [With Vercel](#with-vercel)
 - [With Heroku](#with-heroku)
 - [With Render](#with-render)
 
