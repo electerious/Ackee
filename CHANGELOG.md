@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+This release adds [support for Vercel](https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md) and updates the included `ackee-tracker` which now ignores bots.
+
+### Added
+
+- Support for Vercel (#180, thanks @elliottsj)
+- Contributing guide and issue templates (#184, thanks @BetaHuhn)
+
+### Changed
+
+- `ackee-tracker` updated to version 4.1.0
+
 ## [2.2.0] - 2020-11-01
 
 New tools like [ackee-report](https://github.com/BetaHuhn/ackee-report), [ackee-bitbar](https://github.com/electerious/ackee-bitbar) and the [Ackee iOS widget](https://twitter.com/getackee/status/1320996848623099909) are build upon the powerful API of Ackee. This release makes it even easier to them by introducing permanent tokens. Permanent tokens never expire and are perfect for tools that run in the background. You can create them in the settings of Ackee and use them for authentication in Ackee-powered apps.
