@@ -1,8 +1,10 @@
+const isUrl = require('is-url')
+
 export default (referrers) => {
 
 	return referrers.map((referrer) => ({
-		url: new URL(referrer.id),
-		text: new URL(referrer.id).href,
+		url: isUrl(referrer.id) ? new URL(referrer.id) : null,
+		text: isUrl(referrer.id) ? new URL(referrer.id).href : referrer.id,
 		count: referrer.count,
 		date: referrer.created == null ? null : new Date(referrer.created)
 	}))

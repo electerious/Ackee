@@ -10,16 +10,18 @@ const Row = (props) => {
 
 	const hasBar = props.barWidth != null
 
-	const faviconUrl = (new URL('/favicon.ico', props.url)).href
-	const hostnameUrl = props.url.hostname
-	const pathnameUrl = props.url.pathname
+	const faviconUrl = props.url !== null ? (new URL('/favicon.ico', props.url)).href : props.text
+	const hostnameUrl = props.url !== null ? props.url.hostname : props.text
+	const pathnameUrl = props.url !== null ? props.url.pathname : ''
 
 	return (
-		h('a', {
+		h(props.url !== null ? 'a' : 'div', {
 			className: 'flexList__row',
-			href: enhanceUrl(props.url).href,
-			target: '_blank',
-			rel: 'noopener',
+			...(props.url !== null && {
+				href: enhanceUrl(props.url).href,
+				target: '_blank',
+				rel: 'noopener'
+			}),
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave
 		},
@@ -47,7 +49,7 @@ const PresentationIconList = (props) => {
 			h('div', { className: 'flexList__inner' },
 				props.items.map((item, index) => (
 					h(Row, {
-						key: item.url.href + index,
+						key: item.text + index,
 						barWidth: hasCount === true ? proportionalWidth(item) : undefined,
 						onEnter: () => props.onEnter(index),
 						onLeave: () => props.onLeave(index),
