@@ -30,7 +30,7 @@ yarn start:dev
 
 ## Linting
 
-[ESlint](https://eslint.org/) is used for linting. It's recommended to add the corresponding extension to your editor. It's also possible to run the `lint` task with the following command: 
+[ESlint](https://eslint.org/) is used for linting. It's recommended to add the corresponding extension to your editor. It's also possible to run the `lint` task with the following command:
 
 ```sh
 yarn lint
