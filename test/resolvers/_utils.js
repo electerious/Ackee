@@ -7,6 +7,8 @@ const Token = require('../../src/models/Token')
 const Domain = require('../../src/models/Domain')
 const Record = require('../../src/models/Record')
 const connect = require('../../src/utils/connect')
+const createArray = require('../../src/utils/createArray')
+const { day } = require('../../src/utils/times')
 
 const mongoDb = new MongoMemoryServer()
 
@@ -20,12 +22,10 @@ const fillDatabase = async (t) => {
 	t.context.token = await Token.create({})
 	t.context.domain = await Domain.create({ title: 'example.com' })
 	t.context.factsDomain = await Domain.create({ title: 'facts.example.com' })
-	const now = Date.now()
-	const oneDay = 24 * 60 * 60 * 1000
 
-	// Add fake 1 minute visit per day for the last 14 days with some
-	// variations so that different statistics sorting can be verified
-	await Record.insertMany([ ...Array(14).keys() ].map((i) => ({
+	const now = Date.now()
+
+	const records = createArray(14).map((item, i) => ({
 		clientId: `client-${ i }`,
 		domainId: t.context.factsDomain.id,
 		siteLocation: 'https://facts.example.com/',
@@ -42,9 +42,14 @@ const fillDatabase = async (t) => {
 		browserVersion: i > 7 ? '13.0' : '14.0',
 		browserWidth: 414,
 		browserHeight: 719,
-		created: now - i * oneDay - 60 * 1000,
-		updated: now - i * oneDay
-	})))
+		// Add fake 1 minute visit per day
+		created: now - i * day - 60 * 1000,
+		updated: now - i * day
+	}))
+
+	console.log(records[0])
+
+	await Record.insertMany(records)
 }
 
 const cleanupDatabase = async (t) => {
