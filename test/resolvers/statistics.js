@@ -149,54 +149,54 @@ test('fetch YEARLY and TOTAL views', async (t) => {
 
 })
 
-test('fetch TOP and LAST_7_DAYS pages', async (t) => {
+test('fetch TOP and LAST_6_MONTHS pages', async (t) => {
 
-	const statistics = await getStats(t, pagesFragment('TOP', 'LAST_7_DAYS'))
+	const statistics = await getStats(t, pagesFragment('TOP', 'LAST_6_MONTHS'))
 
 	t.is(statistics.pages.length, 1)
 	t.is(statistics.pages[0].id, 'https://example.com/')
 
 })
 
-test('fetch RECENT and LAST_24_LAST_7_DAYSHOURS pages', async (t) => {
+test('fetch RECENT and LAST_24_LAST_6_MONTHSHOURS pages', async (t) => {
 
-	const statistics = await getStats(t, pagesFragment('RECENT', 'LAST_7_DAYS'))
+	const statistics = await getStats(t, pagesFragment('RECENT', 'LAST_6_MONTHS'))
 
 	t.is(statistics.pages.length, 14)
 	t.is(statistics.pages[0].id, 'https://example.com/')
 
 })
 
-test('fetch NEW and LAST_7_DAYS pages', async (t) => {
+test('fetch NEW and LAST_6_MONTHS pages', async (t) => {
 
-	const statistics = await getStats(t, pagesFragment('NEW', 'LAST_7_DAYS'))
+	const statistics = await getStats(t, pagesFragment('NEW', 'LAST_6_MONTHS'))
 
 	t.is(statistics.pages.length, 1)
 	t.is(statistics.pages[0].id, 'https://example.com/')
 
 })
 
-test('fetch TOP and LAST_7_DAYS referrers', async (t) => {
+test('fetch TOP and LAST_6_MONTHS referrers', async (t) => {
 
-	const statistics = await getStats(t, referrersFragment('TOP', 'LAST_7_DAYS'))
+	const statistics = await getStats(t, referrersFragment('TOP', 'LAST_6_MONTHS'))
 
 	t.is(statistics.referrers.length, 1)
 	t.is(statistics.referrers[0].id, 'https://google.com/')
 
 })
 
-test('fetch RECENT and LAST_7_DAYS referrers', async (t) => {
+test('fetch RECENT and LAST_6_MONTHS referrers', async (t) => {
 
-	const statistics = await getStats(t, referrersFragment('RECENT', 'LAST_7_DAYS'))
+	const statistics = await getStats(t, referrersFragment('RECENT', 'LAST_6_MONTHS'))
 
 	t.is(statistics.referrers.length, 14)
 	t.is(statistics.referrers[0].id, 'https://google.com/')
 
 })
 
-test('fetch NEW and LAST_7_DAYS referrers', async (t) => {
+test('fetch NEW and LAST_6_MONTHS referrers', async (t) => {
 
-	const statistics = await getStats(t, referrersFragment('NEW', 'LAST_7_DAYS'))
+	const statistics = await getStats(t, referrersFragment('NEW', 'LAST_6_MONTHS'))
 
 	t.is(statistics.referrers.length, 1)
 	t.is(statistics.referrers[0].id, 'https://google.com/')
