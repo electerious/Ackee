@@ -77,9 +77,9 @@ test.serial('clear login cookie after successful logout', async (t) => {
 	const body = {
 		query: `
 			mutation deleteToken($id: ID!) {
-					deleteToken(id: $id) {
-						success
-					}
+				deleteToken(id: $id) {
+					success
+				}
 			}
 		`,
 		variables: {
