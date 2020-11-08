@@ -65,10 +65,10 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createRecord: async (parent, { domainId, input }, { ip, userAgent, isLogin }) => {
+		createRecord: async (parent, { domainId, input }, { ip, userAgent, isIgnored }) => {
 
 			// Ignore your own visit when logged in
-			if (isLogin === true) {
+			if (isIgnored === true) {
 				return {
 					success: true,
 					payload: {
@@ -110,10 +110,10 @@ module.exports = {
 			}
 
 		},
-		updateRecord: async (parent, { id }, { isLogin }) => {
+		updateRecord: async (parent, { id }, { isIgnored }) => {
 
 			// Ignore your own visit when logged in
-			if (isLogin === true) {
+			if (isIgnored === true) {
 				return {
 					success: true
 				}

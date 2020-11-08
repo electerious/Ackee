@@ -19,7 +19,7 @@ const createContext = async (ip, headers) => {
 	return {
 		isDemoMode,
 		isAuthenticated: await isAuthenticated(headers['authorization']),
-		isLogin: ignoreCookie.isSet(headers['cookie']),
+		isIgnored: ignoreCookie.isSet(headers['cookie']),
 		dateDetails: createDate(headers['time-zone']),
 		userAgent: headers['user-agent'],
 		ip,
