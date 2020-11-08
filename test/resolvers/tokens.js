@@ -28,6 +28,7 @@ test.serial('return token and cookie after successful login', async (t) => {
 		query: `
 			mutation createToken($input: CreateTokenInput!) {
 				createToken(input: $input) {
+					success
 					payload {
 						id
 					}
@@ -60,11 +61,12 @@ test.serial('return token and cookie after successful login', async (t) => {
 	const headers = res.headers
 	const json = await res.json()
 
+	t.true(headers.get('Set-Cookie').includes('ackee_ignore=1'))
+	t.true(json.data.createToken.success)
+	t.is(typeof json.data.createToken.payload.id, 'string')
+
 	// Save token for the next test
 	validToken = json.data.createToken.payload
-
-	t.true(headers.get('Set-Cookie').includes('ackee_ignore=1'))
-	t.true(validToken.id != null)
 
 	restore()
 
