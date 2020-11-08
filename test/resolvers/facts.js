@@ -13,7 +13,7 @@ test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-test.serial('fetch facts', async (t) => {
+test('fetch facts', async (t) => {
 
 	const body = {
 		query: `

@@ -84,7 +84,7 @@ const getStats = async (t, sorting, systemType, browserType, deviceType, sizeTyp
 	return json.data.domain.statistics
 }
 
-test.serial('fetch TOP statistics', async (t) => {
+test('fetch TOP statistics', async (t) => {
 
 	const domainStatistics = await getStats(t, 'TOP', 'NO_VERSION', 'NO_VERSION', 'NO_MODEL', 'BROWSER_RESOLUTION')
 
@@ -109,7 +109,7 @@ test.serial('fetch TOP statistics', async (t) => {
 
 })
 
-test.serial('fetch RECENT statistics', async (t) => {
+test('fetch RECENT statistics', async (t) => {
 
 	const domainStatistics = await getStats(t, 'RECENT', 'WITH_VERSION', 'WITH_VERSION', 'WITH_MODEL', 'BROWSER_WIDTH')
 
@@ -136,7 +136,7 @@ test.serial('fetch RECENT statistics', async (t) => {
 
 })
 
-test.serial('fetch NEW statistics', async (t) => {
+test('fetch NEW statistics', async (t) => {
 
 	const domainStatistics = await getStats(t, 'NEW', 'WITH_VERSION', 'WITH_VERSION', 'WITH_MODEL', 'BROWSER_HEIGHT')
 
@@ -163,7 +163,7 @@ test.serial('fetch NEW statistics', async (t) => {
 
 })
 
-test.serial('fetch TOP screen statistics', async (t) => {
+test('fetch TOP screen statistics', async (t) => {
 
 	const domainStatistics = await getStats(t, 'TOP', 'WITH_VERSION', 'WITH_VERSION', 'NO_MODEL', 'SCREEN_RESOLUTION')
 
@@ -178,7 +178,7 @@ test.serial('fetch TOP screen statistics', async (t) => {
 
 })
 
-test.serial('fetch RECENT screen statistics', async (t) => {
+test('fetch RECENT screen statistics', async (t) => {
 
 	const domainStatistics = await getStats(t, 'RECENT', 'NO_VERSION', 'NO_VERSION', 'WITH_MODEL', 'SCREEN_WIDTH')
 
@@ -195,7 +195,7 @@ test.serial('fetch RECENT screen statistics', async (t) => {
 
 })
 
-test.serial('fetch NEW screen statistics', async (t) => {
+test('fetch NEW screen statistics', async (t) => {
 
 	const domainStatistics = await getStats(t, 'NEW', 'NO_VERSION', 'NO_VERSION', 'WITH_MODEL', 'SCREEN_HEIGHT')
 
