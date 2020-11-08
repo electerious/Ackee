@@ -13,11 +13,6 @@ test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-// browsers(sorting: $sorting, type: $browserType, range: $range) {
-// 	id
-// 	count
-// 	created
-// }
 // sizes(sorting: $sorting, type: $sizeType, range: $range) {
 // 	id
 // 	count
@@ -92,6 +87,14 @@ const systemsFragment = (sorting, type, range) => `
 
 const devicesFragment = (sorting, type, range) => `
 	devices(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
+		id
+		count
+		created
+	}
+`
+
+const browsersFragment = (sorting, type, range) => `
+	browsers(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
 		id
 		count
 		created
@@ -341,6 +344,63 @@ test('fetch NEW, WITH_MODEL and LAST_6_MONTHS devices', async (t) => {
 
 	t.is(statistics.devices.length, 1)
 	t.is(statistics.devices[0].id, 'Apple iPhone')
+
+})
+
+test('fetch TOP, NO_VERSION and LAST_6_MONTHS browsers', async (t) => {
+
+	const statistics = await getStats(t, browsersFragment('TOP', 'NO_VERSION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.browsers.length, 1)
+	t.is(statistics.browsers[0].id, 'Safari')
+
+})
+
+test('fetch RECENT, NO_VERSION and LAST_6_MONTHS browsers', async (t) => {
+
+	const statistics = await getStats(t, browsersFragment('RECENT', 'NO_VERSION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.browsers.length, 14)
+	t.is(statistics.browsers[0].id, 'Safari')
+
+})
+
+test('fetch NEW, NO_VERSION and LAST_6_MONTHS browsers', async (t) => {
+
+	const statistics = await getStats(t, browsersFragment('NEW', 'NO_VERSION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.browsers.length, 1)
+	t.is(statistics.browsers[0].id, 'Safari')
+
+})
+
+test('fetch TOP, WITH_VERSION and LAST_6_MONTHS browsers', async (t) => {
+
+	const statistics = await getStats(t, browsersFragment('TOP', 'WITH_VERSION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.browsers.length, 2)
+	t.is(statistics.browsers[0].id, 'Safari 14.0')
+	t.is(statistics.browsers[1].id, 'Safari 13.0')
+
+})
+
+test('fetch RECENT, WITH_VERSION and LAST_6_MONTHS browsers', async (t) => {
+
+	const statistics = await getStats(t, browsersFragment('RECENT', 'WITH_VERSION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.browsers.length, 14)
+	t.is(statistics.browsers[0].id, 'Safari 14.0')
+	t.is(statistics.browsers[8].id, 'Safari 13.0')
+
+})
+
+test('fetch NEW, WITH_VERSION and LAST_6_MONTHS browsers', async (t) => {
+
+	const statistics = await getStats(t, browsersFragment('NEW', 'WITH_VERSION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.browsers.length, 2)
+	t.is(statistics.browsers[0].id, 'Safari 14.0')
+	t.is(statistics.browsers[1].id, 'Safari 13.0')
 
 })
 
