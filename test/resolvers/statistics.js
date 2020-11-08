@@ -13,11 +13,6 @@ test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-// devices(sorting: $sorting, type: $deviceType, range: $range) {
-// 	id
-// 	count
-// 	created
-// }
 // browsers(sorting: $sorting, type: $browserType, range: $range) {
 // 	id
 // 	count
@@ -89,6 +84,14 @@ const durationsFragment = (interval) => `
 
 const systemsFragment = (sorting, type, range) => `
 	systems(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
+		id
+		count
+		created
+	}
+`
+
+const devicesFragment = (sorting, type, range) => `
+	devices(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
 		id
 		count
 		created
@@ -284,6 +287,60 @@ test('fetch NEW, WITH_VERSION and LAST_6_MONTHS systems', async (t) => {
 	t.is(statistics.systems.length, 2)
 	t.is(statistics.systems[0].id, 'iOS 14.0')
 	t.is(statistics.systems[1].id, 'iOS 13.0')
+
+})
+
+test('fetch TOP, NO_MODEL and LAST_6_MONTHS devices', async (t) => {
+
+	const statistics = await getStats(t, devicesFragment('TOP', 'NO_MODEL', 'LAST_6_MONTHS'))
+
+	t.is(statistics.devices.length, 1)
+	t.is(statistics.devices[0].id, 'Apple')
+
+})
+
+test('fetch RECENT, NO_MODEL and LAST_6_MONTHS devices', async (t) => {
+
+	const statistics = await getStats(t, devicesFragment('RECENT', 'NO_MODEL', 'LAST_6_MONTHS'))
+
+	t.is(statistics.devices.length, 14)
+	t.is(statistics.devices[0].id, 'Apple')
+
+})
+
+test('fetch NEW, NO_MODEL and LAST_6_MONTHS devices', async (t) => {
+
+	const statistics = await getStats(t, devicesFragment('NEW', 'NO_MODEL', 'LAST_6_MONTHS'))
+
+	t.is(statistics.devices.length, 1)
+	t.is(statistics.devices[0].id, 'Apple')
+
+})
+
+test('fetch TOP, WITH_MODEL and LAST_6_MONTHS devices', async (t) => {
+
+	const statistics = await getStats(t, devicesFragment('TOP', 'WITH_MODEL', 'LAST_6_MONTHS'))
+
+	t.is(statistics.devices.length, 1)
+	t.is(statistics.devices[0].id, 'Apple iPhone')
+
+})
+
+test('fetch RECENT, WITH_MODEL and LAST_6_MONTHS devices', async (t) => {
+
+	const statistics = await getStats(t, devicesFragment('RECENT', 'WITH_MODEL', 'LAST_6_MONTHS'))
+
+	t.is(statistics.devices.length, 14)
+	t.is(statistics.devices[0].id, 'Apple iPhone')
+
+})
+
+test('fetch NEW, WITH_MODEL and LAST_6_MONTHS devices', async (t) => {
+
+	const statistics = await getStats(t, devicesFragment('NEW', 'WITH_MODEL', 'LAST_6_MONTHS'))
+
+	t.is(statistics.devices.length, 1)
+	t.is(statistics.devices[0].id, 'Apple iPhone')
 
 })
 
