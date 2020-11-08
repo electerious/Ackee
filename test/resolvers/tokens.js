@@ -63,7 +63,7 @@ test.serial('return token and cookie after successful login', async (t) => {
 	// Save token for the next test
 	validToken = json.data.createToken.payload
 
-	t.is(headers.get('Set-Cookie'), 'ackee_ignore=1; SameSite=None; Secure; Max-Age=31536000')
+	t.true(headers.get('Set-Cookie').includes('ackee_ignore=1'))
 	t.true((/^[-0-9a-f]{36}$/).test(validToken.id))
 
 	restore()
@@ -99,7 +99,7 @@ test.serial('clear login cookie after successful logout', async (t) => {
 	const headers = res.headers
 	const json = await res.json()
 
-	t.is(headers.get('Set-Cookie'), 'ackee_ignore=0; SameSite=None; Secure; Max-Age=-1')
+	t.true(headers.get('Set-Cookie').includes('ackee_ignore=0'))
 	t.true(json.data.deleteToken.success)
 
 })
