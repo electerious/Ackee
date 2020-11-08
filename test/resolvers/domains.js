@@ -49,7 +49,7 @@ test.serial('create domain', async (t) => {
 
 	const json = await res.json()
 
-	// Save doamin for the next test
+	// Save domain for the next test
 	validDomain = json.data.createDomain.payload
 
 	t.true(json.data.createDomain.success)
