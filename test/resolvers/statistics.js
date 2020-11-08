@@ -2,10 +2,9 @@
 
 const test = require('ava')
 const listen = require('test-listen')
-const fetch = require('node-fetch')
 
 const server = require('../../src/server')
-const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase } = require('./_utils')
+const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase, api } = require('./_utils')
 
 const base = listen(server)
 
@@ -15,8 +14,6 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 const getStats = async (t, sorting, systemType, browserType, deviceType, sizeType) => {
-
-	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
@@ -82,17 +79,7 @@ const getStats = async (t, sorting, systemType, browserType, deviceType, sizeTyp
 		}
 	}
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json',
-			'time-zone': 'UTC'
-		}
-	})
-
-	const json = await res.json()
+	const { json } = await api(base, body, t.context.token.id)
 
 	return json.data.domain.statistics
 }

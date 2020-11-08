@@ -2,10 +2,9 @@
 
 const test = require('ava')
 const listen = require('test-listen')
-const fetch = require('node-fetch')
 const mockedEnv = require('mocked-env')
 
-const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase } = require('./_utils')
+const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase, api } = require('./_utils')
 const server = require('../../src/server')
 
 const base = listen(server)
@@ -19,7 +18,6 @@ test.after.always(disconnectFromDatabase)
 
 test.serial('return token and cookie after successful login', async (t) => {
 
-	const url = new URL('/api', await base)
 
 	const username = 'admin'
 	const password = '123456'
@@ -49,17 +47,9 @@ test.serial('return token and cookie after successful login', async (t) => {
 		ACKEE_ALLOW_ORIGIN: 'https://badexample.com,https://bad.example.com,https://example.com'
 	})
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'Content-Type': 'application/json',
-			'Host': 'ackee.example.com'
-		}
+	const { headers, json } = await api(base, body, undefined, {
+		Host: 'ackee.example.com'
 	})
-
-	const headers = res.headers
-	const json = await res.json()
 
 	t.true(headers.get('Set-Cookie').includes('ackee_ignore=1'))
 	t.true(json.data.createToken.success)
@@ -74,8 +64,6 @@ test.serial('return token and cookie after successful login', async (t) => {
 
 test.serial('clear login cookie after successful logout', async (t) => {
 
-	const url = new URL('/api', await base)
-
 	const body = {
 		query: `
 			mutation deleteToken($id: ID!) {
@@ -89,17 +77,9 @@ test.serial('clear login cookie after successful logout', async (t) => {
 		}
 	}
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'Content-Type': 'application/json',
-			'Host': 'ackee.example.com'
-		}
+	const { json, headers } = await api(base, body, undefined, {
+		Host: 'ackee.example.com'
 	})
-
-	const headers = res.headers
-	const json = await res.json()
 
 	t.true(headers.get('Set-Cookie').includes('ackee_ignore=0'))
 	t.true(json.data.deleteToken.success)

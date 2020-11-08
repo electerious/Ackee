@@ -2,6 +2,7 @@
 
 const { MongoMemoryServer } = require('mongodb-memory-server')
 const mongoose = require('mongoose')
+const fetch = require('node-fetch')
 
 const Token = require('../../src/models/Token')
 const Domain = require('../../src/models/Domain')
@@ -63,9 +64,32 @@ const disconnectFromDatabase = async () => {
 	mongoDb.stop()
 }
 
+const api = async (base, body, token, headers = {}) => {
+	const url = new URL('/api', await base)
+
+	const defaultHeaders = {}
+	defaultHeaders['Content-Type'] = 'application/json'
+	defaultHeaders['Authorization'] = token == null ? undefined : `Bearer ${ token }`
+
+	const res = await fetch(url.href, {
+		method: 'post',
+		body: JSON.stringify(body),
+		headers: {
+			...defaultHeaders,
+			...headers
+		}
+	})
+
+	return {
+		headers: res.headers,
+		json: await res.json()
+	}
+}
+
 module.exports = {
 	connectToDatabase,
 	fillDatabase,
 	cleanupDatabase,
-	disconnectFromDatabase
+	disconnectFromDatabase,
+	api
 }

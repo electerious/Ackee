@@ -2,10 +2,9 @@
 
 const test = require('ava')
 const listen = require('test-listen')
-const fetch = require('node-fetch')
 
 const server = require('../../src/server')
-const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase } = require('./_utils')
+const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase, api } = require('./_utils')
 
 const base = listen(server)
 
@@ -19,7 +18,6 @@ test.after.always(disconnectFromDatabase)
 
 test.serial('create record', async (t) => {
 
-	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
@@ -41,16 +39,7 @@ test.serial('create record', async (t) => {
 		}
 	}
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json'
-		}
-	})
-
-	const json = await res.json()
+	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.createRecord.success)
 	t.is(typeof json.data.createRecord.payload.id, 'string')
@@ -61,8 +50,6 @@ test.serial('create record', async (t) => {
 })
 
 test.serial('update record', async (t) => {
-
-	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
@@ -77,24 +64,13 @@ test.serial('update record', async (t) => {
 		}
 	}
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json'
-		}
-	})
-
-	const json = await res.json()
+	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.updateRecord.success)
 
 })
 
 test.serial('ignore record creation when logged in', async (t) => {
-
-	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
@@ -113,17 +89,9 @@ test.serial('ignore record creation when logged in', async (t) => {
 		}
 	}
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json',
-			'Cookie': 'ackee_ignore=1'
-		}
+	const { json } = await api(base, body, t.context.token.id, {
+		Cookie: 'ackee_ignore=1'
 	})
-
-	const json = await res.json()
 
 	t.true(json.data.createRecord.success)
 	t.is(json.data.createRecord.payload.id, '88888888-8888-8888-8888-888888888888')
@@ -134,8 +102,6 @@ test.serial('ignore record creation when logged in', async (t) => {
 })
 
 test.serial('ignore record update when logged in', async (t) => {
-
-	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
@@ -150,17 +116,9 @@ test.serial('ignore record update when logged in', async (t) => {
 		}
 	}
 
-	const res = await fetch(url.href, {
-		method: 'post',
-		body: JSON.stringify(body),
-		headers: {
-			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json',
-			'Cookie': 'ackee_ignore=1'
-		}
+	const { json } = await api(base, body, t.context.token.id, {
+		Cookie: 'ackee_ignore=1'
 	})
-
-	const json = await res.json()
 
 	t.true(json.data.updateRecord.success)
 
