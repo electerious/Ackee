@@ -15,61 +15,58 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 const getStats = async (t, sorting, systemType, browserType, deviceType, sizeType) => {
-	const url = new URL('/api', await base)
 
-	const statistics = `
-		statistics {
-			views(interval: $interval, type: UNIQUE) {
-				id
-				count
-			}
-			pages(sorting: $sorting, range: $range) {
-				id
-				count
-				created
-			}
-			referrers(sorting: $sorting, range: $range) {
-				id
-				count
-				created
-			}
-			durations(interval: $interval) {
-				id
-				count
-			}
-			systems(sorting: $sorting, type: $systemType, range: $range) {
-				id
-				count
-				created
-			}
-			devices(sorting: $sorting, type: $deviceType, range: $range) {
-				id
-				count
-				created
-			}
-			browsers(sorting: $sorting, type: $browserType, range: $range) {
-				id
-				count
-				created
-			}
-			sizes(sorting: $sorting, type: $sizeType, range: $range) {
-				id
-				count
-				created
-			}
-			languages(sorting: $sorting, range: $range) {
-				id
-				count
-				created
-			}
-		}
-	`
+	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
 			query fetchStatistics($id: ID!, $interval: Interval!, $sorting: Sorting!, $range: Range, $systemType: SystemType!, $browserType: BrowserType!, $deviceType: DeviceType!, $sizeType: SizeType!) {
 				domain(id: $id) {
-					${ statistics }
+					statistics {
+						views(interval: $interval, type: UNIQUE) {
+							id
+							count
+						}
+						pages(sorting: $sorting, range: $range) {
+							id
+							count
+							created
+						}
+						referrers(sorting: $sorting, range: $range) {
+							id
+							count
+							created
+						}
+						durations(interval: $interval) {
+							id
+							count
+						}
+						systems(sorting: $sorting, type: $systemType, range: $range) {
+							id
+							count
+							created
+						}
+						devices(sorting: $sorting, type: $deviceType, range: $range) {
+							id
+							count
+							created
+						}
+						browsers(sorting: $sorting, type: $browserType, range: $range) {
+							id
+							count
+							created
+						}
+						sizes(sorting: $sorting, type: $sizeType, range: $range) {
+							id
+							count
+							created
+						}
+						languages(sorting: $sorting, range: $range) {
+							id
+							count
+							created
+						}
+					}
 				}
 			}
 		`,
@@ -96,10 +93,12 @@ const getStats = async (t, sorting, systemType, browserType, deviceType, sizeTyp
 	})
 
 	const json = await res.json()
+
 	return json.data.domain.statistics
 }
 
 test.serial('fetch TOP statistics', async (t) => {
+
 	const domainStatistics = await getStats(t, 'TOP', 'NO_VERSION', 'NO_VERSION', 'NO_MODEL', 'BROWSER_RESOLUTION')
 
 	t.is(domainStatistics.views.length, 14)
@@ -124,6 +123,7 @@ test.serial('fetch TOP statistics', async (t) => {
 })
 
 test.serial('fetch RECENT statistics', async (t) => {
+
 	const domainStatistics = await getStats(t, 'RECENT', 'WITH_VERSION', 'WITH_VERSION', 'WITH_MODEL', 'BROWSER_WIDTH')
 
 	t.is(domainStatistics.views.length, 14)
@@ -150,6 +150,7 @@ test.serial('fetch RECENT statistics', async (t) => {
 })
 
 test.serial('fetch NEW statistics', async (t) => {
+
 	const domainStatistics = await getStats(t, 'NEW', 'WITH_VERSION', 'WITH_VERSION', 'WITH_MODEL', 'BROWSER_HEIGHT')
 
 	t.is(domainStatistics.views.length, 14)
@@ -176,6 +177,7 @@ test.serial('fetch NEW statistics', async (t) => {
 })
 
 test.serial('fetch TOP screen statistics', async (t) => {
+
 	const domainStatistics = await getStats(t, 'TOP', 'WITH_VERSION', 'WITH_VERSION', 'NO_MODEL', 'SCREEN_RESOLUTION')
 
 	t.is(domainStatistics.systems.length, 1)
@@ -190,6 +192,7 @@ test.serial('fetch TOP screen statistics', async (t) => {
 })
 
 test.serial('fetch RECENT screen statistics', async (t) => {
+
 	const domainStatistics = await getStats(t, 'RECENT', 'NO_VERSION', 'NO_VERSION', 'WITH_MODEL', 'SCREEN_WIDTH')
 
 	t.is(domainStatistics.systems.length, 14)
@@ -206,6 +209,7 @@ test.serial('fetch RECENT screen statistics', async (t) => {
 })
 
 test.serial('fetch NEW screen statistics', async (t) => {
+
 	const domainStatistics = await getStats(t, 'NEW', 'NO_VERSION', 'NO_VERSION', 'WITH_MODEL', 'SCREEN_HEIGHT')
 
 	t.is(domainStatistics.systems.length, 1)
