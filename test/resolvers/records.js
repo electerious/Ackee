@@ -25,6 +25,7 @@ test.serial('create record', async (t) => {
 		query: `
 			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
 				createRecord(domainId: $domainId, input: $input) {
+					success
 					payload {
 						id
 					}
@@ -51,10 +52,11 @@ test.serial('create record', async (t) => {
 
 	const json = await res.json()
 
+	t.true(json.data.createRecord.success)
+	t.is(typeof json.data.createRecord.payload.id, 'string')
+
 	// Save record for the next test
 	validRecord = json.data.createRecord.payload
-
-	t.true(validRecord.id != null)
 
 })
 
@@ -90,7 +92,7 @@ test.serial('update record', async (t) => {
 
 })
 
-test.serial('ignore visit when logged in', async (t) => {
+test.serial('ignore record creation when logged in', async (t) => {
 
 	const url = new URL('/api', await base)
 
@@ -98,6 +100,7 @@ test.serial('ignore visit when logged in', async (t) => {
 		query: `
 			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
 				createRecord(domainId: $domainId, input: $input) {
+					success
 					payload {
 						id
 					}
@@ -122,14 +125,15 @@ test.serial('ignore visit when logged in', async (t) => {
 
 	const json = await res.json()
 
+	t.true(json.data.createRecord.success)
+	t.is(json.data.createRecord.payload.id, '88888888-8888-8888-8888-888888888888')
+
 	// Save record for the next test
 	ignoredRecord = json.data.createRecord.payload
 
-	t.is(ignoredRecord.id, '88888888-8888-8888-8888-888888888888')
-
 })
 
-test.serial('ignore visit update when logged in', async (t) => {
+test.serial('ignore record update when logged in', async (t) => {
 
 	const url = new URL('/api', await base)
 
