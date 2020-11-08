@@ -4,7 +4,7 @@ const { ApolloServer } = require('apollo-server-lambda')
 
 const connect = require('./utils/connect')
 const createApolloServer = require('./utils/createApolloServer')
-const { createMicroContext } = require('./utils/createContext')
+const { createServerlessContext } = require('./utils/createContext')
 
 const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN || ''
 const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
@@ -16,7 +16,7 @@ if (dbUrl == null) {
 connect(dbUrl)
 
 const apolloServer = createApolloServer(ApolloServer, {
-	context: createMicroContext
+	context: createServerlessContext
 })
 
 exports.handler = apolloServer.createHandler({
