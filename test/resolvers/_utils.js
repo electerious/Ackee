@@ -47,8 +47,6 @@ const fillDatabase = async (t) => {
 		updated: now - i * day
 	}))
 
-	console.log(records[0])
-
 	await Record.insertMany(records)
 }
 
