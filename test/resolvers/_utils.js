@@ -21,14 +21,13 @@ const fillDatabase = async (t) => {
 	// Saves to context so tests can access IDs
 	t.context.token = await Token.create({})
 	t.context.domain = await Domain.create({ title: 'example.com' })
-	t.context.factsDomain = await Domain.create({ title: 'facts.example.com' })
 
 	const now = Date.now()
 
 	const records = createArray(14).map((item, i) => ({
 		clientId: `client-${ i }`,
-		domainId: t.context.factsDomain.id,
-		siteLocation: 'https://facts.example.com/',
+		domainId: t.context.domain.id,
+		siteLocation: 'https://example.com/',
 		siteReferrer: 'https://google.com/',
 		siteLanguage: 'en',
 		screenWidth: 414,
@@ -56,9 +55,6 @@ const cleanupDatabase = async (t) => {
 	})
 	await Domain.findOneAndDelete({
 		id: t.context.domain.id
-	})
-	await Domain.findOneAndDelete({
-		id: t.context.factsDomain.id
 	})
 }
 

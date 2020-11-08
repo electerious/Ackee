@@ -34,7 +34,7 @@ test.serial('fetch facts', async (t) => {
 			}
 		`,
 		variables: {
-			id: t.context.factsDomain.id
+			id: t.context.domain.id
 		}
 	}
 

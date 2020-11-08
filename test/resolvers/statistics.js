@@ -71,7 +71,7 @@ const getStats = async (t, sorting, systemType, browserType, deviceType, sizeTyp
 			}
 		`,
 		variables: {
-			id: t.context.factsDomain.id,
+			id: t.context.domain.id,
 			interval: 'DAILY',
 			sorting: sorting,
 			range: 'LAST_24_HOURS',
@@ -104,7 +104,7 @@ test.serial('fetch TOP statistics', async (t) => {
 	t.is(domainStatistics.views.length, 14)
 	t.is(domainStatistics.views[0].count, 1)
 	t.is(domainStatistics.pages.length, 1)
-	t.is(domainStatistics.pages[0].id, 'https://facts.example.com/')
+	t.is(domainStatistics.pages[0].id, 'https://example.com/')
 	t.is(domainStatistics.referrers.length, 1)
 	t.is(domainStatistics.referrers[0].id, 'https://google.com/')
 	t.is(domainStatistics.durations.length, 14)
@@ -129,7 +129,7 @@ test.serial('fetch RECENT statistics', async (t) => {
 	t.is(domainStatistics.views.length, 14)
 	t.is(domainStatistics.views[0].count, 1)
 	t.is(domainStatistics.pages.length, 14)
-	t.is(domainStatistics.pages[0].id, 'https://facts.example.com/')
+	t.is(domainStatistics.pages[0].id, 'https://example.com/')
 	t.is(domainStatistics.referrers.length, 14)
 	t.is(domainStatistics.referrers[0].id, 'https://google.com/')
 	t.is(domainStatistics.durations.length, 14)
@@ -156,7 +156,7 @@ test.serial('fetch NEW statistics', async (t) => {
 	t.is(domainStatistics.views.length, 14)
 	t.is(domainStatistics.views[0].count, 1)
 	t.is(domainStatistics.pages.length, 1)
-	t.is(domainStatistics.pages[0].id, 'https://facts.example.com/')
+	t.is(domainStatistics.pages[0].id, 'https://example.com/')
 	t.is(domainStatistics.referrers.length, 1)
 	t.is(domainStatistics.referrers[0].id, 'https://google.com/')
 	t.is(domainStatistics.durations.length, 14)
