@@ -13,11 +13,6 @@ test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-// sizes(sorting: $sorting, type: $sizeType, range: $range) {
-// 	id
-// 	count
-// 	created
-// }
 // languages(sorting: $sorting, range: $range) {
 // 	id
 // 	count
@@ -95,6 +90,14 @@ const devicesFragment = (sorting, type, range) => `
 
 const browsersFragment = (sorting, type, range) => `
 	browsers(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
+		id
+		count
+		created
+	}
+`
+
+const sizesFragment = (sorting, type, range) => `
+	sizes(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
 		id
 		count
 		created
@@ -401,6 +404,60 @@ test('fetch NEW, WITH_VERSION and LAST_6_MONTHS browsers', async (t) => {
 	t.is(statistics.browsers.length, 2)
 	t.is(statistics.browsers[0].id, 'Safari 14.0')
 	t.is(statistics.browsers[1].id, 'Safari 13.0')
+
+})
+
+test('fetch TOP, BROWSER_RESOLUTION and LAST_6_MONTHS sizes', async (t) => {
+
+	const statistics = await getStats(t, sizesFragment('TOP', 'BROWSER_RESOLUTION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.sizes.length, 1)
+	t.is(statistics.sizes[0].id, '414px x 719px')
+
+})
+
+test('fetch RECENT, BROWSER_RESOLUTION and LAST_6_MONTHS sizes', async (t) => {
+
+	const statistics = await getStats(t, sizesFragment('RECENT', 'BROWSER_RESOLUTION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.sizes.length, 14)
+	t.is(statistics.sizes[0].id, '414px x 719px')
+
+})
+
+test('fetch NEW, BROWSER_RESOLUTION and LAST_6_MONTHS sizes', async (t) => {
+
+	const statistics = await getStats(t, sizesFragment('NEW', 'BROWSER_RESOLUTION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.sizes.length, 1)
+	t.is(statistics.sizes[0].id, '414px x 719px')
+
+})
+
+test('fetch TOP, SCREEN_RESOLUTION and LAST_6_MONTHS sizes', async (t) => {
+
+	const statistics = await getStats(t, sizesFragment('TOP', 'SCREEN_RESOLUTION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.sizes.length, 1)
+	t.is(statistics.sizes[0].id, '414px x 896px')
+
+})
+
+test('fetch RECENT, SCREEN_RESOLUTION and LAST_6_MONTHS sizes', async (t) => {
+
+	const statistics = await getStats(t, sizesFragment('RECENT', 'SCREEN_RESOLUTION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.sizes.length, 14)
+	t.is(statistics.sizes[0].id, '414px x 896px')
+
+})
+
+test('fetch NEW, SCREEN_RESOLUTION and LAST_6_MONTHS sizes', async (t) => {
+
+	const statistics = await getStats(t, sizesFragment('NEW', 'SCREEN_RESOLUTION', 'LAST_6_MONTHS'))
+
+	t.is(statistics.sizes.length, 1)
+	t.is(statistics.sizes[0].id, '414px x 896px')
 
 })
 
