@@ -1,20 +1,18 @@
 'use strict'
 
-const { ApolloServer } = require('apollo-server-micro')
-const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 const micro = require('micro')
 const { resolve } = require('path')
 const { readFile } = require('fs').promises
 const { send, createError } = require('micro')
 const { router, get, post, put, patch, del } = require('microrouter')
+const { ApolloServer } = require('apollo-server-micro')
 
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
 const isDefined = require('./utils/isDefined')
-const isDemoMode = require('./utils/isDemoMode')
-const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const findMatchingOrigin = require('./utils/findMatchingOrigin')
 const customTracker = require('./utils/customTracker')
+const createApolloServer = require('./utils/createApolloServer')
 const { createMicroContext } = require('./utils/createContext')
 
 const index = readFile(resolve(__dirname, '../dist/index.html')).catch(signale.fatal)
@@ -100,21 +98,8 @@ const notFound = async (req) => {
 
 }
 
-const apolloServer = new ApolloServer({
-	introspection: isDemoMode === true || isDevelopmentMode === true,
-	playground: isDemoMode === true || isDevelopmentMode === true,
-	debug: isDevelopmentMode === true,
+const apolloServer = createApolloServer(ApolloServer, {
 	formatError: handleGraphError,
-	typeDefs: [
-		UnsignedIntTypeDefinition,
-		DateTimeTypeDefinition,
-		require('./types')
-	],
-	resolvers: {
-		UnsignedInt: UnsignedIntResolver,
-		DateTime: DateTimeResolver,
-		...require('./resolvers')
-	},
 	context: createMicroContext
 })
 
