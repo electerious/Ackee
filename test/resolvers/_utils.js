@@ -20,7 +20,7 @@ const connectToDatabase = async () => {
 const fillDatabase = async (t) => {
 	// Saves to context so tests can access IDs
 	t.context.token = await Token.create({})
-	t.context.domain = await Domain.create({ title: 'example.com' })
+	t.context.domain = await Domain.create({ title: 'Example' })
 
 	const now = Date.now()
 
@@ -41,7 +41,7 @@ const fillDatabase = async (t) => {
 		browserVersion: i > 7 ? '13.0' : '14.0',
 		browserWidth: 414,
 		browserHeight: 719,
-		// Add fake 1 minute visit per day
+		// Add fake minute visit per day
 		created: now - i * day - 60 * 1000,
 		updated: now - i * day
 	}))
