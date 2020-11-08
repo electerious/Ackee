@@ -9,22 +9,22 @@ const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase
 
 const base = listen(server)
 
-let validRecord = null
-let ignoredRecord = null
+let validDomain = null
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
-test.serial('create record', async (t) => {
+test.serial('create domain', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
-			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
-				createRecord(domainId: $domainId, input: $input) {
+			mutation createDomain($input: CreateDomainInput!) {
+				createDomain(input: $input) {
+					success,
 					payload {
 						id
 					}
@@ -32,10 +32,8 @@ test.serial('create record', async (t) => {
 			}
 		`,
 		variables: {
-			domainId: t.context.domain.id,
 			input: {
-				siteLocation: 'https://example.com/',
-				siteReferrer: 'https://google.com/'
+				title: 'newdomain.com'
 			}
 		}
 	}
@@ -51,27 +49,31 @@ test.serial('create record', async (t) => {
 
 	const json = await res.json()
 
-	// Save record for the next test
-	validRecord = json.data.createRecord.payload
+	// Save doamin for the next test
+	validDomain = json.data.createDomain.payload
 
-	t.true((/^[-0-9a-f]{36}$/).test(validRecord.id))
+	t.true(json.data.createDomain.success)
+	t.true((/^[-0-9a-f]{36}$/).test(validDomain.id))
 
 })
 
-test.serial('update record', async (t) => {
+test.serial('update domain', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
-			mutation updateRecord($id: ID!) {
-				updateRecord(id: $id) {
+			mutation updateDomain($id: ID!, $input: UpdateDomainInput!) {
+				updateDomain(id: $id, input: $input) {
 					success
 				}
 			}
 		`,
 		variables: {
-			id: validRecord.id
+			id: validDomain.id,
+			input: {
+				title: 'updateddomain.com'
+			}
 		}
 	}
 
@@ -86,28 +88,23 @@ test.serial('update record', async (t) => {
 
 	const json = await res.json()
 
-	t.true(json.data.updateRecord.success)
+	t.true(json.data.updateDomain.success)
 
 })
 
-test.serial('ignore visit when logged in', async (t) => {
+test.serial('fetch domains', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
-			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
-				createRecord(domainId: $domainId, input: $input) {
-					payload {
-						id
-					}
+			query fetchDomains {
+				domains {
+					id
+					title
 				}
 			}
-		`,
-		variables: {
-			domainId: t.context.domain.id,
-			input: { siteLocation: 'https://example.com/' }
-		}
+		`
 	}
 
 	const res = await fetch(url.href, {
@@ -115,34 +112,31 @@ test.serial('ignore visit when logged in', async (t) => {
 		body: JSON.stringify(body),
 		headers: {
 			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json',
-			'Cookie': 'ackee_ignore=1'
+			'Content-Type': 'application/json'
 		}
 	})
 
 	const json = await res.json()
 
-	// Save record for the next test
-	ignoredRecord = json.data.createRecord.payload
-
-	t.is(ignoredRecord.id, '88888888-8888-8888-8888-888888888888')
+	const myDomain = json.data.domains.find((_) => _.id === validDomain.id)
+	t.is(myDomain.title, 'updateddomain.com')
 
 })
 
-test.serial('ignore visit update when logged in', async (t) => {
+test.serial('delete domain', async (t) => {
 
 	const url = new URL('/api', await base)
 
 	const body = {
 		query: `
-			mutation updateRecord($id: ID!) {
-				updateRecord(id: $id) {
+			mutation deleteDomain($id: ID!) {
+				deleteDomain(id: $id) {
 					success
 				}
 			}
 		`,
 		variables: {
-			id: ignoredRecord.id
+			id: validDomain.id
 		}
 	}
 
@@ -151,13 +145,12 @@ test.serial('ignore visit update when logged in', async (t) => {
 		body: JSON.stringify(body),
 		headers: {
 			'authorization': `Bearer ${ t.context.token.id }`,
-			'Content-Type': 'application/json',
-			'Cookie': 'ackee_ignore=1'
+			'Content-Type': 'application/json'
 		}
 	})
 
 	const json = await res.json()
 
-	t.true(json.data.updateRecord.success)
+	t.true(json.data.deleteDomain.success)
 
 })
