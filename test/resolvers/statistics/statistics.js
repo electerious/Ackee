@@ -3,8 +3,8 @@
 const test = require('ava')
 const listen = require('test-listen')
 
-const server = require('../../src/server')
-const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase, api } = require('./_utils')
+const server = require('../../../src/server')
+const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase, api } = require('../_utils')
 
 const base = listen(server)
 
@@ -35,36 +35,6 @@ const getStats = async (t, fragment) => {
 	return json.data.domain.statistics
 
 }
-
-const viewsFragment = (interval, type) => `
-	views(interval: ${ interval }, type: ${ type }) {
-		id
-		count
-	}
-`
-
-const pagesFragment = (sorting, range) => `
-	pages(sorting: ${ sorting }, range: ${ range }) {
-		id
-		count
-		created
-	}
-`
-
-const referrersFragment = (sorting, range) => `
-	referrers(sorting: ${ sorting }, range: ${ range }) {
-		id
-		count
-		created
-	}
-`
-
-const durationsFragment = (interval) => `
-	durations(interval: ${ interval }) {
-		id
-		count
-	}
-`
 
 const systemsFragment = (sorting, type, range) => `
 	systems(sorting: ${ sorting }, type: ${ type }, range: ${ range }) {
@@ -105,141 +75,6 @@ const languagesFragment = (sorting, range) => `
 		created
 	}
 `
-
-test('fetch DAILY and UNIQUE views', async (t) => {
-
-	const statistics = await getStats(t, viewsFragment('DAILY', 'UNIQUE'))
-
-	t.is(statistics.views.length, 14)
-	t.is(statistics.views[0].count, 1)
-
-})
-
-test('fetch MONTHLY and UNIQUE views', async (t) => {
-
-	const statistics = await getStats(t, viewsFragment('MONTHLY', 'UNIQUE'))
-
-	t.is(statistics.views.length, 14)
-	t.is(typeof statistics.views[0].count, 'number')
-
-})
-
-test('fetch YEARLY and UNIQUE views', async (t) => {
-
-	const statistics = await getStats(t, viewsFragment('YEARLY', 'UNIQUE'))
-
-	t.is(statistics.views.length, 14)
-	t.is(typeof statistics.views[0].count, 'number')
-
-})
-
-test('fetch DAILY and TOTAL views', async (t) => {
-
-	const statistics = await getStats(t, viewsFragment('DAILY', 'TOTAL'))
-
-	t.is(statistics.views.length, 14)
-	t.is(statistics.views[0].count, 1)
-
-})
-
-test('fetch MONTHLY and TOTAL views', async (t) => {
-
-	const statistics = await getStats(t, viewsFragment('MONTHLY', 'TOTAL'))
-
-	t.is(statistics.views.length, 14)
-	t.is(typeof statistics.views[0].count, 'number')
-
-})
-
-test('fetch YEARLY and TOTAL views', async (t) => {
-
-	const statistics = await getStats(t, viewsFragment('YEARLY', 'TOTAL'))
-
-	t.is(statistics.views.length, 14)
-	t.is(typeof statistics.views[0].count, 'number')
-
-})
-
-test('fetch TOP and LAST_6_MONTHS pages', async (t) => {
-
-	const statistics = await getStats(t, pagesFragment('TOP', 'LAST_6_MONTHS'))
-
-	t.is(statistics.pages.length, 1)
-	t.is(statistics.pages[0].id, 'https://example.com/')
-
-})
-
-test('fetch RECENT and LAST_24_LAST_6_MONTHSHOURS pages', async (t) => {
-
-	const statistics = await getStats(t, pagesFragment('RECENT', 'LAST_6_MONTHS'))
-
-	t.is(statistics.pages.length, 14)
-	t.is(statistics.pages[0].id, 'https://example.com/')
-
-})
-
-test('fetch NEW and LAST_6_MONTHS pages', async (t) => {
-
-	const statistics = await getStats(t, pagesFragment('NEW', 'LAST_6_MONTHS'))
-
-	t.is(statistics.pages.length, 1)
-	t.is(statistics.pages[0].id, 'https://example.com/')
-
-})
-
-test('fetch TOP and LAST_6_MONTHS referrers', async (t) => {
-
-	const statistics = await getStats(t, referrersFragment('TOP', 'LAST_6_MONTHS'))
-
-	t.is(statistics.referrers.length, 1)
-	t.is(statistics.referrers[0].id, 'https://google.com/')
-
-})
-
-test('fetch RECENT and LAST_6_MONTHS referrers', async (t) => {
-
-	const statistics = await getStats(t, referrersFragment('RECENT', 'LAST_6_MONTHS'))
-
-	t.is(statistics.referrers.length, 14)
-	t.is(statistics.referrers[0].id, 'https://google.com/')
-
-})
-
-test('fetch NEW and LAST_6_MONTHS referrers', async (t) => {
-
-	const statistics = await getStats(t, referrersFragment('NEW', 'LAST_6_MONTHS'))
-
-	t.is(statistics.referrers.length, 1)
-	t.is(statistics.referrers[0].id, 'https://google.com/')
-
-})
-
-test('fetch DAILY durations', async (t) => {
-
-	const statistics = await getStats(t, durationsFragment('DAILY'))
-
-	t.is(statistics.durations.length, 14)
-	t.is(statistics.durations[0].count, 60 * 1000)
-
-})
-
-test('fetch MONTHLY durations', async (t) => {
-
-	const statistics = await getStats(t, durationsFragment('MONTHLY'))
-
-	t.is(statistics.durations.length, 14)
-	t.is(statistics.durations[0].count, 60 * 1000)
-
-})
-
-test('fetch YEARLY durations', async (t) => {
-
-	const statistics = await getStats(t, durationsFragment('YEARLY'))
-
-	t.is(statistics.durations.length, 14)
-	t.is(statistics.durations[0].count, 60 * 1000)
-
-})
 
 test('fetch TOP, NO_VERSION and LAST_6_MONTHS systems', async (t) => {
 
