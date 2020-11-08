@@ -53,7 +53,7 @@ test.serial('create domain', async (t) => {
 	validDomain = json.data.createDomain.payload
 
 	t.true(json.data.createDomain.success)
-	t.true((/^[-0-9a-f]{36}$/).test(validDomain.id))
+	t.true(validDomain.id != null)
 
 })
 

@@ -64,7 +64,7 @@ test.serial('return token and cookie after successful login', async (t) => {
 	validToken = json.data.createToken.payload
 
 	t.true(headers.get('Set-Cookie').includes('ackee_ignore=1'))
-	t.true((/^[-0-9a-f]{36}$/).test(validToken.id))
+	t.true(validToken.id != null)
 
 	restore()
 

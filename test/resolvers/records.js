@@ -54,7 +54,7 @@ test.serial('create record', async (t) => {
 	// Save record for the next test
 	validRecord = json.data.createRecord.payload
 
-	t.true((/^[-0-9a-f]{36}$/).test(validRecord.id))
+	t.true(validRecord.id != null)
 
 })
 
