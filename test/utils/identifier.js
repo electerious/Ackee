@@ -18,8 +18,11 @@ test('return different identifiers', async (t) => {
 		}
 	})
 
-	const a = identifier(req(), domainId)
-	const b = identifier(req(), domainId)
+	const reqA = req()
+	const reqB = req()
+
+	const a = identifier(reqA, reqA.headers['user-agent'], domainId)
+	const b = identifier(reqB, reqB.headers['user-agent'], domainId)
 
 	t.not(a, b)
 
@@ -38,8 +41,8 @@ test('return same identifiers', async (t) => {
 		}
 	}
 
-	const a = identifier(req, domainId)
-	const b = identifier(req, domainId)
+	const a = identifier(req, req.headers['user-agent'], domainId)
+	const b = identifier(req, req.headers['user-agent'], domainId)
 
 	t.is(a, b)
 

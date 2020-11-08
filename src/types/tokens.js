@@ -27,6 +27,10 @@ module.exports = gql`
 		Password used to protect the Ackee instance.
 		"""
 		password: String!
+		"""
+		Title of the token.
+		"""
+		title: String
 	}
 
 	type CreateTokenPayload {

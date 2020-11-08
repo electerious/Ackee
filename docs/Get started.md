@@ -5,6 +5,7 @@
 - [With Helm](#with-helm)
 - [Without Docker](#without-docker)
 - [With Netlify](#with-netlify)
+- [With Vercel](#with-vercel)
 - [With Heroku](#with-heroku)
 - [With Render](#with-render)
 
@@ -176,6 +177,24 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 ### 3. Updating Ackee
 
 Netlify adds a forked version of Ackee to your GitHub repositories. You can always [pull the newest code](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork) from the original project. Pushing those changes to your repository will automatically deploy the new version of Ackee on Netlify.
+
+## With Vercel
+
+### 1. Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Felecterious%2FAckee&env=ACKEE_USERNAME,ACKEE_PASSWORD,ACKEE_MONGODB,ACKEE_ALLOW_ORIGIN&envDescription=Environment%20variables%20needed%20to%20configure%20the%20user%20and%20database%20connection&envLink=https%3A%2F%2Fgithub.com%2Felecterious%2FAckee%2Fblob%2Fmaster%2Fdocs%2FOptions.md)
+
+When prompted to select a directory, select the root directory.
+
+### 2. Configure Ackee
+
+* Set the build command: `yarn build`
+* Set the output directory: `dist`
+* Set environment variables `ACKEE_USERNAME`, `ACKEE_PASSWORD`, `ACKEE_MONGODB`, and `ACKEE_ALLOW_ORIGIN`.
+
+### 3. Updating Ackee
+
+Vercel adds a forked version of Ackee to your GitHub repositories. You can always [pull the newest code](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork) from the original project. Pushing those changes to your repository will automatically deploy the new version of Ackee on Vercel.
 
 ## With Heroku
 

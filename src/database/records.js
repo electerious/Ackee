@@ -29,7 +29,24 @@ const add = async (data) => {
 	}
 
 	return enhance(
-		await Record.create(data)
+		await Record.create({
+			clientId: data.clientId,
+			domainId: data.domainId,
+			siteLocation: data.siteLocation,
+			siteReferrer: data.siteReferrer,
+			siteLanguage: data.siteLanguage,
+			screenWidth: data.screenWidth,
+			screenHeight: data.screenHeight,
+			screenColorDepth: data.screenColorDepth,
+			deviceName: data.deviceName,
+			deviceManufacturer: data.deviceManufacturer,
+			osName: data.osName,
+			osVersion: data.osVersion,
+			browserName: data.browserName,
+			browserVersion: data.browserVersion,
+			browserWidth: data.browserWidth,
+			browserHeight: data.browserHeight
+		})
 	)
 
 }

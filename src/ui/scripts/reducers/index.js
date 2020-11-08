@@ -6,6 +6,7 @@ import {
 
 import modals from './modals'
 import token from './token'
+import permanentTokens from './permanentTokens'
 import route from './route'
 import filter from './filter'
 import domains from './domains'
@@ -23,6 +24,7 @@ import languages from './languages'
 const reducers = combineReducers({
 	modals,
 	token,
+	permanentTokens,
 	route,
 	filter,
 	domains,
