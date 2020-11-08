@@ -6,7 +6,6 @@ const identifier = require('../utils/identifier')
 const messages = require('../utils/messages')
 const domains = require('../database/domains')
 const records = require('../database/records')
-const loginCookie = require('../../src/utils/loginCookie')
 
 const normalizeSiteLocation = (siteLocation) => {
 
@@ -66,10 +65,10 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createRecord: async (parent, { domainId, input }, { ip, userAgent }) => {
+		createRecord: async (parent, { domainId, input }, { ip, userAgent, isLogin }) => {
 
 			// Ignore your own visit when logged in
-			if (loginCookie.isSet(req)) {
+			if (isLogin === true) {
 				return {
 					success: true,
 					payload: {
@@ -111,10 +110,10 @@ module.exports = {
 			}
 
 		},
-		updateRecord: async (parent, { id }, { req }) => {
+		updateRecord: async (parent, { id }, { isLogin }) => {
 
 			// Ignore your own visit when logged in
-			if (loginCookie.isSet(req)) {
+			if (isLogin === true) {
 				return {
 					success: true
 				}

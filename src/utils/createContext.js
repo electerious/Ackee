@@ -5,6 +5,7 @@ const { getClientIp } = require('request-ip')
 const isDemoMode = require('./isDemoMode')
 const isAuthenticated = require('./isAuthenticated')
 const createDate = require('./createDate')
+const ignoreCookie = require('./ignoreCookie')
 
 const createServerlessContext = async (integrationContext) => {
 	return createContext(integrationContext.event.headers['client-ip'], integrationContext.event.headers)
@@ -18,9 +19,14 @@ const createContext = async (ip, headers) => {
 	return {
 		isDemoMode,
 		isAuthenticated: await isAuthenticated(headers['authorization']),
+		isLogin: ignoreCookie.isSet(headers['cookie']),
 		dateDetails: createDate(headers['time-zone']),
 		userAgent: headers['user-agent'],
-		ip
+		ip,
+		// Variables used by apollo-server-plugin-http-headers
+		// See: https://github.com/b2a3e8/apollo-server-plugin-http-headers
+		setCookies: [],
+		setHeaders: []
 	}
 }
 

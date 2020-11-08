@@ -113,7 +113,7 @@ test.serial('ignore visit when logged in', async (t) => {
 		headers: {
 			'authorization': `Bearer ${ t.context.token.id }`,
 			'Content-Type': 'application/json',
-			'Cookie': 'ackee_login=1'
+			'Cookie': 'ackee_ignore=1'
 		}
 	})
 
@@ -149,7 +149,7 @@ test.serial('ignore visit update when logged in', async (t) => {
 		headers: {
 			'authorization': `Bearer ${ t.context.token.id }`,
 			'Content-Type': 'application/json',
-			'Cookie': 'ackee_login=1'
+			'Cookie': 'ackee_ignore=1'
 		}
 	})
 

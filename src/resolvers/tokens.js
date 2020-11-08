@@ -2,7 +2,7 @@
 
 const tokens = require('../database/tokens')
 const KnownError = require('../utils/KnownError')
-const loginCookie = require('../utils/loginCookie')
+const ignoreCookie = require('../utils/ignoreCookie')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -12,7 +12,7 @@ const response = (entry) => ({
 
 module.exports = {
 	Mutation: {
-		createToken: async (parent, { input }, { res }) => {
+		createToken: async (parent, { input }, { setCookies }) => {
 
 			const { username, password } = input
 
@@ -25,7 +25,7 @@ module.exports = {
 			const entry = await tokens.add()
 
 			// Set cookie to avoid reporting your own visits
-			loginCookie.set(res)
+			setCookies.push(ignoreCookie.on)
 
 			return {
 				success: true,
@@ -33,12 +33,12 @@ module.exports = {
 			}
 
 		},
-		deleteToken: async (parent, { id }, { res }) => {
+		deleteToken: async (parent, { id }, { setCookies }) => {
 
 			await tokens.del(id)
 
 			// Remove cookie to report your own visits, again
-			loginCookie.unset(res)
+			setCookies.push(ignoreCookie.off)
 
 			return {
 				success: true
