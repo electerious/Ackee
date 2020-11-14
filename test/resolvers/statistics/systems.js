@@ -15,12 +15,14 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
+	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
+
 	const statistics = await getStats({
 		base,
 		token: t.context.token.id,
 		domainId: t.context.domain.id,
 		fragment: `
-			systems(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }) {
+			systems(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
 				id
 				count
 				created
@@ -52,6 +54,16 @@ test(macro, {
 })
 
 test(macro, {
+	sorting: 'RECENT',
+	type: 'NO_VERSION',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, systems) => {
+	t.is(systems.length, 1)
+	t.is(systems[0].id, 'iOS')
+})
+
+test(macro, {
 	sorting: 'NEW',
 	type: 'NO_VERSION',
 	range: 'LAST_6_MONTHS'
@@ -78,6 +90,16 @@ test(macro, {
 	t.is(systems.length, 14)
 	t.is(systems[0].id, 'iOS 14.0')
 	t.is(systems[8].id, 'iOS 13.0')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_VERSION',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, systems) => {
+	t.is(systems.length, 1)
+	t.is(systems[0].id, 'iOS 14.0')
 })
 
 test(macro, {

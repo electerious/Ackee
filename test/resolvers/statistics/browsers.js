@@ -15,12 +15,14 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
+	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
+
 	const statistics = await getStats({
 		base,
 		token: t.context.token.id,
 		domainId: t.context.domain.id,
 		fragment: `
-			browsers(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }) {
+			browsers(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
 				id
 				count
 				created
@@ -52,6 +54,16 @@ test(macro, {
 })
 
 test(macro, {
+	sorting: 'RECENT',
+	type: 'NO_VERSION',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, browsers) => {
+	t.is(browsers.length, 1)
+	t.is(browsers[0].id, 'Safari')
+})
+
+test(macro, {
 	sorting: 'NEW',
 	type: 'NO_VERSION',
 	range: 'LAST_6_MONTHS'
@@ -78,6 +90,16 @@ test(macro, {
 	t.is(browsers.length, 14)
 	t.is(browsers[0].id, 'Safari 14.0')
 	t.is(browsers[8].id, 'Safari 13.0')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_VERSION',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, browsers) => {
+	t.is(browsers.length, 1)
+	t.is(browsers[0].id, 'Safari 14.0')
 })
 
 test(macro, {

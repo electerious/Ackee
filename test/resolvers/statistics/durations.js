@@ -15,12 +15,14 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
+	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
+
 	const statistics = await getStats({
 		base,
 		token: t.context.token.id,
 		domainId: t.context.domain.id,
 		fragment: `
-			durations(interval: ${ variables.interval }) {
+			durations(interval: ${ variables.interval }${ limit }) {
 				id
 				count
 			}
@@ -40,6 +42,14 @@ test(macro, {
 })
 
 test(macro, {
+	interval: 'DAILY',
+	limit: 1
+}, (t, durations) => {
+	t.is(durations.length, 1)
+	t.is(durations[0].count, 60 * 1000)
+})
+
+test(macro, {
 	interval: 'MONTHLY'
 }, (t, durations) => {
 	t.is(durations.length, 14)
@@ -47,8 +57,24 @@ test(macro, {
 })
 
 test(macro, {
+	interval: 'MONTHLY',
+	limit: 1
+}, (t, durations) => {
+	t.is(durations.length, 1)
+	t.is(durations[0].count, 60 * 1000)
+})
+
+test(macro, {
 	interval: 'YEARLY'
 }, (t, durations) => {
 	t.is(durations.length, 14)
+	t.is(durations[0].count, 60 * 1000)
+})
+
+test(macro, {
+	interval: 'YEARLY',
+	limit: 1
+}, (t, durations) => {
+	t.is(durations.length, 1)
 	t.is(durations[0].count, 60 * 1000)
 })

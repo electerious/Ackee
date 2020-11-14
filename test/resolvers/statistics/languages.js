@@ -15,12 +15,14 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
+	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
+
 	const statistics = await getStats({
 		base,
 		token: t.context.token.id,
 		domainId: t.context.domain.id,
 		fragment: `
-			languages(sorting: ${ variables.sorting }, range: ${ variables.range }) {
+			languages(sorting: ${ variables.sorting }, range: ${ variables.range }${ limit }) {
 				id
 				count
 				created
@@ -46,6 +48,15 @@ test(macro, {
 	range: 'LAST_6_MONTHS'
 }, (t, languages) => {
 	t.is(languages.length, 14)
+	t.is(languages[0].id, 'English')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, languages) => {
+	t.is(languages.length, 1)
 	t.is(languages[0].id, 'English')
 })
 
