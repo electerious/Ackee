@@ -168,7 +168,7 @@ The first major back-end and front-end rewrite of Ackee with new API, dashboard,
 
 ### Added
 
-- Ackee can track detailed data ([optional](https://github.com/electerious/ackee-tracker#options)) and now shows more of them in the "Detailed"-menu
+- Ackee can track detailed data ([optional](https://github.com/electerious/ackee-tracker#-options)) and now shows more of them in the "Detailed"-menu
 
 ## [1.4.3] - 2020-01-12
 
