@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [2.3.0] - 2020-11-04
 
-This release adds [support for Vercel](https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md) and updates the included `ackee-tracker` which now ignores bots.
+This release adds [support for Vercel](docs/Get%20started.md) and updates the included `ackee-tracker` which now ignores bots.
 
 ### Added
 
@@ -42,7 +42,7 @@ This release introduces support for serverless functions. You can now deploy Ack
 ### Added
 
 - Support for serverless functions and Netlify (#155)
-- Added "Deploy to Netlify" to the [Get Started](https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md) guide
+- Added "Deploy to Netlify" to the [Get Started](docs/Get%20started.md) guide
 - Build all static files into `/dist` by running `yarn build`
 - Start the server without rebuilding static files using `yarn server`
 
