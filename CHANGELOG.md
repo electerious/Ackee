@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
-Ackee now ignores your own visits once you have logged into the dashboard. Make sure to enable the `ignoreOwnVisits` option in ackee-tracker to use this feature. It's currently opt-in, because it requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md), which wasn't previously required. It will be turned on by default in the next major release of Ackee.
+Ackee now ignores your own visits once you have logged into the dashboard. Make sure to enable the [`ignoreOwnVisits` option in ackee-tracker](https://github.com/electerious/ackee-tracker#-options) to use this feature. It's currently opt-in, because it requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md#credentials), which wasn't previously required. It will be turned on by default in the next major release of Ackee.
+
+> ℹ️ Some browsers strictly block third-party cookies when Ackee runs on a different domain than the site you're visiting. Therefore, it may happen that your own visits still find their way into your statistics, even when the option `ignoreOwnVisits` is turned on.
 
 ### Added
 
