@@ -37,11 +37,47 @@ macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and 
 
 test(macro, {
 	sorting: 'TOP',
+	type: 'BROWSER_WIDTH',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '414px')
+})
+
+test(macro, {
+	sorting: 'TOP',
+	type: 'BROWSER_HEIGHT',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '719px')
+})
+
+test(macro, {
+	sorting: 'TOP',
 	type: 'BROWSER_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
 	t.is(sizes.length, 1)
 	t.is(sizes[0].id, '414px x 719px')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'BROWSER_WIDTH',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 14)
+	t.is(sizes[0].id, '414px')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'BROWSER_HEIGHT',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 14)
+	t.is(sizes[0].id, '719px')
 })
 
 test(macro, {
@@ -65,6 +101,24 @@ test(macro, {
 
 test(macro, {
 	sorting: 'NEW',
+	type: 'BROWSER_WIDTH',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '414px')
+})
+
+test(macro, {
+	sorting: 'NEW',
+	type: 'BROWSER_HEIGHT',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '719px')
+})
+
+test(macro, {
+	sorting: 'NEW',
 	type: 'BROWSER_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
@@ -74,11 +128,47 @@ test(macro, {
 
 test(macro, {
 	sorting: 'TOP',
+	type: 'SCREEN_WIDTH',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '414px')
+})
+
+test(macro, {
+	sorting: 'TOP',
+	type: 'SCREEN_HEIGHT',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '896px')
+})
+
+test(macro, {
+	sorting: 'TOP',
 	type: 'SCREEN_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
 	t.is(sizes.length, 1)
 	t.is(sizes[0].id, '414px x 896px')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'SCREEN_WIDTH',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 14)
+	t.is(sizes[0].id, '414px')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'SCREEN_HEIGHT',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 14)
+	t.is(sizes[0].id, '896px')
 })
 
 test(macro, {
@@ -98,6 +188,24 @@ test(macro, {
 }, (t, sizes) => {
 	t.is(sizes.length, 1)
 	t.is(sizes[0].id, '414px x 896px')
+})
+
+test(macro, {
+	sorting: 'NEW',
+	type: 'SCREEN_WIDTH',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '414px')
+})
+
+test(macro, {
+	sorting: 'NEW',
+	type: 'SCREEN_HEIGHT',
+	range: 'LAST_6_MONTHS'
+}, (t, sizes) => {
+	t.is(sizes.length, 1)
+	t.is(sizes[0].id, '896px')
 })
 
 test(macro, {
