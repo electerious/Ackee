@@ -24,7 +24,7 @@ This release adds [support for Vercel](docs/Get%20started.md) and updates the in
 
 ### Changed
 
-- `ackee-tracker` updated to version 4.1.0
+- ackee-tracker updated to version 4.1.0
 
 ## [2.2.0] - 2020-11-01
 
