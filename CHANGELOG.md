@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+Ackee now ignores your own visits once you have logged into the dashboard. Make sure to enable the `ignoreOwnVisits` option in ackee-tracker to use this feature. It's currently opt-in, because it requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md), which wasn't previously required. It will be turned on by default in the next major release of Ackee.
+
+### Added
+
+- Ignore own visits (#100, thanks @yehudab)
+- Tons of new tests (#171, thanks @yehudab)
+
 ## [2.3.0] - 2020-11-04
 
 This release adds [support for Vercel](docs/Get%20started.md) and updates the included `ackee-tracker` which now ignores bots.
