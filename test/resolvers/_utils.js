@@ -9,7 +9,7 @@ const Domain = require('../../src/models/Domain')
 const Record = require('../../src/models/Record')
 const connect = require('../../src/utils/connect')
 const createArray = require('../../src/utils/createArray')
-const { day } = require('../../src/utils/times')
+const { day, minute } = require('../../src/utils/times')
 
 const mongoDb = new MongoMemoryServer()
 
@@ -43,7 +43,7 @@ const fillDatabase = async (t) => {
 		browserWidth: 414,
 		browserHeight: 719,
 		// Add fake minute visit per day
-		created: now - i * day - 60 * 1000,
+		created: now - i * day - minute,
 		updated: now - i * day
 	}))
 

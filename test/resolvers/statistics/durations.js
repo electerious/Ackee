@@ -4,6 +4,7 @@ const test = require('ava')
 const listen = require('test-listen')
 
 const server = require('../../../src/server')
+const { minute } = require('../../../src/utils/times')
 const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase } = require('../_utils')
 const { getStats } = require('./_utils')
 
@@ -38,7 +39,7 @@ test(macro, {
 	interval: 'DAILY'
 }, (t, durations) => {
 	t.is(durations.length, 14)
-	t.is(durations[0].count, 60 * 1000)
+	t.is(durations[0].count, minute)
 })
 
 test(macro, {
@@ -46,14 +47,14 @@ test(macro, {
 	limit: 1
 }, (t, durations) => {
 	t.is(durations.length, 1)
-	t.is(durations[0].count, 60 * 1000)
+	t.is(durations[0].count, minute)
 })
 
 test(macro, {
 	interval: 'MONTHLY'
 }, (t, durations) => {
 	t.is(durations.length, 14)
-	t.is(durations[0].count, 60 * 1000)
+	t.is(durations[0].count, minute)
 })
 
 test(macro, {
@@ -61,14 +62,14 @@ test(macro, {
 	limit: 1
 }, (t, durations) => {
 	t.is(durations.length, 1)
-	t.is(durations[0].count, 60 * 1000)
+	t.is(durations[0].count, minute)
 })
 
 test(macro, {
 	interval: 'YEARLY'
 }, (t, durations) => {
 	t.is(durations.length, 14)
-	t.is(durations[0].count, 60 * 1000)
+	t.is(durations[0].count, minute)
 })
 
 test(macro, {
@@ -76,5 +77,5 @@ test(macro, {
 	limit: 1
 }, (t, durations) => {
 	t.is(durations.length, 1)
-	t.is(durations[0].count, 60 * 1000)
+	t.is(durations[0].count, minute)
 })
