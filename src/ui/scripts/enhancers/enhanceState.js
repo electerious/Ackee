@@ -17,7 +17,9 @@ export default (state) => {
 		state.sizes.fetching === true ||
 		state.languages.fetching === true ||
 		state.domains.fetching === true ||
-		state.token.fetching === true
+		state.token.fetching === true ||
+		state.permanentTokens.fetching === true ||
+		state.events.fetching === true
 	)
 
 	const errors = [
@@ -33,7 +35,9 @@ export default (state) => {
 		state.sizes.error,
 		state.languages.error,
 		state.domains.error,
-		state.token.error
+		state.token.error,
+		state.permanentTokens.error,
+		state.events.error
 	].filter(isDefined)
 
 	return Object.assign({}, state, {
