@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Close, delete and submit in modals could be triggered multiple times
+
 ## [2.4.0] - 2020-11-15
 
 Ackee now ignores your own visits once you have logged into the dashboard. Make sure to enable the [`ignoreOwnVisits` option in ackee-tracker](https://github.com/electerious/ackee-tracker#-options) to use this feature. It's currently opt-in, because it requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md#credentials), which wasn't previously required. It will be turned on by default in the next major release of Ackee.
