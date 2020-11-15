@@ -22,6 +22,7 @@ test('return cors headers if env vars specify wildcard', async (t) => {
 	t.is(headers.get('Access-Control-Allow-Origin'), '*')
 	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
 	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type')
+	t.is(headers.get('Access-Control-Allow-Credentials'), 'true')
 
 	restore()
 

@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2020-11-15
+
+Ackee now ignores your own visits once you have logged into the dashboard. Make sure to enable the [`ignoreOwnVisits` option in ackee-tracker](https://github.com/electerious/ackee-tracker#-options) to use this feature. It's currently opt-in, because it requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md#credentials), which wasn't previously required. It will be turned on by default in the next major release of Ackee.
+
+> ℹ️ Some browsers strictly block third-party cookies when Ackee runs on a different domain than the site you're visiting. Therefore, it may happen that your own visits still find their way into your statistics, even when the option `ignoreOwnVisits` is turned on.
+
+### Added
+
+- Ignore own visits (#100, thanks @yehudab)
+- Tons of new tests (#171, thanks @yehudab)
+
+## [2.3.0] - 2020-11-04
+
+This release adds [support for Vercel](docs/Get%20started.md) and updates the included `ackee-tracker` which now ignores bots.
+
+### Added
+
+- Support for Vercel (#180, thanks @elliottsj)
+- Contributing guide and issue templates (#184, thanks @BetaHuhn)
+
+### Changed
+
+- ackee-tracker updated to version 4.1.0
+
 ## [2.2.0] - 2020-11-01
 
 New tools like [ackee-report](https://github.com/BetaHuhn/ackee-report), [ackee-bitbar](https://github.com/electerious/ackee-bitbar) and the [Ackee iOS widget](https://twitter.com/getackee/status/1320996848623099909) are build upon the powerful API of Ackee. This release makes it even easier to them by introducing permanent tokens. Permanent tokens never expire and are perfect for tools that run in the background. You can create them in the settings of Ackee and use them for authentication in Ackee-powered apps.
@@ -29,7 +53,7 @@ This release introduces support for serverless functions. You can now deploy Ack
 ### Added
 
 - Support for serverless functions and Netlify (#155)
-- Added "Deploy to Netlify" to the [Get Started](https://github.com/electerious/Ackee/blob/master/docs/Get%20started.md) guide
+- Added "Deploy to Netlify" to the [Get Started](docs/Get%20started.md) guide
 - Build all static files into `/dist` by running `yarn build`
 - Start the server without rebuilding static files using `yarn server`
 
@@ -146,7 +170,7 @@ The first major back-end and front-end rewrite of Ackee with new API, dashboard,
 
 ### Added
 
-- Ackee can track detailed data ([optional](https://github.com/electerious/ackee-tracker#options)) and now shows more of them in the "Detailed"-menu
+- Ackee can track detailed data ([optional](https://github.com/electerious/ackee-tracker#-options)) and now shows more of them in the "Detailed"-menu
 
 ## [1.4.3] - 2020-01-12
 

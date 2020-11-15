@@ -15,6 +15,7 @@ When a site wants to send data to a different domain it needs the permissions to
 Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Credentials: true
 ```
 
 ### Origin
@@ -45,6 +46,16 @@ The `Access-Control-Allow-Headers` header is used in response to a preflight req
 
 ```
 Access-Control-Allow-Headers: Content-Type
+```
+
+### Credentials
+
+The `Access-Control-Allow-Credentials` header tells the browser to include the `ackee_ignore` cookie in requests even when you're on a different (sub-)domain. This allows Ackee to ignore your own visits when the [`ignoreOwnVisits` option in ackee-tracker](https://github.com/electerious/ackee-tracker#-options) is enabled and when your browser doesn't block third-party cookies.
+
+> ℹ️ Some browsers strictly block third-party cookies when Ackee runs on a different domain than the site you're visiting. Therefore, it may happen that your own visits still find their way into your statistics, even when the option `ignoreOwnVisits` is turned on.
+
+```
+Access-Control-Allow-Credentials: true
 ```
 
 ## Heroku or Platforms-As-A-Service configuration

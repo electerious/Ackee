@@ -22,6 +22,7 @@ test('return cors headers with no origin if hostname not whitelisted in env var'
 	t.is(headers.get('Access-Control-Allow-Origin'), null)
 	t.is(headers.get('Access-Control-Allow-Methods'), null)
 	t.is(headers.get('Access-Control-Allow-Headers'), null)
+	t.is(headers.get('Access-Control-Allow-Credentials'), null)
 
 	restore()
 
