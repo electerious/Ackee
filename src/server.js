@@ -51,16 +51,16 @@ const handleGraphError = (err) => {
 	// errors will only show up in the response and as a warning
 	// in the console output.
 
-	const originalError = err.originalError
-	const isKnownError = originalError instanceof KnownError
+	const suitableError = err.originalError || err
+	const isKnownError = suitableError instanceof KnownError
 
 	// Only log the full error stack when the error isn't a known response
 	if (isKnownError === false) {
-		signale.fatal(originalError)
+		signale.fatal(suitableError)
 		return err
 	}
 
-	signale.warn(err.originalError.message)
+	signale.warn(suitableError.message)
 	return err
 
 }

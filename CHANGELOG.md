@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Fixed
 
 - Errors from permanent tokens not showing up in the UI
+- Log GraphQL error instead of `undefined`
 
 ## [2.4.0] - 2020-11-15
 
