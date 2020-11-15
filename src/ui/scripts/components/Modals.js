@@ -1,4 +1,5 @@
 import { createElement as h, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import {
 	MODALS_DOMAIN_ADD,
@@ -17,60 +18,67 @@ import ModalEventEdit from './modals/ModalEventEdit'
 import ModalPermanentTokenAdd from './modals/ModalPermanentTokenAdd'
 import ModalPermanentTokenEdit from './modals/ModalPermanentTokenEdit'
 
+export const commonPropTypes = {
+	current: PropTypes.bool.isRequired,
+	active: PropTypes.bool.isRequired,
+	closeModal: PropTypes.func.isRequired
+}
+
 const Modals = (props) => {
 
 	const modals = Object.entries(props.modals.value).map(([ modalId, modalData ], index, modals) => {
 
 		const current = modals.length - 1 === index
+		const active = modalData.visible === true
 		const closeModal = props.removeModalsModal.bind(null, modalId)
+
+		const commonProps = {
+			current,
+			active,
+			closeModal
+		}
 
 		return (
 			h(Modal, { key: modalId, visible: modalData.visible },
 				modalData.type === MODALS_DOMAIN_ADD && h(ModalDomainAdd, {
-					current,
+					...commonProps,
 					fetching: props.domains.fetching,
-					addDomain: props.addDomain.bind(null, props),
-					closeModal
+					addDomain: props.addDomain.bind(null, props)
 				}),
 				modalData.type === MODALS_DOMAIN_EDIT && h(ModalDomainEdit, {
-					current,
+					...commonProps,
 					id: modalData.props.id,
 					title: modalData.props.title,
 					fetching: props.domains.fetching,
 					updateDomain: props.updateDomain.bind(null, props),
-					deleteDomain: props.deleteDomain.bind(null, props),
-					closeModal
+					deleteDomain: props.deleteDomain.bind(null, props)
 				}),
 				modalData.type === MODALS_EVENT_ADD && h(ModalEventAdd, {
-					current,
+					...commonProps,
 					fetching: props.events.fetching,
-					addEvent: props.addEvent.bind(null, props),
-					closeModal
+					addEvent: props.addEvent.bind(null, props)
 				}),
 				modalData.type === MODALS_EVENT_EDIT && h(ModalEventEdit, {
-					current,
+					...commonProps,
 					id: modalData.props.id,
 					title: modalData.props.title,
 					type: modalData.props.type,
 					fetching: props.events.fetching,
 					updateEvent: props.updateEvent.bind(null, props),
-					deleteEvent: props.deleteEvent.bind(null, props),
-					closeModal
+					deleteEvent: props.deleteEvent.bind(null, props)
 				}),
 				modalData.type === MODALS_PERMANENT_TOKEN_ADD && h(ModalPermanentTokenAdd, {
-					current,
+					...commonProps,
 					fetching: props.permanentTokens.fetching,
-					addPermanentToken: props.addPermanentToken.bind(null, props),
-					closeModal
+					addPermanentToken: props.addPermanentToken.bind(null, props)
 				}),
 				modalData.type === MODALS_PERMANENT_TOKEN_EDIT && h(ModalPermanentTokenEdit, {
-					current,
+					...commonProps,
 					id: modalData.props.id,
 					title: modalData.props.title,
 					fetching: props.permanentTokens.fetching,
 					updatePermanentToken: props.updatePermanentToken.bind(null, props),
-					deletePermanentToken: props.deletePermanentToken.bind(null, props),
-					closeModal
+					deletePermanentToken: props.deletePermanentToken.bind(null, props)
 				})
 			)
 		)

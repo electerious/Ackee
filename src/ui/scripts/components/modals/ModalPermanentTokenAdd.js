@@ -6,6 +6,7 @@ import Input from '../Input'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
+import { commonPropTypes } from '../Modals'
 
 import shortId from '../../utils/shortId'
 
@@ -77,10 +78,9 @@ const ModalPermanentTokenAdd = (props) => {
 }
 
 ModalPermanentTokenAdd.propTypes = {
-	current: PropTypes.bool.isRequired,
+	...commonPropTypes,
 	fetching: PropTypes.bool.isRequired,
-	addPermanentToken: PropTypes.func.isRequired,
-	closeModal: PropTypes.func.isRequired
+	addPermanentToken: PropTypes.func.isRequired
 }
 
 export default ModalPermanentTokenAdd

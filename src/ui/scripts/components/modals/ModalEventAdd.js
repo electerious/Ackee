@@ -9,6 +9,7 @@ import Select from '../Select'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
+import { commonPropTypes } from '../Modals'
 
 import shortId from '../../utils/shortId'
 
@@ -102,10 +103,9 @@ const ModalEventAdd = (props) => {
 }
 
 ModalEventAdd.propTypes = {
-	current: PropTypes.bool.isRequired,
+	...commonPropTypes,
 	fetching: PropTypes.bool.isRequired,
-	addEvent: PropTypes.func.isRequired,
-	closeModal: PropTypes.func.isRequired
+	addEvent: PropTypes.func.isRequired
 }
 
 export default ModalEventAdd

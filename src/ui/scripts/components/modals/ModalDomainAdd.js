@@ -6,6 +6,7 @@ import Input from '../Input'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
+import { commonPropTypes } from '../Modals'
 
 import shortId from '../../utils/shortId'
 
@@ -77,10 +78,9 @@ const ModalDomainAdd = (props) => {
 }
 
 ModalDomainAdd.propTypes = {
-	current: PropTypes.bool.isRequired,
+	...commonPropTypes,
 	fetching: PropTypes.bool.isRequired,
-	addDomain: PropTypes.func.isRequired,
-	closeModal: PropTypes.func.isRequired
+	addDomain: PropTypes.func.isRequired
 }
 
 export default ModalDomainAdd
