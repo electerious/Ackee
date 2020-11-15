@@ -1,4 +1,4 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h, Fragment, useEffect } from 'react'
 
 // import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 // import selectViewsValue from '../../selectors/selectViewsValue'
@@ -9,6 +9,12 @@ import { createElement as h, Fragment } from 'react'
 import CardViews from '../cards/CardViews'
 
 const RouteEvents = (props) => {
+
+	useEffect(() => {
+
+		props.fetchEvents(props)
+
+	}, [])
 
 	return (
 		h(Fragment, {},

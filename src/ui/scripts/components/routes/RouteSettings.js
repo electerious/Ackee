@@ -26,6 +26,7 @@ const RouteSettings = (props) => {
 	useEffect(() => {
 
 		props.fetchPermanentTokens(props)
+		props.fetchEvents(props)
 
 	}, [])
 
