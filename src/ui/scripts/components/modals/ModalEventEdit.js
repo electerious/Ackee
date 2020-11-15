@@ -120,7 +120,8 @@ const ModalEventEdit = (props) => {
 				h('button', {
 					type: 'button',
 					className: 'card__button link',
-					onClick: props.closeModal
+					onClick: props.closeModal,
+					disabled: props.active === false
 				}, 'Close'),
 
 				h('div', {
@@ -130,7 +131,8 @@ const ModalEventEdit = (props) => {
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
-					onClick: deleteEvent
+					onClick: deleteEvent,
+					disabled: props.active === false
 				}, 'Delete'),
 
 				h('div', {
@@ -139,7 +141,7 @@ const ModalEventEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true
+					disabled: props.fetching === true || props.active === false
 				}, props.fetching === true ? h(Spinner) : 'Edit')
 
 			)
