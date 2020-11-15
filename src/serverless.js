@@ -1,11 +1,9 @@
 'use strict'
 
 const { ApolloServer } = require('apollo-server-lambda')
-const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 
 const connect = require('./utils/connect')
-const isDemoMode = require('./utils/isDemoMode')
-const isDevelopmentMode = require('./utils/isDevelopmentMode')
+const createApolloServer = require('./utils/createApolloServer')
 const { createServerlessContext } = require('./utils/createContext')
 
 const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN || ''
@@ -17,20 +15,7 @@ if (dbUrl == null) {
 
 connect(dbUrl)
 
-const apolloServer = new ApolloServer({
-	introspection: isDemoMode === true || isDevelopmentMode === true,
-	playground: isDemoMode === true || isDevelopmentMode === true,
-	debug: isDevelopmentMode === true,
-	typeDefs: [
-		UnsignedIntTypeDefinition,
-		DateTimeTypeDefinition,
-		require('./types')
-	],
-	resolvers: {
-		UnsignedInt: UnsignedIntResolver,
-		DateTime: DateTimeResolver,
-		...require('./resolvers')
-	},
+const apolloServer = createApolloServer(ApolloServer, {
 	context: createServerlessContext
 })
 

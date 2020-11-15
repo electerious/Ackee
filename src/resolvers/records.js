@@ -65,7 +65,17 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createRecord: async (parent, { domainId, input }, { ip, userAgent }) => {
+		createRecord: async (parent, { domainId, input }, { ip, userAgent, isIgnored }) => {
+
+			// Ignore your own visit when logged in
+			if (isIgnored === true) {
+				return {
+					success: true,
+					payload: {
+						id: '88888888-8888-8888-8888-888888888888'
+					}
+				}
+			}
 
 			const clientId = identifier(ip, userAgent, domainId)
 			const data = polish({ ...input, clientId, domainId })
@@ -100,7 +110,14 @@ module.exports = {
 			}
 
 		},
-		updateRecord: async (parent, { id }) => {
+		updateRecord: async (parent, { id }, { isIgnored }) => {
+
+			// Ignore your own visit when logged in
+			if (isIgnored === true) {
+				return {
+					success: true
+				}
+			}
 
 			let entry
 
