@@ -139,6 +139,7 @@ const routes = [
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),
+	get('/.well-known/apollo/server-health', graphqlHandler),
 
 	get('/*', notFound),
 	post('/*', notFound),
