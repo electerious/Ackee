@@ -2,7 +2,7 @@
 'use strict'
 require('dotenv').config()
 
-const http = require('http')
+const fetch = require('node-fetch')
 
 const signale = require('./src/utils/signale')
 const checkMongoDB = require('./src/utils/connect')
@@ -16,37 +16,27 @@ if (dbUrl == null) {
 	process.exit(1)
 }
 
-const checkHTTP = (url) => {
-	return new Promise((resolve, reject) => {
-		const req = http.request(url, (res) => {
-			if (res.statusCode < 200 || res.statusCode >= 300) {
-				return reject(new Error(`Status Code: ${ res.statusCode }`))
-			} else {
-				return resolve(`Conntected to ${ url }`)
+const checkHTTP = async (url) => {
+	return await fetch(url)
+		.then((res) => {
+			if (res.status < 200 || res.status >= 300) {
+				new Error(`Status Code: ${ res.status }`)
 			}
+
+			return res.text() // read the body so it can be garbage collected
 		})
-		req.on('error', reject)
-		req.end()
-	})
 }
 
-const checkAPI = (url) => {
-	return new Promise((resolve, reject) => {
-		const req = http.request(url, (res) => {
-			const data = []
+const checkAPI = async (url) => {
+	return await fetch(url)
+		.then((res) => res.json())
+		.then(({ status }) => {
+			if (status !== 'pass') {
+				throw Error('Apollo server is unhealthy')
+			}
 
-			res.on('data', (chunk) => {
-				data.push(chunk)
-			})
-
-			res.on('end', () => {
-				const { status } = JSON.parse(Buffer.concat(data).toString())
-				return status === 'pass' ? resolve('Apollo server OK') : reject('Apollo server unhealthy')
-			})
+			return 'Apollo server OK'
 		})
-		req.on('error', reject)
-		req.end()
-	})
 }
 
 const exit = ({ healthy = true } = {}) =>
