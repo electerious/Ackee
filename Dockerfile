@@ -23,7 +23,7 @@ COPY . /srv/app/
 
 # Run healthcheck against mongodb, http and api.
 # Wait 15s before start, to ensure the `yarn build` is done
-HEALTHCHECK --interval=10s --timeout=45s --start-period=15s --retries=3 CMD [ "/srv/app/healthcheck.js" ]
+HEALTHCHECK --timeout=45s --start-period=45s CMD [ "/srv/app/src/healthcheck.js" ]
 
 # Wait for external service and start Ackee
 CMD /wait && yarn start
