@@ -161,9 +161,9 @@ const Filter = (props) => {
 
 	const routesMap = {
 		[ROUTE_VIEWS.key]: [
-			createItem(labels.views[props.views.type], [
-				createButton('Unique', 'Unique site views', props.setViewsType, props.views.type, views.VIEWS_TYPE_UNIQUE),
-				createButton('Total', 'Total page views', props.setViewsType, props.views.type, views.VIEWS_TYPE_TOTAL)
+			createItem(labels.views[props.filter.viewsType], [
+				createButton('Unique', 'Unique site views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_UNIQUE),
+				createButton('Total', 'Total page views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_TOTAL)
 			]),
 			intervalsItem
 		],

@@ -7,7 +7,6 @@ export default (state) => {
 	const fetching = (
 		selectOverviewValue.withoutType(state, ALL_DOMAINS).fetching === true ||
 		Object.values(state.overview.value).some((value) => value.fetching) === true ||
-		state.views.fetching === true ||
 		state.referrers.fetching === true ||
 		state.durations.fetching === true ||
 		state.systems.fetching === true ||
@@ -23,7 +22,6 @@ export default (state) => {
 	const errors = [
 		selectOverviewValue.withoutType(state, ALL_DOMAINS).error,
 		...Object.values(state.overview.value).map((value) => value.error),
-		state.views.error,
 		state.referrers.error,
 		state.durations.error,
 		state.systems.error,

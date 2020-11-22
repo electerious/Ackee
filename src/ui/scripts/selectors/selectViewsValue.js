@@ -1,6 +1,7 @@
-import { initialSubState } from '../reducers/views'
+// TODO: Remove file
+// import { initialSubState } from '../reducers/views'
 
-export default (state, domainId) => {
-	const value = state.views.value[domainId]
-	return value == null ? initialSubState() : value
-}
+// export default (state, domainId) => {
+// 	const value = state.views.value[domainId]
+// 	return value == null ? initialSubState() : value
+// }
