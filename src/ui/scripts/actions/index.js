@@ -10,7 +10,6 @@ export * from './referrers'
 export * from './durations'
 export * from './sizes'
 export * from './systems'
-export * from './devices'
 export * from './browsers'
 export * from './widgets'
 

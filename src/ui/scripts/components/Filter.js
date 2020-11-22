@@ -194,8 +194,8 @@ const Filter = (props) => {
 				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
-					createButton('Show model', 'Include device model', props.setDevicesType, props.devices.type, devices.DEVICES_TYPE_WITH_MODEL),
-					createButton('Hide model', 'Don\'t include model', props.setDevicesType, props.devices.type, devices.DEVICES_TYPE_NO_MODEL)
+					createButton('Show model', 'Include device model', props.setFilterDevicesType, props.filter.devicesType, devices.DEVICES_TYPE_WITH_MODEL),
+					createButton('Hide model', 'Don\'t include model', props.setFilterDevicesType, props.filter.devicesType, devices.DEVICES_TYPE_NO_MODEL)
 				)
 			]),
 			rangeItem

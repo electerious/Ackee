@@ -15,7 +15,6 @@ import overview from './overview'
 import referrers from './referrers'
 import durations from './durations'
 import systems from './systems'
-import devices from './devices'
 import browsers from './browsers'
 import sizes from './sizes'
 import widgets from './widgets'
@@ -32,7 +31,6 @@ const reducers = combineReducers({
 	referrers,
 	durations,
 	systems,
-	devices,
 	browsers,
 	sizes,
 	widgets
