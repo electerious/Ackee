@@ -16,7 +16,7 @@ RUN mkdir dist \
 	&& yarn build
 
 # Remove devDependencies by running install again, but only production dependencies
-RUN yarn install --production
+RUN yarn install --production --frozen-lockfile
 
 FROM mhart/alpine-node:14
 
