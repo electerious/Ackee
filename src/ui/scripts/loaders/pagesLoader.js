@@ -1,7 +1,7 @@
 export default (domainId, opts) => {
 
 	// TODO: Improve ids
-	const id = `${ domainId }${ JSON.stringify(opts) }`
+	const id = `fetchPages${ domainId }${ JSON.stringify(opts) }`
 
 	const query = `
 		query fetchPages($domainId: ID!, $sorting: Sorting!, $range: Range) {
