@@ -1,40 +1,25 @@
-import { createElement as h, Fragment, useEffect, useCallback } from 'react'
+import { createElement as h, Fragment } from 'react'
 
 import languagesLoader from '../../loaders/languagesLoader'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import overviewRoute from '../../utils/overviewRoute'
+import useWidgetBundles from '../../utils/useWidgetBundles'
 
 import CardLanguages from '../cards/CardLanguages'
 
 const RouteLanguages = (props) => {
 
-	const createLoader = useCallback((domainId) => {
-
-		return languagesLoader(domainId, {
-			range: props.filter.range,
-			sorting: props.filter.sorting
-		})
-
-	}, [ props.filter.range, props.filter.sorting ])
-
-	useEffect(() => {
-
-		return props.domains.value.map(
-			(domain) => {
-				const loader = createLoader(domain.id)
-				props.fetchWidget(props, loader)
-			}
-		)
-
-	}, [ props.domains.value, createLoader ])
+	const widgetBundles = useWidgetBundles(props, languagesLoader, {
+		range: props.filter.range,
+		sorting: props.filter.sorting
+	})
 
 	return (
 		h(Fragment, {},
 
-			props.domains.value.map(
-				(domain) => {
-					const { id } = createLoader(domain.id)
-					const widget = props.widgets.value[id]
+			widgetBundles.map(
+				({ domain, loader }) => {
+					const widget = props.widgets.value[loader.id]
 
 					if (widget == null) return h('p', { key: domain.id }, 'empty')
 
