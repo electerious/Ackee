@@ -15,7 +15,6 @@ import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
 import { initialState as initialSystemsState } from './reducers/systems'
-import { initialState as initialBrowsersState } from './reducers/browsers'
 import { initialState as initialSizesState } from './reducers/sizes'
 
 import Main from './components/Main'
@@ -53,15 +52,12 @@ store.subscribe(() => {
 			range: currentState.filter.range,
 			interval: currentState.filter.interval,
 			viewsType: currentState.filter.viewsType,
-			devicesType: currentState.filter.devicesType
+			devicesType: currentState.filter.devicesType,
+			browsersType: currentState.filter.browsersType
 		},
 		systems: {
 			...initialSystemsState(),
 			type: currentState.systems.type
-		},
-		browsers: {
-			...initialBrowsersState(),
-			type: currentState.browsers.type
 		},
 		sizes: {
 			...initialSizesState(),

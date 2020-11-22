@@ -11,7 +11,6 @@ export default (state) => {
 		state.referrers.fetching === true ||
 		state.durations.fetching === true ||
 		state.systems.fetching === true ||
-		state.browsers.fetching === true ||
 		state.sizes.fetching === true ||
 		state.domains.fetching === true ||
 		state.token.fetching === true ||
@@ -26,7 +25,6 @@ export default (state) => {
 		state.referrers.error,
 		state.durations.error,
 		state.systems.error,
-		state.browsers.error,
 		state.sizes.error,
 		state.domains.error,
 		state.token.error,

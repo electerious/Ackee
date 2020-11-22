@@ -3,6 +3,7 @@ export const SET_FILTER_RANGE = Symbol()
 export const SET_FILTER_INTERVAL = Symbol()
 export const SET_FILTER_VIEWS_TYPE = Symbol()
 export const SET_FILTER_DEVICES_TYPE = Symbol()
+export const SET_FILTER_BROWSERS_TYPE = Symbol()
 
 export const setFilterSorting = (payload) => ({
 	type: SET_FILTER_SORTING,
@@ -26,5 +27,10 @@ export const setFilterViewsType = (payload) => ({
 
 export const setFilterDevicesType = (payload) => ({
 	type: SET_FILTER_DEVICES_TYPE,
+	payload
+})
+
+export const setFilterBrowsersType = (payload) => ({
+	type: SET_FILTER_BROWSERS_TYPE,
 	payload
 })

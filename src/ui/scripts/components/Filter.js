@@ -205,8 +205,8 @@ const Filter = (props) => {
 				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
-					createButton('Show version', 'Include browser version', props.setBrowsersType, props.browsers.type, browsers.BROWSERS_TYPE_WITH_VERSION),
-					createButton('Hide version', 'Don\'t include version', props.setBrowsersType, props.browsers.type, browsers.BROWSERS_TYPE_NO_VERSION)
+					createButton('Show version', 'Include browser version', props.setFilterBrowsersType, props.filter.browsersType, browsers.BROWSERS_TYPE_WITH_VERSION),
+					createButton('Hide version', 'Don\'t include version', props.setFilterBrowsersType, props.filter.browsersType, browsers.BROWSERS_TYPE_NO_VERSION)
 				)
 			]),
 			rangeItem
