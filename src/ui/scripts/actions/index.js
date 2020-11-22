@@ -7,14 +7,13 @@ export * from './domains'
 export * from './events'
 export * from './overview'
 export * from './views'
-export * from './pages'
 export * from './referrers'
 export * from './durations'
-export * from './languages'
 export * from './sizes'
 export * from './systems'
 export * from './devices'
 export * from './browsers'
+export * from './widgets'
 
 export const RESET_STATE = Symbol()
 

@@ -1,6 +1,7 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment, useMemo } from 'react'
 
-import selectLanguagesValue from '../../selectors/selectLanguagesValue'
+// import selectLanguagesValue from '../../selectors/selectLanguagesValue'
+import languagesLoader from '../../loaders/languagesLoader'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import overviewRoute from '../../utils/overviewRoute'
 
@@ -8,27 +9,42 @@ import CardLanguages from '../cards/CardLanguages'
 
 const RouteLanguages = (props) => {
 
-	useEffect(() => {
+	const widgetIds = useMemo(() => {
 
-		props.fetchLanguages(props)
+		return props.domains.value.map(
+			(domain) => {
+				const loader = languagesLoader(domain.id, {
+					range: props.filter.range,
+					sorting: props.filter.sorting
+				})
 
-	}, [ props.filter.range, props.filter.sorting ])
+				props.fetchWidget(props, loader)
+				return loader.id
+			}
+		)
+
+	}, [ props.domains.value, props.filter.range, props.filter.sorting ])
 
 	return (
 		h(Fragment, {},
 
 			props.domains.value.map(
-				(domain) => (
-					h(CardLanguages, {
+				(domain, index) => {
+					const widgetId = widgetIds[index]
+					const widget = props.widgets.value[widgetId]
+
+					if (widget == null) return h('p', { key: domain.id }, 'empty')
+
+					return h(CardLanguages, {
 						key: domain.id,
 						headline: domain.title,
-						range: props.filter.range,
-						sorting: props.filter.sorting,
-						loading: props.languages.fetching,
-						items: enhanceLanguages(selectLanguagesValue(props, domain.id).value),
+						range: widget.variables.range,
+						sorting: widget.variables.sorting,
+						loading: widget.fetching,
+						items: enhanceLanguages(widget.value),
 						onMore: () => props.setRoute(overviewRoute(domain))
 					})
-				)
+				}
 			)
 
 		)
