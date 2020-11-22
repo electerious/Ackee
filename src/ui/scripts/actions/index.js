@@ -7,7 +7,6 @@ export * from './domains'
 export * from './events'
 export * from './overview'
 export * from './durations'
-export * from './systems'
 export * from './widgets'
 
 export const RESET_STATE = Symbol()

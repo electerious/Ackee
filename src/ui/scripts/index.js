@@ -14,7 +14,6 @@ import * as actions from './actions'
 import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
-import { initialState as initialSystemsState } from './reducers/systems'
 
 import Main from './components/Main'
 
@@ -53,10 +52,6 @@ store.subscribe(() => {
 			viewsType: currentState.filter.viewsType,
 			devicesType: currentState.filter.devicesType,
 			browsersType: currentState.filter.browsersType
-		},
-		systems: {
-			...initialSystemsState(),
-			type: currentState.systems.type
 		}
 	})
 

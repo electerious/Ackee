@@ -183,8 +183,8 @@ const Filter = (props) => {
 				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
-					createButton('Show version', 'Include system version', props.setSystemsType, props.systems.type, systems.SYSTEMS_TYPE_WITH_VERSION),
-					createButton('Hide version', 'Don\'t include version', props.setSystemsType, props.systems.type, systems.SYSTEMS_TYPE_NO_VERSION)
+					createButton('Show version', 'Include system version', props.setFilterSystemsType, props.filter.systemsType, systems.SYSTEMS_TYPE_WITH_VERSION),
+					createButton('Hide version', 'Don\'t include version', props.setFilterSystemsType, props.filter.systemsType, systems.SYSTEMS_TYPE_NO_VERSION)
 				)
 			]),
 			rangeItem

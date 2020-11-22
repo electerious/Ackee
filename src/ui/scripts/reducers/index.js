@@ -13,7 +13,6 @@ import domains from './domains'
 import events from './events'
 import overview from './overview'
 import durations from './durations'
-import systems from './systems'
 import widgets from './widgets'
 
 const reducers = combineReducers({
@@ -26,7 +25,6 @@ const reducers = combineReducers({
 	events,
 	overview,
 	durations,
-	systems,
 	widgets
 })
 

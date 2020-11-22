@@ -7,7 +7,8 @@ import {
 	SET_FILTER_VIEWS_TYPE,
 	SET_FILTER_DEVICES_TYPE,
 	SET_FILTER_BROWSERS_TYPE,
-	SET_FILTER_SIZES_TYPE
+	SET_FILTER_SIZES_TYPE,
+	SET_FILTER_SYSTEMS_TYPE
 } from '../actions'
 
 import { SORTINGS_TOP } from '../../../constants/sortings'
@@ -17,6 +18,7 @@ import { VIEWS_TYPE_UNIQUE } from '../../../constants/views'
 import { DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
+import { SYSTEMS_TYPE_WITH_VERSION } from '../../../constants/systems'
 
 export const initialState = () => ({
 	sorting: SORTINGS_TOP,
@@ -25,7 +27,8 @@ export const initialState = () => ({
 	viewsType: VIEWS_TYPE_UNIQUE,
 	devicesType: DEVICES_TYPE_WITH_MODEL,
 	browsersType: BROWSERS_TYPE_WITH_VERSION,
-	sizesType: SIZES_TYPE_BROWSER_RESOLUTION
+	sizesType: SIZES_TYPE_BROWSER_RESOLUTION,
+	systemsType: SYSTEMS_TYPE_WITH_VERSION
 })
 
 export default produce((draft, action) => {
@@ -51,6 +54,9 @@ export default produce((draft, action) => {
 			break
 		case SET_FILTER_SIZES_TYPE:
 			draft.sizesType = action.payload
+			break
+		case SET_FILTER_SYSTEMS_TYPE:
+			draft.systemsType = action.payload
 			break
 	}
 
