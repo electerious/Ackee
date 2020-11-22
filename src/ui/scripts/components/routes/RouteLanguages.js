@@ -1,4 +1,4 @@
-import { createElement as h, Fragment, useMemo } from 'react'
+import { createElement as h, Fragment, useEffect, useCallback } from 'react'
 
 import languagesLoader from '../../loaders/languagesLoader'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
@@ -8,29 +8,33 @@ import CardLanguages from '../cards/CardLanguages'
 
 const RouteLanguages = (props) => {
 
-	const widgetIds = useMemo(() => {
+	const createLoader = useCallback((domainId) => {
+
+		return languagesLoader(domainId, {
+			range: props.filter.range,
+			sorting: props.filter.sorting
+		})
+
+	}, [ props.filter.range, props.filter.sorting ])
+
+	useEffect(() => {
 
 		return props.domains.value.map(
 			(domain) => {
-				const loader = languagesLoader(domain.id, {
-					range: props.filter.range,
-					sorting: props.filter.sorting
-				})
-
+				const loader = createLoader(domain.id)
 				props.fetchWidget(props, loader)
-				return loader.id
 			}
 		)
 
-	}, [ props.domains.value, props.filter.range, props.filter.sorting ])
+	}, [ props.domains.value, createLoader ])
 
 	return (
 		h(Fragment, {},
 
 			props.domains.value.map(
-				(domain, index) => {
-					const widgetId = widgetIds[index]
-					const widget = props.widgets.value[widgetId]
+				(domain) => {
+					const { id } = createLoader(domain.id)
+					const widget = props.widgets.value[id]
 
 					if (widget == null) return h('p', { key: domain.id }, 'empty')
 
