@@ -20,7 +20,7 @@ const checkServer = async (url) => {
 	const res = await fetch(url)
 
 	if (res.ok === false) {
-		new Error(`Server is unhealthy and returned with the status '${ res.status }'`)
+		throw new Error(`Server is unhealthy and returned with the status '${ res.status }'`)
 	}
 }
 
@@ -28,7 +28,7 @@ const checkApi = async (url) => {
 	const res = await fetch(url)
 
 	if (res.ok === false) {
-		new Error(`API is unhealthy and returned with the status '${ res.status }'`)
+		throw new Error(`API is unhealthy and returned with the status '${ res.status }'`)
 	}
 }
 
