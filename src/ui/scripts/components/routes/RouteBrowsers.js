@@ -2,14 +2,15 @@ import { createElement as h, Fragment } from 'react'
 
 import browsersLoader from '../../loaders/browsersLoader'
 import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
+import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetBundles from '../../utils/useWidgetBundles'
+import useWidgetIds from '../../utils/useWidgetIds'
 
 import CardBrowsers from '../cards/CardBrowsers'
 
 const RouteBrowsers = (props) => {
 
-	const widgetBundles = useWidgetBundles(props, browsersLoader, {
+	const widgetIds = useWidgetIds(props, browsersLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.browsersType
@@ -18,11 +19,12 @@ const RouteBrowsers = (props) => {
 	return (
 		h(Fragment, {},
 
-			widgetBundles.map(
-				({ domain, widgetId }) => {
+			widgetIds.map(
+				(widgetId) => {
 					const widget = props.widgets.value[widgetId]
+					if (widget == null) return h('p', {}, 'empty')
 
-					if (widget == null) return h('p', { key: domain.id }, 'empty')
+					const domain = selectDomainsValue.byId(props, widget.variables.domainId)
 
 					return h(CardBrowsers, {
 						key: domain.id,

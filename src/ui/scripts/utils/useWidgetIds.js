@@ -2,26 +2,23 @@ import { useEffect, useState } from 'react'
 
 export default (props, createLoader, opts) => {
 
-	const [ widgetBundles, setWidgetBundles ] = useState([])
+	const [ widgetIds, setWidgetIds ] = useState([])
 
 	useEffect(() => {
 
-		const widgetBundles = props.domains.value.map(
+		const widgetIds = props.domains.value.map(
 			(domain) => {
 				const loader = createLoader(domain.id, opts)
 				props.fetchWidget(props, loader)
 
-				return {
-					domain,
-					widgetId: loader.id
-				}
+				return loader.id
 			}
 		)
 
-		setWidgetBundles(widgetBundles)
+		setWidgetIds(widgetIds)
 
 	}, [ props.domains.value, ...Object.values(opts) ])
 
-	return widgetBundles
+	return widgetIds
 
 }

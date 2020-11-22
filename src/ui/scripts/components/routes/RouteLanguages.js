@@ -2,14 +2,15 @@ import { createElement as h, Fragment } from 'react'
 
 import languagesLoader from '../../loaders/languagesLoader'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
+import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetBundles from '../../utils/useWidgetBundles'
+import useWidgetIds from '../../utils/useWidgetIds'
 
 import CardLanguages from '../cards/CardLanguages'
 
 const RouteLanguages = (props) => {
 
-	const widgetBundles = useWidgetBundles(props, languagesLoader, {
+	const widgetIds = useWidgetIds(props, languagesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})
@@ -17,11 +18,12 @@ const RouteLanguages = (props) => {
 	return (
 		h(Fragment, {},
 
-			widgetBundles.map(
-				({ domain, widgetId }) => {
+			widgetIds.map(
+				(widgetId) => {
 					const widget = props.widgets.value[widgetId]
+					if (widget == null) return h('p', {}, 'empty')
 
-					if (widget == null) return h('p', { key: domain.id }, 'empty')
+					const domain = selectDomainsValue.byId(props, widget.variables.domainId)
 
 					return h(CardLanguages, {
 						key: domain.id,

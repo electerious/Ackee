@@ -2,14 +2,15 @@ import { createElement as h, Fragment } from 'react'
 
 import devicesLoader from '../../loaders/devicesLoader'
 import enhanceDevices from '../../enhancers/enhanceDevices'
+import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetBundles from '../../utils/useWidgetBundles'
+import useWidgetIds from '../../utils/useWidgetIds'
 
 import CardDevices from '../cards/CardDevices'
 
 const RouteDevices = (props) => {
 
-	const widgetBundles = useWidgetBundles(props, devicesLoader, {
+	const widgetIds = useWidgetIds(props, devicesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.devicesType
@@ -18,11 +19,12 @@ const RouteDevices = (props) => {
 	return (
 		h(Fragment, {},
 
-			widgetBundles.map(
-				({ domain, widgetId }) => {
+			widgetIds.map(
+				(widgetId) => {
 					const widget = props.widgets.value[widgetId]
+					if (widget == null) return h('p', {}, 'empty')
 
-					if (widget == null) return h('p', { key: domain.id }, 'empty')
+					const domain = selectDomainsValue.byId(props, widget.variables.domainId)
 
 					return h(CardDevices, {
 						key: domain.id,

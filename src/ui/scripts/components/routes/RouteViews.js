@@ -3,15 +3,16 @@ import { createElement as h, Fragment } from 'react'
 // import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 import viewsLoader from '../../loaders/viewsLoader'
 import enhanceViews from '../../enhancers/enhanceViews'
+import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 // import mergeViews from '../../utils/mergeViews'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetBundles from '../../utils/useWidgetBundles'
+import useWidgetIds from '../../utils/useWidgetIds'
 
 import CardViews from '../cards/CardViews'
 
 const RouteViews = (props) => {
 
-	const widgetBundles = useWidgetBundles(props, viewsLoader, {
+	const widgetIds = useWidgetIds(props, viewsLoader, {
 		interval: props.filter.interval,
 		type: props.filter.viewsType
 	})
@@ -30,11 +31,12 @@ const RouteViews = (props) => {
 			// 	items: mergeViews(props)
 			// }),
 
-			widgetBundles.map(
-				({ domain, widgetId }) => {
+			widgetIds.map(
+				(widgetId) => {
 					const widget = props.widgets.value[widgetId]
+					if (widget == null) return h('p', {}, 'empty')
 
-					if (widget == null) return h('p', { key: domain.id }, 'empty')
+					const domain = selectDomainsValue.byId(props, widget.variables.domainId)
 
 					return h(CardViews, {
 						key: domain.id,
