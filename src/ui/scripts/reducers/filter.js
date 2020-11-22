@@ -6,7 +6,8 @@ import {
 	SET_FILTER_INTERVAL,
 	SET_FILTER_VIEWS_TYPE,
 	SET_FILTER_DEVICES_TYPE,
-	SET_FILTER_BROWSERS_TYPE
+	SET_FILTER_BROWSERS_TYPE,
+	SET_FILTER_SIZES_TYPE
 } from '../actions'
 
 import { SORTINGS_TOP } from '../../../constants/sortings'
@@ -15,6 +16,7 @@ import { INTERVALS_DAILY } from '../../../constants/intervals'
 import { VIEWS_TYPE_UNIQUE } from '../../../constants/views'
 import { DEVICES_TYPE_WITH_MODEL } from '../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../constants/browsers'
+import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../constants/sizes'
 
 export const initialState = () => ({
 	sorting: SORTINGS_TOP,
@@ -22,7 +24,8 @@ export const initialState = () => ({
 	interval: INTERVALS_DAILY,
 	viewsType: VIEWS_TYPE_UNIQUE,
 	devicesType: DEVICES_TYPE_WITH_MODEL,
-	browsersType: BROWSERS_TYPE_WITH_VERSION
+	browsersType: BROWSERS_TYPE_WITH_VERSION,
+	sizesType: SIZES_TYPE_BROWSER_RESOLUTION
 })
 
 export default produce((draft, action) => {
@@ -45,6 +48,9 @@ export default produce((draft, action) => {
 			break
 		case SET_FILTER_BROWSERS_TYPE:
 			draft.browsersType = action.payload
+			break
+		case SET_FILTER_SIZES_TYPE:
+			draft.sizesType = action.payload
 			break
 	}
 

@@ -213,14 +213,14 @@ const Filter = (props) => {
 		],
 		[ROUTE_SIZES.key]: [
 			sortingItem,
-			createItem(labels.sizes[props.sizes.type], [
-				createButton('Browser sizes', 'Width and height combined', props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
-				createButton('↳ widths', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_WIDTH),
-				createButton('↳ heights', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_BROWSER_HEIGHT),
+			createItem(labels.sizes[props.filter.sizesType], [
+				createButton('Browser sizes', 'Width and height combined', props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
+				createButton('↳ widths', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_WIDTH),
+				createButton('↳ heights', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_HEIGHT),
 				createSeparator(),
-				createButton('Screen sizes', 'Width and height combined', props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_SCREEN_RESOLUTION),
-				createButton('↳ widths', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_SCREEN_WIDTH),
-				createButton('↳ heights', undefined, props.setSizesType, props.sizes.type, sizes.SIZES_TYPE_SCREEN_HEIGHT)
+				createButton('Screen sizes', 'Width and height combined', props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_SCREEN_RESOLUTION),
+				createButton('↳ widths', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_SCREEN_WIDTH),
+				createButton('↳ heights', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_SCREEN_HEIGHT)
 			]),
 			rangeItem
 		],

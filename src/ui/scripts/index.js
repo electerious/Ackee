@@ -15,7 +15,6 @@ import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
 import { initialState as initialSystemsState } from './reducers/systems'
-import { initialState as initialSizesState } from './reducers/sizes'
 
 import Main from './components/Main'
 
@@ -58,10 +57,6 @@ store.subscribe(() => {
 		systems: {
 			...initialSystemsState(),
 			type: currentState.systems.type
-		},
-		sizes: {
-			...initialSizesState(),
-			type: currentState.sizes.type
 		}
 	})
 

@@ -10,7 +10,6 @@ export default (state) => {
 		Object.values(state.widgets.value).some((value) => value.fetching) === true ||
 		state.durations.fetching === true ||
 		state.systems.fetching === true ||
-		state.sizes.fetching === true ||
 		state.domains.fetching === true ||
 		state.token.fetching === true ||
 		state.permanentTokens.fetching === true ||
@@ -23,7 +22,6 @@ export default (state) => {
 		...Object.values(state.widgets.value).map((value) => value.error),
 		state.durations.error,
 		state.systems.error,
-		state.sizes.error,
 		state.domains.error,
 		state.token.error,
 		state.permanentTokens.error,

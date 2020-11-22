@@ -14,7 +14,6 @@ import events from './events'
 import overview from './overview'
 import durations from './durations'
 import systems from './systems'
-import sizes from './sizes'
 import widgets from './widgets'
 
 const reducers = combineReducers({
@@ -28,7 +27,6 @@ const reducers = combineReducers({
 	overview,
 	durations,
 	systems,
-	sizes,
 	widgets
 })
 
