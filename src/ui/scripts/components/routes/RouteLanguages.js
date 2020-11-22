@@ -1,6 +1,5 @@
 import { createElement as h, Fragment, useMemo } from 'react'
 
-// import selectLanguagesValue from '../../selectors/selectLanguagesValue'
 import languagesLoader from '../../loaders/languagesLoader'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import overviewRoute from '../../utils/overviewRoute'
