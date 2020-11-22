@@ -12,7 +12,6 @@ import filter from './filter'
 import domains from './domains'
 import events from './events'
 import overview from './overview'
-import referrers from './referrers'
 import durations from './durations'
 import systems from './systems'
 import sizes from './sizes'
@@ -27,7 +26,6 @@ const reducers = combineReducers({
 	domains,
 	events,
 	overview,
-	referrers,
 	durations,
 	systems,
 	sizes,
