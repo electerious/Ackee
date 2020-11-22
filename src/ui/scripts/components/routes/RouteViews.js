@@ -31,8 +31,8 @@ const RouteViews = (props) => {
 			// }),
 
 			widgetBundles.map(
-				({ domain, loader }) => {
-					const widget = props.widgets.value[loader.id]
+				({ domain, widgetId }) => {
+					const widget = props.widgets.value[widgetId]
 
 					if (widget == null) return h('p', { key: domain.id }, 'empty')
 

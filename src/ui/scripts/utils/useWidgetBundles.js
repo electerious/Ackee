@@ -13,7 +13,7 @@ export default (props, createLoader, opts) => {
 
 				return {
 					domain,
-					loader
+					widgetId: loader.id
 				}
 			}
 		)
