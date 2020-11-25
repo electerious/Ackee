@@ -1,6 +1,5 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
-// import { useHotkeys } from 'react-hotkeys-hook'
 
 import Input from '../Input'
 import Label from '../Label'
@@ -8,14 +7,10 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
 import shortId from '../../utils/shortId'
+import useEscapeKeydown from '../../utils/useEscapeKeydown'
 
 const ModalPermanentTokenEdit = (props) => {
-
-	// Currently not possible:
-	// https://github.com/JohannesKlauss/react-hotkeys-hook/issues/276
-	// useHotkeys('esc', props.closeModal, {
-	// 	filter: () => props.current === true
-	// })
+	useEscapeKeydown(props.closeModal)
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
