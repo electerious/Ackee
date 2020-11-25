@@ -7,6 +7,7 @@ import useMeasure from '../utils/useMeasure'
 import useClickAway from '../utils/useClickAway'
 
 import KeyHint from './KeyHint'
+import useEscapeKeydown from '../utils/useEscapeKeydown'
 
 export const BUTTON = Symbol()
 export const SEPARATOR = Symbol()
@@ -59,6 +60,7 @@ const Context = (props) => {
 	const measurement = useMeasure(props.targetRef, ref)
 
 	useClickAway(ref, props.onAwayClick)
+	useEscapeKeydown(props.onAwayClick)
 
 	const x = measurement == null ? undefined : toPixel(props.x(measurement))
 	const y = measurement == null ? undefined : toPixel(props.y(measurement))
