@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-export default (fn) => {
+export default (fn, filter = () => true) => {
 	const handler = (event) => {
 		const key = event.keyCode || event.which || event.charCode
-		if (key !== 27) return
+		if (key !== 27 || !filter()) return
 		fn()
 	}
 

@@ -10,7 +10,7 @@ import shortId from '../../utils/shortId'
 import useEscapeKeydown from '../../utils/useEscapeKeydown'
 
 const ModalPermanentTokenEdit = (props) => {
-	useEscapeKeydown(props.closeModal)
+	useEscapeKeydown(props.closeModal, () => props.current === true)
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
