@@ -13,7 +13,12 @@ const PresentationEmptyState = (props) => {
 		h('div', { className: 'emptyState' },
 			h('div', { className: 'emptyState__inner' },
 				h(props.icon, { className: 'emptyState__icon' }),
-				props.children
+				props.children,
+			  	h("div", null, 
+				  h("a", { href: "https://github.com/electerious/ackee-tracker#-options", target: "_blank"},
+				    "Detailed tracking"
+				   ), 
+				"may not be enabled.")
 			)
 		)
 	)
