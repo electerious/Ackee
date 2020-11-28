@@ -33,5 +33,5 @@ COPY --from=build /srv/app/ /srv/app/
 # Wait a bit before start to ensure the `yarn build` is done.
 HEALTHCHECK --interval=1m --timeout=45s --start-period=45s CMD [ "/srv/app/src/healthcheck.js" ]
 
-# Wait for external service and start Ackee
-CMD yarn server
+# Start Ackee
+CMD yarn start
