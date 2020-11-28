@@ -12,7 +12,7 @@ Although, we recommend to mention Ackee in your privacy policy. Let your visitor
 To get information about the behavior of our visitors, we use
 <a href="https://ackee.electerious.com" target="_blank">Ackee</a>. This
 analytics software gives us insight about our visitors only in general, but not
-about individuals per say, as it does not track visitors and does not store any
+about individuals per se, as it does not track visitors and does not store any
 personal identifiable information.
 <a href="https://docs.ackee.electerious.com/#/docs/Anonymization" target="_blank">Go
 to their documentation</a> to find out what Ackee collects.
@@ -24,7 +24,7 @@ to their documentation</a> to find out what Ackee collects.
 To get information about the behavior of our visitors, we use
 [Ackee](https://ackee.electerious.com). This
 analytics software gives us insight about our visitors only in general, but not
-about individuals per say, as it does not track visitors and does not store any
+about individuals per se, as it does not track visitors and does not store any
 personal identifiable information.
 [Go
 to their documentation](https://docs.ackee.electerious.com/#/docs/Anonymization) to find out what Ackee collects.
