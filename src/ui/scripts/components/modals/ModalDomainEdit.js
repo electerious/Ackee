@@ -22,6 +22,10 @@ const ModalDomainEdit = (props) => {
 	const [ inputs, setInputs ] = useState({
 		title: props.title
 	})
+	
+	const [ detailed, setDetailed ] = useState(false)
+	
+	const toggleDetailed = () => setDetailed(!!detailed)
 
 	const onChange = (key) => (e) => setInputs({
 		...inputs,
@@ -51,6 +55,8 @@ const ModalDomainEdit = (props) => {
 	const trackerUrl = customTracker.url || '/tracker.js'
 	const srcUrl = (new URL(trackerUrl, location.href)).href
 	const serverUrl = location.origin
+	
+	const detailedOptions = `data-ackee-opts='{ "detailed": true }'`
 
 	return (
 		h('form', { className: 'card', onSubmit: updateDomain },
@@ -89,10 +95,14 @@ const ModalDomainEdit = (props) => {
 					id: embedId,
 					readOnly: true,
 					rows: 4,
-					value: `<script async src="${ srcUrl }" data-ackee-server="${ serverUrl }" data-ackee-domain-id="${ props.id }"></script>`,
+					value: `<script async src="${ srcUrl }" data-ackee-server="${ serverUrl }" data-ackee-domain-id="${ props.id }"${ detailed ? detailedOptions : '' }></script>`,
 					onFocus: copyInput
-				})
-
+				}),
+			  
+				h(LinkItem, { type: 'button', onClick: toggleDetailed }, 
+				  	`${detailed ? "Disable collecting detailed data" : "Enable collecting detailed data"`
+				)
+		
 			),
 			h('div', { className: 'card__footer' },
 
