@@ -24,11 +24,6 @@ EXPOSE 3000
 
 WORKDIR /srv/app/
 
-# Add wait script to the image
-
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
-RUN chmod +x /wait
-
 # Copy and compile source in the last step as the source
 # might change the most.
 
@@ -39,4 +34,4 @@ COPY --from=build /srv/app/ /srv/app/
 HEALTHCHECK --interval=1m --timeout=45s --start-period=45s CMD [ "/srv/app/src/healthcheck.js" ]
 
 # Wait for external service and start Ackee
-CMD /wait && yarn server
+CMD yarn server
