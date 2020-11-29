@@ -18,6 +18,7 @@ const textLabel = (item, range, isRecent, isStale) => {
 	if (isRecent) return 'Recent'
 
 	return rangeLabel(range)
+
 }
 
 const CardDevices = (props) => {
