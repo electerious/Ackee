@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Changed
 
-- Updated Dockerfile reduces the size of the Docker build by ~40% (#195, thanks @omBratteng)
+- Updated Dockerfile reduces the size of the Docker build by ~58% (#195, thanks @omBratteng)
 
 ### Fixed
 
