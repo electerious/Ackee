@@ -21,7 +21,7 @@ const textLabel = (item, range, isRecent, isStale) => {
 
 }
 
-const CardSystems = (props) => {
+const CardList = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState()
@@ -69,7 +69,7 @@ const CardSystems = (props) => {
 
 }
 
-CardSystems.propTypes = {
+CardList.propTypes = {
 	headline: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
@@ -78,4 +78,4 @@ CardSystems.propTypes = {
 	onMore: PropTypes.func
 }
 
-export default CardSystems
+export default CardList
