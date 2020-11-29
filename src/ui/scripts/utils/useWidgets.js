@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { initialSubState } from '../reducers/widgets'
+
 export default (props, createLoader, opts) => {
 
 	const [ widgetIds, setWidgetIds ] = useState([])
@@ -20,8 +22,8 @@ export default (props, createLoader, opts) => {
 	}, [ props.domains.value, ...Object.values(opts) ])
 
 	return widgetIds.map((widgetId) => {
-		console.log(props.widgets.value[widgetId])
-		return props.widgets.value[widgetId]
+		const widget = props.widgets.value[widgetId]
+		return widget == null ? initialSubState() : widget
 	})
 
 }
