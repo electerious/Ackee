@@ -85,6 +85,7 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [Ackee-PHP](https://github.com/BrookeDot/ackee-php) - A PHP Class for Ackee
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
+- [ngx-ackee-wrapper](https://github.com/oakify/ngx-ackee-wrapper) - Angular wrapper for Ackee
 - [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
 - [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee) - Gridsome plugin for Ackee
 - [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress plugin for Ackee
