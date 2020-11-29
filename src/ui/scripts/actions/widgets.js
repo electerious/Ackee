@@ -6,9 +6,10 @@ export const SET_WIDGETS_END = Symbol()
 export const SET_WIDGETS_FETCHING = Symbol()
 export const SET_WIDGETS_ERROR = Symbol()
 
-export const setWidgetsStart = (id, variables) => ({
+export const setWidgetsStart = (id, Renderer, variables) => ({
 	type: SET_WIDGETS_START,
 	id,
+	Renderer,
 	variables
 })
 
@@ -32,9 +33,9 @@ export const setWidgetsError = (id, payload) => ({
 
 export const fetchWidget = signalHandler((signal) => (props, loader) => async (dispatch) => {
 
-	const { id, query, variables, selector } = loader
+	const { id, Renderer, query, variables, selector } = loader
 
-	dispatch(setWidgetsStart(id, variables))
+	dispatch(setWidgetsStart(id, Renderer, variables))
 
 	try {
 

@@ -7,10 +7,8 @@ import Headline from '../Headline'
 import Text from '../Text'
 import Updating from '../Updating'
 import PresentationIconList from '../presentations/PresentationIconList'
-import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
 import relativeDate from '../../utils/relativeDate'
 import rangeLabel from '../../utils/rangeLabel'
-import status from '../../utils/status'
 
 const textLabel = (item, range, isRecent, isNew, isStale) => {
 
@@ -34,27 +32,13 @@ const CardReferrers = (props) => {
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive()
 
-	const {
-		isEmpty,
-		isStale,
-		isLoading
-	} = status(props.items, props.loading)
-
 	const presentation = (() => {
 
-		if (isLoading === true) return h(PresentationEmptyState, {
-			icon: ICON_LOADING
-		}, 'Loading referrers')
-
-		if (isEmpty === false) return h(PresentationIconList, {
+		return h(PresentationIconList, {
 			items: props.items,
 			onEnter,
 			onLeave
 		})
-
-		return h(PresentationEmptyState, {
-			icon: ICON_WARNING
-		}, 'No referrers')
 
 	})()
 
@@ -76,7 +60,7 @@ const CardReferrers = (props) => {
 					props.range,
 					props.sorting === SORTINGS_RECENT,
 					props.sorting === SORTINGS_NEW,
-					isStale
+					props.stale
 				)),
 				presentation
 			)
@@ -88,7 +72,7 @@ const CardReferrers = (props) => {
 CardReferrers.propTypes = {
 	headline: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
-	loading: PropTypes.bool.isRequired,
+	stale: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired,
 	onMore: PropTypes.func
 }

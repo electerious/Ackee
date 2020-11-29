@@ -2,22 +2,17 @@ import { createElement as h, Fragment } from 'react'
 
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 import viewsLoader from '../../loaders/viewsLoader'
-import enhanceViews from '../../enhancers/enhanceViews'
-import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import mergeViews from '../../utils/mergeViews'
-import overviewRoute from '../../utils/overviewRoute'
 import useWidgets from '../../utils/useWidgets'
 
 import CardViews from '../cards/CardViews'
 
 const RouteViews = (props) => {
 
-	const widgets = useWidgets(props, viewsLoader, {
+	const { rawWidgets, renderedWidgets } = useWidgets(props, viewsLoader, {
 		interval: props.filter.interval,
 		type: props.filter.viewsType
 	})
-
-	console.count('views')
 
 	return (
 		h(Fragment, {},
@@ -29,25 +24,10 @@ const RouteViews = (props) => {
 				})[props.filter.viewsType],
 				interval: props.filter.interval,
 				loading: props.fetching,
-				items: mergeViews(widgets)
+				items: mergeViews(rawWidgets)
 			}),
 
-			widgets.map(
-				(widget) => {
-					if (widget == null) return h('p', {}, 'empty')
-
-					const domain = selectDomainsValue.byId(props, widget.variables.domainId)
-
-					return h(CardViews, {
-						key: domain.id,
-						headline: domain.title,
-						interval: widget.variables.interval,
-						loading: widget.fetching,
-						items: enhanceViews(widget.value, 7),
-						onMore: () => props.setRoute(overviewRoute(domain))
-					})
-				}
-			)
+			renderedWidgets
 		)
 	)
 
