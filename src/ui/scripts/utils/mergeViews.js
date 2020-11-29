@@ -6,7 +6,6 @@ export default (widgets) => {
 	// Enhance views for all widgets
 	const enhancedViews = widgets.map((widget) => {
 
-		console.log(widget)
 		return enhanceViews(widget.value, 14)
 
 	})
