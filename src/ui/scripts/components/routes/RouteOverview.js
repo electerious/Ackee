@@ -21,14 +21,9 @@ import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
 import CardFacts from '../cards/CardFacts'
 import CardViews from '../cards/CardViews'
-import CardPages from '../cards/CardPages'
 import CardReferrers from '../cards/CardReferrers'
 import CardDurations from '../cards/CardDurations'
-import CardSystems from '../cards/CardSystems'
-import CardDevices from '../cards/CardDevices'
-import CardBrowsers from '../cards/CardBrowsers'
-import CardSizes from '../cards/CardSizes'
-import CardLanguages from '../cards/CardLanguages'
+import CardList from '../cards/CardList'
 
 const RouteOverview = (props) => {
 
@@ -69,7 +64,7 @@ const RouteOverview = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 
-			h(CardPages, {
+			h(CardList, {
 				headline: 'Pages',
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP,
@@ -89,7 +84,7 @@ const RouteOverview = (props) => {
 
 			h('div', { className: 'content__spacer' }),
 
-			h(CardSystems, {
+			h(CardList, {
 				headline: 'Systems',
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP,
@@ -98,7 +93,7 @@ const RouteOverview = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
 			}),
 
-			h(CardDevices, {
+			h(CardList, {
 				headline: 'Devices',
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP,
@@ -107,7 +102,7 @@ const RouteOverview = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_DEVICES)
 			}),
 
-			h(CardBrowsers, {
+			h(CardList, {
 				headline: 'Browsers',
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP,
@@ -116,7 +111,7 @@ const RouteOverview = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
 			}),
 
-			h(CardSizes, {
+			h(CardList, {
 				headline: 'Sizes',
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP,
@@ -125,7 +120,7 @@ const RouteOverview = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_SIZES)
 			}),
 
-			h(CardLanguages, {
+			h(CardList, {
 				headline: 'Languages',
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP,

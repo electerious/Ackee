@@ -21,7 +21,7 @@ const textLabel = (item, range, isRecent, isStale) => {
 
 }
 
-const CardDevices = (props) => {
+const CardSystems = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState()
@@ -35,7 +35,7 @@ const CardDevices = (props) => {
 			items: props.items
 		})
 
-		if (props.sorting === SORTINGS_RECENT) return h(PresentationList, {
+		return h(PresentationList, {
 			items: props.items,
 			onEnter,
 			onLeave
@@ -69,7 +69,7 @@ const CardDevices = (props) => {
 
 }
 
-CardDevices.propTypes = {
+CardSystems.propTypes = {
 	headline: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
 	sorting: PropTypes.string.isRequired,
@@ -78,4 +78,4 @@ CardDevices.propTypes = {
 	onMore: PropTypes.func
 }
 
-export default CardDevices
+export default CardSystems

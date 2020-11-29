@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import CardSizes from '../components/cards/CardSizes'
+import CardList from '../components/cards/CardList'
 import enhanceSizes from '../enhancers/enhanceSizes'
 
 const Renderer = (props) => {
-	return h(CardSizes, {
+	return h(CardList, {
 		headline: props.headline,
 		range: props.widget.variables.range,
 		sorting: props.widget.variables.sorting,
