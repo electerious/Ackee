@@ -7,21 +7,21 @@ import { INTERVALS_DAILY } from '../../../constants/intervals'
 
 export const ALL_DOMAINS = Symbol()
 
-export const SET_OVERVIEW_FACTS = Symbol()
-export const SET_OVERVIEW_STATISTICS = Symbol()
+export const SET_OVERVIEW_START = Symbol()
+export const SET_OVERVIEW_END = Symbol()
 export const SET_OVERVIEW_FETCHING = Symbol()
 export const SET_OVERVIEW_ERROR = Symbol()
 
-export const setOverviewFacts = (domainId, payload) => ({
-	type: SET_OVERVIEW_FACTS,
-	domainId,
-	payload
+export const setOverviewStart = (domainId) => ({
+	type: SET_OVERVIEW_START,
+	domainId
 })
 
-export const setOverviewStatistics = (domainId, payload) => ({
-	type: SET_OVERVIEW_STATISTICS,
+export const setOverviewEnd = (domainId, facts, statistics) => ({
+	type: SET_OVERVIEW_END,
 	domainId,
-	payload
+	facts,
+	statistics
 })
 
 export const setOverviewFetching = (domainId, payload) => ({
@@ -38,8 +38,7 @@ export const setOverviewError = (domainId, payload) => ({
 
 export const fetchOverview = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
-	dispatch(setOverviewFetching(domainId, true))
-	dispatch(setOverviewError(domainId))
+	dispatch(setOverviewStart(domainId))
 
 	try {
 
@@ -120,8 +119,7 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				signal: signal(domainId)
 			})
 
-			dispatch(setOverviewFacts(domainId, data.facts))
-			dispatch(setOverviewStatistics(domainId, data.statistics))
+			dispatch(setOverviewEnd(domainId, data.facts, data.statistics))
 
 		} else {
 
@@ -144,12 +142,9 @@ export const fetchOverview = signalHandler((signal) => (props, domainId) => asyn
 				signal: signal(domainId)
 			})
 
-			dispatch(setOverviewFacts(domainId, data.domain.facts))
-			dispatch(setOverviewStatistics(domainId, data.domain.statistics))
+			dispatch(setOverviewEnd(domainId, data.domain.facts, data.domain.statistics))
 
 		}
-
-		dispatch(setOverviewFetching(domainId, false))
 
 	} catch (err) {
 
