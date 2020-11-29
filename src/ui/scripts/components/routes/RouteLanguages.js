@@ -4,13 +4,13 @@ import languagesLoader from '../../loaders/languagesLoader'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetIds from '../../utils/useWidgetIds'
+import useWidgets from '../../utils/useWidgets'
 
 import CardLanguages from '../cards/CardLanguages'
 
 const RouteLanguages = (props) => {
 
-	const widgetIds = useWidgetIds(props, languagesLoader, {
+	const widgets = useWidgets(props, languagesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})
@@ -18,9 +18,8 @@ const RouteLanguages = (props) => {
 	return (
 		h(Fragment, {},
 
-			widgetIds.map(
-				(widgetId) => {
-					const widget = props.widgets.value[widgetId]
+			widgets.map(
+				(widget) => {
 					if (widget == null) return h('p', {}, 'empty')
 
 					const domain = selectDomainsValue.byId(props, widget.variables.domainId)

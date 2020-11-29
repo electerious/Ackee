@@ -4,13 +4,13 @@ import systemsLoader from '../../loaders/systemsLoader'
 import enhanceSystems from '../../enhancers/enhanceSystems'
 import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetIds from '../../utils/useWidgetIds'
+import useWidgets from '../../utils/useWidgets'
 
 import CardSystems from '../cards/CardSystems'
 
 const RouteSystems = (props) => {
 
-	const widgetIds = useWidgetIds(props, systemsLoader, {
+	const widgets = useWidgets(props, systemsLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.systemsType
@@ -19,9 +19,8 @@ const RouteSystems = (props) => {
 	return (
 		h(Fragment, {},
 
-			widgetIds.map(
-				(widgetId) => {
-					const widget = props.widgets.value[widgetId]
+			widgets.map(
+				(widget) => {
 					if (widget == null) return h('p', {}, 'empty')
 
 					const domain = selectDomainsValue.byId(props, widget.variables.domainId)

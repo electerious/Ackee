@@ -1,15 +1,13 @@
-import selectViewsValue from '../selectors/selectViewsValue'
 import enhanceViews from '../enhancers/enhanceViews'
 
-// Turns the views of multiple domains into one array of views
-export default (state) => {
+// Turns the views of multiple widgets into one array of views
+export default (widgets) => {
 
-	// Enhance views for all domains
-	const enhancedViews = state.domains.value.map((domain) => {
+	// Enhance views for all widgets
+	const enhancedViews = widgets.map((widget) => {
 
-		const view = selectViewsValue(state, domain.id)
-
-		return enhanceViews(view.value, 14)
+		console.log(widget)
+		return enhanceViews(widget.value, 14)
 
 	})
 

@@ -12,7 +12,6 @@ import filter from './filter'
 import domains from './domains'
 import events from './events'
 import overview from './overview'
-import durations from './durations'
 import widgets from './widgets'
 
 const reducers = combineReducers({
@@ -24,7 +23,6 @@ const reducers = combineReducers({
 	domains,
 	events,
 	overview,
-	durations,
 	widgets
 })
 

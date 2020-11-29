@@ -4,13 +4,13 @@ import enhancePages from '../../enhancers/enhancePages'
 import pagesLoader from '../../loaders/pagesLoader'
 import * as selectDomainsValue from '../../selectors/selectDomainsValue'
 import overviewRoute from '../../utils/overviewRoute'
-import useWidgetIds from '../../utils/useWidgetIds'
+import useWidgets from '../../utils/useWidgets'
 
 import CardPages from '../cards/CardPages'
 
 const RoutePages = (props) => {
 
-	const widgetIds = useWidgetIds(props, pagesLoader, {
+	const widgets = useWidgets(props, pagesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})
@@ -18,9 +18,8 @@ const RoutePages = (props) => {
 	return (
 		h(Fragment, {},
 
-			widgetIds.map(
-				(widgetId) => {
-					const widget = props.widgets.value[widgetId]
+			widgets.map(
+				(widget) => {
 					if (widget == null) return h('p', {}, 'empty')
 
 					const domain = selectDomainsValue.byId(props, widget.variables.domainId)

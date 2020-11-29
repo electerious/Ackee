@@ -1,15 +1,13 @@
-import selectDurationsValue from '../selectors/selectDurationsValue'
+// import selectDurationsValue from '../selectors/selectDurationsValue'
 import enhanceDurations from '../enhancers/enhanceDurations'
 
-// Turns the durations of multiple domains into one array of durations
-export default (state) => {
+// Turns the durations of multiple widgets into one array of durations
+export default (widgets) => {
 
-	// Enhance durations for all domains
-	const enhancedDurations = state.domains.value.map((domain) => {
+	// Enhance durations for all widgets
+	const enhancedDurations = widgets.map((widget) => {
 
-		const duration = selectDurationsValue(state, domain.id)
-
-		return enhanceDurations(duration.value, 14)
+		return enhanceDurations(widget.value, 14)
 
 	})
 

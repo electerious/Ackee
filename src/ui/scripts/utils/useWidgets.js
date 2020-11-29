@@ -19,6 +19,9 @@ export default (props, createLoader, opts) => {
 
 	}, [ props.domains.value, ...Object.values(opts) ])
 
-	return widgetIds
+	return widgetIds.map((widgetId) => {
+		console.log(props.widgets.value[widgetId])
+		return props.widgets.value[widgetId]
+	})
 
 }
