@@ -1,11 +1,12 @@
 import { createElement as h, Fragment } from 'react'
 
+import CardChart from '../cards/CardChart'
+
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 import viewsLoader from '../../loaders/viewsLoader'
 import mergeViews from '../../utils/mergeViews'
 import useWidgets from '../../utils/useWidgets'
-
-import CardViews from '../cards/CardViews'
+import formatNumber from '../../utils/formatNumber'
 
 const RouteViews = (props) => {
 
@@ -16,7 +17,7 @@ const RouteViews = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardViews, {
+			h(CardChart, {
 				wide: true,
 				headline: ({
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
@@ -24,7 +25,8 @@ const RouteViews = (props) => {
 				})[props.filter.viewsType],
 				interval: props.filter.interval,
 				loading: props.fetching,
-				items: mergeViews(rawWidgets)
+				items: mergeViews(rawWidgets),
+				formatter: formatNumber
 			}),
 
 			renderedWidgets

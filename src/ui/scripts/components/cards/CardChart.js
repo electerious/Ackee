@@ -11,10 +11,6 @@ import PresentationBarChart from '../presentations/PresentationBarChart'
 import relativeDays from '../../utils/relativeDays'
 import relativeMonths from '../../utils/relativeMonths'
 import relativeYears from '../../utils/relativeYears'
-import formatDuration from '../../utils/formatDuration'
-import status from '../../utils/status'
-
-const formatter = (ms) => formatDuration(ms).toString()
 
 const relativeFn = (interval) => {
 
@@ -34,17 +30,13 @@ const textLabel = (active, interval, isStale) => {
 
 }
 
-const CardDurations = (props) => {
+const CardChart = (props) => {
 
 	// Index of the active element
 	const [ active, setActive ] = useState(0)
 
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive(0)
-
-	const {
-		isStale
-	} = status(props.items, props.loading)
 
 	return (
 		h('div', {
@@ -65,11 +57,11 @@ const CardDurations = (props) => {
 				}, textLabel(
 					active,
 					props.interval,
-					isStale
+					props.stale
 				)),
 				h(PresentationBarChart, {
 					items: props.items,
-					formatter,
+					formatter: props.formatter,
 					active: active,
 					onEnter,
 					onLeave
@@ -80,13 +72,14 @@ const CardDurations = (props) => {
 
 }
 
-CardDurations.propTypes = {
+CardChart.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
 	interval: PropTypes.string.isRequired,
 	loading: PropTypes.bool.isRequired,
+	stale: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired,
 	onMore: PropTypes.func
 }
 
-export default CardDurations
+export default CardChart

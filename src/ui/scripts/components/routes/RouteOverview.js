@@ -7,6 +7,8 @@ import { INTERVALS_DAILY } from '../../../../constants/intervals'
 import * as route from '../../constants/route'
 import { ALL_DOMAINS } from '../../actions/overview'
 import * as selectOverviewValue from '../../selectors/selectOverviewValue'
+import formatNumber from '../../utils/formatNumber'
+import formatDuration from '../../utils/formatDuration'
 
 import enhanceFacts from '../../enhancers/enhanceFacts'
 import enhanceViews from '../../enhancers/enhanceViews'
@@ -20,9 +22,8 @@ import enhanceSizes from '../../enhancers/enhanceSizes'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
 import CardFacts from '../cards/CardFacts'
-import CardViews from '../cards/CardViews'
+import CardChart from '../cards/CardChart'
 import CardReferrers from '../cards/CardReferrers'
-import CardDurations from '../cards/CardDurations'
 import CardList from '../cards/CardList'
 
 const RouteOverview = (props) => {
@@ -46,21 +47,23 @@ const RouteOverview = (props) => {
 
 			h('div', { className: 'content__spacer' }),
 
-			h(CardViews, {
+			h(CardChart, {
 				wide: true,
 				headline: 'Views',
 				interval: INTERVALS_DAILY,
 				loading: isLoading,
 				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14),
+				formatter: formatNumber,
 				onMore: () => props.setRoute(route.ROUTE_VIEWS)
 			}),
 
-			h(CardDurations, {
+			h(CardChart, {
 				wide: true,
 				headline: 'Durations',
 				interval: INTERVALS_DAILY,
 				loading: isLoading,
 				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14),
+				formatter: (ms) => formatDuration(ms).toString(),
 				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
 			}),
 

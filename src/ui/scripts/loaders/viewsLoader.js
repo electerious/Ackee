@@ -1,16 +1,18 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import CardViews from '../components/cards/CardViews'
+import CardChart from '../components/cards/CardChart'
 import enhanceViews from '../enhancers/enhanceViews'
+import formatNumber from '../utils/formatNumber'
 
 const Renderer = (props) => {
-	return h(CardViews, {
+	return h(CardChart, {
 		headline: props.headline,
 		interval: props.widget.variables.interval,
 		sorting: props.widget.variables.sorting,
 		stale: props.stale,
 		items: enhanceViews(props.widget.value, 7),
+		formatter: formatNumber,
 		onMore: props.onMore
 	})
 }
