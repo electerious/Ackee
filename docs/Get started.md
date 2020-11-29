@@ -1,5 +1,12 @@
 # Get started
 
+Ackee is a simple analytics tool that consists of two parts:
+
+1) A node server running on a server of your choice
+2) A tracking script that talks to that server
+
+The node server shows you the UI and receives the request from all of your sites, while the tracking script is set up on each site you want to analyze. Since normally your site and your analytics server are running on the same machine, a subdomain is recommended to proxy all requests from that subdomain to the node server. The following guides help you to set up Ackee on an infrastructure of your choice.
+
 - [With Docker Compose](#with-docker-compose)
 - [With Docker](#with-docker)
 - [With Helm](#with-helm)
@@ -13,7 +20,7 @@
 
 ### 1. Create the configuration
 
-Create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of this project to store all environment variables in one file.
+Pull the project and create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root to store all environment variables in one file.
 
 ```
 ACKEE_USERNAME=username
@@ -125,7 +132,7 @@ Make sure to install and update all dependencies before you continue. The instal
 
 ### 2. Create the configuration
 
-Configure Ackee using environment variables or create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
+Pull the project and configure Ackee using environment variables or create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
 
 ```
 ACKEE_MONGODB=mongodb://localhost:27017/ackee
@@ -144,7 +151,7 @@ The username and password variables are used to secure your Ackee interface/API.
 Install all required dependencies.
 
 ```sh
-yarn
+yarn install
 ```
 
 ### 4. Run Ackee

@@ -4,11 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased (Events)]
 
 ### Fixed
 
 - Close, delete and submit in modals could be triggered multiple times
+
+## [Unreleased]
+
+### Changed
+
+- Updated Dockerfile reduces the size of the Docker build by ~40% (#195, thanks @omBratteng)
+
+### Fixed
+
+- Errors from permanent tokens not showing up in the UI
+- Remove console logs from `apollo-server-plugin-http-headers`
+- Log GraphQL error instead of `undefined`
 
 ## [2.4.0] - 2020-11-15
 
