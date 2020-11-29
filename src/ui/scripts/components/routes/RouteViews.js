@@ -24,7 +24,6 @@ const RouteViews = (props) => {
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.filter.viewsType],
 				interval: props.filter.interval,
-				loading: props.fetching,
 				items: mergeViews(rawWidgets),
 				formatter: formatNumber
 			}),

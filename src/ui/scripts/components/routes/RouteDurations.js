@@ -20,7 +20,6 @@ const RouteDurations = (props) => {
 				wide: true,
 				headline: 'Durations',
 				interval: props.filter.interval,
-				loading: props.fetching,
 				items: mergeDurations(rawWidgets),
 				formatter: (ms) => formatDuration(ms).toString()
 			}),
