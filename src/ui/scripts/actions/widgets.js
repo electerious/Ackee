@@ -1,21 +1,21 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_WIDGETS_VALUE = Symbol()
-export const SET_WIDGETS_VARIABLES = Symbol()
+export const SET_WIDGETS_START = Symbol()
+export const SET_WIDGETS_END = Symbol()
 export const SET_WIDGETS_FETCHING = Symbol()
 export const SET_WIDGETS_ERROR = Symbol()
 
-export const setWidgetsValue = (id, payload) => ({
-	type: SET_WIDGETS_VALUE,
+export const setWidgetsStart = (id, variables) => ({
+	type: SET_WIDGETS_START,
 	id,
-	payload
+	variables
 })
 
-export const setWidgetsVariables = (id, payload) => ({
-	type: SET_WIDGETS_VARIABLES,
+export const setWidgetsEnd = (id, value) => ({
+	type: SET_WIDGETS_END,
 	id,
-	payload
+	value
 })
 
 export const setWidgetsFetching = (id, payload) => ({
@@ -34,9 +34,7 @@ export const fetchWidget = signalHandler((signal) => (props, loader) => async (d
 
 	const { id, query, variables, selector } = loader
 
-	dispatch(setWidgetsVariables(id, variables))
-	dispatch(setWidgetsFetching(id, true))
-	dispatch(setWidgetsError(id))
+	dispatch(setWidgetsStart(id, variables))
 
 	try {
 
@@ -47,8 +45,7 @@ export const fetchWidget = signalHandler((signal) => (props, loader) => async (d
 			signal: signal(id)
 		})
 
-		dispatch(setWidgetsValue(id, selector(data)))
-		dispatch(setWidgetsFetching(id, false))
+		dispatch(setWidgetsEnd(id, selector(data)))
 
 	} catch (err) {
 

@@ -17,6 +17,8 @@ const RouteViews = (props) => {
 		type: props.filter.viewsType
 	})
 
+	console.count('views')
+
 	return (
 		h(Fragment, {},
 			h(CardViews, {

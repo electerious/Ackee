@@ -1,4 +1,3 @@
-// import selectDurationsValue from '../selectors/selectDurationsValue'
 import enhanceDurations from '../enhancers/enhanceDurations'
 
 // Turns the durations of multiple widgets into one array of durations

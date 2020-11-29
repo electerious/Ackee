@@ -1,13 +1,18 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_EVENTS_VALUE = Symbol()
+export const SET_EVENTS_START = Symbol()
+export const SET_EVENTS_END = Symbol()
 export const SET_EVENTS_FETCHING = Symbol()
 export const SET_EVENTS_ERROR = Symbol()
 
-export const setEventsValue = (payload) => ({
-	type: SET_EVENTS_VALUE,
-	payload
+export const setEventsStart = () => ({
+	type: SET_EVENTS_START
+})
+
+export const setEventsEnd = (value) => ({
+	type: SET_EVENTS_END,
+	value
 })
 
 export const setEventsFetching = (payload) => ({
@@ -22,8 +27,7 @@ export const setEventsError = (payload) => ({
 
 export const fetchEvents = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setEventsFetching(true))
-	dispatch(setEventsError())
+	dispatch(setEventsStart(true))
 
 	try {
 
@@ -41,8 +45,7 @@ export const fetchEvents = signalHandler((signal) => (props) => async (dispatch)
 			signal: signal()
 		})
 
-		dispatch(setEventsValue(data.events))
-		dispatch(setEventsFetching(false))
+		dispatch(setEventsEnd(data.events))
 
 	} catch (err) {
 
@@ -57,8 +60,7 @@ export const fetchEvents = signalHandler((signal) => (props) => async (dispatch)
 
 export const addEvent = (props, state) => async (dispatch) => {
 
-	dispatch(setEventsFetching(true))
-	dispatch(setEventsError())
+	dispatch(setEventsStart(true))
 
 	try {
 
@@ -80,7 +82,6 @@ export const addEvent = (props, state) => async (dispatch) => {
 		})
 
 		await dispatch(fetchEvents(props))
-		dispatch(setEventsFetching(false))
 
 	} catch (err) {
 
@@ -95,8 +96,7 @@ export const addEvent = (props, state) => async (dispatch) => {
 
 export const updateEvent = signalHandler((signal) => (props, eventId, state) => async (dispatch) => {
 
-	dispatch(setEventsFetching(true))
-	dispatch(setEventsError())
+	dispatch(setEventsStart(true))
 
 	try {
 
@@ -120,7 +120,6 @@ export const updateEvent = signalHandler((signal) => (props, eventId, state) => 
 		})
 
 		await dispatch(fetchEvents(props))
-		dispatch(setEventsFetching(false))
 
 	} catch (err) {
 
@@ -135,8 +134,7 @@ export const updateEvent = signalHandler((signal) => (props, eventId, state) => 
 
 export const deleteEvent = signalHandler((signal) => (props, eventId) => async (dispatch) => {
 
-	dispatch(setEventsFetching(true))
-	dispatch(setEventsError())
+	dispatch(setEventsStart(true))
 
 	try {
 
@@ -156,7 +154,6 @@ export const deleteEvent = signalHandler((signal) => (props, eventId) => async (
 		})
 
 		await dispatch(fetchEvents(props))
-		dispatch(setEventsFetching(false))
 
 	} catch (err) {
 
