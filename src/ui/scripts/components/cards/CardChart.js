@@ -76,7 +76,6 @@ CardChart.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
 	interval: PropTypes.string.isRequired,
-	loading: PropTypes.bool.isRequired,
 	stale: PropTypes.bool.isRequired,
 	items: PropTypes.array.isRequired,
 	onMore: PropTypes.func
