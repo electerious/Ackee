@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Changed
+
+- Updated Dockerfile reduces the size of the Docker build by ~40% (#195, thanks @omBratteng)
+
 ### Fixed
 
 - Errors from permanent tokens not showing up in the UI
