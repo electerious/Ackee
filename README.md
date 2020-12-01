@@ -1,4 +1,4 @@
-# Ackee
+# AckeeFU
 
 Self-hosted, easy to install (FTP upload) version of Ackee.
 
