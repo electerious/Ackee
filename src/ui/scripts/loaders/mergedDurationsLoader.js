@@ -4,30 +4,27 @@ import RendererChart from '../components/renderers/RendererChart'
 import enhanceDurations from '../enhancers/enhanceDurations'
 import formatDuration from '../utils/formatDuration'
 
-export default (domainId, opts) => {
+export default (opts) => {
 
 	// TODO: Improve ids
-	const id = `fetchDurations${ domainId }${ JSON.stringify(opts) }`
+	const id = `fetchMergedDurations${ JSON.stringify(opts) }`
 
 	const query = `
-		query fetchDurations($domainId: ID!, $interval: Interval!) {
-			domain(id: $domainId) {
-				statistics {
-					durations(interval: $interval, limit: 7) {
-						id
-						count
-					}
+		query fetchDurations($interval: Interval!) {
+			statistics {
+				durations(interval: $interval) {
+					id
+					count
 				}
 			}
 		}
 	`
 
 	const variables = {
-		domainId,
 		interval: opts.interval
 	}
 
-	const selector = (data) => data.domain.statistics.durations
+	const selector = (data) => data.statistics.durations
 
 	return {
 		id,
@@ -38,7 +35,7 @@ export default (domainId, opts) => {
 		query,
 		variables,
 		selector,
-		enhancer: (durations) => enhanceDurations(durations, 7)
+		enhancer: (durations) => enhanceDurations(durations, 14)
 	}
 
 }

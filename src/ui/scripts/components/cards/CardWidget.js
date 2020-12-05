@@ -16,7 +16,12 @@ const CardWidget = (props) => {
 		isLoading
 	} = status(props.widget.value, props.widget.fetching)
 
-	const [ textLabel, setTextLabel ] = useState('')
+	const headline = typeof props.headline === 'function' ?
+		props.headline(props.widget) :
+		props.headline
+
+	// Use thin space as initial value to avoid that the label changes the height once rendered
+	const [ textLabel, setTextLabel ] = useState(' ')
 
 	const presentation = (() => {
 		if (isLoading === true) {
@@ -49,7 +54,7 @@ const CardWidget = (props) => {
 					type: 'h2',
 					size: 'medium',
 					onClick: props.onMore
-				}, props.headline),
+				}, headline),
 				h(Text, {
 					type: 'div',
 					spacing: false
@@ -63,7 +68,10 @@ const CardWidget = (props) => {
 
 CardWidget.propTypes = {
 	wide: PropTypes.bool,
-	headline: PropTypes.string.isRequired,
+	headline: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.func
+	]).isRequired,
 	widget: PropTypes.object.isRequired
 }
 
