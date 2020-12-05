@@ -25,13 +25,9 @@ export default (props, createLoader, opts) => {
 
 	}, [ props.domains.value, ...Object.values(opts) ])
 
-	const rawWidgets = widgetIds.map((widgetId) => {
-		const widget = props.widgets.value[widgetId]
-		return widget == null ? initialSubState() : widget
-	})
-
-	const renderedWidgets = rawWidgets.map(
-		(widgetData) => {
+	return widgetIds.map(
+		(widgetId) => {
+			const widgetData = props.widgets.value[widgetId] || initialSubState()
 			const domain = selectDomainsValue.byId(props, widgetData.variables.domainId)
 
 			return h(CardWidget, {
@@ -42,10 +38,5 @@ export default (props, createLoader, opts) => {
 			})
 		}
 	)
-
-	return {
-		rawWidgets,
-		renderedWidgets
-	}
 
 }

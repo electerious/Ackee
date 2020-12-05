@@ -5,13 +5,11 @@ import useWidgets from '../../utils/useWidgets'
 
 const RouteSystems = (props) => {
 
-	const { renderedWidgets } = useWidgets(props, systemsLoader, {
+	return useWidgets(props, systemsLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.systemsType
 	})
-
-	return renderedWidgets
 
 }
 

@@ -5,13 +5,11 @@ import useWidgets from '../../utils/useWidgets'
 
 const RouteBrowsers = (props) => {
 
-	const { renderedWidgets } = useWidgets(props, browsersLoader, {
+	return useWidgets(props, browsersLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.browsersType
 	})
-
-	return renderedWidgets
 
 }
 

@@ -5,12 +5,10 @@ import useWidgets from '../../utils/useWidgets'
 
 const RouteReferrers = (props) => {
 
-	const { renderedWidgets } = useWidgets(props, referrersLoader, {
+	return useWidgets(props, referrersLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})
-
-	return renderedWidgets
 
 }
 
