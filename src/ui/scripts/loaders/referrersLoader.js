@@ -1,26 +1,7 @@
 import { createElement as h } from 'react'
-import PropTypes from 'prop-types'
 
-import CardReferrers from '../components/cards/CardReferrers'
+import RendererReferrers from '../components/renderers/RendererReferrers'
 import enhanceReferrers from '../enhancers/enhanceReferrers'
-
-const Renderer = (props) => {
-	return h(CardReferrers, {
-		headline: props.headline,
-		range: props.widget.variables.range,
-		sorting: props.widget.variables.sorting,
-		stale: props.stale,
-		items: enhanceReferrers(props.widget.value),
-		onMore: props.onMore
-	})
-}
-
-Renderer.propTypes = {
-	headline: PropTypes.string.isRequired,
-	widget: PropTypes.object.isRequired,
-	stale: PropTypes.bool.isRequired,
-	onMore: PropTypes.func
-}
 
 export default (domainId, opts) => {
 
@@ -52,10 +33,11 @@ export default (domainId, opts) => {
 
 	return {
 		id,
-		Renderer,
+		Renderer: RendererReferrers,
 		query,
 		variables,
-		selector
+		selector,
+		enhancer: enhanceReferrers
 	}
 
 }

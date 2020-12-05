@@ -33,7 +33,7 @@ export const setWidgetsError = (id, payload) => ({
 
 export const fetchWidget = signalHandler((signal) => (props, loader) => async (dispatch) => {
 
-	const { id, Renderer, query, variables, selector } = loader
+	const { id, Renderer, query, variables, selector, enhancer } = loader
 
 	dispatch(setWidgetsStart(id, Renderer, variables))
 
@@ -46,7 +46,7 @@ export const fetchWidget = signalHandler((signal) => (props, loader) => async (d
 			signal: signal(id)
 		})
 
-		dispatch(setWidgetsEnd(id, selector(data)))
+		dispatch(setWidgetsEnd(id, enhancer(selector(data))))
 
 	} catch (err) {
 

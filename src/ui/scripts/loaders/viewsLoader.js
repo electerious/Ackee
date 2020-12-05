@@ -1,28 +1,8 @@
 import { createElement as h } from 'react'
-import PropTypes from 'prop-types'
 
-import CardChart from '../components/cards/CardChart'
+import RendererChart from '../components/renderers/RendererChart'
 import enhanceViews from '../enhancers/enhanceViews'
 import formatNumber from '../utils/formatNumber'
-
-const Renderer = (props) => {
-	return h(CardChart, {
-		headline: props.headline,
-		interval: props.widget.variables.interval,
-		sorting: props.widget.variables.sorting,
-		stale: props.stale,
-		items: enhanceViews(props.widget.value, 7),
-		formatter: formatNumber,
-		onMore: props.onMore
-	})
-}
-
-Renderer.propTypes = {
-	headline: PropTypes.string.isRequired,
-	widget: PropTypes.object.isRequired,
-	stale: PropTypes.bool.isRequired,
-	onMore: PropTypes.func
-}
 
 export default (domainId, opts) => {
 
@@ -53,10 +33,14 @@ export default (domainId, opts) => {
 
 	return {
 		id,
-		Renderer,
+		Renderer: (props) => h(RendererChart, {
+			...props,
+			formatter: formatNumber
+		}),
 		query,
 		variables,
-		selector
+		selector,
+		enhancer: (views) => enhanceViews(views, 7)
 	}
 
 }

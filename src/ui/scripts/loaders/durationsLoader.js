@@ -1,28 +1,8 @@
 import { createElement as h } from 'react'
-import PropTypes from 'prop-types'
 
-import CardChart from '../components/cards/CardChart'
+import RendererChart from '../components/renderers/RendererChart'
 import enhanceDurations from '../enhancers/enhanceDurations'
 import formatDuration from '../utils/formatDuration'
-
-const Renderer = (props) => {
-	return h(CardChart, {
-		headline: props.headline,
-		interval: props.widget.variables.interval,
-		sorting: props.widget.variables.sorting,
-		stale: props.stale,
-		items: enhanceDurations(props.widget.value, 7),
-		formatter: (ms) => formatDuration(ms).toString(),
-		onMore: props.onMore
-	})
-}
-
-Renderer.propTypes = {
-	headline: PropTypes.string.isRequired,
-	widget: PropTypes.object.isRequired,
-	stale: PropTypes.bool.isRequired,
-	onMore: PropTypes.func
-}
 
 export default (domainId, opts) => {
 
@@ -52,10 +32,14 @@ export default (domainId, opts) => {
 
 	return {
 		id,
-		Renderer,
+		Renderer: (props) => h(RendererChart, {
+			...props,
+			formatter: (ms) => formatDuration(ms).toString()
+		}),
 		query,
 		variables,
-		selector
+		selector,
+		enhancer: (durations) => enhanceDurations(durations, 7)
 	}
 
 }

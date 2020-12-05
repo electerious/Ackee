@@ -1,26 +1,7 @@
 import { createElement as h } from 'react'
-import PropTypes from 'prop-types'
 
-import CardList from '../components/cards/CardList'
+import RendererList from '../components/renderers/RendererList'
 import enhanceSystems from '../enhancers/enhanceSystems'
-
-const Renderer = (props) => {
-	return h(CardList, {
-		headline: props.headline,
-		range: props.widget.variables.range,
-		sorting: props.widget.variables.sorting,
-		stale: props.stale,
-		items: enhanceSystems(props.widget.value),
-		onMore: props.onMore
-	})
-}
-
-Renderer.propTypes = {
-	headline: PropTypes.string.isRequired,
-	widget: PropTypes.object.isRequired,
-	stale: PropTypes.bool.isRequired,
-	onMore: PropTypes.func
-}
 
 export default (domainId, opts) => {
 
@@ -53,10 +34,11 @@ export default (domainId, opts) => {
 
 	return {
 		id,
-		Renderer,
+		Renderer: RendererList,
 		query,
 		variables,
-		selector
+		selector,
+		enhancer: enhanceSystems
 	}
 
 }
