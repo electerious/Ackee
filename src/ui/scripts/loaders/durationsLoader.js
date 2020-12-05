@@ -12,7 +12,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchDurations($domainId: ID!, $interval: Interval!) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					durations(interval: $interval) {
 						id

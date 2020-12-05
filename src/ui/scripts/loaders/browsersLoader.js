@@ -11,7 +11,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchBrowsers($domainId: ID!, $sorting: Sorting!, $type: BrowserType!, $range: Range) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					browsers(sorting: $sorting, type: $type, range: $range) {
 						id

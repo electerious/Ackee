@@ -11,7 +11,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchDevices($domainId: ID!, $sorting: Sorting!, $type: DeviceType!, $range: Range) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					devices(sorting: $sorting, type: $type, range: $range) {
 						id

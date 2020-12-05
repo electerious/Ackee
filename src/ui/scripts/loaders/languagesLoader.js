@@ -11,7 +11,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchLanguages($domainId: ID!, $sorting: Sorting!, $range: Range) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					languages(sorting: $sorting, range: $range) {
 						id

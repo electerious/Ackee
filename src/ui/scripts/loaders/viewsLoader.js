@@ -12,7 +12,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchViews($domainId: ID!, $interval: Interval!, $type: ViewType!) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					views(interval: $interval, type: $type) {
 						id

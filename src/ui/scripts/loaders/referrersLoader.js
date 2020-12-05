@@ -11,7 +11,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchReferrers($domainId: ID!, $sorting: Sorting!, $range: Range) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					referrers(sorting: $sorting, range: $range) {
 						id

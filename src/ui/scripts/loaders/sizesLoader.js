@@ -11,7 +11,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchSizes($domainId: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					sizes(sorting: $sorting, type: $type, range: $range) {
 						id

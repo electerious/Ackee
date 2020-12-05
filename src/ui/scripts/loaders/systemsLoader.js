@@ -11,7 +11,6 @@ export default (domainId, opts) => {
 	const query = `
 		query fetchSystems($domainId: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
 			domain(id: $domainId) {
-				id
 				statistics {
 					systems(sorting: $sorting, type: $type, range: $range) {
 						id
