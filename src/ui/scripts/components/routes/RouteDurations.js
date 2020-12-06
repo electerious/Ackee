@@ -8,8 +8,7 @@ import useWidgets from '../../utils/useWidgets'
 const RouteDurations = (props) => {
 
 	const renderedMergedWidget = useMergedWidget(props, mergedDurationsLoader, {
-		interval: props.filter.interval,
-		type: props.filter.viewsType
+		interval: props.filter.interval
 	}, {
 		wide: true,
 		headline: () => 'Durations'
