@@ -2,13 +2,18 @@ import { createElement as h, Fragment, useEffect } from 'react'
 
 // import { SORTINGS_TOP } from '../../../../constants/sortings'
 // import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
-// import { INTERVALS_DAILY } from '../../../../constants/intervals'
+import { INTERVALS_DAILY } from '../../../../constants/intervals'
+import { VIEWS_TYPE_UNIQUE } from '../../../../constants/views'
 
 // import * as route from '../../constants/route'
 import { ALL_DOMAINS } from '../../actions/overview'
 import * as selectOverviewValue from '../../selectors/selectOverviewValue'
 // import formatNumber from '../../utils/formatNumber'
 // import formatDuration from '../../utils/formatDuration'
+import useMergedWidget from '../../hooks/useMergedWidget'
+
+import mergedViewsLoader from '../../loaders/mergedViewsLoader'
+import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 
 import enhanceFacts from '../../enhancers/enhanceFacts'
 // import enhanceViews from '../../enhancers/enhanceViews'
@@ -37,6 +42,21 @@ const RouteOverview = (props) => {
 
 	}, [ domainId ])
 
+	const renderedMergedViews = useMergedWidget(props, mergedViewsLoader, {
+		interval: INTERVALS_DAILY,
+		type: VIEWS_TYPE_UNIQUE
+	}, {
+		wide: true,
+		headline: () => 'Site Views'
+	})
+
+	const renderedMergedDurations = useMergedWidget(props, mergedDurationsLoader, {
+		interval: INTERVALS_DAILY
+	}, {
+		wide: true,
+		headline: () => 'Durations'
+	})
+
 	return (
 		h(Fragment, {},
 
@@ -45,17 +65,10 @@ const RouteOverview = (props) => {
 				items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
 			}),
 
-			h('div', { className: 'content__spacer' })
+			h('div', { className: 'content__spacer' }),
 
-			// h(RendererChart, {
-			// 	wide: true,
-			// 	headline: 'Views',
-			// 	interval: INTERVALS_DAILY,
-			// 	loading: isLoading,
-			// 	items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14),
-			// 	formatter: formatNumber,
-			// 	onMore: () => props.setRoute(route.ROUTE_VIEWS)
-			// }),
+			renderedMergedViews,
+			renderedMergedDurations
 
 			// h(RendererChart, {
 			// 	wide: true,
