@@ -26,7 +26,7 @@ export default (domainId, opts) => {
 		range: opts.range
 	}
 
-	const selector = (data, entryName = 'domain') => data[entryName].domain.statistics.languages
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.languages
 
 	return {
 		id,
