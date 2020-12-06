@@ -22,8 +22,8 @@ export default (domainId, opts) => {
 
 	const variables = {
 		domainId,
-		interval: opts.interval,
-		type: opts.type
+		type: opts.type,
+		interval: opts.interval
 	}
 
 	const selector = (data, entryName = 'domain') => data[entryName].statistics.views

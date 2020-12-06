@@ -4,30 +4,27 @@ import RendererList from '../components/renderers/RendererList'
 import enhanceBrowsers from '../enhancers/enhanceBrowsers'
 import createWidgetId from '../utils/createWidgetId'
 
-export default (domainId, opts) => {
+export default (opts) => {
 
-	const id = createWidgetId('fetchBrowsers', domainId, opts)
+	const id = createWidgetId('fetchMergedBrowsers', undefined, opts)
 
 	const query = `
-		domain(id: "${ domainId }") {
-			statistics {
-				browsers(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
-					id
-					count
-					created
-				}
+		statistics {
+			browsers(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
+				id
+				count
+				created
 			}
 		}
 	`
 
 	const variables = {
-		domainId,
 		sorting: opts.sorting,
 		type: opts.type,
 		range: opts.range
 	}
 
-	const selector = (data, entryName = 'domain') => data[entryName].statistics.browsers
+	const selector = (data, entryName = 'statistics') => data[entryName].browsers
 
 	return {
 		id,
