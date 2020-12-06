@@ -10,12 +10,10 @@ export default (opts) => {
 	const id = createWidgetId('fetchMergedViews', undefined, opts)
 
 	const query = `
-		query fetchMergedViews($interval: Interval!, $type: ViewType!) {
-			statistics {
-				views(interval: $interval, type: $type) {
-					id
-					count
-				}
+		statistics {
+			views(interval: ${ opts.interval }, type: ${ opts.type }) {
+				id
+				count
 			}
 		}
 	`
@@ -25,7 +23,7 @@ export default (opts) => {
 		type: opts.type
 	}
 
-	const selector = (data) => data.statistics.views
+	const selector = (data, entryName = 'statistics') => data[entryName].views
 
 	return {
 		id,

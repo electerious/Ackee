@@ -12,16 +12,18 @@ export default (props, createLoader, opts, additionalProps = {}) => {
 
 	useEffect(() => {
 
-		const widgetIds = props.domains.value.map(
-			(domain) => {
-				const loader = createLoader(domain.id, opts)
-				props.fetchWidget(props, loader)
-
-				return loader.id
-			}
+		const loaders = props.domains.value.map((domain) =>
+			createLoader(domain.id, opts)
 		)
 
-		setWidgetIds(widgetIds)
+		const widgetIds = loaders.map((loader) =>
+			loader.id
+		)
+
+		if (loaders.length > 0) {
+			props.fetchWidgets(props, loaders)
+			setWidgetIds(widgetIds)
+		}
 
 	}, [ props.domains.value, ...Object.values(opts) ])
 

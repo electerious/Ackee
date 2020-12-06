@@ -9,14 +9,12 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchPages', domainId, opts)
 
 	const query = `
-		query fetchPages($domainId: ID!, $sorting: Sorting!, $range: Range) {
-			domain(id: $domainId) {
-				statistics {
-					pages(sorting: $sorting, range: $range) {
-						id
-						count
-						created
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				pages(sorting: ${ opts.sorting }, range: ${ opts.range }) {
+					id
+					count
+					created
 				}
 			}
 		}
@@ -28,7 +26,7 @@ export default (domainId, opts) => {
 		range: opts.range
 	}
 
-	const selector = (data) => data.domain.statistics.pages
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.pages
 
 	return {
 		id,

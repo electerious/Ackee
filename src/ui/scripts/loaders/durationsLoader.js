@@ -10,13 +10,11 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchDurations', domainId, opts)
 
 	const query = `
-		query fetchDurations($domainId: ID!, $interval: Interval!) {
-			domain(id: $domainId) {
-				statistics {
-					durations(interval: $interval, limit: 7) {
-						id
-						count
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				durations(interval: ${ opts.interval }, limit: 7) {
+					id
+					count
 				}
 			}
 		}
@@ -27,7 +25,7 @@ export default (domainId, opts) => {
 		interval: opts.interval
 	}
 
-	const selector = (data) => data.domain.statistics.durations
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.durations
 
 	return {
 		id,

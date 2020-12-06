@@ -9,14 +9,12 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchSystems', domainId, opts)
 
 	const query = `
-		query fetchSystems($domainId: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
-			domain(id: $domainId) {
-				statistics {
-					systems(sorting: $sorting, type: $type, range: $range) {
-						id
-						count
-						created
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				systems(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
+					id
+					count
+					created
 				}
 			}
 		}
@@ -29,7 +27,7 @@ export default (domainId, opts) => {
 		type: opts.type
 	}
 
-	const selector = (data) => data.domain.statistics.systems
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.systems
 
 	return {
 		id,

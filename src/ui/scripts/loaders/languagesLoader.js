@@ -9,14 +9,12 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchLanguages', domainId, opts)
 
 	const query = `
-		query fetchLanguages($domainId: ID!, $sorting: Sorting!, $range: Range) {
-			domain(id: $domainId) {
-				statistics {
-					languages(sorting: $sorting, range: $range) {
-						id
-						count
-						created
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				languages(sorting: ${ opts.sorting }, range: ${ opts.range }) {
+					id
+					count
+					created
 				}
 			}
 		}
@@ -28,7 +26,7 @@ export default (domainId, opts) => {
 		range: opts.range
 	}
 
-	const selector = (data) => data.domain.statistics.languages
+	const selector = (data, entryName = 'domain') => data[entryName].domain.statistics.languages
 
 	return {
 		id,

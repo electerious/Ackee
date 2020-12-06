@@ -9,14 +9,12 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchSizes', domainId, opts)
 
 	const query = `
-		query fetchSizes($domainId: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {
-			domain(id: $domainId) {
-				statistics {
-					sizes(sorting: $sorting, type: $type, range: $range) {
-						id
-						count
-						created
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				sizes(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
+					id
+					count
+					created
 				}
 			}
 		}
@@ -29,7 +27,7 @@ export default (domainId, opts) => {
 		type: opts.type
 	}
 
-	const selector = (data) => data.domain.statistics.sizes
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.sizes
 
 	return {
 		id,

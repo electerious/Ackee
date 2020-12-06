@@ -10,12 +10,10 @@ export default (opts) => {
 	const id = createWidgetId('fetchMergedDurations', undefined, opts)
 
 	const query = `
-		query fetchMergedDurations($interval: Interval!) {
-			statistics {
-				durations(interval: $interval) {
-					id
-					count
-				}
+		statistics {
+			durations(interval: ${ opts.interval }) {
+				id
+				count
 			}
 		}
 	`
@@ -24,7 +22,7 @@ export default (opts) => {
 		interval: opts.interval
 	}
 
-	const selector = (data) => data.statistics.durations
+	const selector = (data, entryName = 'statistics') => data[entryName].durations
 
 	return {
 		id,

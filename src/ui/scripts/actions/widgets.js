@@ -31,6 +31,54 @@ export const setWidgetsError = (id, payload) => ({
 	payload
 })
 
+export const fetchWidgets = signalHandler((signal) => (props, loaders) => async (dispatch) => {
+
+	const id = loaders.map((loader) => loader.id).join('')
+
+	// Generate an unique name for every query
+	const queryName = (index) => `_${ index }`
+
+	// Combine multiple queries into one
+	const query = loaders.map((loader, index) => {
+		const { query } = loader
+		return `${ queryName(index) }: ${ query }`
+	}).join('')
+
+	loaders.forEach((loader) => {
+		const { id, Renderer, variables } = loader
+		dispatch(setWidgetsStart(id, Renderer, variables))
+	})
+
+	try {
+
+		const data = await api({
+			query: `
+				{
+					${ query }
+				}
+			`,
+			props,
+			signal: signal(id)
+		})
+
+		loaders.forEach((loader, index) => {
+			const { id, enhancer, selector } = loader
+			const entryName = queryName(index)
+			dispatch(setWidgetsEnd(id, enhancer(selector(data, entryName))))
+		})
+
+
+	} catch (err) {
+
+		if (err.name === 'AbortError') return
+		loaders.forEach((loader) => dispatch(setWidgetsFetching(loader.id, false)))
+		if (err.name === 'HandledError') return
+		loaders.forEach((loader) => dispatch(setWidgetsError(loader.id, err)))
+
+	}
+
+})
+
 export const fetchWidget = signalHandler((signal) => (props, loader) => async (dispatch) => {
 
 	const { id, Renderer, query, variables, selector, enhancer } = loader
@@ -40,8 +88,11 @@ export const fetchWidget = signalHandler((signal) => (props, loader) => async (d
 	try {
 
 		const data = await api({
-			query,
-			variables,
+			query: `
+				{
+					${ query }
+				}
+			`,
 			props,
 			signal: signal(id)
 		})

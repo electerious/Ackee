@@ -10,13 +10,11 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchViews', domainId, opts)
 
 	const query = `
-		query fetchViews($domainId: ID!, $interval: Interval!, $type: ViewType!) {
-			domain(id: $domainId) {
-				statistics {
-					views(interval: $interval, type: $type, limit: 7) {
-						id
-						count
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				views(interval: ${ opts.interval }, type: ${ opts.type }, limit: 7) {
+					id
+					count
 				}
 			}
 		}
@@ -28,7 +26,7 @@ export default (domainId, opts) => {
 		type: opts.type
 	}
 
-	const selector = (data) => data.domain.statistics.views
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.views
 
 	return {
 		id,

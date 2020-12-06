@@ -9,14 +9,12 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchBrowsers', domainId, opts)
 
 	const query = `
-		query fetchBrowsers($domainId: ID!, $sorting: Sorting!, $type: BrowserType!, $range: Range) {
-			domain(id: $domainId) {
-				statistics {
-					browsers(sorting: $sorting, type: $type, range: $range) {
-						id
-						count
-						created
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				browsers(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
+					id
+					count
+					created
 				}
 			}
 		}
@@ -29,7 +27,7 @@ export default (domainId, opts) => {
 		type: opts.type
 	}
 
-	const selector = (data) => data.domain.statistics.browsers
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.browsers
 
 	return {
 		id,

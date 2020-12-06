@@ -9,14 +9,12 @@ export default (domainId, opts) => {
 	const id = createWidgetId('fetchReferrers', domainId, opts)
 
 	const query = `
-		query fetchReferrers($domainId: ID!, $sorting: Sorting!, $range: Range) {
-			domain(id: $domainId) {
-				statistics {
-					referrers(sorting: $sorting, range: $range) {
-						id
-						count
-						created
-					}
+		domain(id: "${ domainId }") {
+			statistics {
+				referrers(sorting: ${ opts.sorting }, range: ${ opts.range }) {
+					id
+					count
+					created
 				}
 			}
 		}
@@ -28,7 +26,7 @@ export default (domainId, opts) => {
 		range: opts.range
 	}
 
-	const selector = (data) => data.domain.statistics.referrers
+	const selector = (data, entryName = 'domain') => data[entryName].statistics.referrers
 
 	return {
 		id,
