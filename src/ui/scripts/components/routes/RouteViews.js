@@ -4,7 +4,7 @@ import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views
 import mergedViewsLoader from '../../loaders/mergedViewsLoader'
 import viewsLoader from '../../loaders/viewsLoader'
 import useMergedWidget from '../../utils/useMergedWidget'
-import useWidgets from '../../utils/useWidgets'
+import useDomainWidgets from '../../utils/useDomainWidgets'
 
 const RouteViews = (props) => {
 
@@ -21,7 +21,7 @@ const RouteViews = (props) => {
 		}
 	})
 
-	const renderedWidgets = useWidgets(props, viewsLoader, {
+	const renderedDomainWidgets = useDomainWidgets(props, viewsLoader, {
 		interval: props.filter.interval,
 		type: props.filter.viewsType
 	})
@@ -29,7 +29,7 @@ const RouteViews = (props) => {
 	return (
 		h(Fragment, {},
 			renderedMergedWidget,
-			renderedWidgets
+			renderedDomainWidgets
 		)
 	)
 

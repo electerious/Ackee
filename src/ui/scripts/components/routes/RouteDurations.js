@@ -3,7 +3,7 @@ import { createElement as h, Fragment } from 'react'
 import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 import durationsLoader from '../../loaders/durationsLoader'
 import useMergedWidget from '../../utils/useMergedWidget'
-import useWidgets from '../../utils/useWidgets'
+import useDomainWidgets from '../../utils/useDomainWidgets'
 
 const RouteDurations = (props) => {
 
@@ -14,7 +14,7 @@ const RouteDurations = (props) => {
 		headline: () => 'Durations'
 	})
 
-	const renderedWidgets = useWidgets(props, durationsLoader, {
+	const renderedDomainWidgets = useDomainWidgets(props, durationsLoader, {
 		interval: props.filter.interval,
 		type: props.filter.viewsType
 	})
@@ -22,7 +22,7 @@ const RouteDurations = (props) => {
 	return (
 		h(Fragment, {},
 			renderedMergedWidget,
-			renderedWidgets
+			renderedDomainWidgets
 		)
 	)
 

@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import sizesLoader from '../../loaders/sizesLoader'
-import useWidgets from '../../utils/useWidgets'
+import useDomainWidgets from '../../utils/useDomainWidgets'
 
 const RouteSizes = (props) => {
 
-	return useWidgets(props, sizesLoader, {
+	return useDomainWidgets(props, sizesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.sizesType

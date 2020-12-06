@@ -6,7 +6,7 @@ import { initialSubState } from '../reducers/widgets'
 import * as selectDomainsValue from '../selectors/selectDomainsValue'
 import overviewRoute from './overviewRoute'
 
-export default (props, createLoader, opts) => {
+export default (props, createLoader, opts, additionalProps = {}) => {
 
 	const [ widgetIds, setWidgetIds ] = useState([])
 
@@ -34,7 +34,8 @@ export default (props, createLoader, opts) => {
 				key: domain.id,
 				headline: domain.title,
 				widget: widgetData,
-				onMore: () => props.setRoute(overviewRoute(domain))
+				onMore: () => props.setRoute(overviewRoute(domain)),
+				...additionalProps
 			})
 		}
 	)
