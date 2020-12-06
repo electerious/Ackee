@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import devicesLoader from '../../loaders/devicesLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteDevices = (props) => {
 

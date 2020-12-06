@@ -2,8 +2,8 @@ import { createElement as h, Fragment } from 'react'
 
 import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 import durationsLoader from '../../loaders/durationsLoader'
-import useMergedWidget from '../../utils/useMergedWidget'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useMergedWidget from '../../hooks/useMergedWidget'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteDurations = (props) => {
 

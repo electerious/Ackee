@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import languagesLoader from '../../loaders/languagesLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteLanguages = (props) => {
 

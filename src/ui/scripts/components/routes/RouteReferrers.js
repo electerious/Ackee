@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import referrersLoader from '../../loaders/referrersLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteReferrers = (props) => {
 

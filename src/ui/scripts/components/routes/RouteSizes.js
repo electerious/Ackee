@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import sizesLoader from '../../loaders/sizesLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteSizes = (props) => {
 

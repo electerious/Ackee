@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import pagesLoader from '../../loaders/pagesLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RoutePages = (props) => {
 

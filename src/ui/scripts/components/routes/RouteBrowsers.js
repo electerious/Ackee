@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import browsersLoader from '../../loaders/browsersLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteBrowsers = (props) => {
 

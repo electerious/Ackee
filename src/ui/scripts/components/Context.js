@@ -3,8 +3,8 @@ import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import useMeasure from '../utils/useMeasure'
-import useClickAway from '../utils/useClickAway'
+import useMeasure from '../hooks/useMeasure'
+import useClickAway from '../hooks/useClickAway'
 
 import KeyHint from './KeyHint'
 

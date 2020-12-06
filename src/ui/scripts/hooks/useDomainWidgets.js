@@ -4,7 +4,7 @@ import CardWidget from '../components/cards/CardWidget'
 
 import { initialSubState } from '../reducers/widgets'
 import * as selectDomainsValue from '../selectors/selectDomainsValue'
-import overviewRoute from './overviewRoute'
+import overviewRoute from '../utils/overviewRoute'
 
 export default (props, createLoader, opts, additionalProps = {}) => {
 

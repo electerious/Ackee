@@ -3,8 +3,8 @@ import { createElement as h, Fragment } from 'react'
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 import mergedViewsLoader from '../../loaders/mergedViewsLoader'
 import viewsLoader from '../../loaders/viewsLoader'
-import useMergedWidget from '../../utils/useMergedWidget'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useMergedWidget from '../../hooks/useMergedWidget'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteViews = (props) => {
 

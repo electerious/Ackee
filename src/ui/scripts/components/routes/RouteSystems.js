@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 
 import systemsLoader from '../../loaders/systemsLoader'
-import useDomainWidgets from '../../utils/useDomainWidgets'
+import useDomainWidgets from '../../hooks/useDomainWidgets'
 
 const RouteSystems = (props) => {
 
