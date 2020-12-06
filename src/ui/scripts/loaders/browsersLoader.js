@@ -2,11 +2,11 @@ import { createElement as h } from 'react'
 
 import RendererList from '../components/renderers/RendererList'
 import enhanceBrowsers from '../enhancers/enhanceBrowsers'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchBrowsers${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchBrowsers', domainId, opts)
 
 	const query = `
 		query fetchBrowsers($domainId: ID!, $sorting: Sorting!, $type: BrowserType!, $range: Range) {

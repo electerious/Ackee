@@ -2,11 +2,11 @@ import { createElement as h } from 'react'
 
 import RendererList from '../components/renderers/RendererList'
 import enhanceSizes from '../enhancers/enhanceSizes'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchSizes${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchSizes', domainId, opts)
 
 	const query = `
 		query fetchSizes($domainId: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {

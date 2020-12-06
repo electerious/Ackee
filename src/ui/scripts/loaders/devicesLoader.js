@@ -2,11 +2,11 @@ import { createElement as h } from 'react'
 
 import RendererList from '../components/renderers/RendererList'
 import enhanceDevices from '../enhancers/enhanceDevices'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchDevices${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchDevices', domainId, opts)
 
 	const query = `
 		query fetchDevices($domainId: ID!, $sorting: Sorting!, $type: DeviceType!, $range: Range) {

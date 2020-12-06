@@ -2,11 +2,11 @@ import { createElement as h } from 'react'
 
 import RendererReferrers from '../components/renderers/RendererReferrers'
 import enhanceReferrers from '../enhancers/enhanceReferrers'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchReferrers${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchReferrers', domainId, opts)
 
 	const query = `
 		query fetchReferrers($domainId: ID!, $sorting: Sorting!, $range: Range) {

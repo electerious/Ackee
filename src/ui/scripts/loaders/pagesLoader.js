@@ -2,11 +2,11 @@ import { createElement as h } from 'react'
 
 import RendererList from '../components/renderers/RendererList'
 import enhancePages from '../enhancers/enhancePages'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchPages${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchPages', domainId, opts)
 
 	const query = `
 		query fetchPages($domainId: ID!, $sorting: Sorting!, $range: Range) {

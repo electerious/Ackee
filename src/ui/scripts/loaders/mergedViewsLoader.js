@@ -3,14 +3,14 @@ import { createElement as h } from 'react'
 import RendererChart from '../components/renderers/RendererChart'
 import enhanceViews from '../enhancers/enhanceViews'
 import formatNumber from '../utils/formatNumber'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchMergedViews${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchMergedViews', undefined, opts)
 
 	const query = `
-		query fetchViews($interval: Interval!, $type: ViewType!) {
+		query fetchMergedViews($interval: Interval!, $type: ViewType!) {
 			statistics {
 				views(interval: $interval, type: $type) {
 					id

@@ -3,11 +3,11 @@ import { createElement as h } from 'react'
 import RendererChart from '../components/renderers/RendererChart'
 import enhanceDurations from '../enhancers/enhanceDurations'
 import formatDuration from '../utils/formatDuration'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchDurations${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchDurations', domainId, opts)
 
 	const query = `
 		query fetchDurations($domainId: ID!, $interval: Interval!) {

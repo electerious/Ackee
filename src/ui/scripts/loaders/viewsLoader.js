@@ -3,11 +3,11 @@ import { createElement as h } from 'react'
 import RendererChart from '../components/renderers/RendererChart'
 import enhanceViews from '../enhancers/enhanceViews'
 import formatNumber from '../utils/formatNumber'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchViews${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchViews', domainId, opts)
 
 	const query = `
 		query fetchViews($domainId: ID!, $interval: Interval!, $type: ViewType!) {

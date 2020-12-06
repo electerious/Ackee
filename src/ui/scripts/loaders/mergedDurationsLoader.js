@@ -3,14 +3,14 @@ import { createElement as h } from 'react'
 import RendererChart from '../components/renderers/RendererChart'
 import enhanceDurations from '../enhancers/enhanceDurations'
 import formatDuration from '../utils/formatDuration'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchMergedDurations${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchMergedDurations', undefined, opts)
 
 	const query = `
-		query fetchDurations($interval: Interval!) {
+		query fetchMergedDurations($interval: Interval!) {
 			statistics {
 				durations(interval: $interval) {
 					id

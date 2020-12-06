@@ -2,11 +2,11 @@ import { createElement as h } from 'react'
 
 import RendererList from '../components/renderers/RendererList'
 import enhanceLanguages from '../enhancers/enhanceLanguages'
+import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	// TODO: Improve ids
-	const id = `fetchLanguages${ domainId }${ JSON.stringify(opts) }`
+	const id = createWidgetId('fetchLanguages', domainId, opts)
 
 	const query = `
 		query fetchLanguages($domainId: ID!, $sorting: Sorting!, $range: Range) {
