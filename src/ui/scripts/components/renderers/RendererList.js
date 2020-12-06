@@ -17,7 +17,7 @@ const textLabel = (item, range, isRecent) => {
 
 }
 
-const CardList = (props) => {
+const RendererList = (props) => {
 
 	const items = props.widget.value
 	const { range, sorting } = props.widget.variables
@@ -43,9 +43,9 @@ const CardList = (props) => {
 
 }
 
-CardList.propTypes = {
+RendererList.propTypes = {
 	widget: PropTypes.object.isRequired,
 	setTextLabel: PropTypes.func.isRequired
 }
 
-export default CardList
+export default RendererList

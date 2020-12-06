@@ -19,7 +19,7 @@ const textLabel = (item, range, isRecent, isNew) => {
 
 }
 
-const CardReferrers = (props) => {
+const RendererReferrers = (props) => {
 
 	const items = props.widget.value
 	const { range, sorting } = props.widget.variables
@@ -41,9 +41,9 @@ const CardReferrers = (props) => {
 
 }
 
-CardReferrers.propTypes = {
+RendererReferrers.propTypes = {
 	widget: PropTypes.object.isRequired,
 	setTextLabel: PropTypes.func.isRequired
 }
 
-export default CardReferrers
+export default RendererReferrers
