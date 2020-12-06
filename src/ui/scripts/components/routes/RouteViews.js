@@ -8,7 +8,7 @@ import useWidgets from '../../utils/useWidgets'
 
 const RouteViews = (props) => {
 
-	const renderedMergedWidgets = useMergedWidget(props, mergedViewsLoader, {
+	const renderedMergedWidget = useMergedWidget(props, mergedViewsLoader, {
 		interval: props.filter.interval,
 		type: props.filter.viewsType
 	}, {
@@ -28,7 +28,7 @@ const RouteViews = (props) => {
 
 	return (
 		h(Fragment, {},
-			renderedMergedWidgets,
+			renderedMergedWidget,
 			renderedWidgets
 		)
 	)
