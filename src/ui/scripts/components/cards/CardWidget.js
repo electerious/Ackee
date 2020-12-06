@@ -72,7 +72,8 @@ CardWidget.propTypes = {
 		PropTypes.string,
 		PropTypes.func
 	]).isRequired,
-	widget: PropTypes.object.isRequired
+	widget: PropTypes.object.isRequired,
+	onMore: PropTypes.func
 }
 
 export default CardWidget
