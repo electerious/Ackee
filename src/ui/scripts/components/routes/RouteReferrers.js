@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import referrersLoader from '../../loaders/referrersLoader'
-import useDomainWidgets from '../../hooks/useDomainWidgets'
+import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
 
 const RouteReferrers = (props) => {
 
-	return useDomainWidgets(props, referrersLoader, {
+	return useCardWidgetsForDomains(props, referrersLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})

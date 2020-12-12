@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import browsersLoader from '../../loaders/browsersLoader'
-import useDomainWidgets from '../../hooks/useDomainWidgets'
+import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
 
 const RouteBrowsers = (props) => {
 
-	return useDomainWidgets(props, browsersLoader, {
+	return useCardWidgetsForDomains(props, browsersLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.browsersType

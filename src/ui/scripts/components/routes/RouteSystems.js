@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import systemsLoader from '../../loaders/systemsLoader'
-import useDomainWidgets from '../../hooks/useDomainWidgets'
+import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
 
 const RouteSystems = (props) => {
 
-	return useDomainWidgets(props, systemsLoader, {
+	return useCardWidgetsForDomains(props, systemsLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.systemsType

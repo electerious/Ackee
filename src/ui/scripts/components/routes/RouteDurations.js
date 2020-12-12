@@ -1,27 +1,34 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h, Fragment, useMemo } from 'react'
 
 import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 import durationsLoader from '../../loaders/durationsLoader'
-import useMergedWidget from '../../hooks/useMergedWidget'
-import useDomainWidgets from '../../hooks/useDomainWidgets'
+import useCardWidgets from '../../hooks/useCardWidgets'
+import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
 
 const RouteDurations = (props) => {
 
-	const renderedMergedWidget = useMergedWidget(props, mergedDurationsLoader, {
-		interval: props.filter.interval
-	}, {
-		wide: true,
-		headline: () => 'Durations'
-	})
+	const mergedWidgetConfigs = useMemo(() => {
 
-	const renderedDomainWidgets = useDomainWidgets(props, durationsLoader, {
-		interval: props.filter.interval,
-		type: props.filter.viewsType
+		return [{
+			loader: mergedDurationsLoader({
+				interval: props.filter.interval
+			}),
+			additionalProps: {
+				wide: true,
+				headline: 'Durations'
+			}
+		}]
+
+	}, [ props.filter.interval ])
+
+	const renderedMergedWidgets = useCardWidgets(props, mergedWidgetConfigs)
+	const renderedDomainWidgets = useCardWidgetsForDomains(props, durationsLoader, {
+		interval: props.filter.interval
 	})
 
 	return (
 		h(Fragment, {},
-			renderedMergedWidget,
+			renderedMergedWidgets,
 			renderedDomainWidgets
 		)
 	)

@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import languagesLoader from '../../loaders/languagesLoader'
-import useDomainWidgets from '../../hooks/useDomainWidgets'
+import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
 
 const RouteLanguages = (props) => {
 
-	return useDomainWidgets(props, languagesLoader, {
+	return useCardWidgetsForDomains(props, languagesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})
