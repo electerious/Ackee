@@ -67,7 +67,6 @@ const CardFacts = (props) => {
 }
 
 CardFacts.propTypes = {
-	loading: PropTypes.bool.isRequired,
 	items: PropTypes.exact({
 		activeVisitors: PropTypes.number.isRequired,
 		averageViews: PropTypes.number.isRequired,
