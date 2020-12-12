@@ -1,28 +1,18 @@
-import { createElement as h, useEffect, useState } from 'react'
+import { createElement as h, useMemo } from 'react'
 
-import CardWidget from '../components/cards/CardWidget'
-
-import { initialSubState } from '../reducers/widgets'
+import useWidgets from './useWidgets'
 
 export default (props, createLoader, opts, additionalProps = {}) => {
 
-	const [ widgetId, setWidgetId ] = useState()
+	const widgetConfigs = useMemo(() => {
 
-	useEffect(() => {
-
-		const loader = createLoader(opts)
-		props.fetchWidget(props, loader)
-
-		setWidgetId(loader.id)
+		return [{
+			loader: createLoader(opts),
+			additionalProps
+		}]
 
 	}, [ ...Object.values(opts) ])
 
-	const widgetData = props.widgets.value[widgetId] || initialSubState()
-
-	return h(CardWidget, {
-		key: widgetId,
-		widget: widgetData,
-		...additionalProps
-	})
+	return useWidgets(props, widgetConfigs)
 
 }

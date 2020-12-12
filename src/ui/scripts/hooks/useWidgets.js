@@ -1,4 +1,4 @@
-import { createElement as h, useMemo } from 'react'
+import { createElement as h, useState, useEffect } from 'react'
 
 import { initialSubState } from '../reducers/widgets'
 
@@ -6,7 +6,9 @@ import CardWidget from '../components/cards/CardWidget'
 
 export default (props, widgetConfigs = []) => {
 
-	const widgetIds = useMemo(() => {
+	const [ widgetIds, setWidgetIds ] = useState([])
+
+	useEffect(() => {
 
 		const loaders = widgetConfigs.map((widgetConfig) =>
 			widgetConfig.loader
@@ -17,10 +19,9 @@ export default (props, widgetConfigs = []) => {
 		)
 
 		props.fetchWidgets(props, loaders)
-		return widgetIds
+		setWidgetIds(widgetIds)
 
-		// TODO: Rerender when widgetConfigs changes
-	}, [])
+	}, [ widgetConfigs ])
 
 	return widgetIds.map(
 		(widgetId, index) => {

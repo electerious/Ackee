@@ -5,7 +5,7 @@ import * as route from '../constants/route'
 import * as selectDomainsValue from '../selectors/selectDomainsValue'
 import routeByKey from '../utils/routeByKey'
 import whenBelow from '../utils/whenBelow'
-import overviewRoute from '../utils/overviewRoute'
+import domainRoute from '../utils/domainRoute'
 import isDefined from '../../../utils/isDefined'
 
 import Header, { createButton, createDropdown, createDropdownButton, createDropdownSeparator } from './Header'
@@ -14,7 +14,7 @@ import Modals from './Modals'
 const gotoDomainWhenDefined = (props, index) => {
 
 	const domain = selectDomainsValue.byIndex(props, index)
-	if (domain != null) props.setRoute(overviewRoute(domain))
+	if (domain != null) props.setRoute(domainRoute(domain))
 
 }
 
@@ -56,11 +56,11 @@ const Dashboard = (props) => {
 
 	const hasDomains = props.domains.value.length > 0
 
-	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).title : 'Domains'
+	const domainsLabel = (activeInside) => activeInside === true ? selectDomainsValue.byId(props, props.route.params.domainId).title : route.ROUTE_DOMAIN.title
 	const insightsLabel = (activeInside) => activeInside === true ? routeByKey(props.route.key).title : 'Insights'
 
 	const domainsItems = props.domains.value.map((domain, index) =>
-		createDropdownButton(domain.title, overviewRoute(domain), props, whenBelow(index, 10))
+		createDropdownButton(domain.title, domainRoute(domain), props, whenBelow(index, 10))
 	)
 
 	const insightsItems = [

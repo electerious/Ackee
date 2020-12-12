@@ -6,7 +6,7 @@ import createWidgetId from '../utils/createWidgetId'
 
 export default (domainId, opts) => {
 
-	const id = createWidgetId('fetchLanguages', domainId, opts)
+	const id = createWidgetId('fetchFacts', domainId, opts)
 
 	const query = `
 		domain(id: "${ domainId }") {

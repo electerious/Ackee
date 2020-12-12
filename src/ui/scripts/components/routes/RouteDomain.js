@@ -12,25 +12,27 @@ import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 import * as route from '../../constants/route'
 import useWidgets from '../../hooks/useWidgets'
 
-import mergedViewsLoader from '../../loaders/mergedViewsLoader'
-import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
-import mergedPagesLoader from '../../loaders/mergedPagesLoader'
-import mergedReferrersLoader from '../../loaders/mergedReferrersLoader'
-import mergedSystemsLoader from '../../loaders/mergedSystemsLoader'
-import mergedDevicesLoader from '../../loaders/mergedDevicesLoader'
-import mergedBrowsersLoader from '../../loaders/mergedBrowsersLoader'
-import mergedSizesLoader from '../../loaders/mergedSizesLoader'
-import mergedLanguagesLoader from '../../loaders/mergedLanguagesLoader'
+import viewsLoader from '../../loaders/viewsLoader'
+import durationsLoader from '../../loaders/durationsLoader'
+import pagesLoader from '../../loaders/pagesLoader'
+import referrersLoader from '../../loaders/referrersLoader'
+import systemsLoader from '../../loaders/systemsLoader'
+import devicesLoader from '../../loaders/devicesLoader'
+import browsersLoader from '../../loaders/browsersLoader'
+import sizesLoader from '../../loaders/sizesLoader'
+import languagesLoader from '../../loaders/languagesLoader'
 
 // TODO: Refactor facts
 // import enhanceFacts from '../../enhancers/enhanceFacts'
 // import CardFacts from '../cards/CardFacts'
 
-const RouteOverview = (props) => {
+const RouteDomain = (props) => {
+
+	const domainId = props.route.params.domainId
 
 	const essentialWidgetConfigs = useMemo(() => [
 		{
-			loader: mergedViewsLoader({
+			loader: viewsLoader(domainId, {
 				interval: INTERVALS_DAILY,
 				type: VIEWS_TYPE_UNIQUE
 			}),
@@ -41,7 +43,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedDurationsLoader({
+			loader: durationsLoader(domainId, {
 				interval: INTERVALS_DAILY
 			}),
 			additionalProps: {
@@ -51,7 +53,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedPagesLoader({
+			loader: pagesLoader(domainId, {
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP
 			}),
@@ -61,7 +63,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedReferrersLoader({
+			loader: referrersLoader(domainId, {
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP
 			}),
@@ -74,7 +76,7 @@ const RouteOverview = (props) => {
 
 	const detailedWidgetConfigs = useMemo(() => [
 		{
-			loader: mergedSystemsLoader({
+			loader: systemsLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
 				type: SYSTEMS_TYPE_WITH_VERSION
@@ -85,7 +87,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedDevicesLoader({
+			loader: devicesLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
 				type: DEVICES_TYPE_WITH_MODEL
@@ -96,7 +98,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedBrowsersLoader({
+			loader: browsersLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
 				type: BROWSERS_TYPE_WITH_VERSION
@@ -107,7 +109,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedSizesLoader({
+			loader: sizesLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
 				type: SIZES_TYPE_BROWSER_RESOLUTION
@@ -118,7 +120,7 @@ const RouteOverview = (props) => {
 			}
 		},
 		{
-			loader: mergedLanguagesLoader({
+			loader: languagesLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS
 			}),
@@ -146,4 +148,4 @@ const RouteOverview = (props) => {
 
 }
 
-export default RouteOverview
+export default RouteDomain

@@ -1,9 +1,9 @@
-import { ROUTE_OVERVIEW } from '../constants/route'
+import { ROUTE_DOMAIN } from '../constants/route'
 
 export default (domain) => {
 
 	return {
-		...ROUTE_OVERVIEW,
+		...ROUTE_DOMAIN,
 		params: {
 			domainId: domain.id
 		}
