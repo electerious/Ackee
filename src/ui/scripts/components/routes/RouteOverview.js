@@ -1,4 +1,4 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment } from 'react'
 
 import { SORTINGS_TOP } from '../../../../constants/sortings'
 import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
@@ -10,8 +10,6 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import * as route from '../../constants/route'
-import { ALL_DOMAINS } from '../../actions/overview'
-import * as selectOverviewValue from '../../selectors/selectOverviewValue'
 import useWidgets from '../../hooks/useWidgets'
 
 import mergedViewsLoader from '../../loaders/mergedViewsLoader'
@@ -25,19 +23,12 @@ import mergedSizesLoader from '../../loaders/mergedSizesLoader'
 import mergedLanguagesLoader from '../../loaders/mergedLanguagesLoader'
 
 // TODO: Refactor facts
-import enhanceFacts from '../../enhancers/enhanceFacts'
-import CardFacts from '../cards/CardFacts'
+// import enhanceFacts from '../../enhancers/enhanceFacts'
+// import CardFacts from '../cards/CardFacts'
 
 const RouteOverview = (props) => {
 
-	const domainId = props.route.params.domainId || ALL_DOMAINS
-	const isLoading = selectOverviewValue.withoutType(props, domainId).fetching
-
-	useEffect(() => {
-
-		props.fetchOverview(props, domainId)
-
-	}, [ domainId ])
+	// const domainId = props.route.params.domainId || ALL_DOMAINS
 
 	const renderedEssentialWidgets = useWidgets(props, [
 		{
@@ -142,10 +133,9 @@ const RouteOverview = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardFacts, {
-				loading: isLoading,
-				items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
-			}),
+			// h(CardFacts, {
+			// 	items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
+			// }),
 			h('div', { className: 'content__spacer' }),
 			renderedEssentialWidgets,
 			h('div', { className: 'content__spacer' }),

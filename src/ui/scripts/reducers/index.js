@@ -11,7 +11,6 @@ import route from './route'
 import filter from './filter'
 import domains from './domains'
 import events from './events'
-import overview from './overview'
 import widgets from './widgets'
 
 const reducers = combineReducers({
@@ -22,7 +21,6 @@ const reducers = combineReducers({
 	filter,
 	domains,
 	events,
-	overview,
 	widgets
 })
 
