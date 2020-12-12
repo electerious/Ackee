@@ -16,7 +16,7 @@ export default produce((draft, action) => {
 	switch (action.type) {
 		case SET_ROUTE:
 			draft.key = action.key
-			draft.params = action.params
+			draft.params = action.params || initialState().params
 			break
 	}
 
