@@ -23,8 +23,12 @@ export default (props, widgetConfigs = []) => {
 			loader.id
 		)
 
-		props.fetchWidgets(props, loaders)
-		setWidgetIds(widgetIds)
+		// Only fetch widgets when there's something to load.
+		// Empty requests are forbidden.
+		if (loaders.length > 0) {
+			props.fetchWidgets(props, loaders)
+			setWidgetIds(widgetIds)
+		}
 
 	}, [ widgetConfigs ])
 
