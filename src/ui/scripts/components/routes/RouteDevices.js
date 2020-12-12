@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import devicesLoader from '../../loaders/devicesLoader'
-import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
+import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 
 const RouteDevices = (props) => {
 
-	return useCardWidgetsForDomains(props, devicesLoader, {
+	return useWidgetsForDomains(props, devicesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting,
 		type: props.filter.devicesType

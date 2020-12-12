@@ -1,4 +1,4 @@
-export default (referrers) => {
+export default (referrers = []) => {
 
 	return referrers.map((referrer) => ({
 		url: new URL(referrer.id),

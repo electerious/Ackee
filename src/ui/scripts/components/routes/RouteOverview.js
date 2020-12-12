@@ -10,8 +10,9 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import * as route from '../../constants/route'
-import useCardWidgets from '../../hooks/useCardWidgets'
+import useWidgets from '../../hooks/useWidgets'
 
+import mergedFactsLoader from '../../loaders/mergedFactsLoader'
 import mergedViewsLoader from '../../loaders/mergedViewsLoader'
 import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 import mergedPagesLoader from '../../loaders/mergedPagesLoader'
@@ -22,11 +23,16 @@ import mergedBrowsersLoader from '../../loaders/mergedBrowsersLoader'
 import mergedSizesLoader from '../../loaders/mergedSizesLoader'
 import mergedLanguagesLoader from '../../loaders/mergedLanguagesLoader'
 
-// TODO: Refactor facts
-// import enhanceFacts from '../../enhancers/enhanceFacts'
-// import CardFacts from '../cards/CardFacts'
+import CardFactsWidget from '../cards/CardFactsWidget'
 
 const RouteOverview = (props) => {
+
+	const factsWidgetConfigs = useMemo(() => [
+		{
+			WidgetComponent: CardFactsWidget,
+			loader: mergedFactsLoader({})
+		}
+	], [])
 
 	const essentialWidgetConfigs = useMemo(() => [
 		{
@@ -129,14 +135,13 @@ const RouteOverview = (props) => {
 		}
 	], [])
 
-	const renderedEssentialWidgets = useCardWidgets(props, essentialWidgetConfigs)
-	const renderedDetailedWidgets = useCardWidgets(props, detailedWidgetConfigs)
+	const renderedFactsWidgets = useWidgets(props, factsWidgetConfigs)
+	const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
+	const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
 	return (
 		h(Fragment, {},
-			// h(CardFacts, {
-			// 	items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
-			// }),
+			renderedFactsWidgets,
 			h('div', { className: 'content__spacer' }),
 			renderedEssentialWidgets,
 			h('div', { className: 'content__spacer' }),

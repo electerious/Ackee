@@ -1,11 +1,11 @@
 import { createElement as h } from 'react'
 
 import pagesLoader from '../../loaders/pagesLoader'
-import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
+import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 
 const RoutePages = (props) => {
 
-	return useCardWidgetsForDomains(props, pagesLoader, {
+	return useWidgetsForDomains(props, pagesLoader, {
 		range: props.filter.range,
 		sorting: props.filter.sorting
 	})

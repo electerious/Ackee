@@ -1,4 +1,4 @@
-export default (devices) => {
+export default (devices = []) => {
 
 	return devices.map((device) => ({
 		text: device.id,

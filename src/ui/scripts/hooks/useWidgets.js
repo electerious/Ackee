@@ -4,6 +4,11 @@ import { initialSubState } from '../reducers/widgets'
 
 import CardWidget from '../components/cards/CardWidget'
 
+const defaultWidgetConfig = {
+	WidgetComponent: CardWidget,
+	additionalProps: {}
+}
+
 export default (props, widgetConfigs = []) => {
 
 	const [ widgetIds, setWidgetIds ] = useState([])
@@ -27,10 +32,15 @@ export default (props, widgetConfigs = []) => {
 		(widgetId, index) => {
 			const widgetData = props.widgets.value[widgetId] || initialSubState()
 
-			return h(CardWidget, {
+			const widgetConfig = {
+				...defaultWidgetConfig,
+				...widgetConfigs[index]
+			}
+
+			return h(widgetConfig.WidgetComponent, {
 				key: widgetId,
 				widget: widgetData,
-				...widgetConfigs[index].additionalProps
+				...widgetConfig.additionalProps
 			})
 		}
 	)

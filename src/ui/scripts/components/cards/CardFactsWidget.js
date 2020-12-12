@@ -27,39 +27,48 @@ const Presentation = (props) => {
 
 const CardFacts = (props) => {
 
+	const {
+		activeVisitors,
+		averageViews,
+		averageDuration,
+		viewsToday,
+		viewsMonth,
+		viewsYear
+	} = props.widget.value
+
 	return (
 		h('div', {
 			className: 'facts'
 		},
 			h(Presentation, {
 				headline: 'Active visitors',
-				value: props.items.activeVisitors,
-				text: pluralize([ 'visitors', 'visitor', 'visitors' ], props.items.activeVisitors)
+				value: activeVisitors,
+				text: pluralize([ 'visitors', 'visitor', 'visitors' ], activeVisitors)
 			}),
 			h(Presentation, {
 				headline: 'Average views',
-				value: formatNumber(props.items.averageViews),
+				value: formatNumber(averageViews),
 				text: 'per day'
 			}),
 			h(Presentation, {
 				headline: 'Average duration',
-				value: formatDuration(props.items.averageDuration).value,
-				text: formatDuration(props.items.averageDuration).unit
+				value: formatDuration(averageDuration).value,
+				text: formatDuration(averageDuration).unit
 			}),
 			h(Presentation, {
 				headline: 'Views today',
-				value: formatNumber(props.items.viewsToday),
-				text: pluralize([ 'views', 'view', 'views' ], props.items.viewsToday)
+				value: formatNumber(viewsToday),
+				text: pluralize([ 'views', 'view', 'views' ], viewsToday)
 			}),
 			h(Presentation, {
 				headline: 'Views this month',
-				value: formatNumber(props.items.viewsMonth),
-				text: pluralize([ 'views', 'view', 'views' ], props.items.viewsMonth)
+				value: formatNumber(viewsMonth),
+				text: pluralize([ 'views', 'view', 'views' ], viewsMonth)
 			}),
 			h(Presentation, {
 				headline: 'Views this year',
-				value: formatNumber(props.items.viewsYear),
-				text: pluralize([ 'views', 'view', 'views' ], props.items.viewsYear)
+				value: formatNumber(viewsYear),
+				text: pluralize([ 'views', 'view', 'views' ], viewsYear)
 			})
 		)
 	)
@@ -67,14 +76,7 @@ const CardFacts = (props) => {
 }
 
 CardFacts.propTypes = {
-	items: PropTypes.exact({
-		activeVisitors: PropTypes.number.isRequired,
-		averageViews: PropTypes.number.isRequired,
-		averageDuration: PropTypes.number.isRequired,
-		viewsToday: PropTypes.number.isRequired,
-		viewsMonth: PropTypes.number.isRequired,
-		viewsYear: PropTypes.number.isRequired
-	}).isRequired
+	widget: PropTypes.object.isRequired
 }
 
 export default CardFacts

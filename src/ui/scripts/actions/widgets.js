@@ -6,9 +6,10 @@ export const SET_WIDGETS_END = Symbol()
 export const SET_WIDGETS_FETCHING = Symbol()
 export const SET_WIDGETS_ERROR = Symbol()
 
-export const setWidgetsStart = (id, Renderer, variables) => ({
+export const setWidgetsStart = (id, value, Renderer, variables) => ({
 	type: SET_WIDGETS_START,
 	id,
+	value,
 	Renderer,
 	variables
 })
@@ -45,8 +46,8 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 	}).join('')
 
 	loaders.forEach((loader) => {
-		const { id, Renderer, variables } = loader
-		dispatch(setWidgetsStart(id, Renderer, variables))
+		const { id, Renderer, variables, enhancer } = loader
+		dispatch(setWidgetsStart(id, enhancer(), Renderer, variables))
 	})
 
 	try {
@@ -62,7 +63,7 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 		})
 
 		loaders.forEach((loader, index) => {
-			const { id, enhancer, selector } = loader
+			const { id, selector, enhancer } = loader
 			const entryName = queryName(index)
 			dispatch(setWidgetsEnd(id, enhancer(selector(data, entryName))))
 		})
@@ -74,37 +75,6 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 		loaders.forEach((loader) => dispatch(setWidgetsFetching(loader.id, false)))
 		if (err.name === 'HandledError') return
 		loaders.forEach((loader) => dispatch(setWidgetsError(loader.id, err)))
-
-	}
-
-})
-
-export const fetchWidget = signalHandler((signal) => (props, loader) => async (dispatch) => {
-
-	const { id, Renderer, query, variables, selector, enhancer } = loader
-
-	dispatch(setWidgetsStart(id, Renderer, variables))
-
-	try {
-
-		const data = await api({
-			query: `
-				{
-					${ query }
-				}
-			`,
-			props,
-			signal: signal(id)
-		})
-
-		dispatch(setWidgetsEnd(id, enhancer(selector(data))))
-
-	} catch (err) {
-
-		if (err.name === 'AbortError') return
-		dispatch(setWidgetsFetching(id, false))
-		if (err.name === 'HandledError') return
-		dispatch(setWidgetsError(id, err))
 
 	}
 

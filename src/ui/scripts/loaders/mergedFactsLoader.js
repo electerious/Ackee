@@ -1,6 +1,5 @@
 import { createElement as h } from 'react'
 
-import RendererList from '../components/renderers/RendererList'
 import enhanceFacts from '../enhancers/enhanceFacts'
 import createWidgetId from '../utils/createWidgetId'
 
@@ -25,7 +24,7 @@ export default (opts) => {
 
 	return {
 		id,
-		Renderer: RendererList,
+		Renderer: undefined,
 		query,
 		variables,
 		selector,

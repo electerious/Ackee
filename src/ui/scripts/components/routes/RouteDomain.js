@@ -10,8 +10,9 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import * as route from '../../constants/route'
-import useCardWidgets from '../../hooks/useCardWidgets'
+import useWidgets from '../../hooks/useWidgets'
 
+import factsLoader from '../../loaders/factsLoader'
 import viewsLoader from '../../loaders/viewsLoader'
 import durationsLoader from '../../loaders/durationsLoader'
 import pagesLoader from '../../loaders/pagesLoader'
@@ -22,13 +23,18 @@ import browsersLoader from '../../loaders/browsersLoader'
 import sizesLoader from '../../loaders/sizesLoader'
 import languagesLoader from '../../loaders/languagesLoader'
 
-// TODO: Refactor facts
-// import enhanceFacts from '../../enhancers/enhanceFacts'
-// import CardFacts from '../cards/CardFacts'
+import CardFactsWidget from '../cards/CardFactsWidget'
 
 const RouteDomain = (props) => {
 
 	const domainId = props.route.params.domainId
+
+	const factsWidgetConfigs = useMemo(() => [
+		{
+			WidgetComponent: CardFactsWidget,
+			loader: factsLoader(domainId, {})
+		}
+	], [ domainId ])
 
 	const essentialWidgetConfigs = useMemo(() => [
 		{
@@ -72,7 +78,7 @@ const RouteDomain = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
 			}
 		}
-	], [])
+	], [ domainId ])
 
 	const detailedWidgetConfigs = useMemo(() => [
 		{
@@ -129,16 +135,15 @@ const RouteDomain = (props) => {
 				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)
 			}
 		}
-	], [])
+	], [ domainId ])
 
-	const renderedEssentialWidgets = useCardWidgets(props, essentialWidgetConfigs)
-	const renderedDetailedWidgets = useCardWidgets(props, detailedWidgetConfigs)
+	const renderedFactsWidgets = useWidgets(props, factsWidgetConfigs)
+	const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
+	const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
 	return (
 		h(Fragment, {},
-			// h(CardFacts, {
-			// 	items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
-			// }),
+			renderedFactsWidgets,
 			h('div', { className: 'content__spacer' }),
 			renderedEssentialWidgets,
 			h('div', { className: 'content__spacer' }),

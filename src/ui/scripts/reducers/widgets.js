@@ -12,7 +12,7 @@ export const initialState = () => ({
 })
 
 export const initialSubState = () => ({
-	value: [],
+	value: undefined,
 	Renderer: () => null,
 	variables: {},
 	fetching: false,
@@ -21,19 +21,20 @@ export const initialSubState = () => ({
 
 export default produce((draft, action) => {
 
-	const hasId = () => action.id != null
-	const hasValue = () => draft.value[action.id] != null
-
-	if (hasId() === true && hasValue() === false) draft.value[action.id] = initialSubState()
-
 	switch (action.type) {
 		case SET_WIDGETS_START:
-			draft.value[action.id].Renderer = action.Renderer || initialSubState().Renderer
-			draft.value[action.id].variables = action.variables || initialSubState().variables
+			// Initialize when id is unknown
+			draft.value[action.id] = draft.value[action.id] || initialSubState()
+			// Reuse existing value when available
+			const value = draft.value[action.id].value == null ? action.value : draft.value[action.id].value
+			draft.value[action.id].value = value
+			// Set remaining data
+			draft.value[action.id].Renderer = action.Renderer
+			draft.value[action.id].variables = action.variables
 			draft.value[action.id].fetching = true
 			break
 		case SET_WIDGETS_END:
-			draft.value[action.id].value = action.value || initialSubState().value
+			draft.value[action.id].value = action.value
 			draft.value[action.id].fetching = false
 			break
 		case SET_WIDGETS_FETCHING:

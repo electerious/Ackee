@@ -1,4 +1,4 @@
-export default (systems) => {
+export default (systems = []) => {
 
 	return systems.map((system) => ({
 		text: system.id,

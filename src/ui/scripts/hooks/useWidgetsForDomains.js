@@ -1,6 +1,6 @@
 import { createElement as h, useMemo } from 'react'
 
-import useCardWidgets from './useCardWidgets'
+import useWidgets from './useWidgets'
 import domainRoute from '../utils/domainRoute'
 
 export default (props, createLoader, opts) => {
@@ -17,6 +17,6 @@ export default (props, createLoader, opts) => {
 
 	}, [ props.domains.value, ...Object.values(opts) ])
 
-	return useCardWidgets(props, widgetConfigs)
+	return useWidgets(props, widgetConfigs)
 
 }

@@ -2,8 +2,8 @@ import { createElement as h, Fragment, useMemo } from 'react'
 
 import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 import durationsLoader from '../../loaders/durationsLoader'
-import useCardWidgets from '../../hooks/useCardWidgets'
-import useCardWidgetsForDomains from '../../hooks/useCardWidgetsForDomains'
+import useWidgets from '../../hooks/useWidgets'
+import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 
 const RouteDurations = (props) => {
 
@@ -21,8 +21,8 @@ const RouteDurations = (props) => {
 
 	}, [ props.filter.interval ])
 
-	const renderedMergedWidgets = useCardWidgets(props, mergedWidgetConfigs)
-	const renderedDomainWidgets = useCardWidgetsForDomains(props, durationsLoader, {
+	const renderedMergedWidgets = useWidgets(props, mergedWidgetConfigs)
+	const renderedDomainWidgets = useWidgetsForDomains(props, durationsLoader, {
 		interval: props.filter.interval
 	})
 
