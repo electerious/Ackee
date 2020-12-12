@@ -8,7 +8,7 @@ import {
 } from '../actions'
 
 export const initialState = () => ({
-	value: {},
+	value: undefined,
 	fetching: false,
 	error: undefined
 })

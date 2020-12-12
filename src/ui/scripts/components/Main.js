@@ -24,7 +24,7 @@ const Main = (props) => {
 	const unknownErrors = props.errors.filter(isUnknownError)
 
 	const hasError = unknownErrors.length !== 0
-	const hasToken = props.token.value.id != null
+	const hasToken = props.token.value != null
 
 	const showOverlayFailure = hasError === true
 	const showOverlayLogin = hasError === false && hasToken === false

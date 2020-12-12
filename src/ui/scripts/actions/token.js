@@ -53,8 +53,7 @@ export const addToken = signalHandler((signal) => (props, state) => async (dispa
 			signal: signal()
 		})
 
-		// TODO: Maybe just store the id instead of the payload
-		dispatch(setTokenEnd(data.createToken.payload))
+		dispatch(setTokenEnd(data.createToken.payload.id))
 
 	} catch (err) {
 
@@ -82,7 +81,7 @@ export const deleteToken = signalHandler((signal) => (props) => async (dispatch)
 				}
 			`,
 			variables: {
-				id: props.token.value.id
+				id: props.token.value
 			},
 			props,
 			signal: signal()
