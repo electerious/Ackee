@@ -1,6 +1,6 @@
 import { createElement as h, useMemo } from 'react'
 
-import useWidgets from './useWidgets'
+import useCardWidgets from './useCardWidgets'
 
 export default (props, createLoader, opts, additionalProps = {}) => {
 
@@ -13,6 +13,6 @@ export default (props, createLoader, opts, additionalProps = {}) => {
 
 	}, [ ...Object.values(opts) ])
 
-	return useWidgets(props, widgetConfigs)
+	return useCardWidgets(props, widgetConfigs)
 
 }

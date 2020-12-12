@@ -10,7 +10,7 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import * as route from '../../constants/route'
-import useWidgets from '../../hooks/useWidgets'
+import useCardWidgets from '../../hooks/useCardWidgets'
 
 import mergedViewsLoader from '../../loaders/mergedViewsLoader'
 import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
@@ -129,8 +129,8 @@ const RouteOverview = (props) => {
 		}
 	], [])
 
-	const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
-	const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
+	const renderedEssentialWidgets = useCardWidgets(props, essentialWidgetConfigs)
+	const renderedDetailedWidgets = useCardWidgets(props, detailedWidgetConfigs)
 
 	return (
 		h(Fragment, {},
