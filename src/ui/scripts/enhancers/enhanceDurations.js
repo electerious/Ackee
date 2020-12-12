@@ -1,6 +1,5 @@
 import createArray from '../../../utils/createArray'
 
-// TODO: Avoid that this functions runs that may times
 export default (durations = [], length) => createArray(length).map((_, index) => {
 
 	const duration = durations[index]

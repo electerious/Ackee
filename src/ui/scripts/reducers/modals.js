@@ -21,7 +21,9 @@ export default produce((draft, action) => {
 
 	switch (action.type) {
 		case SET_MODALS_STATE:
+			// Initialize when id is unknown
 			draft.value[action.modalId] = draft.value[action.modalId] || initialSubState()
+			// Set remaining data
 			draft.value[action.modalId].id = action.modalId
 			draft.value[action.modalId].type = action.payload.type
 			draft.value[action.modalId].props = action.payload.props || initialSubState().props
