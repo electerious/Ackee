@@ -1,23 +1,10 @@
-import { v4 as uuid } from 'uuid'
-
-const ids = new Map()
-
-const existingId = (key) => {
-	return ids.get(key)
-}
-
-const newId = (key) => {
-	const id = uuid()
-	ids.set(key, id)
-	return id
-}
+import { v5 as uuid } from 'uuid'
 
 export default (type, domainId, opts) => {
 
-	const key = `${ type }${ domainId || '' }${ JSON.stringify(opts) }`
-	const id = existingId(key)
+	const name = `${ type }${ domainId || '' }${ JSON.stringify(opts) }`
+	const namespace = '906d7dd0-b6e0-42c8-9270-436958c29c36'
 
-	if (id == null) return newId(key)
-	return id
+	return uuid(name, namespace)
 
 }
