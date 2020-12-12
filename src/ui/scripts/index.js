@@ -46,12 +46,7 @@ store.subscribe(() => {
 		},
 		filter: {
 			...initialFilterState(),
-			sorting: currentState.filter.sorting,
-			range: currentState.filter.range,
-			interval: currentState.filter.interval,
-			viewsType: currentState.filter.viewsType,
-			devicesType: currentState.filter.devicesType,
-			browsersType: currentState.filter.browsersType
+			...currentState.filter
 		}
 	})
 
