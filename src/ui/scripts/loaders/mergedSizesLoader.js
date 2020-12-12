@@ -6,7 +6,7 @@ import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	const id = createWidgetId('fetchSizes', undefined, opts)
+	const id = createWidgetId('fetchMergedSizes', undefined, opts)
 
 	const query = `
 		statistics {

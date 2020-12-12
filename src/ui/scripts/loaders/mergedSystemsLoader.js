@@ -6,7 +6,7 @@ import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	const id = createWidgetId('fetchSystems', undefined, opts)
+	const id = createWidgetId('fetchMergedSystems', undefined, opts)
 
 	const query = `
 		statistics {

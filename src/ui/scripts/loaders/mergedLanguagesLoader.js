@@ -6,7 +6,7 @@ import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	const id = createWidgetId('fetchLanguages', undefined, opts)
+	const id = createWidgetId('fetchMergedLanguages', undefined, opts)
 
 	const query = `
 		statistics {

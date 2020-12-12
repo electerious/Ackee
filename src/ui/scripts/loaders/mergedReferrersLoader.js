@@ -6,7 +6,7 @@ import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	const id = createWidgetId('fetchReferrers', undefined, opts)
+	const id = createWidgetId('fetchMergedReferrers', undefined, opts)
 
 	const query = `
 		statistics {

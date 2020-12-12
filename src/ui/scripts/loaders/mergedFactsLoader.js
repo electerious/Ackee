@@ -5,7 +5,7 @@ import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
 
-	const id = createWidgetId('fetchFacts', undefined, opts)
+	const id = createWidgetId('fetchMergedFacts', undefined, opts)
 
 	const query = `
 		facts {
