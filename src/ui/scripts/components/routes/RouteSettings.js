@@ -67,7 +67,7 @@ const RouteSettings = (props) => {
 
 	const domainsItems = createItems(props.domains.value, showDomainEditModal, showDomainAddModal, 'New domain')
 	const eventsItems = createItems(props.events.value, showEventEditModal, showEventAddModal, 'New event')
-	const permanentTokensItems = createItems(props.domains.value, showPermanentTokenEditModal, showPermanentTokenAddModal, 'New permanent token')
+	const permanentTokensItems = createItems(props.permanentTokens.value, showPermanentTokenEditModal, showPermanentTokenAddModal, 'New permanent token')
 
 	return (
 		h(Fragment, {},
