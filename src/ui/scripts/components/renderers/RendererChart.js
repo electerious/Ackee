@@ -36,7 +36,7 @@ const RendererChart = (props) => {
 	const onLeave = () => setActive(0)
 
 	const label = textLabel(active, interval)
-	useEffect(() => props.setTextLabel(label), [ label ])
+	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	return h(PresentationBarChart, {
 		items,
@@ -50,7 +50,7 @@ const RendererChart = (props) => {
 
 RendererChart.propTypes = {
 	widget: PropTypes.object.isRequired,
-	setTextLabel: PropTypes.func.isRequired
+	setStatusLabel: PropTypes.func.isRequired
 }
 
 export default RendererChart

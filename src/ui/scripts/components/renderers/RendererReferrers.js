@@ -31,7 +31,7 @@ const RendererReferrers = (props) => {
 	const onLeave = () => setActive()
 
 	const label = textLabel(items[active], range, sorting === SORTINGS_RECENT, sorting === SORTINGS_NEW)
-	useEffect(() => props.setTextLabel(label), [ label ])
+	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	return h(PresentationIconList, {
 		items,
@@ -43,7 +43,7 @@ const RendererReferrers = (props) => {
 
 RendererReferrers.propTypes = {
 	widget: PropTypes.object.isRequired,
-	setTextLabel: PropTypes.func.isRequired
+	setStatusLabel: PropTypes.func.isRequired
 }
 
 export default RendererReferrers

@@ -4,8 +4,7 @@ import classNames from 'classnames'
 
 import Headline from '../Headline'
 import Text from '../Text'
-import Updating from '../Updating'
-import PresentationEmptyState, { ICON_LOADING, ICON_WARNING } from '../presentations/PresentationEmptyState'
+import Status, { ICON_LOADER, ICON_UPDATER } from '../Status'
 import status from '../../utils/status'
 
 const CardWidget = (props) => {
@@ -17,25 +16,22 @@ const CardWidget = (props) => {
 	} = status(props.widget.value, props.widget.fetching)
 
 	// Use thin space as initial value to avoid that the label changes the height once rendered
-	const [ textLabel, setTextLabel ] = useState(' ')
+	const [ statusLabel, setStatusLabel ] = useState(' ')
 
-	const presentation = (() => {
-		if (isLoading === true) {
-			return h(PresentationEmptyState, {
-				icon: ICON_LOADING
-			}, 'Loading data')
-		}
+	const currentStatus = (() => {
+		if (isLoading === true) return h(Status, {
+			icon: ICON_LOADER
+		}, 'Loading')
 
-		if (isEmpty === true) {
-			return h(PresentationEmptyState, {
-				icon: ICON_WARNING
-			}, 'No data')
-		}
+		if (isStale === true) return h(Status, {
+			icon: ICON_UPDATER
+		}, 'Updating')
 
-		return h(props.widget.Renderer, {
-			widget: props.widget,
-			setTextLabel
-		})
+		if (isEmpty === true) return h(Status, {},
+			'No data'
+		)
+
+		return h(Status, {}, statusLabel)
 	})()
 
 	return (
@@ -54,8 +50,11 @@ const CardWidget = (props) => {
 				h(Text, {
 					type: 'div',
 					spacing: false
-				}, isStale === true ? h(Updating) : textLabel),
-				presentation
+				}, currentStatus),
+				h(props.widget.Renderer, {
+					widget: props.widget,
+					setStatusLabel
+				})
 			)
 		)
 	)

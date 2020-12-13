@@ -29,7 +29,7 @@ const RendererList = (props) => {
 	const onLeave = () => setActive()
 
 	const label = textLabel(items[active], range, sorting === SORTINGS_RECENT)
-	useEffect(() => props.setTextLabel(label), [ label ])
+	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	if (sorting === SORTINGS_TOP) return h(PresentationCounterList, {
 		items
@@ -45,7 +45,7 @@ const RendererList = (props) => {
 
 RendererList.propTypes = {
 	widget: PropTypes.object.isRequired,
-	setTextLabel: PropTypes.func.isRequired
+	setStatusLabel: PropTypes.func.isRequired
 }
 
 export default RendererList
