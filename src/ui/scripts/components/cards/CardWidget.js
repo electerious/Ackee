@@ -27,7 +27,7 @@ const CardWidget = (props) => {
 		}
 
 		if (isEmpty === true) {
-			h(PresentationEmptyState, {
+			return h(PresentationEmptyState, {
 				icon: ICON_WARNING
 			}, 'No data')
 		}
