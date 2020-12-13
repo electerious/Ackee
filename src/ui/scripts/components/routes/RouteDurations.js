@@ -11,7 +11,8 @@ const RouteDurations = (props) => {
 
 		return [{
 			loader: mergedDurationsLoader({
-				interval: props.filter.interval
+				interval: props.filter.interval,
+				limit: 14
 			}),
 			additionalProps: {
 				wide: true,
@@ -23,7 +24,8 @@ const RouteDurations = (props) => {
 
 	const renderedMergedWidgets = useWidgets(props, mergedWidgetConfigs)
 	const renderedDomainWidgets = useWidgetsForDomains(props, durationsLoader, {
-		interval: props.filter.interval
+		interval: props.filter.interval,
+		limit: 7
 	})
 
 	return (

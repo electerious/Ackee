@@ -11,7 +11,7 @@ export default (opts) => {
 
 	const query = `
 		statistics {
-			views(interval: ${ opts.interval }, type: ${ opts.type }) {
+			views(interval: ${ opts.interval }, type: ${ opts.type }, limit: ${ opts.limit }) {
 				id
 				count
 			}
@@ -20,7 +20,8 @@ export default (opts) => {
 
 	const variables = {
 		interval: opts.interval,
-		type: opts.type
+		type: opts.type,
+		limit: opts.limit
 	}
 
 	const selector = (data, entryName = 'statistics') => data[entryName].views
@@ -34,7 +35,7 @@ export default (opts) => {
 		query,
 		variables,
 		selector,
-		enhancer: (views) => enhanceViews(views, 14)
+		enhancer: (views) => enhanceViews(views, opts.limit)
 	}
 
 }

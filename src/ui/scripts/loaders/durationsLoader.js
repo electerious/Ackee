@@ -12,7 +12,7 @@ export default (domainId, opts) => {
 	const query = `
 		domain(id: "${ domainId }") {
 			statistics {
-				durations(interval: ${ opts.interval }, limit: 7) {
+				durations(interval: ${ opts.interval }, limit: ${ opts.limit }) {
 					id
 					count
 				}
@@ -22,7 +22,8 @@ export default (domainId, opts) => {
 
 	const variables = {
 		domainId,
-		interval: opts.interval
+		interval: opts.interval,
+		limit: opts.limit
 	}
 
 	const selector = (data, entryName = 'domain') => data[entryName].statistics.durations
@@ -36,7 +37,7 @@ export default (domainId, opts) => {
 		query,
 		variables,
 		selector,
-		enhancer: (durations) => enhanceDurations(durations, 7)
+		enhancer: (durations) => enhanceDurations(durations, opts.limit)
 	}
 
 }

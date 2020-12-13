@@ -38,7 +38,8 @@ const RouteOverview = (props) => {
 		{
 			loader: mergedViewsLoader({
 				interval: INTERVALS_DAILY,
-				type: VIEWS_TYPE_UNIQUE
+				type: VIEWS_TYPE_UNIQUE,
+				limit: 14
 			}),
 			additionalProps: {
 				wide: true,
@@ -48,7 +49,8 @@ const RouteOverview = (props) => {
 		},
 		{
 			loader: mergedDurationsLoader({
-				interval: INTERVALS_DAILY
+				interval: INTERVALS_DAILY,
+				limit: 14
 			}),
 			additionalProps: {
 				wide: true,

@@ -12,7 +12,7 @@ export default (domainId, opts) => {
 	const query = `
 		domain(id: "${ domainId }") {
 			statistics {
-				views(interval: ${ opts.interval }, type: ${ opts.type }, limit: 7) {
+				views(interval: ${ opts.interval }, type: ${ opts.type }, limit: ${ opts.limit }) {
 					id
 					count
 				}
@@ -23,7 +23,8 @@ export default (domainId, opts) => {
 	const variables = {
 		domainId,
 		type: opts.type,
-		interval: opts.interval
+		interval: opts.interval,
+		limit: opts.limit
 	}
 
 	const selector = (data, entryName = 'domain') => data[entryName].statistics.views
@@ -37,7 +38,7 @@ export default (domainId, opts) => {
 		query,
 		variables,
 		selector,
-		enhancer: (views) => enhanceViews(views, 7)
+		enhancer: (views) => enhanceViews(views, opts.limit)
 	}
 
 }

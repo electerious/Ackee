@@ -40,7 +40,8 @@ const RouteDomain = (props) => {
 		{
 			loader: viewsLoader(domainId, {
 				interval: INTERVALS_DAILY,
-				type: VIEWS_TYPE_UNIQUE
+				type: VIEWS_TYPE_UNIQUE,
+				limit: 14
 			}),
 			additionalProps: {
 				wide: true,
@@ -50,7 +51,8 @@ const RouteDomain = (props) => {
 		},
 		{
 			loader: durationsLoader(domainId, {
-				interval: INTERVALS_DAILY
+				interval: INTERVALS_DAILY,
+				limit: 14
 			}),
 			additionalProps: {
 				wide: true,

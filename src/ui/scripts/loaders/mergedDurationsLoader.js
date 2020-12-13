@@ -11,7 +11,7 @@ export default (opts) => {
 
 	const query = `
 		statistics {
-			durations(interval: ${ opts.interval }) {
+			durations(interval: ${ opts.interval }, limit: ${ opts.limit }) {
 				id
 				count
 			}
@@ -19,7 +19,8 @@ export default (opts) => {
 	`
 
 	const variables = {
-		interval: opts.interval
+		interval: opts.interval,
+		limit: opts.limit
 	}
 
 	const selector = (data, entryName = 'statistics') => data[entryName].durations
@@ -33,7 +34,7 @@ export default (opts) => {
 		query,
 		variables,
 		selector,
-		enhancer: (durations) => enhanceDurations(durations, 14)
+		enhancer: (durations) => enhanceDurations(durations, opts.limit)
 	}
 
 }

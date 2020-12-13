@@ -13,7 +13,8 @@ const RouteViews = (props) => {
 		return [{
 			loader: mergedViewsLoader({
 				interval: props.filter.interval,
-				type: props.filter.viewsType
+				type: props.filter.viewsType,
+				limit: 14
 			}),
 			additionalProps: {
 				wide: true,
@@ -29,7 +30,8 @@ const RouteViews = (props) => {
 	const renderedMergedWidgets = useWidgets(props, mergedWidgetConfigs)
 	const renderedDomainWidgets = useWidgetsForDomains(props, viewsLoader, {
 		interval: props.filter.interval,
-		type: props.filter.viewsType
+		type: props.filter.viewsType,
+		limit: 7
 	})
 
 	return (
