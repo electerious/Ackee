@@ -13,8 +13,6 @@ export const initialState = () => ({
 
 export const initialSubState = () => ({
 	value: undefined,
-	Renderer: () => null,
-	variables: {},
 	fetching: false,
 	error: undefined
 })
@@ -29,8 +27,6 @@ export default produce((draft, action) => {
 			const value = draft.value[action.id].value == null ? action.value : draft.value[action.id].value
 			draft.value[action.id].value = value
 			// Set remaining data
-			draft.value[action.id].Renderer = action.Renderer
-			draft.value[action.id].variables = action.variables
 			draft.value[action.id].fetching = true
 			break
 		case SET_WIDGETS_END:

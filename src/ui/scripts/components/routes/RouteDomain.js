@@ -31,6 +31,7 @@ const RouteDomain = (props) => {
 
 	const factsWidgetConfigs = useMemo(() => [
 		{
+			key: 'routeDomainFacts',
 			WidgetComponent: CardFactsWidget,
 			loader: factsLoader(domainId, {})
 		}
@@ -38,6 +39,7 @@ const RouteDomain = (props) => {
 
 	const essentialWidgetConfigs = useMemo(() => [
 		{
+			key: 'routeDomainViews',
 			loader: viewsLoader(domainId, {
 				interval: INTERVALS_DAILY,
 				type: VIEWS_TYPE_UNIQUE,
@@ -50,6 +52,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainDurations',
 			loader: durationsLoader(domainId, {
 				interval: INTERVALS_DAILY,
 				limit: 14
@@ -61,6 +64,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainPages',
 			loader: pagesLoader(domainId, {
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP
@@ -71,6 +75,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainReferrers',
 			loader: referrersLoader(domainId, {
 				range: RANGES_LAST_24_HOURS,
 				sorting: SORTINGS_TOP
@@ -84,6 +89,7 @@ const RouteDomain = (props) => {
 
 	const detailedWidgetConfigs = useMemo(() => [
 		{
+			key: 'routeDomainSystems',
 			loader: systemsLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
@@ -95,6 +101,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainDevices',
 			loader: devicesLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
@@ -106,6 +113,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainBrowsers',
 			loader: browsersLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
@@ -117,6 +125,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainSizes',
 			loader: sizesLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS,
@@ -128,6 +137,7 @@ const RouteDomain = (props) => {
 			}
 		},
 		{
+			key: 'routeDomainLanguages',
 			loader: languagesLoader(domainId, {
 				sorting: SORTINGS_TOP,
 				range: RANGES_LAST_24_HOURS

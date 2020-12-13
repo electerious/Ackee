@@ -7,12 +7,10 @@ export const SET_WIDGETS_END = Symbol()
 export const SET_WIDGETS_FETCHING = Symbol()
 export const SET_WIDGETS_ERROR = Symbol()
 
-export const setWidgetsStart = (id, value, Renderer, variables) => ({
+export const setWidgetsStart = (id, value) => ({
 	type: SET_WIDGETS_START,
 	id,
-	value,
-	Renderer,
-	variables
+	value
 })
 
 export const setWidgetsEnd = (id, value) => ({
@@ -50,8 +48,8 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 	}).join('')
 
 	batchDispatch(dispatch, loaders.map((loader) => {
-		const { id, Renderer, variables, enhancer } = loader
-		return setWidgetsStart(id, enhancer(), Renderer, variables)
+		const { id, enhancer } = loader
+		return setWidgetsStart(id, enhancer())
 	}))
 
 	try {

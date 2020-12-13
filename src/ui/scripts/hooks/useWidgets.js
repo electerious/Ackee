@@ -19,6 +19,38 @@ export default (props, widgetConfigs = []) => {
 
 	}, [ widgetConfigs ])
 
+	const enhancedWidgetData = useMemo(() => {
+
+		return loaders.map((loader) => {
+			const widgetId = loader.id
+
+			// The loader already contains most data required to render the widget.
+			// We therefore don't need to wait until the remaining data is available through the store.
+			return {
+				...initialSubState(),
+				// Initialize the value with the correct type by calling the enhancer without parameters.
+				// This ensures that there's always an empty value with the correct type available to render.
+				value: loader.enhancer(),
+				Renderer: loader.Renderer,
+				variables: loader.variables,
+				// Overwrite the constructed data with the data in the store (when available).
+				...(props.widgets.value[widgetId] || {})
+			}
+		})
+
+	}, [ loaders, props.widgets.value ])
+
+	const enhancedWidgetConfigs = useMemo(() => {
+
+		return loaders.map((loader, index) => {
+			return {
+				...defaultWidgetConfig,
+				...widgetConfigs[index]
+			}
+		})
+
+	}, [ loaders, widgetConfigs ])
+
 	useEffect(() => {
 
 		props.fetchWidgets(props, loaders)
@@ -28,24 +60,12 @@ export default (props, widgetConfigs = []) => {
 	return loaders.map(
 		(loader, index) => {
 			const widgetId = loader.id
-
-			// Ensure that the data is never empty, even when the widget is not ready or
-			// still loading. Also initialize the value with the correct type using by
-			// calling the enhancer without parameters.
-			const widgetData = {
-				...initialSubState(),
-				value: loader.enhancer(),
-				...(props.widgets.value[widgetId] || {})
-			}
-
-			const widgetConfig = {
-				...defaultWidgetConfig,
-				...widgetConfigs[index]
-			}
+			const widgetState = enhancedWidgetData[index]
+			const widgetConfig = enhancedWidgetConfigs[index]
 
 			return h(widgetConfig.WidgetComponent, {
 				key: widgetConfig.key || widgetId,
-				widget: widgetData,
+				widget: widgetState,
 				...widgetConfig.additionalProps
 			})
 		}
