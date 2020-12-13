@@ -25,6 +25,7 @@ const Dashboard = (props) => {
 	useEffect(() => {
 
 		props.fetchDomains(props)
+		props.fetchEvents(props)
 
 	}, [])
 

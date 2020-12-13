@@ -1,8 +1,14 @@
 import { createElement as h } from 'react'
 
-const RouteEvents = () => {
+import useWidgetsForEvents from '../../hooks/useWidgetsForEvents'
 
-	return null
+const RouteEvents = (props) => {
+
+	return useWidgetsForEvents(props, {
+		interval: props.filter.interval,
+		sorting: props.filter.sorting,
+		range: props.filter.range
+	})
 
 }
 
