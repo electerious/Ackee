@@ -44,7 +44,7 @@ export default (props, widgetConfigs = []) => {
 			}
 
 			return h(widgetConfig.WidgetComponent, {
-				key: widgetData.key || widgetId,
+				key: widgetConfig.key || widgetId,
 				widget: widgetData,
 				...widgetConfig.additionalProps
 			})
