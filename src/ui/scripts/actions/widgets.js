@@ -1,5 +1,6 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
+import batchDispatch from '../utils/batchDispatch'
 
 export const SET_WIDGETS_START = Symbol()
 export const SET_WIDGETS_END = Symbol()
@@ -45,10 +46,10 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 		return `${ queryName(index) }: ${ query }`
 	}).join('')
 
-	loaders.forEach((loader) => {
+	batchDispatch(dispatch, loaders.map((loader) => {
 		const { id, Renderer, variables, enhancer } = loader
-		dispatch(setWidgetsStart(id, enhancer(), Renderer, variables))
-	})
+		return setWidgetsStart(id, enhancer(), Renderer, variables)
+	}))
 
 	try {
 
@@ -62,19 +63,18 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 			signal: signal(id)
 		})
 
-		loaders.forEach((loader, index) => {
+		batchDispatch(dispatch, loaders.map((loader, index) => {
 			const { id, selector, enhancer } = loader
 			const entryName = queryName(index)
-			dispatch(setWidgetsEnd(id, enhancer(selector(data, entryName))))
-		})
-
+			return setWidgetsEnd(id, enhancer(selector(data, entryName)))
+		}))
 
 	} catch (err) {
 
 		if (err.name === 'AbortError') return
-		loaders.forEach((loader) => dispatch(setWidgetsFetching(loader.id, false)))
+		batchDispatch(dispatch, loaders.map((loader) => setWidgetsFetching(loader.id, false)))
 		if (err.name === 'HandledError') return
-		loaders.forEach((loader) => dispatch(setWidgetsError(loader.id, err)))
+		batchDispatch(dispatch, loaders.map((loader) => setWidgetsError(loader.id, err)))
 
 	}
 
