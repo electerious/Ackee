@@ -35,6 +35,9 @@ export const setWidgetsError = (id, payload) => ({
 
 export const fetchWidgets = signalHandler((signal) => (props, loaders) => async (dispatch) => {
 
+	// Only fetch widgets when there's something to load as empty requests are forbidden
+	if (loaders.length === 0) return
+
 	const id = loaders.map((loader) => loader.id).join('')
 
 	// Generate an unique name for every query

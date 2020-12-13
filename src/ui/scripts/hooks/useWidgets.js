@@ -1,4 +1,4 @@
-import { createElement as h, useState, useEffect } from 'react'
+import { createElement as h, useMemo, useEffect } from 'react'
 
 import { initialSubState } from '../reducers/widgets'
 
@@ -11,30 +11,32 @@ const defaultWidgetConfig = {
 
 export default (props, widgetConfigs = []) => {
 
-	const [ widgetIds, setWidgetIds ] = useState([])
+	const loaders = useMemo(() => {
 
-	useEffect(() => {
-
-		const loaders = widgetConfigs.map((widgetConfig) =>
+		return widgetConfigs.map((widgetConfig) =>
 			widgetConfig.loader
 		)
 
-		const widgetIds = loaders.map((loader) =>
-			loader.id
-		)
-
-		// Only fetch widgets when there's something to load.
-		// Empty requests are forbidden.
-		if (loaders.length > 0) {
-			props.fetchWidgets(props, loaders)
-			setWidgetIds(widgetIds)
-		}
-
 	}, [ widgetConfigs ])
 
-	return widgetIds.map(
-		(widgetId, index) => {
-			const widgetData = props.widgets.value[widgetId] || initialSubState()
+	useEffect(() => {
+
+		props.fetchWidgets(props, loaders)
+
+	}, [ loaders ])
+
+	return loaders.map(
+		(loader, index) => {
+			const widgetId = loader.id
+
+			// Ensure that the data is never empty, even when the widget is not ready or
+			// still loading. Also initialize the value with the correct type using by
+			// calling the enhancer without parameters.
+			const widgetData = {
+				...initialSubState(),
+				value: loader.enhancer(),
+				...(props.widgets.value[widgetId] || {})
+			}
 
 			const widgetConfig = {
 				...defaultWidgetConfig,
