@@ -8,6 +8,7 @@ export default (props, createLoader, opts) => {
 	const widgetConfigs = useMemo(() => {
 
 		return props.domains.value.map((domain) => ({
+			key: domain.id,
 			loader: createLoader(domain.id, opts),
 			additionalProps: {
 				headline: domain.title,

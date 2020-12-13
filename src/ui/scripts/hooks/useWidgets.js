@@ -35,7 +35,6 @@ export default (props, widgetConfigs = []) => {
 	return widgetIds.map(
 		(widgetId, index) => {
 			const widgetData = props.widgets.value[widgetId] || initialSubState()
-			const widgetKey = widgetData.variables.domainId || widgetId
 
 			const widgetConfig = {
 				...defaultWidgetConfig,
@@ -43,7 +42,7 @@ export default (props, widgetConfigs = []) => {
 			}
 
 			return h(widgetConfig.WidgetComponent, {
-				key: widgetKey,
+				key: widgetData.key || widgetId,
 				widget: widgetData,
 				...widgetConfig.additionalProps
 			})
