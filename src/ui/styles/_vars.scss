@@ -18,7 +18,8 @@ $destructive: rgba(255, 60, 60, 1);
 // Sizes ------------------------------------------------------- //
 $gutter: 1rem;
 $maxWidth: 1200px;
-$radius: 6px;
+$radius: 10px;
+$innerRadius: 8px;
 $cardContentHeight: 300px;
 $rowHeight: 32px;
 
@@ -26,7 +27,7 @@ $rowHeight: 32px;
 $shadow: 0 2px 10px rgba(0, 0, 0, .12);
 
 // formbase ---------------------------------------------------- //
-$formbase__radius: $radius;
+$formbase__radius: $innerRadius;
 $formbase__background: $dimmed;
 $formbase__svg: #fff;
 $formbase__color: $white;

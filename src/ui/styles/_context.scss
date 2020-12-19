@@ -55,7 +55,7 @@
 		margin: 0 $gutter/2;
 		padding: $gutter/2 $gutter/1.6;
 		color: $white;
-		border-radius: $radius;
+		border-radius: $innerRadius;
 
 		&.active {
 			color: $primary;
