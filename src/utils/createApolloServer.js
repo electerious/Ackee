@@ -1,7 +1,14 @@
 'use strict'
 
-const { UnsignedIntResolver, UnsignedIntTypeDefinition, DateTimeResolver, DateTimeTypeDefinition } = require('graphql-scalars')
 const httpHeadersPlugin = require('apollo-server-plugin-http-headers')
+const {
+	UnsignedIntResolver,
+	UnsignedIntTypeDefinition,
+	DateTimeResolver,
+	DateTimeTypeDefinition,
+	PositiveFloatResolver,
+	PositiveFloatTypeDefinition
+} = require('graphql-scalars')
 
 const isDemoMode = require('./isDemoMode')
 const isDevelopmentMode = require('./isDevelopmentMode')
@@ -16,11 +23,13 @@ module.exports = (ApolloServer, opts) => new ApolloServer({
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
+		PositiveFloatTypeDefinition,
 		require('../types')
 	],
 	resolvers: {
 		UnsignedInt: UnsignedIntResolver,
 		DateTime: DateTimeResolver,
+		PositiveFloat: PositiveFloatResolver,
 		...require('../resolvers')
 	},
 	...opts

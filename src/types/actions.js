@@ -19,7 +19,7 @@ module.exports = gql`
 		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
 		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
 		"""
-		value: Float!
+		value: PositiveFloat!
 		"""
 		Details allow you to store more data along with the associated action.
 		"""
@@ -43,7 +43,7 @@ module.exports = gql`
 		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
 		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
 		"""
-		value: Float!
+		value: PositiveFloat!
 		"""
 		Details allow you to store more data along with the associated action.
 		"""
@@ -70,7 +70,7 @@ module.exports = gql`
 		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
 		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
 		"""
-		value: Float!
+		value: PositiveFloat!
 		"""
 		Details allow you to store more data along with the associated action.
 		"""
