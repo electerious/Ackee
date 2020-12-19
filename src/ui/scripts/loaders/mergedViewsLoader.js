@@ -1,8 +1,7 @@
 import { createElement as h } from 'react'
 
-import RendererChart from '../components/renderers/RendererChart'
+import { ViewsChartRenderer } from './viewsLoader'
 import enhanceViews from '../enhancers/enhanceViews'
-import formatNumber from '../utils/formatNumber'
 import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
@@ -28,10 +27,7 @@ export default (opts) => {
 
 	return {
 		id,
-		Renderer: (props) => h(RendererChart, {
-			...props,
-			formatter: formatNumber
-		}),
+		Renderer: ViewsChartRenderer,
 		query,
 		variables,
 		selector,

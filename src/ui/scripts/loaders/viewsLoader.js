@@ -5,6 +5,11 @@ import enhanceViews from '../enhancers/enhanceViews'
 import formatNumber from '../utils/formatNumber'
 import createWidgetId from '../utils/createWidgetId'
 
+export const ViewsChartRenderer = (props) => h(RendererChart, {
+	...props,
+	formatter: formatNumber
+})
+
 export default (domainId, opts) => {
 
 	const id = createWidgetId('fetchViews', domainId, opts)
@@ -31,10 +36,7 @@ export default (domainId, opts) => {
 
 	return {
 		id,
-		Renderer: (props) => h(RendererChart, {
-			...props,
-			formatter: formatNumber
-		}),
+		Renderer: ViewsChartRenderer,
 		query,
 		variables,
 		selector,

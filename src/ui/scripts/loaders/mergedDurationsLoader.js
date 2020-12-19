@@ -1,8 +1,7 @@
 import { createElement as h } from 'react'
 
-import RendererChart from '../components/renderers/RendererChart'
+import { DurationsChartRenderer } from './durationsLoader'
 import enhanceDurations from '../enhancers/enhanceDurations'
-import formatDuration from '../utils/formatDuration'
 import createWidgetId from '../utils/createWidgetId'
 
 export default (opts) => {
@@ -27,10 +26,7 @@ export default (opts) => {
 
 	return {
 		id,
-		Renderer: (props) => h(RendererChart, {
-			...props,
-			formatter: (ms) => formatDuration(ms).toString()
-		}),
+		Renderer: DurationsChartRenderer,
 		query,
 		variables,
 		selector,

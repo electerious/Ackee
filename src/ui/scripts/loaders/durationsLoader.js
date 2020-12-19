@@ -5,6 +5,11 @@ import enhanceDurations from '../enhancers/enhanceDurations'
 import formatDuration from '../utils/formatDuration'
 import createWidgetId from '../utils/createWidgetId'
 
+export const DurationsChartRenderer = (props) => h(RendererChart, {
+	...props,
+	formatter: (ms) => formatDuration(ms).toString()
+})
+
 export default (domainId, opts) => {
 
 	const id = createWidgetId('fetchDurations', domainId, opts)
@@ -30,10 +35,7 @@ export default (domainId, opts) => {
 
 	return {
 		id,
-		Renderer: (props) => h(RendererChart, {
-			...props,
-			formatter: (ms) => formatDuration(ms).toString()
-		}),
+		Renderer: DurationsChartRenderer,
 		query,
 		variables,
 		selector,

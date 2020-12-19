@@ -5,6 +5,11 @@ import enhanceEventChartEntries from '../enhancers/enhanceEventChartEntries'
 import formatNumber from '../utils/formatNumber'
 import createWidgetId from '../utils/createWidgetId'
 
+const EventEntriesChartRenderer = (props) => h(RendererChart, {
+	...props,
+	formatter: formatNumber
+})
+
 export default (eventId, opts) => {
 
 	const id = createWidgetId('fetchEventsChart', eventId, opts)
@@ -29,10 +34,7 @@ export default (eventId, opts) => {
 
 	return {
 		id,
-		Renderer: (props) => h(RendererChart, {
-			...props,
-			formatter: formatNumber
-		}),
+		Renderer: EventEntriesChartRenderer,
 		query,
 		variables,
 		selector,
