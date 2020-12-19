@@ -25,9 +25,8 @@ export const setWidgetsFetching = (id, payload) => ({
 	payload
 })
 
-export const setWidgetsError = (id, payload) => ({
+export const setWidgetsError = (payload) => ({
 	type: SET_WIDGETS_ERROR,
-	id,
 	payload
 })
 
@@ -75,7 +74,7 @@ export const fetchWidgets = signalHandler((signal) => (props, loaders) => async 
 		if (err.name === 'AbortError') return
 		batchDispatch(dispatch, loaders.map((loader) => setWidgetsFetching(loader.id, false)))
 		if (err.name === 'HandledError') return
-		batchDispatch(dispatch, loaders.map((loader) => setWidgetsError(loader.id, err)))
+		dispatch(setWidgetsError(err))
 
 	}
 

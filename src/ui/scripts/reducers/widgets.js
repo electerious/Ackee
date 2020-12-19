@@ -8,13 +8,13 @@ import {
 } from '../actions'
 
 export const initialState = () => ({
-	value: {}
+	value: {},
+	error: undefined
 })
 
 export const initialSubState = () => ({
 	value: undefined,
-	fetching: false,
-	error: undefined
+	fetching: false
 })
 
 export default produce((draft, action) => {
@@ -37,7 +37,7 @@ export default produce((draft, action) => {
 			draft.value[action.id].fetching = action.payload || initialSubState().fetching
 			break
 		case SET_WIDGETS_ERROR:
-			draft.value[action.id].error = action.payload || initialSubState().error
+			draft.error = action.payload || initialState().error
 			break
 	}
 

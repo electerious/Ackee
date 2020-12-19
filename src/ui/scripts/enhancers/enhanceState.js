@@ -11,7 +11,7 @@ export default (state) => {
 	)
 
 	const errors = [
-		...Object.values(state.widgets.value).map((value) => value.error),
+		state.widgets.error,
 		state.domains.error,
 		state.token.error,
 		state.permanentTokens.error,
