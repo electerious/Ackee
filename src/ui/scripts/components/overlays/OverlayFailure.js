@@ -36,7 +36,6 @@ const OverlayFailure = (props) => {
 				h(Message, { status: 'error' }, `Please report this issue on GitHub if you can't resolve it by yourself.`),
 
 				h(Textarea, {
-					readOnly: true,
 					rows: 6,
 					value: formatErrors(props.errors)
 				}),

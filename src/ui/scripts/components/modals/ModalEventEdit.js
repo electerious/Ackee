@@ -32,11 +32,6 @@ const ModalEventEdit = (props) => {
 		[key]: e.target.value
 	})
 
-	const copyInput = (e) => {
-		e.target.select()
-		document.execCommand('copy')
-	}
-
 	const updateEvent = (e) => {
 		e.preventDefault()
 		props.updateEvent(props.id, inputs).then(props.closeModal)
@@ -100,18 +95,17 @@ const ModalEventEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Event id',
 					value: props.id,
-					onFocus: copyInput
+					copyOnFocus: true
 				}),
 
 				h(Label, { htmlFor: embedId }, 'Embed code'),
 
 				h(Textarea, {
-					type: 'text',
 					id: embedId,
 					readOnly: true,
 					rows: 4,
 					value: `ackeeTracker.create`,
-					onFocus: copyInput
+					copyOnFocus: true
 				})
 
 			),

@@ -29,11 +29,6 @@ const ModalDomainEdit = (props) => {
 		[key]: e.target.value
 	})
 
-	const copyInput = (e) => {
-		e.target.select()
-		document.execCommand('copy')
-	}
-
 	const updateDomain = (e) => {
 		e.preventDefault()
 		props.updateDomain(props.id, inputs).then(props.closeModal)
@@ -80,18 +75,17 @@ const ModalDomainEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Domain id',
 					value: props.id,
-					onFocus: copyInput
+					copyOnFocus: true
 				}),
 
 				h(Label, { htmlFor: embedId }, 'Embed code'),
 
 				h(Textarea, {
-					type: 'text',
 					id: embedId,
 					readOnly: true,
 					rows: 4,
 					value: `<script async src="${ srcUrl }" data-ackee-server="${ serverUrl }" data-ackee-domain-id="${ props.id }"></script>`,
-					onFocus: copyInput
+					copyOnFocus: true
 				})
 
 			),

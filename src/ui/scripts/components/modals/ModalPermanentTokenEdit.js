@@ -27,11 +27,6 @@ const ModalPermanentTokenEdit = (props) => {
 		[key]: e.target.value
 	})
 
-	const copyInput = (e) => {
-		e.target.select()
-		document.execCommand('copy')
-	}
-
 	const updatePermanentToken = (e) => {
 		e.preventDefault()
 		props.updatePermanentToken(props.id, inputs).then(props.closeModal)
@@ -73,7 +68,7 @@ const ModalPermanentTokenEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Permanent token id',
 					value: props.id,
-					onFocus: copyInput
+					copyOnFocus: true
 				})
 
 			),
