@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased (Events)]
 
+### Added
+
+- "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
+
 ### Fixed
 
 - Close, delete and submit in modals could be triggered multiple times
