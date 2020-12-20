@@ -2,12 +2,12 @@ import { createElement as h } from 'react'
 
 import RendererChart from '../components/renderers/RendererChart'
 import enhanceEventChartEntries from '../enhancers/enhanceEventChartEntries'
-import formatNumber from '../utils/formatNumber'
+import formatFloat from '../utils/formatFloat'
 import createWidgetId from '../utils/createWidgetId'
 
 const EventEntriesChartRenderer = (props) => h(RendererChart, {
 	...props,
-	formatter: formatNumber
+	formatter: formatFloat
 })
 
 export default (eventId, opts) => {
