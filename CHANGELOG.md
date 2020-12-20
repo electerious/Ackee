@@ -14,11 +14,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Close, delete and submit in modals could be triggered multiple times
 
-## [Unreleased]
+## [2.4.1] - 2020-12-20
 
 ### Changed
 
-- Updated Dockerfile reduces the size of the Docker build by ~40% (#195, thanks @omBratteng)
+- Updated Dockerfile reduces the size of the Docker build by ~58% (#195, thanks @omBratteng)
 
 ### Fixed
 
