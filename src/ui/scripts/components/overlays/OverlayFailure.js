@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import { homepage } from '../../../../../package'
+import { homepage } from '../../../../../package.json'
 import formatErrors from '../../utils/formatErrors'
 import * as storage from '../../utils/storage'
 

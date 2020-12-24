@@ -1,7 +1,7 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { homepage } from '../../../../../package'
+import { homepage } from '../../../../../package.json'
 import isDemoMode from '../../../../utils/isDemoMode'
 
 import Input from '../Input'

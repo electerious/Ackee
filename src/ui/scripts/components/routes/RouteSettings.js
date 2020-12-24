@@ -1,6 +1,6 @@
 import { createElement as h, Fragment, useEffect } from 'react'
 
-import { version, homepage } from '../../../../../package'
+import { version, homepage } from '../../../../../package.json'
 import {
 	MODALS_DOMAIN_ADD,
 	MODALS_DOMAIN_EDIT,
