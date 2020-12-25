@@ -6,9 +6,3 @@ export * from './filter'
 export * from './domains'
 export * from './events'
 export * from './widgets'
-
-export const RESET_STATE = Symbol()
-
-export const resetState = () => ({
-	type: RESET_STATE
-})

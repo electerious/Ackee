@@ -1,12 +1,15 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-import { resetState } from './index'
-
+export const RESET_STATE = Symbol()
 export const SET_TOKEN_START = Symbol()
 export const SET_TOKEN_END = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
 export const SET_TOKEN_ERROR = Symbol()
+
+export const resetState = () => ({
+	type: RESET_STATE
+})
 
 export const setTokenStart = () => ({
 	type: SET_TOKEN_START
