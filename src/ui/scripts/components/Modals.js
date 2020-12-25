@@ -1,5 +1,4 @@
 import { createElement as h, Fragment } from 'react'
-import PropTypes from 'prop-types'
 
 import {
 	MODALS_DOMAIN_ADD,
@@ -17,12 +16,6 @@ import ModalEventAdd from './modals/ModalEventAdd'
 import ModalEventEdit from './modals/ModalEventEdit'
 import ModalPermanentTokenAdd from './modals/ModalPermanentTokenAdd'
 import ModalPermanentTokenEdit from './modals/ModalPermanentTokenEdit'
-
-export const commonPropTypes = {
-	current: PropTypes.bool.isRequired,
-	active: PropTypes.bool.isRequired,
-	closeModal: PropTypes.func.isRequired
-}
 
 const Modals = (props) => {
 

@@ -7,9 +7,9 @@ import Textarea from '../Textarea'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
-import { commonPropTypes } from '../Modals'
 
 import customTracker from '../../../../utils/customTracker'
+import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalDomainEdit = (props) => {
@@ -125,7 +125,7 @@ const ModalDomainEdit = (props) => {
 }
 
 ModalDomainEdit.propTypes = {
-	...commonPropTypes,
+	...commonModalProps,
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	fetching: PropTypes.bool.isRequired,

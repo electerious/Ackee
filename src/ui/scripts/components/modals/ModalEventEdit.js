@@ -10,8 +10,8 @@ import Textarea from '../Textarea'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
-import { commonPropTypes } from '../Modals'
 
+import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalEventEdit = (props) => {
@@ -145,7 +145,7 @@ const ModalEventEdit = (props) => {
 }
 
 ModalEventEdit.propTypes = {
-	...commonPropTypes,
+	...commonModalProps,
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	fetching: PropTypes.bool.isRequired,
