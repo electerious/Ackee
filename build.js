@@ -5,7 +5,7 @@ require('dotenv').config()
 const { resolve } = require('path')
 const { writeFile, readFile } = require('fs').promises
 const sass = require('rosid-handler-sass')
-const js = require('rosid-handler-js')
+const js = require('rosid-handler-js-next')
 
 const html = require('./src/ui/index')
 const isDemoMode = require('./src/utils/isDemoMode')
@@ -43,32 +43,14 @@ const scripts = async () => {
 
 	const filePath = resolve(__dirname, 'src/ui/scripts/index.js')
 
-	const babel = {
-		presets: [
-			[
-				'@babel/preset-env', {
-					targets: {
-						browsers: [
-							'last 2 Safari versions',
-							'last 2 Chrome versions',
-							'last 2 Opera versions',
-							'last 2 Firefox versions'
-						]
-					}
-				}
-			]
-		],
-		babelrc: false
-	}
-
 	const data = js(filePath, {
 		optimize: isDevelopmentMode === false,
-		env: {
-			ACKEE_TRACKER: process.env.ACKEE_TRACKER,
-			ACKEE_DEMO: isDemoMode === true ? 'true' : 'false',
-			NODE_ENV: isDevelopmentMode === true ? 'development' : 'production'
+		replace: {
+			'process.env.ACKEE_TRACKER': JSON.stringify(process.env.ACKEE_TRACKER),
+			'process.env.ACKEE_DEMO': JSON.stringify(isDemoMode === true ? 'true' : 'false')
 		},
-		babel
+		nodeGlobals: true,
+		babel: false
 	})
 
 	return data
