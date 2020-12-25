@@ -37,7 +37,8 @@ const OverlayFailure = (props) => {
 
 				h(Textarea, {
 					rows: 6,
-					value: formatErrors(props.errors)
+					value: formatErrors(props.errors),
+					readOnly: true
 				}),
 
 				h(Spacer, { size: 1 })
