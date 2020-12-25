@@ -49,7 +49,7 @@ const scripts = async () => {
 			'process.env.ACKEE_TRACKER': JSON.stringify(process.env.ACKEE_TRACKER),
 			'process.env.ACKEE_DEMO': JSON.stringify(isDemoMode === true ? 'true' : 'false')
 		},
-		nodeGlobals: true,
+		nodeGlobals: isDevelopmentMode === true,
 		babel: false
 	})
 
