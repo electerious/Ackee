@@ -98,13 +98,13 @@ const ModalEventEdit = (props) => {
 					copyOnFocus: true
 				}),
 
-				h(Label, { htmlFor: embedId }, 'Embed code'),
+				h(Label, { htmlFor: embedId }, 'Usage example'),
 
 				h(Textarea, {
 					id: embedId,
 					readOnly: true,
 					rows: 4,
-					value: `ackeeTracker.create`,
+					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: '1' })`,
 					copyOnFocus: true
 				})
 
@@ -136,7 +136,7 @@ const ModalEventEdit = (props) => {
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
 					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Edit')
+				}, props.fetching === true ? h(Spinner) : 'Save')
 
 			)
 		)
