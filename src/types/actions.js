@@ -14,7 +14,7 @@ module.exports = gql`
 		"""
 		Optional key that will be used to group similar actions in the UI.
 		"""
-		key: String
+		key: String!
 		"""
 		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
 		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
@@ -36,9 +36,9 @@ module.exports = gql`
 
 	input CreateActionInput {
 		"""
-		Optional key that will be used to group similar actions in the UI.
+		Key that will be used to group similar actions in the UI.
 		"""
-		key: String
+		key: String!
 		"""
 		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
 		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
@@ -63,9 +63,9 @@ module.exports = gql`
 
 	input UpdateActionInput {
 		"""
-		Optional key that will be used to group similar actions in the UI.
+		Key that will be used to group similar actions in the UI.
 		"""
-		key: String
+		key: String!
 		"""
 		Numerical value that is added to all other numerical values of the key, grouped by day, month or year.
 		Use '1' to count how many times an event occurred or a price (e.g. '1.99') to see the sum of successful checkouts in a shop.
