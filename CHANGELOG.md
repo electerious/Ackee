@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Added
 
 - "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
+- Tests for permanent tokens, events and actions
 
 ### Fixed
 
