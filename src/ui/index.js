@@ -4,16 +4,14 @@ const { resolve } = require('path')
 const { writeFile, readFile } = require('fs').promises
 
 const layout = require('../utils/layout')
-const isDemoMode = require('../utils/isDemoMode')
-const isDevelopmentMode = require('../utils/isDevelopmentMode')
+const config = require('../utils/config')
 const customTracker = require('../utils/customTracker')
 const signale = require('../utils/signale')
 
 const index = async () => {
 
 	return layout('<div id="main"></div>', 'favicon.ico', [ 'index.css' ], [ 'index.js' ], {
-		isDemoMode,
-		isDevelopmentMode,
+		isDemoMode: config.isDemoMode,
 		customTracker
 	})
 
@@ -24,7 +22,7 @@ const styles = async () => {
 	const sass = require('rosid-handler-sass')
 	const filePath = resolve(__dirname, './styles/index.scss')
 
-	return sass(filePath, { optimize: isDevelopmentMode === false })
+	return sass(filePath, { optimize: config.isDevelopmentMode === false })
 
 }
 
@@ -34,8 +32,8 @@ const scripts = async () => {
 	const filePath = resolve(__dirname, './scripts/index.js')
 
 	return js(filePath, {
-		optimize: isDevelopmentMode === false,
-		nodeGlobals: isDevelopmentMode === true,
+		optimize: config.isDevelopmentMode === false,
+		nodeGlobals: config.isDevelopmentMode === true,
 		babel: false
 	})
 

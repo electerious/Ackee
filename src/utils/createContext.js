@@ -2,7 +2,7 @@
 
 const { getClientIp } = require('request-ip')
 
-const isDemoMode = require('./isDemoMode')
+const config = require('./config')
 const isAuthenticated = require('./isAuthenticated')
 const createDate = require('./createDate')
 const ignoreCookie = require('./ignoreCookie')
@@ -17,8 +17,8 @@ const createMicroContext = async (integrationContext) => {
 
 const createContext = async (ip, headers) => {
 	return {
-		isDemoMode,
-		isAuthenticated: await isAuthenticated(headers['authorization']),
+		isDemoMode: config.isDemoMode,
+		isAuthenticated: await isAuthenticated(headers['authorization'], config.ttl),
 		isIgnored: ignoreCookie.isSet(headers['cookie']),
 		dateDetails: createDate(headers['time-zone']),
 		userAgent: headers['user-agent'],

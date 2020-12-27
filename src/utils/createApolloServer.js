@@ -10,13 +10,12 @@ const {
 	PositiveFloatTypeDefinition
 } = require('graphql-scalars')
 
-const isDemoMode = require('./isDemoMode')
-const isDevelopmentMode = require('./isDevelopmentMode')
+const config = require('./config')
 
 module.exports = (ApolloServer, opts) => new ApolloServer({
-	introspection: isDemoMode === true || isDevelopmentMode === true,
-	playground: isDemoMode === true || isDevelopmentMode === true,
-	debug: isDevelopmentMode === true,
+	introspection: config.isDemoMode === true || config.isDevelopmentMode === true,
+	playground: config.isDemoMode === true || config.isDevelopmentMode === true,
+	debug: config.isDevelopmentMode === true,
 	plugins: [
 		httpHeadersPlugin
 	],

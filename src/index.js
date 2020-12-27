@@ -4,42 +4,37 @@ require('dotenv').config()
 
 const server = require('./server')
 const signale = require('./utils/signale')
+const config = require('./utils/config')
 const connect = require('./utils/connect')
-const isDemoMode = require('./utils/isDemoMode')
-const isDevelopmentMode = require('./utils/isDevelopmentMode')
 const fillDatabase = require('./utils/fillDatabase')
 const stripUrlAuth = require('./utils/stripUrlAuth')
 
-const port = process.env.ACKEE_PORT || process.env.PORT || 3000
-const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
-const serverUrl = `http://localhost:${ port }`
-
-if (dbUrl == null) {
+if (config.dbUrl == null) {
 	signale.fatal('MongoDB connection URI missing in environment')
 	process.exit(1)
 }
 
-server.on('listening', () => signale.watch(`Listening on ${ serverUrl }`))
+server.on('listening', () => signale.watch(`Listening on http://localhost:${ config.port }`))
 server.on('error', (err) => signale.fatal(err))
 
-signale.await(`Connecting to ${ stripUrlAuth(dbUrl) }`)
+signale.await(`Connecting to ${ stripUrlAuth(config.dbUrl) }`)
 
-connect(dbUrl).then(() => {
+connect(config.dbUrl).then(() => {
 
-	signale.success(`Connected to ${ stripUrlAuth(dbUrl) }`)
+	signale.success(`Connected to ${ stripUrlAuth(config.dbUrl) }`)
 	signale.start(`Starting the server`)
 
-	server.listen(port)
+	server.listen(config.port)
 
-	if (isDevelopmentMode === true) {
+	if (config.isDevelopmentMode === true) {
 
 		signale.info('Development mode enabled')
 
 	}
 
-	if (isDemoMode === true) {
+	if (config.isDemoMode === true) {
 
-		const job = fillDatabase(serverUrl)
+		const job = fillDatabase(`http://localhost:${ config.port }`)
 		const date = job.nextInvocation()
 
 		const formattedDate = `${ date.getDate() }.${ date.getMonth() }.${ date.getFullYear() }`

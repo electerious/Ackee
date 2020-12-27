@@ -5,6 +5,7 @@ const fetch = require('node-fetch')
 const { Headers } = require('node-fetch')
 
 const signale = require('./signale')
+const config = require('./config')
 const sleep = require('./sleep')
 const randomItem = require('./randomItem')
 const randomInt = require('./randomInt')
@@ -219,8 +220,8 @@ const addToken = async (endpoint) => {
 			`,
 			variables: {
 				input: {
-					username: process.env.ACKEE_USERNAME,
-					password: process.env.ACKEE_PASSWORD
+					username: config.username,
+					password: config.password
 				}
 			}
 		})

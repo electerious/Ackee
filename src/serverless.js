@@ -2,26 +2,34 @@
 
 const { ApolloServer } = require('apollo-server-lambda')
 
+const config = require('./utils/config')
 const connect = require('./utils/connect')
 const createApolloServer = require('./utils/createApolloServer')
 const { createServerlessContext } = require('./utils/createContext')
 
-const allowOrigin = process.env.ACKEE_ALLOW_ORIGIN || ''
-const dbUrl = process.env.ACKEE_MONGODB || process.env.MONGODB_URI
-
-if (dbUrl == null) {
+if (config.dbUrl == null) {
 	throw new Error('MongoDB connection URI missing in environment')
 }
 
-connect(dbUrl)
+connect(config.dbUrl)
 
 const apolloServer = createApolloServer(ApolloServer, {
 	context: createServerlessContext
 })
 
+const origin = (() => {
+	if (config.allowOrigin === '*') {
+		return true
+	}
+
+	if (config.allowOrigin != null) {
+		return config.allowOrigin.split(',')
+	}
+})()
+
 exports.handler = apolloServer.createHandler({
 	cors: {
-		origin: allowOrigin === '*' ? true : allowOrigin.split(','),
+		origin,
 		methods: 'GET,POST,PATCH,OPTIONS',
 		allowedHeaders: 'Content-Type'
 	}
