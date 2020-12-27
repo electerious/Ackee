@@ -9,7 +9,7 @@ const server = require('../../src/server')
 
 const base = listen(server)
 
-let validToken = null
+let validToken
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)

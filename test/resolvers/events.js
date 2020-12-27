@@ -9,7 +9,7 @@ const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase
 
 const base = listen(server)
 
-let validEvent = null
+let validEvent
 
 const defaultTitle = uuid()
 const defaultType = 'CHART'
@@ -27,7 +27,7 @@ test.serial('create event', async (t) => {
 		query: `
 			mutation createEvent($input: CreateEventInput!) {
 				createEvent(input: $input) {
-					success,
+					success
 					payload {
 						id
 						title

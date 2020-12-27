@@ -9,8 +9,8 @@ const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase
 
 const base = listen(server)
 
-let validAction = null
-let ignoredAction = null
+let validAction
+let ignoredAction
 
 const defaultKey = uuid()
 const defaultValue = 1
@@ -23,7 +23,6 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 test.serial('create action', async (t) => {
-
 
 	const body = {
 		query: `

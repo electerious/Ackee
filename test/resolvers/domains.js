@@ -9,7 +9,7 @@ const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase
 
 const base = listen(server)
 
-let validDomain = null
+let validDomain
 
 const defaultTitle = uuid()
 const updatedTitle = uuid()
@@ -25,7 +25,7 @@ test.serial('create domain', async (t) => {
 		query: `
 			mutation createDomain($input: CreateDomainInput!) {
 				createDomain(input: $input) {
-					success,
+					success
 					payload {
 						id
 						title
