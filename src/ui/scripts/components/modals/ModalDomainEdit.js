@@ -8,7 +8,6 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
-import customTracker from '../../../../utils/customTracker'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
@@ -44,7 +43,7 @@ const ModalDomainEdit = (props) => {
 	const idId = shortId()
 	const embedId = shortId()
 
-	const trackerUrl = customTracker.url || '/tracker.js'
+	const trackerUrl = window.env.customTracker.url || '/tracker.js'
 	const srcUrl = (new URL(trackerUrl, location.href)).href
 	const serverUrl = location.origin
 

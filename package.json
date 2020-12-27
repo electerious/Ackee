@@ -104,7 +104,7 @@
     "extends": "@electerious/eslint-config"
   },
   "nodemonConfig": {
-    "exec": "npm run build:pre && npm start",
+    "exec": "npm run build:pre && npm run server",
     "ext": "js,json,graphql,scss",
     "watch": [
       "src"
