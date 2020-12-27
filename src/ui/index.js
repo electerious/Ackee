@@ -35,10 +35,6 @@ const scripts = async () => {
 
 	return js(filePath, {
 		optimize: isDevelopmentMode === false,
-		replace: {
-			'process.env.ACKEE_TRACKER': JSON.stringify(process.env.ACKEE_TRACKER),
-			'process.env.ACKEE_DEMO': JSON.stringify(isDemoMode === true ? 'true' : 'false')
-		},
 		nodeGlobals: isDevelopmentMode === true,
 		babel: false
 	})
