@@ -18,7 +18,6 @@ test.after.always(disconnectFromDatabase)
 
 test.serial('create record', async (t) => {
 
-
 	const body = {
 		query: `
 			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {

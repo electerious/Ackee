@@ -18,7 +18,6 @@ test.after.always(disconnectFromDatabase)
 
 test.serial('return token and cookie after successful login', async (t) => {
 
-
 	const username = 'admin'
 	const password = '123456'
 
