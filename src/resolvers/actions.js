@@ -22,7 +22,17 @@ const polish = (obj) => {
 
 module.exports = {
 	Mutation: {
-		createAction: async (parent, { eventId, input }) => {
+		createAction: async (parent, { eventId, input }, { isIgnored }) => {
+
+			// Ignore your own actions when logged in
+			if (isIgnored === true) {
+				return {
+					success: true,
+					payload: {
+						id: '88888888-8888-8888-8888-888888888888'
+					}
+				}
+			}
 
 			const data = polish({ ...input, eventId })
 
@@ -52,7 +62,14 @@ module.exports = {
 			}
 
 		},
-		updateAction: async (parent, { id, input }) => {
+		updateAction: async (parent, { id, input }, { isIgnored }) => {
+
+			// Ignore your own actions when logged in
+			if (isIgnored === true) {
+				return {
+					success: true
+				}
+			}
 
 			let entry
 

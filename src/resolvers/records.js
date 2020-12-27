@@ -67,7 +67,7 @@ module.exports = {
 	Mutation: {
 		createRecord: async (parent, { domainId, input }, { ip, userAgent, isIgnored }) => {
 
-			// Ignore your own visit when logged in
+			// Ignore your own records when logged in
 			if (isIgnored === true) {
 				return {
 					success: true,
@@ -112,7 +112,7 @@ module.exports = {
 		},
 		updateRecord: async (parent, { id }, { isIgnored }) => {
 
-			// Ignore your own visit when logged in
+			// Ignore your own records when logged in
 			if (isIgnored === true) {
 				return {
 					success: true
