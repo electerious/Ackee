@@ -25,6 +25,7 @@
   "scripts": {
     "start": "npm run build && npm run server",
     "start:dev": "NODE_ENV=development nodemon",
+    "build:pre": "node prebuild.js",
     "build": "node build.js",
     "build:dev": "NODE_ENV=development npm run build",
     "server": "node src/index.js",
@@ -105,7 +106,7 @@
     "extends": "@electerious/eslint-config"
   },
   "nodemonConfig": {
-    "exec": "npm start",
+    "exec": "npm run build:pre && npm start",
     "ext": "js,json,graphql,scss",
     "watch": [
       "src"
@@ -113,6 +114,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-push": "npm run build:pre",
       "pre-commit": "npm run lint"
     }
   },
