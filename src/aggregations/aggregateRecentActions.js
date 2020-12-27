@@ -13,7 +13,9 @@ module.exports = (ids, limit) => {
 		},
 		{
 			$project: {
-				_id: {},
+				_id: {
+					key: '$key'
+				},
 				created: '$created'
 			}
 		},
@@ -23,7 +25,6 @@ module.exports = (ids, limit) => {
 	]
 
 	aggregation[0].$match.key = { $ne: null }
-	aggregation[2].$group._id.key = '$key'
 
 	return aggregation
 
