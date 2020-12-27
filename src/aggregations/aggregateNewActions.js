@@ -8,7 +8,9 @@ module.exports = (ids, limit) => {
 		matchEvents(ids),
 		{
 			$group: {
-				_id: {},
+				_id: {
+					key: '$key'
+				},
 				count: {
 					$sum: '$value'
 				},
@@ -28,7 +30,6 @@ module.exports = (ids, limit) => {
 	]
 
 	aggregation[0].$match.key = { $ne: null }
-	aggregation[1].$group._id.key = '$key'
 
 	return aggregation
 

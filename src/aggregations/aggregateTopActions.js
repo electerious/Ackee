@@ -9,7 +9,9 @@ module.exports = (ids, range, limit, dateDetails) => {
 		matchEvents(ids),
 		{
 			$group: {
-				_id: {},
+				_id: {
+					key: '$key'
+				},
 				count: {
 					$sum: '$value'
 				}
@@ -26,7 +28,6 @@ module.exports = (ids, range, limit, dateDetails) => {
 	]
 
 	aggregation[0].$match.key = { $ne: null }
-	aggregation[1].$group._id.key = '$key'
 
 	if (range === ranges.RANGES_LAST_24_HOURS) {
 		aggregation[0].$match.created = { $gte: dateDetails.lastHours(24) }
