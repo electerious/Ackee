@@ -5,9 +5,19 @@ const { writeFile, readFile } = require('fs').promises
 const sass = require('rosid-handler-sass')
 const js = require('rosid-handler-js-next')
 
+const layout = require('../utils/layout')
 const isDemoMode = require('../utils/isDemoMode')
 const isDevelopmentMode = require('../utils/isDevelopmentMode')
 const signale = require('../utils/signale')
+
+const index = async () => {
+
+	return layout('<div id="main"></div>', 'favicon.ico', [ 'index.css' ], [ 'index.js' ], {
+		isDemoMode,
+		isDevelopmentMode
+	})
+
+}
 
 const styles = async () => {
 
@@ -60,6 +70,7 @@ const build = async (path, fn) => {
 }
 
 module.exports = {
+	index,
 	styles,
 	scripts,
 	tracker,
