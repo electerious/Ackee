@@ -6,6 +6,7 @@ const fetch = require('node-fetch')
 
 const Token = require('../../src/models/Token')
 const Domain = require('../../src/models/Domain')
+const Event = require('../../src/models/Event')
 const Record = require('../../src/models/Record')
 const connect = require('../../src/utils/connect')
 const createArray = require('../../src/utils/createArray')
@@ -22,6 +23,7 @@ const fillDatabase = async (t) => {
 	// Saves to context so tests can access IDs
 	t.context.token = await Token.create({})
 	t.context.domain = await Domain.create({ title: 'Example' })
+	t.context.event = await Event.create({ title: 'Example', type: 'CHART' })
 
 	const now = Date.now()
 
