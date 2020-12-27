@@ -3,8 +3,15 @@
 require('dotenv').config()
 
 const customTracker = require('./src/utils/customTracker')
-const { index, tracker, build } = require('./src/ui/index')
+const { index, styles, scripts, tracker, build } = require('./src/ui/index')
 
-// Build files that depend on environment variables of the installation
+// Build files that are identical on every installation
+if (process.env.BUILD_ENV === 'pre') {
+	build('dist/index.css', styles)
+	build('dist/index.js', scripts)
+	build('dist/tracker.js', tracker)
+}
+
+// Build files that depend on environment variables
 build(`dist/index.html`, index)
 if (customTracker.exists === true) build(`dist/${ customTracker.path }`, tracker)

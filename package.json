@@ -25,11 +25,9 @@
   "scripts": {
     "start": "npm run build && npm run server",
     "start:dev": "NODE_ENV=development nodemon",
-    "build:pre": "node prebuild.js",
+    "build:pre": "BUILD_ENV=pre npm run build",
     "build": "node build.js",
-    "build:dev": "NODE_ENV=development npm run build",
     "server": "node src/index.js",
-    "server:dev": "NODE_ENV=development npm run server",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc ava",
     "lint": "eslint '{functions,src,test}/**/*.js'"
@@ -70,8 +68,6 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "request-ip": "^2.1.3",
-    "rosid-handler-js-next": "^1.0.0",
-    "rosid-handler-sass": "^8.0.0",
     "s-ago": "^2.2.0",
     "sanitize-filename": "^1.6.3",
     "shortid": "^2.2.16",
@@ -92,6 +88,8 @@
     "mongodb-memory-server": "^6.9.2",
     "nodemon": "^2.0.6",
     "nyc": "^15.1.0",
+    "rosid-handler-js-next": "^1.0.0",
+    "rosid-handler-sass": "^8.0.0",
     "test-listen": "^1.1.0"
   },
   "ava": {
