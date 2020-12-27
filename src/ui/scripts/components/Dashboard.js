@@ -6,7 +6,6 @@ import * as selectDomainsValue from '../selectors/selectDomainsValue'
 import routeByKey from '../utils/routeByKey'
 import whenBelow from '../utils/whenBelow'
 import domainRoute from '../utils/domainRoute'
-import isDefined from '../../../utils/isDefined'
 
 import Header, { createButton, createDropdown, createDropdownButton, createDropdownSeparator } from './Header'
 import Modals from './Modals'
@@ -84,7 +83,7 @@ const Dashboard = (props) => {
 		hasDomains === true ? createDropdown(domainsLabel, domainsItems) : undefined,
 		createDropdown(insightsLabel, insightsItems),
 		createButton(route.ROUTE_SETTINGS.title, route.ROUTE_SETTINGS, props)
-	].filter(isDefined)
+	].filter(Boolean)
 
 	return (
 		h('div', {},

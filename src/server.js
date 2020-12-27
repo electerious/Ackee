@@ -9,7 +9,6 @@ const { ApolloServer } = require('apollo-server-micro')
 
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
-const isDefined = require('./utils/isDefined')
 const findMatchingOrigin = require('./utils/findMatchingOrigin')
 const customTracker = require('./utils/customTracker')
 const createApolloServer = require('./utils/createApolloServer')
@@ -147,7 +146,7 @@ const routes = [
 	patch('/*', notFound),
 	del('/*', notFound)
 
-].filter(isDefined)
+].filter(Boolean)
 
 module.exports = micro(
 	attachCorsHeaders(

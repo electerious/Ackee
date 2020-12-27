@@ -1,5 +1,3 @@
-import isDefined from '../../../utils/isDefined'
-
 export default (state) => {
 
 	const fetching = (
@@ -16,7 +14,7 @@ export default (state) => {
 		state.token.error,
 		state.permanentTokens.error,
 		state.events.error
-	].filter(isDefined)
+	].filter(Boolean)
 
 	return Object.assign({}, state, {
 		fetching,
