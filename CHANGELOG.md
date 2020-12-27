@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased (Events)]
 
+Introducing events 🎉 Ackee can now track events like newsletter subscriptions, buttons clicks, checkout sums and more. It's the most requested feature and I'm happy that it's finally a part of Ackee.
+
+### Breaking changes
+
+#### New `Access-Control-Allow-Credentials` header
+
+> This change is relevant for everyone.
+
+Ackee requires [a new `Access-Control-Allow-Credentials` header](https://github.com/electerious/Ackee/blob/master/docs/CORS%20headers.md#credentials) which was previously optional. Make sure to add this header in your server or reverse proxy configuration.
+
+#### ackee-tracker with new `.create` and `.record` syntax
+
+> This change is only relevant for you when using ackee-tracker in the [Manually](https://github.com/electerious/ackee-tracker/blob/master/README.md#manually) or [Programmatic](https://github.com/electerious/ackee-tracker/blob/master/README.md#programmatic) way.
+
+The [changelog of ackee-tracker](https://github.com/electerious/ackee-tracker/blob/master/CHANGELOG.md) contains everything you need to know when updating to the newest version.
+
 ### Added
 
 - "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
