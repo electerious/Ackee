@@ -8,6 +8,7 @@ const Token = require('../../src/models/Token')
 const Domain = require('../../src/models/Domain')
 const Event = require('../../src/models/Event')
 const Record = require('../../src/models/Record')
+const Action = require('../../src/models/Action')
 const connect = require('../../src/utils/connect')
 const createArray = require('../../src/utils/createArray')
 const { day, minute } = require('../../src/utils/times')
@@ -44,12 +45,21 @@ const fillDatabase = async (t) => {
 		browserVersion: i > 7 ? '13.0' : '14.0',
 		browserWidth: 414,
 		browserHeight: 719,
-		// Add fake minute visit per day
+		// Set fake duration
 		created: now - i * day - minute,
 		updated: now - i * day
 	}))
 
+	const actions = createArray(14).map((item, i) => ({
+		eventId: t.context.event.id,
+		key: `Key ${ i + 1 }`,
+		value: i + 1,
+		created: now - i * day,
+		updated: now - i * day
+	}))
+
 	await Record.insertMany(records)
+	await Action.insertMany(actions)
 }
 
 const cleanupDatabase = async (t) => {

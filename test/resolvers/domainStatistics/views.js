@@ -77,6 +77,15 @@ test(macro, {
 })
 
 test(macro, {
+	interval: 'YEARLY',
+	type: 'UNIQUE',
+	limit: 1
+}, (t, views) => {
+	t.is(views.length, 1)
+	t.is(typeof views[0].count, 'number')
+})
+
+test(macro, {
 	interval: 'DAILY',
 	type: 'TOTAL'
 }, (t, views) => {
