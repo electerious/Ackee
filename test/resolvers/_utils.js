@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const fetch = require('node-fetch')
 
 const Token = require('../../src/models/Token')
+const PermanentToken = require('../../src/models/PermanentToken')
 const Domain = require('../../src/models/Domain')
 const Event = require('../../src/models/Event')
 const Record = require('../../src/models/Record')
@@ -21,8 +22,9 @@ const connectToDatabase = async () => {
 }
 
 const fillDatabase = async (t) => {
-	// Saves to context so tests can access IDs
+	// Saves to context so tests can access ids
 	t.context.token = await Token.create({})
+	t.context.permanentToken = await PermanentToken.create({ title: 'Example' })
 	t.context.domain = await Domain.create({ title: 'Example' })
 	t.context.event = await Event.create({ title: 'Example', type: 'CHART' })
 
