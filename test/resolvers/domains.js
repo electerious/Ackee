@@ -59,7 +59,7 @@ test.serial('update domain', async (t) => {
 				updateDomain(id: $id, input: $input) {
 					success
 					payload {
-						id,
+						id
 						title
 					}
 				}
