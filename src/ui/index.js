@@ -2,8 +2,6 @@
 
 const { resolve } = require('path')
 const { writeFile, readFile } = require('fs').promises
-const sass = require('rosid-handler-sass')
-const js = require('rosid-handler-js-next')
 
 const layout = require('../utils/layout')
 const isDemoMode = require('../utils/isDemoMode')
@@ -21,18 +19,19 @@ const index = async () => {
 
 const styles = async () => {
 
+	const sass = require('rosid-handler-sass')
 	const filePath = resolve(__dirname, './styles/index.scss')
-	const data = sass(filePath, { optimize: isDevelopmentMode === false })
 
-	return data
+	return sass(filePath, { optimize: isDevelopmentMode === false })
 
 }
 
 const scripts = async () => {
 
+	const js = require('rosid-handler-js-next')
 	const filePath = resolve(__dirname, './scripts/index.js')
 
-	const data = js(filePath, {
+	return js(filePath, {
 		optimize: isDevelopmentMode === false,
 		replace: {
 			'process.env.ACKEE_TRACKER': JSON.stringify(process.env.ACKEE_TRACKER),
@@ -42,16 +41,13 @@ const scripts = async () => {
 		babel: false
 	})
 
-	return data
-
 }
 
 const tracker = async () => {
 
 	const filePath = require.resolve('ackee-tracker')
-	const data = readFile(filePath, 'utf8')
 
-	return data
+	return readFile(filePath, 'utf8')
 
 }
 
