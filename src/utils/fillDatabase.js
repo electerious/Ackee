@@ -169,41 +169,6 @@ const browsers = [
 	}
 ]
 
-const createRecord = () => {
-
-	const resolution = randomItem(resolutions)
-	const device = randomItem(devices)
-	const operatingSystem = randomItem(operatingSystems)
-	const browser = randomItem(browsers)
-
-	const anonymousRecord = {
-		siteLocation: randomItem(siteLocations)
-	}
-
-	const detailedRecord = {
-		siteLocation: randomItem(siteLocations),
-		siteReferrer: randomItem(referrers),
-		siteLanguage: randomItem(langauges),
-		screenWidth: resolution.width,
-		screenHeight: resolution.height,
-		screenColorDepth: randomItem(screenColorDepths),
-		deviceName: device.name,
-		deviceManufacturer: device.manufacturer,
-		osName: operatingSystem.name,
-		osVersion: randomItem(operatingSystem.versions),
-		browserName: browser.name,
-		browserVersion: randomItem(browser.versions),
-		browserWidth: resolution.width,
-		browserHeight: resolution.height
-	}
-
-	return randomItem([
-		anonymousRecord,
-		detailedRecord
-	])
-
-}
-
 const addToken = async (endpoint) => {
 
 	const response = await fetch(endpoint, {
@@ -252,6 +217,41 @@ const fetchDomains = async (endpoint, headers) => {
 	const data = await response.json()
 
 	return data.data.domains
+
+}
+
+const createRecord = () => {
+
+	const resolution = randomItem(resolutions)
+	const device = randomItem(devices)
+	const operatingSystem = randomItem(operatingSystems)
+	const browser = randomItem(browsers)
+
+	const anonymousRecord = {
+		siteLocation: randomItem(siteLocations)
+	}
+
+	const detailedRecord = {
+		siteLocation: randomItem(siteLocations),
+		siteReferrer: randomItem(referrers),
+		siteLanguage: randomItem(langauges),
+		screenWidth: resolution.width,
+		screenHeight: resolution.height,
+		screenColorDepth: randomItem(screenColorDepths),
+		deviceName: device.name,
+		deviceManufacturer: device.manufacturer,
+		osName: operatingSystem.name,
+		osVersion: randomItem(operatingSystem.versions),
+		browserName: browser.name,
+		browserVersion: randomItem(browser.versions),
+		browserWidth: resolution.width,
+		browserHeight: resolution.height
+	}
+
+	return randomItem([
+		anonymousRecord,
+		detailedRecord
+	])
 
 }
 
@@ -308,20 +308,89 @@ const updateRecord = async (endpoint, headers, record) => {
 
 }
 
-const job = (url) => async () => {
+const fetchEvents = async (endpoint, headers) => {
+
+	const response = await fetch(endpoint, {
+		method: 'post',
+		headers,
+		body: JSON.stringify({
+			query: `
+				query fetchEvents {
+					events {
+						id
+					}
+				}
+			`
+		})
+	})
+
+	const data = await response.json()
+
+	return data.data.events
+
+}
+
+const createAction = () => {
+
+	return randomItem([
+		{
+			key: 'Clicked "Twitter"',
+			value: 1
+		},
+		{
+			key: 'Clicked "Instagram"',
+			value: 1
+		},
+		{
+			key: 'Toggled menu',
+			value: 1
+		},
+		{
+			key: 'Clicked "More"',
+			value: 1
+		}
+	])
+
+}
+
+const addAction = async (endpoint, headers, event, action) => {
+
+	const response = await fetch(endpoint, {
+		method: 'post',
+		headers,
+		body: JSON.stringify({
+			query: `
+				mutation createAction($eventId: ID!, $input: CreateActionInput!) {
+					createAction(eventId: $eventId, input: $input) {
+						payload {
+							id
+						}
+					}
+				}
+			`,
+			variables: {
+				eventId: event.id,
+				input: action
+			}
+		})
+	})
+
+	const data = await response.json()
+
+	return data.data.createAction.payload
+
+}
+
+const recordsJob = async (endpoint, token) => {
 
 	try {
-
-		const endpoint = `${ url }/api`
 
 		const currentDate = new Date()
 		const currentWeekday = currentDate.getDay()
 		const updateDelay = randomInt(0, hour * 1.5)
 
-		const token = await addToken(endpoint)
-
 		const headers = new Headers({
-			'Authorization': `Bearer ${ token.id }`,
+			'Authorization': `Bearer ${ (await token).id }`,
 			'User-Agent': randomItem(userAgents)
 		})
 
@@ -344,11 +413,45 @@ const job = (url) => async () => {
 
 }
 
+const actionsJob = async (endpoint, token) => {
+
+	try {
+
+		const currentDate = new Date()
+		const currentWeekday = currentDate.getDay()
+
+		const headers = new Headers({
+			'Authorization': `Bearer ${ (await token).id }`,
+			'User-Agent': randomItem(userAgents)
+		})
+
+		const events = await fetchEvents(endpoint, headers)
+		const event = randomItem([ ...events, ...weekdayDuds[currentWeekday] ])
+
+		if (event == null) return
+
+		const action = createAction()
+		await addAction(endpoint, headers, event, action)
+
+	} catch (err) {
+
+		signale.fatal(err)
+
+	}
+
+}
+
 module.exports = (url) => {
+
+	const endpoint = `${ url }/api`
+	const token = addToken(endpoint)
 
 	const rule = new schedule.RecurrenceRule()
 	rule.second = 0
 
-	return schedule.scheduleJob(rule, job(url))
+	return schedule.scheduleJob(rule, () => {
+		recordsJob(endpoint, token)
+		actionsJob(endpoint, token)
+	})
 
 }
