@@ -25,6 +25,7 @@ The [changelog of ackee-tracker](https://github.com/electerious/ackee-tracker/bl
 ### Added
 
 - "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
+- Modals can be closed with the ESC key
 - Tests for permanent tokens, events and actions
 
 ### Fixed
