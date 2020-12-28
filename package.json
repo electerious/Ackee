@@ -49,7 +49,6 @@
     "microrouter": "^3.1.3",
     "mongoose": "^5.11.8",
     "node-fetch": "^2.6.1",
-    "node-schedule": "^1.3.2",
     "normalize-url": "^5.0.0",
     "request-ip": "^2.1.3",
     "sanitize-filename": "^1.6.3",
