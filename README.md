@@ -24,6 +24,7 @@ Ackee is a self-hosted analytics tool that cares about privacy. We believe that 
 - **Modern technologies**: Lightweight Node.js and MongoDB architecture
 - **Beautiful**: Minimal and focused interface
 - **No cookies**: No unique user tracking and therefore no required cookie message
+- **Events**: Track button clicks, newsletter subscriptions and more
 - **GraphQL API**: Fully documented GraphQL API that allows you to build new tools upon Ackee
 
 ## 🚀 Get started
