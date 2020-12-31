@@ -183,7 +183,7 @@ query getDomainsStatistics {
 				count
 				created
 			}
-			referrers(sorting: TOP) {
+			referrers(sorting: TOP, type: WITH_SOURCE) {
 				id
 				count
 				created

@@ -22,11 +22,25 @@ Ackee requires [a new `Access-Control-Allow-Credentials` header](https://github.
 
 The [changelog of ackee-tracker](https://github.com/electerious/ackee-tracker/blob/master/CHANGELOG.md) contains everything you need to know when updating to the newest version.
 
+#### Referrers require `ReferrerType` in GraphQL API
+
+> This change is relevant for you when using the GraphQL API.
+
+A new parameter is required when requesting referrers via the GraphQL API. The parameter is called `ReferrerType` and can be `WITH_SOURCE` and `NO_SOURCE`.
+
+#### Referrers can return non URL ids via GraphQL API
+
+> This change is relevant for you when using the GraphQL API.
+
+The `id` of requested referrers was always a URL, but has been changed to a string. That's because referrers can now include source parameters like `ref`, `source` and `utm_source`.
+
 ### Added
 
 - "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
 - Modals can be closed with the ESC key
 - Tests for permanent tokens, events and actions
+- `source` field for records to track `ref`, `source` and `utm_source` (thanks @BetaHuhn, #185)
+- Referrers now include source parameters like `ref`, `source` and `utm_source` (thanks @BetaHuhn, #185)
 
 ### Fixed
 
