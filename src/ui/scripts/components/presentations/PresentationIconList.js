@@ -58,8 +58,7 @@ const TextRow = (props) => {
 			onMouseLeave: props.onLeave
 		},
 			h(IconColumn, {
-				barWidth: props.barWidth,
-				faviconUrl: props.faviconUrl
+				barWidth: props.barWidth
 			}),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', { className: 'flexList__truncated' }, props.text)
@@ -89,7 +88,6 @@ const PresentationIconList = (props) => {
 					if (item.url == null) {
 						return h(TextRow, {
 							...commonProps,
-							faviconUrl: '',
 							text: item.text
 						})
 					}
