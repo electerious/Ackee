@@ -3645,10 +3645,10 @@ eslint-plugin-react-native@^3.9.1:
     "@babel/traverse" "^7.7.4"
     eslint-plugin-react-native-globals "^0.1.1"
 
-eslint-plugin-react@^7.21.5:
-  version "7.21.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.5.tgz#50b21a412b9574bfe05b21db176e8b7b3b15bff3"
-  integrity sha512-8MaEggC2et0wSF6bUeywF7qQ46ER81irOdWS4QWxnnlAEsnzeBevk1sWh7fhpCghPpXb+8Ks7hvaft6L/xsR6g==
+eslint-plugin-react@^7.22.0:
+  version "7.22.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.22.0.tgz#3d1c542d1d3169c45421c1215d9470e341707269"
+  integrity sha512-p30tuX3VS+NWv9nQot9xIGAHBXR0+xJVaZriEsHoJrASGCJZDJ8JLNM0YqKqI0AKm6Uxaa1VUHoNEibxRCMQHA==
   dependencies:
     array-includes "^3.1.1"
     array.prototype.flatmap "^1.2.3"
@@ -5484,10 +5484,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.8:
-  version "5.11.8"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.8.tgz#71900d5638a298a8ed37709b3fda8c94e46f29df"
-  integrity sha512-RRfrYLg7pyuyx7xu5hwadjIZZJB9W2jqIMkL1CkTmk/uOCX3MX2tl4BVIi2rJUtgMNwn6dy3wBD3soB8I9Nlog==
+mongoose@^5.11.9:
+  version "5.11.9"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.9.tgz#ba23e82fc21ec6ca42313b66e70e1287e1d64b35"
+  integrity sha512-lmG6R64jtGGxqtn88BkkY+v470LUfGgyTKUyjswQ5c01GNgQvxA0kQd8h+tm0hZb639hKNRxL9ZBQlLleUpuIQ==
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
@@ -6577,10 +6577,10 @@ react-fast-compare@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-hotkeys-hook@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-3.0.0.tgz#e6d10b43e9e296b9f57de1c4fdfc99cc8a3c980d"
-  integrity sha512-+REGVOXPfdENyALHIrEkLBSc4DvKXUtW9eNLZwtotrcucUCySNqiH8NfXPpTAX2LUR8kB9rv7j453HoXD2e5oA==
+react-hotkeys-hook@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-3.0.1.tgz#96fd6f05019adb56e0c69f5019b7832353f0d753"
+  integrity sha512-otpd7gPyyz1etP+WtjEpKRFjR9QIBPYBrzpz9i7o6WeURbY9D2Cn5cy2jNIL9OrxaN2ljno3gSXLdvMfsCNgYA==
   dependencies:
     hotkeys-js "3.8.1"
 
