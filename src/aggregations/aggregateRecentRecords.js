@@ -2,7 +2,7 @@
 
 const matchDomains = require('../stages/matchDomains')
 
-module.exports = (ids, properties, limit) => {
+module.exports = (ids, properties, limit, or) => {
 
 	const aggregation = [
 		matchDomains(ids),
@@ -23,7 +23,14 @@ module.exports = (ids, properties, limit) => {
 	]
 
 	properties.forEach((property) => {
-		aggregation[0].$match[property] = { $ne: null }
+		if (or === true) {
+			aggregation[0].$match['$or'] = [
+				...(aggregation[0].$match['$or'] || []),
+				{ [property]: { $ne: null } }
+			]
+		} else {
+			aggregation[0].$match[property] = { $ne: null }
+		}
 		aggregation[2].$project._id[property] = `$${ property }`
 	})
 
