@@ -92,7 +92,7 @@ const PresentationIconList = (props) => {
 						})
 					}
 
-					h(UrlRow, {
+					return h(UrlRow, {
 						...commonProps,
 						faviconUrl: (new URL('/favicon.ico', item.url)).href,
 						url: item.url
