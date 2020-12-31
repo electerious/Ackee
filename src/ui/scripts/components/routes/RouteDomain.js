@@ -4,6 +4,7 @@ import { SORTINGS_TOP } from '../../../../constants/sortings'
 import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
 import { INTERVALS_DAILY } from '../../../../constants/intervals'
 import { VIEWS_TYPE_UNIQUE } from '../../../../constants/views'
+import { REFERRERS_TYPE_WITH_SOURCE } from '../../../../constants/referrers'
 import { SYSTEMS_TYPE_WITH_VERSION } from '../../../../constants/systems'
 import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
@@ -66,8 +67,8 @@ const RouteDomain = (props) => {
 		{
 			key: 'routeDomainPages',
 			loader: pagesLoader(domainId, {
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP
+				sorting: SORTINGS_TOP,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Pages',
@@ -77,8 +78,9 @@ const RouteDomain = (props) => {
 		{
 			key: 'routeDomainReferrers',
 			loader: referrersLoader(domainId, {
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP
+				sorting: SORTINGS_TOP,
+				type: REFERRERS_TYPE_WITH_SOURCE,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Referrers',
@@ -92,8 +94,8 @@ const RouteDomain = (props) => {
 			key: 'routeDomainSystems',
 			loader: systemsLoader(domainId, {
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: SYSTEMS_TYPE_WITH_VERSION
+				type: SYSTEMS_TYPE_WITH_VERSION,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Systems',
@@ -104,8 +106,8 @@ const RouteDomain = (props) => {
 			key: 'routeDomainDevices',
 			loader: devicesLoader(domainId, {
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: DEVICES_TYPE_WITH_MODEL
+				type: DEVICES_TYPE_WITH_MODEL,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Devices',
@@ -116,8 +118,8 @@ const RouteDomain = (props) => {
 			key: 'routeDomainBrowsers',
 			loader: browsersLoader(domainId, {
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: BROWSERS_TYPE_WITH_VERSION
+				type: BROWSERS_TYPE_WITH_VERSION,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Browsers',
@@ -128,8 +130,8 @@ const RouteDomain = (props) => {
 			key: 'routeDomainSizes',
 			loader: sizesLoader(domainId, {
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: SIZES_TYPE_BROWSER_RESOLUTION
+				type: SIZES_TYPE_BROWSER_RESOLUTION,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Sizes',

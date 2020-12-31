@@ -6,8 +6,8 @@ import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 const RouteLanguages = (props) => {
 
 	return useWidgetsForDomains(props, languagesLoader, {
-		range: props.filter.range,
-		sorting: props.filter.sorting
+		sorting: props.filter.sorting,
+		range: props.filter.range
 	})
 
 }

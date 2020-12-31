@@ -7,7 +7,8 @@ const RouteReferrers = (props) => {
 
 	return useWidgetsForDomains(props, referrersLoader, {
 		range: props.filter.range,
-		sorting: props.filter.sorting
+		sorting: props.filter.sorting,
+		type: props.filter.referrersType
 	})
 
 }

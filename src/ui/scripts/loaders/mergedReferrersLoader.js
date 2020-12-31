@@ -10,7 +10,7 @@ export default (opts) => {
 
 	const query = `
 		statistics {
-			referrers(sorting: ${ opts.sorting }, range: ${ opts.range }) {
+			referrers(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
 				id
 				count
 				created
@@ -20,6 +20,7 @@ export default (opts) => {
 
 	const variables = {
 		sorting: opts.sorting,
+		type: opts.type,
 		range: opts.range
 	}
 

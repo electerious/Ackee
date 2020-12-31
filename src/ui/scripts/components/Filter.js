@@ -14,6 +14,7 @@ import {
 } from '../constants/route'
 
 import * as views from '../../../constants/views'
+import * as referrers from '../../../constants/referrers'
 import * as systems from '../../../constants/systems'
 import * as devices from '../../../constants/devices'
 import * as browsers from '../../../constants/browsers'
@@ -172,7 +173,14 @@ const Filter = (props) => {
 			rangeItem
 		],
 		[ROUTE_REFERRERS.key]: [
-			sortingItem,
+			createItem(labels.sortings[props.filter.sorting], [
+				...sortingButtons,
+				createSeparator(),
+				onlyInactiveButton(
+					createButton('Show sources', 'Include source parameters', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_WITH_SOURCE),
+					createButton('Hide sources', 'Don\'t include source parameters', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_NO_SOURCE)
+				)
+			]),
 			rangeItem
 		],
 		[ROUTE_DURATIONS.key]: [

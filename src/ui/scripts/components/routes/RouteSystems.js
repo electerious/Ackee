@@ -6,9 +6,9 @@ import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 const RouteSystems = (props) => {
 
 	return useWidgetsForDomains(props, systemsLoader, {
-		range: props.filter.range,
 		sorting: props.filter.sorting,
-		type: props.filter.systemsType
+		type: props.filter.systemsType,
+		range: props.filter.range
 	})
 
 }

@@ -6,8 +6,8 @@ import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 const RoutePages = (props) => {
 
 	return useWidgetsForDomains(props, pagesLoader, {
-		range: props.filter.range,
-		sorting: props.filter.sorting
+		sorting: props.filter.sorting,
+		range: props.filter.range
 	})
 
 }

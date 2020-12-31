@@ -4,6 +4,7 @@ import { SORTINGS_TOP } from '../../../../constants/sortings'
 import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
 import { INTERVALS_DAILY } from '../../../../constants/intervals'
 import { VIEWS_TYPE_UNIQUE } from '../../../../constants/views'
+import { REFERRERS_TYPE_WITH_SOURCE } from '../../../../constants/referrers'
 import { SYSTEMS_TYPE_WITH_VERSION } from '../../../../constants/systems'
 import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
@@ -60,8 +61,8 @@ const RouteOverview = (props) => {
 		},
 		{
 			loader: mergedPagesLoader({
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP
+				sorting: SORTINGS_TOP,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Pages',
@@ -70,8 +71,9 @@ const RouteOverview = (props) => {
 		},
 		{
 			loader: mergedReferrersLoader({
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP
+				sorting: SORTINGS_TOP,
+				type: REFERRERS_TYPE_WITH_SOURCE,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Referrers',
@@ -84,8 +86,8 @@ const RouteOverview = (props) => {
 		{
 			loader: mergedSystemsLoader({
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: SYSTEMS_TYPE_WITH_VERSION
+				type: SYSTEMS_TYPE_WITH_VERSION,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Systems',
@@ -95,8 +97,8 @@ const RouteOverview = (props) => {
 		{
 			loader: mergedDevicesLoader({
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: DEVICES_TYPE_WITH_MODEL
+				type: DEVICES_TYPE_WITH_MODEL,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Devices',
@@ -106,8 +108,8 @@ const RouteOverview = (props) => {
 		{
 			loader: mergedBrowsersLoader({
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: BROWSERS_TYPE_WITH_VERSION
+				type: BROWSERS_TYPE_WITH_VERSION,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Browsers',
@@ -117,8 +119,8 @@ const RouteOverview = (props) => {
 		{
 			loader: mergedSizesLoader({
 				sorting: SORTINGS_TOP,
-				range: RANGES_LAST_24_HOURS,
-				type: SIZES_TYPE_BROWSER_RESOLUTION
+				type: SIZES_TYPE_BROWSER_RESOLUTION,
+				range: RANGES_LAST_24_HOURS
 			}),
 			additionalProps: {
 				headline: 'Sizes',

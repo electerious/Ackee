@@ -27,10 +27,10 @@ module.exports = {
 			return pages.get(ids, sorting, range, limit, dateDetails)
 
 		}),
-		referrers: pipe(requireAuth, async (domain, { sorting, range, limit }, { dateDetails }) => {
+		referrers: pipe(requireAuth, async (domain, { sorting, type, range, limit }, { dateDetails }) => {
 
 			const ids = await domainIds(domain)
-			return referrers.get(ids, sorting, range, limit, dateDetails)
+			return referrers.get(ids, sorting, type, range, limit, dateDetails)
 
 		}),
 		durations: pipe(requireAuth, async (domain, { interval, limit }, { dateDetails }) => {

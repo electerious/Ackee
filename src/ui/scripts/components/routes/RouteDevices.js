@@ -6,9 +6,9 @@ import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 const RouteDevices = (props) => {
 
 	return useWidgetsForDomains(props, devicesLoader, {
-		range: props.filter.range,
 		sorting: props.filter.sorting,
-		type: props.filter.devicesType
+		type: props.filter.devicesType,
+		range: props.filter.range
 	})
 
 }

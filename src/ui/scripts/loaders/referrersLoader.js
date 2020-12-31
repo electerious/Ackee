@@ -11,7 +11,7 @@ export default (domainId, opts) => {
 	const query = `
 		domain(id: "${ domainId }") {
 			statistics {
-				referrers(sorting: ${ opts.sorting }, range: ${ opts.range }) {
+				referrers(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
 					id
 					count
 					created
@@ -23,6 +23,7 @@ export default (domainId, opts) => {
 	const variables = {
 		domainId,
 		sorting: opts.sorting,
+		type: opts.type,
 		range: opts.range
 	}
 
