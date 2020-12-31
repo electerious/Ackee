@@ -6,9 +6,23 @@ import Favicon from '../Favicon'
 import enhanceUrl from '../../enhancers/enhanceUrl'
 import sumByProp from '../../utils/sumByProp'
 
-const UrlRow = (props) => {
+const IconColumn = (props) => {
 
 	const hasBar = props.barWidth != null
+
+	return (
+		h('div', { className: 'flexList__column flexList__column--spacing-right' },
+			hasBar === true && h('div', {
+				className: 'flexList__bar flexList__bar--favicon',
+				style: { '--width': `${ props.barWidth }%` }
+			}),
+			h(Favicon, { url: props.faviconUrl })
+		)
+	)
+
+}
+
+const UrlRow = (props) => {
 
 	const hostnameUrl = props.url.hostname
 	const pathnameUrl = props.url.pathname
@@ -22,10 +36,10 @@ const UrlRow = (props) => {
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave
 		},
-			h('div', { className: 'flexList__column flexList__column--spacing-right' },
-				hasBar === true && h('div', { className: 'flexList__bar flexList__bar--favicon', style: { '--width': `${ props.barWidth }%` } }),
-				h(Favicon, { url: props.faviconUrl })
-			),
+			h(IconColumn, {
+				barWidth: props.barWidth,
+				faviconUrl: props.faviconUrl
+			}),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', {}, hostnameUrl),
 				h('span', { className: 'flexList__obscured' }, pathnameUrl)
@@ -37,18 +51,16 @@ const UrlRow = (props) => {
 
 const TextRow = (props) => {
 
-	const hasBar = props.barWidth != null
-
 	return (
 		h('a', {
 			className: 'flexList__row flexList__row--has-hover',
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave
 		},
-			h('div', { className: 'flexList__column flexList__column--spacing-right' },
-				hasBar === true && h('div', { className: 'flexList__bar flexList__bar--favicon', style: { '--width': `${ props.barWidth }%` } }),
-				h(Favicon, { url: props.faviconUrl })
-			),
+			h(IconColumn, {
+				barWidth: props.barWidth,
+				faviconUrl: props.faviconUrl
+			}),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', { className: 'flexList__truncated' }, props.text)
 			)
