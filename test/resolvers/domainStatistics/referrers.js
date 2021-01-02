@@ -124,7 +124,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
 	t.is(referrers.length, 9)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].id, 'Newsletter')
 })
 
 test(macro, {
