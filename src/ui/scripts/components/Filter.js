@@ -121,6 +121,7 @@ const FilterItem = (props) => {
 			),
 			active === true && h(Context, {
 				targetRef: ref,
+				fixed: true,
 				x: calculateX,
 				y: calculateY,
 				floating: true,

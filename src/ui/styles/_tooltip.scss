@@ -1,0 +1,27 @@
+.tooltip {
+
+	$size: 18px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: $size;
+	height: $size;
+	margin: 0 0 $gutter/3;
+	background: $dimmed;
+	border-radius: 100%;
+	outline: none;
+
+	&:focus {
+		box-shadow: 0 0 0 2px $primary;
+	}
+
+	&__icon {
+		$size: 12px;
+
+		width: $size;
+		height: $size;
+		fill: currentColor;
+	}
+
+}

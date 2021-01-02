@@ -10,6 +10,7 @@ import Textarea from '../Textarea'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
+import Tooltip from '../Tooltip'
 
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
@@ -65,7 +66,10 @@ const ModalEventEdit = (props) => {
 					onChange: onChange('title')
 				}),
 
-				h(Label, { htmlFor: typeId }, 'Event type'),
+				h('div', { className: 'card__group' },
+					h(Label, { htmlFor: typeId }, 'Event type'),
+					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.')
+				),
 
 				h(Select, {
 					id: typeId,
@@ -101,7 +105,7 @@ const ModalEventEdit = (props) => {
 				h(Textarea, {
 					id: embedId,
 					readOnly: true,
-					rows: 4,
+					rows: 3,
 					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: '1' })`,
 					copyOnFocus: true
 				})

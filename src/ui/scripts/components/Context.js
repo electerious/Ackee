@@ -5,13 +5,29 @@ import classNames from 'classnames'
 
 import useMeasure from '../hooks/useMeasure'
 import useClickAway from '../hooks/useClickAway'
+import toPixel from '../utils/toPixel'
 
 import KeyHint from './KeyHint'
 
+export const CONTENT = Symbol()
 export const BUTTON = Symbol()
 export const SEPARATOR = Symbol()
 
-const toPixel = (num) => `${ Math.round(num) }px`
+const Content = (props) => {
+
+	return (
+		h('p', {
+			className: 'context__content'
+		},
+			props.children
+		)
+	)
+
+}
+
+Content.propTypes = {
+	children: PropTypes.node.isRequired
+}
 
 const Button = (props) => {
 
@@ -68,6 +84,8 @@ const Context = (props) => {
 			ref,
 			className: classNames({
 				'context': true,
+				'context--fixed': props.fixed === true,
+				'context--tooltip': props.tooltip === true,
 				'context--floating': props.floating === true,
 				'visible': measurement != null
 			}),
@@ -77,6 +95,11 @@ const Context = (props) => {
 			}
 		},
 			props.items.map((item, index) => {
+
+				if (item.type === CONTENT) return h(Content, {
+					key: index,
+					...item
+				})
 
 				if (item.type === BUTTON) return h(Button, {
 					key: item.label + index,
@@ -102,8 +125,10 @@ Context.propTypes = {
 	targetRef: PropTypes.shape({
 		current: PropTypes.instanceOf(Element)
 	}),
+	fixed: PropTypes.bool,
 	x: PropTypes.func.isRequired,
 	y: PropTypes.func.isRequired,
+	tooltip: PropTypes.bool,
 	floating: PropTypes.bool,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onItemClick: PropTypes.func.isRequired,
