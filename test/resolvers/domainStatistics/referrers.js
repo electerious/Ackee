@@ -22,7 +22,7 @@ const macro = async (t, variables, assertions) => {
 		token: t.context.token.id,
 		domainId: t.context.domain.id,
 		fragment: `
-			referrers(sorting: ${ variables.sorting }, range: ${ variables.range }${ limit }) {
+			referrers(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
 				id
 				count
 				created
@@ -37,6 +37,7 @@ macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and 
 
 test(macro, {
 	sorting: 'TOP',
+	type: 'NO_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
@@ -45,6 +46,7 @@ test(macro, {
 
 test(macro, {
 	sorting: 'RECENT',
+	type: 'NO_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
 	t.is(referrers.length, 14)
@@ -53,6 +55,7 @@ test(macro, {
 
 test(macro, {
 	sorting: 'RECENT',
+	type: 'NO_SOURCE',
 	range: 'LAST_6_MONTHS',
 	limit: 1
 }, (t, referrers) => {
@@ -62,6 +65,44 @@ test(macro, {
 
 test(macro, {
 	sorting: 'NEW',
+	type: 'NO_SOURCE',
+	range: 'LAST_6_MONTHS'
+}, (t, referrers) => {
+	t.is(referrers.length, 1)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'TOP',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS'
+}, (t, referrers) => {
+	t.is(referrers.length, 1)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS'
+}, (t, referrers) => {
+	t.is(referrers.length, 14)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, referrers) => {
+	t.is(referrers.length, 1)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'NEW',
+	type: 'WITH_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
