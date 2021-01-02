@@ -26,7 +26,7 @@ The [changelog of ackee-tracker](https://github.com/electerious/ackee-tracker/bl
 
 > This change is relevant for you when using the GraphQL API.
 
-A new parameter is required when requesting referrers via the GraphQL API. The parameter is called `ReferrerType` and can be `WITH_SOURCE` and `NO_SOURCE`.
+A new parameter is required when requesting referrers via the GraphQL API. The parameter is called `ReferrerType` and can be `WITH_SOURCE`, `NO_SOURCE` or `ONLY_SOURCE`.
 
 #### Referrers can return non URL ids via GraphQL API
 
@@ -40,7 +40,7 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 - Modals can be closed with the ESC key
 - Tests for permanent tokens, events and actions
 - `source` field for records to track `ref`, `source` and `utm_source` (thanks @BetaHuhn, #185)
-- Referrers now include source parameters like `ref`, `source` and `utm_source` (thanks @BetaHuhn, #185)
+- Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
 
 ### Fixed
 

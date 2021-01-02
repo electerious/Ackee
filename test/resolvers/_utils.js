@@ -36,6 +36,7 @@ const fillDatabase = async (t) => {
 		siteLocation: 'https://example.com/',
 		siteReferrer: 'https://google.com/',
 		siteLanguage: 'en',
+		source: i > 4 ? 'Newsletter' : undefined,
 		screenWidth: 414,
 		screenHeight: 896,
 		screenColorDepth: 32,

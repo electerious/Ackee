@@ -42,13 +42,17 @@ module.exports = gql`
 
 	enum ReferrerType {
 		"""
-		Include source parameters.
+		Use source parameter instead of referrer when available.
 		"""
 		WITH_SOURCE
 		"""
-		Omit source parameters.
+		Omit source parameters and show referrers only.
 		"""
 		NO_SOURCE
+		"""
+		Omit referrers and show source parameters only.
+		"""
+		ONLY_SOURCE
 	}
 
 	type Referrer {

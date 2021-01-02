@@ -37,6 +37,43 @@ macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and 
 
 test(macro, {
 	sorting: 'TOP',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS'
+}, (t, referrers) => {
+	t.is(referrers.length, 2)
+	t.is(referrers[0].id, 'Newsletter')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS'
+}, (t, referrers) => {
+	t.is(referrers.length, 14)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS',
+	limit: 1
+}, (t, referrers) => {
+	t.is(referrers.length, 1)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'NEW',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS'
+}, (t, referrers) => {
+	t.is(referrers.length, 2)
+	t.is(referrers[0].id, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'TOP',
 	type: 'NO_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
@@ -74,37 +111,37 @@ test(macro, {
 
 test(macro, {
 	sorting: 'TOP',
-	type: 'WITH_SOURCE',
+	type: 'ONLY_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].id, 'Newsletter')
 })
 
 test(macro, {
 	sorting: 'RECENT',
-	type: 'WITH_SOURCE',
+	type: 'ONLY_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
-	t.is(referrers.length, 14)
+	t.is(referrers.length, 9)
 	t.is(referrers[0].id, 'https://google.com/')
 })
 
 test(macro, {
 	sorting: 'RECENT',
-	type: 'WITH_SOURCE',
+	type: 'ONLY_SOURCE',
 	range: 'LAST_6_MONTHS',
 	limit: 1
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].id, 'Newsletter')
 })
 
 test(macro, {
 	sorting: 'NEW',
-	type: 'WITH_SOURCE',
+	type: 'ONLY_SOURCE',
 	range: 'LAST_6_MONTHS'
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].id, 'Newsletter')
 })

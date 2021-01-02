@@ -47,6 +47,11 @@ const labels = {
 		[views.VIEWS_TYPE_UNIQUE]: 'Unique',
 		[views.VIEWS_TYPE_TOTAL]: 'Total'
 	},
+	referrers: {
+		[referrers.REFERRERS_TYPE_WITH_SOURCE]: 'Combined',
+		[referrers.REFERRERS_TYPE_NO_SOURCE]: 'Referrers',
+		[referrers.REFERRERS_TYPE_ONLY_SOURCE]: 'Sources'
+	},
 	sizes: {
 		[sizes.SIZES_TYPE_BROWSER_RESOLUTION]: 'Browser sizes',
 		[sizes.SIZES_TYPE_BROWSER_WIDTH]: 'Browser widths',
@@ -174,13 +179,11 @@ const Filter = (props) => {
 			rangeItem
 		],
 		[ROUTE_REFERRERS.key]: [
-			createItem(labels.sortings[props.filter.sorting], [
-				...sortingButtons,
-				createSeparator(),
-				onlyInactiveButton(
-					createButton('Show sources', 'Include source parameters', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_WITH_SOURCE),
-					createButton('Hide sources', 'Don\'t include source parameters', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_NO_SOURCE)
-				)
+			sortingItem,
+			createItem(labels.referrers[props.filter.referrersType], [
+				createButton('Combined', 'Prefer source parameter', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_WITH_SOURCE),
+				createButton('↳ referrers only', undefined, props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_NO_SOURCE),
+				createButton('↳ sources only', undefined, props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_ONLY_SOURCE)
 			]),
 			rangeItem
 		],
