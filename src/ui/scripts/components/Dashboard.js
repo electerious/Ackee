@@ -22,10 +22,26 @@ import RouteSizes from './routes/RouteSizes'
 import RouteLanguages from './routes/RouteLanguages'
 import RouteSettings from './routes/RouteSettings'
 
-const gotoDomainWhenDefined = (props, index) => {
+const routeComponents = {
+	[routes.OVERVIEW]: RouteOverview,
+	[routes.DOMAIN]: RouteDomain,
+	[routes.VIEWS]: RouteViews,
+	[routes.PAGES]: RoutePages,
+	[routes.REFERRERS]: RouteReferrers,
+	[routes.DURATIONS]: RouteDurations,
+	[routes.EVENTS]: RouteEvents,
+	[routes.SYSTEMS]: RouteSystems,
+	[routes.DEVICES]: RouteDevices,
+	[routes.BROWSERS]: RouteBrowsers,
+	[routes.SIZES]: RouteSizes,
+	[routes.LANGUAGES]: RouteLanguages,
+	[routes.SETTINGS]: RouteSettings
+}
 
-	const domain = props.domains.value[index]
-	if (domain != null) props.setRoute(`/domains/${ domain.id }`)
+const gotoDomainWhenDefined = (domains, setRoute, index) => {
+
+	const domain = domains.value[index]
+	if (domain != null) setRoute(`/domains/${ domain.id }`)
 
 }
 
@@ -55,16 +71,16 @@ const Dashboard = (props) => {
 
 	useHotkeys('e', () => props.setRoute('/insights/events'))
 
-	useHotkeys('0', () => gotoDomainWhenDefined(props, 0), [ props ])
-	useHotkeys('1', () => gotoDomainWhenDefined(props, 1), [ props ])
-	useHotkeys('2', () => gotoDomainWhenDefined(props, 2), [ props ])
-	useHotkeys('3', () => gotoDomainWhenDefined(props, 3), [ props ])
-	useHotkeys('4', () => gotoDomainWhenDefined(props, 4), [ props ])
-	useHotkeys('5', () => gotoDomainWhenDefined(props, 5), [ props ])
-	useHotkeys('6', () => gotoDomainWhenDefined(props, 6), [ props ])
-	useHotkeys('7', () => gotoDomainWhenDefined(props, 7), [ props ])
-	useHotkeys('8', () => gotoDomainWhenDefined(props, 8), [ props ])
-	useHotkeys('9', () => gotoDomainWhenDefined(props, 9), [ props ])
+	useHotkeys('0', () => gotoDomainWhenDefined(props.domains, props.setRoute, 0), [ props.domains ])
+	useHotkeys('1', () => gotoDomainWhenDefined(props.domains, props.setRoute, 1), [ props.domains ])
+	useHotkeys('2', () => gotoDomainWhenDefined(props.domains, props.setRoute, 2), [ props.domains ])
+	useHotkeys('3', () => gotoDomainWhenDefined(props.domains, props.setRoute, 3), [ props.domains ])
+	useHotkeys('4', () => gotoDomainWhenDefined(props.domains, props.setRoute, 4), [ props.domains ])
+	useHotkeys('5', () => gotoDomainWhenDefined(props.domains, props.setRoute, 5), [ props.domains ])
+	useHotkeys('6', () => gotoDomainWhenDefined(props.domains, props.setRoute, 6), [ props.domains ])
+	useHotkeys('7', () => gotoDomainWhenDefined(props.domains, props.setRoute, 7), [ props.domains ])
+	useHotkeys('8', () => gotoDomainWhenDefined(props.domains, props.setRoute, 8), [ props.domains ])
+	useHotkeys('9', () => gotoDomainWhenDefined(props.domains, props.setRoute, 9), [ props.domains ])
 
 	const hasDomains = props.domains.value.length > 0
 
@@ -105,19 +121,7 @@ const Dashboard = (props) => {
 				items
 			}),
 			h('main', { className: 'content' },
-				currentRoute.key === routes.OVERVIEW && h(RouteOverview, props),
-				currentRoute.key === routes.DOMAIN && h(RouteDomain, props),
-				currentRoute.key === routes.VIEWS && h(RouteViews, props),
-				currentRoute.key === routes.PAGES && h(RoutePages, props),
-				currentRoute.key === routes.REFERRERS && h(RouteReferrers, props),
-				currentRoute.key === routes.DURATIONS && h(RouteDurations, props),
-				currentRoute.key === routes.EVENTS && h(RouteEvents, props),
-				currentRoute.key === routes.SYSTEMS && h(RouteSystems, props),
-				currentRoute.key === routes.DEVICES && h(RouteDevices, props),
-				currentRoute.key === routes.BROWSERS && h(RouteBrowsers, props),
-				currentRoute.key === routes.SIZES && h(RouteSizes, props),
-				currentRoute.key === routes.LANGUAGES && h(RouteLanguages, props),
-				currentRoute.key === routes.SETTINGS && h(RouteSettings, props)
+				h(routeComponents[currentRoute.key], props)
 			)
 		)
 	)
