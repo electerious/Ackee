@@ -1,17 +1,8 @@
 import { createElement as h, Fragment, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-import {
-	ROUTE_VIEWS,
-	ROUTE_PAGES,
-	ROUTE_REFERRERS,
-	ROUTE_DURATIONS,
-	ROUTE_LANGUAGES,
-	ROUTE_SIZES,
-	ROUTE_SYSTEMS,
-	ROUTE_DEVICES,
-	ROUTE_BROWSERS
-} from '../constants/route'
+import * as routes from '../constants/routes'
+import useRoute from '../hooks/useRoute'
 
 import * as views from '../../../constants/views'
 import * as referrers from '../../../constants/referrers'
@@ -141,8 +132,6 @@ const FilterItem = (props) => {
 
 const Filter = (props) => {
 
-	const routeKey = props.route.key
-
 	const sortingButtons = [
 		createButton('Top', 'Top entries first', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_TOP),
 		createButton('New', 'New entries only', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_NEW),
@@ -167,18 +156,18 @@ const Filter = (props) => {
 	const intervalsItem = createItem(labels.intervals[props.filter.interval], intervalsButtons)
 
 	const routesMap = {
-		[ROUTE_VIEWS.key]: [
+		[routes.VIEWS]: [
 			createItem(labels.views[props.filter.viewsType], [
 				createButton('Unique', 'Unique site views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_TOTAL)
 			]),
 			intervalsItem
 		],
-		[ROUTE_PAGES.key]: [
+		[routes.PAGES]: [
 			sortingItem,
 			rangeItem
 		],
-		[ROUTE_REFERRERS.key]: [
+		[routes.REFERRERS]: [
 			sortingItem,
 			createItem(labels.referrers[props.filter.referrersType], [
 				createButton('Combined', 'Prefer source parameter', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_WITH_SOURCE),
@@ -187,10 +176,10 @@ const Filter = (props) => {
 			]),
 			rangeItem
 		],
-		[ROUTE_DURATIONS.key]: [
+		[routes.DURATIONS]: [
 			intervalsItem
 		],
-		[ROUTE_SYSTEMS.key]: [
+		[routes.SYSTEMS]: [
 			createItem(labels.sortings[props.filter.sorting], [
 				...sortingButtons,
 				createSeparator(),
@@ -201,7 +190,7 @@ const Filter = (props) => {
 			]),
 			rangeItem
 		],
-		[ROUTE_DEVICES.key]: [
+		[routes.DEVICES]: [
 			createItem(labels.sortings[props.filter.sorting], [
 				...sortingButtons,
 				createSeparator(),
@@ -212,7 +201,7 @@ const Filter = (props) => {
 			]),
 			rangeItem
 		],
-		[ROUTE_BROWSERS.key]: [
+		[routes.BROWSERS]: [
 			createItem(labels.sortings[props.filter.sorting], [
 				...sortingButtons,
 				createSeparator(),
@@ -223,7 +212,7 @@ const Filter = (props) => {
 			]),
 			rangeItem
 		],
-		[ROUTE_SIZES.key]: [
+		[routes.SIZES]: [
 			sortingItem,
 			createItem(labels.sizes[props.filter.sizesType], [
 				createButton('Browser sizes', 'Width and height combined', props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
@@ -236,13 +225,14 @@ const Filter = (props) => {
 			]),
 			rangeItem
 		],
-		[ROUTE_LANGUAGES.key]: [
+		[routes.LANGUAGES]: [
 			sortingItem,
 			rangeItem
 		]
 	}
 
-	const currentButtons = routesMap[routeKey]
+	const currentRoute = useRoute(props.route)
+	const currentButtons = routesMap[currentRoute.key]
 
 	if (currentButtons == null) return null
 

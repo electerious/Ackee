@@ -10,7 +10,6 @@ import reducers from './reducers/index'
 import * as actions from './actions/index'
 
 import { initialState as initialTokenState } from './reducers/token'
-import { initialState as initialRouteState } from './reducers/route'
 import { initialState as initialFilterState } from './reducers/filter'
 
 import Main from './components/Main'
@@ -36,11 +35,6 @@ store.subscribe(() => {
 		token: {
 			...initialTokenState(),
 			value: currentState.token.value
-		},
-		route: {
-			...initialRouteState(),
-			key: currentState.route.key,
-			params: currentState.route.params
 		},
 		filter: {
 			...initialFilterState(),

@@ -10,7 +10,6 @@ import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-import * as route from '../../constants/route'
 import useWidgets from '../../hooks/useWidgets'
 
 import mergedFactsLoader from '../../loaders/mergedFactsLoader'
@@ -45,7 +44,7 @@ const RouteOverview = (props) => {
 			additionalProps: {
 				wide: true,
 				headline: 'Site Views',
-				onMore: () => props.setRoute(route.ROUTE_VIEWS)
+				onMore: () => props.setRoute('/insights/views')
 			}
 		},
 		{
@@ -56,7 +55,7 @@ const RouteOverview = (props) => {
 			additionalProps: {
 				wide: true,
 				headline: 'Durations',
-				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
+				onMore: () => props.setRoute('/insights/durations')
 			}
 		},
 		{
@@ -66,7 +65,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Pages',
-				onMore: () => props.setRoute(route.ROUTE_PAGES)
+				onMore: () => props.setRoute('/insights/pages')
 			}
 		},
 		{
@@ -77,7 +76,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Referrers',
-				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
+				onMore: () => props.setRoute('/insights/referrers')
 			}
 		}
 	], [])
@@ -91,7 +90,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Systems',
-				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
+				onMore: () => props.setRoute('/insights/systems')
 			}
 		},
 		{
@@ -102,7 +101,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Devices',
-				onMore: () => props.setRoute(route.ROUTE_DEVICES)
+				onMore: () => props.setRoute('/insights/devices')
 			}
 		},
 		{
@@ -113,7 +112,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Browsers',
-				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
+				onMore: () => props.setRoute('/insights/browsers')
 			}
 		},
 		{
@@ -124,7 +123,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Sizes',
-				onMore: () => props.setRoute(route.ROUTE_SIZES)
+				onMore: () => props.setRoute('/insights/sizes')
 			}
 		},
 		{
@@ -134,7 +133,7 @@ const RouteOverview = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Languages',
-				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)
+				onMore: () => props.setRoute('/insights/languages')
 			}
 		}
 	], [])

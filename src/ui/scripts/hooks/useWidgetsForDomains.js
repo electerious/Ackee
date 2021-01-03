@@ -1,7 +1,6 @@
 import { createElement as h, useMemo } from 'react'
 
 import useWidgets from './useWidgets'
-import domainRoute from '../utils/domainRoute'
 
 export default (props, createLoader, opts) => {
 
@@ -12,7 +11,7 @@ export default (props, createLoader, opts) => {
 			loader: createLoader(domain.id, opts),
 			additionalProps: {
 				headline: domain.title,
-				onMore: () => props.setRoute(domainRoute(domain))
+				onMore: () => props.setRoute(`/domains/${ domain.id }`)
 			}
 		}))
 

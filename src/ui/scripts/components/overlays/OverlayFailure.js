@@ -15,6 +15,7 @@ const OverlayFailure = (props) => {
 
 	const onClick = () => {
 		storage.reset()
+		window.location.hash = ''
 		window.location.reload()
 	}
 

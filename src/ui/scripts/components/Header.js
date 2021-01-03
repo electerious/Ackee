@@ -2,8 +2,6 @@ import { createElement as h, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import isSameRoute from '../utils/isSameRoute'
-
 import Context, { BUTTON as DROPDOWN_BUTTON, SEPARATOR as DROPDOWN_SEPARATOR } from './Context'
 import IconArrowDown from './icons/IconArrowDown'
 
@@ -32,7 +30,7 @@ const calculateY = (measurement) => {
 
 }
 
-const containsActiveItem = (items) => items.some((item) => item.active === true)
+const activeItem = (items) => items.find((item) => item.active === true)
 
 const Spinner = (props) => {
 
@@ -86,7 +84,7 @@ const Dropdown = (props) => {
 	const close = () => setActive(false)
 	const toggle = () => setActive(!active)
 
-	const activeInside = containsActiveItem(props.items)
+	const containsActiveItem = activeItem(props.items) != null
 
 	return (
 		h(Fragment, {},
@@ -95,9 +93,9 @@ const Dropdown = (props) => {
 				className: classNames({
 					'header__button': true,
 					'hovered': active === true,
-					'active': activeInside === true,
+					'active': containsActiveItem === true,
 					'link': true,
-					'color-white': activeInside === true
+					'color-white': containsActiveItem === true
 				}),
 				onClick: toggle
 			},
@@ -134,7 +132,7 @@ const Header = (props) => {
 						if (item.type === DROPDOWN) return h(Dropdown, {
 							key: index,
 							...item
-						}, item.label(containsActiveItem(item.items)))
+						}, item.label(activeItem(item.items)))
 
 					})
 				)
@@ -152,7 +150,7 @@ Header.propTypes = {
 export const createButton = (label, route, props) => ({
 	type: BUTTON,
 	onClick: () => props.setRoute(route),
-	active: isSameRoute(props.route, route) === true,
+	active: props.route === route,
 	label
 })
 
@@ -165,7 +163,7 @@ export const createDropdown = (label, items) => ({
 export const createDropdownButton = (label, route, props, keyHint) => ({
 	type: DROPDOWN_BUTTON,
 	onClick: () => props.setRoute(route),
-	active: isSameRoute(props.route, route) === true,
+	active: props.route === route,
 	label,
 	keyHint
 })

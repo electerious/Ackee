@@ -10,7 +10,7 @@ import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-import * as route from '../../constants/route'
+import useRoute from '../../hooks/useRoute'
 import useWidgets from '../../hooks/useWidgets'
 
 import factsLoader from '../../loaders/factsLoader'
@@ -28,7 +28,8 @@ import CardFactsWidget from '../cards/CardFactsWidget'
 
 const RouteDomain = (props) => {
 
-	const domainId = props.route.params.domainId
+	const currentRoute = useRoute(props.route)
+	const domainId = currentRoute.params.domainId
 
 	const factsWidgetConfigs = useMemo(() => [
 		{
@@ -49,7 +50,7 @@ const RouteDomain = (props) => {
 			additionalProps: {
 				wide: true,
 				headline: 'Site Views',
-				onMore: () => props.setRoute(route.ROUTE_VIEWS)
+				onMore: () => props.setRoute('/insights/views')
 			}
 		},
 		{
@@ -61,7 +62,7 @@ const RouteDomain = (props) => {
 			additionalProps: {
 				wide: true,
 				headline: 'Durations',
-				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
+				onMore: () => props.setRoute('/insights/durations')
 			}
 		},
 		{
@@ -72,7 +73,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Pages',
-				onMore: () => props.setRoute(route.ROUTE_PAGES)
+				onMore: () => props.setRoute('/insights/pages')
 			}
 		},
 		{
@@ -84,7 +85,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Referrers',
-				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
+				onMore: () => props.setRoute('/insights/referrers')
 			}
 		}
 	], [ domainId ])
@@ -99,7 +100,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Systems',
-				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
+				onMore: () => props.setRoute('/insights/systems')
 			}
 		},
 		{
@@ -111,7 +112,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Devices',
-				onMore: () => props.setRoute(route.ROUTE_DEVICES)
+				onMore: () => props.setRoute('/insights/devices')
 			}
 		},
 		{
@@ -123,7 +124,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Browsers',
-				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
+				onMore: () => props.setRoute('/insights/browsers')
 			}
 		},
 		{
@@ -135,7 +136,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Sizes',
-				onMore: () => props.setRoute(route.ROUTE_SIZES)
+				onMore: () => props.setRoute('/insights/sizes')
 			}
 		},
 		{
@@ -146,7 +147,7 @@ const RouteDomain = (props) => {
 			}),
 			additionalProps: {
 				headline: 'Languages',
-				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)
+				onMore: () => props.setRoute('/insights/languages')
 			}
 		}
 	], [ domainId ])
