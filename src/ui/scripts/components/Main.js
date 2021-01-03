@@ -26,14 +26,10 @@ const Main = (props) => {
 	const hasError = unknownErrors.length !== 0
 	const hasToken = props.token.value != null
 
-	const showOverlayFailure = hasError === true
-	const showOverlayLogin = hasError === false && hasToken === false
-	const showDashboard = hasError === false && hasToken === true
+	if (hasError === true) return h(OverlayFailure, { errors: unknownErrors })
+	if (hasToken === false) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
 
-	if (showOverlayFailure === true) return h(OverlayFailure, { errors: unknownErrors })
-	if (showOverlayLogin === true) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
-
-	if (showDashboard === true) return h(Fragment, {},
+	return h(Fragment, {},
 		h(Filter, props),
 		h(Dashboard, props)
 	)
