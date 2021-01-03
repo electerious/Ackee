@@ -36,6 +36,7 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 
 ### Added
 
+- Browser navigation. It's now possible to navigate using the back and forward button in the browser.
 - "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
 - Modals can be closed with the ESC key
 - Tests for permanent tokens, events and actions
