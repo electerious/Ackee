@@ -106,14 +106,14 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 ### 1. Create `values.yaml`
 
-Based on the [default `values.yaml`](https://github.com/suda/ackee-chart/blob/master/values.yaml) create your own with overrides as needed.
+Based on the [default `values.yaml`](https://github.com/suda/charts/blob/main/charts/ackee/values.yaml) create your own with overrides as needed.
 
 ### 2. Deploy with `helm`
 
 ```
-helm repo add ackee https://raw.githubusercontent.com/suda/ackee-chart/master
+helm repo add suda https://suda.github.io/charts/
 helm repo update
-helm install ackee-release ackee/ackee-chart -n ackee -f values.yaml
+helm install ackee-release suda/ackee -n ackee -f values.yaml
 ```
 
 If you're using the `ingress-nginx`, enabling the ingress will set the necessary annotations to enable CORS.
