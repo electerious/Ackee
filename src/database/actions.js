@@ -56,7 +56,7 @@ const update = async (id, data) => {
 
 }
 
-const getChart = async (ids, interval, limit, dateDetails) => {
+const getChart = async (ids, type, interval, limit, dateDetails) => {
 
 	const enhance = (entries) => {
 
@@ -94,7 +94,8 @@ const getChart = async (ids, interval, limit, dateDetails) => {
 
 	const aggregation = (() => {
 
-		return aggregateActions(ids, interval, limit, dateDetails)
+		if (type === 'TOTAL') return aggregateActions(ids, false, interval, limit, dateDetails)
+		if (type === 'AVERAGE') return aggregateActions(ids, true, interval, limit, dateDetails)
 
 	})()
 
@@ -104,7 +105,7 @@ const getChart = async (ids, interval, limit, dateDetails) => {
 
 }
 
-const getList = async (ids, sorting, range, limit, dateDetails) => {
+const getList = async (ids, sorting, type, range, limit, dateDetails) => {
 
 	const enhance = (entries) => {
 
@@ -118,9 +119,16 @@ const getList = async (ids, sorting, range, limit, dateDetails) => {
 
 	const aggregation = (() => {
 
-		if (sorting === sortings.SORTINGS_TOP) return aggregateTopActions(ids, range, limit, dateDetails)
-		if (sorting === sortings.SORTINGS_NEW) return aggregateNewActions(ids, limit)
-		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
+		if (type === 'TOTAL') {
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopActions(ids, false, range, limit, dateDetails)
+			if (sorting === sortings.SORTINGS_NEW) return aggregateNewActions(ids, limit)
+			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
+		}
+		if (type === 'AVERAGE') {
+			if (sorting === sortings.SORTINGS_TOP) return aggregateTopActions(ids, true, range, limit, dateDetails)
+			if (sorting === sortings.SORTINGS_NEW) return aggregateNewActions(ids, limit)
+			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
+		}
 
 	})()
 

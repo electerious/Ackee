@@ -3,7 +3,7 @@
 const ranges = require('../constants/ranges')
 const matchEvents = require('../stages/matchEvents')
 
-module.exports = (ids, range, limit, dateDetails) => {
+module.exports = (ids, average, range, limit, dateDetails) => {
 
 	const aggregation = [
 		matchEvents(ids),
@@ -11,9 +11,6 @@ module.exports = (ids, range, limit, dateDetails) => {
 			$group: {
 				_id: {
 					key: '$key'
-				},
-				count: {
-					$sum: '$value'
 				}
 			}
 		},
@@ -28,6 +25,7 @@ module.exports = (ids, range, limit, dateDetails) => {
 	]
 
 	aggregation[0].$match.key = { $ne: null }
+	aggregation[1].$group.count = average === true ? { $avg: '$value' } : { $sum: '$value' }
 
 	if (range === ranges.RANGES_LAST_24_HOURS) {
 		aggregation[0].$match.created = { $gte: dateDetails.lastHours(24) }

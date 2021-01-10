@@ -22,7 +22,7 @@ const ModalEventAdd = (props) => {
 
 	const [ inputs, setInputs ] = useState({
 		title: '',
-		type: events.EVENTS_TYPE_CHART
+		type: events.EVENTS_TYPE_TOTAL_CHART
 	})
 
 	const onChange = (key) => (e) => setInputs({
@@ -69,12 +69,20 @@ const ModalEventAdd = (props) => {
 					value: inputs.type,
 					items: [
 						{
-							value: events.EVENTS_TYPE_CHART,
-							label: 'Chart'
+							value: events.EVENTS_TYPE_TOTAL_CHART,
+							label: 'Chart with total sums'
 						},
 						{
-							value: events.EVENTS_TYPE_LIST,
-							label: 'List'
+							value: events.EVENTS_TYPE_AVERAGE_CHART,
+							label: 'Chart with average values'
+						},
+						{
+							value: events.EVENTS_TYPE_TOTAL_LIST,
+							label: 'List with total sums'
+						},
+						{
+							value: events.EVENTS_TYPE_AVERAGE_LIST,
+							label: 'List with average values'
 						}
 					],
 					onChange: onChange('type')

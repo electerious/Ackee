@@ -11,7 +11,7 @@ export default (eventId, opts) => {
 	const query = `
 		event(id: "${ eventId }") {
 			statistics {
-				list(sorting: ${ opts.sorting }, range: ${ opts.range }) {
+				list(sorting: ${ opts.sorting }, type: ${ opts.type }, range: ${ opts.range }) {
 					id
 					count
 					created
@@ -23,6 +23,7 @@ export default (eventId, opts) => {
 	const variables = {
 		eventId,
 		sorting: opts.sorting,
+		type: opts.type,
 		range: opts.range
 	}
 

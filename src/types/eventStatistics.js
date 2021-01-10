@@ -3,6 +3,28 @@
 const { gql } = require('apollo-server-micro')
 
 module.exports = gql`
+	enum EventChartType {
+		"""
+		Total sum of values.
+		"""
+		TOTAL
+		"""
+		Average sum of values.
+		"""
+		AVERAGE
+	}
+
+	enum EventListType {
+		"""
+		Total sum of values.
+		"""
+		TOTAL
+		"""
+		Average sum of values.
+		"""
+		AVERAGE
+	}
+
 	type EventChartEntry {
 		"""
 		Date of the event.
@@ -34,20 +56,22 @@ module.exports = gql`
 	"""
 	type EventStatistics {
 		"""
-		The chart type should be used when showing events in a chart. It groups events by an interval and shows the sum of values on each entry.
+		The chart type should be used when showing events in a chart. It groups events by an interval and shows the total or average sum of values on each entry.
 		"""
 		chart(
 			interval: Interval!,
+			type: EventChartType!,
 			"""
 			Number of entries to return. Starts with the current day, month or year depending on the chosen interval.
 			"""
 			limit: Int = 14
 		): [EventChartEntry!]
 		"""
-		The list type should be used when showing events in a list. It groups events by their key and shows the sum of values on each entry.
+		The list type should be used when showing events in a list. It groups events by their key and shows the total or average sum of values on each entry.
 		"""
 		list(
 			sorting: Sorting!,
+			type: EventListType!,
 			range: Range = LAST_7_DAYS,
 			"""
 			Number of entries to return.

@@ -5,13 +5,21 @@ const { gql } = require('apollo-server-micro')
 module.exports = gql`
 	enum EventType {
 		"""
-		The UI will display the data of this event as bar chart.
+		The UI will display the data of this event as a bar chart with totalized values.
 		"""
-		CHART
+		TOTAL_CHART
 		"""
-		The UI will display the data of this event as a list of entries.
+		The UI will display the data of this event as a bar chart with average values.
 		"""
-		LIST
+		AVERAGE_CHART
+		"""
+		The UI will display the data of this event as a list of entries with totalized values.
+		"""
+		TOTAL_LIST
+		"""
+		The UI will display the data of this event as a list of entries with average values.
+		"""
+		AVERAGE_LIST
 	}
 
 	"""

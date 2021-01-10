@@ -17,7 +17,7 @@ export default (eventId, opts) => {
 	const query = `
 		event(id: "${ eventId }") {
 			statistics {
-				chart(interval: ${ opts.interval }, limit: 7) {
+				chart(interval: ${ opts.interval }, type: ${ opts.type }, limit: 7) {
 					id
 					count
 				}
@@ -27,7 +27,8 @@ export default (eventId, opts) => {
 
 	const variables = {
 		eventId,
-		interval: opts.interval
+		interval: opts.interval,
+		type: opts.type
 	}
 
 	const selector = (data, entryName = 'event') => data[entryName].statistics.chart

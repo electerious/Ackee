@@ -6,16 +6,16 @@ const requireAuth = require('../middlewares/requireAuth')
 
 module.exports = {
 	EventStatistics: {
-		chart: pipe(requireAuth, async (event, { interval, limit }, { dateDetails }) => {
+		chart: pipe(requireAuth, async (event, { type, interval, limit }, { dateDetails }) => {
 
 			const ids = [ event.id ]
-			return actions.getChart(ids, interval, limit, dateDetails)
+			return actions.getChart(ids, type, interval, limit, dateDetails)
 
 		}),
-		list: pipe(requireAuth, async (event, { sorting, range, limit }, { dateDetails }) => {
+		list: pipe(requireAuth, async (event, { sorting, type, range, limit }, { dateDetails }) => {
 
 			const ids = [ event.id ]
-			return actions.getList(ids, sorting, range, limit, dateDetails)
+			return actions.getList(ids, sorting, type, range, limit, dateDetails)
 
 		})
 	}

@@ -1,6 +1,6 @@
 import { createElement as h, useMemo } from 'react'
 
-import { EVENTS_TYPE_CHART, EVENTS_TYPE_LIST } from '../../../constants/events'
+import * as events from '../../../constants/events'
 
 import eventChartEntriesLoader from '../loaders/eventChartEntriesLoader'
 import eventListEntriesLoader from '../loaders/eventListEntriesLoader'
@@ -9,13 +9,17 @@ import useWidgets from './useWidgets'
 
 const selectLoader = (eventId, eventType, opts) => {
 	switch (eventType) {
-		case EVENTS_TYPE_CHART:
+		case events.EVENTS_TYPE_TOTAL_CHART:
+		case events.EVENTS_TYPE_AVERAGE_CHART:
 			return eventChartEntriesLoader(eventId, {
+				type: eventType === events.EVENTS_TYPE_AVERAGE_CHART ? 'AVERAGE' : 'TOTAL',
 				interval: opts.interval
 			})
-		case EVENTS_TYPE_LIST:
+		case events.EVENTS_TYPE_TOTAL_LIST:
+		case events.EVENTS_TYPE_AVERAGE_LIST:
 			return eventListEntriesLoader(eventId, {
 				sorting: opts.sorting,
+				type: eventType === events.EVENTS_TYPE_AVERAGE_LIST ? 'AVERAGE' : 'TOTAL',
 				range: opts.range
 			})
 	}
