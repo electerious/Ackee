@@ -46,7 +46,7 @@ A new parameter is required when requesting referrers via the GraphQL API. The p
 
 > This change is relevant for you when using the GraphQL API.
 
-The `id` of requested referrers was always a URL, but has been changed to a string. That's because referrers can now include source parameters like `ref`, `source` and `utm_source`.
+The `id` of requested referrers was always a URL, but has been changed to a string. That's because referrers can now include parameters (e.g. `source` when using `ackee-tracker`).
 
 ### Added
 
