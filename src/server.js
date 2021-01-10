@@ -9,7 +9,7 @@ const { ApolloServer } = require('apollo-server-micro')
 
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
-const isDefined = require('./utils/isDefined')
+const config = require('./utils/config')
 const findMatchingOrigin = require('./utils/findMatchingOrigin')
 const customTracker = require('./utils/customTracker')
 const createApolloServer = require('./utils/createApolloServer')
@@ -77,7 +77,7 @@ const catchError = (fn) => async (req, res) => {
 
 const attachCorsHeaders = (fn) => async (req, res) => {
 
-	const matchingOrigin = findMatchingOrigin(req, process.env.ACKEE_ALLOW_ORIGIN)
+	const matchingOrigin = findMatchingOrigin(req, config.allowOrigin)
 
 	if (matchingOrigin != null) {
 		res.setHeader('Access-Control-Allow-Origin', matchingOrigin)
@@ -147,7 +147,7 @@ const routes = [
 	patch('/*', notFound),
 	del('/*', notFound)
 
-].filter(isDefined)
+].filter(Boolean)
 
 module.exports = micro(
 	attachCorsHeaders(

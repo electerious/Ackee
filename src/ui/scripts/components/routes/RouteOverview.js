@@ -1,139 +1,154 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment, useMemo } from 'react'
 
 import { SORTINGS_TOP } from '../../../../constants/sortings'
 import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
 import { INTERVALS_DAILY } from '../../../../constants/intervals'
+import { VIEWS_TYPE_UNIQUE } from '../../../../constants/views'
+import { REFERRERS_TYPE_WITH_SOURCE } from '../../../../constants/referrers'
+import { SYSTEMS_TYPE_WITH_VERSION } from '../../../../constants/systems'
+import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
+import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
+import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-import * as route from '../../constants/route'
-import { ALL_DOMAINS } from '../../actions/overview'
-import * as selectOverviewValue from '../../selectors/selectOverviewValue'
+import useWidgets from '../../hooks/useWidgets'
 
-import enhanceFacts from '../../enhancers/enhanceFacts'
-import enhanceViews from '../../enhancers/enhanceViews'
-import enhancePages from '../../enhancers/enhancePages'
-import enhanceReferrers from '../../enhancers/enhanceReferrers'
-import enhanceDurations from '../../enhancers/enhanceDurations'
-import enhanceSystems from '../../enhancers/enhanceSystems'
-import enhanceDevices from '../../enhancers/enhanceDevices'
-import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
-import enhanceSizes from '../../enhancers/enhanceSizes'
-import enhanceLanguages from '../../enhancers/enhanceLanguages'
+import mergedFactsLoader from '../../loaders/mergedFactsLoader'
+import mergedViewsLoader from '../../loaders/mergedViewsLoader'
+import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
+import mergedPagesLoader from '../../loaders/mergedPagesLoader'
+import mergedReferrersLoader from '../../loaders/mergedReferrersLoader'
+import mergedSystemsLoader from '../../loaders/mergedSystemsLoader'
+import mergedDevicesLoader from '../../loaders/mergedDevicesLoader'
+import mergedBrowsersLoader from '../../loaders/mergedBrowsersLoader'
+import mergedSizesLoader from '../../loaders/mergedSizesLoader'
+import mergedLanguagesLoader from '../../loaders/mergedLanguagesLoader'
 
-import CardFacts from '../cards/CardFacts'
-import CardViews from '../cards/CardViews'
-import CardPages from '../cards/CardPages'
-import CardReferrers from '../cards/CardReferrers'
-import CardDurations from '../cards/CardDurations'
-import CardSystems from '../cards/CardSystems'
-import CardDevices from '../cards/CardDevices'
-import CardBrowsers from '../cards/CardBrowsers'
-import CardSizes from '../cards/CardSizes'
-import CardLanguages from '../cards/CardLanguages'
+import CardFactsWidget from '../cards/CardFactsWidget'
 
 const RouteOverview = (props) => {
 
-	const domainId = props.route.params.domainId || ALL_DOMAINS
-	const isLoading = selectOverviewValue.withoutType(props, domainId).fetching
+	const factsWidgetConfigs = useMemo(() => [
+		{
+			WidgetComponent: CardFactsWidget,
+			loader: mergedFactsLoader({})
+		}
+	], [])
 
-	useEffect(() => {
+	const essentialWidgetConfigs = useMemo(() => [
+		{
+			loader: mergedViewsLoader({
+				interval: INTERVALS_DAILY,
+				type: VIEWS_TYPE_UNIQUE,
+				limit: 14
+			}),
+			additionalProps: {
+				wide: true,
+				headline: 'Site Views',
+				onMore: () => props.setRoute('/insights/views')
+			}
+		},
+		{
+			loader: mergedDurationsLoader({
+				interval: INTERVALS_DAILY,
+				limit: 14
+			}),
+			additionalProps: {
+				wide: true,
+				headline: 'Durations',
+				onMore: () => props.setRoute('/insights/durations')
+			}
+		},
+		{
+			loader: mergedPagesLoader({
+				sorting: SORTINGS_TOP,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Pages',
+				onMore: () => props.setRoute('/insights/pages')
+			}
+		},
+		{
+			loader: mergedReferrersLoader({
+				sorting: SORTINGS_TOP,
+				type: REFERRERS_TYPE_WITH_SOURCE,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Referrers',
+				onMore: () => props.setRoute('/insights/referrers')
+			}
+		}
+	], [])
 
-		props.fetchOverview(props, domainId)
+	const detailedWidgetConfigs = useMemo(() => [
+		{
+			loader: mergedSystemsLoader({
+				sorting: SORTINGS_TOP,
+				type: SYSTEMS_TYPE_WITH_VERSION,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Systems',
+				onMore: () => props.setRoute('/insights/systems')
+			}
+		},
+		{
+			loader: mergedDevicesLoader({
+				sorting: SORTINGS_TOP,
+				type: DEVICES_TYPE_WITH_MODEL,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Devices',
+				onMore: () => props.setRoute('/insights/devices')
+			}
+		},
+		{
+			loader: mergedBrowsersLoader({
+				sorting: SORTINGS_TOP,
+				type: BROWSERS_TYPE_WITH_VERSION,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Browsers',
+				onMore: () => props.setRoute('/insights/browsers')
+			}
+		},
+		{
+			loader: mergedSizesLoader({
+				sorting: SORTINGS_TOP,
+				type: SIZES_TYPE_BROWSER_RESOLUTION,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Sizes',
+				onMore: () => props.setRoute('/insights/sizes')
+			}
+		},
+		{
+			loader: mergedLanguagesLoader({
+				sorting: SORTINGS_TOP,
+				range: RANGES_LAST_24_HOURS
+			}),
+			additionalProps: {
+				headline: 'Languages',
+				onMore: () => props.setRoute('/insights/languages')
+			}
+		}
+	], [])
 
-	}, [ domainId ])
+	const renderedFactsWidgets = useWidgets(props, factsWidgetConfigs)
+	const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
+	const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
 	return (
 		h(Fragment, {},
-
-			h(CardFacts, {
-				loading: isLoading,
-				items: enhanceFacts(selectOverviewValue.withoutType(props, domainId).facts)
-			}),
-
+			renderedFactsWidgets,
 			h('div', { className: 'content__spacer' }),
-
-			h(CardViews, {
-				wide: true,
-				headline: 'Views',
-				interval: INTERVALS_DAILY,
-				loading: isLoading,
-				items: enhanceViews(selectOverviewValue.withType(props, domainId, 'views'), 14),
-				onMore: () => props.setRoute(route.ROUTE_VIEWS)
-			}),
-
-			h(CardDurations, {
-				wide: true,
-				headline: 'Durations',
-				interval: INTERVALS_DAILY,
-				loading: isLoading,
-				items: enhanceDurations(selectOverviewValue.withType(props, domainId, 'durations'), 14),
-				onMore: () => props.setRoute(route.ROUTE_DURATIONS)
-			}),
-
-			h(CardPages, {
-				headline: 'Pages',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhancePages(selectOverviewValue.withType(props, domainId, 'pages')),
-				onMore: () => props.setRoute(route.ROUTE_PAGES)
-			}),
-
-			h(CardReferrers, {
-				headline: 'Referrers',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhanceReferrers(selectOverviewValue.withType(props, domainId, 'referrers')),
-				onMore: () => props.setRoute(route.ROUTE_REFERRERS)
-			}),
-
+			renderedEssentialWidgets,
 			h('div', { className: 'content__spacer' }),
-
-			h(CardSystems, {
-				headline: 'Systems',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhanceSystems(selectOverviewValue.withType(props, domainId, 'systems')),
-				onMore: () => props.setRoute(route.ROUTE_SYSTEMS)
-			}),
-
-			h(CardDevices, {
-				headline: 'Devices',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhanceDevices(selectOverviewValue.withType(props, domainId, 'devices')),
-				onMore: () => props.setRoute(route.ROUTE_DEVICES)
-			}),
-
-			h(CardBrowsers, {
-				headline: 'Browsers',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhanceBrowsers(selectOverviewValue.withType(props, domainId, 'browsers')),
-				onMore: () => props.setRoute(route.ROUTE_BROWSERS)
-			}),
-
-			h(CardSizes, {
-				headline: 'Sizes',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhanceSizes(selectOverviewValue.withType(props, domainId, 'sizes')),
-				onMore: () => props.setRoute(route.ROUTE_SIZES)
-			}),
-
-			h(CardLanguages, {
-				headline: 'Languages',
-				range: RANGES_LAST_24_HOURS,
-				sorting: SORTINGS_TOP,
-				loading: isLoading,
-				items: enhanceLanguages(selectOverviewValue.withType(props, domainId, 'languages')),
-				onMore: () => props.setRoute(route.ROUTE_LANGUAGES)
-			})
-
+			renderedDetailedWidgets
 		)
 	)
 

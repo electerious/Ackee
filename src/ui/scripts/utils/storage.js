@@ -1,4 +1,4 @@
-import { version } from '../../../../package'
+import { version } from '../../../../package.json'
 
 // Should include the package version so we can increase the version number
 // when the structure of the state has changed to avoid loading outdated states.

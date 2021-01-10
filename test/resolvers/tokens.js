@@ -9,7 +9,7 @@ const server = require('../../src/server')
 
 const base = listen(server)
 
-let validToken = null
+let validToken
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)
@@ -17,7 +17,6 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 test.serial('return token and cookie after successful login', async (t) => {
-
 
 	const username = 'admin'
 	const password = '123456'

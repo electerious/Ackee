@@ -8,8 +8,8 @@ const { connectToDatabase, fillDatabase, cleanupDatabase, disconnectFromDatabase
 
 const base = listen(server)
 
-let validRecord = null
-let ignoredRecord = null
+let validRecord
+let ignoredRecord
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)
@@ -17,7 +17,6 @@ test.afterEach.always(cleanupDatabase)
 test.after.always(disconnectFromDatabase)
 
 test.serial('create record', async (t) => {
-
 
 	const body = {
 		query: `

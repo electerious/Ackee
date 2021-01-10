@@ -19,13 +19,11 @@ export const initialSubState = () => ({
 
 export default produce((draft, action) => {
 
-	const hasModalId = () => action.modalId != null
-	const hasModalValue = () => draft.value[action.modalId] != null
-
-	if (hasModalId() === true && hasModalValue() === false) draft.value[action.modalId] = initialSubState()
-
 	switch (action.type) {
 		case SET_MODALS_STATE:
+			// Initialize when id is unknown
+			draft.value[action.modalId] = draft.value[action.modalId] || initialSubState()
+			// Set remaining data
 			draft.value[action.modalId].id = action.modalId
 			draft.value[action.modalId].type = action.payload.type
 			draft.value[action.modalId].props = action.payload.props || initialSubState().props

@@ -1,7 +1,8 @@
 import produce from 'immer'
 
 import {
-	SET_PERMANENT_TOKENS_VALUE,
+	SET_PERMANENT_TOKENS_START,
+	SET_PERMANENT_TOKENS_END,
 	SET_PERMANENT_TOKENS_FETCHING,
 	SET_PERMANENT_TOKENS_ERROR
 } from '../actions'
@@ -15,8 +16,13 @@ export const initialState = () => ({
 export default produce((draft, action) => {
 
 	switch (action.type) {
-		case SET_PERMANENT_TOKENS_VALUE:
-			draft.value = action.payload || initialState().value
+		case SET_PERMANENT_TOKENS_START:
+			draft.fetching = true
+			draft.error = initialState().error
+			break
+		case SET_PERMANENT_TOKENS_END:
+			draft.value = action.value || initialState().value
+			draft.fetching = false
 			break
 		case SET_PERMANENT_TOKENS_FETCHING:
 			draft.fetching = action.payload || initialState().fetching

@@ -1,13 +1,18 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_PERMANENT_TOKENS_VALUE = Symbol()
+export const SET_PERMANENT_TOKENS_START = Symbol()
+export const SET_PERMANENT_TOKENS_END = Symbol()
 export const SET_PERMANENT_TOKENS_FETCHING = Symbol()
 export const SET_PERMANENT_TOKENS_ERROR = Symbol()
 
-export const setPermanentTokensValue = (payload) => ({
-	type: SET_PERMANENT_TOKENS_VALUE,
-	payload
+export const setPermanentTokensStart = () => ({
+	type: SET_PERMANENT_TOKENS_START
+})
+
+export const setPermanentTokensEnd = (value) => ({
+	type: SET_PERMANENT_TOKENS_END,
+	value
 })
 
 export const setPermanentTokensFetching = (payload) => ({
@@ -22,8 +27,7 @@ export const setPermanentTokensError = (payload) => ({
 
 export const fetchPermanentTokens = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setPermanentTokensFetching(true))
-	dispatch(setPermanentTokensError())
+	dispatch(setPermanentTokensStart())
 
 	try {
 
@@ -40,8 +44,7 @@ export const fetchPermanentTokens = signalHandler((signal) => (props) => async (
 			signal: signal()
 		})
 
-		dispatch(setPermanentTokensValue(data.permanentTokens))
-		dispatch(setPermanentTokensFetching(false))
+		dispatch(setPermanentTokensEnd(data.permanentTokens))
 
 	} catch (err) {
 
@@ -56,8 +59,7 @@ export const fetchPermanentTokens = signalHandler((signal) => (props) => async (
 
 export const addPermanentToken = (props, state) => async (dispatch) => {
 
-	dispatch(setPermanentTokensFetching(true))
-	dispatch(setPermanentTokensError())
+	dispatch(setPermanentTokensStart())
 
 	try {
 
@@ -78,7 +80,6 @@ export const addPermanentToken = (props, state) => async (dispatch) => {
 		})
 
 		await dispatch(fetchPermanentTokens(props))
-		dispatch(setPermanentTokensFetching(false))
 
 	} catch (err) {
 
@@ -93,8 +94,7 @@ export const addPermanentToken = (props, state) => async (dispatch) => {
 
 export const updatePermanentToken = signalHandler((signal) => (props, permanentTokenId, state) => async (dispatch) => {
 
-	dispatch(setPermanentTokensFetching(true))
-	dispatch(setPermanentTokensError())
+	dispatch(setPermanentTokensStart())
 
 	try {
 
@@ -117,7 +117,6 @@ export const updatePermanentToken = signalHandler((signal) => (props, permanentT
 		})
 
 		await dispatch(fetchPermanentTokens(props))
-		dispatch(setPermanentTokensFetching(false))
 
 	} catch (err) {
 
@@ -132,8 +131,7 @@ export const updatePermanentToken = signalHandler((signal) => (props, permanentT
 
 export const deletePermanentToken = signalHandler((signal) => (props, permanentTokenId) => async (dispatch) => {
 
-	dispatch(setPermanentTokensFetching(true))
-	dispatch(setPermanentTokensError())
+	dispatch(setPermanentTokensStart())
 
 	try {
 
@@ -153,7 +151,6 @@ export const deletePermanentToken = signalHandler((signal) => (props, permanentT
 		})
 
 		await dispatch(fetchPermanentTokens(props))
-		dispatch(setPermanentTokensFetching(false))
 
 	} catch (err) {
 

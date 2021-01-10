@@ -23,25 +23,16 @@ module.exports = (ids, interval, limit, dateDetails) => {
 		}
 	]
 
+	aggregation[0].$match.created = { $gte: dateDetails.includeFnByInterval(interval)(limit) }
+
 	const dateExpression = { date: '$created', timezone: dateDetails.userTimeZone }
+	const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
+	const matchMonth = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY ].includes(interval)
+	const matchYear = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY, intervals.INTERVALS_YEARLY ].includes(interval)
 
-	if (interval === intervals.INTERVALS_DAILY) {
-		aggregation[0].$match.created = { $gte: dateDetails.includeDays(limit) }
-		aggregation[4].$group._id.day = { $dayOfMonth: dateExpression }
-		aggregation[4].$group._id.month = { $month: dateExpression }
-		aggregation[4].$group._id.year = { $year: dateExpression }
-	}
-
-	if (interval === intervals.INTERVALS_MONTHLY) {
-		aggregation[0].$match.created = { $gte: dateDetails.includeMonths(limit) }
-		aggregation[4].$group._id.month = { $month: dateExpression }
-		aggregation[4].$group._id.year = { $year: dateExpression }
-	}
-
-	if (interval === intervals.INTERVALS_YEARLY) {
-		aggregation[0].$match.created = { $gte: dateDetails.includeYears(limit) }
-		aggregation[4].$group._id.year = { $year: dateExpression }
-	}
+	if (matchDay === true) aggregation[4].$group._id.day = { $dayOfMonth: dateExpression }
+	if (matchMonth === true) aggregation[4].$group._id.month = { $month: dateExpression }
+	if (matchYear === true) aggregation[4].$group._id.year = { $year: dateExpression }
 
 	return aggregation
 

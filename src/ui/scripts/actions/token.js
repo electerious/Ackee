@@ -1,15 +1,23 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-import { resetState } from './index'
-
-export const SET_TOKEN_VALUE = Symbol()
+export const RESET_STATE = Symbol()
+export const SET_TOKEN_START = Symbol()
+export const SET_TOKEN_END = Symbol()
 export const SET_TOKEN_FETCHING = Symbol()
 export const SET_TOKEN_ERROR = Symbol()
 
-export const setTokenValue = (payload) => ({
-	type: SET_TOKEN_VALUE,
-	payload
+export const resetState = () => ({
+	type: RESET_STATE
+})
+
+export const setTokenStart = () => ({
+	type: SET_TOKEN_START
+})
+
+export const setTokenEnd = (value) => ({
+	type: SET_TOKEN_END,
+	value
 })
 
 export const setTokenFetching = (payload) => ({
@@ -24,8 +32,7 @@ export const setTokenError = (payload) => ({
 
 export const addToken = signalHandler((signal) => (props, state) => async (dispatch) => {
 
-	dispatch(setTokenFetching(true))
-	dispatch(setTokenError())
+	dispatch(setTokenStart(true))
 
 	try {
 
@@ -49,9 +56,7 @@ export const addToken = signalHandler((signal) => (props, state) => async (dispa
 			signal: signal()
 		})
 
-		// TODO: Maybe just store the id instead of the payload
-		dispatch(setTokenValue(data.createToken.payload))
-		dispatch(setTokenFetching(false))
+		dispatch(setTokenEnd(data.createToken.payload.id))
 
 	} catch (err) {
 
@@ -79,7 +84,7 @@ export const deleteToken = signalHandler((signal) => (props) => async (dispatch)
 				}
 			`,
 			variables: {
-				id: props.token.value.id
+				id: props.token.value
 			},
 			props,
 			signal: signal()

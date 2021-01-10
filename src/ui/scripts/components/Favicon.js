@@ -6,7 +6,8 @@ const transparentPixel = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB
 
 const Favicon = (props) => {
 
-	const [ missing, setMissing ] = useState(false)
+	const initialMissing = props.url == null
+	const [ missing, setMissing ] = useState(initialMissing)
 
 	const onError = () => setMissing(true)
 
@@ -24,7 +25,7 @@ const Favicon = (props) => {
 }
 
 Favicon.propTypes = {
-	url: PropTypes.string.isRequired
+	url: PropTypes.string
 }
 
 export default Favicon
