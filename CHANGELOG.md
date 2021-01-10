@@ -22,6 +22,12 @@ You can now use the back and forward buttons to navigate between pages.
 
 You can now specify a `source` parameter in URLs (e.g. `https://example.com?source=Newsletter`). Ackee will use the parameter instead of the referrer when available. This allows you the track links from newsletters and other platforms more precisely.
 
+#### Fast startup, smaller size
+
+Ackee previously had to compile all source files before the server was ready. v3 now ships with all files Ackee needs and only builds those containing environment variables. This means running `yarn start` is way faster and the Docker container even smaller.
+
+Oh, and we also reduced the JS file size of the UI by ~60%.
+
 ### Breaking changes
 
 #### New `Access-Control-Allow-Credentials` header
@@ -56,6 +62,12 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 - Tests for permanent tokens, events and actions
 - `source` field for records to track (thanks @BetaHuhn, #185)
 - Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
+
+### Changed
+
+- Compiled source files are now part of the repo
+- Docker container size has been reduced (again)
+- Updated build tools allow us to use ~60% less JS in the UI
 
 ### Fixed
 
