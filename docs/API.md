@@ -310,7 +310,7 @@ mutation createEvent($input: CreateEventInput!) {
 {
   "input": {
     "title": "Event Title",
-    "type": "CHART"
+    "type": "TOTAL_CHART"
   }
 }
 ```

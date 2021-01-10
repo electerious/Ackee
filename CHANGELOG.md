@@ -6,7 +6,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased (v3)]
 
-Introducing events 🎉 Ackee can now track events like newsletter subscriptions, buttons clicks, checkout sums and more. It's the most requested feature and I'm happy that it's finally a part of Ackee.
+Events, browser navigation and better referrers 🎉
+
+### Highlights
+
+#### Events
+
+Ackee can now [track events](docs/Events.md) like newsletter subscriptions, buttons clicks, checkout sums and more. It's the most requested feature and I'm happy that it's finally a part of Ackee.
+
+#### Browser navigation
+
+You can now use the back and forward buttons to navigate between pages.
+
+#### Referrers 2.0
+
+You can now specify a `source` parameter in URLs (e.g. `https://example.com?source=Newsletter`). Ackee will use the parameter instead of the referrer when available. This allows you the track links from newsletters and other platforms more precisely.
 
 ### Breaking changes
 
@@ -40,7 +54,7 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 - "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
 - Modals can be closed with the ESC key
 - Tests for permanent tokens, events and actions
-- `source` field for records to track `ref`, `source` and `utm_source` (thanks @BetaHuhn, #185)
+- `source` field for records to track (thanks @BetaHuhn, #185)
 - Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
 
 ### Fixed

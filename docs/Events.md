@@ -16,8 +16,10 @@ Create a new event in the settings of Ackee and you're ready to go. Ackee shows 
 
 The event type specifies how Ackee will show the aggregated data in the UI. It can be changed at any time.
 
-- **Chart**: Shows the aggregated data as a chart. Perfect to track clicks.
-- **List**: Shows the aggregated data as a list. Perfect when an event contains different actions (e.g. tracking button choices).
+- **Chart with total sums**: Shows the aggregated data as a chart. Each day, month or year (depending on the chosen interval) includes the total sum of values.
+- **Chart with average values**: Shows the aggregated data as a chart. Each day, month or year (depending on the chosen interval) includes the average value.
+- **List with total sums**: Shows the aggregated data as a list. Each entry includes the total sum of values. Perfect when an event contains different actions (e.g. tracking choices).
+- **List with average values**: Shows the aggregated data as a list. Each entry includes the total sum of values. Perfect when an event contains different actions (e.g. tracking choices).
 
 ### Adding actions
 
