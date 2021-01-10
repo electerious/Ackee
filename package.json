@@ -1,7 +1,7 @@
 {
   "name": "ackee",
   "private": true,
-  "version": "3.0.0-2",
+  "version": "3.0.0-3",
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
@@ -33,7 +33,7 @@
     "lint": "eslint '{functions,src,test}/**/*.js'"
   },
   "dependencies": {
-    "ackee-tracker": "^5.0.0-1",
+    "ackee-tracker": "^5.0.0-2",
     "apollo-server-lambda": "^2.19.1",
     "apollo-server-micro": "^2.19.1",
     "apollo-server-plugin-http-headers": "^0.1.4",
