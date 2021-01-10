@@ -22,7 +22,7 @@ You can now use the back and forward buttons to navigate between pages.
 
 You can now specify a `source` parameter in URLs (e.g. `https://example.com?source=Newsletter`). Ackee will use the parameter instead of the referrer when available. This allows you the track links from newsletters and other platforms more precisely.
 
-#### Fast startup, smaller size
+#### Faster startup, smaller size
 
 Ackee previously had to compile all source files before the server was ready. v3 now ships with all files Ackee needs and only builds those containing environment variables. This means running `yarn start` is way faster and the Docker container even smaller.
 
