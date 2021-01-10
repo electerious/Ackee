@@ -27,8 +27,8 @@ export default (domainId, opts) => {
 
 	const variables = {
 		domainId,
-		type: opts.type,
 		interval: opts.interval,
+		type: opts.type,
 		limit: opts.limit
 	}
 

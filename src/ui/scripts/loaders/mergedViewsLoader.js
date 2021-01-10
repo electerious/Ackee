@@ -18,8 +18,8 @@ export default (opts) => {
 	`
 
 	const variables = {
-		interval: opts.interval,
 		type: opts.type,
+		interval: opts.interval,
 		limit: opts.limit
 	}
 
