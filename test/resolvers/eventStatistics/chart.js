@@ -84,3 +84,54 @@ test(macro, {
 	t.is(entries.length, 1)
 	t.is(typeof entries[0].count, 'number')
 })
+
+test(macro, {
+	interval: 'DAILY',
+	type: 'AVERAGE'
+}, (t, entries) => {
+	t.is(entries.length, 14)
+	t.is(entries[0].count, 1)
+})
+
+test(macro, {
+	interval: 'DAILY',
+	type: 'AVERAGE',
+	limit: 1
+}, (t, entries) => {
+	t.is(entries.length, 1)
+	t.is(entries[0].count, 1)
+})
+
+test(macro, {
+	interval: 'MONTHLY',
+	type: 'AVERAGE'
+}, (t, entries) => {
+	t.is(entries.length, 14)
+	t.is(typeof entries[0].count, 'number')
+})
+
+test(macro, {
+	interval: 'MONTHLY',
+	type: 'AVERAGE',
+	limit: 1
+}, (t, entries) => {
+	t.is(entries.length, 1)
+	t.is(typeof entries[0].count, 'number')
+})
+
+test(macro, {
+	interval: 'YEARLY',
+	type: 'AVERAGE'
+}, (t, entries) => {
+	t.is(entries.length, 14)
+	t.is(typeof entries[0].count, 'number')
+})
+
+test(macro, {
+	interval: 'YEARLY',
+	type: 'AVERAGE',
+	limit: 1
+}, (t, entries) => {
+	t.is(entries.length, 1)
+	t.is(typeof entries[0].count, 'number')
+})

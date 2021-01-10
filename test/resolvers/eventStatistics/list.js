@@ -46,6 +46,16 @@ test(macro, {
 })
 
 test(macro, {
+	sorting: 'TOP',
+	type: 'AVERAGE',
+	range: 'LAST_6_MONTHS'
+}, (t, entries) => {
+	t.is(entries.length, 14)
+	t.is(entries[0].id, 'Key 14')
+	t.is(entries[0].count, 14)
+})
+
+test(macro, {
 	sorting: 'RECENT',
 	type: 'TOTAL',
 	range: 'LAST_6_MONTHS'
