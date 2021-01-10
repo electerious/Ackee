@@ -22,7 +22,7 @@ const macro = async (t, variables, assertions) => {
 		token: t.context.token.id,
 		eventId: t.context.event.id,
 		fragment: `
-			chart(interval: ${ variables.interval }${ limit }) {
+			chart(type: ${ variables.type }, interval: ${ variables.interval }${ limit }) {
 				id
 				count
 			}
@@ -35,7 +35,8 @@ const macro = async (t, variables, assertions) => {
 macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and ') } chart entries`
 
 test(macro, {
-	interval: 'DAILY'
+	interval: 'DAILY',
+	type: 'TOTAL'
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(entries[0].count, 1)
@@ -43,6 +44,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'DAILY',
+	type: 'TOTAL',
 	limit: 1
 }, (t, entries) => {
 	t.is(entries.length, 1)
@@ -50,7 +52,8 @@ test(macro, {
 })
 
 test(macro, {
-	interval: 'MONTHLY'
+	interval: 'MONTHLY',
+	type: 'TOTAL'
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(typeof entries[0].count, 'number')
@@ -58,6 +61,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'MONTHLY',
+	type: 'TOTAL',
 	limit: 1
 }, (t, entries) => {
 	t.is(entries.length, 1)
@@ -65,7 +69,8 @@ test(macro, {
 })
 
 test(macro, {
-	interval: 'YEARLY'
+	interval: 'YEARLY',
+	type: 'TOTAL'
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(typeof entries[0].count, 'number')
@@ -73,6 +78,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'YEARLY',
+	type: 'TOTAL',
 	limit: 1
 }, (t, entries) => {
 	t.is(entries.length, 1)

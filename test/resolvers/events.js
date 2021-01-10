@@ -12,9 +12,9 @@ const base = listen(server)
 let validEvent
 
 const defaultTitle = uuid()
-const defaultType = 'CHART'
+const defaultType = 'TOTAL_CHART'
 const updatedTitle = uuid()
-const updatedType = 'LIST'
+const updatedType = 'TOTAL_LIST'
 
 test.before(connectToDatabase)
 test.beforeEach(fillDatabase)

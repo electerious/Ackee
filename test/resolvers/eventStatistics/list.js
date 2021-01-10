@@ -22,7 +22,7 @@ const macro = async (t, variables, assertions) => {
 		token: t.context.token.id,
 		eventId: t.context.event.id,
 		fragment: `
-			list(sorting: ${ variables.sorting }, range: ${ variables.range }${ limit }) {
+			list(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
 				id
 				count
 				created
@@ -37,6 +37,7 @@ macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and 
 
 test(macro, {
 	sorting: 'TOP',
+	type: 'TOTAL',
 	range: 'LAST_6_MONTHS'
 }, (t, entries) => {
 	t.is(entries.length, 14)
@@ -46,6 +47,7 @@ test(macro, {
 
 test(macro, {
 	sorting: 'RECENT',
+	type: 'TOTAL',
 	range: 'LAST_6_MONTHS'
 }, (t, entries) => {
 	t.is(entries.length, 14)
@@ -54,6 +56,7 @@ test(macro, {
 
 test(macro, {
 	sorting: 'RECENT',
+	type: 'TOTAL',
 	range: 'LAST_6_MONTHS',
 	limit: 1
 }, (t, entries) => {
@@ -63,6 +66,7 @@ test(macro, {
 
 test(macro, {
 	sorting: 'NEW',
+	type: 'TOTAL',
 	range: 'LAST_6_MONTHS'
 }, (t, entries) => {
 	t.is(entries.length, 14)

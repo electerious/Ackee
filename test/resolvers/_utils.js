@@ -26,7 +26,7 @@ const fillDatabase = async (t) => {
 	t.context.token = await Token.create({})
 	t.context.permanentToken = await PermanentToken.create({ title: 'Example' })
 	t.context.domain = await Domain.create({ title: 'Example' })
-	t.context.event = await Event.create({ title: 'Example', type: 'CHART' })
+	t.context.event = await Event.create({ title: 'Example', type: 'TOTAL_CHART' })
 
 	const now = Date.now()
 
