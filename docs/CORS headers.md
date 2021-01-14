@@ -14,7 +14,7 @@ When a site wants to send data to a different domain it needs the permissions to
 ```
 Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
-Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Headers: Content-Type, Authorization, Time-Zone
 Access-Control-Allow-Credentials: true
 ```
 
@@ -45,7 +45,7 @@ Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 The `Access-Control-Allow-Headers` header is used in response to a preflight request to indicate which HTTP headers can be used when making the actual request.
 
 ```
-Access-Control-Allow-Headers: Content-Type
+Access-Control-Allow-Headers: Content-Type, Authorization, Time-Zone
 ```
 
 ### Credentials
