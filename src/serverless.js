@@ -31,6 +31,6 @@ exports.handler = apolloServer.createHandler({
 	cors: {
 		origin,
 		methods: 'GET,POST,PATCH,OPTIONS',
-		allowedHeaders: 'Content-Type,Authorization,Time-Zone'
+		allowedHeaders: 'Content-Type, Authorization, Time-Zone'
 	}
 })
