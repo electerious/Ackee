@@ -1,6 +1,5 @@
 import { createElement as h, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useHotkeys } from 'react-hotkeys-hook'
 
 import Input from '../Input'
 import Textarea from '../Textarea'
@@ -12,10 +11,6 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalDomainEdit = (props) => {
-
-	useHotkeys('esc', props.closeModal, {
-		filter: () => props.current === true
-	})
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title

@@ -32,7 +32,7 @@ const Modals = (props) => {
 		}
 
 		return (
-			h(Modal, { key: modalId, visible: modalData.visible },
+			h(Modal, { key: modalId, visible: modalData.visible, ...commonProps },
 				modalData.type === MODALS_DOMAIN_ADD && h(ModalDomainAdd, {
 					...commonProps,
 					fetching: props.domains.fetching,

@@ -63,24 +63,13 @@ const Dashboard = (props) => {
 	}, [ props.route ])
 
 	useHotkeys('o', () => props.setRoute('/'))
-
 	useHotkeys('v', () => props.setRoute('/insights/views'))
 	useHotkeys('p', () => props.setRoute('/insights/pages'))
 	useHotkeys('r', () => props.setRoute('/insights/referrers'))
 	useHotkeys('d', () => props.setRoute('/insights/durations'))
-
 	useHotkeys('e', () => props.setRoute('/insights/events'))
-
-	useHotkeys('0', () => gotoDomainWhenDefined(props.domains, props.setRoute, 0), [ props.domains ])
-	useHotkeys('1', () => gotoDomainWhenDefined(props.domains, props.setRoute, 1), [ props.domains ])
-	useHotkeys('2', () => gotoDomainWhenDefined(props.domains, props.setRoute, 2), [ props.domains ])
-	useHotkeys('3', () => gotoDomainWhenDefined(props.domains, props.setRoute, 3), [ props.domains ])
-	useHotkeys('4', () => gotoDomainWhenDefined(props.domains, props.setRoute, 4), [ props.domains ])
-	useHotkeys('5', () => gotoDomainWhenDefined(props.domains, props.setRoute, 5), [ props.domains ])
-	useHotkeys('6', () => gotoDomainWhenDefined(props.domains, props.setRoute, 6), [ props.domains ])
-	useHotkeys('7', () => gotoDomainWhenDefined(props.domains, props.setRoute, 7), [ props.domains ])
-	useHotkeys('8', () => gotoDomainWhenDefined(props.domains, props.setRoute, 8), [ props.domains ])
-	useHotkeys('9', () => gotoDomainWhenDefined(props.domains, props.setRoute, 9), [ props.domains ])
+	useHotkeys('s', () => props.setRoute('/settings'))
+	useHotkeys('0,1,2,3,4,5,6,7,8,9', (e, { key }) => gotoDomainWhenDefined(props.domains, props.setRoute, key), [ props.domains ])
 
 	const hasDomains = props.domains.value.length > 0
 
