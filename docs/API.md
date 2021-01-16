@@ -211,11 +211,11 @@ query getEvents {
 		id
 		title
 		statistics {
-			chart(interval: DAILY) {
+			chart(interval: DAILY, type: TOTAL) {
 				id
 				count
 			}
-			list(sorting: TOP) {
+			list(sorting: TOP, type: TOTAL) {
 				id
 				count
 			}
