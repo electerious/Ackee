@@ -20,7 +20,7 @@ You can now use the back and forward buttons to navigate between pages.
 
 #### Referrers 2.0
 
-You can now specify a `source` parameter in URLs (e.g. `https://example.com?source=Newsletter`). Ackee will use the parameter instead of the referrer when available. This allows you the track links from newsletters and other platforms more precisely.
+You can now [specify a `source` parameter in URLs](docs/Enhancing%20referrers.md) (e.g. `https://example.com?source=Newsletter`). Ackee will use the parameter instead of the referrer when available. This allows you the track links from newsletters and other platforms more precisely.
 
 #### Faster startup, smaller size
 
@@ -34,7 +34,7 @@ Oh, and we also reduced the JS file size of the UI by ~60%.
 
 > This change is relevant for everyone.
 
-Ackee requires [a new `Access-Control-Allow-Credentials` header](https://github.com/electerious/Ackee/blob/master/docs/CORS%20headers.md#credentials) which was previously optional. Make sure to add this header in your server or reverse proxy configuration.
+Ackee requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md#credentials) which was previously optional. Make sure to add this header in your server or reverse proxy configuration.
 
 #### ackee-tracker with new `.create` and `.record` syntax
 
@@ -52,7 +52,7 @@ A new parameter is required when requesting referrers via the GraphQL API. The p
 
 > This change is relevant for you when using the GraphQL API.
 
-The `id` of requested referrers was always a URL, but has been changed to a string. That's because referrers can now include parameters (e.g. `source` when using `ackee-tracker`).
+The `id` of requested referrers was always a URL, but has been changed to a string. That's because [referrers can now include parameters](docs/Enhancing%20referrers.md) (e.g. `source` when using `ackee-tracker`).
 
 ### Added
 
@@ -62,7 +62,7 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 - Tests for permanent tokens, events and actions
 - `source` field for records to track (thanks @BetaHuhn, #185)
 - Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
-- Use the `s` key to open the settings and `o` to switch to the overiew
+- Use the `s` key to open the settings and `o` to switch to the overview
 
 ### Changed
 
