@@ -63,6 +63,7 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 - `source` field for records to track (thanks @BetaHuhn, #185)
 - Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
 - Use the `s` key to open the settings and `o` to switch to the overview
+- Explanation why data is missing (#192)
 
 ### Changed
 
