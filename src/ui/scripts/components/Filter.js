@@ -153,7 +153,7 @@ const Filter = (props) => {
 
 	const sortingItem = createItem(labels.sortings[props.filter.sorting], sortingButtons)
 	const rangeItem = createItem(labels.ranges[props.filter.range], rangeButtons, props.filter.sorting === sortings.SORTINGS_TOP)
-	const intervalsItem = createItem(labels.intervals[props.filter.interval], intervalsButtons)
+	const intervalItem = createItem(labels.intervals[props.filter.interval], intervalsButtons)
 
 	const routesMap = {
 		[routes.VIEWS]: [
@@ -161,7 +161,7 @@ const Filter = (props) => {
 				createButton('Unique', 'Unique site views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_UNIQUE),
 				createButton('Total', 'Total page views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_TOTAL)
 			]),
-			intervalsItem
+			intervalItem
 		],
 		[routes.PAGES]: [
 			sortingItem,
@@ -177,7 +177,11 @@ const Filter = (props) => {
 			rangeItem
 		],
 		[routes.DURATIONS]: [
-			intervalsItem
+			intervalItem
+		],
+		[routes.EVENTS]: [
+			intervalItem,
+			sortingItem
 		],
 		[routes.SYSTEMS]: [
 			createItem(labels.sortings[props.filter.sorting], [
