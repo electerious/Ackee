@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import Headline from '../Headline'
 import Text from '../Text'
 import Status, { ICON_LOADER, ICON_UPDATER } from '../Status'
+import Tooltip from '../Tooltip'
 import status from '../../utils/status'
 
 const CardWidget = (props) => {
@@ -28,7 +29,8 @@ const CardWidget = (props) => {
 		}, 'Updating')
 
 		if (isEmpty === true) return h(Status, {},
-			'No data'
+			'No data',
+			h(Tooltip, {}, 'There is either no data available or collecting detailed data is disabled in ackee-tracker.')
 		)
 
 		return h(Status, {}, statusLabel)

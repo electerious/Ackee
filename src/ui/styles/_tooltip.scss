@@ -1,13 +1,12 @@
 .tooltip {
 
-	$size: 18px;
+	$size: 1em;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: $size;
 	height: $size;
-	margin: 0 0 $gutter/3;
 	background: $dimmed;
 	border-radius: 100%;
 	outline: none;

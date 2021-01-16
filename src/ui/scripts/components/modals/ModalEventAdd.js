@@ -53,7 +53,7 @@ const ModalEventAdd = (props) => {
 				}),
 
 				h('div', { className: 'card__group' },
-					h(Label, { htmlFor: typeId }, 'Event type'),
+					h(Label, { spacing: false, htmlFor: typeId }, 'Event type'),
 					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.')
 				),
 
