@@ -1,0 +1,65 @@
+name: Build
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  push:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  cancel:
+
+    name: 'Cancel previous runs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+  build:
+
+    name: 'Build and test'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: yarn install --production --frozen-lockfile
+
+      - run: yarn test
+
+      - run: yarn coveralls
+
+      - name: Parallel Coveralls report
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ github.token }}
+          flag-name: run-${{ matrix.test_number }}
+          parallel: true
+
+  coveralls:
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Finished Coveralls report
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ github.token }}
+          parallel-finished: true

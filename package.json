@@ -28,7 +28,7 @@
     "build:pre": "BUILD_ENV=pre npm run build",
     "build": "node build.js",
     "server": "node src/index.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=lcov",
     "test": "nyc ava",
     "lint": "eslint '{functions,src,test}/**/*.js'"
   },
