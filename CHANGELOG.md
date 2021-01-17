@@ -62,7 +62,7 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 - Tests for permanent tokens, events and actions
 - `source` field for records to track (thanks @BetaHuhn, #185)
 - Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
-- Use the `s` key to open the settings and `o` to switch to the overview
+- Use the `s` key to open the settings and `o` to switch to the overview ([Keyboard shortcuts](docs/Keyboard%20shortcuts.md))
 - Explanation why data is missing (#192)
 
 ### Changed
