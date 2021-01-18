@@ -14,6 +14,8 @@ import { initialState as initialFilterState } from './reducers/filter'
 
 import Main from './components/Main'
 
+import './sw-handler'
+
 const persistedState = storage.load()
 const store = createStore(reducers, persistedState)
 
