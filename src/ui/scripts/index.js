@@ -22,6 +22,8 @@ import { initialState as initialSizesState } from './reducers/sizes'
 
 import Main from './components/Main'
 
+import './sw-handler'
+
 const persistedState = storage.load()
 const store = createStore(reducers, persistedState)
 

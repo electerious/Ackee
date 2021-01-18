@@ -19,6 +19,11 @@ module.exports = (body, favicon, styles, scripts) => `
 			<!-- JS -->
 			${ scripts.map((src) => `<script defer src="${ src }"></script>`).join('') }
 
+			<!-- PWA -->
+			<link rel="manifest" href="/manifest.webmanifest">
+			<link rel="apple-touch-icon" href="/icon.png">
+			<meta name="theme-color" content="#282d2d">
+    	<meta name="robots" content="noindex">
 		</head>
 		<body>
 
