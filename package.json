@@ -48,7 +48,7 @@
     "graphql-scalars": "^1.6.1",
     "graphql-tools": "^7.0.2",
     "human-number": "^1.0.6",
-    "immer": "^8.0.0",
+    "immer": "^8.0.1",
     "is-url": "^1.2.4",
     "micro": "^9.3.4",
     "microrouter": "^3.1.3",
