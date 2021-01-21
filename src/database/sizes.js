@@ -20,7 +20,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 				[ `${ entry._id.screenHeight }px`, [ entry._id.screenHeight ]],
 				[ `${ entry._id.browserWidth }px`, [ entry._id.browserWidth ]],
 				[ `${ entry._id.browserHeight }px`, [ entry._id.browserHeight ]]
-			]),
+			], '0px'),
 			count: entry.count,
 			created: entry.created
 		}))
