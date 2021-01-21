@@ -64,7 +64,7 @@ const build = async (path, fn) => {
 
 const sw = async () => {
 
-	const filePath = resolve(__dirname, 'src/ui/sw.js')
+	const filePath = resolve(__dirname, './sw.js')
 
 	return js(filePath, {
 		optimize: config.isDevelopmentMode === false,
@@ -72,7 +72,7 @@ const sw = async () => {
 		babel: false,
 		replace: {
 			NODE_ENV: config.isDevelopmentMode === true ? 'development' : 'production',
-			BUILD: require('./package.json').version,
+			BUILD: require('../../package.json').version,
 			ASSETS: [
 				'.', 'favicon.ico', 'index.css', 'index.js', 'icon.png', 'manifest.webmanifest'
 			]
