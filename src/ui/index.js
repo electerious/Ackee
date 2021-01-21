@@ -11,7 +11,7 @@ const signale = require('../utils/signale')
 
 const index = async () => {
 
-	return layout('<div id="main"></div>', 'favicon.ico', ['index.css'], ['index.js'], {
+	return layout('<div id="main"></div>', 'favicon.ico', [ 'index.css' ], [ 'index.js' ], {
 		isDemoMode: config.isDemoMode,
 		customTracker
 	})
@@ -50,10 +50,10 @@ const tracker = async () => {
 const build = async (path, fn) => {
 
 	try {
-		signale.await(`Building and writing '${path}'`)
+		signale.await(`Building and writing '${ path }'`)
 		const data = await fn()
 		await writeFile(path, data)
-		signale.success(`Finished building '${path}'`)
+		signale.success(`Finished building '${ path }'`)
 	} catch (err) {
 		signale.fatal(err)
 		process.exit(1)
@@ -69,7 +69,14 @@ const sw = async () => {
 	return js(filePath, {
 		optimize: config.isDevelopmentMode === false,
 		nodeGlobals: config.isDevelopmentMode === true,
-		babel: false
+		babel: false,
+		replace: {
+			NODE_ENV: config.isDevelopmentMode === true ? 'development' : 'production',
+			BUILD: require('./package.json').version,
+			ASSETS: [
+				'.', 'favicon.ico', 'index.css', 'index.js', 'icon.png', 'manifest.webmanifest'
+			]
+		}
 	})
 
 }

@@ -1,41 +1,42 @@
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js')
-  // Direktly reload when update found.
-  onUpdate((doUpdate) => doUpdate())
+	navigator.serviceWorker.register('sw.js')
+	// Directly reload when update found.
+	onUpdate((doUpdate) => doUpdate())
 }
 
-async function onUpdate(updateReadyCB) {
-  if (!navigator.serviceWorker || !navigator.serviceWorker.controller) {
-    return
-  }
+const onUpdate = async (updateReadyCB) => {
 
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    location.reload()
-  })
-  
-  const updateFactory = (sw) => () => sw.postMessage({ msg: 'update-sw' })
+	if (!navigator.serviceWorker || !navigator.serviceWorker.controller) {
+		return
+	}
 
-  const registration = await navigator.serviceWorker.getRegistration()
+	navigator.serviceWorker.addEventListener('controllerchange', () => {
+		location.reload()
+	})
 
-  if (registration.waiting) {
-    updateReadyCB(updateFactory(registration.waiting))
-    return
-  }
+	const updateFactory = (sw) => () => sw.postMessage({ msg: 'update-sw' })
 
-  if (registration.installing) {
-    updateReadyCB(updateFactory(registration.installing))
-    return
-  }
+	const registration = await navigator.serviceWorker.getRegistration()
 
-  registration.addEventListener('updatefound', () => {
-    const sw = registration.installing
-    if (!sw) {
-      return
-    }
-    sw.addEventListener('statechange', () => {
-      if (sw.state === 'installed') {
-        updateReadyCB(updateFactory(sw2))
-      }
-    })
+	if (registration.waiting) {
+		updateReadyCB(updateFactory(registration.waiting))
+		return
+	}
+
+	if (registration.installing) {
+		updateReadyCB(updateFactory(registration.installing))
+		return
+	}
+
+	registration.addEventListener('updatefound', () => {
+		const sw = registration.installing
+		if (!sw) {
+			return
+		}
+		sw.addEventListener('statechange', () => {
+			if (sw.state === 'installed') {
+				updateReadyCB(updateFactory(sw))
+			}
+		})
 	})
 }
