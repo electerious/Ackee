@@ -71,11 +71,10 @@ const sw = async () => {
 		nodeGlobals: config.isDevelopmentMode === true,
 		babel: false,
 		replace: {
-			NODE_ENV: config.isDevelopmentMode === true ? 'development' : 'production',
-			BUILD: require('../../package.json').version,
-			ASSETS: [
+			BUILD: JSON.stringify(require('../../package.json').version),
+			ASSETS: JSON.stringify([
 				'.', 'favicon.ico', 'index.css', 'index.js', 'icon.png', 'manifest.webmanifest'
-			]
+			])
 		}
 	})
 

@@ -1,6 +1,5 @@
-const VERSION = process.env.BUILD
+const VERSION = BUILD
 const CACHE_NAME = `CACHE_${ VERSION }`
-const ASSETS = process.env.ASSETS
 
 self.addEventListener('install', (ev) => {
 	ev.waitUntil(

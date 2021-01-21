@@ -13,15 +13,8 @@ if (config.isPreBuildMode === true) {
 	build('dist/tracker.js', tracker)
 	build('dist/manifest.webmanifest', manifest)
 	build('dist/sw.js', sw)
-
 }
 
 // Build files that depend on environment variables
 build(`dist/index.html`, index)
 if (customTracker.exists === true) build(`dist/${customTracker.path}`, tracker)
-
-// Optional files
-if (customTracker.exists === true) {
-	build(`dist/${customTracker.path}`, tracker)
-}
-
