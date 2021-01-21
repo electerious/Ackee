@@ -20,7 +20,7 @@ module.exports = gql`
 		"""
 		siteReferrer: URL
 		"""
-		Where the user came from. Either the ref, source or utm_source parameter.
+		Where the user came from. Specified using the source query parameter.
 		"""
 		source: String
 		"""
@@ -91,7 +91,7 @@ module.exports = gql`
 		"""
 		siteReferrer: URL
 		"""
-		Where the user came from. Either the ref, source or utm_source parameter.
+		Where the user came from. Specified using the source query parameter.
 		"""
 		source: String
 		"""
