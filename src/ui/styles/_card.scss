@@ -20,6 +20,15 @@
 		width: 100%;
 	}
 
+	&__group {
+		display: grid;
+		grid-auto-flow: column;
+		grid-gap: $gutter/4;
+		align-items: center;
+		margin: 0 0 $gutter/4;
+		justify-content: start;
+	}
+
 	&__footer {
 		display: flex;
 		border-top: 1px solid $black;

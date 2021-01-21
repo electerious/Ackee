@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import { homepage } from '../../../../../package'
+import { homepage } from '../../../../../package.json'
 import formatErrors from '../../utils/formatErrors'
 import * as storage from '../../utils/storage'
 
@@ -15,6 +15,7 @@ const OverlayFailure = (props) => {
 
 	const onClick = () => {
 		storage.reset()
+		window.location.hash = ''
 		window.location.reload()
 	}
 
@@ -36,9 +37,9 @@ const OverlayFailure = (props) => {
 				h(Message, { status: 'error' }, `Please report this issue on GitHub if you can't resolve it by yourself.`),
 
 				h(Textarea, {
-					readOnly: true,
 					rows: 6,
-					value: formatErrors(props.errors)
+					value: formatErrors(props.errors),
+					readOnly: true
 				}),
 
 				h(Spacer, { size: 1 })
@@ -54,7 +55,7 @@ const OverlayFailure = (props) => {
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator '
+					className: 'card__separator'
 				}),
 
 				h('button', {

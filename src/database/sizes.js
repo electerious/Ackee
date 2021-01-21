@@ -1,9 +1,9 @@
 'use strict'
 
 const Record = require('../models/Record')
-const aggregateTopFields = require('../aggregations/aggregateTopFields')
-const aggregateNewFields = require('../aggregations/aggregateNewFields')
-const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const aggregateTopRecords = require('../aggregations/aggregateTopRecords')
+const aggregateNewRecords = require('../aggregations/aggregateNewRecords')
+const aggregateRecentRecords = require('../aggregations/aggregateRecentRecords')
 const sortings = require('../constants/sortings')
 const constants = require('../constants/sizes')
 const bestMatch = require('../utils/bestMatch')
@@ -30,28 +30,28 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 	const aggregation = (() => {
 
 		if (sorting === sortings.SORTINGS_TOP) {
-			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateTopFields(ids, [ 'browserWidth' ], range, limit, dateDetails)
-			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateTopFields(ids, [ 'browserHeight' ], range, limit, dateDetails)
-			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateTopFields(ids, [ 'browserWidth', 'browserHeight' ], range, limit, dateDetails)
-			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateTopFields(ids, [ 'screenWidth' ], range, limit, dateDetails)
-			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateTopFields(ids, [ 'screenHeight' ], range, limit, dateDetails)
-			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateTopFields(ids, [ 'screenWidth', 'screenHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateTopRecords(ids, [ 'browserWidth' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateTopRecords(ids, [ 'browserHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateTopRecords(ids, [ 'browserWidth', 'browserHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateTopRecords(ids, [ 'screenWidth' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateTopRecords(ids, [ 'screenHeight' ], range, limit, dateDetails)
+			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateTopRecords(ids, [ 'screenWidth', 'screenHeight' ], range, limit, dateDetails)
 		}
 		if (sorting === sortings.SORTINGS_NEW) {
-			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateNewFields(ids, [ 'browserWidth' ], limit)
-			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateNewFields(ids, [ 'browserHeight' ], limit)
-			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateNewFields(ids, [ 'browserWidth', 'browserHeight' ], limit)
-			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateNewFields(ids, [ 'screenWidth' ], limit)
-			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateNewFields(ids, [ 'screenHeight' ], limit)
-			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateNewFields(ids, [ 'screenWidth', 'screenHeight' ], limit)
+			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateNewRecords(ids, [ 'browserWidth' ], limit)
+			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateNewRecords(ids, [ 'browserHeight' ], limit)
+			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateNewRecords(ids, [ 'browserWidth', 'browserHeight' ], limit)
+			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateNewRecords(ids, [ 'screenWidth' ], limit)
+			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateNewRecords(ids, [ 'screenHeight' ], limit)
+			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateNewRecords(ids, [ 'screenWidth', 'screenHeight' ], limit)
 		}
 		if (sorting === sortings.SORTINGS_RECENT) {
-			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateRecentFields(ids, [ 'browserWidth' ], limit)
-			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateRecentFields(ids, [ 'browserHeight' ], limit)
-			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateRecentFields(ids, [ 'browserWidth', 'browserHeight' ], limit)
-			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateRecentFields(ids, [ 'screenWidth' ], limit)
-			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateRecentFields(ids, [ 'screenHeight' ], limit)
-			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateRecentFields(ids, [ 'screenWidth', 'screenHeight' ], limit)
+			if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return aggregateRecentRecords(ids, [ 'browserWidth' ], limit)
+			if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return aggregateRecentRecords(ids, [ 'browserHeight' ], limit)
+			if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return aggregateRecentRecords(ids, [ 'browserWidth', 'browserHeight' ], limit)
+			if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return aggregateRecentRecords(ids, [ 'screenWidth' ], limit)
+			if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return aggregateRecentRecords(ids, [ 'screenHeight' ], limit)
+			if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return aggregateRecentRecords(ids, [ 'screenWidth', 'screenHeight' ], limit)
 		}
 
 	})()

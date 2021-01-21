@@ -1,9 +1,9 @@
 'use strict'
 
 const Record = require('../models/Record')
-const aggregateTopFields = require('../aggregations/aggregateTopFields')
-const aggregateNewFields = require('../aggregations/aggregateNewFields')
-const aggregateRecentFields = require('../aggregations/aggregateRecentFields')
+const aggregateTopRecords = require('../aggregations/aggregateTopRecords')
+const aggregateNewRecords = require('../aggregations/aggregateNewRecords')
+const aggregateRecentRecords = require('../aggregations/aggregateRecentRecords')
 const sortings = require('../constants/sortings')
 const languageCodes = require('../utils/languageCodes')
 
@@ -21,9 +21,9 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 
 	const aggregation = (() => {
 
-		if (sorting === sortings.SORTINGS_TOP) return aggregateTopFields(ids, [ 'siteLanguage' ], range, limit, dateDetails)
-		if (sorting === sortings.SORTINGS_NEW) return aggregateNewFields(ids, [ 'siteLanguage' ], limit)
-		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentFields(ids, [ 'siteLanguage' ], limit)
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopRecords(ids, [ 'siteLanguage' ], range, limit, dateDetails)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewRecords(ids, [ 'siteLanguage' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentRecords(ids, [ 'siteLanguage' ], limit)
 
 	})()
 

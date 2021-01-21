@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = (body, favicon, styles, scripts) => `
+module.exports = (body, favicon, styles, scripts, variables) => `
 	<!doctype html>
 	<html lang="en">
 		<head>
@@ -18,6 +18,11 @@ module.exports = (body, favicon, styles, scripts) => `
 
 			<!-- JS -->
 			${ scripts.map((src) => `<script defer src="${ src }"></script>`).join('') }
+
+			<!-- Variables -->
+			<script>
+				window.env = ${ JSON.stringify(variables) }
+			</script>
 
 		</head>
 		<body>

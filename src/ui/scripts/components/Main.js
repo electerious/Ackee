@@ -1,7 +1,9 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment } from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 
 import isUnknownError from '../utils/isUnknownError'
+import useCustomScrollbar from '../hooks/useCustomScrollbar'
+import useRouter from '../hooks/useRouter'
 
 import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
@@ -11,31 +13,27 @@ import Dashboard from './Dashboard'
 
 const Main = (props) => {
 
-	useEffect(() => {
-		const isWindows = navigator.platform.includes('Win') === true
-		if (isWindows === false) return
+	useCustomScrollbar()
+	const [ setRoute, route ] = useRouter()
 
-		// Use custom scrollbars on Windows because they look ugly
-		document.body.classList.add('customScrollbar')
-		return () => document.body.classList.remove('customScrollbar')
-	}, [])
+	const enhancedProps = {
+		...props,
+		setRoute,
+		route
+	}
 
 	// Only handle errors not handled by other components
 	const unknownErrors = props.errors.filter(isUnknownError)
 
 	const hasError = unknownErrors.length !== 0
-	const hasToken = props.token.value.id != null
+	const hasToken = props.token.value != null
 
-	const showOverlayFailure = hasError === true
-	const showOverlayLogin = hasError === false && hasToken === false
-	const showDashboard = hasError === false && hasToken === true
+	if (hasError === true) return h(OverlayFailure, { errors: unknownErrors })
+	if (hasToken === false) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
 
-	if (showOverlayFailure === true) return h(OverlayFailure, { errors: unknownErrors })
-	if (showOverlayLogin === true) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
-
-	if (showDashboard === true) return h(Fragment, {},
-		h(Filter, props),
-		h(Dashboard, props)
+	return h(Fragment, {},
+		h(Filter, enhancedProps),
+		h(Dashboard, enhancedProps)
 	)
 
 }

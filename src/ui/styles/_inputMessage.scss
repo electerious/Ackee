@@ -1,0 +1,51 @@
+.inputMessage {
+
+	display: grid;
+	grid-template-areas: 'main';
+	position: relative;
+	margin-bottom: $formbase__margin;
+
+	@keyframes inputMessage__show {
+		0% {
+			opacity: 1;
+		}
+		60% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+
+	.input {
+		grid-area: main;
+		margin-bottom: 0;
+	}
+
+	&::after {
+		content: attr(title);
+		grid-area: main;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba($context, .98);
+		border: 2px solid $primary;
+		border-radius: $formbase__radius;
+		color: $white;
+		font-size: .86em;
+		opacity: 0;
+		pointer-events: none;
+
+		@supports (backdrop-filter: blur(10px)) {
+			background: $context;
+			backdrop-filter: blur(10px);
+		}
+	}
+
+	&:focus-within::after {
+		animation-name: inputMessage__show;
+		animation-timing-function: ease;
+		animation-duration: 2s;
+	}
+
+}

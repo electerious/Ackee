@@ -1,6 +1,7 @@
 'use strict'
 
 const tokens = require('../database/tokens')
+const config = require('../utils/config')
 const KnownError = require('../utils/KnownError')
 const ignoreCookie = require('../utils/ignoreCookie')
 
@@ -16,11 +17,11 @@ module.exports = {
 
 			const { username, password } = input
 
-			if (process.env.ACKEE_USERNAME == null) throw new KnownError('Ackee username missing in environment')
-			if (process.env.ACKEE_PASSWORD == null) throw new KnownError('Ackee username missing in environment')
+			if (config.username == null) throw new KnownError('Ackee username missing in environment')
+			if (config.password == null) throw new KnownError('Ackee username missing in environment')
 
-			if (username !== process.env.ACKEE_USERNAME) throw new KnownError('Username or password incorrect')
-			if (password !== process.env.ACKEE_PASSWORD) throw new KnownError('Username or password incorrect')
+			if (username !== config.username) throw new KnownError('Username or password incorrect')
+			if (password !== config.password) throw new KnownError('Username or password incorrect')
 
 			const entry = await tokens.add()
 

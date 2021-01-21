@@ -1,4 +1,4 @@
-export default (browsers) => {
+export default (browsers = []) => {
 
 	return browsers.map((browser) => ({
 		text: browser.id,
