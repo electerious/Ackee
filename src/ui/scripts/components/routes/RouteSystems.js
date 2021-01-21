@@ -1,38 +1,15 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h } from 'react'
 
-import selectSystemsValue from '../../selectors/selectSystemsValue'
-import enhanceSystems from '../../enhancers/enhanceSystems'
-import overviewRoute from '../../utils/overviewRoute'
-
-import CardSystems from '../cards/CardSystems'
+import systemsLoader from '../../loaders/systemsLoader'
+import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
 
 const RouteSystems = (props) => {
 
-	useEffect(() => {
-
-		props.fetchSystems(props)
-
-	}, [ props.filter.range, props.filter.sorting, props.systems.type ])
-
-	return (
-		h(Fragment, {},
-
-			props.domains.value.map(
-				(domain) => (
-					h(CardSystems, {
-						key: domain.id,
-						headline: domain.title,
-						range: props.filter.range,
-						sorting: props.filter.sorting,
-						loading: props.systems.fetching,
-						items: enhanceSystems(selectSystemsValue(props, domain.id).value),
-						onMore: () => props.setRoute(overviewRoute(domain))
-					})
-				)
-			)
-
-		)
-	)
+	return useWidgetsForDomains(props, systemsLoader, {
+		sorting: props.filter.sorting,
+		type: props.filter.systemsType,
+		range: props.filter.range
+	})
 
 }
 

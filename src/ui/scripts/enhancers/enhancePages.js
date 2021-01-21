@@ -1,4 +1,4 @@
-export default (pages) => {
+export default (pages = []) => {
 
 	return pages.map((page) => ({
 		url: new URL(page.id),

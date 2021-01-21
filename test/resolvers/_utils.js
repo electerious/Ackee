@@ -5,8 +5,11 @@ const mongoose = require('mongoose')
 const fetch = require('node-fetch')
 
 const Token = require('../../src/models/Token')
+const PermanentToken = require('../../src/models/PermanentToken')
 const Domain = require('../../src/models/Domain')
+const Event = require('../../src/models/Event')
 const Record = require('../../src/models/Record')
+const Action = require('../../src/models/Action')
 const connect = require('../../src/utils/connect')
 const createArray = require('../../src/utils/createArray')
 const { day, minute } = require('../../src/utils/times')
@@ -19,9 +22,11 @@ const connectToDatabase = async () => {
 }
 
 const fillDatabase = async (t) => {
-	// Saves to context so tests can access IDs
+	// Saves to context so tests can access ids
 	t.context.token = await Token.create({})
+	t.context.permanentToken = await PermanentToken.create({ title: 'Example' })
 	t.context.domain = await Domain.create({ title: 'Example' })
+	t.context.event = await Event.create({ title: 'Example', type: 'TOTAL_CHART' })
 
 	const now = Date.now()
 
@@ -31,6 +36,7 @@ const fillDatabase = async (t) => {
 		siteLocation: 'https://example.com/',
 		siteReferrer: 'https://google.com/',
 		siteLanguage: 'en',
+		source: i > 4 ? 'Newsletter' : undefined,
 		screenWidth: 414,
 		screenHeight: 896,
 		screenColorDepth: 32,
@@ -42,12 +48,21 @@ const fillDatabase = async (t) => {
 		browserVersion: i > 7 ? '13.0' : '14.0',
 		browserWidth: 414,
 		browserHeight: 719,
-		// Add fake minute visit per day
+		// Set fake duration
 		created: now - i * day - minute,
 		updated: now - i * day
 	}))
 
+	const actions = createArray(14).map((item, i) => ({
+		eventId: t.context.event.id,
+		key: `Key ${ i + 1 }`,
+		value: i + 1,
+		created: now - i * day,
+		updated: now - i * day
+	}))
+
 	await Record.insertMany(records)
+	await Action.insertMany(actions)
 }
 
 const cleanupDatabase = async (t) => {

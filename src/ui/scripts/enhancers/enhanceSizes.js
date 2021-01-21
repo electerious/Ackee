@@ -1,4 +1,4 @@
-export default (sizes) => {
+export default (sizes = []) => {
 
 	return sizes.map((size) => ({
 		text: size.id,

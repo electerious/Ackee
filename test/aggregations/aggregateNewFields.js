@@ -3,11 +3,11 @@
 const test = require('ava')
 const uuid = require('uuid').v4
 
-const aggregateNewFields = require('../../src/aggregations/aggregateNewFields')
+const aggregateNewRecords = require('../../src/aggregations/aggregateNewRecords')
 
 test('return aggregation', async (t) => {
 
-	const result = aggregateNewFields(uuid(), [ 'siteReferrer' ])
+	const result = aggregateNewRecords(uuid(), [ 'siteReferrer' ])
 
 	t.true(Array.isArray(result))
 

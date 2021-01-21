@@ -1,4 +1,4 @@
-export default (languages) => {
+export default (languages = []) => {
 
 	return languages.map((language) => ({
 		text: language.id,

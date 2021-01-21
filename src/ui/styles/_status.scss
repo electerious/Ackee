@@ -1,0 +1,9 @@
+.status {
+
+	display: grid;
+	gap: $gutter/2;
+	grid-auto-flow: column;
+	justify-content: start;
+	align-items: center;
+
+}

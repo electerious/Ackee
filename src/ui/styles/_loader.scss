@@ -1,0 +1,36 @@
+.loader {
+
+	$size: 1em;
+
+	@keyframes loader__rotate {
+		0% {
+			transform: rotate(0turn);
+		}
+		100% {
+			transform: rotate(1turn);
+		}
+	}
+
+	position: relative;
+	width: $size;
+	height: $size;
+	background: $context;
+	border-radius: 100%;
+
+	&__circle {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-style: solid;
+		border-width: 2px;
+		border-color: transparent;
+		border-radius: inherit;
+		border-right-color: $white;
+		animation-name: loader__rotate;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+		animation-duration: .5s;
+		opacity: .6;
+	}
+
+}

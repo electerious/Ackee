@@ -22,7 +22,7 @@ module.exports = gql`
 		"""
 		Statistics of a domain. Usually data that needs to be represented in a list or chart.
 		"""
-		statistics: Statistics!
+		statistics: DomainStatistics!
 		"""
 		Identifies the date and time when the object was created.
 		"""

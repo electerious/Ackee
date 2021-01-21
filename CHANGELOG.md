@@ -4,6 +4,77 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2021-01-21
+
+Events, browser navigation and better referrers 🎉
+
+### Highlights
+
+#### Events
+
+Ackee can now [track events](docs/Events.md) like newsletter subscriptions, buttons clicks, checkout sums and more. It's the most requested feature and I'm happy that it's finally a part of Ackee.
+
+#### Browser navigation
+
+You can now use the back and forward buttons to navigate between pages.
+
+#### Referrers 2.0
+
+You can now [specify a `source` parameter in URLs](docs/Enhancing%20referrers.md) (e.g. `https://example.com?source=Newsletter`). Ackee will use the parameter instead of the referrer when available. This allows you the track links from newsletters and other platforms more precisely.
+
+#### Faster startup, smaller size
+
+Ackee previously had to compile all source files before the server was ready. v3 now ships with all files Ackee needs and only builds those containing environment variables. This means running `yarn start` is way faster and the Docker container even smaller.
+
+Oh, and we also reduced the JS file size of the UI by ~60%.
+
+### Breaking changes
+
+#### New `Access-Control-Allow-Credentials` header
+
+> This change is relevant for everyone.
+
+Ackee requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md#credentials) which was previously optional. Make sure to add this header in your server or reverse proxy configuration.
+
+#### ackee-tracker with new `.create` and `.record` syntax
+
+> This change is only relevant for you when using ackee-tracker in the [Manually](https://github.com/electerious/ackee-tracker/blob/master/README.md#manually) or [Programmatic](https://github.com/electerious/ackee-tracker/blob/master/README.md#programmatic) way.
+
+The [changelog of ackee-tracker](https://github.com/electerious/ackee-tracker/blob/master/CHANGELOG.md) contains everything you need to know when updating to the newest version.
+
+#### Referrers require `ReferrerType` in GraphQL API
+
+> This change is relevant for you when using the GraphQL API.
+
+A new parameter is required when requesting referrers via the GraphQL API. The parameter is called `ReferrerType` and can be `WITH_SOURCE`, `NO_SOURCE` or `ONLY_SOURCE`.
+
+#### Referrers can return non URL ids via GraphQL API
+
+> This change is relevant for you when using the GraphQL API.
+
+The `id` of requested referrers was always a URL, but has been changed to a string. That's because [referrers can now include parameters](docs/Enhancing%20referrers.md) (e.g. `source` when using `ackee-tracker`).
+
+### Added
+
+- Browser navigation. It's now possible to navigate using the back and forward button in the browser.
+- "Copied to clipboard" message when clicking on an input or textarea that copies to the clipboard (#166)
+- Modals can be closed with the ESC key
+- Tests for permanent tokens, events and actions
+- `source` field for records to track (thanks @BetaHuhn, #185)
+- Referrers will now show the `source` parameter when available (thanks @BetaHuhn, #185)
+- Use the `s` key to open the settings and `o` to switch to the overview ([Keyboard shortcuts](docs/Keyboard%20shortcuts.md))
+- Explanation why data is missing (#192)
+
+### Changed
+
+- Compiled source files are now part of the repo
+- Docker container size has been reduced (again)
+- Updated build tools allow us to use ~60% less JS in the UI
+
+### Fixed
+
+- Close, delete and submit in modals could be triggered multiple times
+
 ## [2.4.1] - 2020-12-20
 
 ### Changed

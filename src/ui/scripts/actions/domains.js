@@ -1,13 +1,18 @@
 import api from '../utils/api'
 import signalHandler from '../utils/signalHandler'
 
-export const SET_DOMAINS_VALUE = Symbol()
+export const SET_DOMAINS_START = Symbol()
+export const SET_DOMAINS_END = Symbol()
 export const SET_DOMAINS_FETCHING = Symbol()
 export const SET_DOMAINS_ERROR = Symbol()
 
-export const setDomainsValue = (payload) => ({
-	type: SET_DOMAINS_VALUE,
-	payload
+export const setDomainsStart = () => ({
+	type: SET_DOMAINS_START
+})
+
+export const setDomainsEnd = (value) => ({
+	type: SET_DOMAINS_END,
+	value
 })
 
 export const setDomainsFetching = (payload) => ({
@@ -22,8 +27,7 @@ export const setDomainsError = (payload) => ({
 
 export const fetchDomains = signalHandler((signal) => (props) => async (dispatch) => {
 
-	dispatch(setDomainsFetching(true))
-	dispatch(setDomainsError())
+	dispatch(setDomainsStart())
 
 	try {
 
@@ -40,8 +44,7 @@ export const fetchDomains = signalHandler((signal) => (props) => async (dispatch
 			signal: signal()
 		})
 
-		dispatch(setDomainsValue(data.domains))
-		dispatch(setDomainsFetching(false))
+		dispatch(setDomainsEnd(data.domains))
 
 	} catch (err) {
 
@@ -56,8 +59,7 @@ export const fetchDomains = signalHandler((signal) => (props) => async (dispatch
 
 export const addDomain = (props, state) => async (dispatch) => {
 
-	dispatch(setDomainsFetching(true))
-	dispatch(setDomainsError())
+	dispatch(setDomainsStart())
 
 	try {
 
@@ -78,7 +80,6 @@ export const addDomain = (props, state) => async (dispatch) => {
 		})
 
 		await dispatch(fetchDomains(props))
-		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
@@ -93,8 +94,7 @@ export const addDomain = (props, state) => async (dispatch) => {
 
 export const updateDomain = signalHandler((signal) => (props, domainId, state) => async (dispatch) => {
 
-	dispatch(setDomainsFetching(true))
-	dispatch(setDomainsError())
+	dispatch(setDomainsStart())
 
 	try {
 
@@ -117,7 +117,6 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 		})
 
 		await dispatch(fetchDomains(props))
-		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 
@@ -132,8 +131,7 @@ export const updateDomain = signalHandler((signal) => (props, domainId, state) =
 
 export const deleteDomain = signalHandler((signal) => (props, domainId) => async (dispatch) => {
 
-	dispatch(setDomainsFetching(true))
-	dispatch(setDomainsError())
+	dispatch(setDomainsStart())
 
 	try {
 
@@ -153,7 +151,6 @@ export const deleteDomain = signalHandler((signal) => (props, domainId) => async
 		})
 
 		await dispatch(fetchDomains(props))
-		dispatch(setDomainsFetching(false))
 
 	} catch (err) {
 

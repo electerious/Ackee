@@ -9,16 +9,6 @@ const intervals = require('../constants/intervals')
 const createArray = require('../utils/createArray')
 const matchesDate = require('../utils/matchesDate')
 
-const includeFn = (dateDetails, interval) => {
-
-	switch (interval) {
-		case intervals.INTERVALS_DAILY: return dateDetails.lastDays
-		case intervals.INTERVALS_MONTHLY: return dateDetails.lastMonths
-		case intervals.INTERVALS_YEARLY: return dateDetails.lastYears
-	}
-
-}
-
 const get = async (ids, type, interval, limit, dateDetails) => {
 
 	const enhance = (entries) => {
@@ -29,9 +19,9 @@ const get = async (ids, type, interval, limit, dateDetails) => {
 
 		return createArray(limit).map((_, index) => {
 
-			const date = includeFn(dateDetails, interval)(index)
+			const date = dateDetails.lastFnByInterval(interval)(index)
 
-			// Views and durations are returning day, month and year in the
+			// Database entries include the day, month and year in the
 			// timezone of the user. We therefore need to match it against a
 			// date in the timezone of the user.
 			const userZonedDate = utcToZonedTime(date, dateDetails.userTimeZone)

@@ -7,37 +7,19 @@ import {
 import modals from './modals'
 import token from './token'
 import permanentTokens from './permanentTokens'
-import route from './route'
 import filter from './filter'
 import domains from './domains'
-import overview from './overview'
-import views from './views'
-import pages from './pages'
-import referrers from './referrers'
-import durations from './durations'
-import systems from './systems'
-import devices from './devices'
-import browsers from './browsers'
-import sizes from './sizes'
-import languages from './languages'
+import events from './events'
+import widgets from './widgets'
 
 const reducers = combineReducers({
 	modals,
 	token,
 	permanentTokens,
-	route,
 	filter,
 	domains,
-	overview,
-	views,
-	pages,
-	referrers,
-	durations,
-	systems,
-	devices,
-	browsers,
-	sizes,
-	languages
+	events,
+	widgets
 })
 
 export default (state, action) => {

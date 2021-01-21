@@ -31,7 +31,10 @@ node_modules
 
 # Dist folder
 dist/*
-!dist/.gitkeep
+!dist/favicon.ico
+!dist/index.css
+!dist/index.js
+!dist/tracker.js
 
 # Files not required by Docker
 Dockerfile
