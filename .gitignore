@@ -35,6 +35,9 @@ dist/*
 !dist/index.css
 !dist/index.js
 !dist/tracker.js
+!dist/sw.js
+!dist/manifest.webmanifest
+!dist/icon.png
 
 # Vercel
 .vercel

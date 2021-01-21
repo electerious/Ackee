@@ -2,6 +2,7 @@
 
 const { resolve } = require('path')
 const { writeFile, readFile } = require('fs').promises
+const js = require('rosid-handler-js-next')
 
 const layout = require('../utils/layout')
 const config = require('../utils/config')
@@ -28,7 +29,6 @@ const styles = async () => {
 
 const scripts = async () => {
 
-	const js = require('rosid-handler-js-next')
 	const filePath = resolve(__dirname, './scripts/index.js')
 
 	return js(filePath, {
@@ -61,62 +61,16 @@ const build = async (path, fn) => {
 
 }
 
-const favicon = async () => {
-
-	const filePath = resolve(__dirname, 'src/ui/images/favicon.ico')
-	const data = readFile(filePath)
-
-	return data
-
-}
-
-const icon = async () => {
-
-	const filePath = resolve(__dirname, 'src/ui/images/icon.png')
-	const data = readFile(filePath)
-
-	return data
-
-}
-
 
 const sw = async () => {
 
 	const filePath = resolve(__dirname, 'src/ui/sw.js')
 
-	const babel = {
-		presets: [
-			[
-				'@babel/preset-env', {
-					targets: {
-						browsers: [
-							'last 2 Safari versions',
-							'last 2 Chrome versions',
-							'last 2 Opera versions',
-							'last 2 Firefox versions'
-						]
-					}
-				}
-			]
-		],
-		babelrc: false
-	}
-
-	const data = js(filePath, {
-		optimize: isDevelopmentMode === false,
-		env: {
-			ACKEE_TRACKER: process.env.ACKEE_TRACKER,
-			ACKEE_DEMO: isDemoMode === true ? 'true' : 'false',
-			NODE_ENV: isDevelopmentMode === true ? 'development' : 'production',
-			BUILD: require('./package.json').version,
-			ASSETS: [
-				'.', 'favicon.ico', 'index.css', 'index.js', 'icon.png', 'manifest.webmanifest'
-			]
-		},
-		babel
+	return js(filePath, {
+		optimize: config.isDevelopmentMode === false,
+		nodeGlobals: config.isDevelopmentMode === true,
+		babel: false
 	})
-
-	return data
 
 }
 
@@ -150,8 +104,6 @@ module.exports = {
 	scripts,
 	tracker,
 	build,
-	favicon,
-	icon,
 	sw,
 	manifest
 }
