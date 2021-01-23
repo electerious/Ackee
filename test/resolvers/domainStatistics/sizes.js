@@ -40,7 +40,7 @@ test(macro, {
 	type: 'BROWSER_WIDTH',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px')
 })
 
@@ -49,7 +49,7 @@ test(macro, {
 	type: 'BROWSER_HEIGHT',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '719px')
 })
 
@@ -58,7 +58,7 @@ test(macro, {
 	type: 'BROWSER_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px x 719px')
 })
 
@@ -104,7 +104,7 @@ test(macro, {
 	type: 'BROWSER_WIDTH',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px')
 })
 
@@ -113,7 +113,7 @@ test(macro, {
 	type: 'BROWSER_HEIGHT',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '719px')
 })
 
@@ -122,7 +122,7 @@ test(macro, {
 	type: 'BROWSER_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px x 719px')
 })
 
@@ -131,7 +131,7 @@ test(macro, {
 	type: 'SCREEN_WIDTH',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px')
 })
 
@@ -140,7 +140,7 @@ test(macro, {
 	type: 'SCREEN_HEIGHT',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '896px')
 })
 
@@ -149,7 +149,7 @@ test(macro, {
 	type: 'SCREEN_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px x 896px')
 })
 
@@ -195,7 +195,7 @@ test(macro, {
 	type: 'SCREEN_WIDTH',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px')
 })
 
@@ -204,7 +204,7 @@ test(macro, {
 	type: 'SCREEN_HEIGHT',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '896px')
 })
 
@@ -213,6 +213,6 @@ test(macro, {
 	type: 'SCREEN_RESOLUTION',
 	range: 'LAST_6_MONTHS'
 }, (t, sizes) => {
-	t.is(sizes.length, 1)
+	t.is(sizes.length, 2)
 	t.is(sizes[0].id, '414px x 896px')
 })

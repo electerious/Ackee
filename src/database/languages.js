@@ -9,6 +9,14 @@ const languageCodes = require('../utils/languageCodes')
 
 const get = async (ids, sorting, range, limit, dateDetails) => {
 
+	const aggregation = (() => {
+
+		if (sorting === sortings.SORTINGS_TOP) return aggregateTopRecords(ids, [ 'siteLanguage' ], range, limit, dateDetails)
+		if (sorting === sortings.SORTINGS_NEW) return aggregateNewRecords(ids, [ 'siteLanguage' ], limit)
+		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentRecords(ids, [ 'siteLanguage' ], limit)
+
+	})()
+
 	const enhance = (entries) => {
 
 		return entries.map((entry) => ({
@@ -18,14 +26,6 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 		}))
 
 	}
-
-	const aggregation = (() => {
-
-		if (sorting === sortings.SORTINGS_TOP) return aggregateTopRecords(ids, [ 'siteLanguage' ], range, limit, dateDetails)
-		if (sorting === sortings.SORTINGS_NEW) return aggregateNewRecords(ids, [ 'siteLanguage' ], limit)
-		if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentRecords(ids, [ 'siteLanguage' ], limit)
-
-	})()
 
 	return enhance(
 		await Record.aggregate(aggregation)

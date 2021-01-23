@@ -37,8 +37,8 @@ const fillDatabase = async (t) => {
 		siteReferrer: 'https://google.com/',
 		siteLanguage: 'en',
 		source: i > 4 ? 'Newsletter' : undefined,
-		screenWidth: 414,
-		screenHeight: 896,
+		screenWidth: i === 1 ? 0 : 414,
+		screenHeight: i === 1 ? 0 : 896,
 		screenColorDepth: 32,
 		deviceName: 'iPhone',
 		deviceManufacturer: 'Apple',
@@ -46,8 +46,8 @@ const fillDatabase = async (t) => {
 		osVersion: i > 7 ? '13.0' : '14.0',
 		browserName: 'Safari',
 		browserVersion: i > 7 ? '13.0' : '14.0',
-		browserWidth: 414,
-		browserHeight: 719,
+		browserWidth: i === 1 ? 0 : 414,
+		browserHeight: i === 1 ? 0 : 719,
 		// Set fake duration
 		created: now - i * day - minute,
 		updated: now - i * day

@@ -6,26 +6,8 @@ const aggregateNewRecords = require('../aggregations/aggregateNewRecords')
 const aggregateRecentRecords = require('../aggregations/aggregateRecentRecords')
 const sortings = require('../constants/sortings')
 const constants = require('../constants/sizes')
-const bestMatch = require('../utils/bestMatch')
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
-
-	const enhance = (entries) => {
-
-		return entries.map((entry) => ({
-			id: bestMatch([
-				[ `${ entry._id.screenWidth }px x ${ entry._id.screenHeight }px`, [ entry._id.screenWidth, entry._id.screenHeight ]],
-				[ `${ entry._id.browserWidth }px x ${ entry._id.browserHeight }px`, [ entry._id.browserWidth, entry._id.browserHeight ]],
-				[ `${ entry._id.screenWidth }px`, [ entry._id.screenWidth ]],
-				[ `${ entry._id.screenHeight }px`, [ entry._id.screenHeight ]],
-				[ `${ entry._id.browserWidth }px`, [ entry._id.browserWidth ]],
-				[ `${ entry._id.browserHeight }px`, [ entry._id.browserHeight ]]
-			], '0px'),
-			count: entry.count,
-			created: entry.created
-		}))
-
-	}
 
 	const aggregation = (() => {
 
@@ -55,6 +37,27 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 		}
 
 	})()
+
+	const enhanceId = (id) => {
+
+		if (type === constants.SIZES_TYPE_BROWSER_WIDTH) return `${ id.browserWidth }px`
+		if (type === constants.SIZES_TYPE_BROWSER_HEIGHT) return `${ id.browserHeight }px`
+		if (type === constants.SIZES_TYPE_BROWSER_RESOLUTION) return `${ id.browserWidth }px x ${ id.browserHeight }px`
+		if (type === constants.SIZES_TYPE_SCREEN_WIDTH) return `${ id.screenWidth }px`
+		if (type === constants.SIZES_TYPE_SCREEN_HEIGHT) return `${ id.screenHeight }px`
+		if (type === constants.SIZES_TYPE_SCREEN_RESOLUTION) return `${ id.screenWidth }px x ${ id.screenHeight }px`
+
+	}
+
+	const enhance = (entries) => {
+
+		return entries.map((entry) => ({
+			id: enhanceId(entry._id),
+			count: entry.count,
+			created: entry.created
+		}))
+
+	}
 
 	return enhance(
 		await Record.aggregate(aggregation)
