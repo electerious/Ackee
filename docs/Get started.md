@@ -179,7 +179,7 @@ Ackee now runs on port `3000` and is only accessible from you local network. It'
 
 - You need to have a MongoDB instance running (e.g. [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 - Set a username and password to protect your interface
-- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#heroku-or-platforms-as-a-service-configuration).
+- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#platforms-as-a-service-configuration).
 
 ### 3. Updating Ackee
 
@@ -214,7 +214,7 @@ Deploy to Heroku by clicking this button:
 ### 2. Configure Ackee
 
 - You need to have a MongoDB instance running, either hosting it yourself, using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or by using a (paid) add-on like [ObjectRocket MongoDB](https://elements.heroku.com/addons/ormongo). This is as simple as typing `heroku addons:create ormongo:2-wt --app <YOUR_APP_NAME>` using the CLI, or using the web dashboard; more details at the [official documentation](https://devcenter.heroku.com/articles/managing-add-ons). You'll need to provide connection details to Ackee dyno, either from the web dashboard or via command line, e.g. `heroku config:add "ACKEE_MONGODB=mongodb://<host>:<port>/<db>"`
-- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#heroku-or-platforms-as-a-service-configuration).
+- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#platforms-as-a-service-configuration).
 
 ### 3. Updating Ackee
 

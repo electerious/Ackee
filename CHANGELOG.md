@@ -273,7 +273,7 @@ The first major back-end and front-end rewrite of Ackee with new API, dashboard,
 ### Added
 
 - Simply [deploy to Heroku](docs/Get%20started.md#with-heroku) by clicking one button (#72, thanks @aleccool213)
-- `ACKEE_ALLOW_ORIGIN` option for [Heroku or other Platforms-As-A-Service](docs/CORS%20headers.md) (#73, thanks @aleccool213)
+- `ACKEE_ALLOW_ORIGIN` option for [Platforms-As-A-Service](docs/CORS%20headers.md) (#73, thanks @aleccool213)
 
 ## [1.4.2] - 2019-12-19
 
