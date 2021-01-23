@@ -43,6 +43,14 @@ Oh, and we also reduced the JS file size of the UI by ~60%.
 
 ### Breaking changes
 
+#### `Access-Control-Allow-Origin: "*"` unrecommended
+
+> This change is relevant for you when using a wildcard as the Access-Control-Allow-Origin.
+
+Using a wildcard (`*`) for the `Access-Control-Allow-Origin` header was never recommended as it's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if you're currently using a wildcard. The [SSL and HTTPS](docs/SSL%20and%20HTTPS.md) guide contains better alternatives.
+
+`ignoreOwnVisits` is now enabled by default and won't work when using a wildcard.
+
 #### New `Access-Control-Allow-Credentials` header
 
 > This change is relevant for everyone.
