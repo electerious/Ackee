@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Missing breaking change notice in the changelog of version 3.0.0 for those using a wildcard `Access-Control-Allow-Origin` header
+
+### Fixed
+
+- Unknown sizes id when a size is zero (#217)
+- Prevent unknown id errors like in #217 for other record properties
+- Updated ackee-tracker which re-added `ignoreOwnVisits` for those using a wildcard `Access-Control-Allow-Origin` header
+
 ## [3.0.2] - 2021-01-21
 
 ### Fixed
@@ -43,7 +55,7 @@ Oh, and we also reduced the JS file size of the UI by ~60%.
 
 ### Breaking changes
 
-#### `Access-Control-Allow-Origin: "*"` unrecommended
+#### `Access-Control-Allow-Origin: "*"` not recommended
 
 > This change is relevant for you when using a wildcard as the Access-Control-Allow-Origin.
 
