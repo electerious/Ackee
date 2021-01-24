@@ -1,7 +1,7 @@
 {
   "name": "ackee",
   "private": true,
-  "version": "3.0.2",
+  "version": "3.0.3",
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
@@ -33,7 +33,7 @@
     "lint": "eslint '{functions,src,test}/**/*.js'"
   },
   "dependencies": {
-    "ackee-tracker": "^5.0.0",
+    "ackee-tracker": "^5.0.1",
     "apollo-server-lambda": "^2.19.2",
     "apollo-server-micro": "^2.19.2",
     "apollo-server-plugin-http-headers": "^0.1.4",
@@ -47,7 +47,7 @@
     "is-url": "^1.2.4",
     "micro": "^9.3.4",
     "microrouter": "^3.1.3",
-    "mongoose": "^5.11.12",
+    "mongoose": "^5.11.13",
     "node-fetch": "^2.6.1",
     "node-schedule": "^1.3.2",
     "normalize-url": "^5.0.0",

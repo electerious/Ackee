@@ -3,7 +3,7 @@
 Ackee requires correct [CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). [ackee-tracker](https://github.com/electerious/ackee-tracker) (the script that sends data from your sites to Ackee) won't be able to contact your server when the CORS headers aren't available or when they are configured incorrectly.
 
 - [Reverse proxy configuration](#reverse-proxy-configuration)
-- [Heroku or Platforms-As-A-Service configuration](#heroku-or-platforms-as-a-service-configuration)
+- [Platforms-As-A-Service configuration](#platforms-as-a-service-configuration)
 
 ## Why?
 
@@ -20,17 +20,11 @@ Access-Control-Allow-Credentials: true
 
 ### Origin
 
-Your server needs to allow requests from your sites (recommended) or from all sites (easier to implement, but insecure).
+The `Access-Control-Allow-Origin` header only allows one domain. A wildcard (`*`) isn't recommended as it's neither a secure solution nor does it allow Ackee to ignore your own visits. Take a look at our [recommended configuration](SSL%20and%20HTTPS.md#recommended-configuration) if you want to allow requests from multiple domains or disable the `ignoreOwnVisits` option in ackee-tracker if using a wildcard is the only option for you.
 
 ```
 Access-Control-Allow-Origin: https://example.com
 ```
-
-```
-Access-Control-Allow-Origin: *
-```
-
-The `Access-Control-Allow-Origin` header only allows one domain or a wildcard (`*`). Take a look at our [advanced configuration](SSL%20and%20HTTPS.md#advanced-configuration) if you want to allow requests from multiple domains without using the insecure wildcard.
 
 ### Methods
 
@@ -58,7 +52,7 @@ The `Access-Control-Allow-Credentials` header tells the browser to include the `
 Access-Control-Allow-Credentials: true
 ```
 
-## Heroku or Platforms-As-A-Service configuration
+## Platforms-As-A-Service configuration
 
 If you are running Ackee on a platform which handles SSL for you, you may want a quick solution for setting CORS headers instead of using a [reverse proxy](SSL%20and%20HTTPS.md).
 
@@ -68,14 +62,14 @@ As an environment variable, you will need to set:
 ACKEE_ALLOW_ORIGIN="https://example.com"
 ```
 
-The proper header value for `Access-Control-Allow-Origin` will be set with the other headers being the recommended values.
+*or*
 
-It's also possible to allow requests from all domains (not recommended) or from multiple domains:
+```
+ACKEE_ALLOW_ORIGIN="https://example.com,https://one.example.com,https://two.example.com"
+```
+
+Setting a wildcard (`*`) is also supported, but not recommended. It's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if using a wildcard is the only option for you.
 
 ```
 ACKEE_ALLOW_ORIGIN="*"
-```
-
-```
-ACKEE_ALLOW_ORIGIN="https://example.com,https://example2.com"
 ```

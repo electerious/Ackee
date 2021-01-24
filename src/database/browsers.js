@@ -6,22 +6,8 @@ const aggregateNewRecords = require('../aggregations/aggregateNewRecords')
 const aggregateRecentRecords = require('../aggregations/aggregateRecentRecords')
 const sortings = require('../constants/sortings')
 const constants = require('../constants/browsers')
-const bestMatch = require('../utils/bestMatch')
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
-
-	const enhance = (entries) => {
-
-		return entries.map((entry) => ({
-			id: bestMatch([
-				[ `${ entry._id.browserName } ${ entry._id.browserVersion }`, [ entry._id.browserName, entry._id.browserVersion ]],
-				[ `${ entry._id.browserName }`, [ entry._id.browserName ]]
-			]),
-			count: entry.count,
-			created: entry.created
-		}))
-
-	}
 
 	const aggregation = (() => {
 
@@ -37,6 +23,23 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 		}
 
 	})()
+
+	const enhanceId = (id) => {
+
+		if (type === constants.BROWSERS_TYPE_NO_VERSION) return `${ id.browserName }`
+		if (type === constants.BROWSERS_TYPE_WITH_VERSION) return `${ id.browserName } ${ id.browserVersion }`
+
+	}
+
+	const enhance = (entries) => {
+
+		return entries.map((entry) => ({
+			id: enhanceId(entry._id),
+			count: entry.count,
+			created: entry.created
+		}))
+
+	}
 
 	return enhance(
 		await Record.aggregate(aggregation)

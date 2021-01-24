@@ -6,22 +6,8 @@ const aggregateNewRecords = require('../aggregations/aggregateNewRecords')
 const aggregateRecentRecords = require('../aggregations/aggregateRecentRecords')
 const sortings = require('../constants/sortings')
 const constants = require('../constants/devices')
-const bestMatch = require('../utils/bestMatch')
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
-
-	const enhance = (entries) => {
-
-		return entries.map((entry) => ({
-			id: bestMatch([
-				[ `${ entry._id.deviceManufacturer } ${ entry._id.deviceName }`, [ entry._id.deviceManufacturer, entry._id.deviceName ]],
-				[ `${ entry._id.deviceManufacturer }`, [ entry._id.deviceManufacturer ]]
-			]),
-			count: entry.count,
-			created: entry.created
-		}))
-
-	}
 
 	const aggregation = (() => {
 
@@ -37,6 +23,23 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 		}
 
 	})()
+
+	const enhanceId = (id) => {
+
+		if (type === constants.DEVICES_TYPE_NO_MODEL) return `${ id.deviceManufacturer }`
+		if (type === constants.DEVICES_TYPE_WITH_MODEL) return `${ id.deviceManufacturer } ${ id.deviceName }`
+
+	}
+
+	const enhance = (entries) => {
+
+		return entries.map((entry) => ({
+			id: enhanceId(entry._id),
+			count: entry.count,
+			created: entry.created
+		}))
+
+	}
 
 	return enhance(
 		await Record.aggregate(aggregation)

@@ -14,45 +14,15 @@ I highly recommend [this article](https://medium.com/intrinsic/why-should-i-use-
 
 ### nginx
 
-#### Basic configuration
+- [Recommended configuration](#recommended-configuration)
+- [Single domain configuration](#single-domain-configuration)
+- [Insecure wildcard configuration](#insecure-wildcard-configuration)
 
-This configuration secures all connections using TSL/SSL and gives any domain permission to access Ackee.
+#### Recommended configuration
 
-> 👉 The CORS headers are required so all your sites can send data to Ackee, even when their domain is different to the one Ackee uses. Take a look at the next example to tighten the CORS headers.
+This configuration redirects all requests to the non-www domain `example.com`, secures connections using TSL/SSL and allows CORS requests from a list of known domains.
 
-```conf
-server {
-    listen 443 ssl http2;
-
-    server_name example.com;
-
-    ssl_certificate     /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-
-    access_log /var/log/nginx/log/example.com.access.log main;
-    error_log  /var/log/nginx/log/example.com.error.log;
-
-    location / {
-        add_header          Access-Control-Allow-Origin "*" always;
-        add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
-        add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
-        add_header          Access-Control-Allow-Credentials "true" always;
-        add_header          Strict-Transport-Security "max-age=31536000" always;
-        add_header          X-Frame-Options deny;
-        proxy_pass          http://localhost:3000;
-        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-        proxy_redirect      off;
-        proxy_buffering     off;
-        proxy_set_header    Host $host;
-        proxy_set_header    X-Real-IP $remote_addr;
-        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-}
-```
-
-#### Advanced configuration
-
-This configuration redirects all requests to the non-www domain `example.com` and adds the CORS headers only for known domains. It also secures connections using TSL/SSL.
+> 👉 The CORS headers are required so your sites can send data to Ackee, even when their domain is different to the one Ackee uses.
 
 ```conf
 #
@@ -110,6 +80,75 @@ server {
         add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
         add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
         add_header          Access-Control-Allow-Credentials "true" always;
+        add_header          Strict-Transport-Security "max-age=31536000" always;
+        add_header          X-Frame-Options deny;
+        proxy_pass          http://localhost:3000;
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+        proxy_redirect      off;
+        proxy_buffering     off;
+        proxy_set_header    Host $host;
+        proxy_set_header    X-Real-IP $remote_addr;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+#### Single domain configuration
+
+This configuration secures all connections using TSL/SSL and allows `https://example.com` to send data to `https://ackee.example.com`.
+
+> ℹ️ This configuration only allows requests from a single domain. Take a look at our [recommended configuration](#recommended-configuration) if you want to allow requests from multiple domains or use the [insecure wildcard configuration](#insecure-wildcard-configuration).
+
+```conf
+server {
+    listen 443 ssl http2;
+
+    server_name ackee.example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/ackee.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ackee.example.com/privkey.pem;
+
+    access_log /var/log/nginx/log/ackee.example.com.access.log main;
+    error_log  /var/log/nginx/log/ackee.example.com.error.log;
+
+    location / {
+        add_header          Access-Control-Allow-Origin "https://example.com" always;
+        add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
+        add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
+        add_header          Access-Control-Allow-Credentials "true" always;
+        add_header          Strict-Transport-Security "max-age=31536000" always;
+        add_header          X-Frame-Options deny;
+        proxy_pass          http://localhost:3000;
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+        proxy_redirect      off;
+        proxy_buffering     off;
+        proxy_set_header    Host $host;
+        proxy_set_header    X-Real-IP $remote_addr;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+#### Insecure wildcard configuration
+
+A wildcard (`*`) isn't recommended as it's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if using a wildcard is the only option for you.
+
+```conf
+server {
+    listen 443 ssl http2;
+
+    server_name ackee.example.com;
+
+    ssl_certificate     /etc/letsencrypt/live/ackee.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ackee.example.com/privkey.pem;
+
+    access_log /var/log/nginx/log/ackee.example.com.access.log main;
+    error_log  /var/log/nginx/log/ackee.example.com.error.log;
+
+    location / {
+        add_header          Access-Control-Allow-Origin "*" always;
+        add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
+        add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
         proxy_pass          http://localhost:3000;

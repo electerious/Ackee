@@ -58,6 +58,13 @@ const update = async (id, data) => {
 
 const getChart = async (ids, type, interval, limit, dateDetails) => {
 
+	const aggregation = (() => {
+
+		if (type === 'TOTAL') return aggregateActions(ids, false, interval, limit, dateDetails)
+		if (type === 'AVERAGE') return aggregateActions(ids, true, interval, limit, dateDetails)
+
+	})()
+
 	const enhance = (entries) => {
 
 		const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
@@ -91,13 +98,6 @@ const getChart = async (ids, type, interval, limit, dateDetails) => {
 		})
 
 	}
-
-	const aggregation = (() => {
-
-		if (type === 'TOTAL') return aggregateActions(ids, false, interval, limit, dateDetails)
-		if (type === 'AVERAGE') return aggregateActions(ids, true, interval, limit, dateDetails)
-
-	})()
 
 	return enhance(
 		await Action.aggregate(aggregation)

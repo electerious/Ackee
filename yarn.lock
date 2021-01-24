@@ -1834,10 +1834,10 @@ accept@^3.0.2:
     boom "7.x.x"
     hoek "6.x.x"
 
-ackee-tracker@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ackee-tracker/-/ackee-tracker-5.0.0.tgz#d2e2b02e917a0a6f662ce6faf4abd55f85eb9b4c"
-  integrity sha512-4/HVo305tSI/2LgfnQQ+jXa6vY830AD1hzlHDBzSyfaLBGxJAhkeQ9pCXs3jCIZXdUVKuA1j6w/jZ3Do5J7sBg==
+ackee-tracker@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ackee-tracker/-/ackee-tracker-5.0.1.tgz#f32624cf82cb3f26a59e551fecb47e9b18f663ab"
+  integrity sha512-VN5eZK9XjdZ6QGGCfH019LGzLfwb73aXKDg1eDWKudGlijSandJXjzlgqnG9dvkkOKhK6EQLLBanV3tLqKA34w==
   dependencies:
     platform "^1.3.6"
 
@@ -5504,10 +5504,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.12:
-  version "5.11.12"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.12.tgz#452d28ef04b9c6a9601e62a54064851c3b57d4ee"
-  integrity sha512-70wST9hnVlPbt5nKClPKJo54ULIACOVGYdg8fyj17sWtCJLyURCDahhzUh+oUA7WVykOW2ZMqWm2kujBIWYagg==
+mongoose@^5.11.13:
+  version "5.11.13"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.13.tgz#1a8af3c83152d5e0427509966926ea7f5ead4d66"
+  integrity sha512-rXbaxSJfLnKKO2RTm8MKt65glrtfKDc4ATEb6vEbbzsVGCiLut753K5axdpyvE7KeTH7GOh4LzmuQLOvaaWOmA==
   dependencies:
     "@types/mongodb" "^3.5.27"
     bson "^1.1.4"

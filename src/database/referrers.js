@@ -9,16 +9,6 @@ const constants = require('../constants/referrers')
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
 
-	const enhance = (entries) => {
-
-		return entries.map((entry) => ({
-			id: entry._id.source || entry._id.siteReferrer,
-			count: entry.count,
-			created: entry.created
-		}))
-
-	}
-
 	const aggregation = (() => {
 
 		if (type === constants.REFERRERS_TYPE_WITH_SOURCE) {
@@ -38,6 +28,16 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 		}
 
 	})()
+
+	const enhance = (entries) => {
+
+		return entries.map((entry) => ({
+			id: entry._id.source || entry._id.siteReferrer,
+			count: entry.count,
+			created: entry.created
+		}))
+
+	}
 
 	return enhance(
 		await Record.aggregate(aggregation)

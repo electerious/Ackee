@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.3] - 2021-01-24
+
+### Added
+
+- Missing breaking change notice in the changelog of version 3.0.0 for those using a wildcard `Access-Control-Allow-Origin` header
+
+### Fixed
+
+- Unknown sizes id when a size is zero (#217)
+- Prevent unknown id errors like in #217 for other record properties
+- Updated ackee-tracker which re-added `ignoreOwnVisits` for those using a wildcard `Access-Control-Allow-Origin` header
+
 ## [3.0.2] - 2021-01-21
 
 ### Fixed
@@ -42,6 +54,14 @@ Ackee previously had to compile all source files before the server was ready. v3
 Oh, and we also reduced the JS file size of the UI by ~60%.
 
 ### Breaking changes
+
+#### `Access-Control-Allow-Origin: "*"` not recommended
+
+> This change is relevant for you when using a wildcard as the Access-Control-Allow-Origin.
+
+Using a wildcard (`*`) for the `Access-Control-Allow-Origin` header was never recommended as it's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if you're currently using a wildcard. The [SSL and HTTPS](docs/SSL%20and%20HTTPS.md) guide contains better alternatives.
+
+`ignoreOwnVisits` is now enabled by default and won't work when using a wildcard.
 
 #### New `Access-Control-Allow-Credentials` header
 
@@ -273,7 +293,7 @@ The first major back-end and front-end rewrite of Ackee with new API, dashboard,
 ### Added
 
 - Simply [deploy to Heroku](docs/Get%20started.md#with-heroku) by clicking one button (#72, thanks @aleccool213)
-- `ACKEE_ALLOW_ORIGIN` option for [Heroku or other Platforms-As-A-Service](docs/CORS%20headers.md) (#73, thanks @aleccool213)
+- `ACKEE_ALLOW_ORIGIN` option for [Platforms-As-A-Service](docs/CORS%20headers.md) (#73, thanks @aleccool213)
 
 ## [1.4.2] - 2019-12-19
 

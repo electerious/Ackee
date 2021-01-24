@@ -11,6 +11,13 @@ const matchesDate = require('../utils/matchesDate')
 
 const get = async (ids, type, interval, limit, dateDetails) => {
 
+	const aggregation = (() => {
+
+		if (type === constants.VIEWS_TYPE_UNIQUE) return aggregateViews(ids, true, interval, limit, dateDetails)
+		if (type === constants.VIEWS_TYPE_TOTAL) return aggregateViews(ids, false, interval, limit, dateDetails)
+
+	})()
+
 	const enhance = (entries) => {
 
 		const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
@@ -44,13 +51,6 @@ const get = async (ids, type, interval, limit, dateDetails) => {
 		})
 
 	}
-
-	const aggregation = (() => {
-
-		if (type === constants.VIEWS_TYPE_UNIQUE) return aggregateViews(ids, true, interval, limit, dateDetails)
-		if (type === constants.VIEWS_TYPE_TOTAL) return aggregateViews(ids, false, interval, limit, dateDetails)
-
-	})()
 
 	return enhance(
 		await Record.aggregate(aggregation)
