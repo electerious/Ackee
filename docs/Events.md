@@ -19,7 +19,7 @@ The event type specifies how Ackee will show the aggregated data in the UI. It c
 - **Chart with total sums**: Shows the aggregated data as a chart. Each day, month or year (depending on the chosen interval) includes the total sum of values.
 - **Chart with average values**: Shows the aggregated data as a chart. Each day, month or year (depending on the chosen interval) includes the average value.
 - **List with total sums**: Shows the aggregated data as a list. Each entry includes the total sum of values. Perfect when an event contains different actions (e.g. tracking choices).
-- **List with average values**: Shows the aggregated data as a list. Each entry includes the total sum of values. Perfect when an event contains different actions (e.g. tracking choices).
+- **List with average values**: Shows the aggregated data as a list. Each entry includes the average value. Perfect when an event contains different actions (e.g. tracking choices).
 
 ### Adding actions
 
