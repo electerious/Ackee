@@ -38,6 +38,7 @@ Get Ackee up and running…
 - […with Netlify](docs/Get%20started.md#with-netlify)
 - […with Vercel](docs/Get%20started.md#with-vercel)
 - […with Heroku](docs/Get%20started.md#with-heroku)
+- […with Qovery](docs/Get%20started.md#with-qovery)
 - […with Render](docs/Get%20started.md#with-render)
 
 And configure Ackee and your server correctly…

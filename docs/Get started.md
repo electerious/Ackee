@@ -238,6 +238,52 @@ git push heroku master
 
 After your application re-deploys you'll have the latest version of Ackee!
 
+## With Qovery
+
+[Qovery](https://qovery.com) is a fully-managed cloud platform that runs on your AWS, GCP, Azure and Digital Ocean account where you can host static sites, backend APIs, databases, cron jobs, and all your other apps in one place.
+
+### 1. Create a Qovery account.
+
+Visit the [Qovery dashboard](https://console.qovery.com) to create an account if you don't already have one.
+
+### 2. Create a project
+
+Click on "Create a new project" and give a name to your project. 
+
+Click on "Next".
+
+### 3. Add an application
+
+Click on "Create an application" then choose "I have an application" and select your GitHub or GitLab repository where your Ackee app is located.
+
+Click on "Next".
+
+### 4. Add a PostgreSQL database
+
+Select "PostgreSQL" among the services.
+
+Select the version.
+
+Give a name to your PostgreSQL databse.
+
+Click on "Next".
+
+### 5. Add a storage
+
+Select "Storage" among the services.
+
+Give a name to your storage.
+
+Select the storage type between Slow HDD, HDD, SSD, and Fast SSD. (SSD is recommended).
+
+Select the size.
+
+Give a mount point.
+
+### 6. Deploy
+
+Click on the Deploy button. Your app should be deployed: you can see the status in real time by clicking on deployment logs.
+
 ## With Render
 
 You can use [Render's](https://render.com/) one-click deploy button to get up and running with Ackee in minutes.
