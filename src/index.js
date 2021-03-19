@@ -33,6 +33,10 @@ connect(config.dbUrl).then(() => {
 		signale.info('Demo mode enabled')
 	}
 
+	if (!config.username && !config.password) {
+		signale.warn('disabling username/password based authentication')
+	}
+
 }).catch((err) => {
 
 	signale.fatal(err)

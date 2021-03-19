@@ -29,7 +29,9 @@ const Main = (props) => {
 	const hasToken = props.token.value != null
 
 	if (hasError === true) return h(OverlayFailure, { errors: unknownErrors })
-	if (hasToken === false) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
+	if (hasToken === false && !window.env.authDisabled) {
+		return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
+	}
 
 	return h(Fragment, {},
 		h(Filter, enhancedProps),

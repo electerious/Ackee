@@ -4,8 +4,14 @@ const KnownError = require('../utils/KnownError')
 const isExpired = require('../utils/isExpired')
 const tokens = require('../database/tokens')
 const permanentTokens = require('../database/permanentTokens')
+const config = require('../utils/config')
 
 module.exports = async (authorization, ttl) => {
+
+	// username/password authentication is disabled
+	if (!config.username && !config.password) {
+		return true
+	}
 
 	// Token not in request
 	if (authorization == null) {

@@ -12,7 +12,8 @@ const index = async () => {
 
 	return layout('<div id="main"></div>', 'favicon.ico', [ 'index.css' ], [ 'index.js' ], {
 		isDemoMode: config.isDemoMode,
-		customTracker
+		customTracker,
+		authDisabled: !config.username && !config.password
 	})
 
 }
