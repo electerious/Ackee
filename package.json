@@ -24,13 +24,13 @@
   },
   "scripts": {
     "start": "npm run build && npm run server",
-    "start:dev": "NODE_ENV=development nodemon",
-    "build:pre": "BUILD_ENV=pre npm run build",
+    "start:dev": "cross-env NODE_ENV=development nodemon",
+    "build:pre": "cross-env BUILD_ENV=pre npm run build",
     "build": "node build.js",
     "server": "node src/index.js",
-    "coveralls": "nyc report --reporter=lcov",
-    "test": "nyc ava",
-    "lint": "eslint '{functions,src,test}/**/*.js'"
+    "coveralls": "cross-env nyc report --reporter=lcov",
+    "test": "cross-env nyc ava",
+    "lint": "cross-env eslint '{functions,src,test}/**/*.js'"
   },
   "dependencies": {
     "ackee-tracker": "^5.0.1",
@@ -61,6 +61,7 @@
     "ava": "3.15.0",
     "classnames": "^2.2.6",
     "coveralls": "^3.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.20.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.22.0",
