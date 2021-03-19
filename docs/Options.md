@@ -41,6 +41,8 @@ PORT=3000
 
 Username and password. Both are required to generate a new token.
 
+They can be unset to use a custom authentication provider like authelia: [Advanved Authentication](Advanced%20Authentication.md)
+
 ```
 ACKEE_USERNAME=username
 ACKEE_PASSWORD=password

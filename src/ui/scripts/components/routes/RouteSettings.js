@@ -76,8 +76,10 @@ const RouteSettings = (props) => {
 				headline: 'Account'
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
-				h(Line),
-				h(LinkItem, { type: 'button', onClick: () => props.deleteToken(props) }, 'Sign Out')
+				...(!window.env.authDisabled ? [
+					h(LinkItem, { type: 'button', onClick: () => props.deleteToken(props) }, 'Sign Out'),
+					h(Line)
+				] : [])
 			),
 
 			h(CardSetting, {
