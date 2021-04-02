@@ -33,7 +33,7 @@
     "lint": "eslint '{functions,src,test}/**/*.js'"
   },
   "dependencies": {
-    "ackee-tracker": "^5.1.0-0",
+    "ackee-tracker": "^5.1.0",
     "apollo-server-lambda": "^2.21.2",
     "apollo-server-micro": "^2.21.2",
     "apollo-server-plugin-http-headers": "^0.1.4",
