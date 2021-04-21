@@ -250,39 +250,15 @@ Visit the [Qovery dashboard](https://console.qovery.com) to create an account if
 
 Click on "Create a new project" and give a name to your project. 
 
-Click on "Next".
-
 ### 3. Add an application
 
 Click on "Create an application" then choose "I have an application" and select your GitHub or GitLab repository where your Ackee app is located.
 
-Click on "Next".
+Select "MongoDB" service then choose a version. Give the database a name and continue with "Next".
 
-### 4. Add a PostgreSQL database
+Click on "Deploy".
 
-Select "PostgreSQL" among the services.
-
-Select the version.
-
-Give a name to your PostgreSQL databse.
-
-Click on "Next".
-
-### 5. Add a storage
-
-Select "Storage" among the services.
-
-Give a name to your storage.
-
-Select the storage type between Slow HDD, HDD, SSD, and Fast SSD. (SSD is recommended).
-
-Select the size.
-
-Give a mount point.
-
-### 6. Deploy
-
-Click on the Deploy button. Your app should be deployed: you can see the status in real time by clicking on deployment logs.
+Chat with Qovery developers on [Discord](https://discord.qovery.com) if you need help.
 
 ## With Render
 
