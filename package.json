@@ -79,6 +79,7 @@
     "nyc": "^15.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
+    "react-apollo-network-status": "^5.0.1",
     "react-dom": "^17.0.1",
     "react-error-boundary": "^3.1.1",
     "react-fast-compare": "^3.2.0",

@@ -6459,6 +6459,11 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-apollo-network-status@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-apollo-network-status/-/react-apollo-network-status-5.0.1.tgz#25a7ccf956e9c0dd2b7b7bab9efe2681ba0b841c"
+  integrity sha512-kA4WqEHUegc3IjvC9ZmA/hABRFpN9sjJ2wDehbRoyMyV2mVMoDcLq9BH/OQ6hpoeYZhTpl9F8np6fcWYERtn4g==
+
 react-dom@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"

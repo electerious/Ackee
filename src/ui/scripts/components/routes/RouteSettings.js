@@ -1,9 +1,9 @@
 import { createElement as h, Fragment } from 'react'
 
 import { version, homepage } from '../../../../../package.json'
-import useDomains from '../../api/useDomains'
-import useEvents from '../../api/useEvents'
-import usePermanentTokens from '../../api/usePermanentTokens'
+import useDomains from '../../api/hooks/useDomains'
+import useEvents from '../../api/hooks/useEvents'
+import usePermanentTokens from '../../api/hooks/usePermanentTokens'
 import {
 	MODALS_DOMAIN_ADD,
 	MODALS_DOMAIN_EDIT,

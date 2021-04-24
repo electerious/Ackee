@@ -4,8 +4,11 @@ import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { ApolloProvider } from '@apollo/client/react'
 
+import createNetworkStatusLink from './api/links/createNetworkStatusLink'
+import createAuthLink from './api/links/createAuthLink'
+import createHttpLink from './api/links/createHttpLink'
+import createClient from './api/createClient'
 import enhanceState from './enhancers/enhanceState'
-import createClient from './utils/createClient'
 import createStore from './utils/createStore'
 import * as storage from './utils/storage'
 import reducers from './reducers/index'
@@ -16,7 +19,12 @@ import { initialState as initialFilterState } from './reducers/filter'
 
 import Main from './components/Main'
 
-const client = createClient()
+const { networkStatusLink } = createNetworkStatusLink()
+const client = createClient([
+	networkStatusLink,
+	createAuthLink(),
+	createHttpLink()
+])
 
 const persistedState = storage.load()
 const store = createStore(reducers, persistedState)

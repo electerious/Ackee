@@ -1,13 +1,8 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 
 export default () => {
 
-	const httpLink = createHttpLink({
-		uri: '/api'
-	})
-
-	const authLink = setContext((_, { headers }) => {
+	return setContext((request, { headers }) => {
 
 		const state = localStorage.getItem('ackee_state_3.0.6')
 		if (state == null) return { headers }
@@ -21,11 +16,6 @@ export default () => {
 			}
 		}
 
-	})
-
-	return new ApolloClient({
-		link: authLink.concat(httpLink),
-		cache: new InMemoryCache()
 	})
 
 }
