@@ -14,6 +14,7 @@ The node server shows you the UI and receives the request from all of your sites
 - [With Netlify](#with-netlify)
 - [With Vercel](#with-vercel)
 - [With Heroku](#with-heroku)
+- [With Qovery](#with-qovery)
 - [With Render](#with-render)
 
 ## With Docker Compose
@@ -236,6 +237,28 @@ git push heroku master
 ```
 
 After your application re-deploys you'll have the latest version of Ackee!
+
+## With Qovery
+
+[Qovery](https://qovery.com) is a fully-managed cloud platform that runs on your AWS, GCP, Azure and Digital Ocean account where you can host static sites, backend APIs, databases, cron jobs, and all your other apps in one place.
+
+### 1. Create a Qovery account.
+
+Visit the [Qovery dashboard](https://console.qovery.com) to create an account if you don't already have one.
+
+### 2. Create a project
+
+Click on "Create a new project" and give a name to your project. 
+
+### 3. Add an application
+
+Click on "Create an application" then choose "I have an application" and select your GitHub or GitLab repository where your Ackee app is located.
+
+Select "MongoDB" service then choose a version. Give the database a name and continue with "Next".
+
+Click on "Deploy".
+
+Chat with Qovery developers on [Discord](https://discord.qovery.com) if you need help.
 
 ## With Render
 
