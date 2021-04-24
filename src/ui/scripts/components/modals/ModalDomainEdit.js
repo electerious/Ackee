@@ -7,10 +7,17 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
+import useUpdateDomain from '../../api/hooks/useUpdateDomain'
+import useDeleteDomain from '../../api/hooks/useDeleteDomain'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalDomainEdit = (props) => {
+
+	const updateDomain = useUpdateDomain(props.id)
+	const deleteDomain = useDeleteDomain(props.id)
+
+	const fetching = updateDomain.fetching === true || deleteDomain.fetching === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -21,15 +28,22 @@ const ModalDomainEdit = (props) => {
 		[key]: e.target.value
 	})
 
-	const updateDomain = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault()
-		props.updateDomain(props.id, inputs).then(props.closeModal)
+		updateDomain.mutate({
+			variables: {
+				input: inputs
+			}
+		}).then(props.closeModal)
 	}
 
-	const deleteDomain = (e) => {
+	const onDelete = (e) => {
 		e.preventDefault()
+
 		const c = confirm(`Are you sure you want to delete the domain "${ props.title }"? This action cannot be undone.`)
-		if (c === true) props.deleteDomain(props.id, inputs).then(props.closeModal)
+		if (c === false) return
+
+		deleteDomain.mutate().then(props.closeModal)
 	}
 
 	const titleId = shortId()
@@ -41,7 +55,7 @@ const ModalDomainEdit = (props) => {
 	const serverUrl = location.origin
 
 	return (
-		h('form', { className: 'card', onSubmit: updateDomain },
+		h('form', { className: 'card', onSubmit },
 			h('div', { className: 'card__inner' },
 
 				h(Spacer, { size: 0.5 }),
@@ -52,7 +66,7 @@ const ModalDomainEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: fetching === true,
 					focused: true,
 					placeholder: 'Domain title',
 					value: inputs.title,
@@ -97,7 +111,7 @@ const ModalDomainEdit = (props) => {
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
-					onClick: deleteDomain,
+					onClick: onDelete,
 					disabled: props.active === false
 				}, 'Delete'),
 
@@ -107,8 +121,8 @@ const ModalDomainEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Rename')
+					disabled: fetching === true || props.active === false
+				}, fetching === true ? h(Spinner) : 'Rename')
 
 			)
 		)
@@ -119,10 +133,7 @@ const ModalDomainEdit = (props) => {
 ModalDomainEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	fetching: PropTypes.bool.isRequired,
-	updateDomain: PropTypes.func.isRequired,
-	deleteDomain: PropTypes.func.isRequired
+	title: PropTypes.string.isRequired
 }
 
 export default ModalDomainEdit

@@ -6,10 +6,17 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
+import useUpdatePermanentToken from '../../api/hooks/useUpdatePermanentToken'
+import useDeletePermanentToken from '../../api/hooks/useDeletePermanentToken'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalPermanentTokenEdit = (props) => {
+
+	const updatePermanentToken = useUpdatePermanentToken(props.id)
+	const deletePermanentToken = useDeletePermanentToken(props.id)
+
+	const fetching = updatePermanentToken.fetching === true || deletePermanentToken.fetching === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -20,22 +27,29 @@ const ModalPermanentTokenEdit = (props) => {
 		[key]: e.target.value
 	})
 
-	const updatePermanentToken = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault()
-		props.updatePermanentToken(props.id, inputs).then(props.closeModal)
+		updatePermanentToken.mutate({
+			variables: {
+				input: inputs
+			}
+		}).then(props.closeModal)
 	}
 
-	const deletePermanentToken = (e) => {
+	const onDelete = (e) => {
 		e.preventDefault()
+
 		const c = confirm(`Are you sure you want to delete the permanent token "${ props.title }"? This action cannot be undone.`)
-		if (c === true) props.deletePermanentToken(props.id, inputs).then(props.closeModal)
+		if (c === false) return
+
+		deletePermanentToken.mutate().then(props.closeModal)
 	}
 
 	const titleId = shortId()
 	const idId = shortId()
 
 	return (
-		h('form', { className: 'card', onSubmit: updatePermanentToken },
+		h('form', { className: 'card', onSubmit },
 			h('div', { className: 'card__inner' },
 
 				h(Spacer, { size: 0.5 }),
@@ -46,7 +60,7 @@ const ModalPermanentTokenEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: fetching === true,
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
@@ -81,7 +95,7 @@ const ModalPermanentTokenEdit = (props) => {
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
-					onClick: deletePermanentToken,
+					onClick: onDelete,
 					disabled: props.active === false
 				}, 'Delete'),
 
@@ -91,8 +105,8 @@ const ModalPermanentTokenEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Rename')
+					disabled: fetching === true || props.active === false
+				}, fetching === true ? h(Spinner) : 'Rename')
 
 			)
 		)
@@ -103,10 +117,7 @@ const ModalPermanentTokenEdit = (props) => {
 ModalPermanentTokenEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	fetching: PropTypes.bool.isRequired,
-	updatePermanentToken: PropTypes.func.isRequired,
-	deletePermanentToken: PropTypes.func.isRequired
+	title: PropTypes.string.isRequired
 }
 
 export default ModalPermanentTokenEdit

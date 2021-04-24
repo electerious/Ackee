@@ -34,44 +34,29 @@ const Modals = (props) => {
 		return (
 			h(Modal, { key: modalId, visible: modalData.visible, ...commonProps },
 				modalData.type === MODALS_DOMAIN_ADD && h(ModalDomainAdd, {
-					...commonProps,
-					fetching: props.domains.fetching,
-					addDomain: props.addDomain.bind(null, props)
+					...commonProps
 				}),
 				modalData.type === MODALS_DOMAIN_EDIT && h(ModalDomainEdit, {
 					...commonProps,
 					id: modalData.props.id,
-					title: modalData.props.title,
-					fetching: props.domains.fetching,
-					updateDomain: props.updateDomain.bind(null, props),
-					deleteDomain: props.deleteDomain.bind(null, props)
+					title: modalData.props.title
 				}),
 				modalData.type === MODALS_EVENT_ADD && h(ModalEventAdd, {
-					...commonProps,
-					fetching: props.events.fetching,
-					addEvent: props.addEvent.bind(null, props)
+					...commonProps
 				}),
 				modalData.type === MODALS_EVENT_EDIT && h(ModalEventEdit, {
 					...commonProps,
 					id: modalData.props.id,
 					title: modalData.props.title,
-					type: modalData.props.type,
-					fetching: props.events.fetching,
-					updateEvent: props.updateEvent.bind(null, props),
-					deleteEvent: props.deleteEvent.bind(null, props)
+					type: modalData.props.type
 				}),
 				modalData.type === MODALS_PERMANENT_TOKEN_ADD && h(ModalPermanentTokenAdd, {
-					...commonProps,
-					fetching: props.permanentTokens.fetching,
-					addPermanentToken: props.addPermanentToken.bind(null, props)
+					...commonProps
 				}),
 				modalData.type === MODALS_PERMANENT_TOKEN_EDIT && h(ModalPermanentTokenEdit, {
 					...commonProps,
 					id: modalData.props.id,
-					title: modalData.props.title,
-					fetching: props.permanentTokens.fetching,
-					updatePermanentToken: props.updatePermanentToken.bind(null, props),
-					deletePermanentToken: props.deletePermanentToken.bind(null, props)
+					title: modalData.props.title
 				})
 			)
 		)

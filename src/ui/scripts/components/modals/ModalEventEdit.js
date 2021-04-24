@@ -11,10 +11,17 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
+import useUpdateEvent from '../../api/hooks/useUpdateEvent'
+import useDeleteEvent from '../../api/hooks/useDeleteEvent'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalEventEdit = (props) => {
+
+	const updateEvent = useUpdateEvent(props.id)
+	const deleteEvent = useDeleteEvent(props.id)
+
+	const fetching = updateEvent.fetching === true || deleteEvent.fetching === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title,
@@ -26,15 +33,22 @@ const ModalEventEdit = (props) => {
 		[key]: e.target.value
 	})
 
-	const updateEvent = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault()
-		props.updateEvent(props.id, inputs).then(props.closeModal)
+		updateEvent.mutate({
+			variables: {
+				input: inputs
+			}
+		}).then(props.closeModal)
 	}
 
-	const deleteEvent = (e) => {
+	const onDelete = (e) => {
 		e.preventDefault()
+
 		const c = confirm(`Are you sure you want to delete the event "${ props.title }"? This action cannot be undone.`)
-		if (c === true) props.deleteEvent(props.id, inputs).then(props.closeModal)
+		if (c === false) return
+
+		deleteEvent.mutate().then(props.closeModal)
 	}
 
 	const titleId = shortId()
@@ -43,7 +57,7 @@ const ModalEventEdit = (props) => {
 	const embedId = shortId()
 
 	return (
-		h('form', { className: 'card', onSubmit: updateEvent },
+		h('form', { className: 'card', onSubmit },
 			h('div', { className: 'card__inner' },
 
 				h(Spacer, { size: 0.5 }),
@@ -54,7 +68,7 @@ const ModalEventEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: fetching === true,
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
@@ -69,7 +83,7 @@ const ModalEventEdit = (props) => {
 				h(Select, {
 					id: typeId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: fetching === true,
 					value: inputs.type,
 					items: [
 						{
@@ -130,7 +144,7 @@ const ModalEventEdit = (props) => {
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
-					onClick: deleteEvent,
+					onClick: onDelete,
 					disabled: props.active === false
 				}, 'Delete'),
 
@@ -140,8 +154,8 @@ const ModalEventEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Save')
+					disabled: fetching === true || props.active === false
+				}, fetching === true ? h(Spinner) : 'Save')
 
 			)
 		)
@@ -152,10 +166,7 @@ const ModalEventEdit = (props) => {
 ModalEventEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	fetching: PropTypes.bool.isRequired,
-	updateEvent: PropTypes.func.isRequired,
-	deleteEvent: PropTypes.func.isRequired
+	title: PropTypes.string.isRequired
 }
 
 export default ModalEventEdit

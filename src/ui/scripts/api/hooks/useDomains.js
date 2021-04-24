@@ -1,13 +1,16 @@
 import { useMemo } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
+import domainFields from '../fragments/domainFields'
+
 const query = gql`
 	query domains {
 		domains {
-			id
-			title
+			...domainFields
 		}
 	}
+
+	${ domainFields }
 `
 
 export default () => {

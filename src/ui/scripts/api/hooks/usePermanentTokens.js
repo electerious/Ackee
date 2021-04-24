@@ -1,13 +1,16 @@
 import { useMemo } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
+import permanentTokenFields from '../fragments/permanentTokenFields'
+
 const query = gql`
 	query permanentTokens {
 		permanentTokens {
-			id
-			title
+			...permanentTokenFields
 		}
 	}
+
+	${ permanentTokenFields }
 `
 
 export default () => {

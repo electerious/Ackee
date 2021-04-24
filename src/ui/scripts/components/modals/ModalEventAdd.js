@@ -1,5 +1,4 @@
 import { createElement as h, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import * as events from '../../../../constants/events'
 
@@ -10,10 +9,15 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
+import useCreateEvent from '../../api/hooks/useCreateEvent'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalEventAdd = (props) => {
+
+	const createEvent = useCreateEvent()
+
+	const fetching = createEvent.fetching === true
 
 	const [ inputs, setInputs ] = useState({
 		title: '',
@@ -25,16 +29,20 @@ const ModalEventAdd = (props) => {
 		[key]: e.target.value
 	})
 
-	const addEvent = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault()
-		props.addEvent(inputs).then(props.closeModal)
+		createEvent.mutate({
+			variables: {
+				input: inputs
+			}
+		}).then(props.closeModal)
 	}
 
 	const titleId = shortId()
 	const typeId = shortId()
 
 	return (
-		h('form', { className: 'card', onSubmit: addEvent },
+		h('form', { className: 'card', onSubmit },
 			h('div', { className: 'card__inner' },
 
 				h(Spacer, { size: 0.5 }),
@@ -45,7 +53,7 @@ const ModalEventAdd = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: fetching === true,
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
@@ -60,7 +68,7 @@ const ModalEventAdd = (props) => {
 				h(Select, {
 					id: typeId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: fetching === true,
 					value: inputs.type,
 					items: [
 						{
@@ -99,8 +107,8 @@ const ModalEventAdd = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Add')
+					disabled: fetching === true || props.active === false
+				}, fetching === true ? h(Spinner) : 'Add')
 
 			)
 		)
@@ -109,9 +117,7 @@ const ModalEventAdd = (props) => {
 }
 
 ModalEventAdd.propTypes = {
-	...commonModalProps,
-	fetching: PropTypes.bool.isRequired,
-	addEvent: PropTypes.func.isRequired
+	...commonModalProps
 }
 
 export default ModalEventAdd

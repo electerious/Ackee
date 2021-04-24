@@ -6,19 +6,13 @@ import {
 
 import modals from './modals'
 import token from './token'
-import permanentTokens from './permanentTokens'
 import filter from './filter'
-import domains from './domains'
-import events from './events'
 import widgets from './widgets'
 
 const reducers = combineReducers({
 	modals,
 	token,
-	permanentTokens,
 	filter,
-	domains,
-	events,
 	widgets
 })
 

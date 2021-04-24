@@ -1,14 +1,16 @@
 import { useMemo } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
+import eventFields from '../fragments/eventFields'
+
 const query = gql`
 	query events {
 		events {
-			id
-			title
-			type
+			...eventFields
 		}
 	}
+
+	${ eventFields }
 `
 
 export default () => {
