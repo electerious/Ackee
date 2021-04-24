@@ -57,6 +57,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@apollo/client": "^3.3.15",
     "@electerious/eslint-config": "^1.4.0",
     "ava": "3.15.0",
     "classnames": "^2.2.6",

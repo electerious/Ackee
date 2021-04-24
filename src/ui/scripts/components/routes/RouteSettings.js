@@ -1,6 +1,9 @@
-import { createElement as h, Fragment, useEffect } from 'react'
+import { createElement as h, Fragment } from 'react'
 
 import { version, homepage } from '../../../../../package.json'
+import useDomains from '../../api/useDomains'
+import useEvents from '../../api/useEvents'
+import usePermanentTokens from '../../api/usePermanentTokens'
 import {
 	MODALS_DOMAIN_ADD,
 	MODALS_DOMAIN_EDIT,
@@ -23,13 +26,9 @@ const FetchingMessage = (props) => {
 
 const RouteSettings = (props) => {
 
-	useEffect(() => {
-
-		props.fetchDomains(props)
-		props.fetchEvents(props)
-		props.fetchPermanentTokens(props)
-
-	}, [])
+	const domains = useDomains()
+	const events = useEvents()
+	const permanentTokens = usePermanentTokens()
 
 	const showModal = (type, data = {}) => {
 
@@ -65,9 +64,9 @@ const RouteSettings = (props) => {
 	const eventsFetching = h(FetchingMessage, { label: 'events' })
 	const permanentTokensFetching = h(FetchingMessage, { label: 'permanent tokens' })
 
-	const domainsItems = createItems(props.domains.value, showDomainEditModal, showDomainAddModal, 'New domain')
-	const eventsItems = createItems(props.events.value, showEventEditModal, showEventAddModal, 'New event')
-	const permanentTokensItems = createItems(props.permanentTokens.value, showPermanentTokenEditModal, showPermanentTokenAddModal, 'New permanent token')
+	const domainsItems = createItems(domains.value, showDomainEditModal, showDomainAddModal, 'New domain')
+	const eventsItems = createItems(events.value, showEventEditModal, showEventAddModal, 'New event')
+	const permanentTokensItems = createItems(permanentTokens.value, showPermanentTokenEditModal, showPermanentTokenAddModal, 'New permanent token')
 
 	return (
 		h(Fragment, {},
@@ -83,19 +82,19 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Domains'
 			},
-				...(props.domains.fetching === true ? [ domainsFetching ] : domainsItems)
+				...(domains.fetching === true && domains.stale !== true ? [ domainsFetching ] : domainsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Events'
 			},
-				...(props.events.fetching === true ? [ eventsFetching ] : eventsItems)
+				...(events.fetching === true && events.stale !== true ? [ eventsFetching ] : eventsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Permanent Tokens'
 			},
-				...(props.permanentTokens.fetching === true ? [ permanentTokensFetching ] : permanentTokensItems)
+				...(permanentTokens.fetching === true && permanentTokens.stale !== true ? [ permanentTokensFetching ] : permanentTokensItems)
 			),
 
 			h(CardSetting, {

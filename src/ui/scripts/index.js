@@ -2,8 +2,10 @@ import { createElement as h } from 'react'
 import { render } from 'react-dom'
 import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
+import { ApolloProvider } from '@apollo/client/react'
 
 import enhanceState from './enhancers/enhanceState'
+import createClient from './utils/createClient'
 import createStore from './utils/createStore'
 import * as storage from './utils/storage'
 import reducers from './reducers/index'
@@ -13,6 +15,8 @@ import { initialState as initialTokenState } from './reducers/token'
 import { initialState as initialFilterState } from './reducers/filter'
 
 import Main from './components/Main'
+
+const client = createClient()
 
 const persistedState = storage.load()
 const store = createStore(reducers, persistedState)
@@ -44,8 +48,10 @@ store.subscribe(() => {
 
 })
 
-const App = h(Provider, { store },
-	h(ConnectedMain)
+const App = h(ApolloProvider, { client },
+	h(Provider, { store },
+		h(ConnectedMain)
+	)
 )
 
 render(App, container)
