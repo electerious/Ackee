@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
@@ -19,13 +18,11 @@ export default () => {
 		fetchPolicy: 'cache-and-network'
 	})
 
-	const value = useMemo(() => data == null ? [] : data.domains, [ data ])
-
-	return useMemo(() => ({
+	return {
 		fetching,
 		stale: fetching === true && data != null,
 		error,
-		value
-	}), [ fetching, error, value ])
+		value: data == null ? [] : data.domains
+	}
 
 }

@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useMutation, gql } from '@apollo/client'
 
 const mutation = gql`
@@ -20,10 +19,10 @@ export default (id) => {
 		]
 	})
 
-	return useMemo(() => ({
+	return {
 		mutate,
 		fetching,
 		error
-	}), [ mutate, fetching, error ])
+	}
 
 }

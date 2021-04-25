@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useMutation, gql } from '@apollo/client'
 
 import permanentTokenFields from '../fragments/permanentTokenFields'
@@ -23,10 +22,10 @@ export default () => {
 		]
 	})
 
-	return useMemo(() => ({
+	return {
 		mutate,
 		fetching,
 		error
-	}), [ mutate, fetching, error ])
+	}
 
 }

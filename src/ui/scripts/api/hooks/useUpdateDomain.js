@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useMutation, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
@@ -23,10 +22,10 @@ export default (id) => {
 		}
 	})
 
-	return useMemo(() => ({
+	return {
 		mutate,
 		fetching,
 		error
-	}), [ mutate, fetching, error ])
+	}
 
 }

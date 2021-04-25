@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useQuery, gql } from '@apollo/client'
 
 import permanentTokenFields from '../fragments/permanentTokenFields'
@@ -19,13 +18,11 @@ export default () => {
 		fetchPolicy: 'cache-and-network'
 	})
 
-	const value = useMemo(() => data == null ? [] : data.permanentTokens, [ data ])
-
-	return useMemo(() => ({
+	return {
 		fetching,
 		stale: fetching === true && data != null,
 		error,
-		value
-	}), [ fetching, error, value ])
+		value: data == null ? [] : data.permanentTokens
+	}
 
 }
