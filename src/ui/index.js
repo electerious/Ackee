@@ -34,7 +34,7 @@ const scripts = async () => {
 	return js(filePath, {
 		optimize: config.isDevelopmentMode === false,
 		nodeGlobals: config.isDevelopmentMode === true,
-		replace: config.isDevelopmentMode === true ? { 'process.env.NODE_ENV': JSON.stringify('development') } : undefined,
+		replace: { 'process.env.NODE_ENV': JSON.stringify(config.isDevelopmentMode === true ? 'development' : 'production') },
 		babel: false
 	})
 
