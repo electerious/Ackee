@@ -15,7 +15,8 @@ const query = gql`
 export default () => {
 
 	const { loading: fetching, error, data } = useQuery(query, {
-		fetchPolicy: 'cache-and-network'
+		fetchPolicy: 'cache-and-network',
+		nextFetchPolicy: 'cache-first'
 	})
 
 	return {
