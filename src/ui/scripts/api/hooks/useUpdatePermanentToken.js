@@ -2,7 +2,7 @@ import { useMutation, gql } from '@apollo/client'
 
 import permanentTokenFields from '../fragments/permanentTokenFields'
 
-const mutation = gql`
+const UPDATE_PERMANENT_TOKEN = gql`
 	mutation updatePermanentToken($id: ID!, $input: UpdatePermanentTokenInput!) {
 		updatePermanentToken(id: $id, input: $input) {
 			payload {
@@ -16,7 +16,7 @@ const mutation = gql`
 
 export default (id) => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(mutation, {
+	const [ mutate, { loading: fetching, error }] = useMutation(UPDATE_PERMANENT_TOKEN, {
 		variables: {
 			id
 		}

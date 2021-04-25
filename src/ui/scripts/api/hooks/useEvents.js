@@ -2,8 +2,8 @@ import { useQuery, gql } from '@apollo/client'
 
 import eventFields from '../fragments/eventFields'
 
-const query = gql`
-	query events {
+const FETCH_EVENTS = gql`
+	query fetchEvents {
 		events {
 			...eventFields
 		}
@@ -14,7 +14,7 @@ const query = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(query, {
+	const { loading: fetching, error, data } = useQuery(FETCH_EVENTS, {
 		fetchPolicy: 'cache-and-network',
 		nextFetchPolicy: 'cache-first'
 	})

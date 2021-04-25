@@ -2,8 +2,8 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const query = gql`
-	query domains {
+const FETCH_DOMAINS = gql`
+	query fetchDomains {
 		domains {
 			...domainFields
 		}
@@ -14,7 +14,7 @@ const query = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(query, {
+	const { loading: fetching, error, data } = useQuery(FETCH_DOMAINS, {
 		fetchPolicy: 'cache-and-network',
 		nextFetchPolicy: 'cache-first'
 	})

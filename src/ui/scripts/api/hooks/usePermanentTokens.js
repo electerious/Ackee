@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import permanentTokenFields from '../fragments/permanentTokenFields'
 
-const query = gql`
+const FETCH_PERMANENT_TOKENS = gql`
 	query permanentTokens {
 		permanentTokens {
 			...permanentTokenFields
@@ -14,7 +14,7 @@ const query = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(query, {
+	const { loading: fetching, error, data } = useQuery(FETCH_PERMANENT_TOKENS, {
 		fetchPolicy: 'cache-and-network',
 		nextFetchPolicy: 'cache-first'
 	})
