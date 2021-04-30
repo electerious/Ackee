@@ -2,10 +2,10 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const FETCH_VIEWS = gql`
-	query fetchViews($interval: Interval!, $type: ViewType!) {
+const FETCH_DURATIONS = gql`
+	query fetchViews($interval: Interval!) {
 		statistics {
-			views(interval: $interval, type: $type, limit: 14) {
+			durations(interval: $interval, limit: 14) {
 				id
 				count
 			}
@@ -13,7 +13,7 @@ const FETCH_VIEWS = gql`
 		domains {
 			...domainFields
 			statistics {
-				views(interval: $interval, type: $type, limit: 7) {
+				durations(interval: $interval, limit: 7) {
 					id
 					count
 				}
@@ -24,12 +24,11 @@ const FETCH_VIEWS = gql`
 	${ domainFields }
 `
 
-export default (interval, type) => {
+export default (interval) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_VIEWS, {
+	const { loading: fetching, error, data } = useQuery(FETCH_DURATIONS, {
 		variables: {
-			interval,
-			type
+			interval
 		},
 		fetchPolicy: 'cache-and-network',
 		nextFetchPolicy: 'cache-first'
@@ -39,7 +38,7 @@ export default (interval, type) => {
 		fetching,
 		stale: fetching === true && data != null,
 		error,
-		value: data == null ? { statistics: { views: [] }, domains: [] } : data
+		value: data == null ? { statistics: { durations: [] }, domains: [] } : data
 	}
 
 }
