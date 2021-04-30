@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-import { DurationsChartRenderer } from './durationsLoader'
+// import { DurationsChartRenderer } from './durationsLoader'
 import enhanceDurations from '../enhancers/enhanceDurations'
 import createWidgetId from '../utils/createWidgetId'
 
@@ -26,7 +26,7 @@ export default (opts) => {
 
 	return {
 		id,
-		Renderer: DurationsChartRenderer,
+		// Renderer: DurationsChartRenderer,
 		query,
 		variables,
 		selector,

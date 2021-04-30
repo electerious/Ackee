@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-import { ViewsChartRenderer } from './viewsLoader'
+// import { ViewsChartRenderer } from './viewsLoader'
 import enhanceViews from '../enhancers/enhanceViews'
 import createWidgetId from '../utils/createWidgetId'
 
@@ -27,7 +27,7 @@ export default (opts) => {
 
 	return {
 		id,
-		Renderer: ViewsChartRenderer,
+		// Renderer: ViewsChartRenderer,
 		query,
 		variables,
 		selector,
