@@ -4,6 +4,7 @@ import { version, homepage } from '../../../../../package.json'
 import useDomains from '../../api/hooks/useDomains'
 import useEvents from '../../api/hooks/useEvents'
 import usePermanentTokens from '../../api/hooks/usePermanentTokens'
+import status from '../../utils/status'
 import {
 	MODALS_DOMAIN_ADD,
 	MODALS_DOMAIN_EDIT,
@@ -82,19 +83,19 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Domains'
 			},
-				...(domains.fetching === true && domains.stale !== true ? [ domainsFetching ] : domainsItems)
+				...(status(domains.value, domains.fetching).isLoading === true ? [ domainsFetching ] : domainsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Events'
 			},
-				...(events.fetching === true && events.stale !== true ? [ eventsFetching ] : eventsItems)
+				...(status(events.value, events.fetching).isLoading === true ? [ eventsFetching ] : eventsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Permanent Tokens'
 			},
-				...(permanentTokens.fetching === true && permanentTokens.stale !== true ? [ permanentTokensFetching ] : permanentTokensItems)
+				...(status(permanentTokens.value, permanentTokens.fetching).isLoading === true ? [ permanentTokensFetching ] : permanentTokensItems)
 			),
 
 			h(CardSetting, {

@@ -43,7 +43,6 @@ export default (id, filters) => {
 
 	return {
 		fetching,
-		stale: fetching === true && data != null,
 		error,
 		value
 	}

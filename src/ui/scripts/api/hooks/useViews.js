@@ -37,7 +37,6 @@ export default (interval, type) => {
 
 	return {
 		fetching,
-		stale: fetching === true && data != null,
 		error,
 		value: data == null ? { statistics: { views: [] }, domains: [] } : data
 	}

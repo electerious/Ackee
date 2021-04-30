@@ -38,7 +38,6 @@ export default (sorting, range) => {
 
 	return {
 		fetching,
-		stale: fetching === true && data != null,
 		error,
 		value: data == null ? { statistics: { pages: [] }, domains: [] } : data
 	}

@@ -18,7 +18,6 @@ export default () => {
 
 	return {
 		fetching,
-		stale: fetching === true && data != null,
 		error,
 		value: data == null ? [] : data.domains
 	}
