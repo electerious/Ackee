@@ -1,15 +1,34 @@
-import { createElement as h } from 'react'
+import { createElement as h, Fragment } from 'react'
 
-import browsersLoader from '../../loaders/browsersLoader'
-import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
+import useBrowsers from '../../api/hooks/useBrowsers'
+import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
+
+import CardWidget from '../cards/CardWidget'
+import RendererList from '../renderers/RendererList'
 
 const RouteBrowsers = (props) => {
 
-	return useWidgetsForDomains(props, browsersLoader, {
-		sorting: props.filter.sorting,
-		type: props.filter.browsersType,
-		range: props.filter.range
-	})
+	const browsers = useBrowsers(props.filter.sorting, props.filter.browsersType, props.filter.range)
+
+	return (
+		h(Fragment, {},
+			browsers.value.domains.map((domain) => {
+				return h(CardWidget, {
+					headline: domain.title,
+					widget: {
+						Renderer: RendererList,
+						variables: {
+							sorting: props.filter.sorting,
+							browsersType: props.filter.browsersType,
+							range: props.filter.range
+						},
+						value: enhanceBrowsers(domain.statistics.browsers, 7),
+						fetching: browsers.fetching
+					}
+				})
+			})
+		)
+	)
 
 }
 

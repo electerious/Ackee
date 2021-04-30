@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client'
 import domainFields from '../fragments/domainFields'
 
 const FETCH_DURATIONS = gql`
-	query fetchViews($interval: Interval!) {
+	query fetchDurations($interval: Interval!) {
 		statistics {
 			durations(interval: $interval, limit: 14) {
 				id
