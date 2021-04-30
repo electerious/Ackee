@@ -17,7 +17,7 @@ import usePages from '../../api/hooks/usePages'
 import useReferrers from '../../api/hooks/useReferrers'
 import useSystems from '../../api/hooks/useSystems'
 import useDevices from '../../api/hooks/useDevices'
-import useBrowsers from '../../api/hooks/useBrowsers'
+import useMergedBrowsers from '../../api/hooks/browsers/useMergedBrowsers'
 import useSizes from '../../api/hooks/useSizes'
 import useLanguages from '../../api/hooks/useLanguages'
 
@@ -28,7 +28,6 @@ import enhancePages from '../../enhancers/enhancePages'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 import enhanceSystems from '../../enhancers/enhanceSystems'
 import enhanceDevices from '../../enhancers/enhanceDevices'
-import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
 import enhanceSizes from '../../enhancers/enhanceSizes'
 import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
@@ -51,7 +50,11 @@ const RouteOverview = (props) => {
 
 	const systems = useSystems(SORTINGS_TOP, SYSTEMS_TYPE_WITH_VERSION, RANGES_LAST_24_HOURS)
 	const devices = useDevices(SORTINGS_TOP, DEVICES_TYPE_WITH_MODEL, RANGES_LAST_24_HOURS)
-	const browsers = useBrowsers(SORTINGS_TOP, BROWSERS_TYPE_WITH_VERSION, RANGES_LAST_24_HOURS)
+	const browsers = useMergedBrowsers({
+		sorting: SORTINGS_TOP,
+		type: BROWSERS_TYPE_WITH_VERSION,
+		range: RANGES_LAST_24_HOURS
+	})
 	const sizes = useSizes(SORTINGS_TOP, SIZES_TYPE_BROWSER_RESOLUTION, RANGES_LAST_24_HOURS)
 	const languages = useLanguages(SORTINGS_TOP, RANGES_LAST_24_HOURS)
 
@@ -152,7 +155,7 @@ const RouteOverview = (props) => {
 						sorting: SORTINGS_TOP,
 						range: RANGES_LAST_24_HOURS
 					},
-					value: enhanceBrowsers(browsers.value.statistics.browsers),
+					value: browsers.value.statistics.browsers,
 					fetching: browsers.fetching
 				}
 			}),

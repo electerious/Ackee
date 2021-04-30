@@ -1,17 +1,19 @@
 import { createElement as h, Fragment } from 'react'
 
-// import { SORTINGS_TOP } from '../../../../constants/sortings'
-// import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
+import { SORTINGS_TOP } from '../../../../constants/sortings'
+import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
 // import { INTERVALS_DAILY } from '../../../../constants/intervals'
 // import { VIEWS_TYPE_UNIQUE } from '../../../../constants/views'
 // import { REFERRERS_TYPE_WITH_SOURCE } from '../../../../constants/referrers'
 // import { SYSTEMS_TYPE_WITH_VERSION } from '../../../../constants/systems'
 // import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
-// import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
+import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 // import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-// import useRoute from '../../hooks/useRoute'
+import useRoute from '../../hooks/useRoute'
 // import useWidgets from '../../hooks/useWidgets'
+
+import useDomainBrowsers from '../../api/hooks/browsers/useDomainBrowsers'
 
 // import factsLoader from '../../loaders/factsLoader'
 // import viewsLoader from '../../loaders/viewsLoader'
@@ -25,11 +27,23 @@ import { createElement as h, Fragment } from 'react'
 // import languagesLoader from '../../loaders/languagesLoader'
 
 // import CardFactsWidget from '../cards/CardFactsWidget'
+import CardWidget from '../cards/CardWidget'
 
-const RouteDomain = () => {
+// import RendererViews from '../renderers/RendererViews'
+// import RendererDurations from '../renderers/RendererDurations'
+import RendererList from '../renderers/RendererList'
+// import RendererReferrers from '../renderers/RendererReferrers'
 
-	// const currentRoute = useRoute(props.route)
-	// const domainId = currentRoute.params.domainId
+const RouteDomain = (props) => {
+
+	const currentRoute = useRoute(props.route)
+	const domainId = currentRoute.params.domainId
+
+	const browsers = useDomainBrowsers(domainId, {
+		sorting: SORTINGS_TOP,
+		type: BROWSERS_TYPE_WITH_VERSION,
+		range: RANGES_LAST_24_HOURS
+	})
 
 	// const factsWidgetConfigs = useMemo(() => [
 	// 	{
@@ -156,13 +170,27 @@ const RouteDomain = () => {
 	// const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
 	// const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
+	console.log(browsers)
+
 	return (
 		h(Fragment, {},
 			// renderedFactsWidgets,
 			h('div', { className: 'content__spacer' }),
 			// renderedEssentialWidgets,
-			h('div', { className: 'content__spacer' })
-			// renderedDetailedWidgets
+			h('div', { className: 'content__spacer' }),
+			h(CardWidget, {
+				headline: 'Browsers',
+				onMore: () => props.setRoute('/insights/browsers'),
+				widget: {
+					Renderer: RendererList,
+					variables: {
+						sorting: SORTINGS_TOP,
+						range: RANGES_LAST_24_HOURS
+					},
+					value: browsers.value.domain.statistics.browsers,
+					fetching: browsers.fetching
+				}
+			})
 		)
 	)
 

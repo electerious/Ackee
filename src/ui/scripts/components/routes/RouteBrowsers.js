@@ -1,14 +1,17 @@
 import { createElement as h, Fragment } from 'react'
 
-import useBrowsers from '../../api/hooks/useBrowsers'
-import enhanceBrowsers from '../../enhancers/enhanceBrowsers'
+import useDomainsBrowsers from '../../api/hooks/browsers/useDomainsBrowsers'
 
 import CardWidget from '../cards/CardWidget'
 import RendererList from '../renderers/RendererList'
 
 const RouteBrowsers = (props) => {
 
-	const browsers = useBrowsers(props.filter.sorting, props.filter.browsersType, props.filter.range)
+	const browsers = useDomainsBrowsers({
+		sorting: props.filter.sorting,
+		type: props.filter.browsersType,
+		range: props.filter.range
+	})
 
 	return (
 		h(Fragment, {},
@@ -23,7 +26,7 @@ const RouteBrowsers = (props) => {
 							sorting: props.filter.sorting,
 							range: props.filter.range
 						},
-						value: enhanceBrowsers(domain.statistics.browsers),
+						value: domain.statistics.browsers,
 						fetching: browsers.fetching
 					}
 				})
