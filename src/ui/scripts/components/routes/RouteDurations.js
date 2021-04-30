@@ -2,16 +2,9 @@ import { createElement as h, Fragment } from 'react'
 
 import useDurations from '../../api/hooks/useDurations'
 import enhanceDurations from '../../enhancers/enhanceDurations'
-import formatDuration from '../../utils/formatDuration'
 
 import CardWidget from '../cards/CardWidget'
-import RendererChart from '../renderers/RendererChart'
-
-export const DurationsChartRenderer = (props) => h(RendererChart, {
-	...props,
-	formatter: (ms) => formatDuration(ms).toString()
-})
-
+import RendererChartDurations from '../renderers/RendererChartDurations'
 
 const RouteDurations = (props) => {
 
@@ -23,7 +16,7 @@ const RouteDurations = (props) => {
 				wide: true,
 				headline: 'Durations',
 				widget: {
-					Renderer: DurationsChartRenderer,
+					Renderer: RendererChartDurations,
 					variables: {
 						interval: props.filter.interval
 					},
@@ -36,7 +29,7 @@ const RouteDurations = (props) => {
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {
-						Renderer: DurationsChartRenderer,
+						Renderer: RendererChartDurations,
 						variables: {
 							interval: props.filter.interval
 						},

@@ -4,15 +4,9 @@ import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views
 
 import useViews from '../../api/hooks/useViews'
 import enhanceViews from '../../enhancers/enhanceViews'
-import formatNumber from '../../utils/formatNumber'
 
 import CardWidget from '../cards/CardWidget'
-import RendererChart from '../renderers/RendererChart'
-
-export const ViewsChartRenderer = (props) => h(RendererChart, {
-	...props,
-	formatter: formatNumber
-})
+import RendererChartViews from '../renderers/RendererChartViews'
 
 const RouteViews = (props) => {
 
@@ -27,7 +21,7 @@ const RouteViews = (props) => {
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.filter.viewsType],
 				widget: {
-					Renderer: ViewsChartRenderer,
+					Renderer: RendererChartViews,
 					variables: {
 						interval: props.filter.interval,
 						viewsType: props.filter.viewsType
@@ -41,7 +35,7 @@ const RouteViews = (props) => {
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {
-						Renderer: ViewsChartRenderer,
+						Renderer: RendererChartViews,
 						variables: {
 							interval: props.filter.interval
 						},
