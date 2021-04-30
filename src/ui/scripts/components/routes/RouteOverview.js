@@ -13,8 +13,8 @@ import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 import useWidgets from '../../hooks/useWidgets'
 
 import mergedFactsLoader from '../../loaders/mergedFactsLoader'
-import mergedViewsLoader from '../../loaders/mergedViewsLoader'
-import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
+// import mergedViewsLoader from '../../loaders/mergedViewsLoader'
+// import mergedDurationsLoader from '../../loaders/mergedDurationsLoader'
 import mergedPagesLoader from '../../loaders/mergedPagesLoader'
 import mergedReferrersLoader from '../../loaders/mergedReferrersLoader'
 import mergedSystemsLoader from '../../loaders/mergedSystemsLoader'
@@ -35,29 +35,29 @@ const RouteOverview = (props) => {
 	], [])
 
 	const essentialWidgetConfigs = useMemo(() => [
-		{
-			loader: mergedViewsLoader({
-				interval: INTERVALS_DAILY,
-				type: VIEWS_TYPE_UNIQUE,
-				limit: 14
-			}),
-			additionalProps: {
-				wide: true,
-				headline: 'Site Views',
-				onMore: () => props.setRoute('/insights/views')
-			}
-		},
-		{
-			loader: mergedDurationsLoader({
-				interval: INTERVALS_DAILY,
-				limit: 14
-			}),
-			additionalProps: {
-				wide: true,
-				headline: 'Durations',
-				onMore: () => props.setRoute('/insights/durations')
-			}
-		},
+		// {
+		// 	loader: mergedViewsLoader({
+		// 		interval: INTERVALS_DAILY,
+		// 		type: VIEWS_TYPE_UNIQUE,
+		// 		limit: 14
+		// 	}),
+		// 	additionalProps: {
+		// 		wide: true,
+		// 		headline: 'Site Views',
+		// 		onMore: () => props.setRoute('/insights/views')
+		// 	}
+		// },
+		// {
+		// 	loader: mergedDurationsLoader({
+		// 		interval: INTERVALS_DAILY,
+		// 		limit: 14
+		// 	}),
+		// 	additionalProps: {
+		// 		wide: true,
+		// 		headline: 'Durations',
+		// 		onMore: () => props.setRoute('/insights/durations')
+		// 	}
+		// },
 		{
 			loader: mergedPagesLoader({
 				sorting: SORTINGS_TOP,

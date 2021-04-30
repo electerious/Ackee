@@ -15,6 +15,7 @@ const RouteBrowsers = (props) => {
 			browsers.value.domains.map((domain) => {
 				return h(CardWidget, {
 					headline: domain.title,
+					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {
 						Renderer: RendererList,
 						variables: {
@@ -22,7 +23,7 @@ const RouteBrowsers = (props) => {
 							browsersType: props.filter.browsersType,
 							range: props.filter.range
 						},
-						value: enhanceBrowsers(domain.statistics.browsers, 7),
+						value: enhanceBrowsers(domain.statistics.browsers),
 						fetching: browsers.fetching
 					}
 				})

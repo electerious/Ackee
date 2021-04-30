@@ -1,15 +1,35 @@
-import { createElement as h } from 'react'
+import { createElement as h, Fragment } from 'react'
 
-import devicesLoader from '../../loaders/devicesLoader'
-import useWidgetsForDomains from '../../hooks/useWidgetsForDomains'
+import useDevices from '../../api/hooks/useDevices'
+import enhanceDevices from '../../enhancers/enhanceDevices'
+
+import CardWidget from '../cards/CardWidget'
+import RendererList from '../renderers/RendererList'
 
 const RouteDevices = (props) => {
 
-	return useWidgetsForDomains(props, devicesLoader, {
-		sorting: props.filter.sorting,
-		type: props.filter.devicesType,
-		range: props.filter.range
-	})
+	const devices = useDevices(props.filter.sorting, props.filter.devicesType, props.filter.range)
+
+	return (
+		h(Fragment, {},
+			devices.value.domains.map((domain) => {
+				return h(CardWidget, {
+					headline: domain.title,
+					onMore: () => props.setRoute(`/domains/${ domain.id }`),
+					widget: {
+						Renderer: RendererList,
+						variables: {
+							sorting: props.filter.sorting,
+							devicesType: props.filter.devicesType,
+							range: props.filter.range
+						},
+						value: enhanceDevices(domain.statistics.devices),
+						fetching: devices.fetching
+					}
+				})
+			})
+		)
+	)
 
 }
 

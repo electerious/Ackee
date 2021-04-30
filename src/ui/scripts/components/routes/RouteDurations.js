@@ -34,6 +34,7 @@ const RouteDurations = (props) => {
 			durations.value.domains.map((domain) => {
 				return h(CardWidget, {
 					headline: domain.title,
+					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {
 						Renderer: DurationsChartRenderer,
 						variables: {
