@@ -20,7 +20,6 @@ const RouteSystems = (props) => {
 						onMore: () => props.setRoute(`/domains/${ domain.id }`),
 						variables: {
 							sorting: props.filter.sorting,
-							systemsType: props.filter.systemsType,
 							range: props.filter.range
 						},
 						value: enhanceSystems(domain.statistics.systems),

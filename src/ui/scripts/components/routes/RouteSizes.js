@@ -20,7 +20,6 @@ const RouteSizes = (props) => {
 						onMore: () => props.setRoute(`/domains/${ domain.id }`),
 						variables: {
 							sorting: props.filter.sorting,
-							sizesType: props.filter.sizesType,
 							range: props.filter.range
 						},
 						value: enhanceSizes(domain.statistics.sizes),

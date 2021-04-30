@@ -20,7 +20,6 @@ const RouteBrowsers = (props) => {
 						Renderer: RendererList,
 						variables: {
 							sorting: props.filter.sorting,
-							browsersType: props.filter.browsersType,
 							range: props.filter.range
 						},
 						value: enhanceBrowsers(domain.statistics.browsers),

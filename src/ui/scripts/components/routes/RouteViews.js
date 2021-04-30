@@ -43,8 +43,7 @@ const RouteViews = (props) => {
 					widget: {
 						Renderer: ViewsChartRenderer,
 						variables: {
-							interval: props.filter.interval,
-							viewsType: props.filter.viewsType
+							interval: props.filter.interval
 						},
 						value: enhanceViews(domain.statistics.views, 7),
 						fetching: views.fetching

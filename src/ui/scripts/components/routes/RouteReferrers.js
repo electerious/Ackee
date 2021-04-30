@@ -20,7 +20,6 @@ const RouteReferrers = (props) => {
 						onMore: () => props.setRoute(`/domains/${ domain.id }`),
 						variables: {
 							sorting: props.filter.sorting,
-							referrersType: props.filter.referrersType,
 							range: props.filter.range
 						},
 						value: enhanceReferrers(domain.statistics.referrers),

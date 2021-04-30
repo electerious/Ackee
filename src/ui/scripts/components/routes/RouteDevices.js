@@ -20,7 +20,6 @@ const RouteDevices = (props) => {
 						Renderer: RendererList,
 						variables: {
 							sorting: props.filter.sorting,
-							devicesType: props.filter.devicesType,
 							range: props.filter.range
 						},
 						value: enhanceDevices(domain.statistics.devices),
