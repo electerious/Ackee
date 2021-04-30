@@ -4,6 +4,14 @@ import domainFields from '../fragments/domainFields'
 
 const FETCH_DEVICES = gql`
 	query fetchDevices($sorting: Sorting!, $type: DeviceType!, $range: Range) {
+		statistics {
+			id
+			devices(sorting: $sorting, type: $type, range: $range) {
+				id
+				count
+				created
+			}
+		}
 		domains {
 			...domainFields
 			statistics {
@@ -34,7 +42,7 @@ export default (sorting, type, range) => {
 		fetching,
 		stale: fetching === true && data != null,
 		error,
-		value: data == null ? { domains: [] } : data
+		value: data == null ? { statistics: { devices: [] }, domains: [] } : data
 	}
 
 }

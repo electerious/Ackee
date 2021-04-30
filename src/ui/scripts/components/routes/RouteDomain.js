@@ -1,4 +1,4 @@
-import { createElement as h, Fragment, useMemo } from 'react'
+import { createElement as h, Fragment } from 'react'
 
 // import { SORTINGS_TOP } from '../../../../constants/sortings'
 // import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
@@ -10,10 +10,10 @@ import { createElement as h, Fragment, useMemo } from 'react'
 // import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 // import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-import useRoute from '../../hooks/useRoute'
-import useWidgets from '../../hooks/useWidgets'
+// import useRoute from '../../hooks/useRoute'
+// import useWidgets from '../../hooks/useWidgets'
 
-import factsLoader from '../../loaders/factsLoader'
+// import factsLoader from '../../loaders/factsLoader'
 // import viewsLoader from '../../loaders/viewsLoader'
 // import durationsLoader from '../../loaders/durationsLoader'
 // import pagesLoader from '../../loaders/pagesLoader'
@@ -24,20 +24,20 @@ import factsLoader from '../../loaders/factsLoader'
 // import sizesLoader from '../../loaders/sizesLoader'
 // import languagesLoader from '../../loaders/languagesLoader'
 
-import CardFactsWidget from '../cards/CardFactsWidget'
+// import CardFactsWidget from '../cards/CardFactsWidget'
 
-const RouteDomain = (props) => {
+const RouteDomain = () => {
 
-	const currentRoute = useRoute(props.route)
-	const domainId = currentRoute.params.domainId
+	// const currentRoute = useRoute(props.route)
+	// const domainId = currentRoute.params.domainId
 
-	const factsWidgetConfigs = useMemo(() => [
-		{
-			key: 'routeDomainFacts',
-			WidgetComponent: CardFactsWidget,
-			loader: factsLoader(domainId, {})
-		}
-	], [ domainId ])
+	// const factsWidgetConfigs = useMemo(() => [
+	// 	{
+	// 		key: 'routeDomainFacts',
+	// 		WidgetComponent: CardFactsWidget,
+	// 		loader: factsLoader(domainId, {})
+	// 	}
+	// ], [ domainId ])
 
 	// const essentialWidgetConfigs = useMemo(() => [
 	// 	{
@@ -152,13 +152,13 @@ const RouteDomain = (props) => {
 	// 	}
 	// ], [ domainId ])
 
-	const renderedFactsWidgets = useWidgets(props, factsWidgetConfigs)
+	// const renderedFactsWidgets = useWidgets(props, factsWidgetConfigs)
 	// const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
 	// const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
 	return (
 		h(Fragment, {},
-			renderedFactsWidgets,
+			// renderedFactsWidgets,
 			h('div', { className: 'content__spacer' }),
 			// renderedEssentialWidgets,
 			h('div', { className: 'content__spacer' })

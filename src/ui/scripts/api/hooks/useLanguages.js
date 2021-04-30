@@ -4,6 +4,14 @@ import domainFields from '../fragments/domainFields'
 
 const FETCH_LANGUAGES = gql`
 	query fetchLanguages($sorting: Sorting!, $range: Range) {
+		statistics {
+			id
+			languages(sorting: $sorting, range: $range) {
+				id
+				count
+				created
+			}
+		}
 		domains {
 			...domainFields
 			statistics {
@@ -33,7 +41,7 @@ export default (sorting, range) => {
 		fetching,
 		stale: fetching === true && data != null,
 		error,
-		value: data == null ? { domains: [] } : data
+		value: data == null ? { statistics: { languages: [] }, domains: [] } : data
 	}
 
 }
