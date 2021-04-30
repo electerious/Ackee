@@ -5,6 +5,7 @@ import domainFields from '../fragments/domainFields'
 const FETCH_FACTS = gql`
 	query fetchFacts {
 		facts {
+			id
 			activeVisitors
 			averageViews
 			averageDuration
@@ -15,6 +16,7 @@ const FETCH_FACTS = gql`
 		domains {
 			...domainFields
 			facts {
+				id
 				activeVisitors
 				averageViews
 				averageDuration

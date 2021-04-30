@@ -11,6 +11,12 @@ const intervals = require('../constants/intervals')
 
 module.exports = {
 	Facts: {
+		id: pipe(requireAuth, async (domain) => {
+
+			const ids = await domainIds(domain)
+			return ids.join(';')
+
+		}),
 		activeVisitors: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 
 			const ids = await domainIds(domain)
