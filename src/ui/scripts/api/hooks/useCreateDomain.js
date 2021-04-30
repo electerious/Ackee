@@ -3,7 +3,7 @@ import { useMutation, gql } from '@apollo/client'
 import addAndSortModify from '../utils/addAndSortModify'
 import domainFields from '../fragments/domainFields'
 
-const CREATE_DOMAIN = gql`
+const MUTATION = gql`
 	mutation createDomain($input: CreateDomainInput!) {
 		createDomain(input: $input) {
 			payload {
@@ -31,7 +31,7 @@ const update = (cache, result) => {
 
 export default () => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(CREATE_DOMAIN)
+	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION)
 
 	return {
 		mutate: (opts) => mutate({

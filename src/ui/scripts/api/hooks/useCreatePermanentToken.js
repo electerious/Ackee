@@ -3,7 +3,7 @@ import { useMutation, gql } from '@apollo/client'
 import addAndSortModify from '../utils/addAndSortModify'
 import permanentTokenFields from '../fragments/permanentTokenFields'
 
-const CREATE_PERMANENT_TOKEN = gql`
+const MUTATION = gql`
 	mutation createPermanentToken($input: CreatePermanentTokenInput!) {
 		createPermanentToken(input: $input) {
 			payload {
@@ -31,7 +31,7 @@ const update = (cache, result) => {
 
 export default () => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(CREATE_PERMANENT_TOKEN)
+	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION)
 
 	return {
 		mutate: (opts) => mutate({

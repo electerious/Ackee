@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const FETCH_REFERRERS = gql`
+const QUERY = gql`
 	query fetchReferrers($sorting: Sorting!, $type: ReferrerType!, $range: Range) {
 		statistics {
 			id
@@ -29,7 +29,7 @@ const FETCH_REFERRERS = gql`
 
 export default (sorting, type, range) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_REFERRERS, {
+	const { loading: fetching, error, data } = useQuery(QUERY, {
 		variables: {
 			sorting,
 			type,

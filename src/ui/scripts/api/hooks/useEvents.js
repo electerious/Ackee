@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import eventFields from '../fragments/eventFields'
 
-const FETCH_EVENTS = gql`
+const QUERY = gql`
 	query fetchEvents {
 		events {
 			...eventFields
@@ -14,7 +14,7 @@ const FETCH_EVENTS = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_EVENTS)
+	const { loading: fetching, error, data } = useQuery(QUERY)
 
 	return {
 		fetching,

@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const FETCH_SIZES = gql`
+const QUERY = gql`
 	query fetchSizes($sorting: Sorting!, $type: SizeType!, $range: Range) {
 		statistics {
 			id
@@ -30,7 +30,7 @@ const FETCH_SIZES = gql`
 
 export default (sorting, type, range) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_SIZES, {
+	const { loading: fetching, error, data } = useQuery(QUERY, {
 		variables: {
 			sorting,
 			type,

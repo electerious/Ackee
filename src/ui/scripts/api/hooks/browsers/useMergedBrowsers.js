@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import enhanceBrowsers from '../../../enhancers/enhanceBrowsers'
 
-const FETCH_MERGED_BROWSERS = gql`
+const QUERY = gql`
 	query fetchMergedBrowsers($sorting: Sorting!, $type: BrowserType!, $range: Range) {
 		statistics {
 			id
@@ -17,7 +17,7 @@ const FETCH_MERGED_BROWSERS = gql`
 
 export default (filters) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_MERGED_BROWSERS, {
+	const { loading: fetching, error, data } = useQuery(QUERY, {
 		variables: filters,
 		returnPartialData: true
 	})

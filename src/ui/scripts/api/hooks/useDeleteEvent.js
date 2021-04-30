@@ -2,7 +2,7 @@ import { useMutation, gql } from '@apollo/client'
 
 import deleteIdModify from '../utils/deleteIdModify'
 
-const DELETE_EVENT = gql`
+const MUTATION = gql`
 	mutation deleteEvent($id: ID!) {
 		deleteEvent(id: $id) {
 			success
@@ -20,7 +20,7 @@ const update = (id) => (cache) => {
 
 export default (id) => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(DELETE_EVENT, {
+	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION, {
 		variables: {
 			id
 		}

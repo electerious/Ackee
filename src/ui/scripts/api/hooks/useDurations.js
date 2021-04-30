@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const FETCH_DURATIONS = gql`
+const QUERY = gql`
 	query fetchDurations($interval: Interval!) {
 		statistics {
 			id
@@ -28,7 +28,7 @@ const FETCH_DURATIONS = gql`
 
 export default (interval) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_DURATIONS, {
+	const { loading: fetching, error, data } = useQuery(QUERY, {
 		variables: {
 			interval
 		},

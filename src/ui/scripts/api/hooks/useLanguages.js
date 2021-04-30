@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const FETCH_LANGUAGES = gql`
+const QUERY = gql`
 	query fetchLanguages($sorting: Sorting!, $range: Range) {
 		statistics {
 			id
@@ -30,7 +30,7 @@ const FETCH_LANGUAGES = gql`
 
 export default (sorting, range) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_LANGUAGES, {
+	const { loading: fetching, error, data } = useQuery(QUERY, {
 		variables: {
 			sorting,
 			range

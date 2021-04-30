@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client'
 import domainFields from '../../fragments/domainFields'
 import enhanceBrowsers from '../../../enhancers/enhanceBrowsers'
 
-const FETCH_DOMAINS_BROWSERS = gql`
+const QUERY = gql`
 	query fetchDomainsBrowsers($sorting: Sorting!, $type: BrowserType!, $range: Range) {
 		domains {
 			...domainFields
@@ -23,7 +23,7 @@ const FETCH_DOMAINS_BROWSERS = gql`
 
 export default (filters) => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_DOMAINS_BROWSERS, {
+	const { loading: fetching, error, data } = useQuery(QUERY, {
 		variables: filters,
 		returnPartialData: true
 	})

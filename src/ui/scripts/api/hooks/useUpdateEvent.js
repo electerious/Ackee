@@ -2,7 +2,7 @@ import { useMutation, gql } from '@apollo/client'
 
 import eventFields from '../fragments/eventFields'
 
-const UPDATE_EVENT = gql`
+const MUTATION = gql`
 	mutation updateEvent($id: ID!, $input: UpdateEventInput!) {
 		updateEvent(id: $id, input: $input) {
 			payload {
@@ -16,7 +16,7 @@ const UPDATE_EVENT = gql`
 
 export default (id) => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(UPDATE_EVENT, {
+	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION, {
 		variables: {
 			id
 		}

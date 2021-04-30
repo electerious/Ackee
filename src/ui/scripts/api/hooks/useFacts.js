@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
 
-const FETCH_FACTS = gql`
+const QUERY = gql`
 	query fetchFacts {
 		facts {
 			id
@@ -32,7 +32,7 @@ const FETCH_FACTS = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_FACTS)
+	const { loading: fetching, error, data } = useQuery(QUERY)
 
 	return {
 		fetching,

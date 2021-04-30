@@ -3,7 +3,7 @@ import { useMutation, gql } from '@apollo/client'
 import addAndSortModify from '../utils/addAndSortModify'
 import eventFields from '../fragments/eventFields'
 
-const CREATE_EVENT = gql`
+const MUTATION = gql`
 	mutation createEvent($input: CreateEventInput!) {
 		createEvent(input: $input) {
 			payload {
@@ -31,7 +31,7 @@ const update = (cache, result) => {
 
 export default () => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(CREATE_EVENT)
+	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION)
 
 	return {
 		mutate: (opts) => mutate({
