@@ -14,6 +14,7 @@ const RouteDevices = (props) => {
 		h(Fragment, {},
 			devices.value.domains.map((domain) => {
 				return h(CardWidget, {
+					key: domain.statistics.id,
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {

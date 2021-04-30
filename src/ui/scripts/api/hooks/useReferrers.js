@@ -4,9 +4,17 @@ import domainFields from '../fragments/domainFields'
 
 const FETCH_REFERRERS = gql`
 	query fetchReferrers($sorting: Sorting!, $type: ReferrerType!, $range: Range) {
+		statistics {
+			id
+			referrers(sorting: $sorting, type: $type, range: $range) {
+				id
+				count
+			}
+		}
 		domains {
 			...domainFields
 			statistics {
+				id
 				referrers(sorting: $sorting, type: $type, range: $range) {
 					id
 					count
@@ -33,7 +41,7 @@ export default (sorting, type, range) => {
 		fetching,
 		stale: fetching === true && data != null,
 		error,
-		value: data == null ? { domains: [] } : data
+		value: data == null ? { statistics: { pages: [] }, domains: [] } : data
 	}
 
 }

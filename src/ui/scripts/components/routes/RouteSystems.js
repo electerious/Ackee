@@ -14,6 +14,7 @@ const RouteSystems = (props) => {
 		h(Fragment, {},
 			systems.value.domains.map((domain) => {
 				return h(CardWidget, {
+					key: domain.statistics.id,
 					headline: domain.title,
 					widget: {
 						Renderer: RendererList,

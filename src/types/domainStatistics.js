@@ -221,6 +221,10 @@ module.exports = gql`
 	"""
 	type DomainStatistics {
 		"""
+		Statistic identifier.
+		"""
+		id: ID!
+		"""
 		Amount of views grouped by day, month or year.
 		"""
 		views(

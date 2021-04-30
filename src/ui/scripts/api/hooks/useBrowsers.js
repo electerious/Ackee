@@ -7,6 +7,7 @@ const FETCH_BROWSERS = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				browsers(sorting: $sorting, type: $type, range: $range) {
 					id
 					count

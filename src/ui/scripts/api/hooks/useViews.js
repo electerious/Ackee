@@ -5,6 +5,7 @@ import domainFields from '../fragments/domainFields'
 const FETCH_VIEWS = gql`
 	query fetchViews($interval: Interval!, $type: ViewType!) {
 		statistics {
+			id
 			views(interval: $interval, type: $type, limit: 14) {
 				id
 				count
@@ -13,6 +14,7 @@ const FETCH_VIEWS = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				views(interval: $interval, type: $type, limit: 7) {
 					id
 					count

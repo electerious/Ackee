@@ -4,7 +4,7 @@ import useDurations from '../../api/hooks/useDurations'
 import enhanceDurations from '../../enhancers/enhanceDurations'
 
 import CardWidget from '../cards/CardWidget'
-import RendererChartDurations from '../renderers/RendererChartDurations'
+import RendererDurations from '../renderers/RendererDurations'
 
 const RouteDurations = (props) => {
 
@@ -13,10 +13,11 @@ const RouteDurations = (props) => {
 	return (
 		h(Fragment, {},
 			h(CardWidget, {
+				key: durations.value.statistics.id,
 				wide: true,
 				headline: 'Durations',
 				widget: {
-					Renderer: RendererChartDurations,
+					Renderer: RendererDurations,
 					variables: {
 						interval: props.filter.interval
 					},
@@ -29,7 +30,7 @@ const RouteDurations = (props) => {
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {
-						Renderer: RendererChartDurations,
+						Renderer: RendererDurations,
 						variables: {
 							interval: props.filter.interval
 						},

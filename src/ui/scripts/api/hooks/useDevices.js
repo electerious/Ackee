@@ -7,6 +7,7 @@ const FETCH_DEVICES = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				devices(sorting: $sorting, type: $type, range: $range) {
 					id
 					count

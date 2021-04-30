@@ -7,6 +7,7 @@ const FETCH_LANGUAGES = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				languages(sorting: $sorting, range: $range) {
 					id
 					count

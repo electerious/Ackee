@@ -5,6 +5,7 @@ import domainFields from '../fragments/domainFields'
 const FETCH_DURATIONS = gql`
 	query fetchDurations($interval: Interval!) {
 		statistics {
+			id
 			durations(interval: $interval, limit: 14) {
 				id
 				count
@@ -13,6 +14,7 @@ const FETCH_DURATIONS = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				durations(interval: $interval, limit: 7) {
 					id
 					count

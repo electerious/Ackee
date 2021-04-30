@@ -14,6 +14,7 @@ const RouteReferrers = (props) => {
 		h(Fragment, {},
 			referrers.value.domains.map((domain) => {
 				return h(CardWidget, {
+					key: domain.statistics.id,
 					headline: domain.title,
 					widget: {
 						Renderer: RendererReferrers,

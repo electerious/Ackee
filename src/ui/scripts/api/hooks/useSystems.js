@@ -7,6 +7,7 @@ const FETCH_SYSTEMS = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				systems(sorting: $sorting, type: $type, range: $range) {
 					id
 					count

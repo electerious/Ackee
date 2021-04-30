@@ -7,6 +7,7 @@ const FETCH_SIZES = gql`
 		domains {
 			...domainFields
 			statistics {
+				id
 				sizes(sorting: $sorting, type: $type, range: $range) {
 					id
 					count

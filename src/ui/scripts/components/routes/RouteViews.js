@@ -6,7 +6,7 @@ import useViews from '../../api/hooks/useViews'
 import enhanceViews from '../../enhancers/enhanceViews'
 
 import CardWidget from '../cards/CardWidget'
-import RendererChartViews from '../renderers/RendererChartViews'
+import RendererViews from '../renderers/RendererViews'
 
 const RouteViews = (props) => {
 
@@ -15,16 +15,16 @@ const RouteViews = (props) => {
 	return (
 		h(Fragment, {},
 			h(CardWidget, {
+				key: views.value.statistics.id,
 				wide: true,
 				headline: ({
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
 				})[props.filter.viewsType],
 				widget: {
-					Renderer: RendererChartViews,
+					Renderer: RendererViews,
 					variables: {
-						interval: props.filter.interval,
-						viewsType: props.filter.viewsType
+						interval: props.filter.interval
 					},
 					value: enhanceViews(views.value.statistics.views, 14),
 					fetching: views.fetching
@@ -32,10 +32,11 @@ const RouteViews = (props) => {
 			}),
 			views.value.domains.map((domain) => {
 				return h(CardWidget, {
+					key: domain.statistics.id,
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
 					widget: {
-						Renderer: RendererChartViews,
+						Renderer: RendererViews,
 						variables: {
 							interval: props.filter.interval
 						},

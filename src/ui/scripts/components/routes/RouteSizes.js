@@ -14,6 +14,7 @@ const RouteSizes = (props) => {
 		h(Fragment, {},
 			sizes.value.domains.map((domain) => {
 				return h(CardWidget, {
+					key: domain.statistics.id,
 					headline: domain.title,
 					widget: {
 						Renderer: RendererList,
