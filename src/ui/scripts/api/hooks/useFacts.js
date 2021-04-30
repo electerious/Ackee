@@ -32,11 +32,10 @@ const QUERY = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(QUERY)
+	const { loading: fetching, data } = useQuery(QUERY)
 
 	return {
 		fetching,
-		error,
 		value: data == null ? { facts: {}, domains: [] } : data
 	}
 

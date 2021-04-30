@@ -29,7 +29,7 @@ const QUERY = gql`
 
 export default (sorting, type, range) => {
 
-	const { loading: fetching, error, data } = useQuery(QUERY, {
+	const { loading: fetching, data } = useQuery(QUERY, {
 		variables: {
 			sorting,
 			type,
@@ -39,7 +39,6 @@ export default (sorting, type, range) => {
 
 	return {
 		fetching,
-		error,
 		value: data == null ? { statistics: { pages: [] }, domains: [] } : data
 	}
 

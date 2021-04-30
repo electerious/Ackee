@@ -23,7 +23,7 @@ const QUERY = gql`
 
 export default (id, filters) => {
 
-	const { loading: fetching, error, data } = useQuery(QUERY, {
+	const { loading: fetching, data } = useQuery(QUERY, {
 		variables: {
 			...filters,
 			id
@@ -43,7 +43,6 @@ export default (id, filters) => {
 
 	return {
 		fetching,
-		error,
 		value
 	}
 

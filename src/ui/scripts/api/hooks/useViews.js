@@ -28,7 +28,7 @@ const QUERY = gql`
 
 export default (interval, type) => {
 
-	const { loading: fetching, error, data } = useQuery(QUERY, {
+	const { loading: fetching, data } = useQuery(QUERY, {
 		variables: {
 			interval,
 			type
@@ -37,7 +37,6 @@ export default (interval, type) => {
 
 	return {
 		fetching,
-		error,
 		value: data == null ? { statistics: { views: [] }, domains: [] } : data
 	}
 
