@@ -12,24 +12,25 @@ import { REFERRERS_TYPE_WITH_SOURCE } from '../../../../constants/referrers'
 
 // import useWidgets from '../../hooks/useWidgets'
 
+import useFacts from '../../api/hooks/useFacts'
 import useViews from '../../api/hooks/useViews'
 import useDurations from '../../api/hooks/useDurations'
 import usePages from '../../api/hooks/usePages'
 import useReferrers from '../../api/hooks/useReferrers'
 
+import enhanceFacts from '../../enhancers/enhanceFacts'
 import enhanceViews from '../../enhancers/enhanceViews'
 import enhanceDurations from '../../enhancers/enhanceDurations'
 import enhancePages from '../../enhancers/enhancePages'
 import enhanceReferrers from '../../enhancers/enhanceReferrers'
 
-// import mergedFactsLoader from '../../loaders/mergedFactsLoader'
 // import mergedSystemsLoader from '../../loaders/mergedSystemsLoader'
 // import mergedDevicesLoader from '../../loaders/mergedDevicesLoader'
 // import mergedBrowsersLoader from '../../loaders/mergedBrowsersLoader'
 // import mergedSizesLoader from '../../loaders/mergedSizesLoader'
 // import mergedLanguagesLoader from '../../loaders/mergedLanguagesLoader'
 
-// import CardFactsWidget from '../cards/CardFactsWidget'
+import CardFactsWidget from '../cards/CardFactsWidget'
 import CardWidget from '../cards/CardWidget'
 
 import RendererViews from '../renderers/RendererViews'
@@ -39,19 +40,11 @@ import RendererReferrers from '../renderers/RendererReferrers'
 
 const RouteOverview = (props) => {
 
+	const facts = useFacts()
 	const views = useViews(INTERVALS_DAILY, VIEWS_TYPE_UNIQUE)
 	const durations = useDurations(INTERVALS_DAILY)
 	const pages = usePages(SORTINGS_TOP, RANGES_LAST_24_HOURS)
 	const referrers = useReferrers(SORTINGS_TOP, REFERRERS_TYPE_WITH_SOURCE, RANGES_LAST_24_HOURS)
-
-	console.log('Render overview')
-
-	// const factsWidgetConfigs = useMemo(() => [
-	// 	{
-	// 		WidgetComponent: CardFactsWidget,
-	// 		loader: mergedFactsLoader({})
-	// 	}
-	// ], [])
 
 	// const detailedWidgetConfigs = useMemo(() => [
 	// 	{
@@ -110,12 +103,16 @@ const RouteOverview = (props) => {
 	// 	}
 	// ], [])
 
-	// const renderedFactsWidgets = useWidgets(props, factsWidgetConfigs)
 	// const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
 	return (
 		h(Fragment, {},
-			// renderedFactsWidgets,
+			h(CardFactsWidget, {
+				widget: {
+					value: enhanceFacts(facts.value.facts),
+					fetching: views.fetching
+				}
+			}),
 			h('div', { className: 'content__spacer' }),
 			h(CardWidget, {
 				wide: true,
