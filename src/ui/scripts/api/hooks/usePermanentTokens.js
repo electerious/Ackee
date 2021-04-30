@@ -14,10 +14,7 @@ const FETCH_PERMANENT_TOKENS = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_PERMANENT_TOKENS, {
-		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-first'
-	})
+	const { loading: fetching, error, data } = useQuery(FETCH_PERMANENT_TOKENS)
 
 	return {
 		fetching,

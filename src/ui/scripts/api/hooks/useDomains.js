@@ -14,10 +14,7 @@ const FETCH_DOMAINS = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_DOMAINS, {
-		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-first'
-	})
+	const { loading: fetching, error, data } = useQuery(FETCH_DOMAINS)
 
 	return {
 		fetching,

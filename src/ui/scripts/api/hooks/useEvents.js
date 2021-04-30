@@ -14,10 +14,7 @@ const FETCH_EVENTS = gql`
 
 export default () => {
 
-	const { loading: fetching, error, data } = useQuery(FETCH_EVENTS, {
-		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-first'
-	})
+	const { loading: fetching, error, data } = useQuery(FETCH_EVENTS)
 
 	return {
 		fetching,

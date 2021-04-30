@@ -26,9 +26,7 @@ export default (sorting, type, range) => {
 			sorting,
 			type,
 			range
-		},
-		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-first'
+		}
 	})
 
 	return {

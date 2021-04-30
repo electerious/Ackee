@@ -25,9 +25,7 @@ export default (sorting, range) => {
 		variables: {
 			sorting,
 			range
-		},
-		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-first'
+		}
 	})
 
 	return {

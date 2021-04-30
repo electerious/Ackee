@@ -30,9 +30,7 @@ export default (interval, type) => {
 		variables: {
 			interval,
 			type
-		},
-		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-first'
+		}
 	})
 
 	return {
