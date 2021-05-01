@@ -1,30 +1,25 @@
 import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
+import referrersField from '../fragments/referrersField'
 
 const QUERY = gql`
 	query fetchReferrers($sorting: Sorting!, $type: ReferrerType!, $range: Range) {
 		statistics {
 			id
-			referrers(sorting: $sorting, type: $type, range: $range) {
-				id
-				count
-			}
+			...referrersField
 		}
 		domains {
 			...domainFields
 			statistics {
 				id
-				referrers(sorting: $sorting, type: $type, range: $range) {
-					id
-					count
-					created
-				}
+				...referrersField
 			}
 		}
 	}
 
 	${ domainFields }
+	${ referrersField }
 `
 
 export default (sorting, type, range) => {

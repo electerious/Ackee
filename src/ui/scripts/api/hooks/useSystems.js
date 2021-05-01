@@ -1,31 +1,25 @@
 import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
+import systemsField from '../fragments/systemsField'
 
 const QUERY = gql`
 	query fetchSystems($sorting: Sorting!, $type: SystemType!, $range: Range) {
 		statistics {
 			id
-			systems(sorting: $sorting, type: $type, range: $range) {
-				id
-				count
-				created
-			}
+			...systemsField
 		}
 		domains {
 			...domainFields
 			statistics {
 				id
-				systems(sorting: $sorting, type: $type, range: $range) {
-					id
-					count
-					created
-				}
+				...systemsField
 			}
 		}
 	}
 
 	${ domainFields }
+	${ systemsField }
 `
 
 export default (sorting, type, range) => {

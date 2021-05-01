@@ -1,6 +1,7 @@
 import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../../fragments/domainFields'
+import browsersField from '../../fragments/browsersField'
 import enhanceBrowsers from '../../../enhancers/enhanceBrowsers'
 
 const QUERY = gql`
@@ -9,16 +10,13 @@ const QUERY = gql`
 			...domainFields
 			statistics {
 				id
-				browsers(sorting: $sorting, type: $type, range: $range) {
-					id
-					count
-					created
-				}
+				...browsersField
 			}
 		}
 	}
 
 	${ domainFields }
+	${ browsersField }
 `
 
 export default (id, filters) => {

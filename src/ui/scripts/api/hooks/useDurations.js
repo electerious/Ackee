@@ -1,36 +1,33 @@
 import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
+import durationsField from '../fragments/durationsField'
 
 const QUERY = gql`
-	query fetchDurations($interval: Interval!) {
+	query fetchDurations($interval: Interval!, $limit: Int) {
 		statistics {
 			id
-			durations(interval: $interval, limit: 14) {
-				id
-				count
-			}
+			...durationsField
 		}
 		domains {
 			...domainFields
 			statistics {
 				id
-				durations(interval: $interval, limit: 7) {
-					id
-					count
-				}
+				...durationsField
 			}
 		}
 	}
 
 	${ domainFields }
+	${ durationsField }
 `
 
 export default (interval) => {
 
 	const { loading: fetching, data } = useQuery(QUERY, {
 		variables: {
-			interval
+			interval,
+			limit: 14
 		},
 		fetchPolicy: 'cache-and-network',
 		nextFetchPolicy: 'cache-first'

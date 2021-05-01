@@ -1,29 +1,25 @@
 import { useQuery, gql } from '@apollo/client'
 
 import domainFields from '../fragments/domainFields'
+import viewsField from '../fragments/viewsField'
 
 const QUERY = gql`
-	query fetchViews($interval: Interval!, $type: ViewType!) {
+	query fetchViews($interval: Interval!, $type: ViewType!, $limit: Int) {
 		statistics {
 			id
-			views(interval: $interval, type: $type, limit: 14) {
-				id
-				count
-			}
+			...viewsField
 		}
 		domains {
 			...domainFields
 			statistics {
 				id
-				views(interval: $interval, type: $type, limit: 7) {
-					id
-					count
-				}
+				...viewsField
 			}
 		}
 	}
 
 	${ domainFields }
+	${ viewsField }
 `
 
 export default (interval, type) => {
@@ -31,7 +27,8 @@ export default (interval, type) => {
 	const { loading: fetching, data } = useQuery(QUERY, {
 		variables: {
 			interval,
-			type
+			type,
+			limit: 14
 		}
 	})
 
