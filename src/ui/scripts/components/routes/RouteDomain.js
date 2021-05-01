@@ -170,8 +170,6 @@ const RouteDomain = (props) => {
 	// const renderedEssentialWidgets = useWidgets(props, essentialWidgetConfigs)
 	// const renderedDetailedWidgets = useWidgets(props, detailedWidgetConfigs)
 
-	console.log(browsers)
-
 	return (
 		h(Fragment, {},
 			// renderedFactsWidgets,
