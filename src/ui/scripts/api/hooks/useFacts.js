@@ -6,12 +6,12 @@ import factsFields from '../fragments/factsFields'
 const QUERY = gql`
 	query fetchFacts {
 		facts {
-			...factFields
+			...factsFields
 		}
 		domains {
 			...domainFields
 			facts {
-				...factFields
+				...factsFields
 			}
 		}
 	}
