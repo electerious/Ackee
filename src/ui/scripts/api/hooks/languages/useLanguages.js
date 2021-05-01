@@ -6,6 +6,7 @@ import enhanceLanguages from '../../../enhancers/enhanceLanguages'
 const QUERY = gql`
 	query fetchLanguages($id: ID!, $sorting: Sorting!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...languagesField

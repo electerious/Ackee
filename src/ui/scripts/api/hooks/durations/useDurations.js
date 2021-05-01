@@ -4,8 +4,9 @@ import durationsField from '../../fragments/durationsField'
 import enhanceDurations from '../../../enhancers/enhanceDurations'
 
 const QUERY = gql`
-	query fetchDurations($id: ID!, $interval: Interval!, $type: ViewType!, $limit: Int) {
+	query fetchDurations($id: ID!, $interval: Interval!, $limit: Int) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...durationsField

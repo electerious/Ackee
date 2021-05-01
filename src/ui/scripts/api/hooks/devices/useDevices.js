@@ -6,6 +6,7 @@ import enhanceDevices from '../../../enhancers/enhanceDevices'
 const QUERY = gql`
 	query fetchDevices($id: ID!, $sorting: Sorting!, $type: DeviceType!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...devicesField

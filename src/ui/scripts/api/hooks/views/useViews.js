@@ -6,6 +6,7 @@ import enhanceViews from '../../../enhancers/enhanceViews'
 const QUERY = gql`
 	query fetchViews($id: ID!, $interval: Interval!, $type: ViewType!, $limit: Int) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...viewsField

@@ -6,6 +6,7 @@ import enhanceSystems from '../../../enhancers/enhanceSystems'
 const QUERY = gql`
 	query fetchSystems($id: ID!, $sorting: Sorting!, $type: SystemType!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...systemsField

@@ -6,6 +6,7 @@ import enhanceBrowsers from '../../../enhancers/enhanceBrowsers'
 const QUERY = gql`
 	query fetchBrowsers($id: ID!, $sorting: Sorting!, $type: BrowserType!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...browsersField

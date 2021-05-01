@@ -10,7 +10,7 @@ import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-import useFacts from '../../api/hooks/useFacts'
+import useMergedFacts from '../../api/hooks/facts/useMergedFacts'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
 import useMergedPages from '../../api/hooks/pages/useMergedPages'
@@ -20,8 +20,6 @@ import useMergedDevices from '../../api/hooks/devices/useMergedDevices'
 import useMergedBrowsers from '../../api/hooks/browsers/useMergedBrowsers'
 import useMergedSizes from '../../api/hooks/sizes/useMergedSizes'
 import useMergedLanguages from '../../api/hooks/languages/useMergedLanguages'
-
-import enhanceFacts from '../../enhancers/enhanceFacts'
 
 import CardFactsWidget from '../cards/CardFactsWidget'
 import CardWidget from '../cards/CardWidget'
@@ -33,15 +31,11 @@ import RendererReferrers from '../renderers/RendererReferrers'
 
 const RouteOverview = (props) => {
 
-	const facts = useFacts()
-
 	return (
 		h(Fragment, {},
 			h(CardFactsWidget, {
-				widget: {
-					value: enhanceFacts(facts.value.facts),
-					fetching: facts.fetching
-				}
+				hook: useMergedFacts,
+				hookArgs: []
 			}),
 			h('div', { className: 'content__spacer' }),
 			h(CardWidget, {

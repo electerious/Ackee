@@ -6,6 +6,7 @@ import enhancePages from '../../../enhancers/enhancePages'
 const QUERY = gql`
 	query fetchPages($id: ID!, $sorting: Sorting!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...pagesField

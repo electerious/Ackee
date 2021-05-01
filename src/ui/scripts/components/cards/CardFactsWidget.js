@@ -27,6 +27,8 @@ const Presentation = (props) => {
 
 const CardFacts = (props) => {
 
+	const { value } = props.hook(...props.hookArgs)
+
 	const {
 		activeVisitors,
 		averageViews,
@@ -34,7 +36,7 @@ const CardFacts = (props) => {
 		viewsToday,
 		viewsMonth,
 		viewsYear
-	} = props.widget.value
+	} = value
 
 	return (
 		h('div', {
@@ -76,7 +78,8 @@ const CardFacts = (props) => {
 }
 
 CardFacts.propTypes = {
-	widget: PropTypes.object.isRequired
+	hook: PropTypes.func.isRequired,
+	hookArgs: PropTypes.array.isRequired
 }
 
 export default CardFacts

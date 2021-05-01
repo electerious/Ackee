@@ -6,6 +6,7 @@ import enhanceSizes from '../../../enhancers/enhanceSizes'
 const QUERY = gql`
 	query fetchSizes($id: ID!, $sorting: Sorting!, $type: SizeType!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...sizesField

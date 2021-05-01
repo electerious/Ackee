@@ -6,6 +6,7 @@ import enhanceReferrers from '../../../enhancers/enhanceReferrers'
 const QUERY = gql`
 	query fetchReferrers($id: ID!, $sorting: Sorting!, $type: ReferrerType!, $range: Range) {
 		domain(id: $id) {
+			id
 			statistics {
 				id
 				...referrersField

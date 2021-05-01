@@ -4,7 +4,7 @@ import durationsField from '../../fragments/durationsField'
 import enhanceDurations from '../../../enhancers/enhanceDurations'
 
 const QUERY = gql`
-	query fetchMergedDurations($interval: Interval!, $type: ViewType!, $limit: Int) {
+	query fetchMergedDurations($interval: Interval!, $limit: Int) {
 		statistics {
 			id
 			...durationsField
