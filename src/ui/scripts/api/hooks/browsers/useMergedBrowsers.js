@@ -17,20 +17,12 @@ const QUERY = gql`
 export default (filters) => {
 
 	const { loading: fetching, data } = useQuery(QUERY, {
-		variables: filters,
-		returnPartialData: true
+		variables: filters
 	})
-
-	const value = {
-		statistics: {
-			...data?.statistics,
-			browsers: enhanceBrowsers(data?.statistics?.browsers)
-		}
-	}
 
 	return {
 		fetching,
-		value
+		value: enhanceBrowsers(data?.statistics.browsers)
 	}
 
 }

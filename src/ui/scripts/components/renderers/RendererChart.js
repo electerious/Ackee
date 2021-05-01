@@ -26,20 +26,17 @@ const textLabel = (active, interval) => {
 
 const RendererChart = (props) => {
 
-	const items = props.widget.value
-	const { interval } = props.widget.variables
-
 	// Index of the active element
 	const [ active, setActive ] = useState(0)
 
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive(0)
 
-	const label = textLabel(active, interval)
+	const label = textLabel(active, props.interval)
 	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	return h(PresentationBarChart, {
-		items,
+		items: props.items,
 		formatter: props.formatter,
 		active: active,
 		onEnter,
@@ -49,7 +46,9 @@ const RendererChart = (props) => {
 }
 
 RendererChart.propTypes = {
-	widget: PropTypes.object.isRequired,
+	items: PropTypes.array.isRequired,
+	interval: PropTypes.string.isRequired,
+	formatter: PropTypes.func.isRequired,
 	setStatusLabel: PropTypes.func.isRequired
 }
 

@@ -8,13 +8,15 @@ import Status, { ICON_LOADER, ICON_UPDATER } from '../Status'
 import Tooltip from '../Tooltip'
 import status from '../../utils/status'
 
-const CardWidget = (props) => {
+const CardWidget2 = (props) => {
+
+	const { value, fetching } = props.hook(...props.hookArgs)
 
 	const {
 		isEmpty,
 		isStale,
 		isLoading
-	} = status(props.widget.value, props.widget.fetching)
+	} = status(value, fetching)
 
 	// Use thin space as initial value to avoid that the label changes the height once rendered
 	const [ statusLabel, setStatusLabel ] = useState(' ')
@@ -53,8 +55,9 @@ const CardWidget = (props) => {
 					type: 'div',
 					spacing: false
 				}, currentStatus),
-				h(props.widget.Renderer, {
-					widget: props.widget,
+				h(props.renderer, {
+					...props.rendererProps,
+					items: value,
 					setStatusLabel
 				})
 			)
@@ -63,11 +66,14 @@ const CardWidget = (props) => {
 
 }
 
-CardWidget.propTypes = {
+CardWidget2.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
-	widget: PropTypes.object.isRequired,
-	onMore: PropTypes.func
+	onMore: PropTypes.func,
+	hook: PropTypes.func.isRequired,
+	hookArgs: PropTypes.array.isRequired,
+	renderer: PropTypes.elementType.isRequired,
+	rendererProps: PropTypes.object
 }
 
-export default CardWidget
+export default CardWidget2

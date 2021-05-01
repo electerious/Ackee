@@ -1,42 +1,49 @@
 import { createElement as h, Fragment } from 'react'
 
-import useDurations from '../../api/hooks/useDurations'
-import enhanceDurations from '../../enhancers/enhanceDurations'
+import useDomains from '../../api/hooks/useDomains'
+import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
+import useDurations from '../../api/hooks/durations/useDurations'
 
 import CardWidget from '../cards/CardWidget'
 import RendererDurations from '../renderers/RendererDurations'
 
 const RouteDurations = (props) => {
 
-	const durations = useDurations(props.filter.interval)
+	const domains = useDomains()
 
 	return (
 		h(Fragment, {},
 			h(CardWidget, {
-				key: durations.value.statistics.id,
 				wide: true,
 				headline: 'Durations',
-				widget: {
-					Renderer: RendererDurations,
-					variables: {
-						interval: props.filter.interval
-					},
-					value: enhanceDurations(durations.value.statistics.durations, 14),
-					fetching: durations.fetching
+				hook: useMergedDurations,
+				hookArgs: [
+					{
+						interval: props.filter.interval,
+						limit: 14
+					}
+				],
+				renderer: RendererDurations,
+				rendererProps: {
+					interval: props.filter.interval
 				}
 			}),
-			durations.value.domains.map((domain) => {
+			domains.value.map((domain) => {
 				return h(CardWidget, {
-					key: domain.statistics.id,
+					key: domain.id,
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
-					widget: {
-						Renderer: RendererDurations,
-						variables: {
-							interval: props.filter.interval
-						},
-						value: enhanceDurations(domain.statistics.durations, 7),
-						fetching: durations.fetching
+					hook: useDurations,
+					hookArgs: [
+						domain.id,
+						{
+							interval: props.filter.interval,
+							limit: 7
+						}
+					],
+					renderer: RendererDurations,
+					rendererProps: {
+						interval: props.filter.interval
 					}
 				})
 			})

@@ -1,30 +1,34 @@
 import { createElement as h, Fragment } from 'react'
 
-import usePages from '../../api/hooks/usePages'
-import enhancePages from '../../enhancers/enhancePages'
+import useDomains from '../../api/hooks/useDomains'
+import usePages from '../../api/hooks/pages/usePages'
 
 import CardWidget from '../cards/CardWidget'
 import RendererList from '../renderers/RendererList'
 
 const RoutePages = (props) => {
 
-	const pages = usePages(props.filter.sorting, props.filter.range)
+	const domains = useDomains()
 
 	return (
 		h(Fragment, {},
-			pages.value.domains.map((domain) => {
+			domains.value.map((domain) => {
 				return h(CardWidget, {
-					key: domain.statistics.id,
+					key: domain.id,
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),
-					widget: {
-						Renderer: RendererList,
-						variables: {
+					hook: usePages,
+					hookArgs: [
+						domain.id,
+						{
 							sorting: props.filter.sorting,
 							range: props.filter.range
-						},
-						value: enhancePages(domain.statistics.pages),
-						fetching: pages.fetching
+						}
+					],
+					renderer: RendererList,
+					rendererProps: {
+						sorting: props.filter.sorting,
+						range: props.filter.range
 					}
 				})
 			})

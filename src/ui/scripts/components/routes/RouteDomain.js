@@ -13,7 +13,7 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import useRoute from '../../hooks/useRoute'
 // import useWidgets from '../../hooks/useWidgets'
 
-import useDomainBrowsers from '../../api/hooks/browsers/useDomainBrowsers'
+import useBrowsers from '../../api/hooks/browsers/useBrowsers'
 
 // import factsLoader from '../../loaders/factsLoader'
 // import viewsLoader from '../../loaders/viewsLoader'
@@ -38,12 +38,6 @@ const RouteDomain = (props) => {
 
 	const currentRoute = useRoute(props.route)
 	const domainId = currentRoute.params.domainId
-
-	const browsers = useDomainBrowsers(domainId, {
-		sorting: SORTINGS_TOP,
-		type: BROWSERS_TYPE_WITH_VERSION,
-		range: RANGES_LAST_24_HOURS
-	})
 
 	// const factsWidgetConfigs = useMemo(() => [
 	// 	{
@@ -179,14 +173,19 @@ const RouteDomain = (props) => {
 			h(CardWidget, {
 				headline: 'Browsers',
 				onMore: () => props.setRoute('/insights/browsers'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
+				hook: useBrowsers,
+				hookArgs: [
+					domainId,
+					{
 						sorting: SORTINGS_TOP,
+						type: BROWSERS_TYPE_WITH_VERSION,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: browsers.value.domain.statistics.browsers,
-					fetching: browsers.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			})
 		)

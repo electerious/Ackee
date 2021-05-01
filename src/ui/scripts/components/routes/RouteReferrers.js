@@ -1,30 +1,35 @@
 import { createElement as h, Fragment } from 'react'
 
-import useReferrers from '../../api/hooks/useReferrers'
-import enhanceReferrers from '../../enhancers/enhanceReferrers'
+import useDomains from '../../api/hooks/useDomains'
+import useReferrers from '../../api/hooks/referrers/useReferrers'
 
 import CardWidget from '../cards/CardWidget'
 import RendererReferrers from '../renderers/RendererReferrers'
 
 const RouteReferrers = (props) => {
 
-	const referrers = useReferrers(props.filter.sorting, props.filter.referrersType, props.filter.range)
+	const domains = useDomains()
 
 	return (
 		h(Fragment, {},
-			referrers.value.domains.map((domain) => {
+			domains.value.map((domain) => {
 				return h(CardWidget, {
-					key: domain.statistics.id,
+					key: domain.id,
 					headline: domain.title,
-					widget: {
-						Renderer: RendererReferrers,
-						onMore: () => props.setRoute(`/domains/${ domain.id }`),
-						variables: {
+					onMore: () => props.setRoute(`/domains/${ domain.id }`),
+					hook: useReferrers,
+					hookArgs: [
+						domain.id,
+						{
 							sorting: props.filter.sorting,
+							type: props.filter.referrersType,
 							range: props.filter.range
-						},
-						value: enhanceReferrers(domain.statistics.referrers),
-						fetching: referrers.fetching
+						}
+					],
+					renderer: RendererReferrers,
+					rendererProps: {
+						sorting: props.filter.sorting,
+						range: props.filter.range
 					}
 				})
 			})

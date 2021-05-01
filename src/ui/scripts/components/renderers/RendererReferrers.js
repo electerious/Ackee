@@ -21,20 +21,17 @@ const textLabel = (item, range, isRecent, isNew) => {
 
 const RendererReferrers = (props) => {
 
-	const items = props.widget.value
-	const { range, sorting } = props.widget.variables
-
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive()
 
-	const label = textLabel(items[active], range, sorting === SORTINGS_RECENT, sorting === SORTINGS_NEW)
+	const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT, props.sorting === SORTINGS_NEW)
 	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	return h(PresentationIconList, {
-		items,
+		items: props.items,
 		onEnter,
 		onLeave
 	})
@@ -42,7 +39,9 @@ const RendererReferrers = (props) => {
 }
 
 RendererReferrers.propTypes = {
-	widget: PropTypes.object.isRequired,
+	items: PropTypes.array.isRequired,
+	sorting: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	setStatusLabel: PropTypes.func.isRequired
 }
 

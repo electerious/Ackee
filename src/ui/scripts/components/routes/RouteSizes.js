@@ -1,30 +1,35 @@
 import { createElement as h, Fragment } from 'react'
 
-import useSizes from '../../api/hooks/useSizes'
-import enhanceSizes from '../../enhancers/enhanceSizes'
+import useDomains from '../../api/hooks/useDomains'
+import useSizes from '../../api/hooks/sizes/useSizes'
 
 import CardWidget from '../cards/CardWidget'
 import RendererList from '../renderers/RendererList'
 
 const RouteSizes = (props) => {
 
-	const sizes = useSizes(props.filter.sorting, props.filter.sizesType, props.filter.range)
+	const domains = useDomains()
 
 	return (
 		h(Fragment, {},
-			sizes.value.domains.map((domain) => {
+			domains.value.map((domain) => {
 				return h(CardWidget, {
-					key: domain.statistics.id,
+					key: domain.id,
 					headline: domain.title,
-					widget: {
-						Renderer: RendererList,
-						onMore: () => props.setRoute(`/domains/${ domain.id }`),
-						variables: {
+					onMore: () => props.setRoute(`/domains/${ domain.id }`),
+					hook: useSizes,
+					hookArgs: [
+						domain.id,
+						{
 							sorting: props.filter.sorting,
+							type: props.filter.sizesType,
 							range: props.filter.range
-						},
-						value: enhanceSizes(domain.statistics.sizes),
-						fetching: sizes.fetching
+						}
+					],
+					renderer: RendererList,
+					rendererProps: {
+						sorting: props.filter.sorting,
+						range: props.filter.range
 					}
 				})
 			})

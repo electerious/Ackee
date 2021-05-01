@@ -19,24 +19,21 @@ const textLabel = (item, range, isRecent) => {
 
 const RendererList = (props) => {
 
-	const items = props.widget.value
-	const { range, sorting } = props.widget.variables
-
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
 	const onEnter = (index) => setActive(index)
 	const onLeave = () => setActive()
 
-	const label = textLabel(items[active], range, sorting === SORTINGS_RECENT)
+	const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT)
 	useEffect(() => props.setStatusLabel(label), [ label ])
 
-	if (sorting === SORTINGS_TOP) return h(PresentationCounterList, {
-		items
+	if (props.sorting === SORTINGS_TOP) return h(PresentationCounterList, {
+		items: props.items
 	})
 
 	return h(PresentationList, {
-		items,
+		items: props.items,
 		onEnter,
 		onLeave
 	})
@@ -44,7 +41,9 @@ const RendererList = (props) => {
 }
 
 RendererList.propTypes = {
-	widget: PropTypes.object.isRequired,
+	items: PropTypes.array.isRequired,
+	sorting: PropTypes.string.isRequired,
+	range: PropTypes.string.isRequired,
 	setStatusLabel: PropTypes.func.isRequired
 }
 

@@ -11,25 +11,17 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import useFacts from '../../api/hooks/useFacts'
-import useViews from '../../api/hooks/useViews'
-import useDurations from '../../api/hooks/useDurations'
-import usePages from '../../api/hooks/usePages'
-import useReferrers from '../../api/hooks/useReferrers'
-import useSystems from '../../api/hooks/useSystems'
-import useDevices from '../../api/hooks/useDevices'
+import useMergedViews from '../../api/hooks/views/useMergedViews'
+import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
+import useMergedPages from '../../api/hooks/pages/useMergedPages'
+import useMergedReferrers from '../../api/hooks/referrers/useMergedReferrers'
+import useMergedSystems from '../../api/hooks/systems/useMergedSystems'
+import useMergedDevices from '../../api/hooks/devices/useMergedDevices'
 import useMergedBrowsers from '../../api/hooks/browsers/useMergedBrowsers'
-import useSizes from '../../api/hooks/useSizes'
-import useLanguages from '../../api/hooks/useLanguages'
+import useMergedSizes from '../../api/hooks/sizes/useMergedSizes'
+import useMergedLanguages from '../../api/hooks/languages/useMergedLanguages'
 
 import enhanceFacts from '../../enhancers/enhanceFacts'
-import enhanceViews from '../../enhancers/enhanceViews'
-import enhanceDurations from '../../enhancers/enhanceDurations'
-import enhancePages from '../../enhancers/enhancePages'
-import enhanceReferrers from '../../enhancers/enhanceReferrers'
-import enhanceSystems from '../../enhancers/enhanceSystems'
-import enhanceDevices from '../../enhancers/enhanceDevices'
-import enhanceSizes from '../../enhancers/enhanceSizes'
-import enhanceLanguages from '../../enhancers/enhanceLanguages'
 
 import CardFactsWidget from '../cards/CardFactsWidget'
 import CardWidget from '../cards/CardWidget'
@@ -43,146 +35,164 @@ const RouteOverview = (props) => {
 
 	const facts = useFacts()
 
-	const views = useViews(INTERVALS_DAILY, VIEWS_TYPE_UNIQUE)
-	const durations = useDurations(INTERVALS_DAILY)
-	const pages = usePages(SORTINGS_TOP, RANGES_LAST_24_HOURS)
-	const referrers = useReferrers(SORTINGS_TOP, REFERRERS_TYPE_WITH_SOURCE, RANGES_LAST_24_HOURS)
-
-	const systems = useSystems(SORTINGS_TOP, SYSTEMS_TYPE_WITH_VERSION, RANGES_LAST_24_HOURS)
-	const devices = useDevices(SORTINGS_TOP, DEVICES_TYPE_WITH_MODEL, RANGES_LAST_24_HOURS)
-	const browsers = useMergedBrowsers({
-		sorting: SORTINGS_TOP,
-		type: BROWSERS_TYPE_WITH_VERSION,
-		range: RANGES_LAST_24_HOURS
-	})
-	const sizes = useSizes(SORTINGS_TOP, SIZES_TYPE_BROWSER_RESOLUTION, RANGES_LAST_24_HOURS)
-	const languages = useLanguages(SORTINGS_TOP, RANGES_LAST_24_HOURS)
-
 	return (
 		h(Fragment, {},
 			h(CardFactsWidget, {
 				widget: {
 					value: enhanceFacts(facts.value.facts),
-					fetching: views.fetching
+					fetching: facts.fetching
 				}
 			}),
 			h('div', { className: 'content__spacer' }),
 			h(CardWidget, {
 				wide: true,
-				headline: 'Site Views',
+				headline: 'Views',
 				onMore: () => props.setRoute('/insights/views'),
-				widget: {
-					Renderer: RendererViews,
-					variables: {
-						interval: INTERVALS_DAILY
-					},
-					value: enhanceViews(views.value.statistics.views, 14),
-					fetching: views.fetching
+				hook: useMergedViews,
+				hookArgs: [
+					{
+						interval: INTERVALS_DAILY,
+						type: VIEWS_TYPE_UNIQUE,
+						limit: 14
+					}
+				],
+				renderer: RendererViews,
+				rendererProps: {
+					interval: INTERVALS_DAILY
 				}
 			}),
 			h(CardWidget, {
 				wide: true,
 				headline: 'Durations',
 				onMore: () => props.setRoute('/insights/durations'),
-				widget: {
-					Renderer: RendererDurations,
-					variables: {
-						interval: INTERVALS_DAILY
-					},
-					value: enhanceDurations(durations.value.statistics.durations, 14),
-					fetching: durations.fetching
+				hook: useMergedDurations,
+				hookArgs: [
+					{
+						interval: INTERVALS_DAILY,
+						limit: 14
+					}
+				],
+				renderer: RendererDurations,
+				rendererProps: {
+					interval: INTERVALS_DAILY
 				}
 			}),
 			h(CardWidget, {
 				headline: 'Pages',
 				onMore: () => props.setRoute('/insights/pages'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
-						sorting: INTERVALS_DAILY,
+				hook: useMergedPages,
+				hookArgs: [
+					{
+						sorting: SORTINGS_TOP,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: enhancePages(pages.value.statistics.pages),
-					fetching: pages.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			}),
 			h(CardWidget, {
 				headline: 'Referrers',
 				onMore: () => props.setRoute('/insights/referrers'),
-				widget: {
-					Renderer: RendererReferrers,
-					variables: {
-						sorting: INTERVALS_DAILY,
+				hook: useMergedReferrers,
+				hookArgs: [
+					{
+						sorting: SORTINGS_TOP,
+						type: REFERRERS_TYPE_WITH_SOURCE,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: enhanceReferrers(referrers.value.statistics.referrers),
-					fetching: referrers.fetching
+					}
+				],
+				renderer: RendererReferrers,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			}),
 			h('div', { className: 'content__spacer' }),
 			h(CardWidget, {
 				headline: 'Systems',
 				onMore: () => props.setRoute('/insights/systems'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
+				hook: useMergedSystems,
+				hookArgs: [
+					{
 						sorting: SORTINGS_TOP,
+						type: SYSTEMS_TYPE_WITH_VERSION,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: enhanceSystems(systems.value.statistics.systems),
-					fetching: systems.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			}),
 			h(CardWidget, {
 				headline: 'Devices',
 				onMore: () => props.setRoute('/insights/devices'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
+				hook: useMergedDevices,
+				hookArgs: [
+					{
 						sorting: SORTINGS_TOP,
+						type: DEVICES_TYPE_WITH_MODEL,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: enhanceDevices(devices.value.statistics.devices),
-					fetching: devices.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			}),
 			h(CardWidget, {
 				headline: 'Browsers',
 				onMore: () => props.setRoute('/insights/browsers'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
+				hook: useMergedBrowsers,
+				hookArgs: [
+					{
 						sorting: SORTINGS_TOP,
+						type: BROWSERS_TYPE_WITH_VERSION,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: browsers.value.statistics.browsers,
-					fetching: browsers.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			}),
 			h(CardWidget, {
 				headline: 'Sizes',
 				onMore: () => props.setRoute('/insights/sizes'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
+				hook: useMergedSizes,
+				hookArgs: [
+					{
 						sorting: SORTINGS_TOP,
+						type: SIZES_TYPE_BROWSER_RESOLUTION,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: enhanceSizes(sizes.value.statistics.sizes),
-					fetching: sizes.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			}),
 			h(CardWidget, {
-				headline: 'Sizes',
+				headline: 'Languages',
 				onMore: () => props.setRoute('/insights/languages'),
-				widget: {
-					Renderer: RendererList,
-					variables: {
+				hook: useMergedLanguages,
+				hookArgs: [
+					{
 						sorting: SORTINGS_TOP,
 						range: RANGES_LAST_24_HOURS
-					},
-					value: enhanceLanguages(languages.value.statistics.languages),
-					fetching: languages.fetching
+					}
+				],
+				renderer: RendererList,
+				rendererProps: {
+					sorting: SORTINGS_TOP,
+					range: RANGES_LAST_24_HOURS
 				}
 			})
 		)

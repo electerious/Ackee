@@ -1,30 +1,35 @@
 import { createElement as h, Fragment } from 'react'
 
-import useSystems from '../../api/hooks/useSystems'
-import enhanceSystems from '../../enhancers/enhanceSystems'
+import useDomains from '../../api/hooks/useDomains'
+import useSystems from '../../api/hooks/systems/useSystems'
 
 import CardWidget from '../cards/CardWidget'
 import RendererList from '../renderers/RendererList'
 
 const RouteSystems = (props) => {
 
-	const systems = useSystems(props.filter.sorting, props.filter.systemsType, props.filter.range)
+	const domains = useDomains()
 
 	return (
 		h(Fragment, {},
-			systems.value.domains.map((domain) => {
+			domains.value.map((domain) => {
 				return h(CardWidget, {
-					key: domain.statistics.id,
+					key: domain.id,
 					headline: domain.title,
-					widget: {
-						Renderer: RendererList,
-						onMore: () => props.setRoute(`/domains/${ domain.id }`),
-						variables: {
+					onMore: () => props.setRoute(`/domains/${ domain.id }`),
+					hook: useSystems,
+					hookArgs: [
+						domain.id,
+						{
 							sorting: props.filter.sorting,
+							type: props.filter.systemsType,
 							range: props.filter.range
-						},
-						value: enhanceSystems(domain.statistics.systems),
-						fetching: systems.fetching
+						}
+					],
+					renderer: RendererList,
+					rendererProps: {
+						sorting: props.filter.sorting,
+						range: props.filter.range
 					}
 				})
 			})
