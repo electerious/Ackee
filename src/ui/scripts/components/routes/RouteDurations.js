@@ -4,7 +4,7 @@ import useDomains from '../../api/hooks/useDomains'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
 import useDurations from '../../api/hooks/durations/useDurations'
 
-import CardWidget from '../cards/CardWidget'
+import CardStatistics from '../cards/CardStatistics'
 import RendererDurations from '../renderers/RendererDurations'
 
 const RouteDurations = (props) => {
@@ -13,7 +13,7 @@ const RouteDurations = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardWidget, {
+			h(CardStatistics, {
 				wide: true,
 				headline: 'Durations',
 				hook: useMergedDurations,
@@ -29,7 +29,7 @@ const RouteDurations = (props) => {
 				}
 			}),
 			domains.value.map((domain) => {
-				return h(CardWidget, {
+				return h(CardStatistics, {
 					key: domain.id,
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),

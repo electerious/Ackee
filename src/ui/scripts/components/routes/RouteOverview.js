@@ -21,8 +21,8 @@ import useMergedBrowsers from '../../api/hooks/browsers/useMergedBrowsers'
 import useMergedSizes from '../../api/hooks/sizes/useMergedSizes'
 import useMergedLanguages from '../../api/hooks/languages/useMergedLanguages'
 
-import CardFactsWidget from '../cards/CardFactsWidget'
-import CardWidget from '../cards/CardWidget'
+import CardFacts from '../cards/CardFacts'
+import CardStatistics from '../cards/CardStatistics'
 
 import RendererViews from '../renderers/RendererViews'
 import RendererDurations from '../renderers/RendererDurations'
@@ -33,12 +33,12 @@ const RouteOverview = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardFactsWidget, {
+			h(CardFacts, {
 				hook: useMergedFacts,
 				hookArgs: []
 			}),
 			h('div', { className: 'content__spacer' }),
-			h(CardWidget, {
+			h(CardStatistics, {
 				wide: true,
 				headline: 'Views',
 				onMore: () => props.setRoute('/insights/views'),
@@ -55,7 +55,7 @@ const RouteOverview = (props) => {
 					interval: INTERVALS_DAILY
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				wide: true,
 				headline: 'Durations',
 				onMore: () => props.setRoute('/insights/durations'),
@@ -71,7 +71,7 @@ const RouteOverview = (props) => {
 					interval: INTERVALS_DAILY
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Pages',
 				onMore: () => props.setRoute('/insights/pages'),
 				hook: useMergedPages,
@@ -87,7 +87,7 @@ const RouteOverview = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Referrers',
 				onMore: () => props.setRoute('/insights/referrers'),
 				hook: useMergedReferrers,
@@ -105,7 +105,7 @@ const RouteOverview = (props) => {
 				}
 			}),
 			h('div', { className: 'content__spacer' }),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Systems',
 				onMore: () => props.setRoute('/insights/systems'),
 				hook: useMergedSystems,
@@ -122,7 +122,7 @@ const RouteOverview = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Devices',
 				onMore: () => props.setRoute('/insights/devices'),
 				hook: useMergedDevices,
@@ -139,7 +139,7 @@ const RouteOverview = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Browsers',
 				onMore: () => props.setRoute('/insights/browsers'),
 				hook: useMergedBrowsers,
@@ -156,7 +156,7 @@ const RouteOverview = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Sizes',
 				onMore: () => props.setRoute('/insights/sizes'),
 				hook: useMergedSizes,
@@ -173,7 +173,7 @@ const RouteOverview = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Languages',
 				onMore: () => props.setRoute('/insights/languages'),
 				hook: useMergedLanguages,

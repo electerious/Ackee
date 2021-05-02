@@ -1,4 +1,4 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h } from 'react'
 
 import * as events from '../../../../constants/events'
 
@@ -6,11 +6,11 @@ import useEvents from '../../api/hooks/events/useEvents'
 import useEventChartEntries from '../../api/hooks/events/useEventChart'
 import useEventListEntries from '../../api/hooks/events/useEventList'
 
-import CardWidget from '../cards/CardWidget'
+import CardStatistics from '../cards/CardStatistics'
 import RendererEventChart from '../renderers/RendererEventChart'
 import RendererList from '../renderers/RendererList'
 
-const widgetProps = (event, props) => {
+const cardProps = (event, props) => {
 	switch (event.type) {
 		case events.EVENTS_TYPE_TOTAL_CHART:
 		case events.EVENTS_TYPE_AVERAGE_CHART:
@@ -54,17 +54,13 @@ const RouteEvents = (props) => {
 
 	const events = useEvents()
 
-	return (
-		h(Fragment, {},
-			events.value.map((event) => {
-				return h(CardWidget, {
-					key: event.id,
-					headline: event.title,
-					...widgetProps(event, props)
-				})
-			})
-		)
-	)
+	return events.value.map((event) => {
+		return h(CardStatistics, {
+			key: event.id,
+			headline: event.title,
+			...cardProps(event, props)
+		})
+	})
 
 }
 

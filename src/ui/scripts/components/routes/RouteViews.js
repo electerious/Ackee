@@ -6,7 +6,7 @@ import useDomains from '../../api/hooks/useDomains'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
 import useViews from '../../api/hooks/views/useViews'
 
-import CardWidget from '../cards/CardWidget'
+import CardStatistics from '../cards/CardStatistics'
 import RendererViews from '../renderers/RendererViews'
 
 const RouteViews = (props) => {
@@ -15,7 +15,7 @@ const RouteViews = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardWidget, {
+			h(CardStatistics, {
 				wide: true,
 				headline: ({
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
@@ -35,7 +35,7 @@ const RouteViews = (props) => {
 				}
 			}),
 			domains.value.map((domain) => {
-				return h(CardWidget, {
+				return h(CardStatistics, {
 					key: domain.id,
 					headline: domain.title,
 					onMore: () => props.setRoute(`/domains/${ domain.id }`),

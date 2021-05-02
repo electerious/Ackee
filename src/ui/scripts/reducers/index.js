@@ -7,13 +7,11 @@ import {
 import modals from './modals'
 import token from './token'
 import filter from './filter'
-import widgets from './widgets'
 
 const reducers = combineReducers({
 	modals,
 	token,
-	filter,
-	widgets
+	filter
 })
 
 export default (state, action) => {

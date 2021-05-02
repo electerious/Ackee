@@ -22,8 +22,8 @@ import useBrowsers from '../../api/hooks/browsers/useBrowsers'
 import useSizes from '../../api/hooks/sizes/useSizes'
 import useLanguages from '../../api/hooks/languages/useLanguages'
 
-import CardFactsWidget from '../cards/CardFactsWidget'
-import CardWidget from '../cards/CardWidget'
+import CardFacts from '../cards/CardFacts'
+import CardStatistics from '../cards/CardStatistics'
 
 import RendererViews from '../renderers/RendererViews'
 import RendererDurations from '../renderers/RendererDurations'
@@ -37,14 +37,14 @@ const RouteDomain = (props) => {
 
 	return (
 		h(Fragment, {},
-			h(CardFactsWidget, {
+			h(CardFacts, {
 				hook: useFacts,
 				hookArgs: [
 					domainId
 				]
 			}),
 			h('div', { className: 'content__spacer' }),
-			h(CardWidget, {
+			h(CardStatistics, {
 				wide: true,
 				headline: 'Views',
 				onMore: () => props.setRoute('/insights/views'),
@@ -62,7 +62,7 @@ const RouteDomain = (props) => {
 					interval: INTERVALS_DAILY
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				wide: true,
 				headline: 'Durations',
 				onMore: () => props.setRoute('/insights/durations'),
@@ -79,7 +79,7 @@ const RouteDomain = (props) => {
 					interval: INTERVALS_DAILY
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Pages',
 				onMore: () => props.setRoute('/insights/pages'),
 				hook: usePages,
@@ -96,7 +96,7 @@ const RouteDomain = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Referrers',
 				onMore: () => props.setRoute('/insights/referrers'),
 				hook: useReferrers,
@@ -115,7 +115,7 @@ const RouteDomain = (props) => {
 				}
 			}),
 			h('div', { className: 'content__spacer' }),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Systems',
 				onMore: () => props.setRoute('/insights/systems'),
 				hook: useSystems,
@@ -133,7 +133,7 @@ const RouteDomain = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Devices',
 				onMore: () => props.setRoute('/insights/devices'),
 				hook: useDevices,
@@ -151,7 +151,7 @@ const RouteDomain = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Browsers',
 				onMore: () => props.setRoute('/insights/browsers'),
 				hook: useBrowsers,
@@ -169,7 +169,7 @@ const RouteDomain = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Sizes',
 				onMore: () => props.setRoute('/insights/sizes'),
 				hook: useSizes,
@@ -187,7 +187,7 @@ const RouteDomain = (props) => {
 					range: RANGES_LAST_24_HOURS
 				}
 			}),
-			h(CardWidget, {
+			h(CardStatistics, {
 				headline: 'Languages',
 				onMore: () => props.setRoute('/insights/languages'),
 				hook: useLanguages,

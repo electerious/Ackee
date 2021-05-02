@@ -8,7 +8,7 @@ import Status, { ICON_LOADER, ICON_UPDATER } from '../Status'
 import Tooltip from '../Tooltip'
 import status from '../../utils/status'
 
-const CardWidget2 = (props) => {
+const CardStatistics = (props) => {
 
 	const { value, fetching } = props.hook(...props.hookArgs)
 
@@ -66,7 +66,7 @@ const CardWidget2 = (props) => {
 
 }
 
-CardWidget2.propTypes = {
+CardStatistics.propTypes = {
 	wide: PropTypes.bool,
 	headline: PropTypes.string.isRequired,
 	onMore: PropTypes.func,
@@ -76,4 +76,4 @@ CardWidget2.propTypes = {
 	rendererProps: PropTypes.object
 }
 
-export default CardWidget2
+export default CardStatistics
