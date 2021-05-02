@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import durationsField from '../../fragments/durationsField'
 import enhanceDurations from '../../../enhancers/enhanceDurations'
 
@@ -16,13 +17,11 @@ const QUERY = gql`
 
 export default (filters) => {
 
-	const { loading: fetching, data } = useQuery(QUERY, {
+	const selector = (data) => data?.statistics.durations
+	const enhancer = (value) => enhanceDurations(value, filters.limit)
+
+	return useQuery(QUERY, selector, enhancer, {
 		variables: filters
 	})
-
-	return {
-		fetching,
-		value: enhanceDurations(data?.statistics.durations, filters.limit)
-	}
 
 }

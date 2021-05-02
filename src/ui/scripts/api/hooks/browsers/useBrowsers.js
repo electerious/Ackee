@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import browsersField from '../../fragments/browsersField'
 import enhanceBrowsers from '../../../enhancers/enhanceBrowsers'
 
@@ -19,16 +20,14 @@ const QUERY = gql`
 
 export default (id, filters) => {
 
-	const { loading: fetching, data } = useQuery(QUERY, {
+	const selector = (data) => data?.domain.statistics.browsers
+	const enhancer = enhanceBrowsers
+
+	return useQuery(QUERY, selector, enhancer, {
 		variables: {
 			...filters,
 			id
 		}
 	})
-
-	return {
-		fetching,
-		value: enhanceBrowsers(data?.domain.statistics.browsers)
-	}
 
 }

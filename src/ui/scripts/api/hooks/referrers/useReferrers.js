@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import referrersField from '../../fragments/referrersField'
 import enhanceReferrers from '../../../enhancers/enhanceReferrers'
 
@@ -19,16 +20,14 @@ const QUERY = gql`
 
 export default (id, filters) => {
 
-	const { loading: fetching, data } = useQuery(QUERY, {
+	const selector = (data) => data?.domain.statistics.referrers
+	const enhancer = enhanceReferrers
+
+	return useQuery(QUERY, selector, enhancer, {
 		variables: {
 			...filters,
 			id
 		}
 	})
-
-	return {
-		fetching,
-		value: enhanceReferrers(data?.domain.statistics.referrers)
-	}
 
 }

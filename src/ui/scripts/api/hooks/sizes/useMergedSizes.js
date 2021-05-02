@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import sizesField from '../../fragments/sizesField'
 import enhanceSizes from '../../../enhancers/enhanceSizes'
 
@@ -16,13 +17,11 @@ const QUERY = gql`
 
 export default (filters) => {
 
-	const { loading: fetching, data } = useQuery(QUERY, {
+	const selector = (data) => data?.statistics.sizes
+	const enhancer = enhanceSizes
+
+	return useQuery(QUERY, selector, enhancer, {
 		variables: filters
 	})
-
-	return {
-		fetching,
-		value: enhanceSizes(data?.statistics.sizes)
-	}
 
 }

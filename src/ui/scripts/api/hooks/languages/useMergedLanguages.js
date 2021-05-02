@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import languagesField from '../../fragments/languagesField'
 import enhanceLanguages from '../../../enhancers/enhanceLanguages'
 
@@ -16,13 +17,11 @@ const QUERY = gql`
 
 export default (filters) => {
 
-	const { loading: fetching, data } = useQuery(QUERY, {
+	const selector = (data) => data?.statistics.languages
+	const enhancer = enhanceLanguages
+
+	return useQuery(QUERY, selector, enhancer, {
 		variables: filters
 	})
-
-	return {
-		fetching,
-		value: enhanceLanguages(data?.statistics.languages)
-	}
 
 }
