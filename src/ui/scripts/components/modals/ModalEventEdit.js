@@ -11,8 +11,8 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
-import useUpdateEvent from '../../api/hooks/useUpdateEvent'
-import useDeleteEvent from '../../api/hooks/useDeleteEvent'
+import useUpdateEvent from '../../api/hooks/events/useUpdateEvent'
+import useDeleteEvent from '../../api/hooks/events/useDeleteEvent'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 

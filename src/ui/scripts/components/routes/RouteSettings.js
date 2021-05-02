@@ -2,7 +2,7 @@ import { createElement as h, Fragment } from 'react'
 
 import { version, homepage } from '../../../../../package.json'
 import useDomains from '../../api/hooks/useDomains'
-import useEvents from '../../api/hooks/useEvents'
+import useEvents from '../../api/hooks/events/useEvents'
 import usePermanentTokens from '../../api/hooks/usePermanentTokens'
 import status from '../../utils/status'
 import {

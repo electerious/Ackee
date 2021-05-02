@@ -56,6 +56,10 @@ module.exports = gql`
 	"""
 	type EventStatistics {
 		"""
+		Statistic identifier.
+		"""
+		id: ID!
+		"""
 		The chart type should be used when showing events in a chart. It groups events by an interval and shows the total or average sum of values on each entry.
 		"""
 		chart(

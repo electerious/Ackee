@@ -1,6 +1,6 @@
 import { useMutation, gql } from '@apollo/client'
 
-import eventFields from '../fragments/eventFields'
+import eventFields from '../../fragments/eventFields'
 
 const MUTATION = gql`
 	mutation updateEvent($id: ID!, $input: UpdateEventInput!) {

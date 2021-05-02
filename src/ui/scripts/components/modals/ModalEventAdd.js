@@ -9,7 +9,7 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
-import useCreateEvent from '../../api/hooks/useCreateEvent'
+import useCreateEvent from '../../api/hooks/events/useCreateEvent'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
