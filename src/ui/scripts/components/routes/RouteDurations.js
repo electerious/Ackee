@@ -1,6 +1,6 @@
 import { createElement as h, Fragment } from 'react'
 
-import useDomains from '../../api/hooks/useDomains'
+import useDomains from '../../api/hooks/domains/useDomains'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
 import useDurations from '../../api/hooks/durations/useDurations'
 

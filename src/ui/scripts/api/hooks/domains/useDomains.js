@@ -1,6 +1,6 @@
 import { useQuery, gql } from '@apollo/client'
 
-import domainFields from '../fragments/domainFields'
+import domainFields from '../../fragments/domainFields'
 
 const QUERY = gql`
 	query fetchDomains {

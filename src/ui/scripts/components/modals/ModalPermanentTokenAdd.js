@@ -5,7 +5,7 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
-import useCreatePermanentToken from '../../api/hooks/useCreatePermanentToken'
+import useCreatePermanentToken from '../../api/hooks/permanentTokens/useCreatePermanentToken'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 

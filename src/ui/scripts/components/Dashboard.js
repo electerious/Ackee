@@ -1,7 +1,7 @@
 import { createElement as h, useEffect } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 
-import useDomains from '../api/hooks/useDomains'
+import useDomains from '../api/hooks/domains/useDomains'
 import whenBelow from '../utils/whenBelow'
 import * as routes from '../constants/routes'
 import useRoute from '../hooks/useRoute'

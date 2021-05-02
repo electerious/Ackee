@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'
 
-import useDomains from '../../api/hooks/useDomains'
+import useDomains from '../../api/hooks/domains/useDomains'
 import useReferrers from '../../api/hooks/referrers/useReferrers'
 
 import CardStatistics from '../cards/CardStatistics'

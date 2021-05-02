@@ -1,17 +1,17 @@
 import { useMutation, gql } from '@apollo/client'
 
-import permanentTokenFields from '../fragments/permanentTokenFields'
+import domainFields from '../../fragments/domainFields'
 
 const MUTATION = gql`
-	mutation updatePermanentToken($id: ID!, $input: UpdatePermanentTokenInput!) {
-		updatePermanentToken(id: $id, input: $input) {
+	mutation updateDomain($id: ID!, $input: UpdateDomainInput!) {
+		updateDomain(id: $id, input: $input) {
 			payload {
-				...permanentTokenFields
+				...domainFields
 			}
 		}
 	}
 
-	${ permanentTokenFields }
+	${ domainFields }
 `
 
 export default (id) => {

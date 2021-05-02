@@ -7,8 +7,8 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
-import useUpdateDomain from '../../api/hooks/useUpdateDomain'
-import useDeleteDomain from '../../api/hooks/useDeleteDomain'
+import useUpdateDomain from '../../api/hooks/domains/useUpdateDomain'
+import useDeleteDomain from '../../api/hooks/domains/useDeleteDomain'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 

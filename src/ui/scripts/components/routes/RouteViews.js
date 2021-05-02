@@ -2,7 +2,7 @@ import { createElement as h, Fragment } from 'react'
 
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 
-import useDomains from '../../api/hooks/useDomains'
+import useDomains from '../../api/hooks/domains/useDomains'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
 import useViews from '../../api/hooks/views/useViews'
 

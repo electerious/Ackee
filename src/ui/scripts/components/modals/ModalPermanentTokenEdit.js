@@ -6,8 +6,8 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
-import useUpdatePermanentToken from '../../api/hooks/useUpdatePermanentToken'
-import useDeletePermanentToken from '../../api/hooks/useDeletePermanentToken'
+import useUpdatePermanentToken from '../../api/hooks/permanentTokens/useUpdatePermanentToken'
+import useDeletePermanentToken from '../../api/hooks/permanentTokens/useDeletePermanentToken'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 

@@ -5,7 +5,7 @@ import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
-import useCreateDomain from '../../api/hooks/useCreateDomain'
+import useCreateDomain from '../../api/hooks/domains/useCreateDomain'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 

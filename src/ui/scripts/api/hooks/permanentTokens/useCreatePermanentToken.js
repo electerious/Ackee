@@ -1,7 +1,7 @@
 import { useMutation, gql } from '@apollo/client'
 
-import addAndSortModify from '../utils/addAndSortModify'
-import permanentTokenFields from '../fragments/permanentTokenFields'
+import addAndSortModify from '../../utils/addAndSortModify'
+import permanentTokenFields from '../../fragments/permanentTokenFields'
 
 const MUTATION = gql`
 	mutation createPermanentToken($input: CreatePermanentTokenInput!) {

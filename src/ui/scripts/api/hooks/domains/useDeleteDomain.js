@@ -1,6 +1,6 @@
 import { useMutation, gql } from '@apollo/client'
 
-import deleteIdModify from '../utils/deleteIdModify'
+import deleteIdModify from '../../utils/deleteIdModify'
 
 const MUTATION = gql`
 	mutation deleteDomain($id: ID!) {
