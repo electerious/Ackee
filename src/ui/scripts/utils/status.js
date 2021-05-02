@@ -1,4 +1,4 @@
-export default (entries, loading) => {
+export default (data, loading) => {
 
 	// Loads data
 	const isLoading = loading === true
@@ -10,7 +10,7 @@ export default (entries, loading) => {
 	const isUpdating = isEmpty === false && loading === true
 
 	// Has no data
-	const isEmpty = entries == null || entries.length === 0
+	const isEmpty = data == null || data.length === 0
 
 	return {
 		isLoading,
