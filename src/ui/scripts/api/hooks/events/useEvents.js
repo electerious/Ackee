@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import eventFields from '../../fragments/eventFields'
 
 const QUERY = gql`
@@ -14,11 +15,9 @@ const QUERY = gql`
 
 export default () => {
 
-	const { loading: fetching, data } = useQuery(QUERY)
+	const selector = (data) => data?.events
+	const enhancer = (events = []) => events
 
-	return {
-		fetching,
-		value: data == null ? [] : data.events
-	}
+	return useQuery(QUERY, selector, enhancer)
 
 }

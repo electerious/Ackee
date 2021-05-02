@@ -1,5 +1,6 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import useQuery from '../../utils/useQuery'
 import permanentTokenFields from '../../fragments/permanentTokenFields'
 
 const QUERY = gql`
@@ -14,11 +15,9 @@ const QUERY = gql`
 
 export default () => {
 
-	const { loading: fetching, data } = useQuery(QUERY)
+	const selector = (data) => data?.permanentTokens
+	const enhancer = (permanentTokens = []) => permanentTokens
 
-	return {
-		fetching,
-		value: data == null ? [] : data.permanentTokens
-	}
+	return useQuery(QUERY, selector, enhancer)
 
 }
