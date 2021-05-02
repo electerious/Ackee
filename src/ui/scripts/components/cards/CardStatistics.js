@@ -13,20 +13,20 @@ const CardStatistics = (props) => {
 	const { value, fetching } = props.hook(...props.hookArgs)
 
 	const {
-		isEmpty,
-		isStale,
-		isLoading
+		isInitializing,
+		isUpdating,
+		isEmpty
 	} = status(value, fetching)
 
 	// Use thin space as initial value to avoid that the label changes the height once rendered
 	const [ statusLabel, setStatusLabel ] = useState(' ')
 
 	const currentStatus = (() => {
-		if (isLoading === true) return h(Status, {
+		if (isInitializing === true) return h(Status, {
 			icon: ICON_LOADER
 		}, 'Loading')
 
-		if (isStale === true) return h(Status, {
+		if (isUpdating === true) return h(Status, {
 			icon: ICON_UPDATER
 		}, 'Updating')
 

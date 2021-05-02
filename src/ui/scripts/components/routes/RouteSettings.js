@@ -83,19 +83,19 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Domains'
 			},
-				...(status(domains.value, domains.fetching).isLoading === true ? [ domainsFetching ] : domainsItems)
+				...(status(domains.value, domains.fetching).isInitializing === true ? [ domainsFetching ] : domainsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Events'
 			},
-				...(status(events.value, events.fetching).isLoading === true ? [ eventsFetching ] : eventsItems)
+				...(status(events.value, events.fetching).isInitializing === true ? [ eventsFetching ] : eventsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Permanent Tokens'
 			},
-				...(status(permanentTokens.value, permanentTokens.fetching).isLoading === true ? [ permanentTokensFetching ] : permanentTokensItems)
+				...(status(permanentTokens.value, permanentTokens.fetching).isInitializing === true ? [ permanentTokensFetching ] : permanentTokensItems)
 			),
 
 			h(CardSetting, {
