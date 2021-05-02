@@ -18,6 +18,9 @@ export default () => {
 	const selector = (data) => data?.domains
 	const enhancer = (domains = []) => domains
 
-	return useQuery(QUERY, selector, enhancer)
+	return useQuery(QUERY, selector, enhancer, {
+		fetchPolicy: 'cache-first',
+		nextFetchPolicy: 'cache-first'
+	})
 
 }
