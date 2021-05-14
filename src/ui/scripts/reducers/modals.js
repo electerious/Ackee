@@ -1,40 +1,53 @@
-import produce from 'immer'
+import shortId from '../utils/shortId'
+import { useReducer, useCallback } from 'react'
 
-import {
-	SET_MODALS_STATE,
-	REMOVE_MODALS_STATE,
-	SET_MODALS_VISIBLE
-} from '../actions'
+export const ADD_MODAL = Symbol()
+export const REMOVE_MODAL = Symbol()
 
-export const initialState = () => ({
-	value: {}
-})
+export const initialState = {}
 
-export const initialSubState = () => ({
-	id: undefined,
-	type: undefined,
-	props: {},
-	visible: false
-})
-
-export default produce((draft, action) => {
+const reducer = (state, action) => {
 
 	switch (action.type) {
-		case SET_MODALS_STATE:
-			// Initialize when id is unknown
-			draft.value[action.modalId] = draft.value[action.modalId] || initialSubState()
-			// Set remaining data
-			draft.value[action.modalId].id = action.modalId
-			draft.value[action.modalId].type = action.payload.type
-			draft.value[action.modalId].props = action.payload.props || initialSubState().props
-			draft.value[action.modalId].visible = action.payload.visible || initialSubState().visible
-			break
-		case REMOVE_MODALS_STATE:
-			delete draft.value[action.modalId]
-			break
-		case SET_MODALS_VISIBLE:
-			draft.value[action.modalId].visible = action.payload || initialSubState().visible
-			break
+		case ADD_MODAL:
+			return {
+				...state,
+				[action.modalId]: {
+					id: action.modalId,
+					type: action.payload.type,
+					props: action.payload.props,
+					visible: true
+				}
+			}
+		case REMOVE_MODAL:
+			const clone = { ...state }
+			delete clone[action.modalId]
+			return clone
+		default:
+			return state
 	}
 
-}, initialState())
+}
+
+export default () => {
+
+	const [ modals, dispatch ] = useReducer(reducer, initialState)
+
+	const addModal = useCallback((payload) => dispatch({
+		type: ADD_MODAL,
+		modalId: shortId(),
+		payload
+	}), [ dispatch ])
+
+	const removeModal = useCallback((modalId) => dispatch({
+		type: REMOVE_MODAL,
+		modalId
+	}), [ dispatch ])
+
+	return {
+		modals,
+		addModal,
+		removeModal
+	}
+
+}

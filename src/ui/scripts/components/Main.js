@@ -1,9 +1,9 @@
 import { createElement as h, Fragment } from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 
-import isUnknownError from '../utils/isUnknownError'
 import useCustomScrollbar from '../hooks/useCustomScrollbar'
 import useRouter from '../hooks/useRouter'
+import isSignedOutError from '../utils/isSignedOutError'
 
 import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
@@ -15,25 +15,36 @@ const Main = (props) => {
 
 	useCustomScrollbar()
 	const [ setRoute, route ] = useRouter()
+	const status = props.useStatusLink()
 
-	const enhancedProps = {
-		...props,
-		setRoute,
-		route
-	}
+	const fetching = (status.numPendingQueries + status.numPendingMutations) > 0
+	const errors = [
+		...status.queryError?.graphQLErrors ?? [],
+		...status.mutationError?.graphQLErrors ?? []
+	]
 
-	// Only handle errors not handled by other components
-	const unknownErrors = props.errors.filter(isUnknownError)
+	const isSignedOut = errors.filter(isSignedOutError).length > 0
+	if (isSignedOut === true) return h(OverlayLogin, {
+		setToken: props.setToken
+	})
 
-	const hasError = unknownErrors.length !== 0
-	const hasToken = props.token.value != null
-
-	if (hasError === true) return h(OverlayFailure, { errors: unknownErrors })
-	if (hasToken === false) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
+	const hasErrors = errors.length > 0
+	if (hasErrors === true) return h(OverlayFailure, {
+		errors,
+		resetToken: props.resetToken
+	})
 
 	return h(Fragment, {},
-		h(Filter, enhancedProps),
-		h(Dashboard, enhancedProps)
+		h(Filter, {
+			filter: props.filter,
+			route
+		}),
+		h(Dashboard, {
+			...props,
+			fetching,
+			setRoute,
+			route
+		})
 	)
 
 }

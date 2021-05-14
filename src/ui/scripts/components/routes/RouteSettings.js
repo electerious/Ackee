@@ -32,7 +32,7 @@ const RouteSettings = (props) => {
 
 	const showModal = (type, data = {}) => {
 
-		props.addModalsModal({
+		props.addModal({
 			type,
 			props: data
 		})
@@ -76,7 +76,7 @@ const RouteSettings = (props) => {
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
 				h(Line),
-				h(LinkItem, { type: 'button', onClick: () => props.deleteToken(props) }, 'Sign Out')
+				h(LinkItem, { type: 'button', onClick: props.resetToken }, 'Sign Out')
 			),
 
 			h(CardSetting, {

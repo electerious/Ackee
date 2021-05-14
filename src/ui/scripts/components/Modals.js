@@ -19,11 +19,11 @@ import ModalPermanentTokenEdit from './modals/ModalPermanentTokenEdit'
 
 const Modals = (props) => {
 
-	const modals = Object.entries(props.modals.value).map(([ modalId, modalData ], index, modals) => {
+	const modals = Object.entries(props.modals).map(([ modalId, modalData ], index, modals) => {
 
 		const current = modals.length - 1 === index
 		const active = modalData.visible === true
-		const closeModal = props.removeModalsModal.bind(null, modalId)
+		const closeModal = props.removeModal.bind(null, modalId)
 
 		const commonProps = {
 			current,

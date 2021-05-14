@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package.json'
 import formatErrors from '../../utils/formatErrors'
-import * as storage from '../../utils/storage'
 
 import Textarea from '../Textarea'
 import Spacer from '../Spacer'
@@ -14,7 +13,7 @@ import Message from '../Message'
 const OverlayFailure = (props) => {
 
 	const onClick = () => {
-		storage.reset()
+		props.resetToken()
 		window.location.hash = ''
 		window.location.reload()
 	}
@@ -70,7 +69,8 @@ const OverlayFailure = (props) => {
 }
 
 OverlayFailure.propTypes = {
-	errors: PropTypes.array.isRequired
+	errors: PropTypes.array.isRequired,
+	resetToken: PropTypes.func.isRequired
 }
 
 export default OverlayFailure

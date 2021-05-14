@@ -1,12 +1,11 @@
 import { setContext } from '@apollo/client/link/context'
 
+import { get as getToken } from '../../reducers/token'
+
 export default () => {
 
 	return setContext((request, { headers }) => {
-		const state = localStorage.getItem('ackee_state_3.0.6')
-		if (state == null) return { headers }
-
-		const token = JSON.parse(state).token.value
+		const token = getToken()
 
 		return {
 			headers: {

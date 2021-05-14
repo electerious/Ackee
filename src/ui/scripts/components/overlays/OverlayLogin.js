@@ -10,7 +10,14 @@ import Text from '../Text'
 import Spinner from '../Spinner'
 import Message from '../Message'
 
+import useCreateToken from '../../api/hooks/tokens/useCreateToken'
+
 const OverlayLogin = (props) => {
+
+	const createToken = useCreateToken()
+
+	const hasError = createToken.error != null
+	const fetching = createToken.fetching === true
 
 	const [ inputs, setInputs ] = useState({
 		username: window.env.isDemoMode === true ? 'admin' : '',
@@ -24,11 +31,14 @@ const OverlayLogin = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		props.addToken(inputs)
+		createToken.mutate({
+			variables: {
+				input: inputs
+			}
+		}).then(({ data }) => {
+			props.setToken(data.createToken.payload.id)
+		})
 	}
-
-	const hasError = props.token.error != null
-	const isFetching = props.token.fetching === true
 
 	return (
 		h('form', { className: 'card card--overlay', onSubmit },
@@ -45,12 +55,12 @@ const OverlayLogin = (props) => {
 
 				h(Spacer, { size: 2.5 }),
 
-				hasError === true && h(Message, { status: 'error' }, props.token.error.message),
+				hasError === true && h(Message, { status: 'error' }, createToken.error.message),
 
 				h(Input, {
 					type: 'username',
 					required: true,
-					disabled: isFetching === true,
+					disabled: fetching === true,
 					focused: true,
 					placeholder: 'Username',
 					value: inputs.username,
@@ -59,7 +69,7 @@ const OverlayLogin = (props) => {
 				h(Input, {
 					type: 'password',
 					required: true,
-					disabled: isFetching === true,
+					disabled: fetching === true,
 					placeholder: 'Password',
 					value: inputs.password,
 					onChange: onChange('password')
@@ -83,8 +93,8 @@ const OverlayLogin = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: isFetching === true
-				}, isFetching === true ? h(Spinner) : 'Sign In →')
+					disabled: fetching === true
+				}, fetching === true ? h(Spinner) : 'Sign In →')
 
 			)
 		)
@@ -93,8 +103,7 @@ const OverlayLogin = (props) => {
 }
 
 OverlayLogin.propTypes = {
-	token: PropTypes.object.isRequired,
-	addToken: PropTypes.func.isRequired
+	setToken: PropTypes.func.isRequired
 }
 
 export default OverlayLogin

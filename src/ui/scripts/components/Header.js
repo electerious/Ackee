@@ -147,10 +147,10 @@ Header.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export const createButton = (label, route, props) => ({
+export const createButton = (label, targetRoute, currentRoute, setRoute) => ({
 	type: BUTTON,
-	onClick: () => props.setRoute(route),
-	active: props.route === route,
+	onClick: () => setRoute(targetRoute),
+	active: currentRoute === targetRoute,
 	label
 })
 
@@ -160,10 +160,10 @@ export const createDropdown = (label, items) => ({
 	label
 })
 
-export const createDropdownButton = (label, route, props, keyHint) => ({
+export const createDropdownButton = (label, targetRoute, currentRoute, setRoute, keyHint) => ({
 	type: DROPDOWN_BUTTON,
-	onClick: () => props.setRoute(route),
-	active: props.route === route,
+	onClick: () => setRoute(targetRoute),
+	active: currentRoute === targetRoute,
 	label,
 	keyHint
 })

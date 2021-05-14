@@ -73,34 +73,37 @@ const Dashboard = (props) => {
 	const insightsLabel = (activeItem) => activeItem == null ? 'Insights' : activeItem.label
 
 	const domainsItems = domains.value.map((domain, index) =>
-		createDropdownButton(domain.title, `/domains/${ domain.id }`, props, whenBelow(index, 10))
+		createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10))
 	)
 
 	const insightsItems = [
-		createDropdownButton('Views', '/insights/views', props, 'v'),
-		createDropdownButton('Pages', '/insights/pages', props, 'p'),
-		createDropdownButton('Referrers', '/insights/referrers', props, 'r'),
-		createDropdownButton('Durations', '/insights/durations', props, 'd'),
+		createDropdownButton('Views', '/insights/views', props.route, props.setRoute, 'v'),
+		createDropdownButton('Pages', '/insights/pages', props.route, props.setRoute, 'p'),
+		createDropdownButton('Referrers', '/insights/referrers', props.route, props.setRoute, 'r'),
+		createDropdownButton('Durations', '/insights/durations', props.route, props.setRoute, 'd'),
 		createDropdownSeparator(),
-		createDropdownButton('Events', '/insights/events', props, 'e'),
+		createDropdownButton('Events', '/insights/events', props.route, props.setRoute, 'e'),
 		createDropdownSeparator(),
-		createDropdownButton('Systems', '/insights/systems', props),
-		createDropdownButton('Devices', '/insights/devices', props),
-		createDropdownButton('Browsers', '/insights/browsers', props),
-		createDropdownButton('Sizes', '/insights/sizes', props),
-		createDropdownButton('Languages', '/insights/languages', props)
+		createDropdownButton('Systems', '/insights/systems', props.route, props.setRoute),
+		createDropdownButton('Devices', '/insights/devices', props.route, props.setRoute),
+		createDropdownButton('Browsers', '/insights/browsers', props.route, props.setRoute),
+		createDropdownButton('Sizes', '/insights/sizes', props.route, props.setRoute),
+		createDropdownButton('Languages', '/insights/languages', props.route, props.setRoute)
 	]
 
 	const items = [
-		createButton('Overview', '/', props),
+		createButton('Overview', '/', props.route, props.setRoute),
 		hasDomains === true ? createDropdown(domainsLabel, domainsItems) : undefined,
 		createDropdown(insightsLabel, insightsItems),
-		createButton('Settings', '/settings', props)
+		createButton('Settings', '/settings', props.route, props.setRoute)
 	].filter(Boolean)
 
 	return (
 		h('div', {},
-			h(Modals, props),
+			h(Modals, {
+				modals: props.modals,
+				removeModal: props.removeModal
+			}),
 			h(Header, {
 				fetching: props.fetching,
 				items
