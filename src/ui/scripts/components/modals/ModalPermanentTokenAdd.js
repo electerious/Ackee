@@ -13,7 +13,7 @@ const ModalPermanentTokenAdd = (props) => {
 
 	const createPermanentToken = useCreatePermanentToken()
 
-	const fetching = createPermanentToken.fetching === true
+	const loading = createPermanentToken.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: ''
@@ -47,7 +47,7 @@ const ModalPermanentTokenAdd = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
@@ -70,8 +70,8 @@ const ModalPermanentTokenAdd = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: fetching === true || props.active === false
-				}, fetching === true ? h(Spinner) : 'Add')
+					disabled: loading === true || props.active === false
+				}, loading === true ? h(Spinner) : 'Add')
 
 			)
 		)

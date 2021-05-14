@@ -18,9 +18,9 @@ import LinkItem from '../LinkItem'
 import Line from '../Line'
 import Message from '../Message'
 
-const FetchingMessage = (props) => {
+const LoadingMessage = (props) => {
 
-	return h(Message, { status: 'warning' }, `Fetching ${ props.label }...`)
+	return h(Message, { status: 'warning' }, `Loading ${ props.label }...`)
 
 }
 
@@ -60,9 +60,9 @@ const RouteSettings = (props) => {
 	const showPermanentTokenAddModal = () => showModal(MODALS_PERMANENT_TOKEN_ADD)
 	const showPermanentTokenEditModal = (permanentToken) => showModal(MODALS_PERMANENT_TOKEN_EDIT, permanentToken)
 
-	const domainsFetching = h(FetchingMessage, { label: 'domains' })
-	const eventsFetching = h(FetchingMessage, { label: 'events' })
-	const permanentTokensFetching = h(FetchingMessage, { label: 'permanent tokens' })
+	const domainsLoading = h(LoadingMessage, { label: 'domains' })
+	const eventsLoading = h(LoadingMessage, { label: 'events' })
+	const permanentTokensLoading = h(LoadingMessage, { label: 'permanent tokens' })
 
 	const domainsItems = createItems(domains.value, showDomainEditModal, showDomainAddModal, 'New domain')
 	const eventsItems = createItems(events.value, showEventEditModal, showEventAddModal, 'New event')
@@ -82,19 +82,19 @@ const RouteSettings = (props) => {
 			h(CardSetting, {
 				headline: 'Domains'
 			},
-				...(domains.status.isInitializing === true ? [ domainsFetching ] : domainsItems)
+				...(domains.status.isInitializing === true ? [ domainsLoading ] : domainsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Events'
 			},
-				...(events.status.isInitializing === true ? [ eventsFetching ] : eventsItems)
+				...(events.status.isInitializing === true ? [ eventsLoading ] : eventsItems)
 			),
 
 			h(CardSetting, {
 				headline: 'Permanent Tokens'
 			},
-				...(permanentTokens.status.isInitializing === true ? [ permanentTokensFetching ] : permanentTokensItems)
+				...(permanentTokens.status.isInitializing === true ? [ permanentTokensLoading ] : permanentTokensItems)
 			),
 
 			h(CardSetting, {

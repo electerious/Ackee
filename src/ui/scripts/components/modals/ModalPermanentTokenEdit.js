@@ -16,7 +16,7 @@ const ModalPermanentTokenEdit = (props) => {
 	const updatePermanentToken = useUpdatePermanentToken(props.id)
 	const deletePermanentToken = useDeletePermanentToken(props.id)
 
-	const fetching = updatePermanentToken.fetching === true || deletePermanentToken.fetching === true
+	const loading = updatePermanentToken.loading === true || deletePermanentToken.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -60,7 +60,7 @@ const ModalPermanentTokenEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
@@ -105,8 +105,8 @@ const ModalPermanentTokenEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: fetching === true || props.active === false
-				}, fetching === true ? h(Spinner) : 'Rename')
+					disabled: loading === true || props.active === false
+				}, loading === true ? h(Spinner) : 'Rename')
 
 			)
 		)

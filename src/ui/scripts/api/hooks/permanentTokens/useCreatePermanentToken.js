@@ -31,14 +31,14 @@ const update = (cache, result) => {
 
 export default () => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION)
+	const [ mutate, { loading, error }] = useMutation(MUTATION)
 
 	return {
 		mutate: (opts) => mutate({
 			update,
 			...opts
 		}),
-		fetching,
+		loading,
 		error
 	}
 

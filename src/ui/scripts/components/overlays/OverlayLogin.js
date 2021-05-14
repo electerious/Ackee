@@ -17,7 +17,7 @@ const OverlayLogin = (props) => {
 	const createToken = useCreateToken()
 
 	const hasError = createToken.error != null
-	const fetching = createToken.fetching === true
+	const loading = createToken.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		username: window.env.isDemoMode === true ? 'admin' : '',
@@ -60,7 +60,7 @@ const OverlayLogin = (props) => {
 				h(Input, {
 					type: 'username',
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Username',
 					value: inputs.username,
@@ -69,7 +69,7 @@ const OverlayLogin = (props) => {
 				h(Input, {
 					type: 'password',
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					placeholder: 'Password',
 					value: inputs.password,
 					onChange: onChange('password')
@@ -93,8 +93,8 @@ const OverlayLogin = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: fetching === true
-				}, fetching === true ? h(Spinner) : 'Sign In →')
+					disabled: loading === true
+				}, loading === true ? h(Spinner) : 'Sign In →')
 
 			)
 		)

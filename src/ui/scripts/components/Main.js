@@ -17,7 +17,7 @@ const Main = (props) => {
 	const [ setRoute, route ] = useRouter()
 	const status = props.useStatusLink()
 
-	const fetching = (status.numPendingQueries + status.numPendingMutations) > 0
+	const loading = (status.numPendingQueries + status.numPendingMutations) > 0
 	const errors = [
 		...status.queryError?.graphQLErrors ?? [],
 		...status.mutationError?.graphQLErrors ?? []
@@ -41,7 +41,7 @@ const Main = (props) => {
 		}),
 		h(Dashboard, {
 			...props,
-			fetching,
+			loading,
 			setRoute,
 			route
 		})

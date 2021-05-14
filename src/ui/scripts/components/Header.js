@@ -40,7 +40,7 @@ const Spinner = (props) => {
 				'header__spinner': true,
 				'header__spinner--white': props.color === 'white',
 				'header__spinner--primary': props.color === 'primary',
-				'header__spinner--visible': props.fetching === true
+				'header__spinner--visible': props.loading === true
 			})
 		})
 	)
@@ -49,12 +49,10 @@ const Spinner = (props) => {
 
 const Logo = (props) => {
 
-	const fetching = props.fetching === true
-
 	return (
 		h('div', { className: 'header__logo' },
-			h(Spinner, { color: 'white', fetching }),
-			h(Spinner, { color: 'primary', fetching })
+			h(Spinner, { color: 'white', loading: props.loading }),
+			h(Spinner, { color: 'primary', loading: props.loading })
 		)
 	)
 
@@ -119,7 +117,7 @@ const Header = (props) => {
 
 	return (
 		h('header', { className: 'header' },
-			h(Logo, { fetching: props.fetching }),
+			h(Logo, { loading: props.loading }),
 			h('nav', { className: 'header__nav' },
 				h('div', { className: 'header__buttons' },
 					props.items.map((item, index) => {
@@ -143,7 +141,7 @@ const Header = (props) => {
 }
 
 Header.propTypes = {
-	fetching: PropTypes.bool.isRequired,
+	loading: PropTypes.bool.isRequired,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 

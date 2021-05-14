@@ -17,7 +17,7 @@ const ModalEventAdd = (props) => {
 
 	const createEvent = useCreateEvent()
 
-	const fetching = createEvent.fetching === true
+	const loading = createEvent.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: '',
@@ -53,7 +53,7 @@ const ModalEventAdd = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
@@ -68,7 +68,7 @@ const ModalEventAdd = (props) => {
 				h(Select, {
 					id: typeId,
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					value: inputs.type,
 					items: [
 						{
@@ -107,8 +107,8 @@ const ModalEventAdd = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: fetching === true || props.active === false
-				}, fetching === true ? h(Spinner) : 'Add')
+					disabled: loading === true || props.active === false
+				}, loading === true ? h(Spinner) : 'Add')
 
 			)
 		)

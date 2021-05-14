@@ -21,7 +21,7 @@ const ModalEventEdit = (props) => {
 	const updateEvent = useUpdateEvent(props.id)
 	const deleteEvent = useDeleteEvent(props.id)
 
-	const fetching = updateEvent.fetching === true || deleteEvent.fetching === true
+	const loading = updateEvent.loading === true || deleteEvent.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title,
@@ -68,7 +68,7 @@ const ModalEventEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
@@ -83,7 +83,7 @@ const ModalEventEdit = (props) => {
 				h(Select, {
 					id: typeId,
 					required: true,
-					disabled: fetching === true,
+					disabled: loading === true,
 					value: inputs.type,
 					items: [
 						{
@@ -154,8 +154,8 @@ const ModalEventEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: fetching === true || props.active === false
-				}, fetching === true ? h(Spinner) : 'Save')
+					disabled: loading === true || props.active === false
+				}, loading === true ? h(Spinner) : 'Save')
 
 			)
 		)

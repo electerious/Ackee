@@ -105,7 +105,7 @@ const Dashboard = (props) => {
 				removeModal: props.removeModal
 			}),
 			h(Header, {
-				fetching: props.fetching,
+				loading: props.loading,
 				items
 			}),
 			h('main', { className: 'content' },

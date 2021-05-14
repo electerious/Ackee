@@ -20,7 +20,7 @@ const update = (id) => (cache) => {
 
 export default (id) => {
 
-	const [ mutate, { loading: fetching, error }] = useMutation(MUTATION, {
+	const [ mutate, { loading, error }] = useMutation(MUTATION, {
 		variables: {
 			id
 		}
@@ -31,7 +31,7 @@ export default (id) => {
 			update: update(id),
 			...opts
 		}),
-		fetching,
+		loading,
 		error
 	}
 
