@@ -16,6 +16,7 @@ The node server shows you the UI and receives the request from all of your sites
 - [With Heroku](#with-heroku)
 - [With Qovery](#with-qovery)
 - [With Render](#with-render)
+- [With Railway](#with-railway)
 
 ## With Docker Compose
 
@@ -269,3 +270,11 @@ Click **Deploy to Render** below and follow the prompts to set up Ackee on Rende
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/ackee)
 
 Once your deploy has finished, you are ready to start using Ackee! Visit the URL for your service to login. You can get your login credentials from the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables in the **Environment** tab of your service. By default, your username will be `render` and your password will be a randomly generated string.
+
+## With Railway
+
+You can use the [Railway](https://railway.app/) button for a one-click deployment and have Ackee running within minutes.
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2Frailwayapp%2Fexamples%2Ftree%2Fmaster%2Fexamples%2Fackee&plugins=mongodb&envs=ACKEE_USERNAME%2CACKEE_PASSWORD)
+
+Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables. Once you do that, everything should just work on it's own. Railway will automatically provision the MongoDB database for you and also link it to your Ackee deployment!
