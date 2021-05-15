@@ -1,5 +1,6 @@
 import { createElement as h, Fragment, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import PropTypes from 'prop-types'
 
 import * as routes from '../constants/routes'
 import useRoute from '../hooks/useRoute'
@@ -133,33 +134,33 @@ const FilterItem = (props) => {
 const Filter = (props) => {
 
 	const sortingButtons = [
-		createButton('Top', 'Top entries first', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_TOP),
-		createButton('New', 'New entries only', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_NEW),
-		createButton('Recent', 'Entries sorted by time', props.setFilterSorting, props.filter.sorting, sortings.SORTINGS_RECENT)
+		createButton('Top', 'Top entries first', props.setSortingFilter, props.filters.sorting, sortings.SORTINGS_TOP),
+		createButton('New', 'New entries only', props.setSortingFilter, props.filters.sorting, sortings.SORTINGS_NEW),
+		createButton('Recent', 'Entries sorted by time', props.setSortingFilter, props.filters.sorting, sortings.SORTINGS_RECENT)
 	]
 
 	const rangeButtons = [
-		createButton('24 hours', 'Show last 24 hours', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_24_HOURS),
-		createButton('7 days', 'Show last 7 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_7_DAYS),
-		createButton('30 days', 'Show last 30 days', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_30_DAYS),
-		createButton('6 months', 'Show last 6 months', props.setFilterRange, props.filter.range, ranges.RANGES_LAST_6_MONTHS)
+		createButton('24 hours', 'Show last 24 hours', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_24_HOURS),
+		createButton('7 days', 'Show last 7 days', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_7_DAYS),
+		createButton('30 days', 'Show last 30 days', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_30_DAYS),
+		createButton('6 months', 'Show last 6 months', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_6_MONTHS)
 	]
 
 	const intervalsButtons = [
-		createButton('Daily', 'Grouped by day', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_DAILY),
-		createButton('Monthly', 'Grouped by month', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_MONTHLY),
-		createButton('Yearly', 'Grouped by year', props.setFilterInterval, props.filter.interval, intervals.INTERVALS_YEARLY)
+		createButton('Daily', 'Grouped by day', props.setIntervalFilter, props.filters.interval, intervals.INTERVALS_DAILY),
+		createButton('Monthly', 'Grouped by month', props.setIntervalFilter, props.filters.interval, intervals.INTERVALS_MONTHLY),
+		createButton('Yearly', 'Grouped by year', props.setIntervalFilter, props.filters.interval, intervals.INTERVALS_YEARLY)
 	]
 
-	const sortingItem = createItem(labels.sortings[props.filter.sorting], sortingButtons)
-	const rangeItem = createItem(labels.ranges[props.filter.range], rangeButtons, props.filter.sorting === sortings.SORTINGS_TOP)
-	const intervalItem = createItem(labels.intervals[props.filter.interval], intervalsButtons)
+	const sortingItem = createItem(labels.sortings[props.filters.sorting], sortingButtons)
+	const rangeItem = createItem(labels.ranges[props.filters.range], rangeButtons, props.filters.sorting === sortings.SORTINGS_TOP)
+	const intervalItem = createItem(labels.intervals[props.filters.interval], intervalsButtons)
 
 	const routesMap = {
 		[routes.VIEWS]: [
-			createItem(labels.views[props.filter.viewsType], [
-				createButton('Unique', 'Unique site views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_UNIQUE),
-				createButton('Total', 'Total page views', props.setFilterViewsType, props.filter.viewsType, views.VIEWS_TYPE_TOTAL)
+			createItem(labels.views[props.filters.viewsType], [
+				createButton('Unique', 'Unique site views', props.setViewsTypeFilter, props.filters.viewsType, views.VIEWS_TYPE_UNIQUE),
+				createButton('Total', 'Total page views', props.setViewsTypeFilter, props.filters.viewsType, views.VIEWS_TYPE_TOTAL)
 			]),
 			intervalItem
 		],
@@ -169,10 +170,10 @@ const Filter = (props) => {
 		],
 		[routes.REFERRERS]: [
 			sortingItem,
-			createItem(labels.referrers[props.filter.referrersType], [
-				createButton('Combined', 'Prefer source parameter', props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_WITH_SOURCE),
-				createButton('↳ referrers only', undefined, props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_NO_SOURCE),
-				createButton('↳ sources only', undefined, props.setFilterReferrersType, props.filter.referrersType, referrers.REFERRERS_TYPE_ONLY_SOURCE)
+			createItem(labels.referrers[props.filters.referrersType], [
+				createButton('Combined', 'Prefer source parameter', props.setReferrersTypeFilter, props.filters.referrersType, referrers.REFERRERS_TYPE_WITH_SOURCE),
+				createButton('↳ referrers only', undefined, props.setReferrersTypeFilter, props.filters.referrersType, referrers.REFERRERS_TYPE_NO_SOURCE),
+				createButton('↳ sources only', undefined, props.setReferrersTypeFilter, props.filters.referrersType, referrers.REFERRERS_TYPE_ONLY_SOURCE)
 			]),
 			rangeItem
 		],
@@ -184,48 +185,48 @@ const Filter = (props) => {
 			sortingItem
 		],
 		[routes.SYSTEMS]: [
-			createItem(labels.sortings[props.filter.sorting], [
+			createItem(labels.sortings[props.filters.sorting], [
 				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
-					createButton('Show version', 'Include system version', props.setFilterSystemsType, props.filter.systemsType, systems.SYSTEMS_TYPE_WITH_VERSION),
-					createButton('Hide version', 'Don\'t include version', props.setFilterSystemsType, props.filter.systemsType, systems.SYSTEMS_TYPE_NO_VERSION)
+					createButton('Show version', 'Include system version', props.setSystemsTypeFilter, props.filters.systemsType, systems.SYSTEMS_TYPE_WITH_VERSION),
+					createButton('Hide version', 'Don\'t include version', props.setSystemsTypeFilter, props.filters.systemsType, systems.SYSTEMS_TYPE_NO_VERSION)
 				)
 			]),
 			rangeItem
 		],
 		[routes.DEVICES]: [
-			createItem(labels.sortings[props.filter.sorting], [
+			createItem(labels.sortings[props.filters.sorting], [
 				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
-					createButton('Show model', 'Include device model', props.setFilterDevicesType, props.filter.devicesType, devices.DEVICES_TYPE_WITH_MODEL),
-					createButton('Hide model', 'Don\'t include model', props.setFilterDevicesType, props.filter.devicesType, devices.DEVICES_TYPE_NO_MODEL)
+					createButton('Show model', 'Include device model', props.setDevicesTypeFilter, props.filters.devicesType, devices.DEVICES_TYPE_WITH_MODEL),
+					createButton('Hide model', 'Don\'t include model', props.setDevicesTypeFilter, props.filters.devicesType, devices.DEVICES_TYPE_NO_MODEL)
 				)
 			]),
 			rangeItem
 		],
 		[routes.BROWSERS]: [
-			createItem(labels.sortings[props.filter.sorting], [
+			createItem(labels.sortings[props.filters.sorting], [
 				...sortingButtons,
 				createSeparator(),
 				onlyInactiveButton(
-					createButton('Show version', 'Include browser version', props.setFilterBrowsersType, props.filter.browsersType, browsers.BROWSERS_TYPE_WITH_VERSION),
-					createButton('Hide version', 'Don\'t include version', props.setFilterBrowsersType, props.filter.browsersType, browsers.BROWSERS_TYPE_NO_VERSION)
+					createButton('Show version', 'Include browser version', props.setBrowsersTypeFilter, props.filters.browsersType, browsers.BROWSERS_TYPE_WITH_VERSION),
+					createButton('Hide version', 'Don\'t include version', props.setBrowsersTypeFilter, props.filters.browsersType, browsers.BROWSERS_TYPE_NO_VERSION)
 				)
 			]),
 			rangeItem
 		],
 		[routes.SIZES]: [
 			sortingItem,
-			createItem(labels.sizes[props.filter.sizesType], [
-				createButton('Browser sizes', 'Width and height combined', props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
-				createButton('↳ widths', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_WIDTH),
-				createButton('↳ heights', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_BROWSER_HEIGHT),
+			createItem(labels.sizes[props.filters.sizesType], [
+				createButton('Browser sizes', 'Width and height combined', props.setSizesTypeFilter, props.filters.sizesType, sizes.SIZES_TYPE_BROWSER_RESOLUTION),
+				createButton('↳ widths', undefined, props.setSizesTypeFilter, props.filters.sizesType, sizes.SIZES_TYPE_BROWSER_WIDTH),
+				createButton('↳ heights', undefined, props.setSizesTypeFilter, props.filters.sizesType, sizes.SIZES_TYPE_BROWSER_HEIGHT),
 				createSeparator(),
-				createButton('Screen sizes', 'Width and height combined', props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_SCREEN_RESOLUTION),
-				createButton('↳ widths', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_SCREEN_WIDTH),
-				createButton('↳ heights', undefined, props.setFilterSizesType, props.filter.sizesType, sizes.SIZES_TYPE_SCREEN_HEIGHT)
+				createButton('Screen sizes', 'Width and height combined', props.setSizesTypeFilter, props.filters.sizesType, sizes.SIZES_TYPE_SCREEN_RESOLUTION),
+				createButton('↳ widths', undefined, props.setSizesTypeFilter, props.filters.sizesType, sizes.SIZES_TYPE_SCREEN_WIDTH),
+				createButton('↳ heights', undefined, props.setSizesTypeFilter, props.filters.sizesType, sizes.SIZES_TYPE_SCREEN_HEIGHT)
 			]),
 			rangeItem
 		],
@@ -249,6 +250,20 @@ const Filter = (props) => {
 		document.body
 	)
 
+}
+
+Filter.propTypes = {
+	filters: PropTypes.object.isRequired,
+	setSortingFilter: PropTypes.func.isRequired,
+	setRangeFilter: PropTypes.func.isRequired,
+	setIntervalFilter: PropTypes.func.isRequired,
+	setViewsTypeFilter: PropTypes.func.isRequired,
+	setReferrersTypeFilter: PropTypes.func.isRequired,
+	setDevicesTypeFilter: PropTypes.func.isRequired,
+	setBrowsersTypeFilter: PropTypes.func.isRequired,
+	setSizesTypeFilter: PropTypes.func.isRequired,
+	setSystemsTypeFilter: PropTypes.func.isRequired,
+	route: PropTypes.string.isRequired
 }
 
 export default Filter

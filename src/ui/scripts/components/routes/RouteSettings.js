@@ -76,7 +76,7 @@ const RouteSettings = (props) => {
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
 				h(Line),
-				h(LinkItem, { type: 'button', onClick: props.resetToken }, 'Sign Out')
+				h(LinkItem, { type: 'button', onClick: props.reset }, 'Sign Out')
 			),
 
 			h(CardSetting, {

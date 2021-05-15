@@ -19,14 +19,14 @@ const cardProps = (event, props) => {
 				hookArgs: [
 					event.id,
 					{
-						interval: props.filter.interval,
+						interval: props.filters.interval,
 						type: event.type === events.EVENTS_TYPE_AVERAGE_CHART ? 'AVERAGE' : 'TOTAL',
 						limit: 7
 					}
 				],
 				renderer: RendererEventChart,
 				rendererProps: {
-					interval: props.filter.interval
+					interval: props.filters.interval
 				}
 			}
 		case events.EVENTS_TYPE_TOTAL_LIST:
@@ -36,15 +36,15 @@ const cardProps = (event, props) => {
 				hookArgs: [
 					event.id,
 					{
-						sorting: props.filter.sorting,
+						sorting: props.filters.sorting,
 						type: event.type === events.EVENTS_TYPE_AVERAGE_LIST ? 'AVERAGE' : 'TOTAL',
-						range: props.filter.range
+						range: props.filters.range
 					}
 				],
 				renderer: RendererList,
 				rendererProps: {
-					sorting: props.filter.sorting,
-					range: props.filter.range
+					sorting: props.filters.sorting,
+					range: props.filters.range
 				}
 			}
 	}

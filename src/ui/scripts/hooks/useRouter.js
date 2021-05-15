@@ -21,7 +21,7 @@ export default () => {
 	}, [])
 
 	// Use the initial location
-	const [ pathname, setLocalPathname ] = useState(parseLocation(history.location))
+	const [ route, setLocalPathname ] = useState(parseLocation(history.location))
 
 	useEffect(() => {
 
@@ -33,12 +33,15 @@ export default () => {
 	}, [ history ])
 
 	// Provide a simple wrapper for the push function
-	const setPathname = useCallback((pathname) => {
+	const setRoute = useCallback((pathname) => {
 
 		history.push({ pathname })
 
 	}, [ history ])
 
-	return [ setPathname, pathname ]
+	return {
+		setRoute,
+		route
+	}
 
 }

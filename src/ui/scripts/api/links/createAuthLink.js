@@ -1,6 +1,6 @@
 import { setContext } from '@apollo/client/link/context'
 
-import { get as getToken } from '../../reducers/token'
+import { get as getToken } from '../../hooks/useToken'
 
 export default () => {
 

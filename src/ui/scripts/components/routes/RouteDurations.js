@@ -19,13 +19,13 @@ const RouteDurations = (props) => {
 				hook: useMergedDurations,
 				hookArgs: [
 					{
-						interval: props.filter.interval,
+						interval: props.filters.interval,
 						limit: 14
 					}
 				],
 				renderer: RendererDurations,
 				rendererProps: {
-					interval: props.filter.interval
+					interval: props.filters.interval
 				}
 			}),
 			domains.value.map((domain) => {
@@ -37,13 +37,13 @@ const RouteDurations = (props) => {
 					hookArgs: [
 						domain.id,
 						{
-							interval: props.filter.interval,
+							interval: props.filters.interval,
 							limit: 7
 						}
 					],
 					renderer: RendererDurations,
 					rendererProps: {
-						interval: props.filter.interval
+						interval: props.filters.interval
 					}
 				})
 			})

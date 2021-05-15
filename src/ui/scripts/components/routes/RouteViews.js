@@ -20,18 +20,18 @@ const RouteViews = (props) => {
 				headline: ({
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
 					[VIEWS_TYPE_TOTAL]: 'Page Views'
-				})[props.filter.viewsType],
+				})[props.filters.viewsType],
 				hook: useMergedViews,
 				hookArgs: [
 					{
-						interval: props.filter.interval,
-						type: props.filter.viewsType,
+						interval: props.filters.interval,
+						type: props.filters.viewsType,
 						limit: 14
 					}
 				],
 				renderer: RendererViews,
 				rendererProps: {
-					interval: props.filter.interval
+					interval: props.filters.interval
 				}
 			}),
 			domains.value.map((domain) => {
@@ -43,14 +43,14 @@ const RouteViews = (props) => {
 					hookArgs: [
 						domain.id,
 						{
-							interval: props.filter.interval,
-							type: props.filter.viewsType,
+							interval: props.filters.interval,
+							type: props.filters.viewsType,
 							limit: 7
 						}
 					],
 					renderer: RendererViews,
 					rendererProps: {
-						interval: props.filter.interval
+						interval: props.filters.interval
 					}
 				})
 			})

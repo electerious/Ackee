@@ -19,15 +19,15 @@ const RouteReferrers = (props) => {
 			hookArgs: [
 				domain.id,
 				{
-					sorting: props.filter.sorting,
-					type: props.filter.referrersType,
-					range: props.filter.range
+					sorting: props.filters.sorting,
+					type: props.filters.referrersType,
+					range: props.filters.range
 				}
 			],
 			renderer: RendererReferrers,
 			rendererProps: {
-				sorting: props.filter.sorting,
-				range: props.filter.range
+				sorting: props.filters.sorting,
+				range: props.filters.range
 			}
 		})
 	})

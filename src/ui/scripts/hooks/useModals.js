@@ -3,8 +3,9 @@ import { useReducer, useCallback } from 'react'
 
 export const ADD_MODAL = Symbol()
 export const REMOVE_MODAL = Symbol()
+export const RESET_MODALS = Symbol()
 
-export const initialState = {}
+const initialState = {}
 
 const reducer = (state, action) => {
 
@@ -23,6 +24,8 @@ const reducer = (state, action) => {
 			const clone = { ...state }
 			delete clone[action.modalId]
 			return clone
+		case RESET_MODALS:
+			return initialState
 		default:
 			return state
 	}
@@ -44,10 +47,15 @@ export default () => {
 		modalId
 	}), [ dispatch ])
 
+	const resetModals = useCallback(() => dispatch({
+		type: RESET_MODALS
+	}), [ dispatch ])
+
 	return {
 		modals,
 		addModal,
-		removeModal
+		removeModal,
+		resetModals
 	}
 
 }

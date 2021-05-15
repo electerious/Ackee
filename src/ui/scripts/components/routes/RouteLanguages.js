@@ -19,14 +19,14 @@ const RouteLanguages = (props) => {
 			hookArgs: [
 				domain.id,
 				{
-					sorting: props.filter.sorting,
-					range: props.filter.range
+					sorting: props.filters.sorting,
+					range: props.filters.range
 				}
 			],
 			renderer: RendererList,
 			rendererProps: {
-				sorting: props.filter.sorting,
-				range: props.filter.range
+				sorting: props.filters.sorting,
+				range: props.filters.range
 			}
 		})
 	})

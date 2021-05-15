@@ -2,26 +2,22 @@ import { useReducer, useCallback } from 'react'
 
 import { version } from '../../../../package.json'
 
-// Should include the package version so we can increase the version number
-// when the structure of the state has changed to avoid loading outdated state.
-const PERSISTED_STATE_KEY = `ackee_token_${ version }`
+import createStorage from '../utils/createStorage'
 
 const SET_TOKEN = Symbol()
 const RESET_TOKEN = Symbol()
 
-export const get = () => localStorage.getItem(PERSISTED_STATE_KEY)
-const set = (state) => localStorage.setItem(PERSISTED_STATE_KEY, state)
-const reset = () => localStorage.removeItem(PERSISTED_STATE_KEY)
+// The key should include the package version so we can increase the version number
+// when the structure of the state has changed to avoid loading an outdated state.
+export const { get, set, reset } = createStorage(`ackee_token_${ version }`, undefined)
 
 const reducer = (state, action) => {
 
 	switch (action.type) {
 		case SET_TOKEN:
-			set(action.token)
-			return action.token
+			return set(action.token)
 		case RESET_TOKEN:
-			reset()
-			return
+			return reset()
 		default:
 			return state
 	}
