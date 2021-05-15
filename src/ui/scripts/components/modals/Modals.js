@@ -1,4 +1,5 @@
-import { createElement as h, Fragment } from 'react'
+import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import {
 	MODALS_DOMAIN_ADD,
@@ -7,19 +8,19 @@ import {
 	MODALS_EVENT_EDIT,
 	MODALS_PERMANENT_TOKEN_ADD,
 	MODALS_PERMANENT_TOKEN_EDIT
-} from '../constants/modals'
+} from '../../constants/modals'
 
-import Modal from './modals/Modal'
-import ModalDomainAdd from './modals/ModalDomainAdd'
-import ModalDomainEdit from './modals/ModalDomainEdit'
-import ModalEventAdd from './modals/ModalEventAdd'
-import ModalEventEdit from './modals/ModalEventEdit'
-import ModalPermanentTokenAdd from './modals/ModalPermanentTokenAdd'
-import ModalPermanentTokenEdit from './modals/ModalPermanentTokenEdit'
+import Modal from './Modal'
+import ModalDomainAdd from './ModalDomainAdd'
+import ModalDomainEdit from './ModalDomainEdit'
+import ModalEventAdd from './ModalEventAdd'
+import ModalEventEdit from './ModalEventEdit'
+import ModalPermanentTokenAdd from './ModalPermanentTokenAdd'
+import ModalPermanentTokenEdit from './ModalPermanentTokenEdit'
 
 const Modals = (props) => {
 
-	const modals = Object.entries(props.modals).map(([ modalId, modalData ], index, modals) => {
+	return Object.entries(props.modals).map(([ modalId, modalData ], index, modals) => {
 
 		const current = modals.length - 1 === index
 		const active = modalData.visible === true
@@ -63,10 +64,11 @@ const Modals = (props) => {
 
 	})
 
-	return (
-		h(Fragment, {}, ...modals)
-	)
+}
 
+Modals.propTypes = {
+	modals: PropTypes.object.isRequired,
+	removeModal: PropTypes.func.isRequired
 }
 
 export default Modals

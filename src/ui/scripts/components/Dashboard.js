@@ -7,7 +7,7 @@ import * as routes from '../constants/routes'
 import useRoute from '../hooks/useRoute'
 
 import Header, { createButton, createDropdown, createDropdownButton, createDropdownSeparator } from './Header'
-import Modals from './Modals'
+import Modals from './modals/Modals'
 
 import RouteOverview from './routes/RouteOverview'
 import RouteDomain from './routes/RouteDomain'
