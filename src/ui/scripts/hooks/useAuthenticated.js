@@ -1,5 +1,3 @@
-import { createElement as h } from 'react'
-
 import isAuthenticationError from '../utils/isAuthenticationError'
 
 export default (token, errors, reset) => {

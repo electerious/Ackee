@@ -1,4 +1,4 @@
-import { createElement as h, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import routes from '../constants/routes'
 

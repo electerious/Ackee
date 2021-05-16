@@ -1,4 +1,4 @@
-import { createElement as h, useEffect, useMemo, useCallback, useState } from 'react'
+import { useEffect, useMemo, useCallback, useState } from 'react'
 import { createHashHistory } from 'history'
 
 import routes, { defaultRoute } from '../constants/routes'

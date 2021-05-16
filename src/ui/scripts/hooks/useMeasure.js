@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useRafLoop } from 'react-use'
 import isEqual from 'react-fast-compare'
 
