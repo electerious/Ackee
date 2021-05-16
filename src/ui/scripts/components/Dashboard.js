@@ -109,7 +109,13 @@ const Dashboard = (props) => {
 				items
 			}),
 			h('main', { className: 'content' },
-				h(routeComponents[currentRoute.key], props)
+				h(routeComponents[currentRoute.key], {
+					reset: props.reset,
+					route: props.route,
+					setRoute: props.setRoute,
+					addModal: props.addModal,
+					filters: props.filters
+				})
 			)
 		)
 	)
