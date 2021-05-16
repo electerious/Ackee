@@ -10,7 +10,7 @@ const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
 	Event: {
-		statistics: (obj) => obj
+		statistics: (parent) => parent
 	},
 	Query: {
 		event: pipe(requireAuth, async (parent, { id }) => {

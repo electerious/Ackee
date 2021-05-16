@@ -10,8 +10,8 @@ const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
 	Domain: {
-		facts: (obj) => obj,
-		statistics: (obj) => obj
+		facts: (parent) => parent,
+		statistics: (parent) => parent
 	},
 	Query: {
 		domain: pipe(requireAuth, async (parent, { id }) => {
