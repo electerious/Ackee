@@ -31,7 +31,8 @@ const ModalDomainEdit = (props) => {
 			variables: {
 				input: inputs
 			}
-		}).then(props.closeModal)
+		})
+		props.closeModal()
 	}
 
 	const onDelete = (e) => {
@@ -40,7 +41,8 @@ const ModalDomainEdit = (props) => {
 		const c = confirm(`Are you sure you want to delete the domain "${ props.title }"? This action cannot be undone.`)
 		if (c === false) return
 
-		deleteDomain.mutate().then(props.closeModal)
+		deleteDomain.mutate()
+		props.closeModal()
 	}
 
 	const titleId = shortId()

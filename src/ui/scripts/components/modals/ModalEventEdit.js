@@ -36,7 +36,8 @@ const ModalEventEdit = (props) => {
 			variables: {
 				input: inputs
 			}
-		}).then(props.closeModal)
+		})
+		props.closeModal()
 	}
 
 	const onDelete = (e) => {
@@ -45,7 +46,8 @@ const ModalEventEdit = (props) => {
 		const c = confirm(`Are you sure you want to delete the event "${ props.title }"? This action cannot be undone.`)
 		if (c === false) return
 
-		deleteEvent.mutate().then(props.closeModal)
+		deleteEvent.mutate()
+		props.closeModal()
 	}
 
 	const titleId = shortId()

@@ -30,7 +30,8 @@ const ModalPermanentTokenEdit = (props) => {
 			variables: {
 				input: inputs
 			}
-		}).then(props.closeModal)
+		})
+		props.closeModal()
 	}
 
 	const onDelete = (e) => {
@@ -39,7 +40,8 @@ const ModalPermanentTokenEdit = (props) => {
 		const c = confirm(`Are you sure you want to delete the permanent token "${ props.title }"? This action cannot be undone.`)
 		if (c === false) return
 
-		deletePermanentToken.mutate().then(props.closeModal)
+		deletePermanentToken.mutate()
+		props.closeModal()
 	}
 
 	const titleId = shortId()
