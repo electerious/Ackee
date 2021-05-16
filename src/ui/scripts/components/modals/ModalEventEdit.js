@@ -7,7 +7,6 @@ import Input from '../Input'
 import Select from '../Select'
 import Textarea from '../Textarea'
 import Label from '../Label'
-import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
@@ -20,8 +19,6 @@ const ModalEventEdit = (props) => {
 
 	const updateEvent = useUpdateEvent(props.id)
 	const deleteEvent = useDeleteEvent(props.id)
-
-	const loading = updateEvent.loading === true || deleteEvent.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title,
@@ -68,7 +65,6 @@ const ModalEventEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: loading === true,
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
@@ -83,7 +79,6 @@ const ModalEventEdit = (props) => {
 				h(Select, {
 					id: typeId,
 					required: true,
-					disabled: loading === true,
 					value: inputs.type,
 					items: [
 						{
@@ -154,8 +149,8 @@ const ModalEventEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false
-				}, loading === true ? h(Spinner) : 'Save')
+					disabled: props.active === false
+				}, 'Save')
 
 			)
 		)

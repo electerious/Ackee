@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Input from '../Input'
 import Textarea from '../Textarea'
 import Label from '../Label'
-import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
 import useUpdateDomain from '../../api/hooks/domains/useUpdateDomain'
@@ -16,8 +15,6 @@ const ModalDomainEdit = (props) => {
 
 	const updateDomain = useUpdateDomain(props.id)
 	const deleteDomain = useDeleteDomain(props.id)
-
-	const loading = updateDomain.loading === true || deleteDomain.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -66,7 +63,6 @@ const ModalDomainEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: loading === true,
 					focused: true,
 					placeholder: 'Domain title',
 					value: inputs.title,
@@ -121,8 +117,8 @@ const ModalDomainEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false
-				}, loading === true ? h(Spinner) : 'Rename')
+					disabled: props.active === false
+				}, 'Rename')
 
 			)
 		)

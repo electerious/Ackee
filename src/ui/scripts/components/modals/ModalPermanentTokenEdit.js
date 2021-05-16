@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import Input from '../Input'
 import Label from '../Label'
-import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
 import useUpdatePermanentToken from '../../api/hooks/permanentTokens/useUpdatePermanentToken'
@@ -15,8 +14,6 @@ const ModalPermanentTokenEdit = (props) => {
 
 	const updatePermanentToken = useUpdatePermanentToken(props.id)
 	const deletePermanentToken = useDeletePermanentToken(props.id)
-
-	const loading = updatePermanentToken.loading === true || deletePermanentToken.loading === true
 
 	const [ inputs, setInputs ] = useState({
 		title: props.title
@@ -60,7 +57,6 @@ const ModalPermanentTokenEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: loading === true,
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
@@ -105,8 +101,8 @@ const ModalPermanentTokenEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false
-				}, loading === true ? h(Spinner) : 'Rename')
+					disabled: props.active === false
+				}, 'Rename')
 
 			)
 		)
