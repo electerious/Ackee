@@ -1,4 +1,5 @@
 import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import useDomains from '../../api/hooks/domains/useDomains'
 import useDevices from '../../api/hooks/devices/useDevices'
@@ -32,6 +33,11 @@ const RouteDevices = (props) => {
 		})
 	})
 
+}
+
+RouteDevices.propTypes = {
+	setRoute: PropTypes.func.isRequired,
+	filters: PropTypes.object.isRequired
 }
 
 export default RouteDevices

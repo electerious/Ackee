@@ -1,4 +1,5 @@
 import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import useDomains from '../../api/hooks/domains/useDomains'
 import useSizes from '../../api/hooks/sizes/useSizes'
@@ -32,6 +33,11 @@ const RouteSizes = (props) => {
 		})
 	})
 
+}
+
+RouteSizes.propTypes = {
+	setRoute: PropTypes.func.isRequired,
+	filters: PropTypes.object.isRequired
 }
 
 export default RouteSizes

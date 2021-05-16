@@ -1,4 +1,5 @@
 import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import useDomains from '../../api/hooks/domains/useDomains'
 import useReferrers from '../../api/hooks/referrers/useReferrers'
@@ -32,6 +33,11 @@ const RouteReferrers = (props) => {
 		})
 	})
 
+}
+
+RouteReferrers.propTypes = {
+	setRoute: PropTypes.func.isRequired,
+	filters: PropTypes.object.isRequired
 }
 
 export default RouteReferrers

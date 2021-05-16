@@ -1,4 +1,5 @@
 import { createElement as h, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 
@@ -57,6 +58,11 @@ const RouteViews = (props) => {
 		)
 	)
 
+}
+
+RouteViews.propTypes = {
+	setRoute: PropTypes.func.isRequired,
+	filters: PropTypes.object.isRequired
 }
 
 export default RouteViews

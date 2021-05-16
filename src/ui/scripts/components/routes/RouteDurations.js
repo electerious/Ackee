@@ -1,4 +1,5 @@
 import { createElement as h, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import useDomains from '../../api/hooks/domains/useDomains'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
@@ -50,6 +51,11 @@ const RouteDurations = (props) => {
 		)
 	)
 
+}
+
+RouteDurations.propTypes = {
+	setRoute: PropTypes.func.isRequired,
+	filters: PropTypes.object.isRequired
 }
 
 export default RouteDurations

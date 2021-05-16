@@ -1,4 +1,5 @@
 import { createElement as h, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import { version, homepage } from '../../../../../package.json'
 import useDomains from '../../api/hooks/domains/useDomains'
@@ -120,6 +121,11 @@ const RouteSettings = (props) => {
 		)
 	)
 
+}
+
+RouteSettings.propTypes = {
+	reset: PropTypes.func.isRequired,
+	addModal: PropTypes.func.isRequired
 }
 
 export default RouteSettings

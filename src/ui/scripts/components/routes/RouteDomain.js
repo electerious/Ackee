@@ -1,4 +1,5 @@
 import { createElement as h, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import { SORTINGS_TOP } from '../../../../constants/sortings'
 import { RANGES_LAST_24_HOURS } from '../../../../constants/ranges'
@@ -207,6 +208,11 @@ const RouteDomain = (props) => {
 		)
 	)
 
+}
+
+RouteDomain.propTypes = {
+	route: PropTypes.string.isRequired,
+	setRoute: PropTypes.func.isRequired
 }
 
 export default RouteDomain

@@ -1,4 +1,5 @@
 import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import * as events from '../../../../constants/events'
 
@@ -62,6 +63,10 @@ const RouteEvents = (props) => {
 		})
 	})
 
+}
+
+RouteEvents.propTypes = {
+	filters: PropTypes.object.isRequired
 }
 
 export default RouteEvents

@@ -1,4 +1,5 @@
 import { createElement as h } from 'react'
+import PropTypes from 'prop-types'
 
 import useDomains from '../../api/hooks/domains/useDomains'
 import usePages from '../../api/hooks/pages/usePages'
@@ -31,6 +32,11 @@ const RoutePages = (props) => {
 		})
 	})
 
+}
+
+RoutePages.propTypes = {
+	setRoute: PropTypes.func.isRequired,
+	filters: PropTypes.object.isRequired
 }
 
 export default RoutePages
