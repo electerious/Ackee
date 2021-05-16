@@ -15,6 +15,7 @@ import useFilters from './hooks/useFilters'
 import useAuthenticated from './hooks/useAuthenticated'
 
 import Main from './components/Main'
+import ErrorBoundary from './components/ErrorBoundary'
 
 if (window.env.isDemoMode === true) {
 	console.warn('Ackee runs in demo mode')
@@ -46,16 +47,20 @@ const App = () => {
 
 	const authenticated = useAuthenticated(token.token, status.errors, reset)
 
-	return h(ApolloProvider, { client },
-		h(Main, {
-			authenticated,
-			reset,
-			...status,
-			...router,
-			...token,
-			...modals,
-			...filters
-		})
+	return (
+		h(ApolloProvider, { client },
+			h(ErrorBoundary, { reset },
+				h(Main, {
+					authenticated,
+					reset,
+					...status,
+					...router,
+					...token,
+					...modals,
+					...filters
+				})
+			)
+		)
 	)
 
 }
