@@ -11,6 +11,7 @@ const sizes = require('../database/sizes')
 const languages = require('../database/languages')
 const pipe = require('../utils/pipe')
 const domainIds = require('../utils/domainIds')
+const recursiveId = require('../utils/recursiveId')
 const requireAuth = require('../middlewares/requireAuth')
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
 		id: pipe(requireAuth, async (domain) => {
 
 			const ids = await domainIds(domain)
-			return ids.join(';')
+			return recursiveId(...ids)
 
 		}),
 		views: pipe(requireAuth, async (domain, { type, interval, limit }, { dateDetails }) => {

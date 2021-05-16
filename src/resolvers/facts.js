@@ -1,20 +1,21 @@
 'use strict'
 
-const facts = require('../database/facts')
-const pipe = require('../utils/pipe')
-const requireAuth = require('../middlewares/requireAuth')
 const views = require('../database/views')
-const viewsType = require('../constants/views')
+const facts = require('../database/facts')
 const durations = require('../database/durations')
-const domainIds = require('../utils/domainIds')
+const viewsType = require('../constants/views')
 const intervals = require('../constants/intervals')
+const pipe = require('../utils/pipe')
+const domainIds = require('../utils/domainIds')
+const recursiveId = require('../utils/recursiveId')
+const requireAuth = require('../middlewares/requireAuth')
 
 module.exports = {
 	Facts: {
 		id: pipe(requireAuth, async (domain) => {
 
 			const ids = await domainIds(domain)
-			return ids.join(';')
+			return recursiveId(...ids)
 
 		}),
 		activeVisitors: pipe(requireAuth, async (domain, _, { dateDetails }) => {

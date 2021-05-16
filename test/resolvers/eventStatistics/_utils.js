@@ -9,6 +9,7 @@ const getStats = async ({ base, token, eventId, fragment }) => {
 			query fetchStatistics($id: ID!) {
 				event(id: $id) {
 					statistics {
+						id
 						${ fragment }
 					}
 				}
