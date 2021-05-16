@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package.json'
@@ -11,6 +11,7 @@ import Spinner from '../Spinner'
 import Message from '../Message'
 
 import useCreateToken from '../../api/hooks/tokens/useCreateToken'
+import useInputs from '../../hooks/useInputs'
 
 const OverlayLogin = (props) => {
 
@@ -19,14 +20,9 @@ const OverlayLogin = (props) => {
 	const hasError = createToken.error != null
 	const loading = createToken.loading === true
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		username: window.env.isDemoMode === true ? 'admin' : '',
 		password: window.env.isDemoMode === true ? '123456' : ''
-	})
-
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
 	})
 
 	const onSubmit = (e) => {
@@ -64,7 +60,7 @@ const OverlayLogin = (props) => {
 					focused: true,
 					placeholder: 'Username',
 					value: inputs.username,
-					onChange: onChange('username')
+					onChange: onInputChange('username')
 				}),
 				h(Input, {
 					type: 'password',
@@ -72,7 +68,7 @@ const OverlayLogin = (props) => {
 					disabled: loading === true,
 					placeholder: 'Password',
 					value: inputs.password,
-					onChange: onChange('password')
+					onChange: onInputChange('password')
 				}),
 
 				h(Spacer, { size: 1 })

@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 
 import Input from '../Input'
 import Label from '../Label'
@@ -6,6 +6,7 @@ import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
 import useCreatePermanentToken from '../../api/hooks/permanentTokens/useCreatePermanentToken'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
@@ -15,13 +16,8 @@ const ModalPermanentTokenAdd = (props) => {
 
 	const loading = createPermanentToken.loading === true
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		title: ''
-	})
-
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
 	})
 
 	const onSubmit = (e) => {
@@ -51,7 +47,7 @@ const ModalPermanentTokenAdd = (props) => {
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
-					onChange: onChange('title')
+					onChange: onInputChange('title')
 				})
 
 			),

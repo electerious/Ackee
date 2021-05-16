@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import Input from '../Input'
@@ -7,6 +7,7 @@ import Spacer from '../Spacer'
 
 import useUpdatePermanentToken from '../../api/hooks/permanentTokens/useUpdatePermanentToken'
 import useDeletePermanentToken from '../../api/hooks/permanentTokens/useDeletePermanentToken'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
@@ -15,13 +16,8 @@ const ModalPermanentTokenEdit = (props) => {
 	const updatePermanentToken = useUpdatePermanentToken(props.id)
 	const deletePermanentToken = useDeletePermanentToken(props.id)
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		title: props.title
-	})
-
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
 	})
 
 	const onSubmit = (e) => {
@@ -62,7 +58,7 @@ const ModalPermanentTokenEdit = (props) => {
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
-					onChange: onChange('title')
+					onChange: onInputChange('title')
 				}),
 
 				h(Label, { htmlFor: idId }, 'Permanent token id'),

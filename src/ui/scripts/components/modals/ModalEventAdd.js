@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 
 import * as events from '../../../../constants/events'
 
@@ -10,6 +10,7 @@ import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
 import useCreateEvent from '../../api/hooks/events/useCreateEvent'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
@@ -19,14 +20,9 @@ const ModalEventAdd = (props) => {
 
 	const loading = createEvent.loading === true
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		title: '',
 		type: events.EVENTS_TYPE_TOTAL_CHART
-	})
-
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
 	})
 
 	const onSubmit = (e) => {
@@ -57,7 +53,7 @@ const ModalEventAdd = (props) => {
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
-					onChange: onChange('title')
+					onChange: onInputChange('title')
 				}),
 
 				h('div', { className: 'card__group' },
@@ -88,7 +84,7 @@ const ModalEventAdd = (props) => {
 							label: 'List with average values'
 						}
 					],
-					onChange: onChange('type')
+					onChange: onInputChange('type')
 				})
 
 			),

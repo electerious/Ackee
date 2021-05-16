@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import * as events from '../../../../constants/events'
@@ -12,6 +12,7 @@ import Tooltip from '../Tooltip'
 
 import useUpdateEvent from '../../api/hooks/events/useUpdateEvent'
 import useDeleteEvent from '../../api/hooks/events/useDeleteEvent'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
@@ -20,14 +21,9 @@ const ModalEventEdit = (props) => {
 	const updateEvent = useUpdateEvent(props.id)
 	const deleteEvent = useDeleteEvent(props.id)
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		title: props.title,
 		type: props.type
-	})
-
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
 	})
 
 	const onSubmit = (e) => {
@@ -70,7 +66,7 @@ const ModalEventEdit = (props) => {
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
-					onChange: onChange('title')
+					onChange: onInputChange('title')
 				}),
 
 				h('div', { className: 'card__group' },
@@ -100,7 +96,7 @@ const ModalEventEdit = (props) => {
 							label: 'List with average values'
 						}
 					],
-					onChange: onChange('type')
+					onChange: onInputChange('type')
 				}),
 
 				h(Label, { htmlFor: idId }, 'Event id'),

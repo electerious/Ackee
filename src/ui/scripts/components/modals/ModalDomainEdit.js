@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import Input from '../Input'
@@ -8,6 +8,7 @@ import Spacer from '../Spacer'
 
 import useUpdateDomain from '../../api/hooks/domains/useUpdateDomain'
 import useDeleteDomain from '../../api/hooks/domains/useDeleteDomain'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
@@ -16,13 +17,8 @@ const ModalDomainEdit = (props) => {
 	const updateDomain = useUpdateDomain(props.id)
 	const deleteDomain = useDeleteDomain(props.id)
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		title: props.title
-	})
-
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
 	})
 
 	const onSubmit = (e) => {
@@ -68,7 +64,7 @@ const ModalDomainEdit = (props) => {
 					focused: true,
 					placeholder: 'Domain title',
 					value: inputs.title,
-					onChange: onChange('title')
+					onChange: onInputChange('title')
 				}),
 
 				h(Label, { htmlFor: idId }, 'Domain id'),
