@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { createNetworkStatusNotifier } from 'react-apollo-network-status'
 
 export default () => {
@@ -8,7 +9,9 @@ export default () => {
 		const status = useApolloNetworkStatus()
 
 		const loading = (status.numPendingQueries + status.numPendingMutations) > 0
-		const errors = [ ...status.queryError?.graphQLErrors ?? [], ...status.mutationError?.graphQLErrors ?? [] ]
+		const errors = useMemo(() => {
+			return [ ...status.queryError?.graphQLErrors ?? [], ...status.mutationError?.graphQLErrors ?? [] ]
+		}, [ status.queryError, status.mutationError ])
 
 		return {
 			loading,
