@@ -1,4 +1,4 @@
-import { createElement as h, useState, useEffect } from 'react'
+import { createElement as h, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { SORTINGS_NEW, SORTINGS_RECENT } from '../../../../constants/sortings'
@@ -24,8 +24,8 @@ const RendererReferrers = (props) => {
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
-	const onEnter = (index) => setActive(index)
-	const onLeave = () => setActive()
+	const onEnter = useCallback((index) => setActive(index), [ setActive ])
+	const onLeave = useCallback(() => setActive(), [ setActive ])
 
 	const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT, props.sorting === SORTINGS_NEW)
 	useEffect(() => props.setStatusLabel(label), [ label ])

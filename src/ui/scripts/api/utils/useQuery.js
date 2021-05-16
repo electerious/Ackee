@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useQuery } from '@apollo/client'
 
 import status from '../../utils/status'
@@ -10,11 +11,21 @@ export default (query, selector, enhancer, opts) => {
 		...opts
 	})
 
-	const value = selector(data)
+	const selection = useMemo(() => {
+		return selector(data)
+	}, [ data ])
+
+	const _value = useMemo(() => {
+		return enhancer(selection)
+	}, [ selection ])
+
+	const _status = useMemo(() => {
+		return status(selection, loading)
+	}, [ selection, loading ])
 
 	return {
-		value: enhancer(value),
-		status: status(value, loading)
+		value: _value,
+		status: _status
 	}
 
 }

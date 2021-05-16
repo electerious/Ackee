@@ -1,4 +1,4 @@
-import { createElement as h, useState, useEffect } from 'react'
+import { createElement as h, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY } from '../../../../constants/intervals'
@@ -29,8 +29,8 @@ const RendererChart = (props) => {
 	// Index of the active element
 	const [ active, setActive ] = useState(0)
 
-	const onEnter = (index) => setActive(index)
-	const onLeave = () => setActive(0)
+	const onEnter = useCallback((index) => setActive(index), [ setActive ])
+	const onLeave = useCallback(() => setActive(0), [ setActive ])
 
 	const label = textLabel(active, props.interval)
 	useEffect(() => props.setStatusLabel(label), [ label ])
