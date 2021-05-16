@@ -13,7 +13,7 @@ import Message from '../Message'
 const OverlayFailure = (props) => {
 
 	const onClick = () => {
-		props.resetToken()
+		props.reset()
 		window.location.hash = ''
 		window.location.reload()
 	}

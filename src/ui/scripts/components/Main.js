@@ -17,7 +17,7 @@ const Main = (props) => {
 	const hasErrors = props.errors.length > 0
 	if (hasErrors === true) return h(OverlayFailure, {
 		errors: props.errors,
-		resetToken: props.resetToken
+		reset: props.reset
 	})
 
 	return h(Fragment, {},
@@ -34,12 +34,7 @@ const Main = (props) => {
 			setSystemsTypeFilter: props.setSystemsTypeFilter,
 			route: props.route
 		}),
-		h(Dashboard, {
-			...props,
-			loading: props.loading,
-			setRoute: props.setRoute,
-			route: props.route
-		})
+		h(Dashboard, props)
 	)
 
 }
