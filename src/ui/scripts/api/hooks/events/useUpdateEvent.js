@@ -23,7 +23,20 @@ export default (id) => {
 	})
 
 	return {
-		mutate,
+		mutate: (opts) => mutate({
+			optimisticResponse: {
+				updateEvent: {
+					payload: {
+						id: id,
+						title: opts.variables.input.title,
+						type: opts.variables.input.type,
+						__typename: 'Event'
+					},
+					__typename: 'UpdateEventPayload'
+				}
+			},
+			...opts
+		}),
 		loading,
 		error
 	}

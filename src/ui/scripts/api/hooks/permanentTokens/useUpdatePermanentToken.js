@@ -23,7 +23,19 @@ export default (id) => {
 	})
 
 	return {
-		mutate,
+		mutate: (opts) => mutate({
+			optimisticResponse: {
+				updatePermanentToken: {
+					payload: {
+						id: id,
+						title: opts.variables.input.title,
+						__typename: 'PermanentToken'
+					},
+					__typename: 'UpdatePermanentTokenPayload'
+				}
+			},
+			...opts
+		}),
 		loading,
 		error
 	}

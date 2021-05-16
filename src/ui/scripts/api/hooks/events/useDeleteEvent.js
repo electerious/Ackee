@@ -10,10 +10,13 @@ const MUTATION = gql`
 	}
 `
 
-const update = (id) => (cache) => {
+const update = (id) => (cache, result) => {
+	const success = result.data.deleteEvent.success
+	if (success === false) return
+
 	cache.modify({
 		fields: {
-			domains: deleteIdModify(id)
+			events: deleteIdModify(id)
 		}
 	})
 }
@@ -29,6 +32,12 @@ export default (id) => {
 	return {
 		mutate: (opts) => mutate({
 			update: update(id),
+			optimisticResponse: {
+				deleteEvent: {
+					success: true,
+					__typename: 'DeleteEventPayload'
+				}
+			},
 			...opts
 		}),
 		loading,
