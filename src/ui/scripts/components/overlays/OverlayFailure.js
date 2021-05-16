@@ -70,7 +70,7 @@ const OverlayFailure = (props) => {
 
 OverlayFailure.propTypes = {
 	errors: PropTypes.array.isRequired,
-	resetToken: PropTypes.func.isRequired
+	reset: PropTypes.func.isRequired
 }
 
 export default OverlayFailure

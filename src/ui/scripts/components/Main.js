@@ -1,9 +1,7 @@
 import { createElement as h, Fragment } from 'react'
-import { withErrorBoundary } from 'react-error-boundary'
 
 import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
-import ErrorFallback from './ErrorFallback'
 import Filter from './Filter'
 import Dashboard from './Dashboard'
 
@@ -39,6 +37,4 @@ const Main = (props) => {
 
 }
 
-export default withErrorBoundary(Main, {
-	FallbackComponent: ErrorFallback
-})
+export default Main
