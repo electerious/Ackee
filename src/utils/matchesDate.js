@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (day, month, year, date) => {
 
 	const isDay = day === date.getDate() || day == null

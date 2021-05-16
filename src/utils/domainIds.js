@@ -1,3 +1,5 @@
+'use strict'
+
 const debouncePromise = require('debounce-promise')
 
 const domains = require('../database/domains')
