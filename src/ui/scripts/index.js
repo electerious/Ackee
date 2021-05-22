@@ -43,7 +43,7 @@ const App = () => {
 		modals.resetModals()
 		filters.resetFilters()
 		client.clearStore()
-	}, [ token.resetToken, client.resetStore ])
+	}, [ token.resetToken, modals.resetModals, filters.resetFilters, client.resetStore ])
 
 	const authenticated = useAuthenticated(token.token, status.errors, reset)
 
