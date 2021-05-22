@@ -32,7 +32,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 	const enhance = (entries) => {
 
 		return entries.map((entry) => ({
-			id: entry._id.source || entry._id.siteReferrer,
+			value: entry._id.source || entry._id.siteReferrer,
 			count: entry.count,
 			created: entry.created
 		}))

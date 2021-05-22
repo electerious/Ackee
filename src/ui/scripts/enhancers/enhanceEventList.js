@@ -1,7 +1,7 @@
 export default (listEntries = []) => {
 
 	return listEntries.map((listEntry) => ({
-		text: listEntry.id,
+		text: listEntry.value,
 		count: listEntry.count,
 		date: listEntry.created == null ? null : new Date(listEntry.created)
 	}))

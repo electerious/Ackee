@@ -44,7 +44,7 @@ const get = async (ids, type, interval, limit, dateDetails) => {
 			})
 
 			return {
-				id: date,
+				value: date,
 				count: entry == null ? 0 : entry.count
 			}
 

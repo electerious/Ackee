@@ -261,7 +261,6 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var $b=()=>Cg(Vb,(e=>e?.facts),zb),Qb=Mh`
 	fragment viewsField on DomainStatistics {
 		views(interval: $interval, type: $type, limit: $limit) {
-			id
 			count
 		}
 	}
@@ -277,7 +276,6 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var Kb=e=>Cg(Wb,(e=>e?.statistics.views),(t=>Bb(t,e.limit)),{variables:e}),Hb=Mh`
 	fragment durationsField on DomainStatistics {
 		durations(interval: $interval, limit: $limit) {
-			id
 			count
 		}
 	}
@@ -293,12 +291,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var Jb=e=>Cg(Gb,(e=>e?.statistics.durations),(t=>Yb(t,e.limit)),{variables:e}),Xb=Mh`
 	fragment pagesField on DomainStatistics {
 		pages(sorting: $sorting, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,Zb=(e=[])=>e.map((e=>({url:new URL(e.id),text:new URL(e.id).href,count:e.count,date:null==e.created?null:new Date(e.created)})));const ew=Mh`
+`,Zb=(e=[])=>e.map((e=>({url:new URL(e.value),text:new URL(e.value).href,count:e.count,date:null==e.created?null:new Date(e.created)})));const ew=Mh`
 	query fetchMergedPages($sorting: Sorting!, $range: Range) {
 		statistics {
 			id
@@ -310,12 +308,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var tw=e=>Cg(ew,(e=>e?.statistics.pages),Zb,{variables:e}),nw=Mh`
 	fragment referrersField on DomainStatistics {
 		referrers(sorting: $sorting, type: $type, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,rw=function(e){if("string"!=typeof e)return!1;var t=e.match(iw);if(!t)return!1;var n=t[1];if(!n)return!1;if(aw.test(n)||ow.test(n))return!0;return!1},iw=/^(?:\w+:)?\/\/(\S+)$/,aw=/^localhost[\:?\d]*(?:[^\:?\d]\S*)?$/,ow=/^[^\s\.]+\.\S{2,}$/;var sw=(e=[])=>e.map((e=>({url:!0===rw(e.id)?new URL(e.id):null,text:!0===rw(e.id)?new URL(e.id).href:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const lw=Mh`
+`,rw=function(e){if("string"!=typeof e)return!1;var t=e.match(iw);if(!t)return!1;var n=t[1];if(!n)return!1;if(aw.test(n)||ow.test(n))return!0;return!1},iw=/^(?:\w+:)?\/\/(\S+)$/,aw=/^localhost[\:?\d]*(?:[^\:?\d]\S*)?$/,ow=/^[^\s\.]+\.\S{2,}$/;var sw=(e=[])=>e.map((e=>({url:!0===rw(e.value)?new URL(e.value):null,text:!0===rw(e.value)?new URL(e.value).href:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const lw=Mh`
 	query fetchMergedReferrers($sorting: Sorting!, $type: ReferrerType!, $range: Range) {
 		statistics {
 			id
@@ -327,12 +325,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var uw=e=>Cg(lw,(e=>e?.statistics.referrers),sw,{variables:e}),cw=Mh`
 	fragment systemsField on DomainStatistics {
 		systems(sorting: $sorting, type: $type, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,fw=(e=[])=>e.map((e=>({text:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const dw=Mh`
+`,fw=(e=[])=>e.map((e=>({text:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const dw=Mh`
 	query fetchMergedSystems($sorting: Sorting!, $type: SystemType!, $range: Range) {
 		statistics {
 			id
@@ -344,12 +342,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var pw=e=>Cg(dw,(e=>e?.statistics.systems),fw,{variables:e}),hw=Mh`
 	fragment devicesField on DomainStatistics {
 		devices(sorting: $sorting, type: $type, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,vw=(e=[])=>e.map((e=>({text:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const mw=Mh`
+`,vw=(e=[])=>e.map((e=>({text:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const mw=Mh`
 	query fetchMergedDevices($sorting: Sorting!, $type: DeviceType!, $range: Range) {
 		statistics {
 			id
@@ -361,12 +359,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var yw=e=>Cg(mw,(e=>e?.statistics.devices),vw,{variables:e}),gw=Mh`
 	fragment browsersField on DomainStatistics {
 		browsers(sorting: $sorting, type: $type, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,bw=(e=[])=>e.map((e=>({text:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const ww=Mh`
+`,bw=(e=[])=>e.map((e=>({text:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const ww=Mh`
 	query fetchMergedBrowsers($sorting: Sorting!, $type: BrowserType!, $range: Range) {
 		statistics {
 			id
@@ -378,12 +376,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var Ew=e=>Cg(ww,(e=>e?.statistics.browsers),bw,{variables:e}),kw=Mh`
 	fragment sizesField on DomainStatistics {
 		sizes(sorting: $sorting, type: $type, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,Sw=(e=[])=>e.map((e=>({text:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const _w=Mh`
+`,Sw=(e=[])=>e.map((e=>({text:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const _w=Mh`
 	query fetchMergedSizes($sorting: Sorting!, $type: SizeType!, $range: Range) {
 		statistics {
 			id
@@ -395,12 +393,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var xw=e=>Cg(_w,(e=>e?.statistics.sizes),Sw,{variables:e}),Ow=Mh`
 	fragment languagesField on DomainStatistics {
 		languages(sorting: $sorting, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,Tw=(e=[])=>e.map((e=>({text:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const Nw=Mh`
+`,Tw=(e=[])=>e.map((e=>({text:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const Nw=Mh`
 	query fetchMergedLanguages($sorting: Sorting!, $range: Range) {
 		statistics {
 			id
@@ -539,7 +537,6 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var ZE=()=>Cg(XE,(e=>e?.events),((e=[])=>e),{fetchPolicy:"cache-first",nextFetchPolicy:"cache-first"}),ek=Mh`
 	fragment chartField on EventStatistics {
 		chart(interval: $interval, type: $type, limit: $limit) {
-			id
 			count
 		}
 	}
@@ -558,12 +555,12 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 `;var nk=(e,t)=>Cg(tk,(e=>e?.event.chart),(e=>((e=[],t)=>Ub(t).map(((t,n)=>{const r=e[n];return null==r?0:r.count})))(e,t.limit)),{variables:{...t,id:e}}),rk=Mh`
 	fragment listField on EventStatistics {
 		list(sorting: $sorting, type: $type, range: $range) {
-			id
+			value
 			count
 			created
 		}
 	}
-`,ik=(e=[])=>e.map((e=>({text:e.id,count:e.count,date:null==e.created?null:new Date(e.created)})));const ak=Mh`
+`,ik=(e=[])=>e.map((e=>({text:e.value,count:e.count,date:null==e.created?null:new Date(e.created)})));const ak=Mh`
 	query fetchEventChartEntries($id: ID!, $sorting: Sorting!, $type: EventListType!, $range: Range) {
 		event(id: $id) {
 			id
@@ -583,4 +580,4 @@ var ag="undefined"!=typeof navigator&&navigator.userAgent.toLowerCase().indexOf(
 	}
 
 	${Rb}
-`;const yk=e=>u.createElement("div",{className:"card card--wide"},u.createElement("div",{className:"card__inner"},u.createElement(ky,{type:"h2",size:"medium"},e.headline),u.createElement(wy,{size:1.6}),e.children));yk.propTypes={headline:my.string.isRequired,children:my.oneOfType([my.arrayOf(my.node),my.node]).isRequired};const gk=e=>u.createElement(e.type,{onClick:e.onClick,href:e.href,target:e.target,className:Ey({linkItem:!0,"linkItem--disabled":!0===e.disabled,link:!0})},u.createElement("span",{},e.children),null!=e.text&&u.createElement("span",{},e.text));gk.propTypes={type:my.oneOf(["p","a","button"]).isRequired,href:my.string,target:my.string,onClick:my.func,disabled:my.bool,text:my.string,children:my.node.isRequired};const bk=()=>u.createElement("hr",{className:"line"}),wk=e=>u.createElement(_y,{status:"warning"},`Loading ${e.label}...`),Ek=e=>{const t=Pg(),n=ZE(),r=Cg(mk,(e=>e?.permanentTokens),((e=[])=>e),{fetchPolicy:"cache-first",nextFetchPolicy:"cache-first"}),i=(t,n={})=>{e.addModal({type:t,props:n})},a=(e,t,n,r)=>[...e.map((e=>[u.createElement(gk,{type:"button",text:e.id,onClick:()=>t(e)},e.title),u.createElement(bk)])).flat(),u.createElement(gk,{type:"button",onClick:n},r)],o=u.createElement(wk,{label:"domains"}),s=u.createElement(wk,{label:"events"}),l=u.createElement(wk,{label:"permanent tokens"}),c=a(t.value,(e=>i(Yg,e)),(()=>i(Hg)),"New domain"),f=a(n.value,(e=>i(Jg,e)),(()=>i(Gg)),"New event"),d=a(r.value,(e=>i(Zg,e)),(()=>i(Xg)),"New permanent token");return u.createElement(u.Fragment,{},u.createElement(yk,{headline:"Account"},u.createElement(gk,{type:"p",disabled:!0,text:Hh},"Version"),u.createElement(bk),u.createElement(gk,{type:"button",onClick:e.reset},"Sign Out")),u.createElement(yk,{headline:"Domains"},...!0===t.status.isInitializing?[o]:c),u.createElement(yk,{headline:"Events"},...!0===n.status.isInitializing?[s]:f),u.createElement(yk,{headline:"Permanent Tokens"},...!0===r.status.isInitializing?[l]:d),u.createElement(yk,{headline:"Donate"},u.createElement(gk,{type:"a",href:"https://github.com/sponsors/electerious",target:"_blank",rel:"noopener"},"Become a GitHub sponsor"),u.createElement(bk),u.createElement(gk,{type:"a",href:"https://www.buymeacoffee.com/electerious",target:"_blank",rel:"noopener"},"Buy me a coffee"),u.createElement(bk),u.createElement(gk,{type:"a",href:"https://paypal.me/electerious",target:"_blank",rel:"noopener"},"Donate via PayPal")),u.createElement(yk,{headline:"Help"},u.createElement(gk,{type:"a",href:"https://ackee.electerious.com",target:"_blank",rel:"noopener"},"Website and documentation"),u.createElement(bk),u.createElement(gk,{type:"a",href:Yh,target:"_blank",rel:"noopener"},"Ackee on GitHub"),u.createElement(bk),u.createElement(gk,{type:"a",href:"https://github.com/electerious/ackee-tracker",target:"_blank",rel:"noopener"},"Add Ackee to your sites")))};Ek.propTypes={reset:my.func.isRequired,addModal:my.func.isRequired};const kk={[vv]:OE,[mv]:KE,[yv]:HE,[gv]:YE,[bv]:GE,[wv]:JE,[Ev]:ck,[kv]:fk,[Sv]:dk,[_v]:pk,[xv]:hk,[Ov]:vk,[Tv]:Ek},Sk=e=>{const t=Dy(e.route);u.useEffect((()=>{document.scrollingElement.scrollTop=0}),[e.route]);const n=Pg();Rg("o",(()=>e.setRoute("/"))),Rg("v",(()=>e.setRoute("/insights/views"))),Rg("p",(()=>e.setRoute("/insights/pages"))),Rg("r",(()=>e.setRoute("/insights/referrers"))),Rg("d",(()=>e.setRoute("/insights/durations"))),Rg("e",(()=>e.setRoute("/insights/events"))),Rg("s",(()=>e.setRoute("/settings"))),Rg("0,1,2,3,4,5,6,7,8,9",((t,{key:r})=>((e,t,n)=>{const r=e[n];null!=r&&t(`/domains/${r.id}`)})(n.value,e.setRoute,r)),[n.value]);const r=n.value.length>0,i=n.value.map(((t,n)=>Wg(t.title,`/domains/${t.id}`,e.route,e.setRoute,((e,t)=>e<t?e:void 0)(n,10)))),a=[Wg("Views","/insights/views",e.route,e.setRoute,"v"),Wg("Pages","/insights/pages",e.route,e.setRoute,"p"),Wg("Referrers","/insights/referrers",e.route,e.setRoute,"r"),Wg("Durations","/insights/durations",e.route,e.setRoute,"d"),Kg(),Wg("Events","/insights/events",e.route,e.setRoute,"e"),Kg(),Wg("Systems","/insights/systems",e.route,e.setRoute),Wg("Devices","/insights/devices",e.route,e.setRoute),Wg("Browsers","/insights/browsers",e.route,e.setRoute),Wg("Sizes","/insights/sizes",e.route,e.setRoute),Wg("Languages","/insights/languages",e.route,e.setRoute)],o=[Ug("Overview","/",e.route,e.setRoute),!0===r?Bg((e=>null==e?"Domains":e.label),i):void 0,Bg((e=>null==e?"Insights":e.label),a),Ug("Settings","/settings",e.route,e.setRoute)].filter(Boolean);return u.createElement("div",{},u.createElement(Lb,{modals:e.modals,removeModal:e.removeModal}),u.createElement(Qg,{loading:e.loading,items:o}),u.createElement("main",{className:"content"},u.createElement(kk[t.key],{reset:e.reset,route:e.route,setRoute:e.setRoute,addModal:e.addModal,filters:e.filters})))},_k=e=>{if(!0===(!1===e.authenticated))return u.createElement(Iy,{setToken:e.setToken});return!0===e.errors.length>0?u.createElement(xy,{errors:e.errors,reset:e.reset}):u.createElement(u.Fragment,{},u.createElement(ig,{filters:e.filters,setSortingFilter:e.setSortingFilter,setRangeFilter:e.setRangeFilter,setIntervalFilter:e.setIntervalFilter,setViewsTypeFilter:e.setViewsTypeFilter,setReferrersTypeFilter:e.setReferrersTypeFilter,setDevicesTypeFilter:e.setDevicesTypeFilter,setBrowsersTypeFilter:e.setBrowsersTypeFilter,setSizesTypeFilter:e.setSizesTypeFilter,setSystemsTypeFilter:e.setSystemsTypeFilter,route:e.route}),u.createElement(Sk,e))},xk=class extends u.Component{constructor(e){super(e),this.state={error:void 0}}static getDerivedStateFromError(e){return{error:e}}render(){return!0===(null!=this.state.error)?u.createElement(xy,{errors:[this.state.error],reset:this.props.reset}):this.props.children}};xk.propTypes={reset:my.func.isRequired},!0===window.env.isDemoMode&&console.warn("Ackee runs in demo mode");const{statusLink:Ok,useStatus:Tk}=(()=>{const{link:e,useApolloNetworkStatus:t}=Kh.createNetworkStatusNotifier();return{statusLink:e,useStatus:()=>{const e=t();return{loading:e.numPendingQueries+e.numPendingMutations>0,errors:u.useMemo((()=>[...e.queryError?.graphQLErrors??[],...e.mutationError?.graphQLErrors??[]]),[e.queryError,e.mutationError])}}}})(),Nk=(Rk=[Ok,(Ck=(e,{headers:t})=>({headers:{...t,Authorization:`Bearer ${Zh()}`}}),new md((function(e,t){var n=$c(e,[]);return new Nf((function(r){var i;return Promise.resolve(n).then((function(t){return Ck(t,e.getContext())})).then(e.setContext).then((function(){i=t(e).subscribe({next:r.next.bind(r),error:r.error.bind(r),complete:r.complete.bind(r)})})).catch(r.error.bind(r)),function(){i&&i.unsubscribe()}}))}))),new av({uri:"/api",headers:{"Time-Zone":ov}})],new Oh({link:gd(Rk),cache:new mh({})}));var Rk,Ck;yu.render(u.createElement((()=>{u.useEffect((()=>{if(0!=(!0===navigator.platform.includes("Win")))return document.body.classList.add("customScrollbar"),()=>document.body.classList.remove("customScrollbar")}),[]);const e=Tk(),t=Iv(),n=(()=>{const[e,t]=u.useReducer(nv,Zh());return{token:e,setToken:u.useCallback((e=>t({type:Jh,token:e})),[t]),resetToken:u.useCallback((()=>t({type:Xh})),[t])}})(),r=(()=>{const[e,t]=u.useReducer(nm,tm);return{modals:e,addModal:u.useCallback((e=>t({type:Xv,modalId:Jv(),payload:e})),[t]),removeModal:u.useCallback((e=>t({type:Zv,modalId:e})),[t]),resetModals:u.useCallback((()=>t({type:em})),[t])}})(),i=(()=>{const[e,t]=u.useReducer(Qm,zm());return{filters:e,setSortingFilter:u.useCallback((e=>t({type:Cm,payload:e})),[t]),setRangeFilter:u.useCallback((e=>t({type:Im,payload:e})),[t]),setIntervalFilter:u.useCallback((e=>t({type:Dm,payload:e})),[t]),setViewsTypeFilter:u.useCallback((e=>t({type:Pm,payload:e})),[t]),setReferrersTypeFilter:u.useCallback((e=>t({type:Am,payload:e})),[t]),setDevicesTypeFilter:u.useCallback((e=>t({type:Fm,payload:e})),[t]),setBrowsersTypeFilter:u.useCallback((e=>t({type:Mm,payload:e})),[t]),setSizesTypeFilter:u.useCallback((e=>t({type:Lm,payload:e})),[t]),setSystemsTypeFilter:u.useCallback((e=>t({type:qm,payload:e})),[t]),resetFilters:u.useCallback((()=>t({type:jm})),[t])}})(),a=u.useCallback((()=>{n.resetToken(),r.resetModals(),i.resetFilters(),Nk.clearStore()}),[n.resetToken,Nk.resetStore]),o=((e,t,n)=>!1!=(null!=e)&&(1!=t.filter(Bm).length>0||(n(),!1)))(n.token,e.errors,a);return u.createElement(Bf,{client:Nk},u.createElement(xk,{reset:a},u.createElement(_k,{authenticated:o,reset:a,...e,...t,...n,...r,...i})))})),document.querySelector("#main"))}();
+`;const yk=e=>u.createElement("div",{className:"card card--wide"},u.createElement("div",{className:"card__inner"},u.createElement(ky,{type:"h2",size:"medium"},e.headline),u.createElement(wy,{size:1.6}),e.children));yk.propTypes={headline:my.string.isRequired,children:my.oneOfType([my.arrayOf(my.node),my.node]).isRequired};const gk=e=>u.createElement(e.type,{onClick:e.onClick,href:e.href,target:e.target,className:Ey({linkItem:!0,"linkItem--disabled":!0===e.disabled,link:!0})},u.createElement("span",{},e.children),null!=e.text&&u.createElement("span",{},e.text));gk.propTypes={type:my.oneOf(["p","a","button"]).isRequired,href:my.string,target:my.string,onClick:my.func,disabled:my.bool,text:my.string,children:my.node.isRequired};const bk=()=>u.createElement("hr",{className:"line"}),wk=e=>u.createElement(_y,{status:"warning"},`Loading ${e.label}...`),Ek=e=>{const t=Pg(),n=ZE(),r=Cg(mk,(e=>e?.permanentTokens),((e=[])=>e),{fetchPolicy:"cache-first",nextFetchPolicy:"cache-first"}),i=(t,n={})=>{e.addModal({type:t,props:n})},a=(e,t,n,r)=>[...e.map((e=>[u.createElement(gk,{type:"button",text:e.id,onClick:()=>t(e)},e.title),u.createElement(bk)])).flat(),u.createElement(gk,{type:"button",onClick:n},r)],o=u.createElement(wk,{label:"domains"}),s=u.createElement(wk,{label:"events"}),l=u.createElement(wk,{label:"permanent tokens"}),c=a(t.value,(e=>i(Yg,e)),(()=>i(Hg)),"New domain"),f=a(n.value,(e=>i(Jg,e)),(()=>i(Gg)),"New event"),d=a(r.value,(e=>i(Zg,e)),(()=>i(Xg)),"New permanent token");return u.createElement(u.Fragment,{},u.createElement(yk,{headline:"Account"},u.createElement(gk,{type:"p",disabled:!0,text:Hh},"Version"),u.createElement(bk),u.createElement(gk,{type:"button",onClick:e.reset},"Sign Out")),u.createElement(yk,{headline:"Domains"},...!0===t.status.isInitializing?[o]:c),u.createElement(yk,{headline:"Events"},...!0===n.status.isInitializing?[s]:f),u.createElement(yk,{headline:"Permanent Tokens"},...!0===r.status.isInitializing?[l]:d),u.createElement(yk,{headline:"Donate"},u.createElement(gk,{type:"a",href:"https://github.com/sponsors/electerious",target:"_blank",rel:"noopener"},"Become a GitHub sponsor"),u.createElement(bk),u.createElement(gk,{type:"a",href:"https://www.buymeacoffee.com/electerious",target:"_blank",rel:"noopener"},"Buy me a coffee"),u.createElement(bk),u.createElement(gk,{type:"a",href:"https://paypal.me/electerious",target:"_blank",rel:"noopener"},"Donate via PayPal")),u.createElement(yk,{headline:"Help"},u.createElement(gk,{type:"a",href:"https://ackee.electerious.com",target:"_blank",rel:"noopener"},"Website and documentation"),u.createElement(bk),u.createElement(gk,{type:"a",href:Yh,target:"_blank",rel:"noopener"},"Ackee on GitHub"),u.createElement(bk),u.createElement(gk,{type:"a",href:"https://github.com/electerious/ackee-tracker",target:"_blank",rel:"noopener"},"Add Ackee to your sites")))};Ek.propTypes={reset:my.func.isRequired,addModal:my.func.isRequired};const kk={[vv]:OE,[mv]:KE,[yv]:HE,[gv]:YE,[bv]:GE,[wv]:JE,[Ev]:ck,[kv]:fk,[Sv]:dk,[_v]:pk,[xv]:hk,[Ov]:vk,[Tv]:Ek},Sk=e=>{const t=Dy(e.route);u.useEffect((()=>{document.scrollingElement.scrollTop=0}),[e.route]);const n=Pg();Rg("o",(()=>e.setRoute("/"))),Rg("v",(()=>e.setRoute("/insights/views"))),Rg("p",(()=>e.setRoute("/insights/pages"))),Rg("r",(()=>e.setRoute("/insights/referrers"))),Rg("d",(()=>e.setRoute("/insights/durations"))),Rg("e",(()=>e.setRoute("/insights/events"))),Rg("s",(()=>e.setRoute("/settings"))),Rg("0,1,2,3,4,5,6,7,8,9",((t,{key:r})=>((e,t,n)=>{const r=e[n];null!=r&&t(`/domains/${r.id}`)})(n.value,e.setRoute,r)),[n.value]);const r=n.value.length>0,i=n.value.map(((t,n)=>Wg(t.title,`/domains/${t.id}`,e.route,e.setRoute,((e,t)=>e<t?e:void 0)(n,10)))),a=[Wg("Views","/insights/views",e.route,e.setRoute,"v"),Wg("Pages","/insights/pages",e.route,e.setRoute,"p"),Wg("Referrers","/insights/referrers",e.route,e.setRoute,"r"),Wg("Durations","/insights/durations",e.route,e.setRoute,"d"),Kg(),Wg("Events","/insights/events",e.route,e.setRoute,"e"),Kg(),Wg("Systems","/insights/systems",e.route,e.setRoute),Wg("Devices","/insights/devices",e.route,e.setRoute),Wg("Browsers","/insights/browsers",e.route,e.setRoute),Wg("Sizes","/insights/sizes",e.route,e.setRoute),Wg("Languages","/insights/languages",e.route,e.setRoute)],o=[Ug("Overview","/",e.route,e.setRoute),!0===r?Bg((e=>null==e?"Domains":e.label),i):void 0,Bg((e=>null==e?"Insights":e.label),a),Ug("Settings","/settings",e.route,e.setRoute)].filter(Boolean);return u.createElement("div",{},u.createElement(Lb,{modals:e.modals,removeModal:e.removeModal}),u.createElement(Qg,{loading:e.loading,items:o}),u.createElement("main",{className:"content"},u.createElement(kk[t.key],{reset:e.reset,route:e.route,setRoute:e.setRoute,addModal:e.addModal,filters:e.filters})))},_k=e=>{if(!0===(!1===e.authenticated))return u.createElement(Iy,{setToken:e.setToken});return!0===e.errors.length>0?u.createElement(xy,{errors:e.errors,reset:e.reset}):u.createElement(u.Fragment,{},u.createElement(ig,{filters:e.filters,setSortingFilter:e.setSortingFilter,setRangeFilter:e.setRangeFilter,setIntervalFilter:e.setIntervalFilter,setViewsTypeFilter:e.setViewsTypeFilter,setReferrersTypeFilter:e.setReferrersTypeFilter,setDevicesTypeFilter:e.setDevicesTypeFilter,setBrowsersTypeFilter:e.setBrowsersTypeFilter,setSizesTypeFilter:e.setSizesTypeFilter,setSystemsTypeFilter:e.setSystemsTypeFilter,route:e.route}),u.createElement(Sk,e))},xk=class extends u.Component{constructor(e){super(e),this.state={error:void 0}}static getDerivedStateFromError(e){return{error:e}}render(){return!0===(null!=this.state.error)?u.createElement(xy,{errors:[this.state.error],reset:this.props.reset}):this.props.children}};xk.propTypes={reset:my.func.isRequired},!0===window.env.isDemoMode&&console.warn("Ackee runs in demo mode");const{statusLink:Ok,useStatus:Tk}=(()=>{const{link:e,useApolloNetworkStatus:t}=Kh.createNetworkStatusNotifier();return{statusLink:e,useStatus:()=>{const e=t();return{loading:e.numPendingQueries+e.numPendingMutations>0,errors:u.useMemo((()=>[...e.queryError?.graphQLErrors??[],...e.mutationError?.graphQLErrors??[]]),[e.queryError,e.mutationError])}}}})(),Nk=(Rk=[Ok,(Ck=(e,{headers:t})=>({headers:{...t,Authorization:`Bearer ${Zh()}`}}),new md((function(e,t){var n=$c(e,[]);return new Nf((function(r){var i;return Promise.resolve(n).then((function(t){return Ck(t,e.getContext())})).then(e.setContext).then((function(){i=t(e).subscribe({next:r.next.bind(r),error:r.error.bind(r),complete:r.complete.bind(r)})})).catch(r.error.bind(r)),function(){i&&i.unsubscribe()}}))}))),new av({uri:"/api",headers:{"Time-Zone":ov}})],new Oh({link:gd(Rk),cache:new mh({})}));var Rk,Ck;yu.render(u.createElement((()=>{u.useEffect((()=>{if(0!=(!0===navigator.platform.includes("Win")))return document.body.classList.add("customScrollbar"),()=>document.body.classList.remove("customScrollbar")}),[]);const e=Tk(),t=Iv(),n=(()=>{const[e,t]=u.useReducer(nv,Zh());return{token:e,setToken:u.useCallback((e=>t({type:Jh,token:e})),[t]),resetToken:u.useCallback((()=>t({type:Xh})),[t])}})(),r=(()=>{const[e,t]=u.useReducer(nm,tm);return{modals:e,addModal:u.useCallback((e=>t({type:Xv,modalId:Jv(),payload:e})),[t]),removeModal:u.useCallback((e=>t({type:Zv,modalId:e})),[t]),resetModals:u.useCallback((()=>t({type:em})),[t])}})(),i=(()=>{const[e,t]=u.useReducer(Qm,zm());return{filters:e,setSortingFilter:u.useCallback((e=>t({type:Cm,payload:e})),[t]),setRangeFilter:u.useCallback((e=>t({type:Im,payload:e})),[t]),setIntervalFilter:u.useCallback((e=>t({type:Dm,payload:e})),[t]),setViewsTypeFilter:u.useCallback((e=>t({type:Pm,payload:e})),[t]),setReferrersTypeFilter:u.useCallback((e=>t({type:Am,payload:e})),[t]),setDevicesTypeFilter:u.useCallback((e=>t({type:Fm,payload:e})),[t]),setBrowsersTypeFilter:u.useCallback((e=>t({type:Mm,payload:e})),[t]),setSizesTypeFilter:u.useCallback((e=>t({type:Lm,payload:e})),[t]),setSystemsTypeFilter:u.useCallback((e=>t({type:qm,payload:e})),[t]),resetFilters:u.useCallback((()=>t({type:jm})),[t])}})(),a=u.useCallback((()=>{n.resetToken(),r.resetModals(),i.resetFilters(),Nk.clearStore()}),[n.resetToken,r.resetModals,i.resetFilters,Nk.resetStore]),o=((e,t,n)=>!1!=(null!=e)&&(1!=t.filter(Bm).length>0||(n(),!1)))(n.token,e.errors,a);return u.createElement(Bf,{client:Nk},u.createElement(xk,{reset:a},u.createElement(_k,{authenticated:o,reset:a,...e,...t,...n,...r,...i})))})),document.querySelector("#main"))}();

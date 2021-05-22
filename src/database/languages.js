@@ -20,7 +20,7 @@ const get = async (ids, sorting, range, limit, dateDetails) => {
 	const enhance = (entries) => {
 
 		return entries.map((entry) => ({
-			id: languageCodes[entry._id.siteLanguage] || entry._id.siteLanguage,
+			value: languageCodes[entry._id.siteLanguage] || entry._id.siteLanguage,
 			count: entry.count,
 			created: entry.created
 		}))

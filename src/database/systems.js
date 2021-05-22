@@ -34,7 +34,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 	const enhance = (entries) => {
 
 		return entries.map((entry) => ({
-			id: enhanceId(entry._id),
+			value: enhanceId(entry._id),
 			count: entry.count,
 			created: entry.created
 		}))

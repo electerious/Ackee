@@ -91,7 +91,7 @@ const getChart = async (ids, type, interval, limit, dateDetails) => {
 			})
 
 			return {
-				id: date,
+				value: date,
 				count: entry == null ? 0 : entry.count
 			}
 
@@ -110,7 +110,7 @@ const getList = async (ids, sorting, type, range, limit, dateDetails) => {
 	const enhance = (entries) => {
 
 		return entries.map((entry) => ({
-			id: entry._id.key,
+			value: entry._id.key,
 			count: entry.count,
 			created: entry.created
 		}))

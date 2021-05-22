@@ -29,7 +29,7 @@ module.exports = gql`
 		"""
 		Date of the event.
 		"""
-		id: DateTime!
+		value: DateTime!
 		"""
 		Sum of values on that date.
 		"""
@@ -40,7 +40,7 @@ module.exports = gql`
 		"""
 		Key of the event.
 		"""
-		id: String!
+		value: String!
 		"""
 		Sum of values of the current event key.
 		"""

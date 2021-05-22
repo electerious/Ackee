@@ -18,7 +18,7 @@ module.exports = gql`
 		"""
 		Date of visits.
 		"""
-		id: DateTime!
+		value: DateTime!
 		"""
 		Amount of occurrences.
 		"""
@@ -29,7 +29,7 @@ module.exports = gql`
 		"""
 		URL of the page.
 		"""
-		id: URL!
+		value: URL!
 		"""
 		Amount of occurrences.
 		"""
@@ -59,7 +59,7 @@ module.exports = gql`
 		"""
 		Either the URL of the referrer or the source parameter of the page to indicate where the visit comes from.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -74,7 +74,7 @@ module.exports = gql`
 		"""
 		Date of average duration.
 		"""
-		id: DateTime!
+		value: DateTime!
 		"""
 		Average duration in milliseconds.
 		"""
@@ -96,7 +96,7 @@ module.exports = gql`
 		"""
 		Name of the system. With or without the version.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -122,7 +122,7 @@ module.exports = gql`
 		"""
 		Name of the device. With or without the model.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -148,7 +148,7 @@ module.exports = gql`
 		"""
 		Name of the browser. With or without the version.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -190,7 +190,7 @@ module.exports = gql`
 		"""
 		Screen or browser width, height or resolution.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -205,7 +205,7 @@ module.exports = gql`
 		"""
 		Name of the language or language code when unknown.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
