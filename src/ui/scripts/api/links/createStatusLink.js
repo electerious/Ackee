@@ -10,7 +10,13 @@ export default () => {
 
 		const loading = (status.numPendingQueries + status.numPendingMutations) > 0
 		const errors = useMemo(() => {
-			return [ ...status.queryError?.graphQLErrors ?? [], ...status.mutationError?.graphQLErrors ?? [] ]
+			return [
+				status.queryError?.networkError,
+				status.mutationError?.networkError
+			]
+				.concat(status.queryError?.graphQLErrors)
+				.concat(status.mutationError?.graphQLErrors)
+				.filter(Boolean)
 		}, [ status.queryError, status.mutationError ])
 
 		return {
