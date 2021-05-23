@@ -20,7 +20,7 @@ const QUERY = gql`
 
 export default (id, filters) => {
 
-	const selector = (data) => data?.event.chart
+	const selector = (data) => data?.event.statistics.chart
 	const enhancer = (value) => enhanceEventChart(value, filters.limit)
 
 	return useQuery(QUERY, selector, enhancer, {
