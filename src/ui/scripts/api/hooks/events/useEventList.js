@@ -5,7 +5,7 @@ import listField from '../../fragments/listField'
 import enhanceEventList from '../../../enhancers/enhanceEventList'
 
 const QUERY = gql`
-	query fetchEventChartEntries($id: ID!, $sorting: Sorting!, $type: EventListType!, $range: Range) {
+	query fetchEventListEntries($id: ID!, $sorting: Sorting!, $type: EventListType!, $range: Range) {
 		event(id: $id) {
 			id
 			statistics {
