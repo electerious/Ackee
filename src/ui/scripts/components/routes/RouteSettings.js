@@ -54,12 +54,12 @@ const RouteSettings = (props) => {
 		h(LinkItem, { type: 'button', onClick: createFn }, createLabel)
 	]
 
-	const showDomainAddModal = () => showModal(MODALS_DOMAIN_ADD)
-	const showDomainEditModal = (domain) => showModal(MODALS_DOMAIN_EDIT, domain)
-	const showEventAddModal = () => showModal(MODALS_EVENT_ADD)
-	const showEventEditModal = (event) => showModal(MODALS_EVENT_EDIT, event)
-	const showPermanentTokenAddModal = () => showModal(MODALS_PERMANENT_TOKEN_ADD)
-	const showPermanentTokenEditModal = (permanentToken) => showModal(MODALS_PERMANENT_TOKEN_EDIT, permanentToken)
+	const showDomainAddModal = () => props.addModal(MODALS_DOMAIN_ADD)
+	const showDomainEditModal = (domain) => props.addModal(MODALS_DOMAIN_EDIT, domain)
+	const showEventAddModal = () => props.addModal(MODALS_EVENT_ADD)
+	const showEventEditModal = (event) => props.addModal(MODALS_EVENT_EDIT, event)
+	const showPermanentTokenAddModal = () => props.addModal(MODALS_PERMANENT_TOKEN_ADD)
+	const showPermanentTokenEditModal = (permanentToken) => props.addModal(MODALS_PERMANENT_TOKEN_EDIT, permanentToken)
 
 	const domainsLoading = h(LoadingMessage, { label: 'domains' })
 	const eventsLoading = h(LoadingMessage, { label: 'events' })

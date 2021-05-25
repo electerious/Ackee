@@ -36,10 +36,13 @@ export default () => {
 
 	const [ modals, dispatch ] = useReducer(reducer, initialState)
 
-	const addModal = useCallback((payload) => dispatch({
+	const addModal = useCallback((type, props) => dispatch({
 		type: ADD_MODAL,
 		modalId: shortId(),
-		payload
+		payload: {
+			type,
+			props
+		}
 	}), [ dispatch ])
 
 	const removeModal = useCallback((modalId) => dispatch({

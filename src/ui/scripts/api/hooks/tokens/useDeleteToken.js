@@ -8,13 +8,9 @@ const MUTATION = gql`
 	}
 `
 
-export default (id) => {
+export default () => {
 
-	const [ mutate, { loading, error }] = useMutation(MUTATION, {
-		variables: {
-			id
-		}
-	})
+	const [ mutate, { loading, error }] = useMutation(MUTATION)
 
 	return {
 		mutate,
