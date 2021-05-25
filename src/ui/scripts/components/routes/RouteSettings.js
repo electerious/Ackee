@@ -2,6 +2,7 @@ import { createElement as h, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { version, homepage } from '../../../../../package.json'
+import useDeleteToken from '../../api/hooks/tokens/useDeleteToken'
 import useDomains from '../../api/hooks/domains/useDomains'
 import useEvents from '../../api/hooks/events/useEvents'
 import usePermanentTokens from '../../api/hooks/permanentTokens/usePermanentTokens'
@@ -27,17 +28,19 @@ const LoadingMessage = (props) => {
 
 const RouteSettings = (props) => {
 
+	const deleteToken = useDeleteToken()
+
 	const domains = useDomains()
 	const events = useEvents()
 	const permanentTokens = usePermanentTokens()
 
-	const showModal = (type, data = {}) => {
-
-		props.addModal({
-			type,
-			props: data
+	const onSignOut = async () => {
+		await deleteToken.mutate({
+			variables: {
+				id: props.token
+			}
 		})
-
+		props.reset()
 	}
 
 	const createItems = (items, editFn, createFn, createLabel) => [
@@ -77,7 +80,7 @@ const RouteSettings = (props) => {
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
 				h(Line),
-				h(LinkItem, { type: 'button', onClick: props.reset }, 'Sign Out')
+				h(LinkItem, { type: 'button', onClick: onSignOut }, 'Sign Out')
 			),
 
 			h(CardSetting, {
@@ -125,6 +128,7 @@ const RouteSettings = (props) => {
 
 RouteSettings.propTypes = {
 	reset: PropTypes.func.isRequired,
+	token: PropTypes.string.isRequired,
 	addModal: PropTypes.func.isRequired
 }
 

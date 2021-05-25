@@ -20,13 +20,14 @@ const ModalPermanentTokenAdd = (props) => {
 		title: ''
 	})
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		createPermanentToken.mutate({
+		await createPermanentToken.mutate({
 			variables: {
 				input: inputs
 			}
-		}).then(props.closeModal)
+		})
+		props.closeModal()
 	}
 
 	const titleId = shortId()

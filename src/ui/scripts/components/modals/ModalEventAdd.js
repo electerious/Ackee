@@ -25,13 +25,14 @@ const ModalEventAdd = (props) => {
 		type: events.EVENTS_TYPE_TOTAL_CHART
 	})
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		createEvent.mutate({
+		await createEvent.mutate({
 			variables: {
 				input: inputs
 			}
-		}).then(props.closeModal)
+		})
+		props.closeModal()
 	}
 
 	const titleId = shortId()

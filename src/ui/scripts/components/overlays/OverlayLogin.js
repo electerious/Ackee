@@ -25,15 +25,14 @@ const OverlayLogin = (props) => {
 		password: window.env.isDemoMode === true ? '123456' : ''
 	})
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		createToken.mutate({
+		const { data } = await createToken.mutate({
 			variables: {
 				input: inputs
 			}
-		}).then(({ data }) => {
-			props.setToken(data.createToken.payload.id)
 		})
+		props.setToken(data.createToken.payload.id)
 	}
 
 	return (

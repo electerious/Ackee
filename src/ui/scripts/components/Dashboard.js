@@ -113,6 +113,7 @@ const Dashboard = (props) => {
 					reset: props.reset,
 					route: props.route,
 					setRoute: props.setRoute,
+					token: props.token,
 					addModal: props.addModal,
 					filters: props.filters
 				})

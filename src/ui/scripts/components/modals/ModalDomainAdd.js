@@ -20,13 +20,14 @@ const ModalDomainAdd = (props) => {
 		title: ''
 	})
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		createDomain.mutate({
+		await createDomain.mutate({
 			variables: {
 				input: inputs
 			}
-		}).then(props.closeModal)
+		})
+		props.closeModal()
 	}
 
 	const titleId = shortId()
