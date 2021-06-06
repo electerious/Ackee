@@ -23,7 +23,7 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			pages(sorting: ${ variables.sorting }, range: ${ variables.range }${ limit }) {
-				id
+				value
 				count
 				created
 			}
@@ -40,7 +40,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, pages) => {
 	t.is(pages.length, 1)
-	t.is(pages[0].id, 'https://example.com/')
+	t.is(pages[0].value, 'https://example.com/')
 })
 
 test(macro, {
@@ -48,7 +48,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, pages) => {
 	t.is(pages.length, 14)
-	t.is(pages[0].id, 'https://example.com/')
+	t.is(pages[0].value, 'https://example.com/')
 })
 
 test(macro, {
@@ -57,7 +57,7 @@ test(macro, {
 	limit: 1,
 }, (t, pages) => {
 	t.is(pages.length, 1)
-	t.is(pages[0].id, 'https://example.com/')
+	t.is(pages[0].value, 'https://example.com/')
 })
 
 test(macro, {
@@ -65,5 +65,5 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, pages) => {
 	t.is(pages.length, 1)
-	t.is(pages[0].id, 'https://example.com/')
+	t.is(pages[0].value, 'https://example.com/')
 })

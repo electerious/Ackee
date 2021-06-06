@@ -24,7 +24,7 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			durations(interval: ${ variables.interval }${ limit }) {
-				id
+				value
 				count
 			}
 		`,

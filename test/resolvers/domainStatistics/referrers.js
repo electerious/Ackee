@@ -23,7 +23,7 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			referrers(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
-				id
+				value
 				count
 				created
 			}
@@ -41,7 +41,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 2)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
@@ -50,7 +50,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 14)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -60,7 +60,7 @@ test(macro, {
 	limit: 1,
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -69,7 +69,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 2)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -78,7 +78,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -87,7 +87,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 14)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -97,7 +97,7 @@ test(macro, {
 	limit: 1,
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -106,7 +106,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
@@ -115,7 +115,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
@@ -124,7 +124,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 9)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
@@ -134,7 +134,7 @@ test(macro, {
 	limit: 1,
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
@@ -143,5 +143,5 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })

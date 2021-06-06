@@ -23,7 +23,7 @@ const macro = async (t, variables, assertions) => {
 		eventId: t.context.event.id,
 		fragment: `
 			list(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
-				id
+				value
 				count
 				created
 			}
@@ -41,7 +41,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, entries) => {
 	t.is(entries.length, 14)
-	t.is(entries[0].id, 'Key 14')
+	t.is(entries[0].value, 'Key 14')
 	t.is(entries[0].count, 14)
 })
 
@@ -51,7 +51,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, entries) => {
 	t.is(entries.length, 14)
-	t.is(entries[0].id, 'Key 14')
+	t.is(entries[0].value, 'Key 14')
 	t.is(entries[0].count, 14)
 })
 
@@ -61,7 +61,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, entries) => {
 	t.is(entries.length, 14)
-	t.is(entries[0].id, 'Key 1')
+	t.is(entries[0].value, 'Key 1')
 })
 
 test(macro, {
@@ -71,7 +71,7 @@ test(macro, {
 	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
-	t.is(entries[0].id, 'Key 1')
+	t.is(entries[0].value, 'Key 1')
 })
 
 test(macro, {
@@ -80,6 +80,6 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, entries) => {
 	t.is(entries.length, 14)
-	t.true(entries[0].id.includes('Key'))
+	t.true(entries[0].value.includes('Key'))
 	t.is(typeof entries[0].count, 'number')
 })

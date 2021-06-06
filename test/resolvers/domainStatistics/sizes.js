@@ -23,7 +23,7 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			sizes(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
-				id
+				value
 				count
 				created
 			}
@@ -41,7 +41,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px')
+	t.is(sizes[0].value, '414px')
 })
 
 test(macro, {
@@ -50,7 +50,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '719px')
+	t.is(sizes[0].value, '719px')
 })
 
 test(macro, {
@@ -59,7 +59,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px x 719px')
+	t.is(sizes[0].value, '414px x 719px')
 })
 
 test(macro, {
@@ -68,7 +68,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 14)
-	t.is(sizes[0].id, '414px')
+	t.is(sizes[0].value, '414px')
 })
 
 test(macro, {
@@ -77,7 +77,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 14)
-	t.is(sizes[0].id, '719px')
+	t.is(sizes[0].value, '719px')
 })
 
 test(macro, {
@@ -86,7 +86,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 14)
-	t.is(sizes[0].id, '414px x 719px')
+	t.is(sizes[0].value, '414px x 719px')
 })
 
 test(macro, {
@@ -96,7 +96,7 @@ test(macro, {
 	limit: 1,
 }, (t, sizes) => {
 	t.is(sizes.length, 1)
-	t.is(sizes[0].id, '414px x 719px')
+	t.is(sizes[0].value, '414px x 719px')
 })
 
 test(macro, {
@@ -105,7 +105,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px')
+	t.is(sizes[0].value, '414px')
 })
 
 test(macro, {
@@ -114,7 +114,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '719px')
+	t.is(sizes[0].value, '719px')
 })
 
 test(macro, {
@@ -123,7 +123,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px x 719px')
+	t.is(sizes[0].value, '414px x 719px')
 })
 
 test(macro, {
@@ -132,7 +132,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px')
+	t.is(sizes[0].value, '414px')
 })
 
 test(macro, {
@@ -141,7 +141,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '896px')
+	t.is(sizes[0].value, '896px')
 })
 
 test(macro, {
@@ -150,7 +150,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px x 896px')
+	t.is(sizes[0].value, '414px x 896px')
 })
 
 test(macro, {
@@ -159,7 +159,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 14)
-	t.is(sizes[0].id, '414px')
+	t.is(sizes[0].value, '414px')
 })
 
 test(macro, {
@@ -168,7 +168,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 14)
-	t.is(sizes[0].id, '896px')
+	t.is(sizes[0].value, '896px')
 })
 
 test(macro, {
@@ -177,7 +177,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 14)
-	t.is(sizes[0].id, '414px x 896px')
+	t.is(sizes[0].value, '414px x 896px')
 })
 
 test(macro, {
@@ -187,7 +187,7 @@ test(macro, {
 	limit: 1,
 }, (t, sizes) => {
 	t.is(sizes.length, 1)
-	t.is(sizes[0].id, '414px x 896px')
+	t.is(sizes[0].value, '414px x 896px')
 })
 
 test(macro, {
@@ -196,7 +196,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px')
+	t.is(sizes[0].value, '414px')
 })
 
 test(macro, {
@@ -205,7 +205,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '896px')
+	t.is(sizes[0].value, '896px')
 })
 
 test(macro, {
@@ -214,5 +214,5 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
-	t.is(sizes[0].id, '414px x 896px')
+	t.is(sizes[0].value, '414px x 896px')
 })

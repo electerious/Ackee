@@ -23,7 +23,7 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			devices(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
-				id
+				value
 				count
 				created
 			}
@@ -41,7 +41,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
-	t.is(devices[0].id, 'Apple')
+	t.is(devices[0].value, 'Apple')
 })
 
 test(macro, {
@@ -50,7 +50,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 14)
-	t.is(devices[0].id, 'Apple')
+	t.is(devices[0].value, 'Apple')
 })
 
 test(macro, {
@@ -60,7 +60,7 @@ test(macro, {
 	limit: 1,
 }, (t, devices) => {
 	t.is(devices.length, 1)
-	t.is(devices[0].id, 'Apple')
+	t.is(devices[0].value, 'Apple')
 })
 
 test(macro, {
@@ -69,7 +69,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
-	t.is(devices[0].id, 'Apple')
+	t.is(devices[0].value, 'Apple')
 })
 
 test(macro, {
@@ -78,7 +78,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
-	t.is(devices[0].id, 'Apple iPhone')
+	t.is(devices[0].value, 'Apple iPhone')
 })
 
 test(macro, {
@@ -87,7 +87,7 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 14)
-	t.is(devices[0].id, 'Apple iPhone')
+	t.is(devices[0].value, 'Apple iPhone')
 })
 
 test(macro, {
@@ -97,7 +97,7 @@ test(macro, {
 	limit: 1,
 }, (t, devices) => {
 	t.is(devices.length, 1)
-	t.is(devices[0].id, 'Apple iPhone')
+	t.is(devices[0].value, 'Apple iPhone')
 })
 
 test(macro, {
@@ -106,5 +106,5 @@ test(macro, {
 	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
-	t.is(devices[0].id, 'Apple iPhone')
+	t.is(devices[0].value, 'Apple iPhone')
 })

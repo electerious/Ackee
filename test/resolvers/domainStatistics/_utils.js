@@ -21,6 +21,10 @@ const getStats = async ({ base, token, domainId, fragment }) => {
 
 	const { json } = await api(base, body, token)
 
+	if (json.errors != null) {
+		throw new Error(json.errors[0].message)
+	}
+
 	return json.data.domain.statistics
 }
 

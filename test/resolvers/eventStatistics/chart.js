@@ -23,7 +23,7 @@ const macro = async (t, variables, assertions) => {
 		eventId: t.context.event.id,
 		fragment: `
 			chart(type: ${ variables.type }, interval: ${ variables.interval }${ limit }) {
-				id
+				value
 				count
 			}
 		`,
