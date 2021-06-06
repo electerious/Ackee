@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+This release contains a refactored front-end that takes advantage of the GraphQL API that has been in Ackee since version 2. Better caching and instant domain, event and permanent token updates.
+
 ### Changed
 
 - `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id field
