@@ -36,24 +36,19 @@ const routeComponents = {
 	[routes.BROWSERS]: RouteBrowsers,
 	[routes.SIZES]: RouteSizes,
 	[routes.LANGUAGES]: RouteLanguages,
-	[routes.SETTINGS]: RouteSettings
+	[routes.SETTINGS]: RouteSettings,
 }
 
 const gotoDomainWhenDefined = (domains, setRoute, index) => {
-
 	const domain = domains[index]
 	if (domain != null) setRoute(`/domains/${ domain.id }`)
-
 }
 
 const Dashboard = (props) => {
-
 	const currentRoute = useRoute(props.route)
 
 	useEffect(() => {
-
 		document.scrollingElement.scrollTop = 0
-
 	}, [ props.route ])
 
 	const domains = useDomains()
@@ -72,8 +67,7 @@ const Dashboard = (props) => {
 	const domainsLabel = (activeItem) => activeItem == null ? 'Domains' : activeItem.label
 	const insightsLabel = (activeItem) => activeItem == null ? 'Insights' : activeItem.label
 
-	const domainsItems = domains.value.map((domain, index) =>
-		createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10))
+	const domainsItems = domains.value.map((domain, index) => createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10)),
 	)
 
 	const insightsItems = [
@@ -88,25 +82,25 @@ const Dashboard = (props) => {
 		createDropdownButton('Devices', '/insights/devices', props.route, props.setRoute),
 		createDropdownButton('Browsers', '/insights/browsers', props.route, props.setRoute),
 		createDropdownButton('Sizes', '/insights/sizes', props.route, props.setRoute),
-		createDropdownButton('Languages', '/insights/languages', props.route, props.setRoute)
+		createDropdownButton('Languages', '/insights/languages', props.route, props.setRoute),
 	]
 
 	const items = [
 		createButton('Overview', '/', props.route, props.setRoute),
 		hasDomains === true ? createDropdown(domainsLabel, domainsItems) : undefined,
 		createDropdown(insightsLabel, insightsItems),
-		createButton('Settings', '/settings', props.route, props.setRoute)
+		createButton('Settings', '/settings', props.route, props.setRoute),
 	].filter(Boolean)
 
 	return (
 		h('div', {},
 			h(Modals, {
 				modals: props.modals,
-				removeModal: props.removeModal
+				removeModal: props.removeModal,
 			}),
 			h(Header, {
 				loading: props.loading,
-				items
+				items,
 			}),
 			h('main', { className: 'content' },
 				h(routeComponents[currentRoute.key], {
@@ -115,12 +109,11 @@ const Dashboard = (props) => {
 					setRoute: props.setRoute,
 					token: props.token,
 					addModal: props.addModal,
-					filters: props.filters
-				})
-			)
+					filters: props.filters,
+				}),
+			),
 		)
 	)
-
 }
 
 export default Dashboard

@@ -8,5 +8,5 @@ const exists = name != null && name !== ''
 module.exports = {
 	exists,
 	url: exists === true ? `/${ encodeURIComponent(name) }.js` : undefined,
-	path: exists === true ? `${ sanitizeFilename(name) }.js` : undefined
+	path: exists === true ? `${ sanitizeFilename(name) }.js` : undefined,
 }

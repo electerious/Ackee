@@ -24,22 +24,20 @@ const update = (cache, result) => {
 			events: (...args) => {
 				const newRef = cache.writeFragment({ data, fragment })
 				return addAndSortModify(newRef, 'title')(...args)
-			}
-		}
+			},
+		},
 	})
 }
 
 export default () => {
-
 	const [ mutate, { loading, error }] = useMutation(MUTATION)
 
 	return {
-		mutate: (opts) => mutate({
+		mutate: (options) => mutate({
 			update,
-			...opts
+			...options,
 		}),
 		loading,
-		error
+		error,
 	}
-
 }

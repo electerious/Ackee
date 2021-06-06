@@ -11,21 +11,20 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalDomainAdd = (props) => {
-
 	const createDomain = useCreateDomain()
 
 	const loading = createDomain.loading === true
 
 	const [ inputs, onInputChange ] = useInputs({
-		title: ''
+		title: '',
 	})
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
 		await createDomain.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.closeModal()
 	}
@@ -48,8 +47,8 @@ const ModalDomainAdd = (props) => {
 					focused: true,
 					placeholder: 'Domain title',
 					value: inputs.title,
-					onChange: onInputChange('title')
-				})
+					onChange: onInputChange('title'),
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -58,26 +57,25 @@ const ModalDomainAdd = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false
-				}, loading === true ? h(Spinner) : 'Add')
+					disabled: loading === true || props.active === false,
+				}, loading === true ? h(Spinner) : 'Add'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalDomainAdd.propTypes = {
-	...commonModalProps
+	...commonModalProps,
 }
 
 export default ModalDomainAdd

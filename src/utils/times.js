@@ -9,5 +9,5 @@ module.exports = {
 	second,
 	minute,
 	hour,
-	day
+	day,
 }

@@ -15,22 +15,21 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalEventAdd = (props) => {
-
 	const createEvent = useCreateEvent()
 
 	const loading = createEvent.loading === true
 
 	const [ inputs, onInputChange ] = useInputs({
 		title: '',
-		type: events.EVENTS_TYPE_TOTAL_CHART
+		type: events.EVENTS_TYPE_TOTAL_CHART,
 	})
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
 		await createEvent.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.closeModal()
 	}
@@ -54,12 +53,12 @@ const ModalEventAdd = (props) => {
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
-					onChange: onInputChange('title')
+					onChange: onInputChange('title'),
 				}),
 
 				h('div', { className: 'card__group' },
 					h(Label, { spacing: false, htmlFor: typeId }, 'Event type'),
-					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.')
+					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.'),
 				),
 
 				h(Select, {
@@ -70,23 +69,23 @@ const ModalEventAdd = (props) => {
 					items: [
 						{
 							value: events.EVENTS_TYPE_TOTAL_CHART,
-							label: 'Chart with total sums'
+							label: 'Chart with total sums',
 						},
 						{
 							value: events.EVENTS_TYPE_AVERAGE_CHART,
-							label: 'Chart with average values'
+							label: 'Chart with average values',
 						},
 						{
 							value: events.EVENTS_TYPE_TOTAL_LIST,
-							label: 'List with total sums'
+							label: 'List with total sums',
 						},
 						{
 							value: events.EVENTS_TYPE_AVERAGE_LIST,
-							label: 'List with average values'
-						}
+							label: 'List with average values',
+						},
 					],
-					onChange: onInputChange('type')
-				})
+					onChange: onInputChange('type'),
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -95,26 +94,25 @@ const ModalEventAdd = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false
-				}, loading === true ? h(Spinner) : 'Add')
+					disabled: loading === true || props.active === false,
+				}, loading === true ? h(Spinner) : 'Add'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalEventAdd.propTypes = {
-	...commonModalProps
+	...commonModalProps,
 }
 
 export default ModalEventAdd

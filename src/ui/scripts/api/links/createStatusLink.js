@@ -30,7 +30,6 @@ const errorsReducer = (state, action) => {
 }
 
 export default () => {
-
 	const { link, useApolloNetworkStatusReducer } = createNetworkStatusNotifier()
 
 	const useStatus = () => {
@@ -39,13 +38,12 @@ export default () => {
 
 		return {
 			loading: pendingRequests > 0,
-			errors
+			errors,
 		}
 	}
 
 	return {
 		statusLink: link,
-		useStatus
+		useStatus,
 	}
-
 }

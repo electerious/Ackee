@@ -9,16 +9,13 @@ import relativeDate from '../../utils/relativeDate'
 import rangeLabel from '../../utils/rangeLabel'
 
 const textLabel = (item, range, isRecent) => {
-
 	if (item && item.date) return relativeDate(item.date)
 	if (isRecent) return 'Recent'
 
 	return rangeLabel(range)
-
 }
 
 const RendererList = (props) => {
-
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
@@ -29,22 +26,21 @@ const RendererList = (props) => {
 	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	if (props.sorting === SORTINGS_TOP) return h(PresentationCounterList, {
-		items: props.items
+		items: props.items,
 	})
 
 	return h(PresentationList, {
 		items: props.items,
 		onEnter,
-		onLeave
+		onLeave,
 	})
-
 }
 
 RendererList.propTypes = {
 	items: PropTypes.array.isRequired,
 	sorting: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
-	setStatusLabel: PropTypes.func.isRequired
+	setStatusLabel: PropTypes.func.isRequired,
 }
 
 export default RendererList

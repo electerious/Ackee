@@ -1,5 +1,4 @@
 export default (key, fallback) => {
-
 	const get = () => {
 		const value = localStorage.getItem(key)
 		if (value == null) return fallback
@@ -20,7 +19,6 @@ export default (key, fallback) => {
 	return {
 		get,
 		set,
-		reset
+		reset,
 	}
-
 }

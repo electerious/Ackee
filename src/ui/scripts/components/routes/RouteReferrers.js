@@ -8,7 +8,6 @@ import CardStatistics from '../cards/CardStatistics'
 import RendererReferrers from '../renderers/RendererReferrers'
 
 const RouteReferrers = (props) => {
-
 	const domains = useDomains()
 
 	return domains.value.map((domain) => {
@@ -22,22 +21,21 @@ const RouteReferrers = (props) => {
 				{
 					sorting: props.filters.sorting,
 					type: props.filters.referrersType,
-					range: props.filters.range
-				}
+					range: props.filters.range,
+				},
 			],
 			renderer: RendererReferrers,
 			rendererProps: {
 				sorting: props.filters.sorting,
-				range: props.filters.range
-			}
+				range: props.filters.range,
+			},
 		})
 	})
-
 }
 
 RouteReferrers.propTypes = {
 	setRoute: PropTypes.func.isRequired,
-	filters: PropTypes.object.isRequired
+	filters: PropTypes.object.isRequired,
 }
 
 export default RouteReferrers

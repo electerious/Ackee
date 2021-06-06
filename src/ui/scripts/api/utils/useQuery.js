@@ -3,12 +3,11 @@ import { useQuery } from '@apollo/client'
 
 import status from '../../utils/status'
 
-export default (query, selector, enhancer, opts) => {
-
+export default (query, selector, enhancer, options) => {
 	const { loading, data } = useQuery(query, {
 		fetchPolicy: 'cache-and-network',
 		nextFetchPolicy: 'cache-and-network',
-		...opts
+		...options,
 	})
 
 	const selection = useMemo(() => {
@@ -25,7 +24,6 @@ export default (query, selector, enhancer, opts) => {
 
 	return {
 		value: _value,
-		status: _status
+		status: _status,
 	}
-
 }

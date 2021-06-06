@@ -8,7 +8,6 @@ import CardStatistics from '../cards/CardStatistics'
 import RendererList from '../renderers/RendererList'
 
 const RouteSystems = (props) => {
-
 	const domains = useDomains()
 
 	return domains.value.map((domain) => {
@@ -22,22 +21,21 @@ const RouteSystems = (props) => {
 				{
 					sorting: props.filters.sorting,
 					type: props.filters.systemsType,
-					range: props.filters.range
-				}
+					range: props.filters.range,
+				},
 			],
 			renderer: RendererList,
 			rendererProps: {
 				sorting: props.filters.sorting,
-				range: props.filters.range
-			}
+				range: props.filters.range,
+			},
 		})
 	})
-
 }
 
 RouteSystems.propTypes = {
 	setRoute: PropTypes.func.isRequired,
-	filters: PropTypes.object.isRequired
+	filters: PropTypes.object.isRequired,
 }
 
 export default RouteSystems

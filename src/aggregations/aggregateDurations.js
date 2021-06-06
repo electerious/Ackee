@@ -7,7 +7,6 @@ const projectMinInterval = require('../stages/projectMinInterval')
 const matchLimit = require('../stages/matchLimit')
 
 module.exports = (ids, interval, limit, dateDetails) => {
-
 	const aggregation = [
 		matchDomains(ids),
 		projectDuration(),
@@ -17,10 +16,10 @@ module.exports = (ids, interval, limit, dateDetails) => {
 			$group: {
 				_id: {},
 				count: {
-					$avg: '$duration'
-				}
-			}
-		}
+					$avg: '$duration',
+				},
+			},
+		},
 	]
 
 	aggregation[0].$match.created = { $gte: dateDetails.includeFnByInterval(interval)(limit) }
@@ -35,5 +34,4 @@ module.exports = (ids, interval, limit, dateDetails) => {
 	if (matchYear === true) aggregation[4].$group._id.year = { $year: dateExpression }
 
 	return aggregation
-
 }

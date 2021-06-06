@@ -3,7 +3,6 @@
 const { api } = require('../_utils')
 
 const getStats = async ({ base, token, eventId, fragment }) => {
-
 	const body = {
 		query: `
 			query fetchStatistics($id: ID!) {
@@ -16,16 +15,15 @@ const getStats = async ({ base, token, eventId, fragment }) => {
 			}
 		`,
 		variables: {
-			id: eventId
-		}
+			id: eventId,
+		},
 	}
 
 	const { json } = await api(base, body, token)
 
 	return json.data.event.statistics
-
 }
 
 module.exports = {
-	getStats
+	getStats,
 }

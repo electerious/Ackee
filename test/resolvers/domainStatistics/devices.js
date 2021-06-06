@@ -10,9 +10,9 @@ const { getStats } = require('./_utils')
 const base = listen(server)
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
 	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
@@ -27,18 +27,18 @@ const macro = async (t, variables, assertions) => {
 				count
 				created
 			}
-		`
+		`,
 	})
 
 	assertions(t, statistics.devices)
 }
 
-macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and ') } devices`
+macro.title = (providedTitle, options) => `fetch ${ Object.values(options).join(' and ') } devices`
 
 test(macro, {
 	sorting: 'TOP',
 	type: 'NO_MODEL',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
 	t.is(devices[0].id, 'Apple')
@@ -47,7 +47,7 @@ test(macro, {
 test(macro, {
 	sorting: 'RECENT',
 	type: 'NO_MODEL',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 14)
 	t.is(devices[0].id, 'Apple')
@@ -57,7 +57,7 @@ test(macro, {
 	sorting: 'RECENT',
 	type: 'NO_MODEL',
 	range: 'LAST_6_MONTHS',
-	limit: 1
+	limit: 1,
 }, (t, devices) => {
 	t.is(devices.length, 1)
 	t.is(devices[0].id, 'Apple')
@@ -66,7 +66,7 @@ test(macro, {
 test(macro, {
 	sorting: 'NEW',
 	type: 'NO_MODEL',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
 	t.is(devices[0].id, 'Apple')
@@ -75,7 +75,7 @@ test(macro, {
 test(macro, {
 	sorting: 'TOP',
 	type: 'WITH_MODEL',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
 	t.is(devices[0].id, 'Apple iPhone')
@@ -84,7 +84,7 @@ test(macro, {
 test(macro, {
 	sorting: 'RECENT',
 	type: 'WITH_MODEL',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 14)
 	t.is(devices[0].id, 'Apple iPhone')
@@ -94,7 +94,7 @@ test(macro, {
 	sorting: 'RECENT',
 	type: 'WITH_MODEL',
 	range: 'LAST_6_MONTHS',
-	limit: 1
+	limit: 1,
 }, (t, devices) => {
 	t.is(devices.length, 1)
 	t.is(devices[0].id, 'Apple iPhone')
@@ -103,7 +103,7 @@ test(macro, {
 test(macro, {
 	sorting: 'NEW',
 	type: 'WITH_MODEL',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, devices) => {
 	t.is(devices.length, 1)
 	t.is(devices[0].id, 'Apple iPhone')

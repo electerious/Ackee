@@ -9,58 +9,43 @@ const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
 	Query: {
-		permanentToken: pipe(requireAuth, async (parent, { id }) => {
-
+		permanentToken: pipe(requireAuth, (parent, { id }) => {
 			return permanentTokens.get(id)
-
 		}),
-		permanentTokens: pipe(requireAuth, async () => {
-
+		permanentTokens: pipe(requireAuth, () => {
 			return permanentTokens.all()
-
-		})
+		}),
 	},
 	Mutation: {
 		createPermanentToken: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
-
 			let entry
 
 			try {
-
 				entry = await permanentTokens.add(input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			return {
 				payload: entry,
-				success: true
+				success: true,
 			}
-
 		}),
 		updatePermanentToken: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
-
 			let entry
 
 			try {
-
 				entry = await permanentTokens.update(id, input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			if (entry == null) {
@@ -69,18 +54,15 @@ module.exports = {
 
 			return {
 				payload: entry,
-				success: true
+				success: true,
 			}
-
 		}),
 		deletePermanentToken: pipe(requireAuth, blockDemoMode, async (parent, { id }) => {
-
 			await permanentTokens.del(id)
 
 			return {
-				success: true
+				success: true,
 			}
-
-		})
-	}
+		}),
+	},
 }

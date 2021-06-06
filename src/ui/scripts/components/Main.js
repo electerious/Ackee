@@ -6,16 +6,15 @@ import Filter from './Filter'
 import Dashboard from './Dashboard'
 
 const Main = (props) => {
-
 	const requiresLogin = props.authenticated === false
 	if (requiresLogin === true) return h(OverlayLogin, {
-		setToken: props.setToken
+		setToken: props.setToken,
 	})
 
 	const hasErrors = props.errors.length > 0
 	if (hasErrors === true) return h(OverlayFailure, {
 		errors: props.errors,
-		reset: props.reset
+		reset: props.reset,
 	})
 
 	return h(Fragment, {},
@@ -30,11 +29,10 @@ const Main = (props) => {
 			setBrowsersTypeFilter: props.setBrowsersTypeFilter,
 			setSizesTypeFilter: props.setSizesTypeFilter,
 			setSystemsTypeFilter: props.setSystemsTypeFilter,
-			route: props.route
+			route: props.route,
 		}),
-		h(Dashboard, props)
+		h(Dashboard, props),
 	)
-
 }
 
 export default Main

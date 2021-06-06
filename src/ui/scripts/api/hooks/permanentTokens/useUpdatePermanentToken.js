@@ -15,29 +15,27 @@ const MUTATION = gql`
 `
 
 export default (id) => {
-
 	const [ mutate, { loading, error }] = useMutation(MUTATION, {
 		variables: {
-			id
-		}
+			id,
+		},
 	})
 
 	return {
-		mutate: (opts) => mutate({
+		mutate: (options) => mutate({
 			optimisticResponse: {
 				updatePermanentToken: {
 					payload: {
 						id: id,
-						title: opts.variables.input.title,
-						__typename: 'PermanentToken'
+						title: options.variables.input.title,
+						__typename: 'PermanentToken',
 					},
-					__typename: 'UpdatePermanentTokenPayload'
-				}
+					__typename: 'UpdatePermanentTokenPayload',
+				},
 			},
-			...opts
+			...options,
 		}),
 		loading,
-		error
+		error,
 	}
-
 }

@@ -25,11 +25,10 @@ const { statusLink, useStatus } = createStatusLink()
 const client = createClient([
 	statusLink,
 	createAuthLink(),
-	createHttpLink()
+	createHttpLink(),
 ])
 
 const App = () => {
-
 	useCustomScrollbar()
 
 	const status = useStatus()
@@ -57,12 +56,11 @@ const App = () => {
 					...router,
 					...token,
 					...modals,
-					...filters
-				})
-			)
+					...filters,
+				}),
+			),
 		)
 	)
-
 }
 
 render(h(App), document.querySelector('#main'))

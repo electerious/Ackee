@@ -13,20 +13,19 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalDomainEdit = (props) => {
-
 	const updateDomain = useUpdateDomain(props.id)
 	const deleteDomain = useDeleteDomain(props.id)
 
 	const [ inputs, onInputChange ] = useInputs({
-		title: props.title
+		title: props.title,
 	})
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 		updateDomain.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.closeModal()
 	}
@@ -64,7 +63,7 @@ const ModalDomainEdit = (props) => {
 					focused: true,
 					placeholder: 'Domain title',
 					value: inputs.title,
-					onChange: onInputChange('title')
+					onChange: onInputChange('title'),
 				}),
 
 				h(Label, { htmlFor: idId }, 'Domain id'),
@@ -75,7 +74,7 @@ const ModalDomainEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Domain id',
 					value: props.id,
-					copyOnFocus: true
+					copyOnFocus: true,
 				}),
 
 				h(Label, { htmlFor: embedId }, 'Embed code'),
@@ -85,8 +84,8 @@ const ModalDomainEdit = (props) => {
 					readOnly: true,
 					rows: 4,
 					value: `<script async src="${ srcUrl }" data-ackee-server="${ serverUrl }" data-ackee-domain-id="${ props.id }"></script>`,
-					copyOnFocus: true
-				})
+					copyOnFocus: true,
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -95,39 +94,38 @@ const ModalDomainEdit = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
 					onClick: onDelete,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Delete'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.active === false
-				}, 'Rename')
+					disabled: props.active === false,
+				}, 'Rename'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalDomainEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired
+	title: PropTypes.string.isRequired,
 }
 
 export default ModalDomainEdit

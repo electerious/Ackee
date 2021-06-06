@@ -12,12 +12,11 @@ let validRecord
 let ignoredRecord
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 test.serial('create record', async (t) => {
-
 	const body = {
 		query: `
 			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
@@ -33,9 +32,9 @@ test.serial('create record', async (t) => {
 			domainId: t.context.domain.id,
 			input: {
 				siteLocation: 'https://example.com/',
-				siteReferrer: 'https://google.com/'
-			}
-		}
+				siteReferrer: 'https://google.com/',
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -45,11 +44,9 @@ test.serial('create record', async (t) => {
 
 	// Save record for the next test
 	validRecord = json.data.createRecord.payload
-
 })
 
 test.serial('update record', async (t) => {
-
 	const body = {
 		query: `
 			mutation updateRecord($id: ID!) {
@@ -59,18 +56,16 @@ test.serial('update record', async (t) => {
 			}
 		`,
 		variables: {
-			id: validRecord.id
-		}
+			id: validRecord.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.updateRecord.success)
-
 })
 
 test.serial('ignore record creation when logged in', async (t) => {
-
 	const body = {
 		query: `
 			mutation createRecord($domainId: ID!, $input: CreateRecordInput!) {
@@ -84,12 +79,12 @@ test.serial('ignore record creation when logged in', async (t) => {
 		`,
 		variables: {
 			domainId: t.context.domain.id,
-			input: { siteLocation: 'https://example.com/' }
-		}
+			input: { siteLocation: 'https://example.com/' },
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id, {
-		Cookie: 'ackee_ignore=1'
+		Cookie: 'ackee_ignore=1',
 	})
 
 	t.true(json.data.createRecord.success)
@@ -97,11 +92,9 @@ test.serial('ignore record creation when logged in', async (t) => {
 
 	// Save record for the next test
 	ignoredRecord = json.data.createRecord.payload
-
 })
 
 test.serial('ignore record update when logged in', async (t) => {
-
 	const body = {
 		query: `
 			mutation updateRecord($id: ID!) {
@@ -111,14 +104,13 @@ test.serial('ignore record update when logged in', async (t) => {
 			}
 		`,
 		variables: {
-			id: ignoredRecord.id
-		}
+			id: ignoredRecord.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id, {
-		Cookie: 'ackee_ignore=1'
+		Cookie: 'ackee_ignore=1',
 	})
 
 	t.true(json.data.updateRecord.success)
-
 })

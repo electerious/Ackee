@@ -12,7 +12,7 @@ import {
 	MODALS_EVENT_ADD,
 	MODALS_EVENT_EDIT,
 	MODALS_PERMANENT_TOKEN_ADD,
-	MODALS_PERMANENT_TOKEN_EDIT
+	MODALS_PERMANENT_TOKEN_EDIT,
 } from '../../constants/modals'
 
 import CardSetting from '../cards/CardSetting'
@@ -21,13 +21,10 @@ import Line from '../Line'
 import Message from '../Message'
 
 const LoadingMessage = (props) => {
-
 	return h(Message, { status: 'warning' }, `Loading ${ props.label }...`)
-
 }
 
 const RouteSettings = (props) => {
-
 	const deleteToken = useDeleteToken()
 
 	const domains = useDomains()
@@ -37,8 +34,8 @@ const RouteSettings = (props) => {
 	const onSignOut = async () => {
 		await deleteToken.mutate({
 			variables: {
-				id: props.token
-			}
+				id: props.token,
+			},
 		})
 		props.reset()
 	}
@@ -49,12 +46,12 @@ const RouteSettings = (props) => {
 				h(LinkItem, {
 					type: 'button',
 					text: item.id,
-					onClick: () => editFn(item)
+					onClick: () => editFn(item),
 				}, item.title),
-				h(Line)
-			]
+				h(Line),
+			],
 		).flat(),
-		h(LinkItem, { type: 'button', onClick: createFn }, createLabel)
+		h(LinkItem, { type: 'button', onClick: createFn }, createLabel),
 	]
 
 	const showDomainAddModal = () => props.addModal(MODALS_DOMAIN_ADD)
@@ -76,60 +73,59 @@ const RouteSettings = (props) => {
 		h(Fragment, {},
 
 			h(CardSetting, {
-				headline: 'Account'
+				headline: 'Account',
 			},
 				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
 				h(Line),
-				h(LinkItem, { type: 'button', onClick: onSignOut }, 'Sign Out')
+				h(LinkItem, { type: 'button', onClick: onSignOut }, 'Sign Out'),
 			),
 
 			h(CardSetting, {
-				headline: 'Domains'
+				headline: 'Domains',
 			},
-				...(domains.status.isInitializing === true ? [ domainsLoading ] : domainsItems)
+				...(domains.status.isInitializing === true ? [ domainsLoading ] : domainsItems),
 			),
 
 			h(CardSetting, {
-				headline: 'Events'
+				headline: 'Events',
 			},
-				...(events.status.isInitializing === true ? [ eventsLoading ] : eventsItems)
+				...(events.status.isInitializing === true ? [ eventsLoading ] : eventsItems),
 			),
 
 			h(CardSetting, {
-				headline: 'Permanent Tokens'
+				headline: 'Permanent Tokens',
 			},
-				...(permanentTokens.status.isInitializing === true ? [ permanentTokensLoading ] : permanentTokensItems)
+				...(permanentTokens.status.isInitializing === true ? [ permanentTokensLoading ] : permanentTokensItems),
 			),
 
 			h(CardSetting, {
-				headline: 'Donate'
+				headline: 'Donate',
 			},
 				h(LinkItem, { type: 'a', href: 'https://github.com/sponsors/electerious', target: '_blank', rel: 'noopener' }, 'Become a GitHub sponsor'),
 				h(Line),
 				h(LinkItem, { type: 'a', href: 'https://www.buymeacoffee.com/electerious', target: '_blank', rel: 'noopener' }, 'Buy me a coffee'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: 'https://paypal.me/electerious', target: '_blank', rel: 'noopener' }, 'Donate via PayPal')
+				h(LinkItem, { type: 'a', href: 'https://paypal.me/electerious', target: '_blank', rel: 'noopener' }, 'Donate via PayPal'),
 			),
 
 			h(CardSetting, {
-				headline: 'Help'
+				headline: 'Help',
 			},
 				h(LinkItem, { type: 'a', href: 'https://ackee.electerious.com', target: '_blank', rel: 'noopener' }, 'Website and documentation'),
 				h(Line),
 				h(LinkItem, { type: 'a', href: homepage, target: '_blank', rel: 'noopener' }, 'Ackee on GitHub'),
 				h(Line),
-				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/ackee-tracker', target: '_blank', rel: 'noopener' }, 'Add Ackee to your sites')
-			)
+				h(LinkItem, { type: 'a', href: 'https://github.com/electerious/ackee-tracker', target: '_blank', rel: 'noopener' }, 'Add Ackee to your sites'),
+			),
 
 		)
 	)
-
 }
 
 RouteSettings.propTypes = {
 	reset: PropTypes.func.isRequired,
 	token: PropTypes.string.isRequired,
-	addModal: PropTypes.func.isRequired
+	addModal: PropTypes.func.isRequired,
 }
 
 export default RouteSettings

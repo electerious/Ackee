@@ -15,12 +15,11 @@ const defaultTitle = uuid()
 const updatedTitle = uuid()
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 test.serial('create permanent token', async (t) => {
-
 	const body = {
 		query: `
 			mutation createPermanentToken($input: CreatePermanentTokenInput!) {
@@ -35,9 +34,9 @@ test.serial('create permanent token', async (t) => {
 		`,
 		variables: {
 			input: {
-				title: defaultTitle
-			}
-		}
+				title: defaultTitle,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -48,11 +47,9 @@ test.serial('create permanent token', async (t) => {
 
 	// Save permanent token for the next test
 	validPermanentToken = json.data.createPermanentToken.payload
-
 })
 
 test.serial('update permanent token', async (t) => {
-
 	const body = {
 		query: `
 			mutation updatePermanentToken($id: ID!, $input: UpdatePermanentTokenInput!) {
@@ -68,9 +65,9 @@ test.serial('update permanent token', async (t) => {
 		variables: {
 			id: validPermanentToken.id,
 			input: {
-				title: updatedTitle
-			}
-		}
+				title: updatedTitle,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -81,11 +78,9 @@ test.serial('update permanent token', async (t) => {
 
 	// Save permanent token for the next test
 	validPermanentToken = json.data.updatePermanentToken.payload
-
 })
 
 test.serial('fetch permanent tokens', async (t) => {
-
 	const body = {
 		query: `
 			query fetchPermanentTokens {
@@ -94,7 +89,7 @@ test.serial('fetch permanent tokens', async (t) => {
 					title
 				}
 			}
-		`
+		`,
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -103,11 +98,9 @@ test.serial('fetch permanent tokens', async (t) => {
 	const permanentToken = permanentTokens.find((permanentToken) => permanentToken.id === validPermanentToken.id)
 
 	t.is(permanentToken.title, validPermanentToken.title)
-
 })
 
 test.serial('fetch permanent token', async (t) => {
-
 	const body = {
 		query: `
 			query fetchPermanentToken($id: ID!) {
@@ -118,19 +111,17 @@ test.serial('fetch permanent token', async (t) => {
 			}
 		`,
 		variables: {
-			id: validPermanentToken.id
-		}
+			id: validPermanentToken.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.is(json.data.permanentToken.id, validPermanentToken.id)
 	t.is(json.data.permanentToken.title, validPermanentToken.title)
-
 })
 
 test.serial('delete permanent token', async (t) => {
-
 	const body = {
 		query: `
 			mutation deletePermanentToken($id: ID!) {
@@ -140,12 +131,11 @@ test.serial('delete permanent token', async (t) => {
 			}
 		`,
 		variables: {
-			id: validPermanentToken.id
-		}
+			id: validPermanentToken.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.deletePermanentToken.success)
-
 })

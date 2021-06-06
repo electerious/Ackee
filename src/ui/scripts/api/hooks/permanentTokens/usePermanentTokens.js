@@ -14,13 +14,11 @@ const QUERY = gql`
 `
 
 export default () => {
-
 	const selector = (data) => data?.permanentTokens
 	const enhancer = (permanentTokens = []) => permanentTokens
 
 	return useQuery(QUERY, selector, enhancer, {
 		fetchPolicy: 'cache-first',
-		nextFetchPolicy: 'cache-first'
+		nextFetchPolicy: 'cache-first',
 	})
-
 }

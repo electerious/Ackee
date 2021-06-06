@@ -6,5 +6,5 @@ import RendererChart from './RendererChart'
 
 export default (props) => h(RendererChart, {
 	...props,
-	formatter: formatNumber
+	formatter: formatNumber,
 })

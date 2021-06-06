@@ -32,7 +32,6 @@ import RendererList from '../renderers/RendererList'
 import RendererReferrers from '../renderers/RendererReferrers'
 
 const RouteDomain = (props) => {
-
 	const currentRoute = useRoute(props.route)
 	const domainId = currentRoute.params.domainId
 
@@ -41,8 +40,8 @@ const RouteDomain = (props) => {
 			h(CardFacts, {
 				hook: useFacts,
 				hookArgs: [
-					domainId
-				]
+					domainId,
+				],
 			}),
 			h('div', { className: 'content__spacer' }),
 			h(CardStatistics, {
@@ -55,13 +54,13 @@ const RouteDomain = (props) => {
 					{
 						interval: INTERVALS_DAILY,
 						type: VIEWS_TYPE_UNIQUE,
-						limit: 14
-					}
+						limit: 14,
+					},
 				],
 				renderer: RendererViews,
 				rendererProps: {
-					interval: INTERVALS_DAILY
-				}
+					interval: INTERVALS_DAILY,
+				},
 			}),
 			h(CardStatistics, {
 				wide: true,
@@ -72,13 +71,13 @@ const RouteDomain = (props) => {
 					domainId,
 					{
 						interval: INTERVALS_DAILY,
-						limit: 14
-					}
+						limit: 14,
+					},
 				],
 				renderer: RendererDurations,
 				rendererProps: {
-					interval: INTERVALS_DAILY
-				}
+					interval: INTERVALS_DAILY,
+				},
 			}),
 			h(CardStatistics, {
 				headline: 'Pages',
@@ -88,14 +87,14 @@ const RouteDomain = (props) => {
 					domainId,
 					{
 						sorting: SORTINGS_TOP,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
+					range: RANGES_LAST_24_HOURS,
+				},
 			}),
 			h(CardStatistics, {
 				headline: 'Referrers',
@@ -106,14 +105,14 @@ const RouteDomain = (props) => {
 					{
 						sorting: SORTINGS_TOP,
 						type: REFERRERS_TYPE_WITH_SOURCE,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererReferrers,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
+					range: RANGES_LAST_24_HOURS,
+				},
 			}),
 			h('div', { className: 'content__spacer' }),
 			h(CardStatistics, {
@@ -125,14 +124,14 @@ const RouteDomain = (props) => {
 					{
 						sorting: SORTINGS_TOP,
 						type: SYSTEMS_TYPE_WITH_VERSION,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
+					range: RANGES_LAST_24_HOURS,
+				},
 			}),
 			h(CardStatistics, {
 				headline: 'Devices',
@@ -143,14 +142,14 @@ const RouteDomain = (props) => {
 					{
 						sorting: SORTINGS_TOP,
 						type: DEVICES_TYPE_WITH_MODEL,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
+					range: RANGES_LAST_24_HOURS,
+				},
 			}),
 			h(CardStatistics, {
 				headline: 'Browsers',
@@ -161,14 +160,14 @@ const RouteDomain = (props) => {
 					{
 						sorting: SORTINGS_TOP,
 						type: BROWSERS_TYPE_WITH_VERSION,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
+					range: RANGES_LAST_24_HOURS,
+				},
 			}),
 			h(CardStatistics, {
 				headline: 'Sizes',
@@ -179,14 +178,14 @@ const RouteDomain = (props) => {
 					{
 						sorting: SORTINGS_TOP,
 						type: SIZES_TYPE_BROWSER_RESOLUTION,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
+					range: RANGES_LAST_24_HOURS,
+				},
 			}),
 			h(CardStatistics, {
 				headline: 'Languages',
@@ -196,23 +195,22 @@ const RouteDomain = (props) => {
 					domainId,
 					{
 						sorting: SORTINGS_TOP,
-						range: RANGES_LAST_24_HOURS
-					}
+						range: RANGES_LAST_24_HOURS,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: SORTINGS_TOP,
-					range: RANGES_LAST_24_HOURS
-				}
-			})
+					range: RANGES_LAST_24_HOURS,
+				},
+			}),
 		)
 	)
-
 }
 
 RouteDomain.propTypes = {
 	route: PropTypes.string.isRequired,
-	setRoute: PropTypes.func.isRequired
+	setRoute: PropTypes.func.isRequired,
 }
 
 export default RouteDomain

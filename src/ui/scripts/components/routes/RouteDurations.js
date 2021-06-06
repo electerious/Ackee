@@ -9,7 +9,6 @@ import CardStatistics from '../cards/CardStatistics'
 import RendererDurations from '../renderers/RendererDurations'
 
 const RouteDurations = (props) => {
-
 	const domains = useDomains()
 
 	return (
@@ -21,13 +20,13 @@ const RouteDurations = (props) => {
 				hookArgs: [
 					{
 						interval: props.filters.interval,
-						limit: 14
-					}
+						limit: 14,
+					},
 				],
 				renderer: RendererDurations,
 				rendererProps: {
-					interval: props.filters.interval
-				}
+					interval: props.filters.interval,
+				},
 			}),
 			domains.value.map((domain) => {
 				return h(CardStatistics, {
@@ -39,23 +38,22 @@ const RouteDurations = (props) => {
 						domain.id,
 						{
 							interval: props.filters.interval,
-							limit: 7
-						}
+							limit: 7,
+						},
 					],
 					renderer: RendererDurations,
 					rendererProps: {
-						interval: props.filters.interval
-					}
+						interval: props.filters.interval,
+					},
 				})
-			})
+			}),
 		)
 	)
-
 }
 
 RouteDurations.propTypes = {
 	setRoute: PropTypes.func.isRequired,
-	filters: PropTypes.object.isRequired
+	filters: PropTypes.object.isRequired,
 }
 
 export default RouteDurations

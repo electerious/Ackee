@@ -1,5 +1,4 @@
 export default (data, loading) => {
-
 	// Loads data
 	const isLoading = loading === true
 
@@ -16,7 +15,6 @@ export default (data, loading) => {
 		isLoading,
 		isEmpty,
 		isInitializing,
-		isUpdating
+		isUpdating,
 	}
-
 }

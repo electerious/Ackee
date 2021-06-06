@@ -8,6 +8,6 @@ module.exports = (url) => normalizeUrl(url, {
 		/^utm_\w+/i,
 		'ref',
 		'fbclid',
-		'source'
-	]
+		'source',
+	],
 })

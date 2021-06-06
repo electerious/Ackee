@@ -16,12 +16,10 @@ const QUERY = gql`
 `
 
 export default (filters) => {
-
 	const selector = (data) => data?.statistics.systems
 	const enhancer = enhanceSystems
 
 	return useQuery(QUERY, selector, enhancer, {
-		variables: filters
+		variables: filters,
 	})
-
 }

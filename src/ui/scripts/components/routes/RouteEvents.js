@@ -22,13 +22,13 @@ const cardProps = (event, props) => {
 					{
 						interval: props.filters.interval,
 						type: event.type === events.EVENTS_TYPE_AVERAGE_CHART ? 'AVERAGE' : 'TOTAL',
-						limit: 7
-					}
+						limit: 7,
+					},
 				],
 				renderer: RendererEventChart,
 				rendererProps: {
-					interval: props.filters.interval
-				}
+					interval: props.filters.interval,
+				},
 			}
 		case events.EVENTS_TYPE_TOTAL_LIST:
 		case events.EVENTS_TYPE_AVERAGE_LIST:
@@ -39,34 +39,32 @@ const cardProps = (event, props) => {
 					{
 						sorting: props.filters.sorting,
 						type: event.type === events.EVENTS_TYPE_AVERAGE_LIST ? 'AVERAGE' : 'TOTAL',
-						range: props.filters.range
-					}
+						range: props.filters.range,
+					},
 				],
 				renderer: RendererList,
 				rendererProps: {
 					sorting: props.filters.sorting,
-					range: props.filters.range
-				}
+					range: props.filters.range,
+				},
 			}
 	}
 }
 
 const RouteEvents = (props) => {
-
 	const events = useEvents()
 
 	return events.value.map((event) => {
 		return h(CardStatistics, {
 			key: event.id,
 			headline: event.title,
-			...cardProps(event, props)
+			...cardProps(event, props),
 		})
 	})
-
 }
 
 RouteEvents.propTypes = {
-	filters: PropTypes.object.isRequired
+	filters: PropTypes.object.isRequired,
 }
 
 export default RouteEvents

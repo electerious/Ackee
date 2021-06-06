@@ -9,12 +9,11 @@ const server = require('../src/server')
 
 const base = listen(server)
 
-test('return no cors headers if env var specifies none', async (t) => {
-
+test('return cors headers with no origin if hostname not whitelisted in env var', async (t) => {
 	const url = new URL('/api', await base)
 
 	const restore = mockedEnv({
-		ACKEE_ALLOW_ORIGIN: undefined
+		ACKEE_ALLOW_ORIGIN: 'https://example.com',
 	})
 
 	const { headers } = await fetch(url.href)
@@ -25,5 +24,4 @@ test('return no cors headers if env var specifies none', async (t) => {
 	t.is(headers.get('Access-Control-Allow-Credentials'), null)
 
 	restore()
-
 })

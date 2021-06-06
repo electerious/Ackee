@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import enhanceUrl from '../../enhancers/enhanceUrl'
 
 const Row = (props) => {
-
 	const hasUrl = props.url != null
 
 	const rootType = hasUrl === true ? 'a' : 'div'
@@ -15,18 +14,16 @@ const Row = (props) => {
 			className: 'flexList__row flexList__row--has-hover',
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave,
-			...rootProps
+			...rootProps,
 		},
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
-				h('span', { className: 'flexList__truncated' }, props.text)
-			)
+				h('span', { className: 'flexList__truncated' }, props.text),
+			),
 		)
 	)
-
 }
 
 const PresentationList = (props) => {
-
 	return (
 		h('div', { className: 'flexList' },
 			h('div', { className: 'flexList__inner' },
@@ -35,24 +32,23 @@ const PresentationList = (props) => {
 						key: item.text + index,
 						onEnter: () => props.onEnter(index),
 						onLeave: () => props.onLeave(index),
-						...item
+						...item,
 					})
-				))
-			)
+				)),
+			),
 		)
 	)
-
 }
 
 PresentationList.propTypes = {
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
 			url: PropTypes.object,
-			text: PropTypes.string.isRequired
-		})
+			text: PropTypes.string.isRequired,
+		}),
 	).isRequired,
 	onEnter: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired
+	onLeave: PropTypes.func.isRequired,
 }
 
 export default PresentationList

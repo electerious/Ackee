@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import OverlayFailure from './overlays/OverlayFailure'
 
 const ErrorBoundary = class extends Component {
-
 	constructor(props) {
 		super(props)
 		this.state = { error: undefined }
@@ -19,17 +18,16 @@ const ErrorBoundary = class extends Component {
 		if (hasError === true) {
 			return h(OverlayFailure, {
 				errors: [ this.state.error ],
-				reset: this.props.reset
+				reset: this.props.reset,
 			})
 		}
 
 		return this.props.children
 	}
-
 }
 
 ErrorBoundary.propTypes = {
-	reset: PropTypes.func.isRequired
+	reset: PropTypes.func.isRequired,
 }
 
 export default ErrorBoundary

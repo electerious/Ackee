@@ -8,7 +8,6 @@ import Status, { ICON_LOADER, ICON_UPDATER } from '../Status'
 import Tooltip from '../Tooltip'
 
 const CardStatistics = (props) => {
-
 	const { value, status } = props.hook(...props.hookArgs)
 
 	// Use thin space as initial value to avoid that the label changes the height once rendered
@@ -16,16 +15,16 @@ const CardStatistics = (props) => {
 
 	const currentStatus = (() => {
 		if (status.isInitializing === true) return h(Status, {
-			icon: ICON_LOADER
+			icon: ICON_LOADER,
 		}, 'Loading')
 
 		if (status.isUpdating === true) return h(Status, {
-			icon: ICON_UPDATER
+			icon: ICON_UPDATER,
 		}, 'Updating')
 
 		if (status.isEmpty === true) return h(Status, {},
 			'No data',
-			h(Tooltip, {}, 'There is either no data available or collecting detailed data is disabled in ackee-tracker.')
+			h(Tooltip, {}, 'There is either no data available or collecting detailed data is disabled in ackee-tracker.'),
 		)
 
 		return h(Status, {}, statusLabel)
@@ -35,28 +34,27 @@ const CardStatistics = (props) => {
 		h('div', {
 			className: classNames({
 				'card': true,
-				'card--wide': props.wide === true
-			})
+				'card--wide': props.wide === true,
+			}),
 		},
 			h('div', { className: 'card__inner' },
 				h(Headline, {
 					type: 'h2',
 					size: 'medium',
-					onClick: props.onMore
+					onClick: props.onMore,
 				}, props.headline),
 				h(Text, {
 					type: 'div',
-					spacing: false
+					spacing: false,
 				}, currentStatus),
 				h(props.renderer, {
 					...props.rendererProps,
 					items: value,
-					setStatusLabel
-				})
-			)
+					setStatusLabel,
+				}),
+			),
 		)
 	)
-
 }
 
 CardStatistics.propTypes = {
@@ -66,7 +64,7 @@ CardStatistics.propTypes = {
 	hook: PropTypes.func.isRequired,
 	hookArgs: PropTypes.array.isRequired,
 	renderer: PropTypes.elementType.isRequired,
-	rendererProps: PropTypes.object
+	rendererProps: PropTypes.object,
 }
 
 export default CardStatistics

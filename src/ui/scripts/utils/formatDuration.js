@@ -7,7 +7,6 @@ const toString = function() {
 }
 
 export default (ms) => {
-
 	const date = new Date(ms)
 	const duration = date.toISOString().substr(11, 8)
 
@@ -17,19 +16,18 @@ export default (ms) => {
 	if (hasMinutes === false) return {
 		value: cleanZeros(duration.substr(6)),
 		unit: 's',
-		toString
+		toString,
 	}
 
 	if (hasHours === false) return {
 		value: cleanZeros(duration.substr(3)),
 		unit: 'm',
-		toString
+		toString,
 	}
 
 	return {
 		value: cleanZeros(duration),
 		unit: 'h',
-		toString
+		toString,
 	}
-
 }

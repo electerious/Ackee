@@ -1,7 +1,6 @@
 'use strict'
 
 module.exports = (errors) => {
-
 	// Extract message from an error
 	const message = (key) => errors[key].message
 
@@ -12,5 +11,4 @@ module.exports = (errors) => {
 		.map(message)
 		.map(normalize)
 		.join('\n')
-
 }

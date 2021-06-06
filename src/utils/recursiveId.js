@@ -6,10 +6,8 @@ const uuid = require('uuid').v5
 const DEFAULT_NAMESPACE = 'faea8d75-e9c5-45fe-a436-4a906d44b88e'
 
 const recursiveId = (...args) => {
-
 	const [ current, ...rest ] = args
 	return uuid(current, rest.length === 0 ? DEFAULT_NAMESPACE : recursiveId(...rest))
-
 }
 
 module.exports = recursiveId

@@ -20,11 +20,10 @@ const response = (entry) => ({
 	browserWidth: entry.browserWidth,
 	browserHeight: entry.browserHeight,
 	created: entry.created,
-	updated: entry.updated
+	updated: entry.updated,
 })
 
 const add = async (data) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
@@ -47,44 +46,40 @@ const add = async (data) => {
 			browserName: data.browserName,
 			browserVersion: data.browserVersion,
 			browserWidth: data.browserWidth,
-			browserHeight: data.browserHeight
-		})
+			browserHeight: data.browserHeight,
+		}),
 	)
-
 }
 
 const update = async (id) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
 		await Record.findOneAndUpdate({
-			id
+			id,
 		}, {
 			$set: {
-				updated: Date.now()
-			}
+				updated: Date.now(),
+			},
 		}, {
-			new: true
-		})
+			new: true,
+		}),
 	)
-
 }
 
 const anonymize = async (clientId, ignoreId) => {
-
 	// Don't return anything about the update
 	await Record.updateMany({
 		$and: [
 			{ clientId },
 			{
 				id: {
-					$ne: ignoreId
-				}
-			}
-		]
+					$ne: ignoreId,
+				},
+			},
+		],
 	}, {
 		clientId: undefined,
 		siteLanguage: undefined,
@@ -98,22 +93,19 @@ const anonymize = async (clientId, ignoreId) => {
 		browserName: undefined,
 		browserVersion: undefined,
 		browserWidth: undefined,
-		browserHeight: undefined
+		browserHeight: undefined,
 	})
-
 }
 
-const del = async (domainId) => {
-
+const del = (domainId) => {
 	return Record.deleteMany({
-		domainId
+		domainId,
 	})
-
 }
 
 module.exports = {
 	add,
 	update,
 	anonymize,
-	del
+	del,
 }

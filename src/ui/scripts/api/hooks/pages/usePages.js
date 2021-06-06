@@ -19,15 +19,13 @@ const QUERY = gql`
 `
 
 export default (id, filters) => {
-
 	const selector = (data) => data?.domain.statistics.pages
 	const enhancer = enhancePages
 
 	return useQuery(QUERY, selector, enhancer, {
 		variables: {
 			...filters,
-			id
-		}
+			id,
+		},
 	})
-
 }

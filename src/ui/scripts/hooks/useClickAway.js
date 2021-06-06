@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 export default (ref, fn) => {
-
 	const [ ready, setReady ] = useState(false)
 
 	useEffect(() => {
@@ -29,5 +28,4 @@ export default (ref, fn) => {
 		document.addEventListener('click', handler)
 		return () => document.removeEventListener('click', handler)
 	}, [ fn, ready ])
-
 }

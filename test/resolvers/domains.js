@@ -15,12 +15,11 @@ const defaultTitle = uuid()
 const updatedTitle = uuid()
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 test.serial('create domain', async (t) => {
-
 	const body = {
 		query: `
 			mutation createDomain($input: CreateDomainInput!) {
@@ -35,9 +34,9 @@ test.serial('create domain', async (t) => {
 		`,
 		variables: {
 			input: {
-				title: defaultTitle
-			}
-		}
+				title: defaultTitle,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -48,11 +47,9 @@ test.serial('create domain', async (t) => {
 
 	// Save domain for the next test
 	validDomain = json.data.createDomain.payload
-
 })
 
 test.serial('update domain', async (t) => {
-
 	const body = {
 		query: `
 			mutation updateDomain($id: ID!, $input: UpdateDomainInput!) {
@@ -68,9 +65,9 @@ test.serial('update domain', async (t) => {
 		variables: {
 			id: validDomain.id,
 			input: {
-				title: updatedTitle
-			}
-		}
+				title: updatedTitle,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -81,11 +78,9 @@ test.serial('update domain', async (t) => {
 
 	// Save domain for the next test
 	validDomain = json.data.updateDomain.payload
-
 })
 
 test.serial('fetch domains', async (t) => {
-
 	const body = {
 		query: `
 			query fetchDomains {
@@ -94,7 +89,7 @@ test.serial('fetch domains', async (t) => {
 					title
 				}
 			}
-		`
+		`,
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -103,11 +98,9 @@ test.serial('fetch domains', async (t) => {
 	const domain = domains.find((domain) => domain.id === validDomain.id)
 
 	t.is(domain.title, validDomain.title)
-
 })
 
 test.serial('fetch domain', async (t) => {
-
 	const body = {
 		query: `
 			query fetchDomain($id: ID!) {
@@ -118,19 +111,17 @@ test.serial('fetch domain', async (t) => {
 			}
 		`,
 		variables: {
-			id: validDomain.id
-		}
+			id: validDomain.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.is(json.data.domain.id, validDomain.id)
 	t.is(json.data.domain.title, validDomain.title)
-
 })
 
 test.serial('delete domain', async (t) => {
-
 	const body = {
 		query: `
 			mutation deleteDomain($id: ID!) {
@@ -140,12 +131,11 @@ test.serial('delete domain', async (t) => {
 			}
 		`,
 		variables: {
-			id: validDomain.id
-		}
+			id: validDomain.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.deleteDomain.success)
-
 })

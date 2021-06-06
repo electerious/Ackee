@@ -12,20 +12,19 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalPermanentTokenEdit = (props) => {
-
 	const updatePermanentToken = useUpdatePermanentToken(props.id)
 	const deletePermanentToken = useDeletePermanentToken(props.id)
 
 	const [ inputs, onInputChange ] = useInputs({
-		title: props.title
+		title: props.title,
 	})
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 		updatePermanentToken.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.closeModal()
 	}
@@ -58,7 +57,7 @@ const ModalPermanentTokenEdit = (props) => {
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
-					onChange: onInputChange('title')
+					onChange: onInputChange('title'),
 				}),
 
 				h(Label, { htmlFor: idId }, 'Permanent token id'),
@@ -69,8 +68,8 @@ const ModalPermanentTokenEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Permanent token id',
 					value: props.id,
-					copyOnFocus: true
-				})
+					copyOnFocus: true,
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -79,39 +78,38 @@ const ModalPermanentTokenEdit = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator '
+					className: 'card__separator ',
 				}),
 
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
 					onClick: onDelete,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Delete'),
 
 				h('div', {
-					className: 'card__separator '
+					className: 'card__separator ',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.active === false
-				}, 'Rename')
+					disabled: props.active === false,
+				}, 'Rename'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalPermanentTokenEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired
+	title: PropTypes.string.isRequired,
 }
 
 export default ModalPermanentTokenEdit

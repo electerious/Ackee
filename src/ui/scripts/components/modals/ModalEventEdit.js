@@ -17,21 +17,20 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalEventEdit = (props) => {
-
 	const updateEvent = useUpdateEvent(props.id)
 	const deleteEvent = useDeleteEvent(props.id)
 
 	const [ inputs, onInputChange ] = useInputs({
 		title: props.title,
-		type: props.type
+		type: props.type,
 	})
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 		updateEvent.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.closeModal()
 	}
@@ -66,12 +65,12 @@ const ModalEventEdit = (props) => {
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
-					onChange: onInputChange('title')
+					onChange: onInputChange('title'),
 				}),
 
 				h('div', { className: 'card__group' },
 					h(Label, { spacing: false, htmlFor: typeId }, 'Event type'),
-					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.')
+					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.'),
 				),
 
 				h(Select, {
@@ -81,22 +80,22 @@ const ModalEventEdit = (props) => {
 					items: [
 						{
 							value: events.EVENTS_TYPE_TOTAL_CHART,
-							label: 'Chart with total sums'
+							label: 'Chart with total sums',
 						},
 						{
 							value: events.EVENTS_TYPE_AVERAGE_CHART,
-							label: 'Chart with average values'
+							label: 'Chart with average values',
 						},
 						{
 							value: events.EVENTS_TYPE_TOTAL_LIST,
-							label: 'List with total sums'
+							label: 'List with total sums',
 						},
 						{
 							value: events.EVENTS_TYPE_AVERAGE_LIST,
-							label: 'List with average values'
-						}
+							label: 'List with average values',
+						},
 					],
-					onChange: onInputChange('type')
+					onChange: onInputChange('type'),
 				}),
 
 				h(Label, { htmlFor: idId }, 'Event id'),
@@ -107,7 +106,7 @@ const ModalEventEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Event id',
 					value: props.id,
-					copyOnFocus: true
+					copyOnFocus: true,
 				}),
 
 				h(Label, { htmlFor: embedId }, 'Usage example'),
@@ -117,8 +116,8 @@ const ModalEventEdit = (props) => {
 					readOnly: true,
 					rows: 3,
 					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: '1' })`,
-					copyOnFocus: true
-				})
+					copyOnFocus: true,
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -127,39 +126,38 @@ const ModalEventEdit = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
 					onClick: onDelete,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Delete'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.active === false
-				}, 'Save')
+					disabled: props.active === false,
+				}, 'Save'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalEventEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired
+	title: PropTypes.string.isRequired,
 }
 
 export default ModalEventEdit

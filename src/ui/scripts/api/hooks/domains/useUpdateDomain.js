@@ -15,29 +15,27 @@ const MUTATION = gql`
 `
 
 export default (id) => {
-
 	const [ mutate, { loading, error }] = useMutation(MUTATION, {
 		variables: {
-			id
-		}
+			id,
+		},
 	})
 
 	return {
-		mutate: (opts) => mutate({
+		mutate: (options) => mutate({
 			optimisticResponse: {
 				updateDomain: {
 					payload: {
 						id: id,
-						title: opts.variables.input.title,
-						__typename: 'Domain'
+						title: options.variables.input.title,
+						__typename: 'Domain',
 					},
-					__typename: 'UpdateDomainPayload'
-				}
+					__typename: 'UpdateDomainPayload',
+				},
 			},
-			...opts
+			...options,
 		}),
 		loading,
-		error
+		error,
 	}
-
 }

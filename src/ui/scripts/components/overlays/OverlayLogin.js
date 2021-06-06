@@ -14,7 +14,6 @@ import useCreateToken from '../../api/hooks/tokens/useCreateToken'
 import useInputs from '../../hooks/useInputs'
 
 const OverlayLogin = (props) => {
-
 	const createToken = useCreateToken()
 
 	const hasError = createToken.error != null
@@ -22,15 +21,15 @@ const OverlayLogin = (props) => {
 
 	const [ inputs, onInputChange ] = useInputs({
 		username: window.env.isDemoMode === true ? 'admin' : '',
-		password: window.env.isDemoMode === true ? '123456' : ''
+		password: window.env.isDemoMode === true ? '123456' : '',
 	})
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
 		const { data } = await createToken.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.setToken(data.createToken.payload.id)
 	}
@@ -42,10 +41,10 @@ const OverlayLogin = (props) => {
 				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
-					type: 'h1'
+					type: 'h1',
 				}, 'Ackee'),
 				h(Text, {
-					type: 'p'
+					type: 'p',
 				}, 'Welcome back, sign in to continue.'),
 
 				h(Spacer, { size: 2.5 }),
@@ -59,7 +58,7 @@ const OverlayLogin = (props) => {
 					focused: true,
 					placeholder: 'Username',
 					value: inputs.username,
-					onChange: onInputChange('username')
+					onChange: onInputChange('username'),
 				}),
 				h(Input, {
 					type: 'password',
@@ -67,10 +66,10 @@ const OverlayLogin = (props) => {
 					disabled: loading === true,
 					placeholder: 'Password',
 					value: inputs.password,
-					onChange: onInputChange('password')
+					onChange: onInputChange('password'),
 				}),
 
-				h(Spacer, { size: 1 })
+				h(Spacer, { size: 1 }),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -79,26 +78,25 @@ const OverlayLogin = (props) => {
 					className: 'card__button link',
 					href: homepage,
 					target: '_blank',
-					rel: 'noopener'
+					rel: 'noopener',
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true
-				}, loading === true ? h(Spinner) : 'Sign In →')
+					disabled: loading === true,
+				}, loading === true ? h(Spinner) : 'Sign In →'),
 
-			)
+			),
 		)
 	)
-
 }
 
 OverlayLogin.propTypes = {
-	setToken: PropTypes.func.isRequired
+	setToken: PropTypes.func.isRequired,
 }
 
 export default OverlayLogin

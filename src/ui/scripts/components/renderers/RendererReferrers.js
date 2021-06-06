@@ -8,7 +8,6 @@ import relativeDate from '../../utils/relativeDate'
 import rangeLabel from '../../utils/rangeLabel'
 
 const textLabel = (item, range, isRecent, isNew) => {
-
 	if (item && item.date) return relativeDate(item.date)
 	if (item && item.count) return `${ item.count } ${ item.count === 1 ? 'visit' : 'visits' }`
 
@@ -16,11 +15,9 @@ const textLabel = (item, range, isRecent, isNew) => {
 	if (isNew) return 'New'
 
 	return rangeLabel(range)
-
 }
 
 const RendererReferrers = (props) => {
-
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
@@ -33,16 +30,15 @@ const RendererReferrers = (props) => {
 	return h(PresentationIconList, {
 		items: props.items,
 		onEnter,
-		onLeave
+		onLeave,
 	})
-
 }
 
 RendererReferrers.propTypes = {
 	items: PropTypes.array.isRequired,
 	sorting: PropTypes.string.isRequired,
 	range: PropTypes.string.isRequired,
-	setStatusLabel: PropTypes.func.isRequired
+	setStatusLabel: PropTypes.func.isRequired,
 }
 
 export default RendererReferrers

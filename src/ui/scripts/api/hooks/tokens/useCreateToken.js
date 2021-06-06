@@ -11,13 +11,11 @@ const MUTATION = gql`
 `
 
 export default () => {
-
 	const [ mutate, { loading, error }] = useMutation(MUTATION)
 
 	return {
 		mutate,
 		loading,
-		error
+		error,
 	}
-
 }

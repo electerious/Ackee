@@ -19,15 +19,13 @@ const QUERY = gql`
 `
 
 export default (id, filters) => {
-
 	const selector = (data) => data?.domain.statistics.durations
 	const enhancer = (value) => enhanceDurations(value, filters.limit)
 
 	return useQuery(QUERY, selector, enhancer, {
 		variables: {
 			...filters,
-			id
-		}
+			id,
+		},
 	})
-
 }

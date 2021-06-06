@@ -7,7 +7,6 @@ const copyInput = (e) => {
 }
 
 const Input = (props) => {
-
 	const ref = useRef(null)
 
 	useEffect(() => {
@@ -17,13 +16,13 @@ const Input = (props) => {
 	const type = ({
 		text: 'text',
 		username: 'text',
-		password: 'password'
+		password: 'password',
 	})[props.type]
 
 	const autoComplete = ({
 		text: undefined,
 		username: 'username',
-		password: 'current-password'
+		password: 'current-password',
 	})[props.type]
 
 	const input = h('input', {
@@ -40,18 +39,17 @@ const Input = (props) => {
 		placeholder: props.placeholder,
 		value: props.value,
 		onChange: props.onChange,
-		onFocus: props.copyOnFocus === true ? copyInput : undefined
+		onFocus: props.copyOnFocus === true ? copyInput : undefined,
 	})
 
 	if (props.copyOnFocus === true) return (
 		h('div', {
 			className: 'inputMessage',
-			title: 'Copied to clipboard'
+			title: 'Copied to clipboard',
 		}, input)
 	)
 
 	return input
-
 }
 
 Input.propTypes = {
@@ -64,7 +62,7 @@ Input.propTypes = {
 	placeholder: PropTypes.string.isRequired,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
-	copyOnFocus: PropTypes.bool
+	copyOnFocus: PropTypes.bool,
 }
 
 export default Input

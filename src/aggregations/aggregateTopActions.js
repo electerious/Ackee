@@ -4,24 +4,23 @@ const ranges = require('../constants/ranges')
 const matchEvents = require('../stages/matchEvents')
 
 module.exports = (ids, average, range, limit, dateDetails) => {
-
 	const aggregation = [
 		matchEvents(ids),
 		{
 			$group: {
 				_id: {
-					key: '$key'
-				}
-			}
+					key: '$key',
+				},
+			},
 		},
 		{
 			$sort: {
-				count: -1
-			}
+				count: -1,
+			},
 		},
 		{
-			$limit: limit
-		}
+			$limit: limit,
+		},
 	]
 
 	aggregation[0].$match.key = { $ne: null }
@@ -44,5 +43,4 @@ module.exports = (ids, average, range, limit, dateDetails) => {
 	}
 
 	return aggregation
-
 }

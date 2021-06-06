@@ -16,32 +16,30 @@ const update = (id) => (cache, result) => {
 
 	cache.modify({
 		fields: {
-			events: deleteIdModify(id)
-		}
+			events: deleteIdModify(id),
+		},
 	})
 }
 
 export default (id) => {
-
 	const [ mutate, { loading, error }] = useMutation(MUTATION, {
 		variables: {
-			id
-		}
+			id,
+		},
 	})
 
 	return {
-		mutate: (opts) => mutate({
+		mutate: (options) => mutate({
 			update: update(id),
 			optimisticResponse: {
 				deleteEvent: {
 					success: true,
-					__typename: 'DeleteEventPayload'
-				}
+					__typename: 'DeleteEventPayload',
+				},
 			},
-			...opts
+			...options,
 		}),
 		loading,
-		error
+		error,
 	}
-
 }

@@ -11,21 +11,20 @@ import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalPermanentTokenAdd = (props) => {
-
 	const createPermanentToken = useCreatePermanentToken()
 
 	const loading = createPermanentToken.loading === true
 
 	const [ inputs, onInputChange ] = useInputs({
-		title: ''
+		title: '',
 	})
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
 		await createPermanentToken.mutate({
 			variables: {
-				input: inputs
-			}
+				input: inputs,
+			},
 		})
 		props.closeModal()
 	}
@@ -48,8 +47,8 @@ const ModalPermanentTokenAdd = (props) => {
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
-					onChange: onInputChange('title')
-				})
+					onChange: onInputChange('title'),
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -58,26 +57,25 @@ const ModalPermanentTokenAdd = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
+					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator '
+					className: 'card__separator ',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false
-				}, loading === true ? h(Spinner) : 'Add')
+					disabled: loading === true || props.active === false,
+				}, loading === true ? h(Spinner) : 'Add'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalPermanentTokenAdd.propTypes = {
-	...commonModalProps
+	...commonModalProps,
 }
 
 export default ModalPermanentTokenAdd

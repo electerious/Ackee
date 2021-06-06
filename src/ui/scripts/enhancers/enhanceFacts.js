@@ -4,14 +4,12 @@ const defaults = {
 	averageDuration: 0,
 	viewsToday: 0,
 	viewsMonth: 0,
-	viewsYear: 0
+	viewsYear: 0,
 }
 
 export default (facts = {}) => {
-
 	return {
 		...defaults,
-		...facts
+		...facts,
 	}
-
 }

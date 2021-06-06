@@ -8,7 +8,6 @@ export const RESET_MODALS = Symbol()
 const initialState = {}
 
 const reducer = (state, action) => {
-
 	switch (action.type) {
 		case ADD_MODAL:
 			return {
@@ -17,8 +16,8 @@ const reducer = (state, action) => {
 					id: action.modalId,
 					type: action.payload.type,
 					props: action.payload.props,
-					visible: true
-				}
+					visible: true,
+				},
 			}
 		case REMOVE_MODAL:
 			const clone = { ...state }
@@ -29,11 +28,9 @@ const reducer = (state, action) => {
 		default:
 			return state
 	}
-
 }
 
 export default () => {
-
 	const [ modals, dispatch ] = useReducer(reducer, initialState)
 
 	const addModal = useCallback((type, props) => dispatch({
@@ -41,24 +38,23 @@ export default () => {
 		modalId: shortId(),
 		payload: {
 			type,
-			props
-		}
+			props,
+		},
 	}), [ dispatch ])
 
 	const removeModal = useCallback((modalId) => dispatch({
 		type: REMOVE_MODAL,
-		modalId
+		modalId,
 	}), [ dispatch ])
 
 	const resetModals = useCallback(() => dispatch({
-		type: RESET_MODALS
+		type: RESET_MODALS,
 	}), [ dispatch ])
 
 	return {
 		modals,
 		addModal,
 		removeModal,
-		resetModals
+		resetModals,
 	}
-
 }

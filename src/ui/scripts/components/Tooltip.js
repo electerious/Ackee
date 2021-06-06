@@ -5,7 +5,6 @@ import Context, { CONTENT } from './Context'
 import IconQuestionMark from './icons/IconQuestionMark'
 
 const calculateX = (measurement) => {
-
 	const padding = 10
 
 	return Math.max(
@@ -14,10 +13,9 @@ const calculateX = (measurement) => {
 			// Ensure that the context stays on the screen
 			measurement.body.width - measurement.element.width - padding,
 			// Ensure that the context is pinned to the target
-			measurement.target.relative.x + measurement.target.width / 2 - measurement.element.width / 2
-		)
+			measurement.target.relative.x + measurement.target.width / 2 - measurement.element.width / 2,
+		),
 	)
-
 }
 
 const calculateY = (measurement) => {
@@ -25,7 +23,6 @@ const calculateY = (measurement) => {
 }
 
 const Tooltip = (props) => {
-
 	const ref = useRef()
 	const [ active, setActive ] = useState(false)
 
@@ -34,7 +31,7 @@ const Tooltip = (props) => {
 
 	const items = [{
 		type: CONTENT,
-		children: props.children
+		children: props.children,
 	}]
 
 	return (
@@ -42,10 +39,10 @@ const Tooltip = (props) => {
 			ref,
 			type: 'button',
 			className: 'link tooltip',
-			onClick: toggle
+			onClick: toggle,
 		},
 			h(IconQuestionMark, {
-				className: 'tooltip__icon'
+				className: 'tooltip__icon',
 			}),
 			active === true && h(Context, {
 				targetRef: ref,
@@ -55,15 +52,14 @@ const Tooltip = (props) => {
 				tooltip: true,
 				items,
 				onItemClick: close,
-				onAwayClick: close
-			}, props.children)
+				onAwayClick: close,
+			}, props.children),
 		)
 	)
-
 }
 
 Tooltip.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
 }
 
 export default Tooltip

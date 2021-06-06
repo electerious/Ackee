@@ -11,7 +11,6 @@ import CardStatistics from '../cards/CardStatistics'
 import RendererViews from '../renderers/RendererViews'
 
 const RouteViews = (props) => {
-
 	const domains = useDomains()
 
 	return (
@@ -20,20 +19,20 @@ const RouteViews = (props) => {
 				wide: true,
 				headline: ({
 					[VIEWS_TYPE_UNIQUE]: 'Site Views',
-					[VIEWS_TYPE_TOTAL]: 'Page Views'
+					[VIEWS_TYPE_TOTAL]: 'Page Views',
 				})[props.filters.viewsType],
 				hook: useMergedViews,
 				hookArgs: [
 					{
 						interval: props.filters.interval,
 						type: props.filters.viewsType,
-						limit: 14
-					}
+						limit: 14,
+					},
 				],
 				renderer: RendererViews,
 				rendererProps: {
-					interval: props.filters.interval
-				}
+					interval: props.filters.interval,
+				},
 			}),
 			domains.value.map((domain) => {
 				return h(CardStatistics, {
@@ -46,23 +45,22 @@ const RouteViews = (props) => {
 						{
 							interval: props.filters.interval,
 							type: props.filters.viewsType,
-							limit: 7
-						}
+							limit: 7,
+						},
 					],
 					renderer: RendererViews,
 					rendererProps: {
-						interval: props.filters.interval
-					}
+						interval: props.filters.interval,
+					},
 				})
-			})
+			}),
 		)
 	)
-
 }
 
 RouteViews.propTypes = {
 	setRoute: PropTypes.func.isRequired,
-	filters: PropTypes.object.isRequired
+	filters: PropTypes.object.isRequired,
 }
 
 export default RouteViews

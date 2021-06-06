@@ -15,10 +15,8 @@ const QUERY = gql`
 `
 
 export default () => {
-
 	const selector = (data) => data?.facts
 	const enhancer = enhanceFacts
 
 	return useQuery(QUERY, selector, enhancer)
-
 }

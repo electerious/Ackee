@@ -1,7 +1,6 @@
 import isAuthenticationError from '../utils/isAuthenticationError'
 
 export default (token, errors, reset) => {
-
 	const hasToken = token != null
 	if (hasToken === false) return false
 
@@ -12,5 +11,4 @@ export default (token, errors, reset) => {
 	}
 
 	return true
-
 }

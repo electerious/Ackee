@@ -8,18 +8,18 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
-		default: uuid
+		default: uuid,
 	},
 	created: {
 		type: Date,
 		required: true,
-		default: Date.now
+		default: Date.now,
 	},
 	updated: {
 		type: Date,
 		required: true,
-		default: Date.now
-	}
+		default: Date.now,
+	},
 })
 
 module.exports = mongoose.model('Token', schema)

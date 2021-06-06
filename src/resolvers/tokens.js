@@ -8,13 +8,12 @@ const ignoreCookie = require('../utils/ignoreCookie')
 const response = (entry) => ({
 	id: entry.id,
 	created: entry.created,
-	updated: entry.updated
+	updated: entry.updated,
 })
 
 module.exports = {
 	Mutation: {
 		createToken: async (parent, { input }, { setCookies }) => {
-
 			const { username, password } = input
 
 			if (config.username == null) throw new KnownError('Ackee username missing in environment')
@@ -30,21 +29,18 @@ module.exports = {
 
 			return {
 				success: true,
-				payload: response(entry)
+				payload: response(entry),
 			}
-
 		},
 		deleteToken: async (parent, { id }, { setCookies }) => {
-
 			await tokens.del(id)
 
 			// Remove cookie to report your own visits, again
 			setCookies.push(ignoreCookie.off)
 
 			return {
-				success: true
+				success: true,
 			}
-
-		}
-	}
+		},
+	},
 }

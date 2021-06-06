@@ -35,116 +35,113 @@ const { get, set, reset } = createStorage(`ackee_filter_${ version }`, {
 	devicesType: DEVICES_TYPE_WITH_MODEL,
 	browsersType: BROWSERS_TYPE_WITH_VERSION,
 	sizesType: SIZES_TYPE_BROWSER_RESOLUTION,
-	systemsType: SYSTEMS_TYPE_WITH_VERSION
+	systemsType: SYSTEMS_TYPE_WITH_VERSION,
 })
 
 const reducer = (state, action) => {
-
 	switch (action.type) {
 		case SET_SORTING_FILTER:
 			return set({
 				...state,
-				sorting: action.payload
+				sorting: action.payload,
 			})
 		case SET_RANGE_FILTER:
 			return set({
 				...state,
-				range: action.payload
+				range: action.payload,
 			})
 		case SET_INTERVAL_FILTER:
 			return set({
 				...state,
-				interval: action.payload
+				interval: action.payload,
 			})
 		case SET_VIEWS_TYPE_FILTER:
 			return set({
 				...state,
-				viewsType: action.payload
+				viewsType: action.payload,
 			})
 		case SET_REFERRERS_TYPE_FILTER:
 			return set({
 				...state,
-				referrersType: action.payload
+				referrersType: action.payload,
 			})
 		case SET_DEVICES_TYPE_FILTER:
 			return set({
 				...state,
-				devicesType: action.payload
+				devicesType: action.payload,
 			})
 		case SET_BROWSERS_TYPE_FILTER:
 			return set({
 				...state,
-				browsersType: action.payload
+				browsersType: action.payload,
 			})
 		case SET_SIZES_TYPE_FILTER:
 			return set({
 				...state,
-				sizesType: action.payload
+				sizesType: action.payload,
 			})
 		case SET_SYSTEMS_TYPE_FILTER:
 			return set({
 				...state,
-				systemsType: action.payload
+				systemsType: action.payload,
 			})
 		case RESET_FILTERS:
 			return reset()
 		default:
 			return state
 	}
-
 }
 
 export default () => {
-
 	const [ filters, dispatch ] = useReducer(reducer, get())
 
 	const setSortingFilter = useCallback((payload) => dispatch({
 		type: SET_SORTING_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setRangeFilter = useCallback((payload) => dispatch({
 		type: SET_RANGE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setIntervalFilter = useCallback((payload) => dispatch({
 		type: SET_INTERVAL_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setViewsTypeFilter = useCallback((payload) => dispatch({
 		type: SET_VIEWS_TYPE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setReferrersTypeFilter = useCallback((payload) => dispatch({
 		type: SET_REFERRERS_TYPE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setDevicesTypeFilter = useCallback((payload) => dispatch({
 		type: SET_DEVICES_TYPE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setBrowsersTypeFilter = useCallback((payload) => dispatch({
 		type: SET_BROWSERS_TYPE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setSizesTypeFilter = useCallback((payload) => dispatch({
 		type: SET_SIZES_TYPE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const setSystemsTypeFilter = useCallback((payload) => dispatch({
 		type: SET_SYSTEMS_TYPE_FILTER,
-		payload
+		payload,
 	}), [ dispatch ])
 
 	const resetFilters = useCallback(() => dispatch({
-		type: RESET_FILTERS
+		type: RESET_FILTERS,
 	}), [ dispatch ])
 
 	return {
@@ -158,7 +155,6 @@ export default () => {
 		setBrowsersTypeFilter,
 		setSizesTypeFilter,
 		setSystemsTypeFilter,
-		resetFilters
+		resetFilters,
 	}
-
 }
