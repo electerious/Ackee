@@ -1,19 +1,24 @@
 import { createElement as h, Fragment } from 'react'
 
+import useAuthenticated from '../hooks/useAuthenticated'
+
 import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
 import Filter from './Filter'
 import Dashboard from './Dashboard'
 
 const Main = (props) => {
-	const requiresLogin = props.authenticated === false
+	const errors = props.useErrors()
+	const authenticated = useAuthenticated(props.token, errors, props.reset)
+
+	const requiresLogin = authenticated === false
 	if (requiresLogin === true) return h(OverlayLogin, {
 		setToken: props.setToken,
 	})
 
-	const hasErrors = props.errors.length > 0
+	const hasErrors = errors.length > 0
 	if (hasErrors === true) return h(OverlayFailure, {
-		errors: props.errors,
+		errors,
 		reset: props.reset,
 	})
 
