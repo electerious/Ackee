@@ -30,7 +30,7 @@
     "server": "node src/index.js",
     "coveralls": "nyc report --reporter=lcov",
     "test": "npm run lint && nyc ava",
-    "lint": "eslint '{functions,src,test}/**/*.js'"
+    "lint": "eslint \"{functions,src,test}/**/*.js\""
   },
   "dependencies": {
     "ackee-tracker": "^5.1.0",
