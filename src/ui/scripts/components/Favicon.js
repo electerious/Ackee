@@ -5,7 +5,6 @@ import classNames from 'classnames'
 const transparentPixel = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 
 const Favicon = (props) => {
-
 	const initialMissing = props.url == null
 	const [ missing, setMissing ] = useState(initialMissing)
 
@@ -15,17 +14,16 @@ const Favicon = (props) => {
 		h('img', {
 			className: classNames({
 				'favicon': true,
-				'favicon--missing': missing === true
+				'favicon--missing': missing === true,
 			}),
 			src: missing === true ? transparentPixel : props.url,
-			onError
+			onError,
 		})
 	)
-
 }
 
 Favicon.propTypes = {
-	url: PropTypes.string
+	url: PropTypes.string,
 }
 
 export default Favicon

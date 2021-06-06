@@ -10,9 +10,9 @@ const { getStats } = require('./_utils')
 const base = listen(server)
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
 	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
@@ -23,125 +23,125 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			referrers(sorting: ${ variables.sorting }, type: ${ variables.type }, range: ${ variables.range }${ limit }) {
-				id
+				value
 				count
 				created
 			}
-		`
+		`,
 	})
 
 	assertions(t, statistics.referrers)
 }
 
-macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and ') } referrers`
+macro.title = (providedTitle, options) => `fetch ${ Object.values(options).join(' and ') } referrers`
 
 test(macro, {
 	sorting: 'TOP',
 	type: 'WITH_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 2)
-	t.is(referrers[0].id, 'Newsletter')
-})
-
-test(macro, {
-	sorting: 'RECENT',
-	type: 'WITH_SOURCE',
-	range: 'LAST_6_MONTHS'
-}, (t, referrers) => {
-	t.is(referrers.length, 14)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
 	sorting: 'RECENT',
 	type: 'WITH_SOURCE',
 	range: 'LAST_6_MONTHS',
-	limit: 1
+}, (t, referrers) => {
+	t.is(referrers.length, 14)
+	t.is(referrers[0].value, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'WITH_SOURCE',
+	range: 'LAST_6_MONTHS',
+	limit: 1,
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
 	sorting: 'NEW',
 	type: 'WITH_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 2)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
 	sorting: 'TOP',
 	type: 'NO_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
-})
-
-test(macro, {
-	sorting: 'RECENT',
-	type: 'NO_SOURCE',
-	range: 'LAST_6_MONTHS'
-}, (t, referrers) => {
-	t.is(referrers.length, 14)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
 	sorting: 'RECENT',
 	type: 'NO_SOURCE',
 	range: 'LAST_6_MONTHS',
-	limit: 1
+}, (t, referrers) => {
+	t.is(referrers.length, 14)
+	t.is(referrers[0].value, 'https://google.com/')
+})
+
+test(macro, {
+	sorting: 'RECENT',
+	type: 'NO_SOURCE',
+	range: 'LAST_6_MONTHS',
+	limit: 1,
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
 	sorting: 'NEW',
 	type: 'NO_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'https://google.com/')
+	t.is(referrers[0].value, 'https://google.com/')
 })
 
 test(macro, {
 	sorting: 'TOP',
 	type: 'ONLY_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
 	sorting: 'RECENT',
 	type: 'ONLY_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 9)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
 	sorting: 'RECENT',
 	type: 'ONLY_SOURCE',
 	range: 'LAST_6_MONTHS',
-	limit: 1
+	limit: 1,
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })
 
 test(macro, {
 	sorting: 'NEW',
 	type: 'ONLY_SOURCE',
-	range: 'LAST_6_MONTHS'
+	range: 'LAST_6_MONTHS',
 }, (t, referrers) => {
 	t.is(referrers.length, 1)
-	t.is(referrers[0].id, 'Newsletter')
+	t.is(referrers[0].value, 'Newsletter')
 })

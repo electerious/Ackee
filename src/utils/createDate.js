@@ -5,7 +5,6 @@ const serverTimeZone = require('./timeZone')
 const intervals = require('../constants/intervals')
 
 module.exports = (userTimeZone = serverTimeZone) => {
-
 	const currentDate = new Date()
 
 	// This is the biggest, positive timezone offset possible (starting from UTC).
@@ -30,7 +29,7 @@ module.exports = (userTimeZone = serverTimeZone) => {
 		// Get a date with an offset that always includes the whole unit of the given interval and a timezone toleranz
 		includeDays: (days) => subHours(subDays(startOfDay(currentDate), days - 1), timeZoneToleranz),
 		includeMonths: (months) => subHours(subMonths(startOfMonth(currentDate), months - 1), timeZoneToleranz),
-		includeYears: (years) => subHours(subYears(startOfYear(currentDate), years - 1), timeZoneToleranz)
+		includeYears: (years) => subHours(subYears(startOfYear(currentDate), years - 1), timeZoneToleranz),
 	}
 
 	// Get the last-function that matches the interval
@@ -54,7 +53,6 @@ module.exports = (userTimeZone = serverTimeZone) => {
 	return {
 		...instance,
 		lastFnByInterval,
-		includeFnByInterval
+		includeFnByInterval,
 	}
-
 }

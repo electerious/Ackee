@@ -18,12 +18,11 @@ const updatedKey = uuid()
 const updatedValue = null
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 test.serial('create action', async (t) => {
-
 	const body = {
 		query: `
 			mutation createAction($eventId: ID!, $input: CreateActionInput!) {
@@ -41,9 +40,9 @@ test.serial('create action', async (t) => {
 			eventId: t.context.event.id,
 			input: {
 				key: defaultKey,
-				value: defaultValue
-			}
-		}
+				value: defaultValue,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -55,11 +54,9 @@ test.serial('create action', async (t) => {
 
 	// Save action for the next test
 	validAction = json.data.createAction.payload
-
 })
 
 test.serial('update action', async (t) => {
-
 	const body = {
 		query: `
 			mutation updateAction($id: ID!, $input: UpdateActionInput!) {
@@ -72,19 +69,17 @@ test.serial('update action', async (t) => {
 			id: validAction.id,
 			input: {
 				key: updatedKey,
-				value: updatedValue
-			}
-		}
+				value: updatedValue,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.updateAction.success)
-
 })
 
 test.serial('ignore action creation when logged in', async (t) => {
-
 	const body = {
 		query: `
 			mutation createAction($eventId: ID!, $input: CreateActionInput!) {
@@ -99,13 +94,13 @@ test.serial('ignore action creation when logged in', async (t) => {
 		variables: {
 			eventId: t.context.event.id,
 			input: {
-				key: uuid()
-			}
-		}
+				key: uuid(),
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id, {
-		Cookie: 'ackee_ignore=1'
+		Cookie: 'ackee_ignore=1',
 	})
 
 	t.true(json.data.createAction.success)
@@ -113,11 +108,9 @@ test.serial('ignore action creation when logged in', async (t) => {
 
 	// Save action for the next test
 	ignoredAction = json.data.createAction.payload
-
 })
 
 test.serial('ignore action update when logged in', async (t) => {
-
 	const body = {
 		query: `
 			mutation updateAction($id: ID!, $input: UpdateActionInput!) {
@@ -129,15 +122,14 @@ test.serial('ignore action update when logged in', async (t) => {
 		variables: {
 			id: ignoredAction.id,
 			input: {
-				key: uuid()
-			}
-		}
+				key: uuid(),
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id, {
-		Cookie: 'ackee_ignore=1'
+		Cookie: 'ackee_ignore=1',
 	})
 
 	t.true(json.data.updateAction.success)
-
 })

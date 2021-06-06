@@ -12,5 +12,5 @@ module.exports = mergeTypeDefs([
 	require('./facts'),
 	require('./miscellaneous'),
 	require('./domainStatistics'),
-	require('./eventStatistics')
+	require('./eventStatistics'),
 ], { all: true })

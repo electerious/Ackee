@@ -11,5 +11,5 @@ module.exports = mergeResolvers([
 	require('./actions'),
 	require('./facts'),
 	require('./domainStatistics'),
-	require('./eventStatistics')
+	require('./eventStatistics'),
 ])

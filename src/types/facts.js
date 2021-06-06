@@ -8,6 +8,10 @@ module.exports = gql`
 	"""
 	type Facts {
 		"""
+		Facts identifier.
+		"""
+		id: ID!
+		"""
 		Number of visitors currently on your site.
 		"""
 		activeVisitors: UnsignedInt!

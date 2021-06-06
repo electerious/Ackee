@@ -21,8 +21,7 @@ const styles = readFile(resolve(__dirname, '../dist/index.css')).catch(signale.f
 const scripts = readFile(resolve(__dirname, '../dist/index.js')).catch(signale.fatal)
 const tracker = readFile(resolve(__dirname, '../dist/tracker.js')).catch(signale.fatal)
 
-const handleMicroError = (err, res) => {
-
+const handleMicroError = (error, res) => {
 	// This part is for micro errors and errors outside of GraphQL.
 	// Most errors won't be caught here, but some error can still
 	// happen outside of GraphQL. In this case we distinguish
@@ -30,53 +29,47 @@ const handleMicroError = (err, res) => {
 	// created with the createError function while unknown errors
 	// are simply errors thrown somewhere in the application.
 
-	const isUnknownError = err.statusCode == null
-	const hasOriginalError = err.originalError != null
+	const isUnknownError = error.statusCode == null
+	const hasOriginalError = error.originalError != null
 
 	// Only log the full error stack when the error isn't a known response
 	if (isUnknownError === true) {
-		signale.fatal(err)
-		return send(res, 500, err.message)
+		signale.fatal(error)
+		return send(res, 500, error.message)
 	}
 
-	signale.warn(hasOriginalError === true ? err.originalError.message : err.message)
-	send(res, err.statusCode, err.message)
-
+	signale.warn(hasOriginalError === true ? error.originalError.message : error.message)
+	send(res, error.statusCode, error.message)
 }
 
-const handleGraphError = (err) => {
-
+const handleGraphError = (error) => {
 	// This part is for error that happen inside GraphQL resolvers.
 	// All known errors should be thrown as a KnownError as those
 	// errors will only show up in the response and as a warning
 	// in the console output.
 
-	const suitableError = err.originalError || err
+	const suitableError = error.originalError || error
 	const isKnownError = suitableError instanceof KnownError
 
 	// Only log the full error stack when the error isn't a known response
 	if (isKnownError === false) {
 		signale.fatal(suitableError)
-		return err
+		return error
 	}
 
 	signale.warn(suitableError.message)
-	return err
-
+	return error
 }
 
 const catchError = (fn) => async (req, res) => {
-
 	try {
 		return await fn(req, res)
-	} catch (err) {
-		handleMicroError(err, res)
+	} catch (error) {
+		handleMicroError(error, res)
 	}
-
 }
 
-const attachCorsHeaders = (fn) => async (req, res) => {
-
+const attachCorsHeaders = (fn) => (req, res) => {
 	const matchingOrigin = findMatchingOrigin(req, config.allowOrigin)
 
 	if (matchingOrigin != null) {
@@ -87,20 +80,17 @@ const attachCorsHeaders = (fn) => async (req, res) => {
 	}
 
 	return fn(req, res)
-
 }
 
-const notFound = async (req) => {
+const notFound = (req) => {
+	const error = new Error(`\`${ req.url }\` not found`)
 
-	const err = new Error(`\`${ req.url }\` not found`)
-
-	throw createError(404, 'Not found', err)
-
+	throw createError(404, 'Not found', error)
 }
 
 const apolloServer = createApolloServer(ApolloServer, {
 	formatError: handleGraphError,
-	context: createMicroContext
+	context: createMicroContext,
 })
 
 const graphqlPath = '/api'
@@ -145,14 +135,14 @@ const routes = [
 	post('/*', notFound),
 	put('/*', notFound),
 	patch('/*', notFound),
-	del('/*', notFound)
+	del('/*', notFound),
 
 ].filter(Boolean)
 
 module.exports = micro(
 	attachCorsHeaders(
 		catchError(
-			router(...routes)
-		)
-	)
+			router(...routes),
+		),
+	),
 )

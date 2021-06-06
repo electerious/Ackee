@@ -5,30 +5,28 @@ import Headline from '../Headline'
 import Text from '../Text'
 
 const PresentationValueText = (props) => {
-
 	return (
 		h('div', {
-			className: 'valueText'
+			className: 'valueText',
 		},
 			h(Headline, {
 				type: 'div',
-				spacing: false
+				spacing: false,
 			}, props.value),
 			h(Text, {
 				type: 'div',
-				spacing: false
-			}, props.text)
+				spacing: false,
+			}, props.text),
 		)
 	)
-
 }
 
 PresentationValueText.propTypes = {
 	value: PropTypes.oneOfType([
 		PropTypes.number,
-		PropTypes.string
+		PropTypes.string,
 	]).isRequired,
-	text: PropTypes.string.isRequired
+	text: PropTypes.string.isRequired,
 }
 
 export default PresentationValueText

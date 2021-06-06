@@ -5,5 +5,5 @@ const VIEWS_TYPE_TOTAL = 'TOTAL'
 
 module.exports = {
 	VIEWS_TYPE_UNIQUE,
-	VIEWS_TYPE_TOTAL
+	VIEWS_TYPE_TOTAL,
 }

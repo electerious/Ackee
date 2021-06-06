@@ -2,7 +2,6 @@ import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 const Select = (props) => {
-
 	return (
 		h('select', {
 			className: 'select',
@@ -10,17 +9,16 @@ const Select = (props) => {
 			required: props.required,
 			disabled: props.disabled,
 			value: props.value,
-			onChange: props.onChange
+			onChange: props.onChange,
 		},
 			props.items.map((item, index) => (
 				h('option', {
 					key: item.value + index,
-					value: item.value
+					value: item.value,
 				}, item.label)
-			))
+			)),
 		)
 	)
-
 }
 
 Select.propTypes = {
@@ -32,9 +30,9 @@ Select.propTypes = {
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
 			value: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired
-		})
-	).isRequired
+			label: PropTypes.string.isRequired,
+		}),
+	).isRequired,
 }
 
 export default Select

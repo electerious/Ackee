@@ -14,23 +14,20 @@ export const BUTTON = Symbol()
 export const SEPARATOR = Symbol()
 
 const Content = (props) => {
-
 	return (
 		h('p', {
-			className: 'context__content'
+			className: 'context__content',
 		},
-			props.children
+			props.children,
 		)
 	)
-
 }
 
 Content.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
 }
 
 const Button = (props) => {
-
 	const hasKeyHint = props.keyHint != null
 	const hasKeyDescription = props.description != null
 
@@ -39,18 +36,17 @@ const Button = (props) => {
 			className: classNames({
 				context__button: true,
 				active: props.active === true,
-				link: true
+				link: true,
 			}),
-			onClick: props.onClick
+			onClick: props.onClick,
 		},
 			h('div', { className: 'context__head' },
 				h('div', { className: 'context__label' }, props.label),
-				hasKeyHint === true && h(KeyHint, {}, props.keyHint)
+				hasKeyHint === true && h(KeyHint, {}, props.keyHint),
 			),
-			hasKeyDescription === true && h('div', { className: 'context__description' }, props.description)
+			hasKeyDescription === true && h('div', { className: 'context__description' }, props.description),
 		)
 	)
-
 }
 
 Button.propTypes = {
@@ -58,19 +54,16 @@ Button.propTypes = {
 	description: PropTypes.string,
 	active: PropTypes.bool.isRequired,
 	onClick: PropTypes.func.isRequired,
-	keyHint: PropTypes.node
+	keyHint: PropTypes.node,
 }
 
 const Separator = () => {
-
 	return (
 		h('div', { className: 'context__separator' })
 	)
-
 }
 
 const Context = (props) => {
-
 	const ref = useRef()
 	const measurement = useMeasure(props.targetRef, ref)
 
@@ -87,18 +80,17 @@ const Context = (props) => {
 				'context--fixed': props.fixed === true,
 				'context--tooltip': props.tooltip === true,
 				'context--floating': props.floating === true,
-				'visible': measurement != null
+				'visible': measurement != null,
 			}),
 			style: {
 				'--x': x,
-				'--y': y
-			}
+				'--y': y,
+			},
 		},
 			props.items.map((item, index) => {
-
 				if (item.type === CONTENT) return h(Content, {
 					key: index,
-					...item
+					...item,
 				})
 
 				if (item.type === BUTTON) return h(Button, {
@@ -107,23 +99,21 @@ const Context = (props) => {
 					onClick: (e) => {
 						item.onClick(e)
 						props.onItemClick(e)
-					}
+					},
 				})
 
 				if (item.type === SEPARATOR) return h(Separator, {
-					key: index
+					key: index,
 				})
-
-			})
+			}),
 		),
-		document.body
+		document.body,
 	)
-
 }
 
 Context.propTypes = {
 	targetRef: PropTypes.shape({
-		current: PropTypes.instanceOf(Element)
+		current: PropTypes.instanceOf(Element),
 	}),
 	fixed: PropTypes.bool,
 	x: PropTypes.func.isRequired,
@@ -132,7 +122,7 @@ Context.propTypes = {
 	floating: PropTypes.bool,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onItemClick: PropTypes.func.isRequired,
-	onAwayClick: PropTypes.func.isRequired
+	onAwayClick: PropTypes.func.isRequired,
 }
 
 export default Context

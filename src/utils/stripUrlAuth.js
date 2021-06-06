@@ -6,5 +6,5 @@ module.exports = (url) => normalizeUrl(url, {
 	normalizeProtocol: false,
 	stripWWW: false,
 	removeTrailingSlash: false,
-	sortQueryParameters: false
+	sortQueryParameters: false,
 })

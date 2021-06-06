@@ -4,14 +4,13 @@ const intervals = require('../constants/intervals')
 const matchEvents = require('../stages/matchEvents')
 
 module.exports = (ids, average, interval, limit, dateDetails) => {
-
 	const aggregation = [
 		matchEvents(ids),
 		{
 			$group: {
-				_id: {}
-			}
-		}
+				_id: {},
+			},
+		},
 	]
 
 	aggregation[0].$match.created = { $gte: dateDetails.includeFnByInterval(interval)(limit) }
@@ -27,5 +26,4 @@ module.exports = (ids, average, interval, limit, dateDetails) => {
 	if (matchYear === true) aggregation[1].$group._id.year = { $year: dateExpression }
 
 	return aggregation
-
 }

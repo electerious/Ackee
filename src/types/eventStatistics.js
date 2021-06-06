@@ -29,7 +29,7 @@ module.exports = gql`
 		"""
 		Date of the event.
 		"""
-		id: DateTime!
+		value: DateTime!
 		"""
 		Sum of values on that date.
 		"""
@@ -40,7 +40,7 @@ module.exports = gql`
 		"""
 		Key of the event.
 		"""
-		id: String!
+		value: String!
 		"""
 		Sum of values of the current event key.
 		"""
@@ -55,6 +55,10 @@ module.exports = gql`
 	Statistics of an event. The data is available in different types, depending on whether they are to be shown in a chart or list.
 	"""
 	type EventStatistics {
+		"""
+		Statistic identifier.
+		"""
+		id: ID!
 		"""
 		The chart type should be used when showing events in a chart. It groups events by an interval and shows the total or average sum of values on each entry.
 		"""

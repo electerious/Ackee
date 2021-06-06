@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+This release contains a refactored front-end that takes advantage of the GraphQL API that has been in Ackee since version 2. Better caching and instant domain, event and permanent token updates.
+
+### Changed
+
+- `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id field
+- `DomainStatistics` and `EventStatistics` (GraphQL API) now contain entries with a `value` instead of `id` to avoid confusing GraphQL clients that automatically cache entries with an `id` field. The used id was never unique and therefore shouldn't be named `id`.
+
 ## [3.0.6] - 2021-04-02
 
 ### Changed

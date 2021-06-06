@@ -8,35 +8,35 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
-		default: uuid
+		default: uuid,
 	},
 	eventId: {
 		type: String,
 		required: true,
-		index: true
+		index: true,
 	},
 	key: {
-		type: String
+		type: String,
 	},
 	value: {
 		type: Number,
-		required: true
+		required: true,
 	},
 	details: {
-		type: String
+		type: String,
 	},
 	created: {
 		type: Date,
 		required: true,
 		index: true,
-		default: Date.now
+		default: Date.now,
 	},
 	updated: {
 		type: Date,
 		required: true,
 		index: true,
-		default: Date.now
-	}
+		default: Date.now,
+	},
 })
 
 module.exports = mongoose.model('Action', schema)
