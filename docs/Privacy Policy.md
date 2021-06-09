@@ -10,11 +10,11 @@ Although, we recommend to mention Ackee in your privacy policy. Let your visitor
 
 ```html
 To get information about the behavior of our visitors, we use
-<a href="https://ackee.electerious.com" target="_blank">Ackee</a>. This
+<a href="https://ackee.electerious.com" target="_blank" rel="noopener noreferrer">Ackee</a>. This
 analytics software gives us insight about our visitors only in general, but not
 about individuals per se, as it does not track visitors and does not store any
 personal identifiable information.
-<a href="https://docs.ackee.electerious.com/#/docs/Anonymization" target="_blank">Go
+<a href="https://docs.ackee.electerious.com/#/docs/Anonymization" target="_blank" rel="noopener noreferrer">Go
 to their documentation</a> to find out what Ackee collects.
 ```
 
