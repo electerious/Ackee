@@ -34,7 +34,7 @@ const RouteViews = (props) => {
 				renderer: RendererViews,
 				rendererProps: {
 					interval: props.filters.interval,
-					onColumnClick: (index) => props.addModal(MODALS_VIEWS, {
+					onItemClick: (index) => props.addModal(MODALS_VIEWS, {
 						index,
 						interval: props.filters.interval,
 						type: props.filters.viewsType,

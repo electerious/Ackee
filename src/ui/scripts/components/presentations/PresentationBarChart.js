@@ -63,9 +63,9 @@ const PresentationBarChart = (props) => {
 						key: index,
 						active: props.active === index,
 						size: `${ percentage(item, max(props.items)) }%`,
-						onEnter: () => props.onColumnEnter(index),
-						onLeave: () => props.onColumnLeave(index),
-						onClick: props.onColumnClick == null ? undefined : () => props.onColumnClick(index),
+						onEnter: () => props.onItemEnter(index),
+						onLeave: () => props.onItemLeave(index),
+						onClick: props.onItemClick == null ? undefined : () => props.onItemClick(index),
 						label: props.formatter(item),
 					})
 				)),
@@ -77,9 +77,9 @@ const PresentationBarChart = (props) => {
 PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,
 	formatter: PropTypes.func.isRequired,
-	onColumnEnter: PropTypes.func.isRequired,
-	onColumnLeave: PropTypes.func.isRequired,
-	onColumnClick: PropTypes.func,
+	onItemEnter: PropTypes.func.isRequired,
+	onItemLeave: PropTypes.func.isRequired,
+	onItemClick: PropTypes.func,
 }
 
 export default PresentationBarChart

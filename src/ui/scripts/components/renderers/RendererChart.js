@@ -13,8 +13,8 @@ const RendererChart = (props) => {
 	// Index of the active element
 	const [ active, setActive ] = useState(0)
 
-	const onColumnEnter = useCallback((index) => setActive(index), [ setActive ])
-	const onColumnLeave = useCallback(() => setActive(0), [ setActive ])
+	const onItemEnter = useCallback((index) => setActive(index), [ setActive ])
+	const onItemLeave = useCallback(() => setActive(0), [ setActive ])
 
 	const label = textLabel(active, props.interval)
 	useEffect(() => props.setStatusLabel(label), [ label ])
@@ -23,9 +23,9 @@ const RendererChart = (props) => {
 		items: props.items,
 		formatter: props.formatter,
 		active: active,
-		onColumnEnter,
-		onColumnLeave,
-		onColumnClick: props.onColumnClick,
+		onItemEnter,
+		onItemLeave,
+		onItemClick: props.onItemClick,
 	})
 }
 
@@ -34,7 +34,7 @@ RendererChart.propTypes = {
 	interval: PropTypes.string.isRequired,
 	formatter: PropTypes.func.isRequired,
 	setStatusLabel: PropTypes.func.isRequired,
-	onColumnClick: PropTypes.func,
+	onItemClick: PropTypes.func,
 }
 
 export default RendererChart

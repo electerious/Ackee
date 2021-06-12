@@ -55,7 +55,7 @@ const RouteOverview = (props) => {
 				renderer: RendererViews,
 				rendererProps: {
 					interval: INTERVALS_DAILY,
-					onColumnClick: (index) => props.addModal(MODALS_VIEWS, {
+					onItemClick: (index) => props.addModal(MODALS_VIEWS, {
 						index,
 						interval: INTERVALS_DAILY,
 						type: VIEWS_TYPE_UNIQUE,
