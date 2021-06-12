@@ -32,11 +32,13 @@ const Column = (props) => {
 	return (
 		h('div', {
 			className: classNames({
-				barChart__column: true,
-				active: props.active,
+				'barChart__column': true,
+				'barChart__column--disabled': props.onClick == null,
+				'active': props.active,
 			}),
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave,
+			onClick: props.onClick,
 		},
 			h('div', {
 				'className': 'barChart__bar color-black',
@@ -48,6 +50,8 @@ const Column = (props) => {
 }
 
 const PresentationBarChart = (props) => {
+	const hasClick = (item) => props.onColumnClick != null && item > 0
+
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
@@ -61,8 +65,9 @@ const PresentationBarChart = (props) => {
 						key: index,
 						active: props.active === index,
 						size: `${ percentage(item, max(props.items)) }%`,
-						onEnter: () => props.onEnter(index),
-						onLeave: () => props.onLeave(index),
+						onEnter: () => props.onColumnEnter(index),
+						onLeave: () => props.onColumnLeave(index),
+						onClick: hasClick(item) === true ? () => props.onColumnClick(index) : undefined,
 						label: props.formatter(item),
 					})
 				)),
@@ -74,8 +79,9 @@ const PresentationBarChart = (props) => {
 PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,
 	formatter: PropTypes.func.isRequired,
-	onEnter: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired,
+	onColumnEnter: PropTypes.func.isRequired,
+	onColumnLeave: PropTypes.func.isRequired,
+	onColumnClick: PropTypes.func,
 }
 
 export default PresentationBarChart

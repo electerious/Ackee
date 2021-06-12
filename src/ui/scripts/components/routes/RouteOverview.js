@@ -11,6 +11,8 @@ import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
+import { MODALS_OVERVIEW_VIEWS } from '../../constants/modals'
+
 import useMergedFacts from '../../api/hooks/facts/useMergedFacts'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
@@ -53,6 +55,9 @@ const RouteOverview = (props) => {
 				renderer: RendererViews,
 				rendererProps: {
 					interval: INTERVALS_DAILY,
+					onColumnClick: (index) => props.addModal(MODALS_OVERVIEW_VIEWS, {
+						index,
+					}),
 				},
 			}),
 			h(CardStatistics, {

@@ -78,7 +78,6 @@ const ModalPermanentTokenEdit = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
@@ -89,7 +88,6 @@ const ModalPermanentTokenEdit = (props) => {
 					type: 'button',
 					className: 'card__button link color-destructive',
 					onClick: onDelete,
-					disabled: props.active === false,
 				}, 'Delete'),
 
 				h('div', {
@@ -98,7 +96,6 @@ const ModalPermanentTokenEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.active === false,
 				}, 'Rename'),
 
 			),
