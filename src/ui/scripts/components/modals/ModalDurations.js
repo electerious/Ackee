@@ -1,29 +1,21 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
-
 import Headline from '../Headline'
 import Text from '../Text'
 import CurrentStatus from '../CurrentStatus'
 import PresentationCounterList from '../presentations/PresentationCounterList'
 
-import useCombinedViews from '../../api/hooks/views/useCombinedViews'
+import useCombinedDurations from '../../api/hooks/durations/useCombinedDurations'
 import relativeFn from '../../utils/relativeFn'
-import formatCount from '../../utils/formatCount'
+import formatDuration from '../../utils/formatDuration'
 import commonModalProps from '../../utils/commonModalProps'
 
-const ModalViews = (props) => {
-	const { value, status } = useCombinedViews({
+const ModalDurations = (props) => {
+	const { value, status } = useCombinedDurations({
 		interval: props.interval,
-		type: props.type,
 		limit: props.limit,
 	})
-
-	const headline = ({
-		[VIEWS_TYPE_UNIQUE]: 'Site Views',
-		[VIEWS_TYPE_TOTAL]: 'Page Views',
-	})[props.type]
 
 	return (
 		h('div', { className: 'card' },
@@ -32,7 +24,7 @@ const ModalViews = (props) => {
 				h(Headline, {
 					type: 'h2',
 					size: 'medium',
-				}, headline),
+				}, 'Durations'),
 				h(Text, {
 					type: 'div',
 					spacing: false,
@@ -41,7 +33,7 @@ const ModalViews = (props) => {
 				),
 				h(PresentationCounterList, {
 					items: value[props.index],
-					formatter: formatCount,
+					formatter: formatDuration,
 				}),
 
 			),
@@ -58,7 +50,7 @@ const ModalViews = (props) => {
 	)
 }
 
-ModalViews.propTypes = {
+ModalDurations.propTypes = {
 	...commonModalProps,
 	index: PropTypes.number.isRequired,
 	interval: PropTypes.string.isRequired,
@@ -66,4 +58,4 @@ ModalViews.propTypes = {
 	limit: PropTypes.number.isRequired,
 }
 
-export default ModalViews
+export default ModalDurations

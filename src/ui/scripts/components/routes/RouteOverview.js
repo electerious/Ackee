@@ -11,7 +11,7 @@ import { DEVICES_TYPE_WITH_MODEL } from '../../../../constants/devices'
 import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
-import { MODALS_VIEWS } from '../../constants/modals'
+import { MODALS_VIEWS, MODALS_DURATIONS } from '../../constants/modals'
 
 import useMergedFacts from '../../api/hooks/facts/useMergedFacts'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
@@ -77,6 +77,11 @@ const RouteOverview = (props) => {
 				renderer: RendererDurations,
 				rendererProps: {
 					interval: INTERVALS_DAILY,
+					onItemClick: (index) => props.addModal(MODALS_DURATIONS, {
+						index,
+						interval: INTERVALS_DAILY,
+						limit: 14,
+					}),
 				},
 			}),
 			h(CardStatistics, {

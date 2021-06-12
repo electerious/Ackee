@@ -4,11 +4,6 @@ import PropTypes from 'prop-types'
 import enhanceUrl from '../../enhancers/enhanceUrl'
 import sumByProp from '../../utils/sumByProp'
 
-const formatCount = (num) => {
-	return Number.parseFloat(num).toFixed(2)
-		.replace('.00', '')
-}
-
 const Row = (props) => {
 	const hasUrl = props.url != null
 
@@ -25,7 +20,7 @@ const Row = (props) => {
 				style: { '--width': `${ props.counterWidth }px` },
 			},
 				h('div', { className: 'flexList__bar flexList__bar--counter', style: { '--width': `${ props.barWidth }%` } }),
-				h('span', { className: 'color-primary' }, `${ props.count }x`),
+				h('span', { className: 'color-primary' }, `${ props.count }`),
 			),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', { className: 'flexList__truncated' }, props.text),
@@ -39,11 +34,11 @@ const PresentationCounterList = (props) => {
 	const proportionalWidth = ({ count }) => (count / totalCount) * 100
 
 	const counterWidth = props.items.reduce((maxWidth, item) => {
-		const formattedCount = formatCount(item.count)
+		const formattedCount = props.formatter(item.count)
 		const formattedLength = String(formattedCount).length
 
 		const averageCharWidth = 9
-		const formattedWidth = (formattedLength + 1) * averageCharWidth
+		const formattedWidth = formattedLength * averageCharWidth
 
 		if (formattedWidth > maxWidth) return formattedWidth
 		return maxWidth
@@ -57,7 +52,7 @@ const PresentationCounterList = (props) => {
 						key: item.text + index,
 						barWidth: proportionalWidth(item),
 						counterWidth,
-						count: formatCount(item.count),
+						count: props.formatter(item.count),
 						url: item.url,
 						text: item.text,
 					})
@@ -75,6 +70,7 @@ PresentationCounterList.propTypes = {
 			count: PropTypes.number.isRequired,
 		}),
 	).isRequired,
+	formatter: PropTypes.func.isRequired,
 }
 
 export default PresentationCounterList

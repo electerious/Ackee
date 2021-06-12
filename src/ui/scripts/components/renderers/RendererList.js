@@ -5,6 +5,7 @@ import { SORTINGS_TOP, SORTINGS_RECENT } from '../../../../constants/sortings'
 
 import relativeDate from '../../utils/relativeDate'
 import rangeLabel from '../../utils/rangeLabel'
+import formatCount from '../../utils/formatCount'
 
 import PresentationCounterList from '../presentations/PresentationCounterList'
 import PresentationList from '../presentations/PresentationList'
@@ -28,6 +29,7 @@ const RendererList = (props) => {
 
 	if (props.sorting === SORTINGS_TOP) return h(PresentationCounterList, {
 		items: props.items,
+		formatter: formatCount,
 	})
 
 	return h(PresentationList, {
