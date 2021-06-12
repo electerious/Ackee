@@ -48,14 +48,12 @@ const Column = (props) => {
 }
 
 const PresentationBarChart = (props) => {
-	const hasItems = props.items.length > 0
-
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
-				h(Row, { position: 'top' }, hasItems === true ? props.formatter(max(props.items)) : ''),
-				h(Row, { position: 'middle' }, hasItems === true ? props.formatter(mid(props.items)) : ''),
-				h(Row, { position: 'bottom' }, hasItems === true ? props.formatter(min()) : ''),
+				h(Row, { position: 'top' }, props.formatter(max(props.items))),
+				h(Row, { position: 'middle' }, props.formatter(mid(props.items))),
+				h(Row, { position: 'bottom' }, props.formatter(min())),
 			),
 			h('div', { className: 'barChart__columns' },
 				props.items.map((item, index) => (
