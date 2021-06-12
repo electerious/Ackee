@@ -23,7 +23,6 @@ const ModalOverviewViews = (props) => {
 			h('div', { className: 'card__inner' },
 
 				h(PresentationCounterList, {
-					padded: false,
 					items: value[props.index],
 				}),
 
