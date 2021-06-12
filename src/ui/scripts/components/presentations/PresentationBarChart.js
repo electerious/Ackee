@@ -32,11 +32,13 @@ const Column = (props) => {
 	return (
 		h('div', {
 			className: classNames({
-				barChart__column: true,
-				active: props.active,
+				'barChart__column': true,
+				'barChart__column--disabled': props.onClick == null,
+				'active': props.active,
 			}),
 			onMouseEnter: props.onEnter,
 			onMouseLeave: props.onLeave,
+			onClick: props.onClick,
 		},
 			h('div', {
 				'className': 'barChart__bar color-black',
@@ -48,14 +50,12 @@ const Column = (props) => {
 }
 
 const PresentationBarChart = (props) => {
-	const hasItems = props.items.length > 0
-
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
-				h(Row, { position: 'top' }, hasItems === true ? props.formatter(max(props.items)) : ''),
-				h(Row, { position: 'middle' }, hasItems === true ? props.formatter(mid(props.items)) : ''),
-				h(Row, { position: 'bottom' }, hasItems === true ? props.formatter(min()) : ''),
+				h(Row, { position: 'top' }, props.formatter(max(props.items))),
+				h(Row, { position: 'middle' }, props.formatter(mid(props.items))),
+				h(Row, { position: 'bottom' }, props.formatter(min())),
 			),
 			h('div', { className: 'barChart__columns' },
 				props.items.map((item, index) => (
@@ -63,8 +63,9 @@ const PresentationBarChart = (props) => {
 						key: index,
 						active: props.active === index,
 						size: `${ percentage(item, max(props.items)) }%`,
-						onEnter: () => props.onEnter(index),
-						onLeave: () => props.onLeave(index),
+						onEnter: () => props.onItemEnter(index),
+						onLeave: () => props.onItemLeave(index),
+						onClick: props.onItemClick == null ? undefined : () => props.onItemClick(index),
 						label: props.formatter(item),
 					})
 				)),
@@ -76,8 +77,9 @@ const PresentationBarChart = (props) => {
 PresentationBarChart.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.number).isRequired,
 	formatter: PropTypes.func.isRequired,
-	onEnter: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired,
+	onItemEnter: PropTypes.func.isRequired,
+	onItemLeave: PropTypes.func.isRequired,
+	onItemClick: PropTypes.func,
 }
 
 export default PresentationBarChart

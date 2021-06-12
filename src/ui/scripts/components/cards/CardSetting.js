@@ -8,16 +8,12 @@ const CardSetting = (props) => {
 	return (
 		h('div', { className: 'card card--wide' },
 			h('div', { className: 'card__inner' },
-
 				h(Headline, {
 					type: 'h2',
 					size: 'medium',
 				}, props.headline),
-
 				h(Spacer, { size: 1.6 }),
-
 				props.children,
-
 			),
 		)
 	)

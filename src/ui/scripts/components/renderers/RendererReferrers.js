@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import { SORTINGS_NEW, SORTINGS_RECENT } from '../../../../constants/sortings'
 
-import PresentationIconList from '../presentations/PresentationIconList'
 import relativeDate from '../../utils/relativeDate'
 import rangeLabel from '../../utils/rangeLabel'
+
+import PresentationIconList from '../presentations/PresentationIconList'
 
 const textLabel = (item, range, isRecent, isNew) => {
 	if (item && item.date) return relativeDate(item.date)
@@ -21,16 +22,16 @@ const RendererReferrers = (props) => {
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
-	const onEnter = useCallback((index) => setActive(index), [ setActive ])
-	const onLeave = useCallback(() => setActive(), [ setActive ])
+	const onItemEnter = useCallback((index) => setActive(index), [ setActive ])
+	const onItemLeave = useCallback(() => setActive(), [ setActive ])
 
 	const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT, props.sorting === SORTINGS_NEW)
 	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	return h(PresentationIconList, {
 		items: props.items,
-		onEnter,
-		onLeave,
+		onItemEnter,
+		onItemLeave,
 	})
 }
 

@@ -126,7 +126,6 @@ const ModalEventEdit = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
@@ -137,7 +136,6 @@ const ModalEventEdit = (props) => {
 					type: 'button',
 					className: 'card__button link color-destructive',
 					onClick: onDelete,
-					disabled: props.active === false,
 				}, 'Delete'),
 
 				h('div', {
@@ -146,7 +144,6 @@ const ModalEventEdit = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.active === false,
 				}, 'Save'),
 
 			),

@@ -30,8 +30,8 @@ const PresentationList = (props) => {
 				props.items.map((item, index) => (
 					h(Row, {
 						key: item.text + index,
-						onEnter: () => props.onEnter(index),
-						onLeave: () => props.onLeave(index),
+						onEnter: () => props.onItemEnter(index),
+						onLeave: () => props.onItemLeave(index),
 						...item,
 					})
 				)),
@@ -47,8 +47,8 @@ PresentationList.propTypes = {
 			text: PropTypes.string.isRequired,
 		}),
 	).isRequired,
-	onEnter: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired,
+	onItemEnter: PropTypes.func.isRequired,
+	onItemLeave: PropTypes.func.isRequired,
 }
 
 export default PresentationList

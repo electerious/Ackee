@@ -16,7 +16,6 @@ const reducer = (state, action) => {
 					id: action.modalId,
 					type: action.payload.type,
 					props: action.payload.props,
-					visible: true,
 				},
 			}
 		case REMOVE_MODAL:

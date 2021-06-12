@@ -74,8 +74,8 @@ const PresentationIconList = (props) => {
 					const commonProps = {
 						key: item.text + index,
 						barWidth: hasCount === true ? proportionalWidth(item) : undefined,
-						onEnter: () => props.onEnter(index),
-						onLeave: () => props.onLeave(index),
+						onEnter: () => props.onItemEnter(index),
+						onLeave: () => props.onItemLeave(index),
 					}
 
 					if (item.url == null) {
@@ -104,8 +104,8 @@ PresentationIconList.propTypes = {
 			count: PropTypes.number,
 		}),
 	).isRequired,
-	onEnter: PropTypes.func.isRequired,
-	onLeave: PropTypes.func.isRequired,
+	onItemEnter: PropTypes.func.isRequired,
+	onItemLeave: PropTypes.func.isRequired,
 }
 
 export default PresentationIconList

@@ -1,4 +1,4 @@
-import { createElement as h, useEffect } from 'react'
+import { createElement as h } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 import useDomains from '../api/hooks/domains/useDomains'
@@ -46,11 +46,6 @@ const gotoDomainWhenDefined = (domains, setRoute, index) => {
 
 const Dashboard = (props) => {
 	const currentRoute = useRoute(props.route)
-
-	useEffect(() => {
-		document.scrollingElement.scrollTop = 0
-	}, [ props.route ])
-
 	const domains = useDomains()
 
 	useHotkeys('o', () => props.setRoute('/'))
@@ -67,7 +62,8 @@ const Dashboard = (props) => {
 	const domainsLabel = (activeItem) => activeItem == null ? 'Domains' : activeItem.label
 	const insightsLabel = (activeItem) => activeItem == null ? 'Insights' : activeItem.label
 
-	const domainsItems = domains.value.map((domain, index) => createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10)),
+	const domainsItems = domains.value.map(
+		(domain, index) => createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10)),
 	)
 
 	const insightsItems = [

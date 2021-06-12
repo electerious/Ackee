@@ -57,7 +57,6 @@ const ModalPermanentTokenAdd = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false,
 				}, 'Close'),
 
 				h('div', {
@@ -66,7 +65,7 @@ const ModalPermanentTokenAdd = (props) => {
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: loading === true || props.active === false,
+					disabled: loading === true,
 				}, loading === true ? h(Spinner) : 'Add'),
 
 			),

@@ -1,6 +1,8 @@
 import { createElement as h, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import { MODALS_DURATIONS } from '../../constants/modals'
+
 import useDomains from '../../api/hooks/domains/useDomains'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
 import useDurations from '../../api/hooks/durations/useDurations'
@@ -26,6 +28,11 @@ const RouteDurations = (props) => {
 				renderer: RendererDurations,
 				rendererProps: {
 					interval: props.filters.interval,
+					onItemClick: (index) => props.addModal(MODALS_DURATIONS, {
+						index,
+						interval: props.filters.interval,
+						limit: 14,
+					}),
 				},
 			}),
 			domains.value.map((domain) => {
