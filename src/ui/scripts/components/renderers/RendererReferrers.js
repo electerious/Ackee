@@ -21,16 +21,16 @@ const RendererReferrers = (props) => {
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
-	const onEnter = useCallback((index) => setActive(index), [ setActive ])
-	const onLeave = useCallback(() => setActive(), [ setActive ])
+	const onItemEnter = useCallback((index) => setActive(index), [ setActive ])
+	const onItemLeave = useCallback(() => setActive(), [ setActive ])
 
 	const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT, props.sorting === SORTINGS_NEW)
 	useEffect(() => props.setStatusLabel(label), [ label ])
 
 	return h(PresentationIconList, {
 		items: props.items,
-		onEnter,
-		onLeave,
+		onItemEnter,
+		onItemLeave,
 	})
 }
 

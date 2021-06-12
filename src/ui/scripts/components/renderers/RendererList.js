@@ -19,8 +19,8 @@ const RendererList = (props) => {
 	// Index of the active element
 	const [ active, setActive ] = useState()
 
-	const onEnter = useCallback((index) => setActive(index), [ setActive ])
-	const onLeave = useCallback(() => setActive(), [ setActive ])
+	const onItemEnter = useCallback((index) => setActive(index), [ setActive ])
+	const onItemLeave = useCallback(() => setActive(), [ setActive ])
 
 	const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT)
 	useEffect(() => props.setStatusLabel(label), [ label ])
@@ -31,8 +31,8 @@ const RendererList = (props) => {
 
 	return h(PresentationList, {
 		items: props.items,
-		onEnter,
-		onLeave,
+		onItemEnter,
+		onItemLeave,
 	})
 }
 
