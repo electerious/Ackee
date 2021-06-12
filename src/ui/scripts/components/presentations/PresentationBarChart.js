@@ -50,8 +50,6 @@ const Column = (props) => {
 }
 
 const PresentationBarChart = (props) => {
-	const hasClick = (item) => props.onColumnClick != null && item > 0
-
 	return (
 		h('div', { className: 'barChart' },
 			h('div', { className: 'barChart__axis' },
@@ -67,7 +65,7 @@ const PresentationBarChart = (props) => {
 						size: `${ percentage(item, max(props.items)) }%`,
 						onEnter: () => props.onColumnEnter(index),
 						onLeave: () => props.onColumnLeave(index),
-						onClick: hasClick(item) === true ? () => props.onColumnClick(index) : undefined,
+						onClick: props.onColumnClick == null ? undefined : () => props.onColumnClick(index),
 						label: props.formatter(item),
 					})
 				)),
