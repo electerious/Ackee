@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { VIEWS_TYPE_UNIQUE, VIEWS_TYPE_TOTAL } from '../../../../constants/views'
 
-import { MODALS_OVERVIEW_VIEWS } from '../../constants/modals'
+import { MODALS_VIEWS } from '../../constants/modals'
 
 import useDomains from '../../api/hooks/domains/useDomains'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
@@ -34,7 +34,7 @@ const RouteViews = (props) => {
 				renderer: RendererViews,
 				rendererProps: {
 					interval: props.filters.interval,
-					onColumnClick: (index) => props.addModal(MODALS_OVERVIEW_VIEWS, {
+					onColumnClick: (index) => props.addModal(MODALS_VIEWS, {
 						index,
 						interval: props.filters.interval,
 						type: props.filters.viewsType,

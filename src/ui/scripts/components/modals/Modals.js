@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import * as modals from '../../constants/modals'
 
 import Modal from './Modal'
-import ModalOverviewViews from './ModalOverviewViews'
+import ModalViews from './ModalViews'
 import ModalDomainAdd from './ModalDomainAdd'
 import ModalDomainEdit from './ModalDomainEdit'
 import ModalEventAdd from './ModalEventAdd'
@@ -13,7 +13,7 @@ import ModalPermanentTokenAdd from './ModalPermanentTokenAdd'
 import ModalPermanentTokenEdit from './ModalPermanentTokenEdit'
 
 const modalComponents = {
-	[modals.MODALS_OVERVIEW_VIEWS]: ModalOverviewViews,
+	[modals.MODALS_VIEWS]: ModalViews,
 	[modals.MODALS_DOMAIN_ADD]: ModalDomainAdd,
 	[modals.MODALS_DOMAIN_EDIT]: ModalDomainEdit,
 	[modals.MODALS_EVENT_ADD]: ModalEventAdd,

@@ -12,7 +12,7 @@ import useCombinedViews from '../../api/hooks/views/useCombinedViews'
 import relativeFn from '../../utils/relativeFn'
 import commonModalProps from '../../utils/commonModalProps'
 
-const ModalOverviewViews = (props) => {
+const ModalViews = (props) => {
 	const { value, status } = useCombinedViews({
 		interval: props.interval,
 		type: props.type,
@@ -56,7 +56,7 @@ const ModalOverviewViews = (props) => {
 	)
 }
 
-ModalOverviewViews.propTypes = {
+ModalViews.propTypes = {
 	...commonModalProps,
 	index: PropTypes.number.isRequired,
 	interval: PropTypes.string.isRequired,
@@ -64,4 +64,4 @@ ModalOverviewViews.propTypes = {
 	limit: PropTypes.number.isRequired,
 }
 
-export default ModalOverviewViews
+export default ModalViews
