@@ -67,7 +67,8 @@ const Dashboard = (props) => {
 	const domainsLabel = (activeItem) => activeItem == null ? 'Domains' : activeItem.label
 	const insightsLabel = (activeItem) => activeItem == null ? 'Insights' : activeItem.label
 
-	const domainsItems = domains.value.map((domain, index) => createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10)),
+	const domainsItems = domains.value.map(
+		(domain, index) => createDropdownButton(domain.title, `/domains/${ domain.id }`, props.route, props.setRoute, whenBelow(index, 10)),
 	)
 
 	const insightsItems = [
