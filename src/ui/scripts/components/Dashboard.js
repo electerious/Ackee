@@ -1,4 +1,4 @@
-import { createElement as h, useEffect } from 'react'
+import { createElement as h } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 import useDomains from '../api/hooks/domains/useDomains'
