@@ -14,7 +14,8 @@ module.exports = {
 	Facts: {
 		id: pipe(requireAuth, async (domain) => {
 			const ids = await domainIds(domain)
-			return recursiveId(...ids)
+			// Provide a static fallback id when there're no domains to create a recursive id from
+			return recursiveId(ids, '882b8e8a-f30b-414d-85e1-00d8ed5585a6')
 		}),
 		activeVisitors: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)
