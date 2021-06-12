@@ -1,5 +1,6 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import enhanceUrl from '../../enhancers/enhanceUrl'
 import sumByProp from '../../utils/sumByProp'
@@ -46,7 +47,12 @@ const PresentationCounterList = (props) => {
 
 	return (
 		h('div', { className: 'flexList' },
-			h('div', { className: 'flexList__inner' },
+			h('div', {
+				className: classNames({
+					'flexList__inner': true,
+					'flexList__inner--padded': props.padded !== false,
+				}),
+			},
 				props.items.map((item, index) => (
 					h(Row, {
 						key: item.text + index,
@@ -63,6 +69,7 @@ const PresentationCounterList = (props) => {
 }
 
 PresentationCounterList.propTypes = {
+	padded: PropTypes.bool,
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
 			url: PropTypes.object,

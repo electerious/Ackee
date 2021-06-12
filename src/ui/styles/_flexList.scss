@@ -26,10 +26,13 @@
 	}
 
 	&__inner {
-		padding-top: $gutter;
 		height: $cardContentHeight;
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
+
+		&--padded {
+			padding-top: $gutter;
+		}
 	}
 
 	&__row {
