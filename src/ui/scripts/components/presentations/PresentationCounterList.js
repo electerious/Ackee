@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import enhanceUrl from '../../enhancers/enhanceUrl'
 import sumByProp from '../../utils/sumByProp'
-import maxByProp from '../../utils/maxByProp'
 
 const formatCount = (num) => {
 	return Number.parseFloat(num).toFixed(2)
@@ -39,10 +38,16 @@ const PresentationCounterList = (props) => {
 	const totalCount = props.items.reduce(sumByProp('count'), 0)
 	const proportionalWidth = ({ count }) => (count / totalCount) * 100
 
-	const averageCharWidth = 9
-	const maxCount = props.items.reduce(maxByProp('count'), 0)
-	const formattedCount = formatCount(maxCount)
-	const counterWidth = (String(formattedCount).length + 1) * averageCharWidth
+	const counterWidth = props.items.reduce((maxWidth, item) => {
+		const formattedCount = formatCount(item.count)
+		const formattedLength = String(formattedCount).length
+
+		const averageCharWidth = 9
+		const formattedWidth = (formattedLength + 1) * averageCharWidth
+
+		if (formattedWidth > maxWidth) return formattedWidth
+		return maxWidth
+	}, 0)
 
 	return (
 		h('div', { className: 'flexList' },
