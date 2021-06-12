@@ -46,11 +46,6 @@ const gotoDomainWhenDefined = (domains, setRoute, index) => {
 
 const Dashboard = (props) => {
 	const currentRoute = useRoute(props.route)
-
-	useEffect(() => {
-		document.scrollingElement.scrollTop = 0
-	}, [ props.route ])
-
 	const domains = useDomains()
 
 	useHotkeys('o', () => props.setRoute('/'))

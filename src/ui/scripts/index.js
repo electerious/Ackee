@@ -8,6 +8,7 @@ import createHttpLink from './api/links/createHttpLink'
 import createClient from './api/utils/createClient'
 
 import useCustomScrollbar from './hooks/useCustomScrollbar'
+import useScrollReset from './hooks/useScrollReset'
 import useRouter from './hooks/useRouter'
 import useToken from './hooks/useToken'
 import useModals from './hooks/useModals'
@@ -33,8 +34,6 @@ const client = createClient([
 ])
 
 const App = () => {
-	useCustomScrollbar()
-
 	// Change the key to re-render the whole application. This will
 	// reset the states of hooks inside the Main component and therefore
 	// all existing GraphQL errors that occurred before the reset.
@@ -59,6 +58,9 @@ const App = () => {
 		// Reset the main component and the states it contains
 		setKey(Date.now())
 	}, [ token.resetToken, modals.resetModals, filters.resetFilters, client.resetStore, setKey ])
+
+	useCustomScrollbar()
+	useScrollReset(router.route)
 
 	return (
 		h(ApolloProvider, { client },
