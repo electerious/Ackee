@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import { SORTINGS_NEW, SORTINGS_RECENT } from '../../../../constants/sortings'
 
-import PresentationIconList from '../presentations/PresentationIconList'
 import relativeDate from '../../utils/relativeDate'
 import rangeLabel from '../../utils/rangeLabel'
+
+import PresentationIconList from '../presentations/PresentationIconList'
 
 const textLabel = (item, range, isRecent, isNew) => {
 	if (item && item.date) return relativeDate(item.date)
