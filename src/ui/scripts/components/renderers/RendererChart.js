@@ -1,20 +1,9 @@
 import { createElement as h, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import { INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY } from '../../../../constants/intervals'
+import relativeFn from '../../utils/relativeFn'
 
 import PresentationBarChart from '../presentations/PresentationBarChart'
-import relativeDays from '../../utils/relativeDays'
-import relativeMonths from '../../utils/relativeMonths'
-import relativeYears from '../../utils/relativeYears'
-
-const relativeFn = (interval) => {
-	switch (interval) {
-		case INTERVALS_DAILY: return relativeDays
-		case INTERVALS_MONTHLY: return relativeMonths
-		case INTERVALS_YEARLY: return relativeYears
-	}
-}
 
 const textLabel = (active, interval) => {
 	return relativeFn(interval)(active)

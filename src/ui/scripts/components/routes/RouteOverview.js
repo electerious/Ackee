@@ -57,6 +57,9 @@ const RouteOverview = (props) => {
 					interval: INTERVALS_DAILY,
 					onColumnClick: (index) => props.addModal(MODALS_OVERVIEW_VIEWS, {
 						index,
+						interval: INTERVALS_DAILY,
+						type: VIEWS_TYPE_UNIQUE,
+						limit: 14,
 					}),
 				},
 			}),
