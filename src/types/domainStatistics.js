@@ -16,9 +16,14 @@ module.exports = gql`
 
 	type View {
 		"""
-		Date of visits.
+		View identifier.
 		"""
-		value: DateTime!
+		id: ID!
+		"""
+		Date of visits.
+		Either YYYY, YYYY-MM or YYYY-MM-DD depending on the current interval.
+		"""
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -72,9 +77,14 @@ module.exports = gql`
 
 	type Duration {
 		"""
-		Date of average duration.
+		Duration identifier.
 		"""
-		value: DateTime!
+		id: ID!
+		"""
+		Date of average duration.
+		Either YYYY, YYYY-MM or YYYY-MM-DD depending on the current interval.
+		"""
+		value: String!
 		"""
 		Average duration in milliseconds.
 		"""

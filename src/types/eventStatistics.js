@@ -27,9 +27,14 @@ module.exports = gql`
 
 	type EventChartEntry {
 		"""
-		Date of the event.
+		Event identifier.
 		"""
-		value: DateTime!
+		id: ID!
+		"""
+		Date of the event.
+		Either YYYY, YYYY-MM or YYYY-MM-DD depending on the current interval.
+		"""
+		value: String!
 		"""
 		Sum of values on that date.
 		"""

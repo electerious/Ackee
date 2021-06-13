@@ -18,8 +18,11 @@ module.exports = {
 	DomainStatistics: {
 		id: pipe(requireAuth, async (domain) => {
 			const ids = await domainIds(domain)
-			// Provide a static fallback id when there're no ids to create a recursive id from
-			return recursiveId(ids, 'eaf55ae8-29b8-448f-b45c-85e17fbfc8ba')
+
+			// Provide a static fallback id when there're no domains to create a recursive id from
+			if (ids.length === 0) return 'eaf55ae8-29b8-448f-b45c-85e17fbfc8ba'
+
+			return recursiveId(ids)
 		}),
 		views: pipe(requireAuth, async (domain, { type, interval, limit }, { dateDetails }) => {
 			const ids = await domainIds(domain)

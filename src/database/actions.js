@@ -11,6 +11,7 @@ const sortings = require('../constants/sortings')
 const intervals = require('../constants/intervals')
 const createArray = require('../utils/createArray')
 const matchesDate = require('../utils/matchesDate')
+const recursiveId = require('../utils/recursiveId')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -81,8 +82,15 @@ const getChart = async (ids, type, interval, limit, dateDetails) => {
 				)
 			})
 
+			const value = (() => {
+				if (matchDay === true) return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`
+				if (matchMonth === true) return `${ date.getFullYear() }-${ date.getMonth() + 1 }`
+				if (matchYear === true) return `${ date.getFullYear() }`
+			})()
+
 			return {
-				value: date,
+				id: recursiveId([ value, ...ids ]),
+				value,
 				count: entry == null ? 0 : entry.count,
 			}
 		})
