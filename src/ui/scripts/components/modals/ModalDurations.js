@@ -54,7 +54,6 @@ ModalDurations.propTypes = {
 	...commonModalProps,
 	index: PropTypes.number.isRequired,
 	interval: PropTypes.string.isRequired,
-	type: PropTypes.string.isRequired,
 	limit: PropTypes.number.isRequired,
 }
 
