@@ -34,15 +34,15 @@
   },
   "dependencies": {
     "ackee-tracker": "^5.1.0",
-    "apollo-server-lambda": "^2.25.0",
-    "apollo-server-micro": "^2.25.0",
+    "apollo-server-lambda": "^2.25.1",
+    "apollo-server-micro": "^2.25.1",
     "apollo-server-plugin-http-headers": "^0.1.4",
     "date-fns": "^2.22.1",
     "date-fns-tz": "^1.1.4",
     "debounce-promise": "^3.1.2",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.0",
-    "graphql-scalars": "^1.9.3",
+    "graphql-scalars": "^1.10.0",
     "graphql-tools": "^7.0.5",
     "is-url": "^1.2.4",
     "micro": "^9.3.4",
@@ -57,7 +57,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@apollo/client": "^3.3.19",
+    "@apollo/client": "^3.3.20",
     "@electerious/eslint-config": "^2.0.2",
     "ava": "3.15.0",
     "classnames": "^2.3.1",
