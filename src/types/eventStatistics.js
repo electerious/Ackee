@@ -27,11 +27,11 @@ module.exports = gql`
 
 	type EventChartEntry {
 		"""
-		Event identifier.
+		Event entry identifier.
 		"""
 		id: ID!
 		"""
-		Date of the event.
+		Date of the event entry.
 		Either YYYY, YYYY-MM or YYYY-MM-DD depending on the current interval.
 		"""
 		value: String!
@@ -43,7 +43,11 @@ module.exports = gql`
 
 	type EventListEntry {
 		"""
-		Key of the event.
+		Event entry identifier.
+		"""
+		id: ID!
+		"""
+		Key of the event entry.
 		"""
 		value: String!
 		"""

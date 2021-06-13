@@ -32,6 +32,10 @@ module.exports = gql`
 
 	type Page {
 		"""
+		Page identifier.
+		"""
+		id: ID!
+		"""
 		URL of the page.
 		"""
 		value: URL!
@@ -61,6 +65,10 @@ module.exports = gql`
 	}
 
 	type Referrer {
+		"""
+		Referrer identifier.
+		"""
+		id: ID!
 		"""
 		Either the URL of the referrer or the source parameter of the page to indicate where the visit comes from.
 		"""
@@ -104,6 +112,10 @@ module.exports = gql`
 
 	type System {
 		"""
+		System identifier.
+		"""
+		id: ID!
+		"""
 		Name of the system. With or without the version.
 		"""
 		value: String!
@@ -130,6 +142,10 @@ module.exports = gql`
 
 	type Device {
 		"""
+		Device identifier.
+		"""
+		id: ID!
+		"""
 		Name of the device. With or without the model.
 		"""
 		value: String!
@@ -155,6 +171,10 @@ module.exports = gql`
 	}
 
 	type Browser {
+		"""
+		Browser identifier.
+		"""
+		id: ID!
 		"""
 		Name of the browser. With or without the version.
 		"""
@@ -198,6 +218,10 @@ module.exports = gql`
 
 	type Size {
 		"""
+		Size identifier.
+		"""
+		id: ID!
+		"""
 		Screen or browser width, height or resolution.
 		"""
 		value: String!
@@ -212,6 +236,10 @@ module.exports = gql`
 	}
 
 	type Language {
+		"""
+		Language identifier.
+		"""
+		id: ID!
 		"""
 		Name of the language or language code when unknown.
 		"""

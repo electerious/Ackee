@@ -6,6 +6,7 @@ const aggregateNewRecords = require('../aggregations/aggregateNewRecords')
 const aggregateRecentRecords = require('../aggregations/aggregateRecentRecords')
 const sortings = require('../constants/sortings')
 const constants = require('../constants/sizes')
+const recursiveId = require('../utils/recursiveId')
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
 	const aggregation = (() => {
@@ -45,11 +46,16 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
 	}
 
 	const enhance = (entries) => {
-		return entries.map((entry) => ({
-			value: enhanceId(entry._id),
-			count: entry.count,
-			created: entry.created,
-		}))
+		return entries.map((entry) => {
+			const value = enhanceId(entry._id)
+
+			return {
+				id: recursiveId([ value, sorting, type, range, ...ids ]),
+				value,
+				count: entry.count,
+				created: entry.created,
+			}
+		})
 	}
 
 	return enhance(

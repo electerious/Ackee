@@ -102,14 +102,6 @@ const getChart = async (ids, type, interval, limit, dateDetails) => {
 }
 
 const getList = async (ids, sorting, type, range, limit, dateDetails) => {
-	const enhance = (entries) => {
-		return entries.map((entry) => ({
-			value: entry._id.key,
-			count: entry.count,
-			created: entry.created,
-		}))
-	}
-
 	const aggregation = (() => {
 		if (type === 'TOTAL') {
 			if (sorting === sortings.SORTINGS_TOP) return aggregateTopActions(ids, false, range, limit, dateDetails)
@@ -122,6 +114,23 @@ const getList = async (ids, sorting, type, range, limit, dateDetails) => {
 			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
 		}
 	})()
+
+	const enhanceId = (id) => {
+		return id.key
+	}
+
+	const enhance = (entries) => {
+		return entries.map((entry) => {
+			const value = enhanceId(entry._id)
+
+			return {
+				id: recursiveId([ value, sorting, type, range, ...ids ]),
+				value,
+				count: entry.count,
+				created: entry.created,
+			}
+		})
+	}
 
 	return enhance(
 		await Action.aggregate(aggregation),
