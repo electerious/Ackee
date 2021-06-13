@@ -109,7 +109,7 @@ const ModalEventEdit = (props) => {
 					id: embedId,
 					readOnly: true,
 					rows: 3,
-					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: '1' })`,
+					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: 1 })`,
 					copyOnFocus: true
 				})
 
