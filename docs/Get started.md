@@ -14,7 +14,9 @@ The node server shows you the UI and receives the request from all of your sites
 - [With Netlify](#with-netlify)
 - [With Vercel](#with-vercel)
 - [With Heroku](#with-heroku)
+- [With Qovery](#with-qovery)
 - [With Render](#with-render)
+- [With Railway](#with-railway)
 
 ## With Docker Compose
 
@@ -237,6 +239,28 @@ git push heroku master
 
 After your application re-deploys you'll have the latest version of Ackee!
 
+## With Qovery
+
+[Qovery](https://qovery.com) is a fully-managed cloud platform that runs on your AWS, GCP, Azure and Digital Ocean account where you can host static sites, backend APIs, databases, cron jobs, and all your other apps in one place.
+
+### 1. Create a Qovery account.
+
+Visit the [Qovery dashboard](https://console.qovery.com) to create an account if you don't already have one.
+
+### 2. Create a project
+
+Click on "Create a new project" and give a name to your project. 
+
+### 3. Add an application
+
+Click on "Create an application" then choose "I have an application" and select your GitHub or GitLab repository where your Ackee app is located.
+
+Select "MongoDB" service then choose a version. Give the database a name and continue with "Next".
+
+Click on "Deploy".
+
+Chat with Qovery developers on [Discord](https://discord.qovery.com) if you need help.
+
 ## With Render
 
 You can use [Render's](https://render.com/) one-click deploy button to get up and running with Ackee in minutes.
@@ -246,3 +270,11 @@ Click **Deploy to Render** below and follow the prompts to set up Ackee on Rende
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/ackee)
 
 Once your deploy has finished, you are ready to start using Ackee! Visit the URL for your service to login. You can get your login credentials from the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables in the **Environment** tab of your service. By default, your username will be `render` and your password will be a randomly generated string.
+
+## With Railway
+
+You can use the [Railway](https://railway.app/) button for a one-click deployment and have Ackee running within minutes.
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2Frailwayapp%2Fexamples%2Ftree%2Fmaster%2Fexamples%2Fackee&plugins=mongodb&envs=ACKEE_USERNAME%2CACKEE_PASSWORD)
+
+Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables. Once you do that, everything should just work on it's own. Railway will automatically provision the MongoDB database for you and also link it to your Ackee deployment!

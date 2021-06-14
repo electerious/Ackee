@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+This release contains a refactored front-end that takes advantage of the GraphQL API that has been in Ackee since version 2. Better caching and instant domain, event and permanent token updates.
+
+### Added
+
+- Views and duration details: Click on a chart bar on the overview and insights page to see more details
+
+### Changed
+
+- `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id field
+- `View`, `Duration` and `EventChartEntry` (GraphQL API) now contain their date in a `value` field in the format: YYYY, YYYY-MM or YYYY-MM-DD. The format depends on the chosen interval.
+- `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id in the `id` field. The previous data has been renamed to `value`, because it was never unique and therefore shouldn't be named `id`.
+
 ## [3.0.6] - 2021-04-02
 
 ### Changed

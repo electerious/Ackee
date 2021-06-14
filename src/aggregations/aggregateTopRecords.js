@@ -4,32 +4,31 @@ const ranges = require('../constants/ranges')
 const matchDomains = require('../stages/matchDomains')
 
 module.exports = (ids, properties, range, limit, dateDetails, or) => {
-
 	const aggregation = [
 		matchDomains(ids),
 		{
 			$group: {
 				_id: {},
 				count: {
-					$sum: 1
-				}
-			}
+					$sum: 1,
+				},
+			},
 		},
 		{
 			$sort: {
-				count: -1
-			}
+				count: -1,
+			},
 		},
 		{
-			$limit: limit
-		}
+			$limit: limit,
+		},
 	]
 
 	properties.forEach((property) => {
 		if (or === true) {
 			aggregation[0].$match['$or'] = [
 				...(aggregation[0].$match['$or'] || []),
-				{ [property]: { $ne: null } }
+				{ [property]: { $ne: null } },
 			]
 		} else {
 			aggregation[0].$match[property] = { $ne: null }
@@ -54,5 +53,4 @@ module.exports = (ids, properties, range, limit, dateDetails, or) => {
 	}
 
 	return aggregation
-
 }

@@ -1,43 +1,45 @@
 import { createElement as h, Fragment } from 'react'
-import { withErrorBoundary } from 'react-error-boundary'
 
-import isUnknownError from '../utils/isUnknownError'
-import useCustomScrollbar from '../hooks/useCustomScrollbar'
-import useRouter from '../hooks/useRouter'
+import useAuthenticated from '../hooks/useAuthenticated'
 
 import OverlayFailure from './overlays/OverlayFailure'
 import OverlayLogin from './overlays/OverlayLogin'
-import ErrorFallback from './ErrorFallback'
 import Filter from './Filter'
 import Dashboard from './Dashboard'
 
 const Main = (props) => {
+	const errors = props.useErrors()
+	const authenticated = useAuthenticated(props.token, errors, props.reset)
 
-	useCustomScrollbar()
-	const [ setRoute, route ] = useRouter()
+	const requiresLogin = authenticated === false
+	if (requiresLogin === true) return h(OverlayLogin, {
+		setToken: props.setToken,
+	})
 
-	const enhancedProps = {
-		...props,
-		setRoute,
-		route
-	}
+	const hasErrors = errors.length > 0
+	if (hasErrors === true) return h(OverlayFailure, {
+		errors,
+		reset: props.reset,
+	})
 
-	// Only handle errors not handled by other components
-	const unknownErrors = props.errors.filter(isUnknownError)
-
-	const hasError = unknownErrors.length !== 0
-	const hasToken = props.token.value != null
-
-	if (hasError === true) return h(OverlayFailure, { errors: unknownErrors })
-	if (hasToken === false) return h(OverlayLogin, { token: props.token, addToken: props.addToken.bind(null, props) })
-
-	return h(Fragment, {},
-		h(Filter, enhancedProps),
-		h(Dashboard, enhancedProps)
+	return (
+		h(Fragment, {},
+			h(Filter, {
+				filters: props.filters,
+				setSortingFilter: props.setSortingFilter,
+				setRangeFilter: props.setRangeFilter,
+				setIntervalFilter: props.setIntervalFilter,
+				setViewsTypeFilter: props.setViewsTypeFilter,
+				setReferrersTypeFilter: props.setReferrersTypeFilter,
+				setDevicesTypeFilter: props.setDevicesTypeFilter,
+				setBrowsersTypeFilter: props.setBrowsersTypeFilter,
+				setSizesTypeFilter: props.setSizesTypeFilter,
+				setSystemsTypeFilter: props.setSystemsTypeFilter,
+				route: props.route,
+			}),
+			h(Dashboard, props),
+		)
 	)
-
 }
 
-export default withErrorBoundary(Main, {
-	FallbackComponent: ErrorFallback
-})
+export default Main

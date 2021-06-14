@@ -1,13 +1,11 @@
 import { createElement as h } from 'react'
 
 const Line = () => {
-
 	return (
 		h('hr', {
-			className: 'line'
+			className: 'line',
 		})
 	)
-
 }
 
 export default Line

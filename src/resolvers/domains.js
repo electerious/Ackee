@@ -10,62 +10,47 @@ const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
 	Domain: {
-		facts: (obj) => obj,
-		statistics: (obj) => obj
+		facts: (parent) => parent,
+		statistics: (parent) => parent,
 	},
 	Query: {
-		domain: pipe(requireAuth, async (parent, { id }) => {
-
+		domain: pipe(requireAuth, (parent, { id }) => {
 			return domains.get(id)
-
 		}),
-		domains: pipe(requireAuth, async () => {
-
+		domains: pipe(requireAuth, () => {
 			return domains.all()
-
-		})
+		}),
 	},
 	Mutation: {
 		createDomain: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
-
 			let entry
 
 			try {
-
 				entry = await domains.add(input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			return {
 				payload: entry,
-				success: true
+				success: true,
 			}
-
 		}),
 		updateDomain: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
-
 			let entry
 
 			try {
-
 				entry = await domains.update(id, input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			if (entry == null) {
@@ -74,19 +59,16 @@ module.exports = {
 
 			return {
 				payload: entry,
-				success: true
+				success: true,
 			}
-
 		}),
 		deleteDomain: pipe(requireAuth, blockDemoMode, async (parent, { id }) => {
-
 			await records.del(id)
 			await domains.del(id)
 
 			return {
-				success: true
+				success: true,
 			}
-
-		})
-	}
+		}),
+	},
 }

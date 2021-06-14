@@ -14,12 +14,11 @@ if (config.dbUrl == null) {
 }
 
 server.on('listening', () => signale.watch(`Listening on http://localhost:${ config.port }`))
-server.on('error', (err) => signale.fatal(err))
+server.on('error', (error) => signale.fatal(error))
 
 signale.await(`Connecting to ${ stripUrlAuth(config.dbUrl) }`)
 
 connect(config.dbUrl).then(() => {
-
 	signale.success(`Connected to ${ stripUrlAuth(config.dbUrl) }`)
 	signale.start(`Starting the server`)
 
@@ -32,10 +31,8 @@ connect(config.dbUrl).then(() => {
 	if (config.isDemoMode === true) {
 		signale.info('Demo mode enabled')
 	}
-
-}).catch((err) => {
-
-	signale.fatal(err)
-	process.exit(1)
-
 })
+	.catch((error) => {
+		signale.fatal(error)
+		process.exit(1)
+	})

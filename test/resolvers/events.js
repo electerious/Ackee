@@ -17,12 +17,11 @@ const updatedTitle = uuid()
 const updatedType = 'TOTAL_LIST'
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 test.serial('create event', async (t) => {
-
 	const body = {
 		query: `
 			mutation createEvent($input: CreateEventInput!) {
@@ -39,9 +38,9 @@ test.serial('create event', async (t) => {
 		variables: {
 			input: {
 				title: defaultTitle,
-				type: defaultType
-			}
-		}
+				type: defaultType,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -53,11 +52,9 @@ test.serial('create event', async (t) => {
 
 	// Save event for the next test
 	validEvent = json.data.createEvent.payload
-
 })
 
 test.serial('update event', async (t) => {
-
 	const body = {
 		query: `
 			mutation updateEvent($id: ID!, $input: UpdateEventInput!) {
@@ -75,9 +72,9 @@ test.serial('update event', async (t) => {
 			id: validEvent.id,
 			input: {
 				title: updatedTitle,
-				type: updatedType
-			}
-		}
+				type: updatedType,
+			},
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -89,11 +86,9 @@ test.serial('update event', async (t) => {
 
 	// Save event for the next test
 	validEvent = json.data.updateEvent.payload
-
 })
 
 test.serial('fetch events', async (t) => {
-
 	const body = {
 		query: `
 			query fetchEvents {
@@ -103,7 +98,7 @@ test.serial('fetch events', async (t) => {
 					type
 				}
 			}
-		`
+		`,
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -113,11 +108,9 @@ test.serial('fetch events', async (t) => {
 
 	t.is(event.title, validEvent.title)
 	t.is(event.type, validEvent.type)
-
 })
 
 test.serial('fetch event', async (t) => {
-
 	const body = {
 		query: `
 			query fetchEvent($id: ID!) {
@@ -129,8 +122,8 @@ test.serial('fetch event', async (t) => {
 			}
 		`,
 		variables: {
-			id: validEvent.id
-		}
+			id: validEvent.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
@@ -138,11 +131,9 @@ test.serial('fetch event', async (t) => {
 	t.is(json.data.event.id, validEvent.id)
 	t.is(json.data.event.title, validEvent.title)
 	t.is(json.data.event.type, validEvent.type)
-
 })
 
 test.serial('delete event', async (t) => {
-
 	const body = {
 		query: `
 			mutation deleteEvent($id: ID!) {
@@ -152,12 +143,11 @@ test.serial('delete event', async (t) => {
 			}
 		`,
 		variables: {
-			id: validEvent.id
-		}
+			id: validEvent.id,
+		},
 	}
 
 	const { json } = await api(base, body, t.context.token.id)
 
 	t.true(json.data.deleteEvent.success)
-
 })

@@ -10,8 +10,8 @@ module.exports = {
 		options: {
 			maxAge: 365 * 24 * 60 * 60,
 			sameSite: 'none',
-			secure: true
-		}
+			secure: true,
+		},
 	},
 	off: {
 		name: COOKIE_NAME,
@@ -19,7 +19,7 @@ module.exports = {
 		options: {
 			maxAge: -1,
 			sameSite: 'none',
-			secure: true
-		}
-	}
+			secure: true,
+		},
+	},
 }

@@ -7,29 +7,29 @@ const {
 	DateTimeResolver,
 	DateTimeTypeDefinition,
 	PositiveFloatResolver,
-	PositiveFloatTypeDefinition
+	PositiveFloatTypeDefinition,
 } = require('graphql-scalars')
 
 const config = require('./config')
 
-module.exports = (ApolloServer, opts) => new ApolloServer({
+module.exports = (ApolloServer, options) => new ApolloServer({
 	introspection: config.isDemoMode === true || config.isDevelopmentMode === true,
 	playground: config.isDemoMode === true || config.isDevelopmentMode === true,
 	debug: config.isDevelopmentMode === true,
 	plugins: [
-		httpHeadersPlugin
+		httpHeadersPlugin,
 	],
 	typeDefs: [
 		UnsignedIntTypeDefinition,
 		DateTimeTypeDefinition,
 		PositiveFloatTypeDefinition,
-		require('../types')
+		require('../types'),
 	],
 	resolvers: {
 		UnsignedInt: UnsignedIntResolver,
 		DateTime: DateTimeResolver,
 		PositiveFloat: PositiveFloatResolver,
-		...require('../resolvers')
+		...require('../resolvers'),
 	},
-	...opts
+	...options,
 })

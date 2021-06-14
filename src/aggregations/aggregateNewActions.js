@@ -3,34 +3,32 @@
 const matchEvents = require('../stages/matchEvents')
 
 module.exports = (ids, limit) => {
-
 	const aggregation = [
 		matchEvents(ids),
 		{
 			$group: {
 				_id: {
-					key: '$key'
+					key: '$key',
 				},
 				count: {
-					$sum: '$value'
+					$sum: '$value',
 				},
 				created: {
-					$first: '$created'
-				}
-			}
+					$first: '$created',
+				},
+			},
 		},
 		{
 			$sort: {
-				created: -1
-			}
+				created: -1,
+			},
 		},
 		{
-			$limit: limit
-		}
+			$limit: limit,
+		},
 	]
 
 	aggregation[0].$match.key = { $ne: null }
 
 	return aggregation
-
 }

@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = (length) => Array(length).fill(undefined)
+module.exports = (length) => new Array(length).fill()

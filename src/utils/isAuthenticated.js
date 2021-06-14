@@ -6,7 +6,6 @@ const tokens = require('../database/tokens')
 const permanentTokens = require('../database/permanentTokens')
 
 module.exports = async (authorization, ttl) => {
-
 	// Token not in request
 	if (authorization == null) {
 		return new KnownError('Token missing')
@@ -41,7 +40,7 @@ module.exports = async (authorization, ttl) => {
 	if (permanentTokenEntry != null) {
 		// Update token to indicate the last time it was used
 		await permanentTokens.update(token, {
-			title: permanentTokenEntry.title
+			title: permanentTokenEntry.title,
 		})
 
 		return true
@@ -49,5 +48,4 @@ module.exports = async (authorization, ttl) => {
 
 	// Token not in database
 	return new KnownError('Token invalid')
-
 }

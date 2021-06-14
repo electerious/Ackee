@@ -4,22 +4,21 @@ const intervals = require('../constants/intervals')
 const matchDomains = require('../stages/matchDomains')
 
 module.exports = (ids, unique, interval, limit, dateDetails) => {
-
 	const aggregation = [
 		matchDomains(ids),
 		{
 			$group: {
 				_id: {},
 				count: {
-					$sum: 1
-				}
-			}
-		}
+					$sum: 1,
+				},
+			},
+		},
 	]
 
 	if (unique === true) aggregation[0].$match.clientId = {
 		$exists: true,
-		$ne: null
+		$ne: null,
 	}
 
 	aggregation[0].$match.created = { $gte: dateDetails.includeFnByInterval(interval)(limit) }
@@ -34,5 +33,4 @@ module.exports = (ids, unique, interval, limit, dateDetails) => {
 	if (matchYear === true) aggregation[1].$group._id.year = { $year: dateExpression }
 
 	return aggregation
-
 }

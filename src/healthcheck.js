@@ -34,7 +34,7 @@ const exit = (healthy) => process.exit(healthy === true ? 0 : 1)
 const check = () => Promise.all([
 	checkMongoDB(config.dbUrl),
 	checkServer(`http://localhost:${ config.port }`),
-	checkApi(`http://localhost:${ config.port }/.well-known/apollo/server-health`)
+	checkApi(`http://localhost:${ config.port }/.well-known/apollo/server-health`),
 ])
 
 const handleSuccess = () => {
@@ -42,8 +42,8 @@ const handleSuccess = () => {
 	exit(true)
 }
 
-const handleFailure = (err) => {
-	signale.fatal(err)
+const handleFailure = (error) => {
+	signale.fatal(error)
 	exit(false)
 }
 

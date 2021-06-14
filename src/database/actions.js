@@ -11,6 +11,7 @@ const sortings = require('../constants/sortings')
 const intervals = require('../constants/intervals')
 const createArray = require('../utils/createArray')
 const matchesDate = require('../utils/matchesDate')
+const recursiveId = require('../utils/recursiveId')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -18,61 +19,52 @@ const response = (entry) => ({
 	value: entry.value,
 	details: entry.details,
 	created: entry.created,
-	updated: entry.updated
+	updated: entry.updated,
 })
 
 const add = async (data) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
-		await Action.create(data)
+		await Action.create(data),
 	)
-
 }
 
 const update = async (id, data) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
 		await Action.findOneAndUpdate({
-			id
+			id,
 		}, {
 			$set: {
 				key: data.key,
 				value: data.value,
 				details: data.details,
-				updated: Date.now()
-			}
+				updated: Date.now(),
+			},
 		}, {
-			new: true
-		})
+			new: true,
+		}),
 	)
-
 }
 
 const getChart = async (ids, type, interval, limit, dateDetails) => {
-
 	const aggregation = (() => {
-
 		if (type === 'TOTAL') return aggregateActions(ids, false, interval, limit, dateDetails)
 		if (type === 'AVERAGE') return aggregateActions(ids, true, interval, limit, dateDetails)
-
 	})()
 
 	const enhance = (entries) => {
-
 		const matchDay = [ intervals.INTERVALS_DAILY ].includes(interval)
 		const matchMonth = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY ].includes(interval)
 		const matchYear = [ intervals.INTERVALS_DAILY, intervals.INTERVALS_MONTHLY, intervals.INTERVALS_YEARLY ].includes(interval)
 
 		return createArray(limit).map((_, index) => {
-
 			const date = dateDetails.lastFnByInterval(interval)(index)
 
 			// Database entries include the day, month and year in the
@@ -86,39 +78,31 @@ const getChart = async (ids, type, interval, limit, dateDetails) => {
 					matchDay === true ? entry._id.day : undefined,
 					matchMonth === true ? entry._id.month : undefined,
 					matchYear === true ? entry._id.year : undefined,
-					userZonedDate
+					userZonedDate,
 				)
 			})
 
+			const value = (() => {
+				if (matchDay === true) return `${ date.getFullYear() }-${ date.getMonth() + 1 }-${ date.getDate() }`
+				if (matchMonth === true) return `${ date.getFullYear() }-${ date.getMonth() + 1 }`
+				if (matchYear === true) return `${ date.getFullYear() }`
+			})()
+
 			return {
-				id: date,
-				count: entry == null ? 0 : entry.count
+				id: recursiveId([ value, ...ids ]),
+				value,
+				count: entry == null ? 0 : entry.count,
 			}
-
 		})
-
 	}
 
 	return enhance(
-		await Action.aggregate(aggregation)
+		await Action.aggregate(aggregation),
 	)
-
 }
 
 const getList = async (ids, sorting, type, range, limit, dateDetails) => {
-
-	const enhance = (entries) => {
-
-		return entries.map((entry) => ({
-			id: entry._id.key,
-			count: entry.count,
-			created: entry.created
-		}))
-
-	}
-
 	const aggregation = (() => {
-
 		if (type === 'TOTAL') {
 			if (sorting === sortings.SORTINGS_TOP) return aggregateTopActions(ids, false, range, limit, dateDetails)
 			if (sorting === sortings.SORTINGS_NEW) return aggregateNewActions(ids, limit)
@@ -129,21 +113,34 @@ const getList = async (ids, sorting, type, range, limit, dateDetails) => {
 			if (sorting === sortings.SORTINGS_NEW) return aggregateNewActions(ids, limit)
 			if (sorting === sortings.SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
 		}
-
 	})()
 
-	return enhance(
-		await Action.aggregate(aggregation)
-	)
+	const enhanceId = (id) => {
+		return id.key
+	}
 
+	const enhance = (entries) => {
+		return entries.map((entry) => {
+			const value = enhanceId(entry._id)
+
+			return {
+				id: recursiveId([ value, sorting, type, range, ...ids ]),
+				value,
+				count: entry.count,
+				created: entry.created,
+			}
+		})
+	}
+
+	return enhance(
+		await Action.aggregate(aggregation),
+	)
 }
 
-const del = async (eventId) => {
-
+const del = (eventId) => {
 	return Action.deleteMany({
-		eventId
+		eventId,
 	})
-
 }
 
 module.exports = {
@@ -151,5 +148,5 @@ module.exports = {
 	update,
 	getChart,
 	getList,
-	del
+	del,
 }

@@ -3,35 +3,34 @@
 const matchDomains = require('../stages/matchDomains')
 
 module.exports = (ids, properties, limit, or) => {
-
 	const aggregation = [
 		matchDomains(ids),
 		{
 			$group: {
 				_id: {},
 				count: {
-					$sum: 1
+					$sum: 1,
 				},
 				created: {
-					$first: '$created'
-				}
-			}
+					$first: '$created',
+				},
+			},
 		},
 		{
 			$sort: {
-				created: -1
-			}
+				created: -1,
+			},
 		},
 		{
-			$limit: limit
-		}
+			$limit: limit,
+		},
 	]
 
 	properties.forEach((property) => {
 		if (or === true) {
 			aggregation[0].$match['$or'] = [
 				...(aggregation[0].$match['$or'] || []),
-				{ [property]: { $ne: null } }
+				{ [property]: { $ne: null } },
 			]
 		} else {
 			aggregation[0].$match[property] = { $ne: null }
@@ -40,5 +39,4 @@ module.exports = (ids, properties, limit, or) => {
 	})
 
 	return aggregation
-
 }

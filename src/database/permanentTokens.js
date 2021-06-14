@@ -7,25 +7,22 @@ const response = (entry) => ({
 	id: entry.id,
 	title: entry.title,
 	created: entry.created,
-	updated: entry.updated
+	updated: entry.updated,
 })
 
 const add = async (data) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
 		await PermanentToken.create({
-			title: data.title
-		})
+			title: data.title,
+		}),
 	)
-
 }
 
 const all = async () => {
-
 	const enhance = (entries) => {
 		return entries
 			.map(response)
@@ -33,50 +30,43 @@ const all = async () => {
 	}
 
 	return enhance(
-		await PermanentToken.find({})
+		await PermanentToken.find({}),
 	)
-
 }
 
 const get = async (id) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
-		await PermanentToken.findOne({ id })
+		await PermanentToken.findOne({ id }),
 	)
-
 }
 
 const update = async (id, data) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
 		await PermanentToken.findOneAndUpdate({
-			id
+			id,
 		}, {
 			$set: {
 				title: data.title,
-				updated: Date.now()
-			}
+				updated: Date.now(),
+			},
 		}, {
-			new: true
-		})
+			new: true,
+		}),
 	)
-
 }
 
-const del = async (id) => {
-
+const del = (id) => {
 	return PermanentToken.findOneAndDelete({
-		id
+		id,
 	})
-
 }
 
 module.exports = {
@@ -84,5 +74,5 @@ module.exports = {
 	all,
 	get,
 	update,
-	del
+	del,
 }

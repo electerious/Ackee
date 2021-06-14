@@ -10,9 +10,9 @@ const { getStats } = require('./_utils')
 const base = listen(server)
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
 	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
@@ -23,20 +23,20 @@ const macro = async (t, variables, assertions) => {
 		eventId: t.context.event.id,
 		fragment: `
 			chart(type: ${ variables.type }, interval: ${ variables.interval }${ limit }) {
-				id
+				value
 				count
 			}
-		`
+		`,
 	})
 
 	assertions(t, statistics.chart)
 }
 
-macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and ') } chart entries`
+macro.title = (providedTitle, options) => `fetch ${ Object.values(options).join(' and ') } chart entries`
 
 test(macro, {
 	interval: 'DAILY',
-	type: 'TOTAL'
+	type: 'TOTAL',
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(entries[0].count, 1)
@@ -45,7 +45,7 @@ test(macro, {
 test(macro, {
 	interval: 'DAILY',
 	type: 'TOTAL',
-	limit: 1
+	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
 	t.is(entries[0].count, 1)
@@ -53,7 +53,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'MONTHLY',
-	type: 'TOTAL'
+	type: 'TOTAL',
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(typeof entries[0].count, 'number')
@@ -62,7 +62,7 @@ test(macro, {
 test(macro, {
 	interval: 'MONTHLY',
 	type: 'TOTAL',
-	limit: 1
+	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
 	t.is(typeof entries[0].count, 'number')
@@ -70,7 +70,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'YEARLY',
-	type: 'TOTAL'
+	type: 'TOTAL',
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(typeof entries[0].count, 'number')
@@ -79,7 +79,7 @@ test(macro, {
 test(macro, {
 	interval: 'YEARLY',
 	type: 'TOTAL',
-	limit: 1
+	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
 	t.is(typeof entries[0].count, 'number')
@@ -87,7 +87,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'DAILY',
-	type: 'AVERAGE'
+	type: 'AVERAGE',
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(entries[0].count, 1)
@@ -96,7 +96,7 @@ test(macro, {
 test(macro, {
 	interval: 'DAILY',
 	type: 'AVERAGE',
-	limit: 1
+	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
 	t.is(entries[0].count, 1)
@@ -104,7 +104,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'MONTHLY',
-	type: 'AVERAGE'
+	type: 'AVERAGE',
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(typeof entries[0].count, 'number')
@@ -113,7 +113,7 @@ test(macro, {
 test(macro, {
 	interval: 'MONTHLY',
 	type: 'AVERAGE',
-	limit: 1
+	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
 	t.is(typeof entries[0].count, 'number')
@@ -121,7 +121,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'YEARLY',
-	type: 'AVERAGE'
+	type: 'AVERAGE',
 }, (t, entries) => {
 	t.is(entries.length, 14)
 	t.is(typeof entries[0].count, 'number')
@@ -130,7 +130,7 @@ test(macro, {
 test(macro, {
 	interval: 'YEARLY',
 	type: 'AVERAGE',
-	limit: 1
+	limit: 1,
 }, (t, entries) => {
 	t.is(entries.length, 1)
 	t.is(typeof entries[0].count, 'number')

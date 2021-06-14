@@ -1,34 +1,38 @@
-import { createElement as h, useState } from 'react'
-import PropTypes from 'prop-types'
+import { createElement as h } from 'react'
 
 import Input from '../Input'
 import Label from '../Label'
 import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 
+import useCreatePermanentToken from '../../api/hooks/permanentTokens/useCreatePermanentToken'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalPermanentTokenAdd = (props) => {
+	const createPermanentToken = useCreatePermanentToken()
 
-	const [ inputs, setInputs ] = useState({
-		title: ''
+	const loading = createPermanentToken.loading === true
+
+	const [ inputs, onInputChange ] = useInputs({
+		title: '',
 	})
 
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
-	})
-
-	const addPermanentToken = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		props.addPermanentToken(inputs).then(props.closeModal)
+		await createPermanentToken.mutate({
+			variables: {
+				input: inputs,
+			},
+		})
+		props.closeModal()
 	}
 
 	const titleId = shortId()
 
 	return (
-		h('form', { className: 'card', onSubmit: addPermanentToken },
+		h('form', { className: 'card', onSubmit },
 			h('div', { className: 'card__inner' },
 
 				h(Spacer, { size: 0.5 }),
@@ -39,12 +43,12 @@ const ModalPermanentTokenAdd = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: props.fetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Permanent token title',
 					value: inputs.title,
-					onChange: onChange('title')
-				})
+					onChange: onInputChange('title'),
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -53,28 +57,24 @@ const ModalPermanentTokenAdd = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator '
+					className: 'card__separator ',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Add')
+					disabled: loading === true,
+				}, loading === true ? h(Spinner) : 'Add'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalPermanentTokenAdd.propTypes = {
 	...commonModalProps,
-	fetching: PropTypes.bool.isRequired,
-	addPermanentToken: PropTypes.func.isRequired
 }
 
 export default ModalPermanentTokenAdd

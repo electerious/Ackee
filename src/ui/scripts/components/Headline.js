@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const Headline = (props) => {
-
 	const hasClick = props.onClick != null
 
 	const button = h('button', {
 		className: 'headline__button link',
-		onClick: props.onClick
+		onClick: props.onClick,
 	}, props.children)
 
 	return (
@@ -16,11 +15,10 @@ const Headline = (props) => {
 			className: classNames({
 				'headline': true,
 				[`headline--${ props.size }`]: props.size != null,
-				'headline--no-spacing': props.spacing === false
-			}, props.className)
+				'headline--no-spacing': props.spacing === false,
+			}, props.className),
 		}, hasClick === true ? button : props.children)
 	)
-
 }
 
 Headline.propTypes = {
@@ -29,7 +27,7 @@ Headline.propTypes = {
 	spacing: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired,
-	onClick: PropTypes.func
+	onClick: PropTypes.func,
 }
 
 export default Headline

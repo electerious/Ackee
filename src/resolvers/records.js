@@ -8,47 +8,31 @@ const domains = require('../database/domains')
 const records = require('../database/records')
 
 const normalizeSiteLocation = (siteLocation) => {
-
 	if (siteLocation == null) {
-
 		// Pre-validate siteLocation and imitate MongoDB error
 		throw new KnownError(`Path \`siteLocation\` is required`)
-
 	}
 
 	try {
-
 		return normalizeUrl(siteLocation)
-
-	} catch (err) {
-
-		throw new KnownError(`Failed to normalize \`siteLocation\``, err)
-
+	} catch (error) {
+		throw new KnownError(`Failed to normalize \`siteLocation\``, error)
 	}
-
 }
 
 const normalizeSiteReferrer = (siteReferrer) => {
-
 	// The siteReferrer is optional
 	if (siteReferrer == null) return siteReferrer
 
 	try {
-
 		return normalizeUrl(siteReferrer)
-
-	} catch (err) {
-
-		throw new KnownError(`Failed to normalize \`siteReferrer\``, err)
-
+	} catch (error) {
+		throw new KnownError(`Failed to normalize \`siteReferrer\``, error)
 	}
-
 }
 
 const polish = (obj) => {
-
 	return Object.entries(obj).reduce((acc, [ key, value ]) => {
-
 		value = typeof value === 'string' ? value.trim() : value
 		value = value == null ? undefined : value
 		value = value === '' ? undefined : value
@@ -58,22 +42,19 @@ const polish = (obj) => {
 
 		acc[key] = value
 		return acc
-
 	}, {})
-
 }
 
 module.exports = {
 	Mutation: {
 		createRecord: async (parent, { domainId, input }, { ip, userAgent, isIgnored }) => {
-
 			// Ignore your own records when logged in
 			if (isIgnored === true) {
 				return {
 					success: true,
 					payload: {
-						id: '88888888-8888-8888-8888-888888888888'
-					}
+						id: '88888888-8888-8888-8888-888888888888',
+					},
 				}
 			}
 
@@ -87,17 +68,13 @@ module.exports = {
 			let entry
 
 			try {
-
 				entry = await records.add(data)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			// Anonymize old entries with the same clientId to prevent that the browsing history
@@ -106,33 +83,27 @@ module.exports = {
 
 			return {
 				success: true,
-				payload: entry
+				payload: entry,
 			}
-
 		},
 		updateRecord: async (parent, { id }, { isIgnored }) => {
-
 			// Ignore your own records when logged in
 			if (isIgnored === true) {
 				return {
-					success: true
+					success: true,
 				}
 			}
 
 			let entry
 
 			try {
-
 				entry = await records.update(id)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			if (entry == null) {
@@ -140,9 +111,8 @@ module.exports = {
 			}
 
 			return {
-				success: true
+				success: true,
 			}
-
-		}
-	}
+		},
+	},
 }
