@@ -92,6 +92,8 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee) - Gridsome plugin for Ackee
 - [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress plugin for Ackee
 - [svelte-ackee](https://github.com/gaia-green-tech/svelte-ackee) - Svelte module for Ackee
+- [ackee_dart](https://github.com/marchellodev/ackee_dart) - Ackee plugin for Dart/Flutter ([pub.dev](https://pub.dev/packages/ackee_dart))
+
 
 ### Links
 
