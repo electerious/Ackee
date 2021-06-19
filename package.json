@@ -83,7 +83,7 @@
     "react-fast-compare": "^3.2.0",
     "react-hotkeys-hook": "^3.3.2",
     "react-use": "^17.2.4",
-    "rosid-handler-js-next": "^1.0.0",
+    "rosid-handler-js-next": "^1.0.1",
     "rosid-handler-sass": "^8.0.0",
     "s-ago": "^2.2.0",
     "shortid": "^2.2.16",
