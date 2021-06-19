@@ -10,7 +10,7 @@
 		position: absolute;
 		left: 0;
 		right: 0;
-		height: $gutter/2;
+		height: math.div($gutter, 2);
 		pointer-events: none;
 		z-index: 1;
 	}
@@ -82,7 +82,7 @@
 	&__bar {
 		position: absolute;
 		left: 0;
-		top: $gutter/2;
+		top: math.div($gutter, 2);
 		width: var(--width);
 		height: $rowHeight;
 		border-radius: 100px;

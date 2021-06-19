@@ -30,7 +30,7 @@
 	&__button {
 		display: flex;
 		align-items: center;
-		padding: $gutter/1.5 0;
+		padding: math.div($gutter, 1.5) 0;
 		white-space: nowrap;
 		color: $white;
 		outline: none;
@@ -43,7 +43,7 @@
 	&__arrow {
 		$size: 12px;
 
-		margin-left: $gutter/2;
+		margin-left: math.div($gutter, 2);
 		width: $size;
 		height: $size;
 		fill: $light;

@@ -4,7 +4,7 @@
 	display: grid;
 	top: 0;
 	left: 0;
-	padding: $gutter/2 0;
+	padding: math.div($gutter, 2) 0;
 	min-width: 210px;
 	background: rgba($context, .98);
 	border-radius: $radius;
@@ -41,12 +41,12 @@
 
 	&__content {
 		margin: 0;
-		padding: $gutter/3 $gutter*1.2;
+		padding: math.div($gutter, 3) $gutter*1.2;
 		font-size: .9em;
 	}
 
 	&__button {
-		padding: $gutter/3 $gutter*1.2;
+		padding: math.div($gutter, 3) $gutter*1.2;
 		color: currentColor;
 		text-align: left;
 		transition: color .3s ease, background .2s ease;
@@ -64,8 +64,8 @@
 	}
 
 	&--floating &__button {
-		margin: 0 $gutter/2;
-		padding: $gutter/2 $gutter/1.6;
+		margin: 0 math.div($gutter, 2);
+		padding: math.div($gutter, 2) math.div($gutter, 1.6);
 		color: $white;
 		border-radius: $innerRadius;
 
@@ -98,7 +98,7 @@
 	&__separator {
 		height: 1px;
 		background: $dimmed;
-		margin: $gutter/2 0;
+		margin: math.div($gutter, 2) 0;
 	}
 
 }
