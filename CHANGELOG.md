@@ -6,11 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
-This release contains a refactored front-end that takes advantage of the GraphQL API that has been in Ackee since version 2. Better caching and instant domain, event and permanent token updates.
+This release contains a refactored front-end that takes advantage of the GraphQL API that has been in Ackee since version 2. Better caching and instant domain, event and permanent token updates. And: An active visitor counter that updated periodically without reloading the UI.
 
 ### Added
 
 - Views and duration details: Click on a chart bar on the overview and insights page to see more details
+- Active visitors counter updates periodically without reloading the UI
 
 ### Changed
 
