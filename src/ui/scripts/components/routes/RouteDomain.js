@@ -36,7 +36,7 @@ const RouteDomain = (props) => {
 	const currentRoute = useRoute(props.route)
 	const domainId = currentRoute.params.domainId
 
-	useActiveVisitors()
+	useActiveVisitors(domainId)
 
 	return (
 		h(Fragment, {},
