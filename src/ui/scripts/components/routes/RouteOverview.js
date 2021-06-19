@@ -13,6 +13,7 @@ import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import { MODALS_VIEWS, MODALS_DURATIONS } from '../../constants/modals'
 
+import useMergedActiveVisitors from '../../api/hooks/facts/useMergedActiveVisitors'
 import useMergedFacts from '../../api/hooks/facts/useMergedFacts'
 import useMergedViews from '../../api/hooks/views/useMergedViews'
 import useMergedDurations from '../../api/hooks/durations/useMergedDurations'
@@ -33,6 +34,8 @@ import RendererList from '../renderers/RendererList'
 import RendererReferrers from '../renderers/RendererReferrers'
 
 const RouteOverview = (props) => {
+	useMergedActiveVisitors()
+
 	return (
 		h(Fragment, {},
 			h(CardFacts, {

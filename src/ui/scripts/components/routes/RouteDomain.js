@@ -12,6 +12,7 @@ import { BROWSERS_TYPE_WITH_VERSION } from '../../../../constants/browsers'
 import { SIZES_TYPE_BROWSER_RESOLUTION } from '../../../../constants/sizes'
 
 import useRoute from '../../hooks/useRoute'
+import useActiveVisitors from '../../api/hooks/facts/useActiveVisitors'
 import useFacts from '../../api/hooks/facts/useFacts'
 import useViews from '../../api/hooks/views/useViews'
 import useDurations from '../../api/hooks/durations/useDurations'
@@ -34,6 +35,8 @@ import RendererReferrers from '../renderers/RendererReferrers'
 const RouteDomain = (props) => {
 	const currentRoute = useRoute(props.route)
 	const domainId = currentRoute.params.domainId
+
+	useActiveVisitors()
 
 	return (
 		h(Fragment, {},

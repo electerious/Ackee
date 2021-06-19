@@ -15,11 +15,12 @@ const QUERY = gql`
 	${ viewsField }
 `
 
-export default (filters) => {
+export default (filters, options) => {
 	const selector = (data) => data?.statistics.views
 	const enhancer = (value) => enhanceViews(value, filters.limit)
 
 	return useQuery(QUERY, selector, enhancer, {
 		variables: filters,
+		...options,
 	})
 }

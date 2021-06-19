@@ -6,7 +6,7 @@ import status from '../../utils/status'
 export default (query, selector, enhancer, options) => {
 	const { loading, data } = useQuery(query, {
 		fetchPolicy: 'cache-and-network',
-		nextFetchPolicy: 'cache-and-network',
+		nextFetchPolicy: 'cache-first',
 		...options,
 	})
 
