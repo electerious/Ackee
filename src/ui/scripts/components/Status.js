@@ -10,7 +10,7 @@ export const ICON_UPDATER = Updater
 const Status = (props) => {
 	return (
 		h('div', { className: 'status' },
-			props.icon && h(props.icon, {}),
+			props.icon != null && h(props.icon, {}),
 			props.children,
 		)
 	)
