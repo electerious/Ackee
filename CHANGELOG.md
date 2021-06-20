@@ -12,6 +12,7 @@ This release contains a refactored front-end that takes advantage of the GraphQL
 
 - Views and duration details: Click on a chart bar on the overview and insights page to see more details
 - Active visitors counter updates periodically without reloading the UI
+- Tooltips for text in lists (#266)
 
 ### Changed
 

@@ -39,7 +39,7 @@ const UrlRow = (props) => {
 			}),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
 				h('span', {}, hostnameUrl),
-				h('span', { className: 'flexList__obscured' }, pathnameUrl),
+				h('span', { className: 'flexList__obscured', title: pathnameUrl }, pathnameUrl),
 			),
 		)
 	)
@@ -56,7 +56,7 @@ const TextRow = (props) => {
 				barWidth: props.barWidth,
 			}),
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
-				h('span', { className: 'flexList__truncated' }, props.text),
+				h('span', { className: 'flexList__truncated', title: props.text }, props.text),
 			),
 		)
 	)

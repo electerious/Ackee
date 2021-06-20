@@ -17,7 +17,7 @@ const Row = (props) => {
 			...rootProps,
 		},
 			h('div', { className: 'flexList__column flexList__column--text-adjustment' },
-				h('span', { className: 'flexList__truncated' }, props.text),
+				h('span', { className: 'flexList__truncated', title: props.text }, props.text),
 			),
 		)
 	)
