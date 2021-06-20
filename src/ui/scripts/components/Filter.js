@@ -16,7 +16,7 @@ import * as ranges from '../../../constants/ranges'
 import * as intervals from '../../../constants/intervals'
 
 import Context, { BUTTON, SEPARATOR } from './Context'
-import IconArrowDown from './icons/IconArrowDown'
+import IconChevronDown from './icons/IconChevronDown'
 
 const labels = {
 	sortings: {
@@ -111,7 +111,7 @@ const FilterItem = (props) => {
 				onClick: toggle,
 			},
 				h('span', {}, props.label),
-				h(IconArrowDown, { className: 'filter__arrow' }),
+				h(IconChevronDown, { className: 'filter__arrow' }),
 			),
 			active === true && h(Context, {
 				targetRef: ref,

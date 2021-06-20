@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import Context, { BUTTON as DROPDOWN_BUTTON, SEPARATOR as DROPDOWN_SEPARATOR } from './Context'
-import IconArrowDown from './icons/IconArrowDown'
+import IconChevronDown from './icons/IconChevronDown'
 
 const BUTTON = Symbol()
 const DROPDOWN = Symbol()
@@ -87,7 +87,7 @@ const Dropdown = (props) => {
 				onClick: toggle,
 			},
 				props.children,
-				h(IconArrowDown, { className: 'header__arrow' }),
+				h(IconChevronDown, { className: 'header__arrow' }),
 			),
 			active === true && h(Context, {
 				targetRef: ref,

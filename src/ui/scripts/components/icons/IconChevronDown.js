@@ -1,7 +1,7 @@
 import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
-const IconArrowDown = (props) => {
+const IconChevronDown = (props) => {
 	return (
 		h('svg', {
 			viewBox: '0 0 512 512',
@@ -14,8 +14,8 @@ const IconArrowDown = (props) => {
 	)
 }
 
-IconArrowDown.propTypes = {
+IconChevronDown.propTypes = {
 	className: PropTypes.string,
 }
 
-export default IconArrowDown
+export default IconChevronDown
