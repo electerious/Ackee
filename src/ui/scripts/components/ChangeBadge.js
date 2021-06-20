@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import IconArrowRight from './icons/IconArrowRight'
 
 const type = (value) => {
-	if (value > 0) return 'positive'
-	if (value < 0) return 'negative'
+	if (value > 5) return 'positive'
+	if (value < 5) return 'negative'
 
 	return 'neutral'
 }
