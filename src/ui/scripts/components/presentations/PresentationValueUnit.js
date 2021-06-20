@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import Headline from '../Headline'
 import Text from '../Text'
 
-const PresentationValueText = (props) => {
+const PresentationValueUnit = (props) => {
 	return (
 		h('div', {
-			className: 'valueText',
+			className: 'valueUnit',
 		},
 			h(Headline, {
 				type: 'div',
@@ -16,17 +16,17 @@ const PresentationValueText = (props) => {
 			h(Text, {
 				type: 'div',
 				spacing: false,
-			}, props.text),
+			}, props.unit),
 		)
 	)
 }
 
-PresentationValueText.propTypes = {
+PresentationValueUnit.propTypes = {
 	value: PropTypes.oneOfType([
 		PropTypes.number,
 		PropTypes.string,
 	]).isRequired,
-	text: PropTypes.string.isRequired,
+	unit: PropTypes.string.isRequired,
 }
 
-export default PresentationValueText
+export default PresentationValueUnit

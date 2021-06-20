@@ -29,16 +29,44 @@ module.exports = {
 		averageViews: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)
 			const entries = await views.get(ids, viewsType.VIEWS_TYPE_UNIQUE, intervals.INTERVALS_DAILY, 14, dateDetails)
-			const totalCount = entries.reduce((acc, entry) => acc + entry.count, 0)
 
+			const totalCount = entries.reduce((acc, entry) => acc + entry.count, 0)
 			return totalCount / entries.length
+		}),
+		averageViewsChange: pipe(requireAuth, async (domain, _, { dateDetails }) => {
+			const ids = await domainIds(domain)
+			const entries = await views.get(ids, viewsType.VIEWS_TYPE_UNIQUE, intervals.INTERVALS_DAILY, 14, dateDetails)
+
+			const totalCountPrevious = entries.slice(7, 14).reduce((acc, entry) => acc + entry.count, 0)
+			const totalCountCurrent = entries.slice(0, 7).reduce((acc, entry) => acc + entry.count, 0)
+			const totalDifference = totalCountCurrent - totalCountPrevious
+
+			// No previous views, no change
+			if (totalCountPrevious === 0) return
+
+			const percentageChange = totalDifference / totalCountPrevious * 100
+			return Math.min(Math.max(Math.round(percentageChange), -100), 100)
 		}),
 		averageDuration: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)
 			const entries = await durations.get(ids, intervals.INTERVALS_DAILY, 14, dateDetails)
-			const totalCount = entries.reduce((acc, entry) => acc + entry.count, 0)
 
+			const totalCount = entries.reduce((acc, entry) => acc + entry.count, 0)
 			return totalCount / entries.length
+		}),
+		averageDurationChange: pipe(requireAuth, async (domain, _, { dateDetails }) => {
+			const ids = await domainIds(domain)
+			const entries = await durations.get(ids, intervals.INTERVALS_DAILY, 14, dateDetails)
+
+			const totalCountPrevious = entries.slice(7, 14).reduce((acc, entry) => acc + entry.count, 0)
+			const totalCountCurrent = entries.slice(0, 7).reduce((acc, entry) => acc + entry.count, 0)
+			const totalDifference = totalCountCurrent - totalCountPrevious
+
+			// No previous views, no change
+			if (totalCountPrevious === 0) return
+
+			const percentageChange = totalDifference / totalCountPrevious * 100
+			return Math.min(Math.max(Math.round(percentageChange), -100), 100)
 		}),
 		viewsToday: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)

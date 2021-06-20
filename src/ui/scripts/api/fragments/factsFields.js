@@ -5,7 +5,9 @@ export default gql`
 		id
 		activeVisitors
 		averageViews
+		averageViewsChange
 		averageDuration
+		averageDurationChange
 		viewsToday
 		viewsMonth
 		viewsYear

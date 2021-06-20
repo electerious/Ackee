@@ -20,9 +20,19 @@ module.exports = gql`
 		"""
 		averageViews: UnsignedInt!
 		"""
+		Percentage change of the average visitors when comparing the last 7 days with the previous 7 days.
+		Might be undefined when there's not enough data to compare.
+		"""
+		averageViewsChange: Float
+		"""
 		Average visit duration of the last 14 days in milliseconds.
 		"""
 		averageDuration: UnsignedInt!
+		"""
+		Percentage change of the average visit duration when comparing the last 7 days with the previous 7 days.
+		Might be undefined when there's not enough data to compare.
+		"""
+		averageDurationChange: Float
 		"""
 		Number of unique views today.
 		"""
