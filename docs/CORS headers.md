@@ -16,6 +16,7 @@ Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 Access-Control-Allow-Headers: Content-Type, Authorization, Time-Zone
 Access-Control-Allow-Credentials: true
+Access-Control-Max-Age: 3600
 ```
 
 ### Origin
@@ -50,6 +51,14 @@ The `Access-Control-Allow-Credentials` header tells the browser to include the `
 
 ```
 Access-Control-Allow-Credentials: true
+```
+
+### Max-Age
+
+The `Access-Control-Max-Age` header tells the browser that all `Access-Control-Allow-*` headers can be cached for one hour. This minimizes the amount of preflight requests.
+
+```
+Access-Control-Max-Age: 3600
 ```
 
 ## Platforms-As-A-Service configuration

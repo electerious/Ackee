@@ -22,6 +22,7 @@ test('return no cors headers if env var specifies none', async (t) => {
 	t.is(headers.get('Access-Control-Allow-Methods'), null)
 	t.is(headers.get('Access-Control-Allow-Headers'), null)
 	t.is(headers.get('Access-Control-Allow-Credentials'), null)
+	t.is(headers.get('Access-Control-Max-Age'), null)
 
 	restore()
 })
