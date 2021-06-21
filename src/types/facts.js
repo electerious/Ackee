@@ -3,6 +3,30 @@
 const { gql } = require('apollo-server-micro')
 
 module.exports = gql`
+	type AverageViews {
+		"""
+		Average number of views per day during the last 14 days, excluding the current day.
+		"""
+		count: UnsignedInt!
+		"""
+		Percentage change of the average views when comparing the last 7 days with the previous 7 days.
+		Might be undefined when there's not enough data to compare.
+		"""
+		change: Float
+	}
+
+	type AverageDuration {
+		"""
+		Average visit duration in milliseconds for the last 14 days, excluding the current day.
+		"""
+		count: UnsignedInt!
+		"""
+		Percentage change of the average visit duration when comparing the last 7 days with the previous 7 days.
+		Might be undefined when there's not enough data to compare.
+		"""
+		change: Float
+	}
+
 	"""
 	Facts about a domain. Usually simple data that can be represented in one value.
 	"""
@@ -16,23 +40,13 @@ module.exports = gql`
 		"""
 		activeVisitors: UnsignedInt!
 		"""
-		Average number of visitors per day during the last 14 days.
+		Details about the average number of views.
 		"""
-		averageViews: UnsignedInt!
+		averageViews: AverageViews!
 		"""
-		Percentage change of the average visitors when comparing the last 7 days with the previous 7 days.
-		Might be undefined when there's not enough data to compare.
+		Details about the average visit duration.
 		"""
-		averageViewsChange: Float
-		"""
-		Average visit duration of the last 14 days in milliseconds.
-		"""
-		averageDuration: UnsignedInt!
-		"""
-		Percentage change of the average visit duration when comparing the last 7 days with the previous 7 days.
-		Might be undefined when there's not enough data to compare.
-		"""
-		averageDurationChange: Float
+		averageDuration: AverageDuration!
 		"""
 		Number of unique views today.
 		"""

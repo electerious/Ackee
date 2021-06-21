@@ -20,6 +20,7 @@ const Presentation = (props) => {
 			}, props.headline),
 			h('div', {
 				className: 'facts__left',
+				title: props.title,
 			},
 				h(PresentationValueUnit, {
 					value: props.value,
@@ -39,9 +40,7 @@ const CardFacts = (props) => {
 	const {
 		activeVisitors,
 		averageViews,
-		averageViewsChange,
 		averageDuration,
-		averageDurationChange,
 		viewsToday,
 		viewsMonth,
 		viewsYear,
@@ -59,15 +58,17 @@ const CardFacts = (props) => {
 			}),
 			h(Presentation, {
 				headline: 'Average views',
-				value: formatNumber(averageViews),
+				value: formatNumber(averageViews.count),
 				unit: 'per day',
-				addition: averageViewsChange != null && h(ChangeBadge, { value: averageViewsChange }),
+				title: `An average of ${ averageViews.count } views per day during the last 14 days`,
+				addition: averageViews.change != null && h(ChangeBadge, { value: averageViews.change }),
 			}),
 			h(Presentation, {
 				headline: 'Average duration',
-				value: formatDuration(averageDuration).value,
-				unit: formatDuration(averageDuration).unit,
-				addition: averageDurationChange != null && h(ChangeBadge, { value: averageDurationChange }),
+				value: formatDuration(averageDuration.count).value,
+				unit: formatDuration(averageDuration.count).unit,
+				title: `An average visit duration of ${ formatDuration(averageDuration.count).value }${ formatDuration(averageDuration.count).unit } per day during the last 14 days`,
+				addition: averageDuration.change != null && h(ChangeBadge, { value: averageDuration.change }),
 			}),
 			h(Presentation, {
 				headline: 'Views today',
