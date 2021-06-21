@@ -20,6 +20,7 @@ This release contains a refactored front-end that takes advantage of the GraphQL
 - `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id field
 - `View`, `Duration` and `EventChartEntry` (GraphQL API) now contain their date in a `value` field in the format: YYYY, YYYY-MM or YYYY-MM-DD. The format depends on the chosen interval.
 - `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id in the `id` field. The previous data has been renamed to `value`, because it was never unique and therefore shouldn't be named `id`.
+- `averageViews` and `averageDuration` (GraphQL API) are now types and don't contain the values directly
 
 ## [3.0.6] - 2021-04-02
 
