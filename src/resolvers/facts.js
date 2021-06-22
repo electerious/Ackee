@@ -10,22 +10,35 @@ const domainIds = require('../utils/domainIds')
 const recursiveId = require('../utils/recursiveId')
 const requireAuth = require('../middlewares/requireAuth')
 
-const calculateCountAndChange = (entries) => {
-	const totalCountCurrent = entries.slice(1, 8).reduce((acc, entry) => acc + entry.count, 0)
-	const totalCountPrevious = entries.slice(8, 15).reduce((acc, entry) => acc + entry.count, 0)
-	const totalCount = totalCountCurrent + totalCountPrevious
-	const totalDifference = totalCountCurrent - totalCountPrevious
-
-	const count = Math.round(totalCount / 14)
-	const change = Math.min(Math.max(Math.round(totalDifference / totalCountPrevious * 100), -100), 100)
-
-	return {
-		count,
-		change: Number.isNaN(change) === true ? undefined : change,
-	}
-}
-
 module.exports = {
+	AverageViews: {
+		count: pipe(requireAuth, (entries) => {
+			const totalCount = entries.slice(1, 15).reduce((acc, entry) => acc + entry.count, 0)
+
+			return Math.round(totalCount / 14)
+		}),
+		change: pipe(requireAuth, (entries) => {
+			const totalCountCurrent = entries.slice(1, 8).reduce((acc, entry) => acc + entry.count, 0)
+			const totalCountPrevious = entries.slice(8, 15).reduce((acc, entry) => acc + entry.count, 0)
+			const totalDifference = totalCountCurrent - totalCountPrevious
+
+			return Math.min(Math.max(Math.round(totalDifference / totalCountPrevious * 100), -100), 100)
+		}),
+	},
+	AverageDuration: {
+		count: pipe(requireAuth, (entries) => {
+			const totalCount = entries.slice(1, 15).reduce((acc, entry) => acc + entry.count, 0)
+
+			return Math.round(totalCount / 14)
+		}),
+		change: pipe(requireAuth, (entries) => {
+			const totalCountCurrent = entries.slice(1, 8).reduce((acc, entry) => acc + entry.count, 0)
+			const totalCountPrevious = entries.slice(8, 15).reduce((acc, entry) => acc + entry.count, 0)
+			const totalDifference = totalCountCurrent - totalCountPrevious
+
+			return Math.min(Math.max(Math.round(totalDifference / totalCountPrevious * 100), -100), 100)
+		}),
+	},
 	Facts: {
 		id: pipe(requireAuth, async (domain) => {
 			const ids = await domainIds(domain)
@@ -43,15 +56,15 @@ module.exports = {
 		}),
 		averageViews: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)
-			const entries = await views.get(ids, viewsType.VIEWS_TYPE_UNIQUE, intervals.INTERVALS_DAILY, 15, dateDetails)
+			const entries = views.get(ids, viewsType.VIEWS_TYPE_UNIQUE, intervals.INTERVALS_DAILY, 15, dateDetails)
 
-			return calculateCountAndChange(entries)
+			return entries
 		}),
 		averageDuration: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)
-			const entries = await durations.get(ids, intervals.INTERVALS_DAILY, 15, dateDetails)
+			const entries = durations.get(ids, intervals.INTERVALS_DAILY, 15, dateDetails)
 
-			return calculateCountAndChange(entries)
+			return entries
 		}),
 		viewsToday: pipe(requireAuth, async (domain, _, { dateDetails }) => {
 			const ids = await domainIds(domain)
