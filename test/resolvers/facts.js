@@ -44,8 +44,6 @@ test('fetch facts', async (t) => {
 	const { json } = await api(base, body, t.context.token.id)
 	const facts = json.data.domain.facts
 
-	console.log(facts.averageDuration)
-
 	t.is(typeof facts.id, 'string')
 	t.is(facts.activeVisitors, 1)
 	t.is(facts.averageViews.count, 1)

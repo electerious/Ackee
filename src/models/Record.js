@@ -42,12 +42,12 @@ const schema = new mongoose.Schema({
 	screenWidth: {
 		type: Number,
 		min: 0,
-		max: 100_000,
+		max: 100000,
 	},
 	screenHeight: {
 		type: Number,
 		min: 0,
-		max: 100_000,
+		max: 100000,
 	},
 	screenColorDepth: {
 		type: Number,
@@ -75,12 +75,12 @@ const schema = new mongoose.Schema({
 	browserWidth: {
 		type: Number,
 		min: 0,
-		max: 100_000,
+		max: 100000,
 	},
 	browserHeight: {
 		type: Number,
 		min: 0,
-		max: 100_000,
+		max: 100000,
 	},
 	created: {
 		type: Date,
