@@ -9,13 +9,13 @@ test('return one second in milliseconds', (t) => {
 })
 
 test('return one minute in milliseconds', (t) => {
-	t.is(times.minute, 60_000)
+	t.is(times.minute, 60000)
 })
 
 test('return one hour in milliseconds', (t) => {
-	t.is(times.hour, 3_600_000)
+	t.is(times.hour, 3600000)
 })
 
 test('return one day in milliseconds', (t) => {
-	t.is(times.day, 86_400_000)
+	t.is(times.day, 86400000)
 })

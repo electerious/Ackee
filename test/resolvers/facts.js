@@ -21,8 +21,14 @@ test('fetch facts', async (t) => {
 					facts {
 						id
 						activeVisitors
-						averageViews
-						averageDuration
+						averageViews {
+							count
+							change
+						}
+						averageDuration {
+							count
+							change
+						}
 						viewsToday
 						viewsMonth
 						viewsYear
@@ -38,10 +44,14 @@ test('fetch facts', async (t) => {
 	const { json } = await api(base, body, t.context.token.id)
 	const facts = json.data.domain.facts
 
+	console.log(facts.averageDuration)
+
 	t.is(typeof facts.id, 'string')
 	t.is(facts.activeVisitors, 1)
-	t.is(facts.averageViews, 1)
-	t.is(facts.averageDuration, 60_000)
+	t.is(facts.averageViews.count, 1)
+	t.is(facts.averageViews.change, 17)
+	t.is(facts.averageDuration.count, 55714)
+	t.is(facts.averageDuration.change, 17)
 	t.is(typeof facts.viewsToday, 'number')
 	t.is(typeof facts.viewsMonth, 'number')
 	t.is(typeof facts.viewsYear, 'number')
