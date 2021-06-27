@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.1.1] - 2021-06-27
+
+### Fixed
+
+- "Float cannot represent non numeric value: NaN" when visiting a new installation of Ackee
+
 ## [3.1.0] - 2021-06-27
 
 > ⚠️ Contains breaking changes in the GraphQL API

@@ -22,6 +22,8 @@ module.exports = {
 			const totalCountPrevious = entries.slice(8, 15).reduce((acc, entry) => acc + entry.count, 0)
 			const totalDifference = totalCountCurrent - totalCountPrevious
 
+			if (totalCountPrevious === 0) return
+
 			return Math.min(Math.max(Math.round(totalDifference / totalCountPrevious * 100), -100), 100)
 		}),
 	},
@@ -35,6 +37,8 @@ module.exports = {
 			const totalCountCurrent = entries.slice(1, 8).reduce((acc, entry) => acc + entry.count, 0)
 			const totalCountPrevious = entries.slice(8, 15).reduce((acc, entry) => acc + entry.count, 0)
 			const totalDifference = totalCountCurrent - totalCountPrevious
+
+			if (totalCountPrevious === 0) return
 
 			return Math.min(Math.max(Math.round(totalDifference / totalCountPrevious * 100), -100), 100)
 		}),
