@@ -14,7 +14,7 @@ if (config.dbUrl == null) {
 connect(config.dbUrl)
 
 const apolloServer = createApolloServer(ApolloServer, {
-	context: createServerlessContext
+	context: createServerlessContext,
 })
 
 const origin = (() => {
@@ -32,6 +32,6 @@ exports.handler = apolloServer.createHandler({
 		origin,
 		credentials: true,
 		methods: 'GET,POST,PATCH,OPTIONS',
-		allowedHeaders: 'Content-Type, Authorization, Time-Zone'
-	}
+		allowedHeaders: 'Content-Type, Authorization, Time-Zone',
+	},
 })

@@ -9,6 +9,7 @@ module.exports = (body, favicon, styles, scripts, variables) => `
 
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="theme-color" content="#282d2d">
 
 			<!-- Favicon -->
 			<link rel="shortcut icon" href="${ favicon }" type="image/x-icon">

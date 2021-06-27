@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package.json'
@@ -10,25 +10,29 @@ import Text from '../Text'
 import Spinner from '../Spinner'
 import Message from '../Message'
 
+import useCreateToken from '../../api/hooks/tokens/useCreateToken'
+import useInputs from '../../hooks/useInputs'
+
 const OverlayLogin = (props) => {
+	const createToken = useCreateToken()
 
-	const [ inputs, setInputs ] = useState({
+	const hasError = createToken.error != null
+	const loading = createToken.loading === true
+
+	const [ inputs, onInputChange ] = useInputs({
 		username: window.env.isDemoMode === true ? 'admin' : '',
-		password: window.env.isDemoMode === true ? '123456' : ''
+		password: window.env.isDemoMode === true ? '123456' : '',
 	})
 
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
-	})
-
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		props.addToken(inputs)
+		const { data } = await createToken.mutate({
+			variables: {
+				input: inputs,
+			},
+		})
+		props.setToken(data.createToken.payload.id)
 	}
-
-	const hasError = props.token.error != null
-	const isFetching = props.token.fetching === true
 
 	return (
 		h('form', { className: 'card card--overlay', onSubmit },
@@ -37,35 +41,35 @@ const OverlayLogin = (props) => {
 				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
-					type: 'h1'
+					type: 'h1',
 				}, 'Ackee'),
 				h(Text, {
-					type: 'p'
+					type: 'p',
 				}, 'Welcome back, sign in to continue.'),
 
 				h(Spacer, { size: 2.5 }),
 
-				hasError === true && h(Message, { status: 'error' }, props.token.error.message),
+				hasError === true && h(Message, { status: 'error' }, createToken.error.message),
 
 				h(Input, {
 					type: 'username',
 					required: true,
-					disabled: isFetching === true,
+					disabled: loading === true,
 					focused: true,
 					placeholder: 'Username',
 					value: inputs.username,
-					onChange: onChange('username')
+					onChange: onInputChange('username'),
 				}),
 				h(Input, {
 					type: 'password',
 					required: true,
-					disabled: isFetching === true,
+					disabled: loading === true,
 					placeholder: 'Password',
 					value: inputs.password,
-					onChange: onChange('password')
+					onChange: onInputChange('password'),
 				}),
 
-				h(Spacer, { size: 1 })
+				h(Spacer, { size: 1 }),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -74,27 +78,25 @@ const OverlayLogin = (props) => {
 					className: 'card__button link',
 					href: homepage,
 					target: '_blank',
-					rel: 'noopener'
+					rel: 'noopener',
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: isFetching === true
-				}, isFetching === true ? h(Spinner) : 'Sign In →')
+					disabled: loading === true,
+				}, loading === true ? h(Spinner) : 'Sign In →'),
 
-			)
+			),
 		)
 	)
-
 }
 
 OverlayLogin.propTypes = {
-	token: PropTypes.object.isRequired,
-	addToken: PropTypes.func.isRequired
+	setToken: PropTypes.func.isRequired,
 }
 
 export default OverlayLogin

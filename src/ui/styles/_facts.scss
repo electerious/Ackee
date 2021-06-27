@@ -20,11 +20,26 @@
 
 	&__card {
 		display: grid;
+		grid-template-areas: 'top top' 'left right';
 		align-content: space-between;
+		align-items: end;
 		gap: $gutter;
 		background: $card;
 		padding: $gutter*1.6 $gutter*1.5 $gutter*1.5;
 		width: 100%;
+	}
+
+	&__top {
+		grid-area: top;
+	}
+
+	&__left {
+		grid-area: left;
+	}
+
+	&__right {
+		grid-area: right;
+		justify-self: end;
 	}
 
 }

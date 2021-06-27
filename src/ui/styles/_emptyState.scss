@@ -9,7 +9,7 @@
 		display: grid;
 		align-items: center;
 		grid-auto-flow: column;
-		gap: $gutter/1.5;
+		gap: math.div($gutter, 1.5);
 	}
 
 	&__icon {

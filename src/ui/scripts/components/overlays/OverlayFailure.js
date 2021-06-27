@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package.json'
 import formatErrors from '../../utils/formatErrors'
-import * as storage from '../../utils/storage'
 
 import Textarea from '../Textarea'
 import Spacer from '../Spacer'
@@ -12,9 +11,8 @@ import Text from '../Text'
 import Message from '../Message'
 
 const OverlayFailure = (props) => {
-
 	const onClick = () => {
-		storage.reset()
+		props.reset()
 		window.location.hash = ''
 		window.location.reload()
 	}
@@ -26,10 +24,10 @@ const OverlayFailure = (props) => {
 				h(Spacer, { size: 2.4 }),
 
 				h(Headline, {
-					type: 'h1'
+					type: 'h1',
 				}, 'Oops'),
 				h(Text, {
-					type: 'p'
+					type: 'p',
 				}, 'Something went wrong.'),
 
 				h(Spacer, { size: 2.5 }),
@@ -39,10 +37,10 @@ const OverlayFailure = (props) => {
 				h(Textarea, {
 					rows: 6,
 					value: formatErrors(props.errors),
-					readOnly: true
+					readOnly: true,
 				}),
 
-				h(Spacer, { size: 1 })
+				h(Spacer, { size: 1 }),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -51,26 +49,26 @@ const OverlayFailure = (props) => {
 					className: 'card__button link',
 					href: homepage,
 					target: '_blank',
-					rel: 'noopener'
+					rel: 'noopener',
 				}, 'Help'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					onClick
-				}, 'Reload Ackee')
+					onClick,
+				}, 'Reload Ackee'),
 
-			)
+			),
 		)
 	)
-
 }
 
 OverlayFailure.propTypes = {
-	errors: PropTypes.array.isRequired
+	errors: PropTypes.array.isRequired,
+	reset: PropTypes.func.isRequired,
 }
 
 export default OverlayFailure

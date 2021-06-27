@@ -11,89 +11,89 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
-		default: uuid
+		default: uuid,
 	},
 	clientId: {
 		type: String,
-		index: true
+		index: true,
 	},
 	domainId: {
 		type: String,
 		required: true,
-		index: true
+		index: true,
 	},
 	siteLocation: {
 		type: String,
 		required: true,
-		validate: isUrl
+		validate: isUrl,
 	},
 	siteReferrer: {
 		type: String,
-		validate: isNullOrUrl
+		validate: isNullOrUrl,
 	},
 	siteLanguage: {
 		type: String,
 		minlength: 2,
-		maxlength: 2
+		maxlength: 2,
 	},
 	source: {
-		type: String
+		type: String,
 	},
 	screenWidth: {
 		type: Number,
 		min: 0,
-		max: 100000
+		max: 100000,
 	},
 	screenHeight: {
 		type: Number,
 		min: 0,
-		max: 100000
+		max: 100000,
 	},
 	screenColorDepth: {
 		type: Number,
 		min: 1,
-		max: 48
+		max: 48,
 	},
 	deviceName: {
-		type: String
+		type: String,
 	},
 	deviceManufacturer: {
-		type: String
+		type: String,
 	},
 	osName: {
-		type: String
+		type: String,
 	},
 	osVersion: {
-		type: String
+		type: String,
 	},
 	browserName: {
-		type: String
+		type: String,
 	},
 	browserVersion: {
-		type: String
+		type: String,
 	},
 	browserWidth: {
 		type: Number,
 		min: 0,
-		max: 100000
+		max: 100000,
 	},
 	browserHeight: {
 		type: Number,
 		min: 0,
-		max: 100000
+		max: 100000,
 	},
 	created: {
 		type: Date,
 		required: true,
 		index: true,
-		default: Date.now
+		default: Date.now,
 	},
 	updated: {
 		type: Date,
 		required: true,
 		index: true,
-		default: Date.now
-	}
+		default: Date.now,
+	},
 })
 
 module.exports = mongoose.model('Record', schema)

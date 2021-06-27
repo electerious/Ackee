@@ -7,5 +7,5 @@ module.exports = (dbUrl) => mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true,
-	connectTimeoutMS: 60000
+	connectTimeoutMS: 60000,
 })

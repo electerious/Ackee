@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2021-06-27
+
+> ⚠️ Contains breaking changes in the GraphQL API
+
+This release contains a refactored front-end that takes advantage of the GraphQL API that has been a part of Ackee since version 2. Better caching and instant domain, event and permanent token updates. And: An active visitor counter that updated periodically without reloading the UI.
+
+### Added
+
+- Views and duration details: Click on a chart bar on the overview and insights page to see more details
+- Percentage changes of average views and duration in the facts panel
+- Active visitors counter updates periodically without reloading the UI
+- Tooltips for text in lists (#266)
+
+### Changed
+
+- `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id field
+- `View`, `Duration` and `EventChartEntry` (GraphQL API) now contain their date in a `value` field in the format: YYYY, YYYY-MM or YYYY-MM-DD. The format depends on the chosen interval.
+- `DomainStatistics` and `EventStatistics` (GraphQL API) now contain a unique id in the `id` field. The previous data has been renamed to `value`, because it was never unique and therefore shouldn't be named `id`.
+- `averageViews` and `averageDuration` (GraphQL API) are now types and don't contain the values directly
+
 ## [3.0.6] - 2021-04-02
 
 ### Changed

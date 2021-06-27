@@ -5,64 +5,56 @@ const Token = require('../models/Token')
 const response = (entry) => ({
 	id: entry.id,
 	created: entry.created,
-	updated: entry.updated
+	updated: entry.updated,
 })
 
 const add = async () => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
-		await Token.create({})
+		await Token.create({}),
 	)
-
 }
 
 const get = async (id) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
-		await Token.findOne({ id })
+		await Token.findOne({ id }),
 	)
-
 }
 
 const update = async (id) => {
-
 	const enhance = (entry) => {
 		return entry == null ? entry : response(entry)
 	}
 
 	return enhance(
 		await Token.findOneAndUpdate({
-			id
+			id,
 		}, {
 			$set: {
-				updated: Date.now()
-			}
+				updated: Date.now(),
+			},
 		}, {
-			new: true
-		})
+			new: true,
+		}),
 	)
-
 }
 
-const del = async (id) => {
-
+const del = (id) => {
 	return Token.findOneAndDelete({
-		id
+		id,
 	})
-
 }
 
 module.exports = {
 	add,
 	get,
 	update,
-	del
+	del,
 }

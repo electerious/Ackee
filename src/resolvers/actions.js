@@ -6,31 +6,26 @@ const events = require('../database/events')
 const actions = require('../database/actions')
 
 const polish = (obj) => {
-
 	return Object.entries(obj).reduce((acc, [ key, value ]) => {
-
 		value = typeof value === 'string' ? value.trim() : value
 		value = value == null ? undefined : value
 		value = value === '' ? undefined : value
 
 		acc[key] = value
 		return acc
-
 	}, {})
-
 }
 
 module.exports = {
 	Mutation: {
 		createAction: async (parent, { eventId, input }, { isIgnored }) => {
-
 			// Ignore your own actions when logged in
 			if (isIgnored === true) {
 				return {
 					success: true,
 					payload: {
-						id: '88888888-8888-8888-8888-888888888888'
-					}
+						id: '88888888-8888-8888-8888-888888888888',
+					},
 				}
 			}
 
@@ -43,48 +38,38 @@ module.exports = {
 			let entry
 
 			try {
-
 				entry = await actions.add(data)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			return {
 				success: true,
-				payload: entry
+				payload: entry,
 			}
-
 		},
 		updateAction: async (parent, { id, input }, { isIgnored }) => {
-
 			// Ignore your own actions when logged in
 			if (isIgnored === true) {
 				return {
-					success: true
+					success: true,
 				}
 			}
 
 			let entry
 
 			try {
-
 				entry = await actions.update(id, input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			if (entry == null) {
@@ -92,9 +77,8 @@ module.exports = {
 			}
 
 			return {
-				success: true
+				success: true,
 			}
-
-		}
-	}
+		},
+	},
 }

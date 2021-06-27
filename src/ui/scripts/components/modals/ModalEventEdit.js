@@ -1,4 +1,4 @@
-import { createElement as h, useState } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import * as events from '../../../../constants/events'
@@ -7,34 +7,42 @@ import Input from '../Input'
 import Select from '../Select'
 import Textarea from '../Textarea'
 import Label from '../Label'
-import Spinner from '../Spinner'
 import Spacer from '../Spacer'
 import Tooltip from '../Tooltip'
 
+import useUpdateEvent from '../../api/hooks/events/useUpdateEvent'
+import useDeleteEvent from '../../api/hooks/events/useDeleteEvent'
+import useInputs from '../../hooks/useInputs'
 import commonModalProps from '../../utils/commonModalProps'
 import shortId from '../../utils/shortId'
 
 const ModalEventEdit = (props) => {
+	const updateEvent = useUpdateEvent(props.id)
+	const deleteEvent = useDeleteEvent(props.id)
 
-	const [ inputs, setInputs ] = useState({
+	const [ inputs, onInputChange ] = useInputs({
 		title: props.title,
-		type: props.type
+		type: props.type,
 	})
 
-	const onChange = (key) => (e) => setInputs({
-		...inputs,
-		[key]: e.target.value
-	})
-
-	const updateEvent = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault()
-		props.updateEvent(props.id, inputs).then(props.closeModal)
+		updateEvent.mutate({
+			variables: {
+				input: inputs,
+			},
+		})
+		props.closeModal()
 	}
 
-	const deleteEvent = (e) => {
+	const onDelete = (e) => {
 		e.preventDefault()
+
 		const c = confirm(`Are you sure you want to delete the event "${ props.title }"? This action cannot be undone.`)
-		if (c === true) props.deleteEvent(props.id, inputs).then(props.closeModal)
+		if (c === false) return
+
+		deleteEvent.mutate()
+		props.closeModal()
 	}
 
 	const titleId = shortId()
@@ -43,7 +51,7 @@ const ModalEventEdit = (props) => {
 	const embedId = shortId()
 
 	return (
-		h('form', { className: 'card', onSubmit: updateEvent },
+		h('form', { className: 'card', onSubmit },
 			h('div', { className: 'card__inner' },
 
 				h(Spacer, { size: 0.5 }),
@@ -54,42 +62,40 @@ const ModalEventEdit = (props) => {
 					type: 'text',
 					id: titleId,
 					required: true,
-					disabled: props.fetching === true,
 					focused: true,
 					placeholder: 'Event title',
 					value: inputs.title,
-					onChange: onChange('title')
+					onChange: onInputChange('title'),
 				}),
 
 				h('div', { className: 'card__group' },
 					h(Label, { spacing: false, htmlFor: typeId }, 'Event type'),
-					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.')
+					h(Tooltip, {}, 'Specifies how the aggregated data will be displayed in the UI. Can be changed at any time.'),
 				),
 
 				h(Select, {
 					id: typeId,
 					required: true,
-					disabled: props.fetching === true,
 					value: inputs.type,
 					items: [
 						{
 							value: events.EVENTS_TYPE_TOTAL_CHART,
-							label: 'Chart with total sums'
+							label: 'Chart with total sums',
 						},
 						{
 							value: events.EVENTS_TYPE_AVERAGE_CHART,
-							label: 'Chart with average values'
+							label: 'Chart with average values',
 						},
 						{
 							value: events.EVENTS_TYPE_TOTAL_LIST,
-							label: 'List with total sums'
+							label: 'List with total sums',
 						},
 						{
 							value: events.EVENTS_TYPE_AVERAGE_LIST,
-							label: 'List with average values'
-						}
+							label: 'List with average values',
+						},
 					],
-					onChange: onChange('type')
+					onChange: onInputChange('type'),
 				}),
 
 				h(Label, { htmlFor: idId }, 'Event id'),
@@ -100,7 +106,7 @@ const ModalEventEdit = (props) => {
 					readOnly: true,
 					placeholder: 'Event id',
 					value: props.id,
-					copyOnFocus: true
+					copyOnFocus: true,
 				}),
 
 				h(Label, { htmlFor: embedId }, 'Usage example'),
@@ -109,9 +115,9 @@ const ModalEventEdit = (props) => {
 					id: embedId,
 					readOnly: true,
 					rows: 3,
-					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: '1' })`,
-					copyOnFocus: true
-				})
+					value: `ackeeTracker.action('${ props.id }', { key: 'Click', value: 1 })`,
+					copyOnFocus: true,
+				}),
 
 			),
 			h('div', { className: 'card__footer' },
@@ -120,42 +126,35 @@ const ModalEventEdit = (props) => {
 					type: 'button',
 					className: 'card__button link',
 					onClick: props.closeModal,
-					disabled: props.active === false
 				}, 'Close'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					type: 'button',
 					className: 'card__button link color-destructive',
-					onClick: deleteEvent,
-					disabled: props.active === false
+					onClick: onDelete,
 				}, 'Delete'),
 
 				h('div', {
-					className: 'card__separator'
+					className: 'card__separator',
 				}),
 
 				h('button', {
 					className: 'card__button card__button--primary link color-white',
-					disabled: props.fetching === true || props.active === false
-				}, props.fetching === true ? h(Spinner) : 'Save')
+				}, 'Save'),
 
-			)
+			),
 		)
 	)
-
 }
 
 ModalEventEdit.propTypes = {
 	...commonModalProps,
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
-	fetching: PropTypes.bool.isRequired,
-	updateEvent: PropTypes.func.isRequired,
-	deleteEvent: PropTypes.func.isRequired
 }
 
 export default ModalEventEdit

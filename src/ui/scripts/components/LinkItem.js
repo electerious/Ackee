@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const LinkItem = (props) => {
-
 	return (
 		h(props.type, {
 			onClick: props.onClick,
@@ -12,14 +11,13 @@ const LinkItem = (props) => {
 			className: classNames({
 				'linkItem': true,
 				'linkItem--disabled': props.disabled === true,
-				'link': true
-			})
+				'link': true,
+			}),
 		},
 			h('span', {}, props.children),
-			props.text != null && h('span', {}, props.text)
+			props.text != null && h('span', {}, props.text),
 		)
 	)
-
 }
 
 LinkItem.propTypes = {
@@ -29,7 +27,7 @@ LinkItem.propTypes = {
 	onClick: PropTypes.func,
 	disabled: PropTypes.bool,
 	text: PropTypes.string,
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
 }
 
 export default LinkItem

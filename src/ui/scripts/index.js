@@ -1,51 +1,84 @@
-import { createElement as h } from 'react'
+import { createElement as h, useState, useCallback } from 'react'
 import { render } from 'react-dom'
-import { bindActionCreators } from 'redux'
-import { Provider, connect } from 'react-redux'
+import { ApolloProvider } from '@apollo/client/react'
 
-import enhanceState from './enhancers/enhanceState'
-import createStore from './utils/createStore'
-import * as storage from './utils/storage'
-import reducers from './reducers/index'
-import * as actions from './actions/index'
+import createStatusLink from './api/links/createStatusLink'
+import createAuthLink from './api/links/createAuthLink'
+import createHttpLink from './api/links/createHttpLink'
+import createClient from './api/utils/createClient'
 
-import { initialState as initialTokenState } from './reducers/token'
-import { initialState as initialFilterState } from './reducers/filter'
+import useCustomScrollbar from './hooks/useCustomScrollbar'
+import useScrollReset from './hooks/useScrollReset'
+import useRouter from './hooks/useRouter'
+import useToken from './hooks/useToken'
+import useModals from './hooks/useModals'
+import useFilters from './hooks/useFilters'
 
 import Main from './components/Main'
-
-const persistedState = storage.load()
-const store = createStore(reducers, persistedState)
-
-const mapStateToProps = (state) => enhanceState(state)
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const ConnectedMain = connect(mapStateToProps, mapDispatchToProps)(Main)
-const container = document.querySelector('#main')
+import ErrorBoundary from './components/ErrorBoundary'
 
 if (window.env.isDemoMode === true) {
 	console.warn('Ackee runs in demo mode')
 }
 
-store.subscribe(() => {
+const {
+	statusLink,
+	useLoading,
+	useErrors,
+} = createStatusLink()
 
-	const currentState = store.getState()
+const client = createClient([
+	statusLink,
+	createAuthLink(),
+	createHttpLink(),
+])
 
-	storage.save({
-		token: {
-			...initialTokenState(),
-			value: currentState.token.value
-		},
-		filter: {
-			...initialFilterState(),
-			...currentState.filter
-		}
-	})
+const App = () => {
+	// Change the key to re-render the whole application. This will
+	// reset the states of hooks inside the Main component and therefore
+	// all existing GraphQL errors that occurred before the reset.
+	// https://github.com/molindo/react-apollo-network-status/issues/45
+	const [ key, setKey ] = useState(Date.now())
 
-})
+	const loading = useLoading()
+	const router = useRouter()
+	const token = useToken()
+	const modals = useModals()
+	const filters = useFilters()
 
-const App = h(Provider, { store },
-	h(ConnectedMain)
-)
+	const reset = useCallback(() => {
+		// Reset everything that has a local or saved state
+		token.resetToken()
+		modals.resetModals()
+		filters.resetFilters()
 
-render(App, container)
+		// Reset the cache of the client
+		client.clearStore()
+
+		// Reset the main component and the states it contains
+		setKey(Date.now())
+	}, [ token.resetToken, modals.resetModals, filters.resetFilters, client.resetStore, setKey ])
+
+	useCustomScrollbar()
+	useScrollReset(router.route)
+
+	return (
+		h(ApolloProvider, { client },
+			h(ErrorBoundary, { reset },
+				h(Main, {
+					key,
+					reset,
+					useErrors,
+					loading,
+					...status,
+					...router,
+					...token,
+					...modals,
+					...filters,
+				}),
+			),
+		)
+	)
+}
+
+render(h(App), document.querySelector('#main'))

@@ -17,56 +17,56 @@ export const SETTINGS = Symbol()
 const routes = [
 	{
 		pattern: new UrlPattern('/'),
-		key: OVERVIEW
+		key: OVERVIEW,
 	},
 	{
 		pattern: new UrlPattern('/domains/:domainId'),
-		key: DOMAIN
+		key: DOMAIN,
 	},
 	{
 		pattern: new UrlPattern('/insights/views'),
-		key: VIEWS
+		key: VIEWS,
 	},
 	{
 		pattern: new UrlPattern('/insights/pages'),
-		key: PAGES
+		key: PAGES,
 	},
 	{
 		pattern: new UrlPattern('/insights/referrers'),
-		key: REFERRERS
+		key: REFERRERS,
 	},
 	{
 		pattern: new UrlPattern('/insights/durations'),
-		key: DURATIONS
+		key: DURATIONS,
 	},
 	{
 		pattern: new UrlPattern('/insights/events'),
-		key: EVENTS
+		key: EVENTS,
 	},
 	{
 		pattern: new UrlPattern('/insights/systems'),
-		key: SYSTEMS
+		key: SYSTEMS,
 	},
 	{
 		pattern: new UrlPattern('/insights/devices'),
-		key: DEVICES
+		key: DEVICES,
 	},
 	{
 		pattern: new UrlPattern('/insights/browsers'),
-		key: BROWSERS
+		key: BROWSERS,
 	},
 	{
 		pattern: new UrlPattern('/insights/sizes'),
-		key: SIZES
+		key: SIZES,
 	},
 	{
 		pattern: new UrlPattern('/insights/languages'),
-		key: LANGUAGES
+		key: LANGUAGES,
 	},
 	{
 		pattern: new UrlPattern('/settings'),
-		key: SETTINGS
-	}
+		key: SETTINGS,
+	},
 ]
 
 export const defaultRoute = routes[0]

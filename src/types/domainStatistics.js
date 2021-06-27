@@ -16,9 +16,14 @@ module.exports = gql`
 
 	type View {
 		"""
-		Date of visits.
+		View identifier.
 		"""
-		id: DateTime!
+		id: ID!
+		"""
+		Date of visits.
+		Either YYYY, YYYY-MM or YYYY-MM-DD depending on the current interval.
+		"""
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -27,9 +32,13 @@ module.exports = gql`
 
 	type Page {
 		"""
+		Page identifier.
+		"""
+		id: ID!
+		"""
 		URL of the page.
 		"""
-		id: URL!
+		value: URL!
 		"""
 		Amount of occurrences.
 		"""
@@ -57,9 +66,13 @@ module.exports = gql`
 
 	type Referrer {
 		"""
+		Referrer identifier.
+		"""
+		id: ID!
+		"""
 		Either the URL of the referrer or the source parameter of the page to indicate where the visit comes from.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -72,9 +85,14 @@ module.exports = gql`
 
 	type Duration {
 		"""
-		Date of average duration.
+		Duration identifier.
 		"""
-		id: DateTime!
+		id: ID!
+		"""
+		Date of average duration.
+		Either YYYY, YYYY-MM or YYYY-MM-DD depending on the current interval.
+		"""
+		value: String!
 		"""
 		Average duration in milliseconds.
 		"""
@@ -94,9 +112,13 @@ module.exports = gql`
 
 	type System {
 		"""
+		System identifier.
+		"""
+		id: ID!
+		"""
 		Name of the system. With or without the version.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -120,9 +142,13 @@ module.exports = gql`
 
 	type Device {
 		"""
+		Device identifier.
+		"""
+		id: ID!
+		"""
 		Name of the device. With or without the model.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -146,9 +172,13 @@ module.exports = gql`
 
 	type Browser {
 		"""
+		Browser identifier.
+		"""
+		id: ID!
+		"""
 		Name of the browser. With or without the version.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -188,9 +218,13 @@ module.exports = gql`
 
 	type Size {
 		"""
+		Size identifier.
+		"""
+		id: ID!
+		"""
 		Screen or browser width, height or resolution.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -203,9 +237,13 @@ module.exports = gql`
 
 	type Language {
 		"""
+		Language identifier.
+		"""
+		id: ID!
+		"""
 		Name of the language or language code when unknown.
 		"""
-		id: String!
+		value: String!
 		"""
 		Amount of occurrences.
 		"""
@@ -220,6 +258,10 @@ module.exports = gql`
 	Statistics of a domain. Usually data that needs to be represented in a list or chart.
 	"""
 	type DomainStatistics {
+		"""
+		Statistic identifier.
+		"""
+		id: ID!
 		"""
 		Amount of views grouped by day, month or year.
 		"""

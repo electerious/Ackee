@@ -10,61 +10,46 @@ const blockDemoMode = require('../middlewares/blockDemoMode')
 
 module.exports = {
 	Event: {
-		statistics: (obj) => obj
+		statistics: (parent) => parent,
 	},
 	Query: {
-		event: pipe(requireAuth, async (parent, { id }) => {
-
+		event: pipe(requireAuth, (parent, { id }) => {
 			return events.get(id)
-
 		}),
-		events: pipe(requireAuth, async () => {
-
+		events: pipe(requireAuth, () => {
 			return events.all()
-
-		})
+		}),
 	},
 	Mutation: {
 		createEvent: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
-
 			let entry
 
 			try {
-
 				entry = await events.add(input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			return {
 				payload: entry,
-				success: true
+				success: true,
 			}
-
 		}),
 		updateEvent: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
-
 			let entry
 
 			try {
-
 				entry = await events.update(id, input)
-
-			} catch (err) {
-
-				if (err.name === 'ValidationError') {
-					throw new KnownError(messages(err.errors))
+			} catch (error) {
+				if (error.name === 'ValidationError') {
+					throw new KnownError(messages(error.errors))
 				}
 
-				throw err
-
+				throw error
 			}
 
 			if (entry == null) {
@@ -73,19 +58,16 @@ module.exports = {
 
 			return {
 				payload: entry,
-				success: true
+				success: true,
 			}
-
 		}),
 		deleteEvent: pipe(requireAuth, blockDemoMode, async (parent, { id }) => {
-
 			await actions.del(id)
 			await events.del(id)
 
 			return {
-				success: true
+				success: true,
 			}
-
-		})
-	}
+		}),
+	},
 }

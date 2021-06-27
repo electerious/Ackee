@@ -1,6 +1,6 @@
 .headline {
 
-	margin: 0 0 $gutter/2;
+	margin: 0 0 math.div($gutter, 2);
 	color: $white;
 	font-weight: 400;
 	font-size: 2.2em;
@@ -8,13 +8,13 @@
 	line-height: 1;
 
 	&--medium {
-		margin: 0 0 $gutter/4;
+		margin: 0 0 math.div($gutter, 4);
 		font-size: 1.5em;
 		line-height: 1.2;
 	}
 
 	&--small {
-		margin: 0 0 $gutter/3;
+		margin: 0 0 math.div($gutter, 3);
 		font-size: inherit;
 		line-height: inherit;
 	}

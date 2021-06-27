@@ -11,9 +11,9 @@ const { getStats } = require('./_utils')
 const base = listen(server)
 
 test.before(connectToDatabase)
+test.after.always(disconnectFromDatabase)
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
-test.after.always(disconnectFromDatabase)
 
 const macro = async (t, variables, assertions) => {
 	const limit = variables.limit == null ? '' : `, limit: ${ variables.limit }`
@@ -24,19 +24,19 @@ const macro = async (t, variables, assertions) => {
 		domainId: t.context.domain.id,
 		fragment: `
 			durations(interval: ${ variables.interval }${ limit }) {
-				id
+				value
 				count
 			}
-		`
+		`,
 	})
 
 	assertions(t, statistics.durations)
 }
 
-macro.title = (providedTitle, opts) => `fetch ${ Object.values(opts).join(' and ') } durations`
+macro.title = (providedTitle, options) => `fetch ${ Object.values(options).join(' and ') } durations`
 
 test(macro, {
-	interval: 'DAILY'
+	interval: 'DAILY',
 }, (t, durations) => {
 	t.is(durations.length, 14)
 	t.is(durations[0].count, minute)
@@ -44,14 +44,14 @@ test(macro, {
 
 test(macro, {
 	interval: 'DAILY',
-	limit: 1
+	limit: 1,
 }, (t, durations) => {
 	t.is(durations.length, 1)
 	t.is(durations[0].count, minute)
 })
 
 test(macro, {
-	interval: 'MONTHLY'
+	interval: 'MONTHLY',
 }, (t, durations) => {
 	t.is(durations.length, 14)
 	t.is(durations[0].count, minute)
@@ -59,14 +59,14 @@ test(macro, {
 
 test(macro, {
 	interval: 'MONTHLY',
-	limit: 1
+	limit: 1,
 }, (t, durations) => {
 	t.is(durations.length, 1)
 	t.is(durations[0].count, minute)
 })
 
 test(macro, {
-	interval: 'YEARLY'
+	interval: 'YEARLY',
 }, (t, durations) => {
 	t.is(durations.length, 14)
 	t.is(durations[0].count, minute)
@@ -74,7 +74,7 @@ test(macro, {
 
 test(macro, {
 	interval: 'YEARLY',
-	limit: 1
+	limit: 1,
 }, (t, durations) => {
 	t.is(durations.length, 1)
 	t.is(durations[0].count, minute)

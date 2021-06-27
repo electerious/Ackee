@@ -1,3 +1,6 @@
+// Namespaces -------------------------------------------------- //
+@use 'sass:math';
+
 // Basics ------------------------------------------------------ //
 @import 'vars';
 
@@ -31,7 +34,7 @@
 @import 'linkItem';
 @import 'flexList';
 @import 'emptyState';
-@import 'valueText';
+@import 'valueUnit';
 @import 'favicon';
 @import 'modal';
 @import 'context';
@@ -40,6 +43,7 @@
 @import 'status';
 @import 'facts';
 @import 'tooltip';
+@import 'badge';
 
 // Helpers ----------------------------------------------------- //
 @import 'align';

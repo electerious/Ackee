@@ -1,17 +1,15 @@
 'use strict'
 
 module.exports = (ids) => {
-
 	const stage = {
-		$match: {}
+		$match: {},
 	}
 
 	if (ids != null) {
 		stage.$match.eventId = {
-			$in: ids
+			$in: ids,
 		}
 	}
 
 	return stage
-
 }

@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useRafLoop } from 'react-use'
 import isEqual from 'react-fast-compare'
 
 const getMeasurement = (targetRef, elementRef) => {
-
 	const scrollingBoundingClientRect = document.scrollingElement.getBoundingClientRect()
 	const targetBoundingClientRect = targetRef.current.getBoundingClientRect()
 	const elementBoundingClientRect = elementRef.current.getBoundingClientRect()
@@ -13,12 +12,12 @@ const getMeasurement = (targetRef, elementRef) => {
 		height: scrollingBoundingClientRect.height,
 		relative: {
 			x: scrollingBoundingClientRect.left,
-			y: scrollingBoundingClientRect.top
+			y: scrollingBoundingClientRect.top,
 		},
 		absolute: {
 			x: scrollingBoundingClientRect.left,
-			y: scrollingBoundingClientRect.top
-		}
+			y: scrollingBoundingClientRect.top,
+		},
 	}
 
 	const target = {
@@ -26,33 +25,30 @@ const getMeasurement = (targetRef, elementRef) => {
 		height: targetBoundingClientRect.height,
 		relative: {
 			x: targetBoundingClientRect.left,
-			y: targetBoundingClientRect.top
+			y: targetBoundingClientRect.top,
 		},
 		absolute: {
 			x: targetBoundingClientRect.left + scrollingBoundingClientRect.left * -1,
-			y: targetBoundingClientRect.top + scrollingBoundingClientRect.top * -1
-		}
+			y: targetBoundingClientRect.top + scrollingBoundingClientRect.top * -1,
+		},
 	}
 
 	const element = {
 		width: elementBoundingClientRect.width,
-		height: elementBoundingClientRect.height
+		height: elementBoundingClientRect.height,
 	}
 
 	return {
 		body,
 		target,
-		element
+		element,
 	}
-
 }
 
 export default (targetRef, elementRef) => {
-
 	const [ measurement, setMeasurement ] = useState()
 
 	useRafLoop(() => {
-
 		if (targetRef.current == null) return
 		if (elementRef.current == null) return
 
@@ -62,9 +58,7 @@ export default (targetRef, elementRef) => {
 		if (needsStateUpdate === false) return
 
 		setMeasurement(nextMeasurement)
-
 	}, true)
 
 	return measurement
-
 }

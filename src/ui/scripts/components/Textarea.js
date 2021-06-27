@@ -7,7 +7,6 @@ const copyInput = (e) => {
 }
 
 const Textarea = (props) => {
-
 	const textarea = h('textarea', {
 		className: 'input',
 		id: props.id,
@@ -18,18 +17,17 @@ const Textarea = (props) => {
 		value: props.value,
 		rows: props.rows,
 		onChange: props.onChange,
-		onFocus: props.copyOnFocus === true ? copyInput : undefined
+		onFocus: props.copyOnFocus === true ? copyInput : undefined,
 	})
 
 	if (props.copyOnFocus === true) return (
 		h('div', {
 			className: 'inputMessage',
-			title: 'Copied to clipboard'
+			title: 'Copied to clipboard',
 		}, textarea)
 	)
 
 	return textarea
-
 }
 
 Textarea.propTypes = {
@@ -41,7 +39,7 @@ Textarea.propTypes = {
 	value: PropTypes.string,
 	rows: PropTypes.number,
 	onChange: PropTypes.func,
-	copyOnFocus: PropTypes.bool
+	copyOnFocus: PropTypes.bool,
 }
 
 export default Textarea

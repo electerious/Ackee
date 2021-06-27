@@ -1,0 +1,72 @@
+.badge {
+
+	$height: 28px;
+	$paddingVertical: 1px;
+	$paddingHorizontal: math.div($gutter, 1.5);
+
+	display: grid;
+	gap: math.div($gutter, 3);
+	grid-auto-flow: column;
+	align-items: center;
+	padding: 0 $paddingHorizontal;
+	height: $height+$paddingVertical*2;
+	border-radius: 100px;
+
+	&--with-icon {
+		padding-left: $paddingVertical;
+
+		@media (max-width: 1100px) and (min-width: 901px) {
+			padding-right: $paddingVertical;
+		}
+
+		@media (max-width: 700px) and (min-width: 561px) {
+			padding-right: $paddingVertical;
+		}
+	}
+
+	&--positive {
+		background: rgba($positive, .3);
+		color: $positive;
+	}
+
+	&--negative {
+		background: rgba($negative, .3);
+		color: $negative;
+	}
+
+	&--neutral {
+		background: rgba($light, .3);
+		color: $light;
+	}
+
+	&__icon {
+		$size: $height;
+
+		width: $size;
+		height: $size;
+		fill: currentColor;
+	}
+
+	&--positive &__icon {
+		transform: rotate(-45deg);
+	}
+
+	&--negative &__icon {
+		transform: rotate(45deg);
+	}
+
+	&__value {
+		font-size: .8em;
+	}
+
+	&--with-icon &__value {
+		@media (max-width: 1100px) and (min-width: 901px) {
+			display: none;
+		}
+
+		@media (max-width: 700px) and (min-width: 561px) {
+			display: none;
+		}
+	}
+
+}

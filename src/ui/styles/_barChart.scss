@@ -4,7 +4,7 @@
 	display: grid;
 	grid-auto-flow: column;
 	grid-template-columns: min-content auto;
-	gap: $gutter/2;
+	gap: math.div($gutter, 2);
 	padding-top: $gutter*3.5;
 	height: $cardContentHeight;
 	overflow: hidden;
@@ -20,7 +20,7 @@
 	&__row {
 		position: relative;
 		font-size: .8em;
-		padding: $gutter/2 0;
+		padding: math.div($gutter, 2) 0;
 
 		&--top {
 			transform: translateY(-100%);
@@ -53,8 +53,12 @@
 	&__column {
 		display: flex;
 		align-items: flex-end;
-		padding: 0 $gutter/4;
+		padding: 0 math.div($gutter, 4);
 		width: 100%;
+
+		&:not(.barChart__column--disabled) {
+			cursor: pointer;
+		}
 	}
 
 	&__bar {
