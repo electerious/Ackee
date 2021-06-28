@@ -4,6 +4,7 @@ const { ApolloServer } = require('apollo-server-lambda')
 
 const config = require('./utils/config')
 const connect = require('./utils/connect')
+const domainFqNames = require('./utils/domainFqNames')
 const createApolloServer = require('./utils/createApolloServer')
 const { createServerlessContext } = require('./utils/createContext')
 
@@ -17,14 +18,25 @@ const apolloServer = createApolloServer(ApolloServer, {
 	context: createServerlessContext,
 })
 
-const origin = (() => {
+const origin = ((req, callback) => {
+	if (config.autoOrigin) {
+		domainFqNames().then((d) => callback(req, d))
+			.catch(() => callback(req, false))
+		return
+	}
+
 	if (config.allowOrigin === '*') {
-		return true
+		callback(req, true)
+		return
 	}
 
 	if (config.allowOrigin != null) {
-		return config.allowOrigin.split(',')
+		callback(req, config.allowOrigin.split(','))
+		return
 	}
+
+	callback(req, false)
+	return
 })()
 
 exports.handler = apolloServer.createHandler({
