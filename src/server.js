@@ -69,8 +69,8 @@ const catchError = (fn) => async (req, res) => {
 	}
 }
 
-const attachCorsHeaders = (fn) => (req, res) => {
-	const matchingOrigin = findMatchingOrigin(req, config.allowOrigin)
+const attachCorsHeaders = (fn) => async (req, res) => {
+	const matchingOrigin = await findMatchingOrigin(req, config.allowOrigin, config.autoOrigin)
 
 	if (matchingOrigin != null) {
 		res.setHeader('Access-Control-Allow-Origin', matchingOrigin)
@@ -79,7 +79,7 @@ const attachCorsHeaders = (fn) => (req, res) => {
 		res.setHeader('Access-Control-Allow-Credentials', 'true')
 	}
 
-	return fn(req, res)
+	return await fn(req, res)
 }
 
 const notFound = (req) => {
