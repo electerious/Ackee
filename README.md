@@ -96,6 +96,7 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress plugin for Ackee
 - [svelte-ackee](https://github.com/gaia-green-tech/svelte-ackee) - Svelte module for Ackee
 - [ackee_dart](https://github.com/marchellodev/ackee_dart) - Ackee plugin for Dart/Flutter ([pub.dev](https://pub.dev/packages/ackee_dart))
+- [ackee-tracker-consent](https://www.npmjs.com/package/ackee-tracker-consent) - A consent banner to activate detailed tracking on Ackee
 
 
 ### Links
