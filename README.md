@@ -98,7 +98,6 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [ackee_dart](https://github.com/marchellodev/ackee_dart) - Ackee plugin for Dart/Flutter ([pub.dev](https://pub.dev/packages/ackee_dart))
 - [ackee-tracker-consent](https://www.npmjs.com/package/ackee-tracker-consent) - A consent banner to activate detailed tracking on Ackee
 
-
 ### Links
 
 - [Follow Ackee on Twitter](https://twitter.com/getackee)
