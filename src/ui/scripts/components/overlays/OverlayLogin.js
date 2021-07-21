@@ -1,4 +1,4 @@
-import { createElement as h, useEffect, useRef } from 'react'
+import { createElement as h } from 'react'
 import PropTypes from 'prop-types'
 
 import { homepage } from '../../../../../package.json'
@@ -35,12 +35,12 @@ const OverlayLogin = (props) => {
 	}
 
 	// If in anonymous mode go ahead and generate the token and then close this modal
-	const createAnonymousToken = async (e) => {
+	const createAnonymousToken = async () => {
 		const { data } = await createToken.mutate({
 			variables: {
 				input: {
 					username: 'anonymous',
-					password: 'anonymous'
+					password: 'anonymous',
 				},
 			},
 		})
