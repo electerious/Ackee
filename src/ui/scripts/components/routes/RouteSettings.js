@@ -69,16 +69,24 @@ const RouteSettings = (props) => {
 	const eventsItems = createItems(events.value, showEventEditModal, showEventAddModal, 'New event')
 	const permanentTokensItems = createItems(permanentTokens.value, showPermanentTokenEditModal, showPermanentTokenAddModal, 'New permanent token')
 
+	const accountCard = window.env.isAnonymousMode ?
+		h(CardSetting, {
+			headline: 'Account',
+		},
+			h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
+		) :
+		h(CardSetting, {
+			headline: 'Account',
+		},
+			h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
+			h(Line),
+			h(LinkItem, { type: 'button', onClick: onSignOut }, 'Sign Out'),
+		)
+
 	return (
 		h(Fragment, {},
 
-			h(CardSetting, {
-				headline: 'Account',
-			},
-				h(LinkItem, { type: 'p', disabled: true, text: version }, 'Version'),
-				h(Line),
-				h(LinkItem, { type: 'button', onClick: onSignOut }, 'Sign Out'),
-			),
+			accountCard,
 
 			h(CardSetting, {
 				headline: 'Domains',

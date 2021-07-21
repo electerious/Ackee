@@ -14,13 +14,16 @@ const response = (entry) => ({
 module.exports = {
 	Mutation: {
 		createToken: async (parent, { input }, { setCookies }) => {
-			const { username, password } = input
+			// If anonymous mode then skip checking for a username and password and just make the token
+			if (!config.isAnonymousMode) {
+				const { username, password } = input
 
-			if (config.username == null) throw new KnownError('Ackee username missing in environment')
-			if (config.password == null) throw new KnownError('Ackee username missing in environment')
+				if (config.username == null) throw new KnownError('Ackee username missing in environment')
+				if (config.password == null) throw new KnownError('Ackee username missing in environment')
 
-			if (username !== config.username) throw new KnownError('Username or password incorrect')
-			if (password !== config.password) throw new KnownError('Username or password incorrect')
+				if (username !== config.username) throw new KnownError('Username or password incorrect')
+				if (password !== config.password) throw new KnownError('Username or password incorrect')
+			}
 
 			const entry = await tokens.add()
 
