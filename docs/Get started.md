@@ -288,7 +288,7 @@ Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` and `ACK
 
 - You need to have a MongoDB instance running (e.g. [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 - Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#platforms-as-a-service-configuration)
-- Have the [Koyeb CLI]([https://](https://github.com/koyeb/koyeb-cli) installed which is the fastest way to deploy Ackee
+- Have the [Koyeb CLI](https://www.koyeb.com/docs/cli/installation) installed which is the fastest way to deploy Ackee
 
 ### 2. Deploy Ackee
 
