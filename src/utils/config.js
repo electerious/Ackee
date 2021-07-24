@@ -16,6 +16,7 @@ module.exports = new Proxy({}, {
 			isDemoMode: process.env.ACKEE_DEMO === 'true',
 			isDevelopmentMode: process.env.NODE_ENV === 'development',
 			isPreBuildMode: process.env.BUILD_ENV === 'pre',
+			isAnonymousMode: process.env.ACKEE_ANONYMOUS,
 		}
 
 		return data[prop]

@@ -31,6 +31,10 @@ connect(config.dbUrl).then(() => {
 	if (config.isDemoMode === true) {
 		signale.info('Demo mode enabled')
 	}
+
+	if (config.isAnonymousMode === true) {
+		signale.info('Anonymous mode enabled')
+	}
 })
 	.catch((error) => {
 		signale.fatal(error)

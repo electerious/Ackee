@@ -32,6 +32,10 @@
     "ACKEE_TRACKER": {
       "description": "Specifies a custom name for the tracking script (Default: tracker.js)",
       "required": false
+    },
+    "ACKEE_ANONYMOUS": {
+      "description": "When set to true, allows users to view the Ackee UI without a username and password",
+      "required": false
     }
   }
 }
