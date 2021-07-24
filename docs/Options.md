@@ -46,6 +46,14 @@ ACKEE_USERNAME=username
 ACKEE_PASSWORD=password
 ```
 
+## Anonymous Mode
+
+When set to `true`, allows users to access the Ackee UI without a username or password.
+
+```
+ACKEE_ANONYMOUS=true
+```
+
 ## TTL
 
 Specifies how long a generated token is valid. Defaults to `3600000` (1 day).
