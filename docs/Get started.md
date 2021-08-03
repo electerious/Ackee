@@ -275,6 +275,6 @@ Once your deploy has finished, you are ready to start using Ackee! Visit the URL
 
 You can use the [Railway](https://railway.app/) button for a one-click deployment and have Ackee running within minutes.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2Frailwayapp%2Fexamples%2Ftree%2Fmaster%2Fexamples%2Fackee&plugins=mongodb&envs=ACKEE_USERNAME%2CACKEE_PASSWORD)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/starters/ackee)
 
 Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables. Once you do that, everything should just work on it's own. Railway will automatically provision the MongoDB database for you and also link it to your Ackee deployment!
