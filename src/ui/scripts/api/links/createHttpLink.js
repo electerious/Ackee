@@ -4,7 +4,7 @@ import userTimeZone from '../../../../utils/timeZone'
 
 export default () => {
 	return new BatchHttpLink({
-		uri: '/api',
+		uri: '/analytics/api',
 		headers: {
 			'Time-Zone': userTimeZone,
 		},
