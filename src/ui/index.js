@@ -29,7 +29,7 @@ const scripts = () => {
 	return js(filePath, {
 		optimize: config.isDevelopmentMode === false,
 		nodeGlobals: config.isDevelopmentMode === true,
-		replace: { 'process.env.NODE_ENV': JSON.stringify(config.isDevelopmentMode === true ? 'development' : 'production') },
+		replace: { 'process.env.NODE_ENV': JSON.stringify(config.isDevelopmentMode === true ? 'development' : 'production'), 'process.env.BASE_URL': config.baseUrl },
 		babel: false,
 	})
 }
