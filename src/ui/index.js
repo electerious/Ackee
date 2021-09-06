@@ -9,7 +9,7 @@ const customTracker = require('../utils/customTracker')
 const signale = require('../utils/signale')
 
 const index = () => {
-	return layout('<div id="main"></div>', '/analytics/favicon.ico', [ '/analytics/index.css' ], [ '/analytics/index.js' ], {
+	return layout('<div id="main"></div>', `${ config.baseUrl }/favicon.ico`, [ `${ config.baseUrl }/index.css` ], [ `${ config.baseUrl }/index.js` ], {
 		isDemoMode: config.isDemoMode,
 		customTracker,
 	})
