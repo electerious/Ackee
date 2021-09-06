@@ -91,3 +91,15 @@ Setting a wildcard (`*`) is also supported, but not recommended. It's neither a 
 ```
 ACKEE_ALLOW_ORIGIN="*"
 ```
+
+## Base URL
+
+As an alternative to masking with a reverse proxy, you can use the base URL environment variable like so
+
+```
+BASE_URL=/ackee
+```
+
+Because when Ackee builds the index.html it needs to know where to retrieve index.js, style.css etc. from, base URL allows you to serve Ackee on a route other than index.
+
+Note, that because `dist` is already built when you clone the repo, you'll need to run `npm run build:pre` and rebuild the entire dist rather than just the index. This is particularly important because the route on which index.js is served, is also the route to which you will want to post API requests e.g. `/ackee/api`.
