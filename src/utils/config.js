@@ -10,6 +10,7 @@ module.exports = new Proxy({}, {
 			ttl: process.env.ACKEE_TTL || day,
 			port: process.env.ACKEE_PORT || process.env.PORT || 3000,
 			dbUrl: process.env.ACKEE_MONGODB || process.env.MONGODB_URI,
+			baseUrl: process.env.BASE_URL || '',
 			allowOrigin: process.env.ACKEE_ALLOW_ORIGIN,
 			username: process.env.ACKEE_USERNAME,
 			password: process.env.ACKEE_PASSWORD,

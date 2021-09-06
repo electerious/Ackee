@@ -9,7 +9,7 @@ const customTracker = require('../utils/customTracker')
 const signale = require('../utils/signale')
 
 const index = () => {
-	return layout('<div id="main"></div>', 'favicon.ico', [ 'index.css' ], [ 'index.js' ], {
+	return layout('<div id="main"></div>', `${ config.baseUrl }/favicon.ico`, [ `${ config.baseUrl }/index.css` ], [ `${ config.baseUrl }/index.js` ], {
 		isDemoMode: config.isDemoMode,
 		customTracker,
 	})
@@ -29,7 +29,7 @@ const scripts = () => {
 	return js(filePath, {
 		optimize: config.isDevelopmentMode === false,
 		nodeGlobals: config.isDevelopmentMode === true,
-		replace: { 'process.env.NODE_ENV': JSON.stringify(config.isDevelopmentMode === true ? 'development' : 'production') },
+		replace: { 'process.env.NODE_ENV': JSON.stringify(config.isDevelopmentMode === true ? 'development' : 'production'), 'process.env.BASE_URL': config.baseUrl },
 		babel: false,
 	})
 }
