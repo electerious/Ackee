@@ -14,10 +14,10 @@ const connect = require('../../src/utils/connect')
 const createArray = require('../../src/utils/createArray')
 const { day, minute } = require('../../src/utils/times')
 
-const mongoDb = new MongoMemoryServer()
+const mongoDb = MongoMemoryServer.create()
 
 const connectToDatabase = async () => {
-	const dbUrl = await mongoDb.getUri()
+	const dbUrl = (await mongoDb).getUri()
 	return connect(dbUrl)
 }
 
@@ -74,9 +74,9 @@ const cleanupDatabase = async (t) => {
 	})
 }
 
-const disconnectFromDatabase = () => {
+const disconnectFromDatabase = async () => {
 	mongoose.disconnect()
-	mongoDb.stop()
+	;(await mongoDb).stop()
 }
 
 const api = async (base, body, token, headers = {}) => {

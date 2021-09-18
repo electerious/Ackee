@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - Switch to official Node.js Docker image
+- Updated dependencies, including mongoose (thanks @suda, #291)
 
 ## [3.1.1] - 2021-06-27
 
