@@ -6,7 +6,7 @@ WORKDIR /srv/app/
 # Add dependencies first so that Docker can use the cache as long as the dependencies stay unchanged
 
 COPY package.json yarn.lock /srv/app/
-RUN yarn install --production --frozen-lockfile
+RUN yarn install --production --frozen-lockfile --network-timeout 120000
 
 # Copy source after the dependency step as it's more likely that the source changes
 

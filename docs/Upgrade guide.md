@@ -6,7 +6,7 @@
 
 > This change is relevant for you when using a wildcard as the Access-Control-Allow-Origin.
 
-Using a wildcard (`*`) for the `Access-Control-Allow-Origin` header was never recommended as it's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if you're currently using a wildcard. The [SSL and HTTPS](docs/SSL%20and%20HTTPS.md) guide contains better alternatives.
+Using a wildcard (`*`) for the `Access-Control-Allow-Origin` header was never recommended as it's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if you're currently using a wildcard. The [SSL and HTTPS](SSL%20and%20HTTPS.md) guide contains better alternatives.
 
 `ignoreOwnVisits` is now enabled by default and won't work when using a wildcard.
 
@@ -14,7 +14,7 @@ Using a wildcard (`*`) for the `Access-Control-Allow-Origin` header was never re
 
 > This change is relevant for everyone.
 
-Ackee requires [a new `Access-Control-Allow-Credentials` header](docs/CORS%20headers.md#credentials) which was previously optional. Make sure to add this header in your server or reverse proxy configuration.
+Ackee requires [a new `Access-Control-Allow-Credentials` header](CORS%20headers.md#credentials) which was previously optional. Make sure to add this header in your server or reverse proxy configuration.
 
 ### ackee-tracker with new `.create` and `.record` syntax
 
@@ -32,4 +32,4 @@ A new parameter is required when requesting referrers via the GraphQL API. The p
 
 > This change is relevant for you when using the GraphQL API.
 
-The `id` of requested referrers was always a URL, but has been changed to a string. That's because [referrers can now include parameters](docs/Enhancing%20referrers.md) (e.g. `source` when using `ackee-tracker`).
+The `id` of requested referrers was always a URL, but has been changed to a string. That's because [referrers can now include parameters](Enhancing%20referrers.md) (e.g. `source` when using `ackee-tracker`).
