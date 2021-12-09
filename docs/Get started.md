@@ -129,7 +129,7 @@ Ackee dependents on …
 
 - [Node.js](https://nodejs.org/en/) (v14 or newer)
 - [yarn](https://yarnpkg.com/en/)
-- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
+- [MongoDB](https://www.mongodb.com) (v4.4 or newer)
 
 Make sure to install and update all dependencies before you continue. The installation instructions for the individual dependencies can be found on the linked websites.
 
