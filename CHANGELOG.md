@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Support for Node.js 17 (#302)
 
+### Changed
+
+- MongoDB 4.4 or newer is now required, but older versions still may work
+
 ## [3.3.0] - 2021-12-04
 
 ### Added
