@@ -82,6 +82,10 @@ const attachCorsHeaders = (fn) => (req, res) => {
 	return fn(req, res)
 }
 
+const awaitedHandler = (fn) => async (req, res) => {
+	return (await fn)(req, res)
+}
+
 const notFound = (req) => {
 	const error = new Error(`\`${ req.url }\` not found`)
 
@@ -94,7 +98,9 @@ const apolloServer = createApolloServer(ApolloServer, {
 })
 
 const graphqlPath = '/api'
-const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
+const apolloHandler = apolloServer
+	.start()
+	.then(() => apolloServer.createHandler({ path: graphqlPath }))
 
 const routes = [
 
@@ -127,9 +133,9 @@ const routes = [
 		res.end(await tracker)
 	}) : undefined,
 
-	post(graphqlPath, graphqlHandler),
-	get(graphqlPath, graphqlHandler),
-	get('/.well-known/apollo/server-health', graphqlHandler),
+	post(graphqlPath, awaitedHandler(apolloHandler)),
+	get(graphqlPath, awaitedHandler(apolloHandler)),
+	get('/.well-known/apollo/server-health', awaitedHandler(apolloHandler)),
 
 	get('/*', notFound),
 	post('/*', notFound),

@@ -1,5 +1,9 @@
 'use strict'
 
+const {
+	ApolloServerPluginLandingPageGraphQLPlayground: apolloServerPluginLandingPageGraphQLPlayground,
+	ApolloServerPluginLandingPageDisabled: apolloServerPluginLandingPageDisabled,
+} = require('apollo-server-core')
 const httpHeadersPlugin = require('apollo-server-plugin-http-headers')
 const {
 	UnsignedIntResolver,
@@ -18,6 +22,9 @@ module.exports = (ApolloServer, options) => new ApolloServer({
 	debug: config.isDevelopmentMode === true,
 	plugins: [
 		httpHeadersPlugin,
+		(config.isDemoMode === true || config.isDevelopmentMode === true) ?
+			apolloServerPluginLandingPageGraphQLPlayground() :
+			apolloServerPluginLandingPageDisabled(),
 	],
 	typeDefs: [
 		UnsignedIntTypeDefinition,
