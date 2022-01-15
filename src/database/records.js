@@ -69,9 +69,9 @@ const update = async (id) => {
 	)
 }
 
-const anonymize = async (clientId, ignoreId) => {
+const anonymize = (clientId, ignoreId) => {
 	// Don't return anything about the update
-	await Record.updateMany({
+	return Record.updateMany({
 		$and: [
 			{ clientId },
 			{
@@ -81,19 +81,19 @@ const anonymize = async (clientId, ignoreId) => {
 			},
 		],
 	}, {
-		clientId: undefined,
-		siteLanguage: undefined,
-		screenWidth: undefined,
-		screenHeight: undefined,
-		screenColorDepth: undefined,
-		deviceName: undefined,
-		deviceManufacturer: undefined,
-		osName: undefined,
-		osVersion: undefined,
-		browserName: undefined,
-		browserVersion: undefined,
-		browserWidth: undefined,
-		browserHeight: undefined,
+		clientId: null,
+		siteLanguage: null,
+		screenWidth: null,
+		screenHeight: null,
+		screenColorDepth: null,
+		deviceName: null,
+		deviceManufacturer: null,
+		osName: null,
+		osVersion: null,
+		browserName: null,
+		browserVersion: null,
+		browserWidth: null,
+		browserHeight: null,
 	})
 }
 

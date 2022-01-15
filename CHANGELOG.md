@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - MongoDB 4.4 or newer is now required, but older versions still may work
 
+### Fixed
+
+- Unique visitor count and anonymisation (#304)
+
 ## [3.3.0] - 2021-12-04
 
 ### Added
