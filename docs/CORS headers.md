@@ -68,17 +68,17 @@ If you are running Ackee on a platform which handles SSL for you, you may want a
 As an environment variable, you will need to set:
 
 ```
-ACKEE_ALLOW_ORIGIN="https://example.com"
+ACKEE_ALLOW_ORIGIN=https://example.com
 ```
 
 *or*
 
 ```
-ACKEE_ALLOW_ORIGIN="https://example.com,https://one.example.com,https://two.example.com"
+ACKEE_ALLOW_ORIGIN=https://example.com,https://one.example.com,https://two.example.com
 ```
 
 Setting a wildcard (`*`) is also supported, but not recommended. It's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if using a wildcard is the only option for you.
 
 ```
-ACKEE_ALLOW_ORIGIN="*"
+ACKEE_ALLOW_ORIGIN=*
 ```
