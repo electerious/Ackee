@@ -99,6 +99,4 @@ Change the url path at which Ackee listens. You can use this in conjunction with
 ACKEE_BASEURL=/ackee
 ```
 
-*Do not add a trailing `/`. Ackee will be available at `example.com/ackee/`.*
-
-*You might want to use your reverse proxy to redirect `/ackee` to `/ackee/`.*
+*Do not add a trailing `/`.*

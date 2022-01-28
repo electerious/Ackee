@@ -126,6 +126,11 @@ const routes = [
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}) : undefined,
+	config.baseUrl !== '' ? get(config.baseUrl, (req, res) => {
+		res.statusCode = 302
+		res.setHeader('Location', `${ config.baseUrl }/`)
+		res.end()
+	}) : undefined,
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),
