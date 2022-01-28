@@ -93,32 +93,32 @@ const apolloServer = createApolloServer(ApolloServer, {
 	context: createMicroContext,
 })
 
-const graphqlPath = '/api'
+const graphqlPath = `${ config.baseUrl }/api`
 const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
 
 const routes = [
 
-	get('/', async (req, res) => {
+	get(`${ config.baseUrl }/`, async (req, res) => {
 		res.setHeader('Content-Type', 'text/html; charset=utf-8')
 		res.end(await index)
 	}),
-	get('/index.html', async (req, res) => {
+	get(`${ config.baseUrl }/index.html`, async (req, res) => {
 		res.setHeader('Content-Type', 'text/html; charset=utf-8')
 		res.end(await index)
 	}),
-	get('/favicon.ico', async (req, res) => {
+	get(`${ config.baseUrl }/favicon.ico`, async (req, res) => {
 		res.setHeader('Content-Type', 'image/vnd.microsoft.icon')
 		res.end(await favicon)
 	}),
-	get('/index.css', async (req, res) => {
+	get(`${ config.baseUrl }/index.css`, async (req, res) => {
 		res.setHeader('Content-Type', 'text/css; charset=utf-8')
 		res.end(await styles)
 	}),
-	get('/index.js', async (req, res) => {
+	get(`${ config.baseUrl }/index.js`, async (req, res) => {
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await scripts)
 	}),
-	get('/tracker.js', async (req, res) => {
+	get(`${ config.baseUrl }/tracker.js`, async (req, res) => {
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}),
@@ -126,10 +126,15 @@ const routes = [
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}) : undefined,
+	config.baseUrl !== '' ? get(config.baseUrl, (req, res) => {
+		res.statusCode = 302
+		res.setHeader('Location', `${ config.baseUrl }/`)
+		res.end()
+	}) : undefined,
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),
-	get('/.well-known/apollo/server-health', graphqlHandler),
+	get(`${ config.baseUrl }/.well-known/apollo/server-health`, graphqlHandler),
 
 	get('/*', notFound),
 	post('/*', notFound),

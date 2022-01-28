@@ -91,3 +91,12 @@ Setting a wildcard (`*`) is also supported, but not recommended. It's neither a 
 ```
 ACKEE_ALLOW_ORIGIN="*"
 ```
+
+## Base url
+Change the url path at which Ackee listens. You can use this in conjunction with a reverse proxy like nginx or traefik to publish ackee on `https://example.com/ackee/` instead of `https://ackee.example.com/`
+
+```
+ACKEE_BASEURL=/ackee
+```
+
+*Do not add a trailing `/`.*

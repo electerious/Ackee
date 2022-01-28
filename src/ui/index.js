@@ -6,12 +6,14 @@ const { writeFile, readFile } = require('fs').promises
 const layout = require('../utils/layout')
 const config = require('../utils/config')
 const customTracker = require('../utils/customTracker')
+const baseUrl = require('../utils/baseUrl')
 const signale = require('../utils/signale')
 
 const index = () => {
 	return layout('<div id="main"></div>', 'favicon.ico', [ 'index.css' ], [ 'index.js' ], {
 		isDemoMode: config.isDemoMode,
 		customTracker,
+		baseUrl,
 	})
 }
 
