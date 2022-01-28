@@ -44,9 +44,9 @@ const ModalDomainEdit = (props) => {
 	const idId = shortId()
 	const embedId = shortId()
 
-	const trackerUrl = window.env.customTracker.url || '/tracker.js'
+	const trackerUrl = window.env.customTracker.url || `${ decodeURIComponent(window.env.baseUrl.url) }/tracker.js`
 	const srcUrl = (new URL(trackerUrl, location.href)).href
-	const serverUrl = location.origin
+	const serverUrl = `${ location.origin }${ decodeURIComponent(window.env.baseUrl.url) }`
 
 	return (
 		h('form', { className: 'card', onSubmit },
