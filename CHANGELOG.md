@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 - Support for Node.js 17 (#302)
 - Cache preflight requests (via `Access-Control-Max-Age`) (#261)
+- Automatically add CORS headers for domains that have fully qualified domain names as titles ([`ACKEE_AUTO_ORIGIN`](docs/Options.md)) (#271)
 
 ### Changed
 
