@@ -28,7 +28,7 @@ test('return cors headers for domain with fully qualifed domain name', async (t)
 	const origin = 'fqdn.example.com'
 
 	const restore = mockedEnv({
-		ACKEE_AUTO_FQDN_ORIGIN: 'true',
+		ACKEE_AUTO_ORIGIN: 'true',
 	})
 
 	const { headers } = await fetch(url.href, { headers: { Host: origin } })
@@ -41,12 +41,12 @@ test('return cors headers for domain with fully qualifed domain name', async (t)
 	restore()
 })
 
-test('do not return cors headers for domain that is not an fqdn', async (t) => {
+test('do not return cors headers for domain that is not a fully qualified domain name', async (t) => {
 	const url = new URL('/api', await base)
 	const origin = 'not-an-fqdn'
 
 	const restore = mockedEnv({
-		ACKEE_AUTO_FQDN_ORIGIN: 'true',
+		ACKEE_AUTO_ORIGIN: 'true',
 	})
 
 	const { headers } = await fetch(url.href, { headers: { Host: origin } })

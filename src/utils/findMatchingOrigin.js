@@ -1,14 +1,21 @@
 'use strict'
 
-const domainFqNames = require('./domainFqNames')
+const fullyQualifiedDomainNames = require('./fullyQualifiedDomainNames')
+
+const findOrigin = (req, origins) => {
+	return origins.find((origin) => origin.includes(req.headers.origin) || origin.includes(req.headers.host))
+}
 
 module.exports = async (req, allowedOrigins, autoOrigin) => {
-	const allowedDomains = autoOrigin === true ? (await domainFqNames()).join(',') : allowedOrigins
+	if (autoOrigin === true) {
+		const origins = await fullyQualifiedDomainNames()
+		return findOrigin(req, origins)
+	}
 
-	if (allowedDomains === '*') return '*'
+	if (allowedOrigins === '*') return '*'
 
-	if (allowedDomains != null) {
-		const origins = allowedDomains.split(',')
-		return origins.find((origin) => origin.includes(req.headers.origin) || origin.includes(req.headers.host))
+	if (allowedOrigins != null) {
+		const origins = allowedOrigins.split(',')
+		return findOrigin(req, origins)
 	}
 }

@@ -4,7 +4,7 @@ const { ApolloServer } = require('apollo-server-lambda')
 
 const config = require('./utils/config')
 const connect = require('./utils/connect')
-const domainFqNames = require('./utils/domainFqNames')
+const fullyQualifiedDomainNames = require('./utils/fullyQualifiedDomainNames')
 const createApolloServer = require('./utils/createApolloServer')
 const { createServerlessContext } = require('./utils/createContext')
 
@@ -20,8 +20,8 @@ const apolloServer = createApolloServer(ApolloServer, {
 
 const origin = ((req, callback) => {
 	if (config.autoOrigin === true) {
-		domainFqNames()
-			.then((title) => callback(null, title))
+		fullyQualifiedDomainNames()
+			.then((names) => callback(null, names))
 			.catch((error) => callback(error, false))
 		return
 	}

@@ -92,8 +92,8 @@ Setting a wildcard (`*`) is also supported, but not recommended. It's neither a 
 ACKEE_ALLOW_ORIGIN=*
 ```
 
-As opposed to manually configuring CORS domains, you can also automatically add CORS Headers for domains in the domain list that have [fully qualified domain names](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) as a title. To achieve this, set:
+As opposed to manually configuring CORS domains, you can also automatically add CORS Headers for domains in the domain list that have a [fully qualified domain name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) as a title. To achieve this, set:
 
 ```
-ACKEE_AUTO_FQDN_ORIGIN=true
+ACKEE_AUTO_ORIGIN=true
 ```
