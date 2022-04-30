@@ -40,13 +40,21 @@ const origin = ((req, callback) => {
 	return
 })()
 
-exports.handler = apolloServer.createHandler({
-	expressGetMiddlewareOptions: {
-		cors: {
-			origin,
-			credentials: true,
-			methods: 'GET,POST,PATCH,OPTIONS',
-			allowedHeaders: 'Content-Type, Authorization, Time-Zone',
+exports.handler = (event, context) => {
+	// Set request context which is missing on Vercel
+	// https://stackoverflow.com/questions/71360059/apollo-server-lambda-unable-to-determine-event-source-based-on-event
+	if (event.requestContext == null) event.requestContext = context
+
+	const handler = apolloServer.createHandler({
+		expressGetMiddlewareOptions: {
+			cors: {
+				origin,
+				credentials: true,
+				methods: 'GET,POST,PATCH,OPTIONS',
+				allowedHeaders: 'Content-Type, Authorization, Time-Zone',
+			},
 		},
-	},
-})
+	})
+
+	return handler(event, context)
+}
