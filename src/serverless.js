@@ -18,7 +18,7 @@ const apolloServer = createApolloServer(ApolloServer, {
 	context: createServerlessContext,
 })
 
-const origin = ((req, callback) => {
+const origin = (origin, callback) => {
 	if (config.autoOrigin === true) {
 		fullyQualifiedDomainNames()
 			.then((names) => callback(null, names))
@@ -38,7 +38,7 @@ const origin = ((req, callback) => {
 
 	callback(null, false)
 	return
-})()
+}
 
 exports.handler = (event, context) => {
 	// Set request context which is missing on Vercel
