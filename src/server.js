@@ -122,7 +122,7 @@ const routes = [
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}),
-	customTracker.exists === true ? get(customTracker.url, async (req, res) => {
+	customTracker.exists === true ? get(`${ config.baseUrl }${ customTracker.url }`, async (req, res) => {
 		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
 		res.end(await tracker)
 	}) : undefined,
