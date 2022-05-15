@@ -1,6 +1,6 @@
 'use strict'
 
-const { mergeTypeDefs } = require('graphql-tools')
+const { mergeTypeDefs } = require('@graphql-tools/merge')
 
 module.exports = mergeTypeDefs([
 	require('./tokens'),

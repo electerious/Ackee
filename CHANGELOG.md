@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2022-05-15
+
+### Added
+
+- Support for Node.js 17 (#302)
+- Cache preflight requests (via `Access-Control-Max-Age`) (#261)
+- Automatically add CORS headers for domains that have fully qualified domain names as titles ([`ACKEE_AUTO_ORIGIN`](docs/Options.md)) (#271)
+
+### Changed
+
+- MongoDB 4.4 or newer is now required, but older versions still may work
+
 ## [3.3.1] - 2022-01-16
 
 You will see a lower unique visitor count after updating. This release contains a fix for the unique visitor count and anonymisation that was broken since 3.2.0. The recorded visits were still anonymous, but Ackee tracked the visit path of each visitor. Data that Ackee normally removes. Data tracked since 3.2.0 are all counted as unique, even if they were not.

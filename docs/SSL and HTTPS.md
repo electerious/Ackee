@@ -80,6 +80,7 @@ server {
         add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
         add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
         add_header          Access-Control-Allow-Credentials "true" always;
+        add_header          Access-Control-Max-Age "3600" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
         proxy_pass          http://localhost:3000;
@@ -116,6 +117,7 @@ server {
         add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
         add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
         add_header          Access-Control-Allow-Credentials "true" always;
+        add_header          Access-Control-Max-Age "3600" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
         proxy_pass          http://localhost:3000;
@@ -149,6 +151,7 @@ server {
         add_header          Access-Control-Allow-Origin "*" always;
         add_header          Access-Control-Allow-Methods "GET, POST, PATCH, OPTIONS" always;
         add_header          Access-Control-Allow-Headers "Content-Type, Authorization, Time-Zone" always;
+        add_header          Access-Control-Max-Age "3600" always;
         add_header          Strict-Transport-Security "max-age=31536000" always;
         add_header          X-Frame-Options deny;
         proxy_pass          http://localhost:3000;

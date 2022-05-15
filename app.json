@@ -25,6 +25,10 @@
       "description": "Tracked domains which will be used on Ackee (CORS headers)",
       "required": true
     },
+    "ACKEE_AUTO_ORIGIN": {
+      "description": "Automatically add CORS headers for domains with fully qualified domain names as titles",
+      "required": false
+    },
     "ACKEE_TTL": {
       "description": "Specifies how long an Ackee TTL token is valid (Default: 3600000)",
       "required": false

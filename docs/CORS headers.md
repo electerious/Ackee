@@ -16,6 +16,7 @@ Access-Control-Allow-Origin: https://example.com
 Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
 Access-Control-Allow-Headers: Content-Type, Authorization, Time-Zone
 Access-Control-Allow-Credentials: true
+Access-Control-Max-Age: 3600
 ```
 
 ### Origin
@@ -52,6 +53,14 @@ The `Access-Control-Allow-Credentials` header tells the browser to include the `
 Access-Control-Allow-Credentials: true
 ```
 
+### Max-Age
+
+The `Access-Control-Max-Age` header tells the browser that all `Access-Control-Allow-*` headers can be cached for one hour. This minimizes the amount of preflight requests.
+
+```
+Access-Control-Max-Age: 3600
+```
+
 ## Platforms-As-A-Service configuration
 
 If you are running Ackee on a platform which handles SSL for you, you may want a quick solution for setting CORS headers instead of using a [reverse proxy](SSL%20and%20HTTPS.md).
@@ -59,17 +68,17 @@ If you are running Ackee on a platform which handles SSL for you, you may want a
 As an environment variable, you will need to set:
 
 ```
-ACKEE_ALLOW_ORIGIN="https://example.com"
+ACKEE_ALLOW_ORIGIN=https://example.com
 ```
 
 *or*
 
 ```
-ACKEE_ALLOW_ORIGIN="https://example.com,https://one.example.com,https://two.example.com"
+ACKEE_ALLOW_ORIGIN=https://example.com,https://one.example.com,https://two.example.com
 ```
 
 Setting a wildcard (`*`) is also supported, but not recommended. It's neither a secure solution nor does it allow Ackee to ignore your own visits. Please disable the `ignoreOwnVisits` option in ackee-tracker if using a wildcard is the only option for you.
 
 ```
-ACKEE_ALLOW_ORIGIN="*"
+ACKEE_ALLOW_ORIGIN=*
 ```

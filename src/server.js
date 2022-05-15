@@ -69,17 +69,22 @@ const catchError = (fn) => async (req, res) => {
 	}
 }
 
-const attachCorsHeaders = (fn) => (req, res) => {
-	const matchingOrigin = findMatchingOrigin(req, config.allowOrigin)
+const attachCorsHeaders = (fn) => async (req, res) => {
+	const matchingOrigin = await findMatchingOrigin(req, config.allowOrigin, config.autoOrigin)
 
 	if (matchingOrigin != null) {
 		res.setHeader('Access-Control-Allow-Origin', matchingOrigin)
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
 		res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Time-Zone')
 		res.setHeader('Access-Control-Allow-Credentials', 'true')
+		res.setHeader('Access-Control-Max-Age', '3600')
 	}
 
 	return fn(req, res)
+}
+
+const awaitedHandler = (fn) => async (req, res) => {
+	return (await fn)(req, res)
 }
 
 const notFound = (req) => {
@@ -94,7 +99,9 @@ const apolloServer = createApolloServer(ApolloServer, {
 })
 
 const graphqlPath = '/api'
-const graphqlHandler = apolloServer.createHandler({ path: graphqlPath })
+const apolloHandler = apolloServer
+	.start()
+	.then(() => apolloServer.createHandler({ path: graphqlPath }))
 
 const routes = [
 
@@ -127,9 +134,9 @@ const routes = [
 		res.end(await tracker)
 	}) : undefined,
 
-	post(graphqlPath, graphqlHandler),
-	get(graphqlPath, graphqlHandler),
-	get('/.well-known/apollo/server-health', graphqlHandler),
+	post(graphqlPath, awaitedHandler(apolloHandler)),
+	get(graphqlPath, awaitedHandler(apolloHandler)),
+	get('/.well-known/apollo/server-health', awaitedHandler(apolloHandler)),
 
 	get('/*', notFound),
 	post('/*', notFound),

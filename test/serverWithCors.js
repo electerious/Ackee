@@ -22,6 +22,7 @@ test('return cors headers if env var specifies one', async (t) => {
 	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
 	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type, Authorization, Time-Zone')
 	t.is(headers.get('Access-Control-Allow-Credentials'), 'true')
+	t.is(headers.get('Access-Control-Max-Age'), '3600')
 
 	restore()
 })
