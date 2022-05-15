@@ -13,7 +13,7 @@ if (config.dbUrl == null) {
 	process.exit(1)
 }
 
-server.on('listening', () => signale.watch(`Listening on http://localhost:${ config.port }`))
+server.on('listening', () => signale.watch(`Listening on http://localhost:${ config.port }${ config.baseUrl }`))
 server.on('error', (error) => signale.fatal(error))
 
 signale.await(`Connecting to ${ stripUrlAuth(config.dbUrl) }`)
