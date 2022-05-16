@@ -59,5 +59,7 @@ exports.handler = (event, context) => {
 		},
 	})
 
-	return handler(event, context)
+	const response = handler(event, context)
+	response.then((value) => console.log('Response', value))
+	return response
 }
