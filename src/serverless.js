@@ -21,10 +21,13 @@ const apolloServer = createApolloServer(ApolloServer, {
 const origin = (origin, callback) => {
 	if (config.autoOrigin === true) {
 		fullyQualifiedDomainNames()
-			.then((names) => callback(
-				null,
-				names.flatMap((name) => [ `http://${ name }`, `https://${ names }`, name ]),
-			))
+			.then((names) => {
+				console.log('Got qualified domains', names)
+				return callback(
+					null,
+					names.flatMap((name) => [ `http://${ name }`, `https://${ names }`, name ]),
+				)
+			})
 			.catch((error) => callback(error, false))
 		return
 	}
