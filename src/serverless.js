@@ -25,7 +25,7 @@ const origin = (origin, callback) => {
 				console.log('Got qualified domains', names)
 				return callback(
 					null,
-					names.flatMap((name) => [ `http://${ name }`, `https://${ names }`, name ]),
+					names.flatMap((name) => [ `http://${ name }`, `https://${ name }`, name ]),
 				)
 			})
 			.catch((error) => callback(error, false))
