@@ -2,7 +2,7 @@
   publish = "dist"
   command = "yarn build"
   functions = "functions/"
-  environment = { NODE_VERSION = "14.9.0", NODE_ENV = "production" }
+  environment = { NODE_VERSION = "14.16.0", NODE_ENV = "production" }
 
 [[redirects]]
   from = "/api"
