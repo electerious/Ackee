@@ -21,7 +21,10 @@ const apolloServer = createApolloServer(ApolloServer, {
 const origin = (origin, callback) => {
 	if (config.autoOrigin === true) {
 		fullyQualifiedDomainNames()
-			.then((names) => callback(null, names))
+			.then((names) => callback(
+				null,
+				names.flatMap((name) => [ `http://${ name }`, `https://${ name }`, name ]),
+			))
 			.catch((error) => callback(error, false))
 		return
 	}
@@ -41,7 +44,7 @@ const origin = (origin, callback) => {
 }
 
 exports.handler = (event, context) => {
-	// Set request context which is missing on Vercel
+	// Set request context which is missing on Vercel:
 	// https://stackoverflow.com/questions/71360059/apollo-server-lambda-unable-to-determine-event-source-based-on-event
 	if (event.requestContext == null) event.requestContext = context
 
