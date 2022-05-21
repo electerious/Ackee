@@ -17,22 +17,22 @@ exports.handler = async (...args) => {
 }
 
 /*
- * At the time of writing the Vercel polyfill for the AWS Lambda API doesn't support .multiValueHeaders
- * This stops us from attaching CORS headers to requests
- * Since all the headers we commonly attach have a single value, we can map them to .headers instead
+ * At the time of writing the Vercel polyfill for the AWS Lambda API doesn't support .multiValueHeaders.
+ * This stops us from attaching CORS headers to requests.
+ * Since all the headers we commonly attach have a single value, we can map them to .headers instead.
  */
 const convertMultiValueHeaders = (response) => {
-	if (!(response instanceof Object) || !('multiValueHeaders' in response)) {
-		console.log('No multiValueHeaders, not converting')
-		return response
-	}
-	response.headers = response.headers || {}
+	if (response?.multiValueHeaders == null) return response
+
+	response.headers = response.headers ?? {}
+
 	for (const [ key, value ] of Object.entries(response.multiValueHeaders)) {
 		if (value.length === 1) {
 			response.headers[key] = value[0]
 		} else {
-			console.warn(`multiValueHeaders is currently unsupported on Vercel. Header ${key} will be ignored`)
+			console.warn(`multiValueHeaders is currently unsupported on Vercel. Header ${ key } will be ignored.`)
 		}
 	}
+
 	return response
 }
