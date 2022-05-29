@@ -2,7 +2,8 @@
 
 FROM node:14-alpine AS build
 
-# Add and set user to ackee. Disable the password and do not create a home folder.
+# Add and set non-root user. Disable the password and do not create a home folder.
+
 RUN adduser -D ackee ackee
 USER ackee
 
@@ -29,10 +30,9 @@ WORKDIR /srv/app/
 
 COPY --from=build /srv/app/ /srv/app/
 
-# Create User/Group to run as and change ownership of files
-RUN adduser -D ackee ackee && chown -R ackee:ackee /srv/app
+# Create user/group to run as, change ownership of files and set user
 
-# Adjust to run as the new user
+RUN adduser -D ackee ackee && chown -R ackee:ackee /srv/app
 USER ackee
 
 # Run healthcheck against MongoDB, server and API.
