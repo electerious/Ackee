@@ -49,7 +49,7 @@
     "is-valid-domain": "^0.1.6",
     "micro": "^9.3.4",
     "microrouter": "^3.1.3",
-    "mongoose": "^6.3.1",
+    "mongoose": "^6.4.6",
     "node-fetch": "^2.6.1",
     "node-schedule": "^2.0.0",
     "normalize-url": "^6.0.1",
