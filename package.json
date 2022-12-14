@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.6.1",
-    "@electerious/eslint-config": "^3.1.0",
+    "@electerious/eslint-config": "^3.5.0",
     "ava": "4.2.0",
     "classnames": "^2.3.1",
     "coveralls": "^3.1.1",

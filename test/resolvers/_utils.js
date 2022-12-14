@@ -86,7 +86,7 @@ const api = async (base, body, token, headers = {}) => {
 	defaultHeaders['Content-Type'] = 'application/json'
 	defaultHeaders['Authorization'] = token == null ? undefined : `Bearer ${ token }`
 
-	const res = await fetch(url.href, {
+	const result = await fetch(url.href, {
 		method: 'post',
 		body: JSON.stringify(body),
 		headers: {
@@ -96,8 +96,8 @@ const api = async (base, body, token, headers = {}) => {
 	})
 
 	return {
-		headers: res.headers,
-		json: await res.json(),
+		headers: result.headers,
+		json: await result.json(),
 	}
 }
 
