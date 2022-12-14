@@ -4615,10 +4615,10 @@ https-proxy-agent@^5.0.1:
     agent-base "6"
     debug "4"
 
-human-number@^1.0.10:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/human-number/-/human-number-1.0.11.tgz#279aa7ca3fa7f3dce9fcc259f03b91cc78d74482"
-  integrity sha512-nZQvCsEU6u24ljhTqkTWfwr71v4hCay1rLs80JI0zM4kK3TH7Ref7moIMTGXpLIN4rdsZoonGAquBmFuH9LsMQ==
+human-number@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/human-number/-/human-number-2.0.1.tgz#bd220c8b13e1eb5617ba42f20ee77c8fd723fe01"
+  integrity sha512-0ibkHNHQXLiI4Exiu9Cm2EhnrBOSEt4kHRxbKhmM41rbjCIlfd35PdNptEbHohnKkqmJt6q+Z9X8A1WcDCeuNg==
   dependencies:
     round-to "~5.0.0"
 
