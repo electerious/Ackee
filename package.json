@@ -61,7 +61,7 @@
   "devDependencies": {
     "@apollo/client": "^3.7.2",
     "@electerious/eslint-config": "^3.5.0",
-    "ava": "4.2.0",
+    "ava": "5.1.0",
     "classnames": "^2.3.1",
     "coveralls": "^3.1.1",
     "formbase": "^12.0.2",
