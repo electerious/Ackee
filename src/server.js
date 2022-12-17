@@ -21,7 +21,7 @@ const styles = readFile(resolve(__dirname, '../dist/index.css')).catch(signale.f
 const scripts = readFile(resolve(__dirname, '../dist/index.js')).catch(signale.fatal)
 const tracker = readFile(resolve(__dirname, '../dist/tracker.js')).catch(signale.fatal)
 
-const handleMicroError = (error, res) => {
+const handleMicroError = (error, response) => {
 	// This part is for micro errors and errors outside of GraphQL.
 	// Most errors won't be caught here, but some error can still
 	// happen outside of GraphQL. In this case we distinguish
@@ -35,11 +35,11 @@ const handleMicroError = (error, res) => {
 	// Only log the full error stack when the error isn't a known response
 	if (isUnknownError === true) {
 		signale.fatal(error)
-		return send(res, 500, error.message)
+		return send(response, 500, error.message)
 	}
 
 	signale.warn(hasOriginalError === true ? error.originalError.message : error.message)
-	send(res, error.statusCode, error.message)
+	send(response, error.statusCode, error.message)
 }
 
 const handleGraphError = (error) => {
@@ -61,34 +61,34 @@ const handleGraphError = (error) => {
 	return error
 }
 
-const catchError = (fn) => async (req, res) => {
+const catchError = (fn) => async (request, response) => {
 	try {
-		return await fn(req, res)
+		return await fn(request, response)
 	} catch (error) {
-		handleMicroError(error, res)
+		handleMicroError(error, response)
 	}
 }
 
-const attachCorsHeaders = (fn) => async (req, res) => {
-	const matchingOrigin = await findMatchingOrigin(req, config.allowOrigin, config.autoOrigin)
+const attachCorsHeaders = (fn) => async (request, response) => {
+	const matchingOrigin = await findMatchingOrigin(request, config.allowOrigin, config.autoOrigin)
 
 	if (matchingOrigin != null) {
-		res.setHeader('Access-Control-Allow-Origin', matchingOrigin)
-		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
-		res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Time-Zone')
-		res.setHeader('Access-Control-Allow-Credentials', 'true')
-		res.setHeader('Access-Control-Max-Age', '3600')
+		response.setHeader('Access-Control-Allow-Origin', matchingOrigin)
+		response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
+		response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Time-Zone')
+		response.setHeader('Access-Control-Allow-Credentials', 'true')
+		response.setHeader('Access-Control-Max-Age', '3600')
 	}
 
-	return fn(req, res)
+	return fn(request, response)
 }
 
-const awaitedHandler = (fn) => async (req, res) => {
-	return (await fn)(req, res)
+const awaitedHandler = (fn) => async (request, response) => {
+	return (await fn)(request, response)
 }
 
-const notFound = (req) => {
-	const error = new Error(`\`${ req.url }\` not found`)
+const notFound = (request) => {
+	const error = new Error(`\`${ request.url }\` not found`)
 
 	throw createError(404, 'Not found', error)
 }
@@ -105,33 +105,33 @@ const apolloHandler = apolloServer
 
 const routes = [
 
-	get('/', async (req, res) => {
-		res.setHeader('Content-Type', 'text/html; charset=utf-8')
-		res.end(await index)
+	get('/', async (request, response) => {
+		response.setHeader('Content-Type', 'text/html; charset=utf-8')
+		response.end(await index)
 	}),
-	get('/index.html', async (req, res) => {
-		res.setHeader('Content-Type', 'text/html; charset=utf-8')
-		res.end(await index)
+	get('/index.html', async (request, response) => {
+		response.setHeader('Content-Type', 'text/html; charset=utf-8')
+		response.end(await index)
 	}),
-	get('/favicon.ico', async (req, res) => {
-		res.setHeader('Content-Type', 'image/vnd.microsoft.icon')
-		res.end(await favicon)
+	get('/favicon.ico', async (request, response) => {
+		response.setHeader('Content-Type', 'image/vnd.microsoft.icon')
+		response.end(await favicon)
 	}),
-	get('/index.css', async (req, res) => {
-		res.setHeader('Content-Type', 'text/css; charset=utf-8')
-		res.end(await styles)
+	get('/index.css', async (request, response) => {
+		response.setHeader('Content-Type', 'text/css; charset=utf-8')
+		response.end(await styles)
 	}),
-	get('/index.js', async (req, res) => {
-		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-		res.end(await scripts)
+	get('/index.js', async (request, response) => {
+		response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		response.end(await scripts)
 	}),
-	get('/tracker.js', async (req, res) => {
-		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-		res.end(await tracker)
+	get('/tracker.js', async (request, response) => {
+		response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		response.end(await tracker)
 	}),
-	customTracker.exists === true ? get(customTracker.url, async (req, res) => {
-		res.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-		res.end(await tracker)
+	customTracker.exists === true ? get(customTracker.url, async (request, response) => {
+		response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
+		response.end(await tracker)
 	}) : undefined,
 
 	post(graphqlPath, awaitedHandler(apolloHandler)),

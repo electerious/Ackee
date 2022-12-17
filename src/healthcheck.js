@@ -14,18 +14,18 @@ if (config.dbUrl == null) {
 }
 
 const checkServer = async (url) => {
-	const res = await fetch(url)
+	const response = await fetch(url)
 
-	if (res.ok === false) {
-		throw new Error(`Server is unhealthy and returned with the status '${ res.status }'`)
+	if (response.ok === false) {
+		throw new Error(`Server is unhealthy and returned with the status '${ response.status }'`)
 	}
 }
 
 const checkApi = async (url) => {
-	const res = await fetch(url)
+	const response = await fetch(url)
 
-	if (res.ok === false) {
-		throw new Error(`API is unhealthy and returned with the status '${ res.status }'`)
+	if (response.ok === false) {
+		throw new Error(`API is unhealthy and returned with the status '${ response.status }'`)
 	}
 }
 

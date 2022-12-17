@@ -1,8 +1,7 @@
 .status {
 
-	display: grid;
+	display: flex;
 	gap: math.div($gutter, 2);
-	grid-auto-flow: column;
 	justify-content: start;
 	align-items: center;
 

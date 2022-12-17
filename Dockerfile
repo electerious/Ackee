@@ -1,6 +1,12 @@
 # Start with first build stage
 
 FROM node:14-alpine AS build
+
+# Add and set non-root user. Disable the password and do not create a home folder.
+
+RUN adduser -D ackee ackee
+USER ackee
+
 WORKDIR /srv/app/
 
 # Add dependencies first so that Docker can use the cache as long as the dependencies stay unchanged
@@ -23,6 +29,11 @@ WORKDIR /srv/app/
 # Copy the source from the build stage to the second stage
 
 COPY --from=build /srv/app/ /srv/app/
+
+# Create user/group to run as, change ownership of files and set user
+
+RUN adduser -D ackee ackee && chown -R ackee:ackee /srv/app
+USER ackee
 
 # Run healthcheck against MongoDB, server and API.
 # Wait a bit before start to ensure the `yarn build` is done.

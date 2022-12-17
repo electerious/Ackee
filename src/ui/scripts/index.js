@@ -1,5 +1,5 @@
 import { createElement as h, useState, useCallback } from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { ApolloProvider } from '@apollo/client/react'
 
 import createStatusLink from './api/links/createStatusLink'
@@ -81,4 +81,7 @@ const App = () => {
 	)
 }
 
-render(h(App), document.querySelector('#main'))
+const container = document.querySelector('#main')
+const root = createRoot(container)
+
+root.render(h(App))
