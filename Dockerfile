@@ -1,6 +1,6 @@
 # Start with first build stage
 
-FROM node:14-alpine AS build
+FROM node:18-alpine AS build
 
 # Add and set non-root user. Disable the password and do not create a home folder.
 
@@ -22,7 +22,7 @@ COPY dist /srv/app/dist
 
 # Start with second build stage
 
-FROM node:14-alpine
+FROM node:18-alpine
 EXPOSE 3000
 WORKDIR /srv/app/
 
