@@ -33,6 +33,8 @@ test('return cors headers for domain with fully qualifed domain name', async (t)
 
 	const { headers } = await fetch(url.href, { headers: { Host: origin } })
 
+	console.log(headers)
+
 	t.is(headers.get('Access-Control-Allow-Origin'), origin)
 	t.is(headers.get('Access-Control-Allow-Methods'), 'GET, POST, PATCH, OPTIONS')
 	t.is(headers.get('Access-Control-Allow-Headers'), 'Content-Type, Authorization, Time-Zone')
