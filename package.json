@@ -35,7 +35,7 @@
   "dependencies": {
     "@graphql-tools/merge": "^8.3.14",
     "ackee-tracker": "^5.1.0",
-    "apollo-server-core": "^3.11.1",
+    "apollo-server-core": "^3.12.1",
     "apollo-server-lambda": "^3.11.1",
     "apollo-server-micro": "^3.11.1",
     "apollo-server-plugin-http-headers": "^0.1.4",
