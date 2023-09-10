@@ -1,6 +1,6 @@
 # SSL and HTTPS
 
-Ackee runs a simple server that doesn't support TSL/SSL. This means it's not possible to directly connect via HTTPS. It's recommended to use a reverse proxy instead. This document explains how.
+Ackee runs a simple server that doesn't support TLS/SSL. This means it's not possible to directly connect via HTTPS. It's recommended to use a reverse proxy instead. This document explains how.
 
 ## What is a reverse proxy?
 
