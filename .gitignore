@@ -38,3 +38,5 @@ dist/*
 
 # Vercel
 .vercel
+
+/docker

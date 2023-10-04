@@ -12,6 +12,7 @@ const intervals = require('../constants/intervals')
 const createArray = require('../utils/createArray')
 const matchesDate = require('../utils/matchesDate')
 const recursiveId = require('../utils/recursiveId')
+const convertTimezoneToOffset = require('../utils/convertTimezoneToOffset')
 
 const response = (entry) => ({
 	id: entry.id,
@@ -70,7 +71,7 @@ const getChart = async (ids, type, interval, limit, dateDetails) => {
 			// Database entries include the day, month and year in the
 			// timezone of the user. We therefore need to match it against a
 			// date in the timezone of the user.
-			const userZonedDate = utcToZonedTime(date, dateDetails.userTimeZone)
+			const userZonedDate = utcToZonedTime(date, convertTimezoneToOffset(dateDetails.userTimeZone))
 
 			// Find a entry that matches the date
 			const entry = entries.find((entry) => {
