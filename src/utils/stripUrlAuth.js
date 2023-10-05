@@ -1,10 +1,9 @@
 'use strict'
 
-const normalizeUrl = require('normalize-url')
+module.exports = (url) => {
+	if (typeof url !== 'string') {
+		throw new TypeError('Expected a valid URL')
+	}
 
-module.exports = (url) => normalizeUrl(url, {
-	normalizeProtocol: false,
-	stripWWW: false,
-	removeTrailingSlash: false,
-	sortQueryParameters: false,
-})
+	return url.replace(/^((?:\w+:)?\/\/)[^@/]+@/, '$1')
+}
