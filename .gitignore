@@ -30,11 +30,7 @@ node_modules
 .env
 
 # Dist folder
-dist/*
-!dist/favicon.ico
-!dist/index.css
-!dist/index.js
-!dist/tracker.js
+/dist
 
 # Vercel
 .vercel

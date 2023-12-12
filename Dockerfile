@@ -18,7 +18,7 @@ RUN yarn install --production --frozen-lockfile --network-timeout 120000
 
 COPY build.js /srv/app/
 COPY src /srv/app/src
-COPY dist /srv/app/dist
+COPY public /srv/app/public
 
 # Start with second build stage
 
