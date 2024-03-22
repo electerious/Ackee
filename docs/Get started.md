@@ -274,11 +274,24 @@ Once your deploy has finished, you are ready to start using Ackee! Visit the URL
 
 ## With Railway
 
-You can use the [Railway](https://railway.app/) button for a one-click deployment and have Ackee running within minutes.
+You can use the button below for a one-click deployment and have Ackee running within minutes.  Make sure you are logged into your [Railway account](https://railway.app/), then follow the steps below.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/starters/ackee)
+### 1. Launch the Template
 
-Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables. Once you do that, everything should just work on it's own. Railway will automatically provision the MongoDB database for you and also link it to your Ackee deployment!
+Launch the Ackee template on Railway by clicking this button:
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/ackee)
+
+### 2. Configure and Deploy
+
+Upon launching the template, you will be prompted to configure the Ackee and MongoDB services.
+
+- Click `Configure` on the Ackee service and enter your desired username in the `ACKEE_USERNAME` environment variable input.  Click `Save Config`.
+  - Note: A password will be automatically generated for you which you can retrieve from within the Ackee service's [variables tab](https://docs.railway.app/guides/variables#service-variables) after deployment.
+- Click `Configure` on the MongoDB service.  You do not need to set any variable configurations, simply click `Save Config`.
+- Click `Deploy`
+
+
+Upon deployment, everything should just work on it's own. Railway will automatically provision the MongoDB database for you and link it to your Ackee service!
 
 ## With Koyeb
 
