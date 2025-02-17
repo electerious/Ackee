@@ -11,7 +11,7 @@ Here are a few resources to help you get started with GraphQL:
 
 GraphQL Playground is a graphical, interactive, in-browser GraphQL IDE. It allows you to play and experiment with the API of Ackee.
 
-Simply run Ackee with `NODE_ENV` set to `development` and visit the `/api` playground in your browser. You can do so by adding `NODE_ENV=development` to the environment of your `docker-compose.yml` or by using `yarn start:dev`. Only use this mode on your local machine as Ackee runs slower when in development mode.
+Simply run Ackee with `NODE_ENV` set to `development` and visit the `/api` playground in your browser. You can do so by adding `NODE_ENV=development` to the environment of your `docker-compose.yml` or by using `npm run start:dev`. Only use this mode on your local machine as Ackee runs slower when in development mode.
 
 Try the [🔮 live playground](https://demo.ackee.electerious.com/api) of the Ackee demo.
 

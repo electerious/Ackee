@@ -31,6 +31,12 @@ connect(config.dbUrl).then(() => {
 	if (config.isDemoMode === true) {
 		signale.info('Demo mode enabled')
 	}
+
+	process.on('SIGTERM', () => {
+		console.log('Terminating')
+		server.close()
+		process.exit(1)
+	})
 })
 	.catch((error) => {
 		signale.fatal(error)

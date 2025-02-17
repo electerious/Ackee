@@ -21,7 +21,6 @@ coverage
 .nyc_output
 
 # Package Managers
-package-lock.json
 npm-debug.log
 node_modules
 

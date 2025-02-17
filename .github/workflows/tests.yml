@@ -1,4 +1,4 @@
-name: Build
+name: Tests
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  build:
+  test:
     name: 'Build and test'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
@@ -38,11 +38,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: |
-          yarn install --frozen-lockfile
-          yarn build
+          npm ci
+          npm run build
 
-      - run: yarn test:cov
-      - run: yarn coveralls
+      - run: npm run test:cov
+      - run: npm run coveralls
 
       - name: Parallel Coveralls report
         uses: coverallsapp/github-action@v2

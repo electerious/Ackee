@@ -1,45 +1,34 @@
-# Start with first build stage
+FROM node:22-alpine AS build
 
-FROM node:14-alpine AS build
+WORKDIR /build
 
-# Add and set non-root user. Disable the password and do not create a home folder.
+COPY package.json package-lock.json ./
+RUN npm ci
 
-RUN adduser -D ackee ackee
-USER ackee
+COPY build.js ./
+COPY src ./src
+COPY dist ./dist
 
+RUN NODE_ENV=production npm run build:pre
+
+
+FROM node:22-alpine
 WORKDIR /srv/app/
 
-# Add dependencies first so that Docker can use the cache as long as the dependencies stay unchanged
+COPY package.json package-lock.json ./
+RUN set -e; \
+    apk add --no-cache tini; \
+    npm ci --omit=dev
 
-COPY package.json yarn.lock /srv/app/
-RUN yarn install --production --frozen-lockfile --network-timeout 120000
-
-# Copy source after the dependency step as it's more likely that the source changes
-
-COPY build.js /srv/app/
-COPY src /srv/app/src
-COPY dist /srv/app/dist
-
-# Start with second build stage
-
-FROM node:14-alpine
-EXPOSE 3000
-WORKDIR /srv/app/
-
-# Copy the source from the build stage to the second stage
-
-COPY --from=build /srv/app/ /srv/app/
-
-# Create user/group to run as, change ownership of files and set user
+COPY src ./src
+COPY --from=build /build/dist ./dist
 
 RUN adduser -D ackee ackee && chown -R ackee:ackee /srv/app
 USER ackee
 
-# Run healthcheck against MongoDB, server and API.
-# Wait a bit before start to ensure the `yarn build` is done.
+HEALTHCHECK --interval=1m --timeout=45s CMD [ "/srv/app/src/healthcheck.js" ]
 
-HEALTHCHECK --interval=1m --timeout=45s --start-period=45s CMD [ "/srv/app/src/healthcheck.js" ]
+EXPOSE 3000
 
-# Start Ackee
-
-CMD yarn start
+ENTRYPOINT ["/sbin/tini", "--", "npm"]
+CMD ["start"]

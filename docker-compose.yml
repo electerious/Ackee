@@ -1,7 +1,10 @@
 version: "2"
 services:
   ackee:
-    image: electerious/ackee
+    image: ghcr.io/janw/ackee
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: ackee
     restart: always
     ports:
@@ -19,3 +22,6 @@ services:
     restart: always
     volumes:
       - ./data:/data/db
+
+    ports:
+      - "27017:27017"

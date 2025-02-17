@@ -145,7 +145,7 @@ You can now [specify a `source` parameter in URLs](docs/Enhancing%20referrers.md
 
 #### Faster startup, smaller size
 
-Ackee previously had to compile all source files before the server was ready. v3 now ships with all files Ackee needs and only builds those containing environment variables. This means running `yarn start` is way faster and the Docker container even smaller.
+Ackee previously had to compile all source files before the server was ready. v3 now ships with all files Ackee needs and only builds those containing environment variables. This means running `npm start` is way faster and the Docker container even smaller.
 
 Oh, and we also reduced the JS file size of the UI by ~60%.
 
@@ -260,14 +260,14 @@ New tools like [ackee-report](https://github.com/BetaHuhn/ackee-report), [ackee-
 
 ## [2.1.0] - 2020-10-24
 
-This release introduces support for serverless functions. You can now deploy Ackee to Netlify 🚀 It also reduces the memory usage and allows you to build all static files into `/dist` by running `yarn build`. Run `yarn server` to start the server without building those files, again. This reduces the initial startup time. `yarn start` combines both commands for convenience and is still the recommended way to run Ackee.
+This release introduces support for serverless functions. You can now deploy Ackee to Netlify 🚀 It also reduces the memory usage and allows you to build all static files into `/dist` by running `npm run build`. Run `npm run server` to start the server without building those files, again. This reduces the initial startup time. `npm start` combines both commands for convenience and is still the recommended way to run Ackee.
 
 ### Added
 
 - Support for serverless functions and Netlify (#155)
 - Added "Deploy to Netlify" to the [Get Started](docs/Get%20started.md) guide
-- Build all static files into `/dist` by running `yarn build`
-- Start the server without rebuilding static files using `yarn server`
+- Build all static files into `/dist` by running `npm run build`
+- Start the server without rebuilding static files using `npm run server`
 
 ### Changed
 
