@@ -5,6 +5,7 @@ import * as modals from '../../constants/modals'
 
 import Modal from './Modal'
 import ModalViews from './ModalViews'
+import ModalConstantEdit from './ModalConstantEdit'
 import ModalDurations from './ModalDurations'
 import ModalDomainAdd from './ModalDomainAdd'
 import ModalDomainEdit from './ModalDomainEdit'
@@ -15,6 +16,7 @@ import ModalPermanentTokenEdit from './ModalPermanentTokenEdit'
 
 const modalComponents = {
 	[modals.MODALS_VIEWS]: ModalViews,
+	[modals.MODALS_CONSTANT_EDIT]: ModalConstantEdit,
 	[modals.MODALS_DURATIONS]: ModalDurations,
 	[modals.MODALS_DOMAIN_ADD]: ModalDomainAdd,
 	[modals.MODALS_DOMAIN_EDIT]: ModalDomainEdit,

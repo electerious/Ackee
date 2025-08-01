@@ -1,0 +1,19 @@
+.radio-group {
+    justify-content: space-evenly;
+    background: $formbase__background;
+    border-radius: $formbase__radius;
+    padding: $formbase__padding;
+
+    & {
+        display: flex;
+    }
+
+    & .control {
+        margin: 0;
+
+        &__label::before {
+            position: absolute;
+            left: 0;
+        }
+    }
+}
