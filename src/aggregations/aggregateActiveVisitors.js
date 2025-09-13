@@ -1,6 +1,6 @@
 'use strict'
 
-const { DURATIONS_LIMIT, DURATIONS_INTERVAL } = require('../constants/durations')
+const constants = require('../constants/durations')
 const matchDomains = require('../stages/matchDomains')
 
 module.exports = (ids, dateDetails) => {
@@ -19,10 +19,10 @@ module.exports = (ids, dateDetails) => {
 	}
 
 	// Ignore users that are on the page for too long
-	aggregation[0].$match.created = { $gte: dateDetails.lastMilliseconds(DURATIONS_LIMIT) }
+	aggregation[0].$match.created = { $gte: dateDetails.lastMilliseconds(constants.DURATIONS_LIMIT) }
 
 	// Ignore users that aren't active anymore
-	aggregation[0].$match.updated = { $gte: dateDetails.lastMilliseconds(DURATIONS_INTERVAL * 2) }
+	aggregation[0].$match.updated = { $gte: dateDetails.lastMilliseconds(constants.DURATIONS_INTERVAL * 2) }
 
 	return aggregation
 }

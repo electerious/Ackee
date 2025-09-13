@@ -2,11 +2,13 @@ import { createElement as h, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { version, homepage } from '../../../../../package.json'
-import useDeleteToken from '../../api/hooks/tokens/useDeleteToken'
+import useConstants from '../../api/hooks/constants/useConstants'
 import useDomains from '../../api/hooks/domains/useDomains'
 import useEvents from '../../api/hooks/events/useEvents'
 import usePermanentTokens from '../../api/hooks/permanentTokens/usePermanentTokens'
+import useDeleteToken from '../../api/hooks/tokens/useDeleteToken'
 import {
+	MODALS_CONSTANT_EDIT,
 	MODALS_DOMAIN_ADD,
 	MODALS_DOMAIN_EDIT,
 	MODALS_EVENT_ADD,
@@ -30,6 +32,7 @@ const RouteSettings = (props) => {
 	const domains = useDomains()
 	const events = useEvents()
 	const permanentTokens = usePermanentTokens()
+	const constants = useConstants()
 
 	const onSignOut = async () => {
 		await deleteToken.mutate({
@@ -51,7 +54,7 @@ const RouteSettings = (props) => {
 				h(Line),
 			],
 		).flat(),
-		h(LinkItem, { type: 'button', onClick: createFn }, createLabel),
+		createFn && createLabel && h(LinkItem, { type: 'button', onClick: createFn }, createLabel),
 	]
 
 	const showDomainAddModal = () => props.addModal(MODALS_DOMAIN_ADD)
@@ -60,14 +63,17 @@ const RouteSettings = (props) => {
 	const showEventEditModal = (event) => props.addModal(MODALS_EVENT_EDIT, event)
 	const showPermanentTokenAddModal = () => props.addModal(MODALS_PERMANENT_TOKEN_ADD)
 	const showPermanentTokenEditModal = (permanentToken) => props.addModal(MODALS_PERMANENT_TOKEN_EDIT, permanentToken)
+	const showConstantEditModal = (constant) => props.addModal(MODALS_CONSTANT_EDIT, constant)
 
 	const domainsLoading = h(LoadingMessage, { label: 'domains' })
 	const eventsLoading = h(LoadingMessage, { label: 'events' })
 	const permanentTokensLoading = h(LoadingMessage, { label: 'permanent tokens' })
+	const constantLoading = h(LoadingMessage, { label: 'constants' })
 
 	const domainsItems = createItems(domains.value, showDomainEditModal, showDomainAddModal, 'New domain')
 	const eventsItems = createItems(events.value, showEventEditModal, showEventAddModal, 'New event')
 	const permanentTokensItems = createItems(permanentTokens.value, showPermanentTokenEditModal, showPermanentTokenAddModal, 'New permanent token')
+	const constantItems = createItems(constants.value, showConstantEditModal)
 
 	return (
 		h(Fragment, {},
@@ -96,6 +102,12 @@ const RouteSettings = (props) => {
 				headline: 'Permanent Tokens',
 			},
 				...(permanentTokens.status.isInitializing === true ? [ permanentTokensLoading ] : permanentTokensItems),
+			),
+
+			h(CardSetting, {
+				headline: 'System Contants',
+			},
+				...(constants.status.isInitializing === true ? [ constantLoading ] : constantItems),
 			),
 
 			h(CardSetting, {

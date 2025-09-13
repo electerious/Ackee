@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Added
+
+- Page view duration limit and interval is configurable now at system level, could be changed via API and Settings panel (thanks @marek629, #381)
+
 ### Changed
 
 - The official Docker image is now based on Node.js 22 (#343)

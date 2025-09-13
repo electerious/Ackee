@@ -1,0 +1,47 @@
+.range {
+	display: flex;
+	background: $dimmed;
+    border-radius: $innerRadius;
+    padding: $formbase__padding;
+
+	&__input {
+		padding: 0;
+		margin: 0;
+		background: $dimmed;
+		height: $formbase__control_size;
+		border: transparent 1px solid;
+
+		&[type='range'] {
+			$thumb-size: calc($formbase__control_size * 0.55);
+			&::-ms-thumb {
+				border: none;
+				background: $white;
+				width: $thumb-size;
+				height: $thumb-size;
+				border-radius: 50%;
+			}
+			&::-moz-range-thumb {
+				border: none;
+				background: $white;
+				width: $thumb-size;
+				height: $thumb-size;
+				border-radius: 50%;
+			}
+			&::-webkit-slider-thumb {
+				appearance: none;
+				background: $white;
+				width: $thumb-size;
+				height: $thumb-size;
+				border-radius: 50%;
+			}
+		}
+	}
+
+	&__label {
+		margin: 0;
+		padding-inline-start: 1.2em;
+		text-wrap-mode: nowrap;
+		text-align: right;
+		min-width: 7em;
+	}
+}

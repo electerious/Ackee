@@ -1,11 +1,15 @@
 'use strict'
 
-const { hour } = require('../utils/times')
+const { customise } = require('../utils/constants')
+const { hour, second } = require('../utils/times')
 
-const DURATIONS_INTERVAL = 15000
+const DURATIONS_INTERVAL = 15 * second
 const DURATIONS_LIMIT = hour / 2
 
-module.exports = {
+module.exports = customise({
 	DURATIONS_INTERVAL,
 	DURATIONS_LIMIT,
-}
+}, [
+	'DURATIONS_INTERVAL',
+	'DURATIONS_LIMIT',
+])

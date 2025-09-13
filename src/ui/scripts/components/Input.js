@@ -1,5 +1,6 @@
 import { createElement as h, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 const copyInput = (e) => {
 	e.target.select()
@@ -14,6 +15,8 @@ const Input = (props) => {
 	}, [])
 
 	const type = ({
+		hidden: 'hidden',
+		range: 'range',
 		text: 'text',
 		username: 'text',
 		password: 'password',
@@ -27,7 +30,7 @@ const Input = (props) => {
 
 	const input = h('input', {
 		ref,
-		className: 'input',
+		className: classNames('input', props.className),
 		autoCapitalize: 'off',
 		autoCorrect: 'off',
 		autoComplete,
@@ -40,6 +43,9 @@ const Input = (props) => {
 		value: props.value,
 		onChange: props.onChange,
 		onFocus: props.copyOnFocus === true ? copyInput : undefined,
+		min: props.min,
+		max: props.max,
+		step: props.step,
 	})
 
 	if (props.copyOnFocus === true) return (
@@ -53,7 +59,8 @@ const Input = (props) => {
 }
 
 Input.propTypes = {
-	type: PropTypes.oneOf([ 'text', 'username', 'password' ]).isRequired,
+	type: PropTypes.oneOf([ 'text', 'username', 'password', 'hidden', 'range' ]).isRequired,
+	className: PropTypes.string,
 	id: PropTypes.string,
 	required: PropTypes.bool,
 	disabled: PropTypes.bool,
@@ -63,6 +70,9 @@ Input.propTypes = {
 	value: PropTypes.string,
 	onChange: PropTypes.func,
 	copyOnFocus: PropTypes.bool,
+	min: PropTypes.number,
+	max: PropTypes.number,
+	step: PropTypes.number,
 }
 
 export default Input
