@@ -1,21 +1,73 @@
-version: "2"
+version: "3.8"
+
 services:
   ackee:
-    image: electerious/ackee
+    image: electerious/ackee:latest
     container_name: ackee
-    restart: always
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3003:3000"
     environment:
-      - WAIT_HOSTS=mongo:27017
-      - ACKEE_MONGODB=mongodb://mongo:27017/ackee
-    env_file:
-      - .env
+      # Required variables - Coolify will detect these in UI
+      - ACKEE_MONGODB=${ACKEE_MONGODB:?mongodb://mongo:27017/ackee}
+      - ACKEE_USERNAME=${ACKEE_USERNAME:?}
+      - ACKEE_PASSWORD=${ACKEE_PASSWORD:?}
+
+      # Application configuration
+      - ACKEE_PORT=3000
+      - ACKEE_TTL=${ACKEE_TTL:-3600000}
+      - ACKEE_ALLOW_ORIGIN=${ACKEE_ALLOW_ORIGIN:-*}
+      - ACKEE_AUTO_ORIGIN=${ACKEE_AUTO_ORIGIN:-true}
+      - NODE_ENV=${NODE_ENV:-production}
+
+      # Coolify magic variable for service URL
+      - SERVICE_URL=${SERVICE_URL_ACKEE_3003:-}
+
+      # Optional tracker customization
+      - ACKEE_TRACKER=${ACKEE_TRACKER:-tracker.js}
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "/app/src/healthcheck.js"]
+      interval: 60s
+      timeout: 45s
+      retries: 3
+      start_period: 30s
+    networks:
+      - ackee-network
+
   mongo:
-    image: mongo
-    container_name: mongo
-    restart: always
+    image: mongo:7.0-jammy
+    container_name: ackee-mongo
+    restart: unless-stopped
+    environment:
+      # Coolify auto-generated credentials
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME:?}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:?}
+      - MONGO_INITDB_DATABASE=ackee
     volumes:
-      - ./data:/data/db
+      # Coolify-style volume binding with is_directory flag
+      - type: bind
+        source: ./data
+        target: /data/db
+        is_directory: true
+
+      # MongoDB initialization script
+      - type: bind
+        source: ./mongo-init.js
+        target: /docker-entrypoint-initdb.d/mongo-init.js
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    networks:
+      - ackee-network
+    # Security: Do NOT expose MongoDB port publicly!
+    # Internal communication only through Docker network
+
+networks:
+  ackee-network:
+    driver: bridge

@@ -38,3 +38,12 @@ dist/*
 
 # Vercel
 .vercel
+
+# Coolify deployment files
+.env.local
+.env.production
+.env.staging
+mongo-data/
+
+# Coolify generated files
+.coolify/

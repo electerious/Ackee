@@ -31,6 +31,7 @@ Ackee is a self-hosted analytics tool that cares about privacy. We believe that 
 
 Get Ackee up and running…
 
+- […with Coolify](#-deploy-on-coolify) ⚡ **Recommended for production**
 - […with Docker Compose](docs/Get%20started.md#with-docker-compose)
 - […with Docker](docs/Get%20started.md#with-docker)
 - […with Helm](docs/Get%20started.md#with-helm)
@@ -50,6 +51,93 @@ And configure Ackee and your server correctly…
 - […with CORS headers](docs/CORS%20headers.md)
 
 Take a look at the [FAQ](docs/FAQ.md) if you have any questions left.
+
+## 🐳 Deploy on Coolify
+
+**Coolify** is a self-hosted platform that makes deploying applications with Docker incredibly easy. Ackee is fully optimized for Coolify deployment with production-ready configuration.
+
+### ⚡ Quick Start (5 minutes)
+
+1. **Prepare Configuration**
+   ```bash
+   # Clone repository
+   git clone https://github.com/electerious/Ackee.git
+   cd Ackee
+
+   # Copy environment template
+   cp .env.example .env
+   # Edit .env with your credentials (ACKEE_USERNAME, ACKEE_PASSWORD)
+   ```
+
+2. **Deploy to Coolify**
+   - Open Coolify Dashboard
+   - **New Resource** → **Docker Compose** → **Git Repository**
+   - Repository URL: `https://github.com/electerious/Ackee.git`
+   - Branch: `main`
+   - Compose file: `./docker-compose.yml`
+
+3. **Configure Environment Variables** (in Coolify UI)
+   ```env
+   ACKEE_USERNAME=admin
+   ACKEE_PASSWORD=your_secure_password_here
+   MONGO_USERNAME=root
+   MONGO_PASSWORD=your_mongo_password_here
+   ```
+
+4. **Set Domain & Deploy**
+   - Add domain: `analytics.yourdomain.com`
+   - Port: `3003` (auto-detected)
+   - Enable SSL/TLS
+   - Click **Deploy** 🚀
+
+5. **Access Dashboard**
+   - Navigate to: `https://analytics.yourdomain.com:3003`
+   - Login with your credentials
+   - Start tracking!
+
+### 📖 Detailed Documentation
+
+For comprehensive setup instructions, troubleshooting, security best practices, and advanced configuration, see:
+
+**[📘 Complete Coolify Deployment Guide](DEPLOYMENT.md)**
+
+The guide includes:
+- Step-by-step deployment instructions
+- Environment variables configuration
+- Domain & SSL setup
+- MongoDB persistence & backups
+- Health checks & monitoring
+- Troubleshooting common issues
+- Security hardening
+- Performance optimization
+
+### ✨ Features
+
+This Coolify configuration includes:
+- ✅ **Port 3003** exposed for public access
+- ✅ **MongoDB 7.0** with persistent storage
+- ✅ **Auto-initialization** of database schema
+- ✅ **Health checks** for reliable deployments
+- ✅ **Environment variable detection** in Coolify UI
+- ✅ **Production-ready** security settings
+- ✅ **SSL/TLS support** via Coolify
+
+### 🔧 Custom Configuration
+
+All deployment settings are in `docker-compose.yml`. Key configurations:
+
+```yaml
+services:
+  ackee:
+    ports:
+      - "3003:3000"  # External:Internal port mapping
+    environment:
+      - ACKEE_USERNAME=${ACKEE_USERNAME:?}  # Required
+      - ACKEE_PASSWORD=${ACKEE_PASSWORD:?}  # Required
+      - ACKEE_ALLOW_ORIGIN=${ACKEE_ALLOW_ORIGIN:-*}  # CORS
+```
+
+For all configuration options, see [Options documentation](docs/Options.md).
 
 ## 📚 Documentation
 
