@@ -44,6 +44,7 @@
     "express": "^4.21.2",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.20.1",
+    "graphql-tag": "^2.12.6",
     "is-url": "^1.2.4",
     "is-valid-domain": "^0.1.6",
     "mongoose": "^8.19.3",

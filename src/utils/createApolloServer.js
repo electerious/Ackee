@@ -2,7 +2,7 @@
 
 const {
 	ApolloServerPluginLandingPageLocalDefault,
-	ApolloServerPluginLandingPageDisabled,
+	ApolloServerPluginLandingPageProductionDefault,
 } = require('@apollo/server/plugin/landingPage/default')
 const httpHeadersPlugin = require('./httpHeadersPlugin')
 const {
@@ -21,8 +21,8 @@ module.exports = (ApolloServer, options) => new ApolloServer({
 	plugins: [
 		httpHeadersPlugin,
 		(config.isDemoMode === true || config.isDevelopmentMode === true) ?
-			ApolloServerPluginLandingPageLocalDefault() : // eslint-disable-line new-cap
-			ApolloServerPluginLandingPageDisabled(), // eslint-disable-line new-cap
+			ApolloServerPluginLandingPageLocalDefault({ embed: true }) : // eslint-disable-line new-cap
+			ApolloServerPluginLandingPageProductionDefault({ embed: false, graphRef: 'none' }), // eslint-disable-line new-cap
 	],
 	typeDefs: [
 		UnsignedIntTypeDefinition,

@@ -1,5 +1,6 @@
 'use strict'
 
+const http = require('http')
 const express = require('express')
 const { resolve } = require('path')
 const { readFile } = require('fs').promises
@@ -103,14 +104,11 @@ const apolloServer = createApolloServer(ApolloServer, {
 	formatError: handleGraphError,
 })
 
-// Variable to track if Apollo Server has started
-let apolloServerReady = false
-
-// Start Apollo Server
-apolloServer.start().then(() => {
-	apolloServerReady = true
-	signale.success('Apollo Server started')
-})
+// Start Apollo Server asynchronously
+const apolloServerStarted = apolloServer.start()
+	.then(() => {
+		signale.success('Apollo Server started')
+	})
 	.catch((error) => {
 		signale.fatal('Failed to start Apollo Server:', error)
 		process.exit(1)
@@ -118,14 +116,13 @@ apolloServer.start().then(() => {
 
 // GraphQL endpoint - wait for server to start before processing
 app.use('/api', express.json(), async (request, response, next) => {
-	if (!apolloServerReady) {
-		await apolloServer.start()
-		apolloServerReady = true
-	}
-	next()
-}, expressMiddleware(apolloServer, {
-	context: createExpressContext,
-}))
+	// Ensure Apollo Server is started
+	await apolloServerStarted
+	// Call expressMiddleware after server is started
+	return expressMiddleware(apolloServer, {
+		context: createExpressContext,
+	})(request, response, next)
+})
 
 // Health check endpoint
 app.get('/.well-known/apollo/server-health', (request, response) => {
@@ -153,4 +150,7 @@ app.use((error, request, response) => {
 	response.status(error.statusCode).send(error.message)
 })
 
-module.exports = app
+// Create HTTP server
+const server = http.createServer(app)
+
+module.exports = server

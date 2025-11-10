@@ -1,6 +1,6 @@
 'use strict'
 
-const { gql } = require('@apollo/server')
+const { gql } = require('graphql-tag')
 
 module.exports = gql`
 	type PermanentToken {
