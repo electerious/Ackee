@@ -1,6 +1,7 @@
 'use strict'
 
-const { ApolloServer } = require('apollo-server-lambda')
+const { ApolloServer } = require('@apollo/server')
+const { startServerAndCreateLambdaHandler, handlers } = require('@as-integrations/aws-lambda')
 
 const config = require('./utils/config')
 const connect = require('./utils/connect')
@@ -14,50 +15,64 @@ if (config.dbUrl == null) {
 
 connect(config.dbUrl)
 
-const apolloServer = createApolloServer(ApolloServer, {
-	context: createServerlessContext,
-})
+const apolloServer = createApolloServer(ApolloServer, {})
 
-const origin = (origin, callback) => {
+const getCorsOrigin = async () => {
 	if (config.autoOrigin === true) {
-		fullyQualifiedDomainNames()
-			.then((names) => callback(
-				null,
-				names.flatMap((name) => [ `http://${ name }`, `https://${ name }`, name ]),
-			))
-			.catch((error) => callback(error, false))
-		return
+		const names = await fullyQualifiedDomainNames()
+		return names.flatMap((name) => [ `http://${ name }`, `https://${ name }`, name ])
 	}
 
 	if (config.allowOrigin === '*') {
-		callback(null, true)
-		return
+		return '*'
 	}
 
 	if (config.allowOrigin != null) {
-		callback(null, config.allowOrigin.split(','))
-		return
+		return config.allowOrigin.split(',')
 	}
 
-	callback(null, false)
-	return
+	return []
 }
 
-exports.handler = (event, context) => {
-	// Set request context which is missing on Vercel:
-	// https://stackoverflow.com/questions/71360059/apollo-server-lambda-unable-to-determine-event-source-based-on-event
-	if (event.requestContext == null) event.requestContext = context
+// Cache CORS origins for better performance
+let corsOriginsPromise = null
+const getCachedCorsOrigins = () => {
+	if (corsOriginsPromise == null) {
+		corsOriginsPromise = getCorsOrigin()
+	}
+	return corsOriginsPromise
+}
 
-	const handler = apolloServer.createHandler({
-		expressGetMiddlewareOptions: {
-			cors: {
-				origin,
-				credentials: true,
-				methods: [ 'GET', 'POST', 'PATCH', 'OPTIONS' ],
-				allowedHeaders: [ 'Content-Type', 'Authorization', 'Time-Zone' ],
+exports.handler = startServerAndCreateLambdaHandler(
+	apolloServer,
+	handlers.createAPIGatewayProxyEventV2RequestHandler(),
+	{
+		context: createServerlessContext,
+		middleware: [
+			async (event) => {
+				// Add CORS headers to the response
+				const allowedOrigins = await getCachedCorsOrigins()
+				const requestOrigin = event.headers?.origin || event.headers?.Origin
+
+				return (result) => { // eslint-disable-line require-await
+					const headers = result.headers || {}
+
+					if (allowedOrigins === '*') {
+						headers['Access-Control-Allow-Origin'] = '*'
+					} else if (Array.isArray(allowedOrigins) && requestOrigin && allowedOrigins.includes(requestOrigin)) {
+						headers['Access-Control-Allow-Origin'] = requestOrigin
+					}
+
+					if (headers['Access-Control-Allow-Origin']) {
+						headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, OPTIONS'
+						headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, Time-Zone'
+						headers['Access-Control-Allow-Credentials'] = 'true'
+						headers['Access-Control-Max-Age'] = '3600'
+					}
+
+					return { ...result, headers }
+				}
 			},
-		},
-	})
-
-	return handler(event, context)
-}
+		],
+	},
+)

@@ -7,12 +7,14 @@ const isAuthenticated = require('./isAuthenticated')
 const createDate = require('./createDate')
 const ignoreCookie = require('./ignoreCookie')
 
-const createServerlessContext = (integrationContext) => {
-	return createContext(integrationContext.event.headers['client-ip'], integrationContext.event.headers)
+// For serverless (AWS Lambda)
+const createServerlessContext = async ({ event }) => { // eslint-disable-line require-await
+	return createContext(event.headers['client-ip'], event.headers)
 }
 
-const createMicroContext = (integrationContext) => {
-	return createContext(getClientIp(integrationContext.req), integrationContext.req.headers)
+// For Express
+const createExpressContext = async ({ req }) => { // eslint-disable-line require-await
+	return createContext(getClientIp(req), req.headers)
 }
 
 const createContext = async (ip, headers) => {
@@ -23,8 +25,7 @@ const createContext = async (ip, headers) => {
 		dateDetails: createDate(headers['time-zone']),
 		userAgent: headers['user-agent'],
 		ip,
-		// Variables used by apollo-server-plugin-http-headers
-		// See: https://github.com/b2a3e8/apollo-server-plugin-http-headers
+		// Variables used by custom httpHeadersPlugin
 		setCookies: [],
 		setHeaders: [],
 	}
@@ -32,5 +33,7 @@ const createContext = async (ip, headers) => {
 
 module.exports = {
 	createServerlessContext,
-	createMicroContext,
+	createExpressContext,
+	// Keep old name for backwards compatibility during transition
+	createMicroContext: createExpressContext,
 }

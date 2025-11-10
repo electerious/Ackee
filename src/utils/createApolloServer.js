@@ -1,10 +1,10 @@
 'use strict'
 
 const {
-	ApolloServerPluginLandingPageGraphQLPlayground: apolloServerPluginLandingPageGraphQLPlayground,
-	ApolloServerPluginLandingPageDisabled: apolloServerPluginLandingPageDisabled,
-} = require('apollo-server-core')
-const httpHeadersPlugin = require('apollo-server-plugin-http-headers')
+	ApolloServerPluginLandingPageLocalDefault,
+	ApolloServerPluginLandingPageDisabled,
+} = require('@apollo/server/plugin/landingPage/default')
+const httpHeadersPlugin = require('./httpHeadersPlugin')
 const {
 	UnsignedIntResolver,
 	UnsignedIntTypeDefinition,
@@ -17,15 +17,12 @@ const {
 const config = require('./config')
 
 module.exports = (ApolloServer, options) => new ApolloServer({
-	cache: 'bounded',
 	introspection: config.isDemoMode === true || config.isDevelopmentMode === true,
-	playground: config.isDemoMode === true || config.isDevelopmentMode === true,
-	debug: config.isDevelopmentMode === true,
 	plugins: [
 		httpHeadersPlugin,
 		(config.isDemoMode === true || config.isDevelopmentMode === true) ?
-			apolloServerPluginLandingPageGraphQLPlayground() :
-			apolloServerPluginLandingPageDisabled(),
+			ApolloServerPluginLandingPageLocalDefault() : // eslint-disable-line new-cap
+			ApolloServerPluginLandingPageDisabled(), // eslint-disable-line new-cap
 	],
 	typeDefs: [
 		UnsignedIntTypeDefinition,
