@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "npm run build && npm run server",
-    "dev": "NODE_ENV=development nodemon",
+    "dev": "NODE_ENV=development node --watch-path=./src dev.js",
     "build:pre": "BUILD_ENV=pre npm run build",
     "build": "node build.js",
     "server": "node src/index.js",
@@ -67,7 +67,6 @@
     "human-number": "^2.0.1",
     "mocked-env": "^1.3.5",
     "mongodb-memory-server": "^10.3.0",
-    "nodemon": "^3.1.10",
     "normalize.css": "^8.0.1",
     "nyc": "^15.1.0",
     "prop-types": "^15.8.1",
@@ -94,13 +93,6 @@
   "eslintConfig": {
     "root": true,
     "extends": "@electerious/eslint-config"
-  },
-  "nodemonConfig": {
-    "exec": "npm run build:pre && npm run server",
-    "ext": "js,json,graphql,scss",
-    "watch": [
-      "src"
-    ]
   },
   "engines": {
     "node": ">= 14"
