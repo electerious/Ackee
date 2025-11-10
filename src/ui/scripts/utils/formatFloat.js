@@ -1,8 +1,5 @@
-import humanNumber from 'human-number'
+import formatCompactNumber from './formatCompactNumber'
 
 export default (num) => {
-	const formattedNum = humanNumber(num, (num) => Number.parseFloat(num).toFixed(2))
-	const cleanNum = formattedNum.replace('.00', '')
-
-	return cleanNum
+	return formatCompactNumber(num, 2)
 }
