@@ -1,6 +1,7 @@
 # Options
 
-The following environment variables are used by Ackee. You can also create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file.
+The following environment variables are used by Ackee. You can also create a [`.env` file](https://www.npmjs.com/package/dotenv) in the root of the project to store all variables in one file. All environment
+variables also support a `_FILE` suffix, which will fetch the value from the specified file path.
 
 - [Database](#database)
 - [Port](#port)
