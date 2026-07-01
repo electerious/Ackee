@@ -3,6 +3,7 @@ import { createElement as h } from 'react'
 
 import Favicon from '../Favicon.js'
 
+import faviconUrl from '../../../../utils/faviconUrl.js'
 import enhanceUrl from '../../enhancers/enhanceUrl.js'
 import sumByProp from '../../utils/sumByProp.js'
 
@@ -95,7 +96,7 @@ const PresentationIconList = (props) => {
 
         return h(UrlRow, {
           ...commonProps,
-          faviconUrl: new URL('/favicon.ico', item.url).href,
+          faviconUrl: faviconUrl(item.url),
           url: item.url,
         })
       }),
