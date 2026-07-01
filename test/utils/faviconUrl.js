@@ -27,9 +27,9 @@ test('return nothing for IPv4 loopback hostname', (t) => {
 })
 
 test('return favicon URL for public IPv4 hostnames', (t) => {
-  const result = faviconUrl(new URL('http://192.168.1.1:5173/path'))
+  const result = faviconUrl(new URL('http://8.8.8.8:5173/path'))
 
-  t.is(result, 'http://192.168.1.1:5173/favicon.ico')
+  t.is(result, 'http://8.8.8.8:5173/favicon.ico')
 })
 
 test('return nothing for IPv6 loopback hostname', (t) => {
