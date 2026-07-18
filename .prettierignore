@@ -1,32 +1,5 @@
-# Temporary files
-**/.DS_Store
-**/.AppleDouble
-**/.LSOverride
-**/.idea/
-**/Icon\r\r
-
-# External disk files
-**/.Spotlight-V100
-**/.Trashes
-
-# AFP share files
-**/.AppleDB
-**/.AppleDesktop
-**/.apdisk
-**/Network Trash Folder
-**/Temporary Items
-
 # Test artifacts
-coverage
 .nyc_output
-
-# Package Managers
-npm-debug.log
-node_modules
-
-# User data
-/data
-.env
 
 # Build output
 dist
