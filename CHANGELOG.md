@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [3.6.0] - 2026-04-08
 
@@ -43,7 +43,7 @@ Small fixes, internal improvements and dependency updates.
 
 ## [3.4.2] - 2022-12-17
 
-## Changed
+### Changed
 
 - Adjust Docker to run as non-root user (thanks @rjhancock, #309, #337)
 
@@ -53,7 +53,7 @@ Small fixes, internal improvements and dependency updates.
 
 ## [3.4.1] - 2022-05-21
 
-## Fixed
+### Fixed
 
 - Build failing on Netlify (thanks @adityatelange, #333)
 - Vercel not attaching CORS headers because of unsupported `multiValueHeaders` (thanks @birjj, #330)
@@ -233,6 +233,11 @@ The `id` of requested referrers was always a URL, but has been changed to a stri
 
 ### Changed
 
+- `Access-Control-Allow-Origin: "*"` not recommended
+- New `Access-Control-Allow-Credentials` header required
+- ackee-tracker with new `.create` and `.record` syntax
+- Referrers require `ReferrerType` in GraphQL API
+- Referrers can return non URL ids via GraphQL API
 - Compiled source files are now part of the repo
 - Docker container size has been reduced (again)
 - Updated build tools allow us to use ~60% less JS in the UI
@@ -406,7 +411,7 @@ The first major back-end and front-end rewrite of Ackee with new API, dashboard,
 - Switch between daily, monthly and yearly views
 - `ACKEE_ALLOW_ORIGIN` now supports multiple domains (#79 #82, thanks @jaryl)
 
-### Improved
+### Changed
 
 - JS error handling with React error boundary
 
