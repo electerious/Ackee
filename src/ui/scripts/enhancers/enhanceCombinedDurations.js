@@ -1,5 +1,5 @@
 import createArray from '../../../utils/createArray.js'
-import sortByProp from '../../../utils/sortByProp.js'
+import sortByProperty from '../../../utils/sortByProperty.js'
 
 export default (domains = [], length) => {
   // Ensure that each day has at least an empty list
@@ -11,7 +11,7 @@ export default (domains = [], length) => {
       const newItem = { text: domain.title, count: duration.count }
 
       // Set items, sort items and reverse them, because it should be a desc sorting
-      acc[index] = [...existingItems, newItem].toSorted(sortByProp('count')).toReversed()
+      acc[index] = [...existingItems, newItem].toSorted(sortByProperty('count')).toReversed()
     }
 
     return acc

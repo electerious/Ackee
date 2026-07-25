@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { createElement as h, useEffect, useRef } from 'react'
 
-const copyInput = (e) => {
-  e.target.select()
+const copyInput = (event) => {
+  event.target.select()
   document.execCommand('copy')
 }
 

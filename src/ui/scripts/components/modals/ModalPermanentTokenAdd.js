@@ -19,8 +19,8 @@ const ModalPermanentTokenAdd = (props) => {
     title: '',
   })
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (event) => {
+    event.preventDefault()
     await createPermanentToken.mutate({
       variables: {
         input: inputs,

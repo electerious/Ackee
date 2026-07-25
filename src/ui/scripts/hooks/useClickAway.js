@@ -13,13 +13,13 @@ export default (ref, fn) => {
     // event shows and hides the component in the same step.
     if (ready === false) return
 
-    const handler = (e) => {
+    const handler = (event) => {
       // Only continue with handler when a ref exists
       const hasRef = ref != null && ref.current != null
       if (hasRef === false) return
 
       // Only close when click is outside of target
-      const isTarget = ref.current.contains(e.target) === true
+      const isTarget = ref.current.contains(event.target) === true
       if (isTarget === true) return
 
       fn()

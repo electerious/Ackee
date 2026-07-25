@@ -1,5 +1,5 @@
-export default (words, num) => {
-  switch (num) {
+export default (words, number) => {
+  switch (number) {
     case 0: {
       return words[0]
     }

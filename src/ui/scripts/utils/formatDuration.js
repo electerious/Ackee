@@ -1,6 +1,6 @@
-const removeLeadingZero = (str) => str.replace(/^0/, '')
-const removeTrailingZeros = (str) => str.replace(/(:00:00|:00)$/, '')
-const cleanZeros = (str) => removeLeadingZero(removeTrailingZeros(str))
+const removeLeadingZero = (string) => string.replace(/^0/, '')
+const removeTrailingZeros = (string) => string.replace(/(:00:00|:00)$/, '')
+const cleanZeros = (string) => removeLeadingZero(removeTrailingZeros(string))
 
 const toString = function () {
   return `${this.value}${this.unit}`

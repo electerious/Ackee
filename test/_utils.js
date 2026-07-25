@@ -1,9 +1,10 @@
 export const api = async (base, body, token, headers = {}) => {
   const url = new URL('/api', await base)
 
-  const defaultHeaders = {}
-  defaultHeaders['Content-Type'] = 'application/json'
-  defaultHeaders['Authorization'] = token == null ? undefined : `Bearer ${token}`
+  const defaultHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': token == null ? undefined : `Bearer ${token}`,
+  }
 
   const result = await fetch(url.href, {
     method: 'post',

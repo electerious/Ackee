@@ -19,8 +19,8 @@ const ModalPermanentTokenEdit = (props) => {
     title: props.title,
   })
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = (event) => {
+    event.preventDefault()
     updatePermanentToken.mutate({
       variables: {
         input: inputs,
@@ -29,8 +29,8 @@ const ModalPermanentTokenEdit = (props) => {
     props.closeModal()
   }
 
-  const onDelete = (e) => {
-    e.preventDefault()
+  const onDelete = (event) => {
+    event.preventDefault()
 
     const c = confirm(
       `Are you sure you want to delete the permanent token "${props.title}"? This action cannot be undone.`,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { createElement as h } from 'react'
 
 // Round upward to the next group of ten
-const round = (num) => Math.ceil(num / 10) * 10
+const round = (number) => Math.ceil(number / 10) * 10
 
 const max = (items) => round(Math.max.apply(Math, items))
 const mid = (items) => max(items) / 2

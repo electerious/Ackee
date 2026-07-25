@@ -5,7 +5,7 @@ import { day } from './times.js'
 export default new Proxy(
   {},
   {
-    get(target, prop) {
+    get(target, property) {
       const data = {
         ttl: process.env.ACKEE_TTL || day,
         port: process.env.ACKEE_PORT || process.env.PORT || 3000,
@@ -19,7 +19,7 @@ export default new Proxy(
         isPreBuildMode: process.env.BUILD_ENV === 'pre',
       }
 
-      return data[prop]
+      return data[property]
     },
   },
 )

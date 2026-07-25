@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { createElement as h } from 'react'
 
 import enhanceUrl from '../../enhancers/enhanceUrl.js'
-import sumByProp from '../../utils/sumByProp.js'
+import sumByProperty from '../../utils/sumByProperty.js'
 
 const Row = (props) => {
   const hasUrl = props.url != null
@@ -35,15 +35,15 @@ const Row = (props) => {
 }
 
 const PresentationCounterList = (props) => {
-  const totalCount = props.items.reduce(sumByProp('count'), 0)
+  const totalCount = props.items.reduce(sumByProperty('count'), 0)
   const proportionalWidth = ({ count }) => (count / totalCount) * 100
 
   const counterWidth = props.items.reduce((maxWidth, item) => {
     const formattedCount = props.formatter(item.count)
     const formattedLength = String(formattedCount).length
 
-    const averageCharWidth = 9
-    const formattedWidth = formattedLength * averageCharWidth
+    const averageCharacterWidth = 9
+    const formattedWidth = formattedLength * averageCharacterWidth
 
     if (formattedWidth > maxWidth) return formattedWidth
     return maxWidth

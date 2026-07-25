@@ -1,3 +1,3 @@
-export default (num, max) => {
-  return num < max ? num : undefined
+export default (number, max) => {
+  return number < max ? number : undefined
 }

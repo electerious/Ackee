@@ -1,5 +1,5 @@
 import Event from '../models/Event.js'
-import sortByProp from '../utils/sortByProp.js'
+import sortByProperty from '../utils/sortByProperty.js'
 
 const response = (entry) => ({
   id: entry.id,
@@ -19,7 +19,7 @@ export const add = async (data) => {
 
 export const all = async () => {
   const enhance = (entries) => {
-    return entries.map(response).toSorted(sortByProp('title'))
+    return entries.map(response).toSorted(sortByProperty('title'))
   }
 
   return enhance(await Event.find({}))

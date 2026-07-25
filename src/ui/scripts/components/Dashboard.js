@@ -55,7 +55,7 @@ const Dashboard = (props) => {
   useHotkey('d', () => props.setRoute('/insights/durations'))
   useHotkey('e', () => props.setRoute('/insights/events'))
   useHotkey('s', () => props.setRoute('/settings'))
-  useHotkey('0,1,2,3,4,5,6,7,8,9', (e, { key }) => gotoDomainWhenDefined(domains.value, props.setRoute, key), {}, [
+  useHotkey('0,1,2,3,4,5,6,7,8,9', (event, { key }) => gotoDomainWhenDefined(domains.value, props.setRoute, key), {}, [
     domains.value,
   ])
 

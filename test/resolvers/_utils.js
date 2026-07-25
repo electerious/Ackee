@@ -85,5 +85,5 @@ export const cleanup = (server) => async () => {
 }
 
 export const gql = (strings, ...values) => {
-  return strings.reduce((result, str, index) => result + str + (values[index] ?? ''), '')
+  return strings.reduce((result, string, index) => result + string + (values[index] ?? ''), '')
 }

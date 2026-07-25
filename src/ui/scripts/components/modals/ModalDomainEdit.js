@@ -20,8 +20,8 @@ const ModalDomainEdit = (props) => {
     title: props.title,
   })
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = (event) => {
+    event.preventDefault()
     updateDomain.mutate({
       variables: {
         input: inputs,
@@ -30,8 +30,8 @@ const ModalDomainEdit = (props) => {
     props.closeModal()
   }
 
-  const onDelete = (e) => {
-    e.preventDefault()
+  const onDelete = (event) => {
+    event.preventDefault()
 
     const c = confirm(`Are you sure you want to delete the domain "${props.title}"? This action cannot be undone.`)
     if (c === false) return

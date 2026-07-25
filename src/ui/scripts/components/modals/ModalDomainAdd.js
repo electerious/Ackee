@@ -19,8 +19,8 @@ const ModalDomainAdd = (props) => {
     title: '',
   })
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (event) => {
+    event.preventDefault()
     await createDomain.mutate({
       variables: {
         input: inputs,

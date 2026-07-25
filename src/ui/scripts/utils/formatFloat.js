@@ -1,8 +1,8 @@
 import humanNumber from 'human-number'
 
-export default (num) => {
-  const formattedNum = humanNumber(num, (num) => Number.parseFloat(num).toFixed(2))
-  const cleanNum = formattedNum.replace('.00', '')
+export default (number) => {
+  const formattedNumber = humanNumber(number, (innerNumber) => Number.parseFloat(innerNumber).toFixed(2))
+  const cleanNumber = formattedNumber.replace('.00', '')
 
-  return cleanNum
+  return cleanNumber
 }

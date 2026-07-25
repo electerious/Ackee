@@ -100,9 +100,9 @@ const Context = (props) => {
           return h(Button, {
             key: item.label + index,
             ...item,
-            onClick: (e) => {
-              item.onClick(e)
-              props.onItemClick(e)
+            onClick: (event) => {
+              item.onClick(event)
+              props.onItemClick(event)
             },
           })
 

@@ -25,8 +25,8 @@ const ModalEventEdit = (props) => {
     type: props.type,
   })
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = (event) => {
+    event.preventDefault()
     updateEvent.mutate({
       variables: {
         input: inputs,
@@ -35,8 +35,8 @@ const ModalEventEdit = (props) => {
     props.closeModal()
   }
 
-  const onDelete = (e) => {
-    e.preventDefault()
+  const onDelete = (event) => {
+    event.preventDefault()
 
     const c = confirm(`Are you sure you want to delete the event "${props.title}"? This action cannot be undone.`)
     if (c === false) return

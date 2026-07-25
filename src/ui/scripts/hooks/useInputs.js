@@ -5,10 +5,10 @@ export default (initialInputs) => {
 
   const onChange = useCallback(
     (key) => {
-      return (e) => {
+      return (event) => {
         setInputs((inputs) => ({
           ...inputs,
-          [key]: e.target.value,
+          [key]: event.target.value,
         }))
       }
     },

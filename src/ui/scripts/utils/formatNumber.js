@@ -1,9 +1,9 @@
 import humanNumber from 'human-number'
 
-export default (num) => {
-  const roundedNum = Math.round(num)
-  const formattedNum = humanNumber(roundedNum, (num) => Number.parseFloat(num).toFixed(1))
-  const cleanNum = formattedNum.replace('.0', '')
+export default (number) => {
+  const roundedNumber = Math.round(number)
+  const formattedNumber = humanNumber(roundedNumber, (innerNumber) => Number.parseFloat(innerNumber).toFixed(1))
+  const cleanNumber = formattedNumber.replace('.0', '')
 
-  return cleanNum
+  return cleanNumber
 }

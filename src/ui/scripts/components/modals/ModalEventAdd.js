@@ -24,8 +24,8 @@ const ModalEventAdd = (props) => {
     type: events.EVENTS_TYPE_TOTAL_CHART,
   })
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (event) => {
+    event.preventDefault()
     await createEvent.mutate({
       variables: {
         input: inputs,
