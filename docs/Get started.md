@@ -19,6 +19,7 @@ The node server shows you the UI and receives the request from all of your sites
 - [With Railway](#with-railway)
 - [With Koyeb](#with-koyeb)
 - [With Zeabur](#with-zeabur)
+- [With RepoCloud](#with-repocloud)
 
 ## With Docker Compose
 
@@ -319,7 +320,7 @@ $ koyeb secret create ackee-password
 ✔ Enter your secret: <ackee_password>
 ```
 
-Once you’ve created the secrets, you can deploy Ackee. In your terminal run the following command to create a new Koyeb App and deploy the Ackee service.
+Once you've created the secrets, you can deploy Ackee. In your terminal run the following command to create a new Koyeb App and deploy the Ackee service.
 
 ```sh
 koyeb app init ackee --docker electerious/ackee --ports 3000:http --routes /:3000 --env ACKEE_USERNAME=@ackee-username --env ACKEE_PASSWORD=@ackee-password --env ACKEE_MONGODB=@mongodb-url --env ACKEE_ALLOW_ORIGIN="https://example.com"
@@ -343,3 +344,11 @@ You can use the [Zeabur](https://zeabur.com/) button for a one-click deployment 
 
 Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` environment variables. Once you do that, everything should just work on its own.
 Zeabur will automatically provision the MongoDB database for you and also link it to your Ackee deployment!
+
+## With RepoCloud
+
+You can use the [RepoCloud](https://repocloud.io/) button below for a one-click deployment and have Ackee running within minutes.
+
+[![Deploy on RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploylobe.svg)](https://repocloud.io/details/Ackee/)
+
+RepoCloud will automatically provision the required infrastructure and handle all the configuration. Once deployed, you can access your Ackee instance via the provided URL and start tracking your website analytics right away.
