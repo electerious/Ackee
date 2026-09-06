@@ -1,6 +1,7 @@
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import { expressMiddleware } from '@as-integrations/express5'
 import express from 'express'
+import helmet from 'helmet'
 import { readFile } from 'node:fs/promises'
 import http from 'node:http'
 import path from 'node:path'
@@ -57,6 +58,16 @@ const attachCorsHeaders = async (request, response, next) => {
 }
 
 const app = express()
+
+// Disable the X-Powered-By header and set other security headers
+app.use(
+  helmet({
+    // Allow the tracker and UI assets to be loaded cross-origin
+    crossOriginResourcePolicy: false,
+    // The generated UI contains an inline configuration script.
+    contentSecurityPolicy: false,
+  }),
+)
 
 // Create HTTP server before Apollo Server (needed for drain plugin)
 const server = http.createServer(app)

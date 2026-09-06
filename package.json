@@ -59,6 +59,7 @@
     "graphql": "^16.14.2",
     "graphql-scalars": "^1.25.0",
     "graphql-tag": "^2.12.7",
+    "helmet": "^8.1.0",
     "is-url": "^1.2.4",
     "is-valid-domain": "^0.1.6",
     "mongoose": "^9.7.4",

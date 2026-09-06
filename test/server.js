@@ -19,6 +19,16 @@ test('return 404', async (t) => {
   t.is(status, 404)
 })
 
+test('return security headers', async (t) => {
+  const url = new URL('/', await base)
+  const response = await fetch(url.href)
+
+  t.is(response.headers.get('X-Content-Type-Options'), 'nosniff')
+  t.is(response.headers.get('X-Frame-Options'), 'SAMEORIGIN')
+  t.is(response.headers.get('Referrer-Policy'), 'no-referrer')
+  t.is(response.headers.get('X-Powered-By'), null)
+})
+
 test('return production styles', async (t) => {
   const url = new URL('/index.css', await base)
   const response = await fetch(url.href)
