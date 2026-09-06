@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Security
+
+- The `Time-Zone` request header is now validated before use; invalid values fall back to the server timezone silently
+
 ## [3.6.0] - 2026-04-08
 
 Code refactoring, internal improvements and dependency updates to bring the codebase up to date with the latest versions and features of Node.js and MongoDB (fixes #377).

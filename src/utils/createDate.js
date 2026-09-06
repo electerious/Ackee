@@ -11,7 +11,21 @@ import {
 import { INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY } from '../constants/intervals.js'
 import serverTimeZone from './timeZone.js'
 
-export default (userTimeZone = serverTimeZone) => {
+// Validate the timezone string against the Intl API. Falls back to the
+// server timezone when the client-supplied value is absent or invalid,
+// preventing a RangeError from propagating through the request.
+const sanitizeTimeZone = (tz) => {
+  if (tz == null) return serverTimeZone
+  try {
+    Intl.DateTimeFormat(undefined, { timeZone: tz })
+    return tz
+  } catch {
+    return serverTimeZone
+  }
+}
+
+export default (userTimeZone) => {
+  const safeTimeZone = sanitizeTimeZone(userTimeZone)
   const currentDate = new Date()
 
   // This is the biggest, positive timezone offset possible (starting from UTC).
@@ -26,7 +40,7 @@ export default (userTimeZone = serverTimeZone) => {
   const timeZoneToleranz = 14
 
   const instance = {
-    userTimeZone,
+    userTimeZone: safeTimeZone,
     // Get a date with an offset
     lastMilliseconds: (milliseconds) => subMilliseconds(currentDate, milliseconds),
     lastHours: (hours) => subHours(currentDate, hours),
