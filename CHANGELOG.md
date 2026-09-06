@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Security
 
 - The `Time-Zone` request header is now validated before use; invalid values fall back to the server timezone silently
+- Free-text fields in the database (`source`, `deviceName`, `deviceManufacturer`, `osName`, `osVersion`, `browserName`, `browserVersion`, `title`, `key`, `details`) now enforce maximum length limits to prevent storage abuse
 
 ## [3.6.0] - 2026-04-08
 

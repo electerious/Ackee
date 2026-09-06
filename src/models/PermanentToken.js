@@ -11,6 +11,7 @@ const schema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    maxlength: 500,
   },
   created: {
     type: Date,

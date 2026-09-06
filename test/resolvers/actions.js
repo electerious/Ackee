@@ -78,6 +78,29 @@ test.serial('update action', async (t) => {
   t.true(json.data.updateAction.success)
 })
 
+test.serial('reject oversized action update', async (t) => {
+  const body = {
+    query: gql`
+      mutation updateAction($id: ID!, $input: UpdateActionInput!) {
+        updateAction(id: $id, input: $input) {
+          success
+        }
+      }
+    `,
+    variables: {
+      id: validAction.id,
+      input: {
+        key: 'x'.repeat(501),
+      },
+    },
+  }
+
+  const { json } = await api(base, body)
+
+  t.is(json.data, null)
+  t.true(json.errors[0].message.includes('maximum allowed length'))
+})
+
 test.serial('ignore action creation when logged in', async (t) => {
   const body = {
     query: gql`

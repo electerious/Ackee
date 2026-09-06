@@ -36,6 +36,7 @@ const schema = new mongoose.Schema({
   },
   source: {
     type: String,
+    maxlength: 500,
   },
   screenWidth: {
     type: Number,
@@ -54,21 +55,27 @@ const schema = new mongoose.Schema({
   },
   deviceName: {
     type: String,
+    maxlength: 200,
   },
   deviceManufacturer: {
     type: String,
+    maxlength: 200,
   },
   osName: {
     type: String,
+    maxlength: 200,
   },
   osVersion: {
     type: String,
+    maxlength: 100,
   },
   browserName: {
     type: String,
+    maxlength: 200,
   },
   browserVersion: {
     type: String,
+    maxlength: 100,
   },
   browserWidth: {
     type: Number,

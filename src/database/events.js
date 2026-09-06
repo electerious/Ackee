@@ -52,6 +52,7 @@ export const update = async (id, data) => {
       },
       {
         returnDocument: 'after',
+        runValidators: true,
       },
     ),
   )
