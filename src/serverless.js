@@ -5,6 +5,7 @@ import connect from './utils/connect.js'
 import createApolloServer from './utils/createApolloServer.js'
 import { createServerlessContext } from './utils/createContext.js'
 import findMatchingOrigin from './utils/findMatchingOrigin.js'
+import setSecurityHeaders from './utils/securityHeaders.js'
 
 if (config.dbUrl == null) {
   throw new Error('MongoDB connection URI missing in environment')
@@ -27,6 +28,12 @@ const buildCorsHeaders = (allowedOrigin) => {
   }
 }
 
+const buildResponseHeaders = (corsHeaders) => {
+  const responseHeaders = new Headers(corsHeaders)
+  setSecurityHeaders(responseHeaders)
+  return responseHeaders
+}
+
 /**
  * Handles incoming requests using the Web API (Request/Response).
  * Manages CORS, delegates GraphQL operations to Apollo Server, and returns a Web Response.
@@ -43,7 +50,7 @@ export const handler = async (request) => {
   if (request.method === 'OPTIONS') {
     return new Response(null, {
       status: 204,
-      headers: corsHeaders,
+      headers: buildResponseHeaders(corsHeaders),
     })
   }
 
@@ -66,7 +73,7 @@ export const handler = async (request) => {
     context: () => createServerlessContext(request),
   })
 
-  const responseHeaders = new Headers()
+  const responseHeaders = buildResponseHeaders(corsHeaders)
 
   for (const [key, value] of result.headers) {
     responseHeaders.set(key, value)
