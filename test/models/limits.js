@@ -18,10 +18,6 @@ test('limits action key and details', async (t) => {
   )
 })
 
-test('requires an action value when creating an action', async (t) => {
-  t.true(await hasValidationError(Action, { eventId: 'event', key: 'key' }, 'value'))
-})
-
 test('limits domain title', async (t) => {
   t.true(await hasValidationError(Domain, { title: 'x'.repeat(501) }, 'title'))
 })

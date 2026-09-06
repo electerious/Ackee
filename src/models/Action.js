@@ -19,9 +19,6 @@ const schema = new mongoose.Schema({
   },
   value: {
     type: Number,
-    required() {
-      return this.isNew === true
-    },
   },
   details: {
     type: String,
