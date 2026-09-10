@@ -354,4 +354,6 @@ Zeabur will automatically provision the MongoDB database for you and also link i
 3. Search for **Ackee** and select it
 4. Set your `ACKEE_USERNAME` and `ACKEE_PASSWORD`, then click **Create** to deploy the service
 
+![Ackee deployed on Easypanel](images/easypanel_deployed.png)
+
 Easypanel automatically provisions the MongoDB database and links it to your Ackee deployment. See the [official Ackee template on Easypanel](https://easypanel.io/templates/ackee) for more details.
