@@ -19,6 +19,7 @@ The node server shows you the UI and receives the request from all of your sites
 - [With Railway](#with-railway)
 - [With Koyeb](#with-koyeb)
 - [With Zeabur](#with-zeabur)
+- [With Easypanel](#with-easypanel)
 
 ## With Docker Compose
 
@@ -343,3 +344,14 @@ You can use the [Zeabur](https://zeabur.com/) button for a one-click deployment 
 
 Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` environment variables. Once you do that, everything should just work on its own.
 Zeabur will automatically provision the MongoDB database for you and also link it to your Ackee deployment!
+
+## With Easypanel
+
+[Easypanel](https://easypanel.io/) can deploy Ackee with one click using its official template.
+
+1. Open your Easypanel dashboard and create (or open) a project
+2. Click **+ Add Service** and choose **Templates**
+3. Search for **Ackee** and select it
+4. Set your `ACKEE_USERNAME` and `ACKEE_PASSWORD`, then click **Create** to deploy the service
+
+Easypanel automatically provisions the MongoDB database and links it to your Ackee deployment. See the [official Ackee template on Easypanel](https://easypanel.io/templates/ackee) for more details.
