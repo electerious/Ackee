@@ -8,6 +8,8 @@ The following environment variables are used by Ackee. You can also create a `.e
 - [TTL](#ttl)
 - [Tracker](#tracker)
 - [Environment](#environment)
+- [Demo mode](#demo-mode)
+- [CORS headers](#cors-headers)
 
 ## Database
 
