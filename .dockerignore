@@ -14,8 +14,6 @@ node_modules
 # Test artifacts
 coverage
 .nyc_output
-npm-debug.log
-node_modules
 
 # User data
 /data
