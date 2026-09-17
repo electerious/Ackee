@@ -4,17 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-### Security
-
-- HTTP responses now include security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, etc.) via `helmet`
-- The `Time-Zone` request header is now validated before use; invalid values fall back to the server timezone silently
-- Free-text fields in the database (`source`, `deviceName`, `deviceManufacturer`, `osName`, `osVersion`, `browserName`, `browserVersion`, `title`, `key`, `details`) now enforce maximum length limits to prevent storage abuse
+## [3.6.1] - 2026-09-18
 
 ### Changed
 
 - Action values can now be omitted or set to `null` when creating actions, matching the existing support for resetting values on update
+- HTTP responses now include security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, etc.) via `helmet`
+- The `Time-Zone` request header is now validated before use; invalid values fall back to the server timezone silently
+- Free-text fields in the database (`source`, `deviceName`, `deviceManufacturer`, `osName`, `osVersion`, `browserName`, `browserVersion`, `title`, `key`, `details`) now enforce maximum length limits to prevent storage abuse
 
 ## [3.6.0] - 2026-04-08
 
