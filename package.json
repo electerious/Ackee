@@ -73,7 +73,7 @@
   "devDependencies": {
     "@apollo/client": "^4.2.12",
     "@electerious/eslint-config": "^5.4.0",
-    "@electerious/prettier-config": "^4.0.2",
+    "@electerious/prettier-config": "^5.0.0",
     "ava": "^6.4.1",
     "classnames": "^2.5.1",
     "eslint": "^9.39.5",
