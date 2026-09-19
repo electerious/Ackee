@@ -12,6 +12,9 @@ I highly recommend [this article](https://medium.com/intrinsic/why-should-i-use-
 
 ## Example configurations
 
+- [Nginx](#nginx)
+- [Caddy](#caddy)
+
 ### nginx
 
 - [Recommended configuration](#recommended-configuration)
@@ -164,3 +167,38 @@ server {
     }
 }
 ```
+
+### Caddy
+#### Recommended configuration
+
+This configuration redirects all requests to the non-www domain `example.com`, securing connections via Caddy's [Automatic TSL/SSL](https://caddyserver.com/docs/automatic-https). If Ackee is serving over HTTP, modern browsers likely will block `/tracker.js` for mixed content, making HTTPS very valuble. In addition, it enables the correct [CORS headers](https://docs.ackee.electerious.com/#/docs/CORS%20headers). 
+
+> 👉 The CORS headers are required so your sites can send data to Ackee, even when their domain is different to the one Ackee uses.
+
+It also includes an optional directive to only serve the analytics console to designated IP addresses. It does this by limiting non-designated IP's to `/tracker.js` and `/api`, the two pages necessary for analytics collection. This rule provides additional security if required. Uncommented directive to enable. 
+
+Be sure to substitute `example.com` and `example.ip.to.whitelist`, if whitelist is in use. `/tracker.js` must be changed as well if your tracking script has another name, set by the `ACKEE_TRACKER` variable.
+```
+example.com:443 {
+    
+    # Change if Ackee is not running on default port
+    reverse_proxy :3000
+
+    header {
+        Access-Control-Allow-Origin: https://example.com
+        Access-Control-Allow-Methods: "GET, POST, PATCH, OPTIONS"
+        Access-Control-Allow-Headers: "Content-Type, Authorization, Time-Zone"
+        Access-Control-Allow-Credentials: true
+        Access-Control-Max-Age: 3600
+    }
+
+    # Uncomment out the following to enable whitelisting for the analytics console 
+    #@Denied {
+    #    not client_ip private_ranges example.ip.to.whitelist
+    #    not path /tracker.js /api
+    #}
+    #abort @Denied
+
+}
+```
+To whitelist additional IP's, append them after example.ip.to.whitelist.
