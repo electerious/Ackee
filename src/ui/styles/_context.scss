@@ -31,7 +31,7 @@
 	}
 
 	&--floating {
-		border-radius: 12px;
+		border-radius: $radius;
 	}
 
 	&.visible {
