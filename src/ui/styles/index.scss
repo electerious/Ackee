@@ -1,49 +1,43 @@
-// Namespaces -------------------------------------------------- //
-@use 'sass:math';
-
-// Basics ------------------------------------------------------ //
-@import 'vars';
-
 // Modules ----------------------------------------------------- //
-@import 'normalize';
+@use 'normalize';
 
 // Styles ------------------------------------------------------ //
-@import 'html';
-@import 'body';
-@import 'customScrollbar';
-@import 'fonts';
-@import 'headline';
-@import 'text';
-@import 'label';
-@import 'link';
-@import 'input';
-@import 'select';
-@import 'inputMessage';
-@import 'main';
-@import 'card';
-@import 'spinner';
-@import 'updater';
-@import 'loader';
-@import 'message';
-@import 'header';
-@import 'content';
-@import 'barChart';
-@import 'line';
-@import 'linkItem';
-@import 'flexList';
-@import 'emptyState';
-@import 'valueUnit';
-@import 'favicon';
-@import 'modal';
-@import 'context';
-@import 'filter';
-@import 'keyHint';
-@import 'status';
-@import 'facts';
-@import 'tooltip';
-@import 'badge';
+@use 'html';
+@use 'body';
+@use 'customScrollbar';
+@use 'fonts';
+@use 'headline';
+@use 'text';
+@use 'label';
+@use 'link';
+@use 'input';
+@use 'select';
+@use 'inputMessage';
+@use 'main';
+@use 'card';
+@use 'spinner';
+@use 'updater';
+@use 'loader';
+@use 'message';
+@use 'header';
+@use 'content';
+@use 'barChart';
+@use 'line';
+@use 'linkItem';
+@use 'flexList';
+@use 'emptyState';
+@use 'valueUnit';
+@use 'favicon';
+@use 'modal';
+@use 'context';
+@use 'filter';
+@use 'keyHint';
+@use 'status';
+@use 'facts';
+@use 'tooltip';
+@use 'badge';
 
 // Helpers ----------------------------------------------------- //
-@import 'align';
-@import 'spacer';
-@import 'color';
+@use 'align';
+@use 'spacer';
+@use 'color';
