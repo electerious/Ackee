@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .badge {
 
 	$height: 28px;
@@ -26,18 +24,18 @@
 	}
 
 	&--positive {
-		background: rgba($positive, .3);
-		color: $positive;
+		background: var(--positive-background);
+		color: var(--positive);
 	}
 
 	&--negative {
-		background: rgba($negative, .3);
-		color: $negative;
+		background: var(--negative-background);
+		color: var(--negative);
 	}
 
 	&--neutral {
-		background: rgba($light, .3);
-		color: $light;
+		background: var(--light-background);
+		color: var(--light);
 	}
 
 	&__icon {

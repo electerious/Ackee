@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .barChart {
 
 	position: relative;
@@ -43,7 +41,7 @@
 			bottom: 0;
 			width: var(--max-width);
 			height: 1px;
-			background: $dimmed;
+			background: var(--dimmed);
 		}
 	}
 
@@ -68,12 +66,12 @@
 		width: 100%;
 		height: var(--size);
 		min-height: 2px;
-		background: $tertiary;
+		background: var(--tertiary);
 		transition: height .3s ease;
 	}
 
 	&__column.active &__bar {
-		background: $primary;
+		background: var(--primary);
 
 		&::after {
 			--arrow-width: 15px;
@@ -84,7 +82,7 @@
 			right: 0;
 			bottom: calc(100% + var(--gutter));
 			padding: .2em .5em calc(.2em + var(--arrow-height));
-			background: $white;
+			background: var(--white);
 			clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--arrow-width)) calc(100% - var(--arrow-height)), 0 calc(100% - var(--arrow-height)));
 			color: currentColor;
 			z-index: 1;

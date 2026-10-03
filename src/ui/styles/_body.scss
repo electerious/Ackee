@@ -1,10 +1,8 @@
-@use 'vars' as *;
-
 body {
 
 	display: grid;
-	color: $light;
-	background: $black;
+	color: var(--light);
+	background: var(--black);
 
 	// Make sure that the grid is limited to 100%:
 	// https://css-tricks.com/preventing-a-grid-blowout/

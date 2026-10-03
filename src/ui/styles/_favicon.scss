@@ -1,16 +1,14 @@
-@use 'vars' as *;
-
 .favicon {
 
 	width: var(--row-height);
 	height: var(--row-height);
-	background: $white;
+	background: var(--white);
 	border-radius: 100%;
-	border: 2px solid $white;
+	border: 2px solid var(--white);
 	overflow: hidden;
 
 	&--missing {
-		background: $gradient;
+		background: var(--gradient);
 	}
 
 }

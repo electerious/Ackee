@@ -1,6 +1,3 @@
-@use 'sass:color';
-@use 'vars' as *;
-
 .modal {
 
 	position: fixed;
@@ -12,7 +9,7 @@
 	bottom: 0;
 	left: 0;
 	padding: 0 var(--gutter);
-	background: rgba(color.adjust($black, $lightness: -6%), .9);
+	background: var(--modal-backdrop);
 	pointer-events: none;
 	opacity: 0;
 	z-index: 3;

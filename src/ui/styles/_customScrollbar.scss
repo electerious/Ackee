@@ -15,7 +15,7 @@
 	}
 
 	::-webkit-scrollbar-thumb {
-		background-color: rgba(255, 255, 255, .5);
+		background-color: var(--light);
 		border-radius: math.div($size, 2);
 	}
 
@@ -25,7 +25,7 @@
 
 	* {
 		scrollbar-width: thin;
-		scrollbar-color: rgba(255, 255, 255, .5) transparent;
+		scrollbar-color: var(--light) transparent;
 	}
 
 }

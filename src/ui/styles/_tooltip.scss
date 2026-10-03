@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .tooltip {
 
 	$size: 1em;
@@ -9,12 +7,12 @@
 	justify-content: center;
 	width: $size;
 	height: $size;
-	background: $dimmed;
+	background: var(--dimmed);
 	border-radius: 100%;
 	outline: none;
 
 	&:focus {
-		box-shadow: 0 0 0 2px $primary;
+		box-shadow: 0 0 0 2px var(--primary);
 	}
 
 	&__icon {

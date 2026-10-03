@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .emptyState {
 
 	display: grid;
@@ -17,7 +15,7 @@
 	&__icon {
 		$size: 24px;
 
-		fill: $light;
+		fill: var(--light);
 		width: $size;
 		height: $size;
 	}

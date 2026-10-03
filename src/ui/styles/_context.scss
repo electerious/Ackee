@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .context {
 
 	position: absolute;
@@ -8,7 +6,7 @@
 	left: 0;
 	padding: calc(var(--gutter) / 2) 0;
 	min-width: 210px;
-	background: rgba($context, .98);
+	background: var(--context-overlay);
 	border-radius: var(--radius);
 	transform: translate(var(--x), var(--y));
 	z-index: 3;
@@ -16,7 +14,7 @@
 	pointer-events: none;
 
 	@supports (backdrop-filter: blur(10px)) {
-		background: $context;
+		background: var(--context);
 		backdrop-filter: blur(10px);
 	}
 
@@ -56,23 +54,23 @@
 		outline: none;
 
 		&.active {
-			color: $white;
+			color: var(--white);
 		}
 
 		&:focus,
 		&:hover {
-			background: $dimmed;
+			background: var(--dimmed);
 		}
 	}
 
 	&--floating &__button {
 		margin: 0 calc(var(--gutter) / 2);
 		padding: calc(var(--gutter) / 2) calc(var(--gutter) / 1.6);
-		color: $white;
+		color: var(--white);
 		border-radius: var(--inner-radius);
 
 		&.active {
-			color: $primary;
+			color: var(--primary);
 		}
 	}
 
@@ -94,12 +92,12 @@
 	&__description {
 		padding-right: var(--gutter);
 		font-size: .86em;
-		color: $light;
+		color: var(--light);
 	}
 
 	&__separator {
 		height: 1px;
-		background: $dimmed;
+		background: var(--dimmed);
 		margin: calc(var(--gutter) / 2) 0;
 	}
 

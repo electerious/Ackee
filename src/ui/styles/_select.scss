@@ -1,6 +1,3 @@
-@use 'sass:color';
-@use 'vars' as *;
-
 .select {
 
 	appearance: none;
@@ -9,7 +6,7 @@
 	margin: 0 0 var(--form-margin);
 	padding: var(--form-padding);
 	padding-right: calc(var(--gutter) * 2);
-	background: $dimmed;
+	background: var(--dimmed);
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23fff' d='M256,298.3L256,298.3L256,298.3l174.2-167.2c4.3-4.2,11.4-4.1,15.8,0.2l30.6,29.9c4.4,4.3,4.5,11.3,0.2,15.5L264.1,380.9c-2.2,2.2-5.2,3.2-8.1,3c-3,0.1-5.9-0.9-8.1-3L35.2,176.7c-4.3-4.2-4.2-11.2,0.2-15.5L66,131.3c4.4-4.3,11.5-4.4,15.8-0.2L256,298.3z'/%3E%3C/svg%3E");
 	background-size: 12px;
 	background-repeat: no-repeat;
@@ -19,20 +16,20 @@
 	border-radius: var(--inner-radius);
 	outline: none;
 	transition: border-color .3s ease;
-	color: $white;
+	color: var(--white);
 
 	&:disabled {
-		border-color: color.adjust(transparent, $lightness: 5%);
-		background-color: color.adjust($dimmed, $lightness: -5%);
+		border-color: var(--disabled-border);
+		background-color: var(--disabled-background);
 		box-shadow: none;
 		cursor: not-allowed;
-		color: color.adjust($white, $lightness: 5%);
+		color: var(--white);
 		opacity: .6;
 		background-image: none;
 	}
 
 	&:focus {
-		border-color: $primary;
+		border-color: var(--primary);
 	}
 
 	option {

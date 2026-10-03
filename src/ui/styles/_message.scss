@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .message {
 
 	margin-bottom: var(--gutter);
@@ -7,19 +5,19 @@
 	padding: var(--form-padding);
 	border: 2px solid transparent;
 	border-radius: var(--inner-radius);
-	color: $white;
+	color: var(--white);
 	font-size: .8em;
 
 	&--success {
-		background: $success;
+		background: var(--success);
 	}
 
 	&--warning {
-		background: $warning;
+		background: var(--warning);
 	}
 
 	&--error {
-		background: $error;
+		background: var(--error);
 	}
 
 }

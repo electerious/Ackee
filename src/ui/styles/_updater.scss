@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .updater {
 
 	$size: 1em;
@@ -25,14 +23,14 @@
 	position: relative;
 	width: $size;
 	height: $size;
-	background: $context;
+	background: var(--context);
 	border-radius: 100%;
 
 	&__circle {
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: $white;
+		background: var(--white);
 		border-radius: inherit;
 		animation-name: updater__zoom;
 		animation-iteration-count: infinite;

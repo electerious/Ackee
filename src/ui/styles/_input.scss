@@ -1,6 +1,3 @@
-@use 'sass:color';
-@use 'vars' as *;
-
 .input {
 
 	appearance: none;
@@ -8,24 +5,24 @@
 	width: 100%;
 	margin: 0 0 var(--form-margin);
 	padding: var(--form-padding);
-	background: $dimmed;
+	background: var(--dimmed);
 	border: 2px solid transparent;
 	box-shadow: none;
 	border-radius: var(--inner-radius);
 	outline: none;
 	resize: vertical;
 	transition: border-color .3s ease;
-	color: $white;
+	color: var(--white);
 
 	&:disabled {
-		border-color: color.adjust(transparent, $lightness: 5%);
-		background-color: color.adjust($dimmed, $lightness: -5%);
+		border-color: var(--disabled-border);
+		background-color: var(--disabled-background);
 		cursor: not-allowed;
-		color: color.adjust($white, $lightness: 5%);
+		color: var(--white);
 	}
 
 	&:focus {
-		border-color: $primary;
+		border-color: var(--primary);
 	}
 
 	&::placeholder {

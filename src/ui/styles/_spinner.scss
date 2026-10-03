@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .spinner {
 
 	$size: 26px;
@@ -30,17 +28,17 @@
 		animation-timing-function: linear;
 
 		&--primary {
-			border-right-color: $primary;
+			border-right-color: var(--primary);
 			animation-duration: .5s;
 		}
 
 		&--white {
-			border-right-color: $white;
+			border-right-color: var(--white);
 			animation-duration: .8s;
 		}
 
 		&--dimmed {
-			border-color: $dimmed;
+			border-color: var(--dimmed);
 		}
 	}
 

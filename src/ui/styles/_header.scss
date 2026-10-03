@@ -1,12 +1,10 @@
-@use 'vars' as *;
-
 .header {
 
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border-bottom: 1px solid $border;
+	border-bottom: 1px solid var(--border);
 
 	&::before,
 	&::after {
@@ -20,12 +18,12 @@
 
 	&::before {
 		left: 0;
-		background: linear-gradient(to right, $black, rgba($black, 0));
+		background: linear-gradient(to right, var(--black), var(--black-transparent));
 	}
 
 	&::after {
 		right: 0;
-		background: linear-gradient(to right, rgba($black, 0), $black);
+		background: linear-gradient(to right, var(--black-transparent), var(--black));
 	}
 
 	@keyframes header__rotate {
@@ -44,7 +42,7 @@
 		margin: var(--gutter) 0 calc(var(--gutter) / 2);
 		width: $size;
 		height: $size;
-		background: $gradient;
+		background: var(--gradient);
 		border-radius: 100%;
 	}
 
@@ -71,12 +69,12 @@
 		}
 
 		&--white {
-			border-right-color: $white;
+			border-right-color: var(--white);
 			animation-duration: .5s;
 		}
 
 		&--primary {
-			border-right-color: $primary;
+			border-right-color: var(--primary);
 			animation-duration: 1.2s;
 		}
 	}
@@ -106,11 +104,11 @@
 		&.hovered,
 		&:hover,
 		&:focus {
-			box-shadow: inset 0 -2px 0 $light;
+			box-shadow: inset 0 -2px 0 var(--light);
 		}
 
 		&.active {
-			box-shadow: inset 0 -2px 0 $primary;
+			box-shadow: inset 0 -2px 0 var(--primary);
 		}
 	}
 

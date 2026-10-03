@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .inputMessage {
 
 	display: grid;
@@ -30,16 +28,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba($context, .98);
-		border: 2px solid $primary;
+		background: var(--context-overlay);
+		border: 2px solid var(--primary);
 		border-radius: var(--inner-radius);
-		color: $white;
+		color: var(--white);
 		font-size: .86em;
 		opacity: 0;
 		pointer-events: none;
 
 		@supports (backdrop-filter: blur(10px)) {
-			background: $context;
+			background: var(--context);
 			backdrop-filter: blur(10px);
 		}
 	}

@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .facts {
 
 	--columns: 3;
@@ -26,7 +24,7 @@
 		align-content: space-between;
 		align-items: end;
 		gap: var(--gutter);
-		background: $card;
+		background: var(--card);
 		padding: calc(var(--gutter) * 1.6) calc(var(--gutter) * 1.5) calc(var(--gutter) * 1.5);
 		width: 100%;
 	}

@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .keyHint {
 
 	$size: 1.5em;
@@ -10,9 +8,9 @@
 	width: $size;
 	height: $size;
 	font-size: .8em;
-	background: rgba(255, 255, 255, .05);
+	background: var(--dimmed);
 	border-radius: 6px;
-	border: 1px solid $tertiary;
-	color: $light;
+	border: 1px solid var(--tertiary);
+	color: var(--light);
 
 }

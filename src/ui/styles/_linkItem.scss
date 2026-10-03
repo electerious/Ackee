@@ -1,5 +1,3 @@
-@use 'vars' as *;
-
 .linkItem {
 
 	display: flex;
@@ -16,7 +14,7 @@
 
 	&:not(.linkItem--disabled):focus,
 	&:not(.linkItem--disabled):hover {
-		color: $white;
+		color: var(--white);
 	}
 
 	@media (max-width: 800px) {

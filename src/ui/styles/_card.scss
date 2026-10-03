@@ -1,8 +1,6 @@
-@use 'vars' as *;
-
 .card {
 
-	background: $card;
+	background: var(--card);
 	border-radius: var(--radius);
 	width: 100%;
 	overflow: hidden;
@@ -33,7 +31,7 @@
 
 	&__footer {
 		display: flex;
-		border-top: 1px solid $black;
+		border-top: 1px solid var(--black);
 	}
 
 	&__button {
@@ -49,7 +47,7 @@
 
 		&:not([disabled]):focus,
 		&:not([disabled]):hover {
-			background: $dimmed;
+			background: var(--dimmed);
 		}
 
 		&:active {
@@ -65,7 +63,7 @@
 	&__separator {
 		flex-shrink: 0;
 		width: 1px;
-		background: $black;
+		background: var(--black);
 	}
 
 }
