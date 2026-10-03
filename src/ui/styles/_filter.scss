@@ -18,13 +18,9 @@
 		gap: var(--gutter);
 		padding: 0 calc(var(--gutter) * 1.5);
 		border-radius: 100px;
-		background: var(--context-overlay);
+		background: var(--context);
+		backdrop-filter: blur(10px);
 		pointer-events: all;
-
-		@supports (backdrop-filter: blur(10px)) {
-			background: var(--context);
-			backdrop-filter: blur(10px);
-		}
 	}
 
 	&__button {

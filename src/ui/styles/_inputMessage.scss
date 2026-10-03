@@ -28,18 +28,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: var(--context-overlay);
+		background: var(--context);
+		backdrop-filter: blur(10px);
 		border: 2px solid var(--primary);
 		border-radius: var(--inner-radius);
 		color: var(--white);
 		font-size: .86em;
 		opacity: 0;
 		pointer-events: none;
-
-		@supports (backdrop-filter: blur(10px)) {
-			background: var(--context);
-			backdrop-filter: blur(10px);
-		}
 	}
 
 	&:focus-within::after {

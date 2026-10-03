@@ -6,17 +6,13 @@
 	left: 0;
 	padding: calc(var(--gutter) / 2) 0;
 	min-width: 210px;
-	background: var(--context-overlay);
+	background: var(--context);
+	backdrop-filter: blur(10px);
 	border-radius: var(--radius);
 	transform: translate(var(--x), var(--y));
 	z-index: 3;
 	opacity: 0;
 	pointer-events: none;
-
-	@supports (backdrop-filter: blur(10px)) {
-		background: var(--context);
-		backdrop-filter: blur(10px);
-	}
 
 	@media (max-width: 800px) {
 		font-size: .9em;
