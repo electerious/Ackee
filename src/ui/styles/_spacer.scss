@@ -1,7 +1,5 @@
-@use 'vars' as *;
-
 .spacer {
 
-	height: calc(#{ $gutter } * var(--size));
+	height: calc(var(--gutter) * var(--size));
 
 }

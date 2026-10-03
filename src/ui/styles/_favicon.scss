@@ -2,8 +2,8 @@
 
 .favicon {
 
-	width: $rowHeight;
-	height: $rowHeight;
+	width: var(--row-height);
+	height: var(--row-height);
 	background: $white;
 	border-radius: 100%;
 	border: 2px solid $white;

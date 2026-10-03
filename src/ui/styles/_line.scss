@@ -2,7 +2,7 @@
 
 .line {
 
-	margin: 0 0 $gutter;
+	margin: 0 0 var(--gutter);
 	height: 1px;
 	background: $dimmed;
 	border: 0;

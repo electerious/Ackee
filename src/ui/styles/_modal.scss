@@ -11,7 +11,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	padding: 0 $gutter;
+	padding: 0 var(--gutter);
 	background: rgba(color.adjust($black, $lightness: -6%), .9);
 	pointer-events: none;
 	opacity: 0;

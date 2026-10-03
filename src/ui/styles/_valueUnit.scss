@@ -1,12 +1,9 @@
-@use 'sass:math';
-@use 'vars' as *;
-
 .valueUnit {
 
 	display: grid;
 	grid-auto-flow: column;
 	justify-content: start;
 	align-items: end;
-	gap: math.div($gutter, 2);
+	gap: calc(var(--gutter) / 2);
 
 }

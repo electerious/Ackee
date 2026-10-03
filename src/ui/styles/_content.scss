@@ -1,16 +1,14 @@
-@use 'vars' as *;
-
 .content {
 
 	--columns: 2;
 
 	display: grid;
 	grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
-	gap: $gutter;
+	gap: var(--gutter);
 	margin: 0 auto;
-	padding: 6vh $gutter;
+	padding: 6vh var(--gutter);
 	width: 100%;
-	max-width: $maxWidth;
+	max-width: var(--max-width);
 
 	@media (max-width: 800px) {
 		--columns: 1;

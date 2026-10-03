@@ -1,4 +1,3 @@
-@use 'sass:math';
 @use 'vars' as *;
 
 .header {
@@ -15,7 +14,7 @@
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		width: $gutter*2;
+		width: calc(var(--gutter) * 2);
 		pointer-events: none;
 	}
 
@@ -42,7 +41,7 @@
 		$size: 42px;
 
 		position: relative;
-		margin: $gutter 0 math.div($gutter, 2);
+		margin: var(--gutter) 0 calc(var(--gutter) / 2);
 		width: $size;
 		height: $size;
 		background: $gradient;
@@ -92,14 +91,14 @@
 	&__buttons {
 		display: flex;
 		margin: 0 auto;
-		padding: 0 math.div($gutter, 2);
+		padding: 0 calc(var(--gutter) / 2);
 	}
 
 	&__button {
 		display: flex;
 		align-items: center;
-		margin: 0 math.div($gutter, 2);
-		padding: math.div($gutter, 1.5) 2px;
+		margin: 0 calc(var(--gutter) / 2);
+		padding: calc(var(--gutter) / 1.5) 2px;
 		outline: none;
 		white-space: nowrap;
 		transition: box-shadow .3s ease;
@@ -118,7 +117,7 @@
 	&__arrow {
 		$size: 12px;
 
-		margin-left: math.div($gutter, 2);
+		margin-left: calc(var(--gutter) / 2);
 		width: $size;
 		height: $size;
 		fill: currentColor;

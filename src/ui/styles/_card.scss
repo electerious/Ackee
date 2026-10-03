@@ -1,10 +1,9 @@
-@use 'sass:math';
 @use 'vars' as *;
 
 .card {
 
 	background: $card;
-	border-radius: $radius;
+	border-radius: var(--radius);
 	width: 100%;
 	overflow: hidden;
 
@@ -19,16 +18,16 @@
 	}
 
 	&__inner {
-		padding: $gutter*1.6 $gutter*1.5 $gutter*1.5;
+		padding: calc(var(--gutter) * 1.6) calc(var(--gutter) * 1.5) calc(var(--gutter) * 1.5);
 		width: 100%;
 	}
 
 	&__group {
 		display: grid;
 		grid-auto-flow: column;
-		grid-gap: math.div($gutter, 4);
+		grid-gap: calc(var(--gutter) / 4);
 		align-items: center;
-		margin: 0 0 math.div($gutter, 4);
+		margin: 0 0 calc(var(--gutter) / 4);
 		justify-content: start;
 	}
 
@@ -40,7 +39,7 @@
 	&__button {
 		display: flex;
 		justify-content: flex-end;
-		padding: $gutter $gutter*1.5;
+		padding: var(--gutter) calc(var(--gutter) * 1.5);
 		transition: background .3s ease;
 		outline: none;
 

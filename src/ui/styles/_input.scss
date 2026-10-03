@@ -6,12 +6,12 @@
 	appearance: none;
 	box-sizing: border-box;
 	width: 100%;
-	margin: 0 0 $formMargin;
-	padding: $formPadding;
+	margin: 0 0 var(--form-margin);
+	padding: var(--form-padding);
 	background: $dimmed;
 	border: 2px solid transparent;
 	box-shadow: none;
-	border-radius: $innerRadius;
+	border-radius: var(--inner-radius);
 	outline: none;
 	resize: vertical;
 	transition: border-color .3s ease;

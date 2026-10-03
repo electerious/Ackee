@@ -2,11 +2,11 @@
 
 .message {
 
-	margin-bottom: $gutter;
+	margin-bottom: var(--gutter);
 	// Keep padding consistent with form controls.
-	padding: $formPadding;
+	padding: var(--form-padding);
 	border: 2px solid transparent;
-	border-radius: $innerRadius;
+	border-radius: var(--inner-radius);
 	color: $white;
 	font-size: .8em;
 

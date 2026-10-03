@@ -8,7 +8,7 @@
 	display: grid;
 	grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 	gap: 1px;
-	border-radius: $radius;
+	border-radius: var(--radius);
 	width: 100%;
 	overflow: hidden;
 
@@ -25,9 +25,9 @@
 		grid-template-areas: 'top top' 'left right';
 		align-content: space-between;
 		align-items: end;
-		gap: $gutter;
+		gap: var(--gutter);
 		background: $card;
-		padding: $gutter*1.6 $gutter*1.5 $gutter*1.5;
+		padding: calc(var(--gutter) * 1.6) calc(var(--gutter) * 1.5) calc(var(--gutter) * 1.5);
 		width: 100%;
 	}
 

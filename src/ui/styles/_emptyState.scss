@@ -1,4 +1,3 @@
-@use 'sass:math';
 @use 'vars' as *;
 
 .emptyState {
@@ -6,13 +5,13 @@
 	display: grid;
 	align-content: center;
 	justify-content: center;
-	height: $cardContentHeight;
+	height: var(--card-content-height);
 
 	&__inner {
 		display: grid;
 		align-items: center;
 		grid-auto-flow: column;
-		gap: math.div($gutter, 1.5);
+		gap: calc(var(--gutter) / 1.5);
 	}
 
 	&__icon {

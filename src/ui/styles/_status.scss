@@ -1,10 +1,7 @@
-@use 'sass:math';
-@use 'vars' as *;
-
 .status {
 
 	display: flex;
-	gap: math.div($gutter, 2);
+	gap: calc(var(--gutter) / 2);
 	justify-content: start;
 	align-items: center;
 
