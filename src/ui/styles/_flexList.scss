@@ -1,6 +1,6 @@
 .flexList {
 
-	$textAdjustment: 3px;
+	--flex-list-text-adjustment: 3px;
 
 	position: relative;
 
@@ -75,7 +75,7 @@
 		}
 
 		&--text-adjustment {
-			margin-top: $textAdjustment;
+			margin-top: var(--flex-list-text-adjustment);
 		}
 	}
 

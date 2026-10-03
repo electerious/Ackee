@@ -36,24 +36,24 @@
 	}
 
 	&__logo {
-		$size: 42px;
+		--header-logo-size: 42px;
 
 		position: relative;
 		margin: var(--gutter) 0 calc(var(--gutter) / 2);
-		width: $size;
-		height: $size;
+		width: var(--header-logo-size);
+		height: var(--header-logo-size);
 		background: var(--gradient);
 		border-radius: 100%;
 	}
 
 	&__spinner {
-		$offset: 4px;
+		--header-spinner-offset: 4px;
 
 		position: absolute;
-		top: $offset*-1;
-		left: $offset*-1;
-		width: calc(100% + #{ $offset*2 });
-		height: calc(100% + #{ $offset*2 });
+		top: calc(var(--header-spinner-offset) * -1);
+		left: calc(var(--header-spinner-offset) * -1);
+		width: calc(100% + var(--header-spinner-offset) * 2);
+		height: calc(100% + var(--header-spinner-offset) * 2);
 		border-style: solid;
 		border-width: 2px;
 		border-radius: 100%;
@@ -113,11 +113,11 @@
 	}
 
 	&__arrow {
-		$size: 12px;
+		--header-arrow-size: 12px;
 
 		margin-left: calc(var(--gutter) / 2);
-		width: $size;
-		height: $size;
+		width: var(--header-arrow-size);
+		height: var(--header-arrow-size);
 		fill: currentColor;
 	}
 

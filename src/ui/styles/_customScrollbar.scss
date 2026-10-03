@@ -1,12 +1,10 @@
-@use 'sass:math';
-
 .customScrollbar {
 
-	$size: 6px;
+	--scrollbar-size: 6px;
 
 	::-webkit-scrollbar {
-		width: $size;
-		height: $size;
+		width: var(--scrollbar-size);
+		height: var(--scrollbar-size);
 		z-index: 1000;
 	}
 
@@ -16,7 +14,7 @@
 
 	::-webkit-scrollbar-thumb {
 		background-color: var(--light);
-		border-radius: math.div($size, 2);
+		border-radius: calc(var(--scrollbar-size) / 2);
 	}
 
 	::-webkit-scrollbar-corner {

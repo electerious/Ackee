@@ -1,6 +1,6 @@
 .loader {
 
-	$size: 1em;
+	--loader-size: 1em;
 
 	@keyframes loader__rotate {
 		0% {
@@ -12,8 +12,8 @@
 	}
 
 	position: relative;
-	width: $size;
-	height: $size;
+	width: var(--loader-size);
+	height: var(--loader-size);
 	background: var(--context);
 	border-radius: 100%;
 

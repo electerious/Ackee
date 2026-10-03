@@ -1,25 +1,25 @@
 .badge {
 
-	$height: 28px;
-	$paddingVertical: 1px;
+	--badge-height: 28px;
+	--badge-padding-vertical: 1px;
 
 	display: grid;
 	gap: calc(var(--gutter) / 3);
 	grid-auto-flow: column;
 	align-items: center;
 	padding: 0 calc(var(--gutter) / 1.5);
-	height: $height+$paddingVertical*2;
+	height: calc(var(--badge-height) + var(--badge-padding-vertical) * 2);
 	border-radius: 100px;
 
 	&--with-icon {
-		padding-left: $paddingVertical;
+		padding-left: var(--badge-padding-vertical);
 
 		@media (max-width: 1100px) and (min-width: 901px) {
-			padding-right: $paddingVertical;
+			padding-right: var(--badge-padding-vertical);
 		}
 
 		@media (max-width: 700px) and (min-width: 561px) {
-			padding-right: $paddingVertical;
+			padding-right: var(--badge-padding-vertical);
 		}
 	}
 
@@ -39,10 +39,8 @@
 	}
 
 	&__icon {
-		$size: $height;
-
-		width: $size;
-		height: $size;
+		width: var(--badge-height);
+		height: var(--badge-height);
 		fill: currentColor;
 	}
 

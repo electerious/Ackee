@@ -13,11 +13,11 @@
 	}
 
 	&__icon {
-		$size: 24px;
+		--empty-state-icon-size: 24px;
 
 		fill: var(--light);
-		width: $size;
-		height: $size;
+		width: var(--empty-state-icon-size);
+		height: var(--empty-state-icon-size);
 	}
 
 }

@@ -1,12 +1,12 @@
 .keyHint {
 
-	$size: 1.5em;
+	--key-hint-size: 1.5em;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: $size;
-	height: $size;
+	width: var(--key-hint-size);
+	height: var(--key-hint-size);
 	font-size: .8em;
 	background: var(--dimmed);
 	border-radius: 6px;

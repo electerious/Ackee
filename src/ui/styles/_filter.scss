@@ -41,11 +41,11 @@
 	}
 
 	&__arrow {
-		$size: 12px;
+		--filter-arrow-size: 12px;
 
 		margin-left: calc(var(--gutter) / 2);
-		width: $size;
-		height: $size;
+		width: var(--filter-arrow-size);
+		height: var(--filter-arrow-size);
 		fill: var(--light);
 	}
 

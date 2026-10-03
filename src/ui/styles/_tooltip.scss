@@ -1,12 +1,12 @@
 .tooltip {
 
-	$size: 1em;
+	--tooltip-size: 1em;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: $size;
-	height: $size;
+	width: var(--tooltip-size);
+	height: var(--tooltip-size);
 	background: var(--dimmed);
 	border-radius: 100%;
 	outline: none;
@@ -16,10 +16,10 @@
 	}
 
 	&__icon {
-		$size: 12px;
+		--tooltip-icon-size: 12px;
 
-		width: $size;
-		height: $size;
+		width: var(--tooltip-icon-size);
+		height: var(--tooltip-icon-size);
 		fill: currentColor;
 	}
 

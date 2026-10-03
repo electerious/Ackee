@@ -1,6 +1,6 @@
 .updater {
 
-	$size: 1em;
+	--updater-size: 1em;
 
 	@keyframes updater__zoom {
 		0% {
@@ -21,8 +21,8 @@
 	}
 
 	position: relative;
-	width: $size;
-	height: $size;
+	width: var(--updater-size);
+	height: var(--updater-size);
 	background: var(--context);
 	border-radius: 100%;
 
