@@ -28,12 +28,6 @@ $rowHeight: 32px;
 // Properties -------------------------------------------------- //
 $shadow: 0 2px 10px rgba(0, 0, 0, .12);
 
-// formbase ---------------------------------------------------- //
-$formbase__radius: $innerRadius;
-$formbase__margin: .9rem;
-$formbase__background: $dimmed;
-$formbase__svg: #fff;
-$formbase__color: $white;
-$formbase__border: transparent;
-$formbase__shadow: none;
-$formbase__active: $primary;
+// Form controls ----------------------------------------------- //
+$formMargin: .9rem;
+$formPadding: .6rem;

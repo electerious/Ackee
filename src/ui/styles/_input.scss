@@ -1,5 +1,35 @@
+@use 'sass:color';
+
 .input {
 
-	border-width: 2px;
+	appearance: none;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0 0 $formMargin;
+	padding: $formPadding;
+	background: $dimmed;
+	border: 2px solid transparent;
+	box-shadow: none;
+	border-radius: $innerRadius;
+	outline: none;
+	resize: vertical;
+	transition: border-color .3s ease;
+	color: $white;
+
+	&:disabled {
+		border-color: color.adjust(transparent, $lightness: 5%);
+		background-color: color.adjust($dimmed, $lightness: -5%);
+		cursor: not-allowed;
+		color: color.adjust($white, $lightness: 5%);
+	}
+
+	&:focus {
+		border-color: $primary;
+	}
+
+	&::placeholder {
+		color: #999;
+		opacity: 1;
+	}
 
 }

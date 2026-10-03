@@ -3,7 +3,7 @@
 	display: grid;
 	grid-template-areas: 'main';
 	position: relative;
-	margin-bottom: $formbase__margin;
+	margin-bottom: $formMargin;
 
 	@keyframes inputMessage__show {
 		0% {
@@ -30,7 +30,7 @@
 		justify-content: center;
 		background: rgba($context, .98);
 		border: 2px solid $primary;
-		border-radius: $formbase__radius;
+		border-radius: $innerRadius;
 		color: $white;
 		font-size: .86em;
 		opacity: 0;

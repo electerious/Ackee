@@ -1,8 +1,8 @@
 .message {
 
 	margin-bottom: $gutter;
-	// Make the padding and border look like formbase
-	padding: $formbase__padding;
+	// Keep padding consistent with form controls.
+	padding: $formPadding;
 	border: 2px solid transparent;
 	border-radius: $innerRadius;
 	color: $white;
