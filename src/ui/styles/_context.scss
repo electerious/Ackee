@@ -7,7 +7,7 @@
 	padding: calc(var(--gutter) / 2) 0;
 	min-width: 210px;
 	background: var(--context);
-	backdrop-filter: blur(10px);
+	backdrop-filter: var(--backdrop-filter);
 	border-radius: var(--radius);
 	transform: translate(var(--x), var(--y));
 	z-index: 3;

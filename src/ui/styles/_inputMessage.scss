@@ -29,7 +29,7 @@
 		align-items: center;
 		justify-content: center;
 		background: var(--context);
-		backdrop-filter: blur(10px);
+		backdrop-filter: var(--backdrop-filter);
 		border: 2px solid var(--primary);
 		border-radius: var(--inner-radius);
 		color: var(--white);

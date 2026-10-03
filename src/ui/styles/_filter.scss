@@ -19,7 +19,7 @@
 		padding: 0 calc(var(--gutter) * 1.5);
 		border-radius: 100px;
 		background: var(--context);
-		backdrop-filter: blur(10px);
+		backdrop-filter: var(--backdrop-filter);
 		pointer-events: all;
 	}
 
