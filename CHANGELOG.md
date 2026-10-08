@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - Modals now fade and slide in and out, respecting reduced-motion preferences
+- Bar chart bars now grow in sequence
 - UI styles now use CSS imports and nesting instead of Sass
 - Small visual improvements
 - Internal modernization and code cleanup
