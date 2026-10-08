@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Modals now fade and slide in and out, respecting reduced-motion preferences
 - Bar chart bars now grow in sequence
 - List items in cards now fade in sequentially
-- Change badges fade in as their icons rotate on appearance
+- Change badge icons now rotate on appearance
+- Change badges now show 0% when comparison data is unavailable
 - UI styles now use CSS imports and nesting instead of Sass
 - Small visual improvements
 - Internal modernization and code cleanup

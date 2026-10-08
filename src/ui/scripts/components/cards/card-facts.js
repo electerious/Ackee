@@ -66,14 +66,14 @@ const CardFacts = (props) => {
       value: formatNumber(averageViews.count),
       unit: 'per day',
       title: `An average of ${averageViews.count} views per day during the last 14 days`,
-      addition: averageViews.change != null && h(ChangeBadge, { value: averageViews.change }),
+      addition: h(ChangeBadge, { value: averageViews.change ?? 0 }),
     }),
     h(Presentation, {
       headline: 'Average duration',
       value: formatDuration(averageDuration.count).value,
       unit: formatDuration(averageDuration.count).unit,
       title: `An average visit duration of ${formatDuration(averageDuration.count).value}${formatDuration(averageDuration.count).unit} per day during the last 14 days`,
-      addition: averageDuration.change != null && h(ChangeBadge, { value: averageDuration.change }),
+      addition: h(ChangeBadge, { value: averageDuration.change ?? 0 }),
     }),
     h(Presentation, {
       headline: 'Views today',
