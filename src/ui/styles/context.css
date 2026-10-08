@@ -1,17 +1,23 @@
 .context {
+  --context-starting-y: -4px;
+
   display: grid;
 
   position: absolute;
   top: 0;
   left: 0;
   transform: translate(var(--x), var(--y));
+  translate: 0 var(--context-starting-y);
   opacity: 0;
   z-index: 3;
   backdrop-filter: var(--backdrop-filter);
+  transition:
+    opacity 0.2s ease,
+    translate 0.2s ease;
   border-radius: var(--radius);
   background: var(--context);
   padding: calc(var(--gutter) / 2) 0;
-  min-width: 210px;
+  min-width: 240px;
   pointer-events: none;
 
   @media (max-width: 800px) {
@@ -27,12 +33,24 @@
   }
 
   &--floating {
+    --context-starting-y: 4px;
+
     border-radius: var(--radius);
   }
 
   &.visible {
+    translate: 0 0;
     opacity: 1;
     pointer-events: all;
+
+    @starting-style {
+      translate: 0 var(--context-starting-y);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 
   &__content {
@@ -45,30 +63,21 @@
     transition:
       color 0.3s ease,
       background 0.2s ease;
+    margin: 0 calc(var(--gutter) / 2);
     outline: none;
-    padding: calc(var(--gutter) / 3) calc(var(--gutter) * 1.2);
-    color: currentColor;
+    border-radius: var(--inner-radius);
+    padding: calc(var(--gutter) / 2) calc(var(--gutter) / 1.6);
+    color: var(--white);
     line-height: 1.4;
     text-align: left;
 
     &.active {
-      color: var(--white);
+      color: var(--primary);
     }
 
     &:focus,
     &:hover {
       background: var(--dimmed);
-    }
-  }
-
-  &--floating &__button {
-    margin: 0 calc(var(--gutter) / 2);
-    border-radius: var(--inner-radius);
-    padding: calc(var(--gutter) / 2) calc(var(--gutter) / 1.6);
-    color: var(--white);
-
-    &.active {
-      color: var(--primary);
     }
   }
 
