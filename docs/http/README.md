@@ -4,17 +4,17 @@ This folder contains `.http` files for manually testing the Ackee GraphQL API. T
 
 ## Files
 
-| File                    | Description                                                                                         |
-| ----------------------- | --------------------------------------------------------------------------------------------------- |
-| `tokens.http`           | Login (create token) and logout (delete token)                                                      |
-| `domains.http`          | Create, read, update, and delete domains                                                            |
-| `records.http`          | Create and update tracking records                                                                  |
-| `events.http`           | Create, read, update, and delete events                                                             |
-| `actions.http`          | Create and update event actions                                                                     |
-| `permanentTokens.http`  | Create, read, update, and delete permanent tokens                                                   |
-| `facts.http`            | Fetch domain facts (active visitors, views, durations)                                              |
-| `domainStatistics.http` | Domain statistics: browsers, devices, durations, languages, pages, referrers, sizes, systems, views |
-| `eventStatistics.http`  | Event statistics: chart and list                                                                    |
+| File                     | Description                                                                                         |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| `tokens.http`            | Login (create token) and logout (delete token)                                                      |
+| `domains.http`           | Create, read, update, and delete domains                                                            |
+| `records.http`           | Create and update tracking records                                                                  |
+| `events.http`            | Create, read, update, and delete events                                                             |
+| `actions.http`           | Create and update event actions                                                                     |
+| `permanent-tokens.http`  | Create, read, update, and delete permanent tokens                                                   |
+| `facts.http`             | Fetch domain facts (active visitors, views, durations)                                              |
+| `domain-statistics.http` | Domain statistics: browsers, devices, durations, languages, pages, referrers, sizes, systems, views |
+| `event-statistics.http`  | Event statistics: chart and list                                                                    |
 
 ## Usage
 
