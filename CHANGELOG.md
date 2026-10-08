@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - The Live badge on active visitors now pulses to signal real-time data
 - Modals now fade and slide in and out, respecting reduced-motion preferences
 - Bar chart bars now grow in sequence
+- Chart bars now have a subtle gradient, and chart and list divider lines fade at the edges
 - List items in cards now fade in sequentially
 - Change badge icons now rotate on appearance
 - Change badges now show 0% when comparison data is unavailable

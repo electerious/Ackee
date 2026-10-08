@@ -47,12 +47,23 @@
     align-items: center;
     animation: flexList__fade-in 0.3s ease backwards;
     animation-delay: calc((sibling-index() - 1) * 300ms / sibling-count());
-    border-bottom: 1px solid var(--dimmed);
     height: calc(var(--row-height) + var(--gutter));
     font-size: 0.9em;
 
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, transparent, var(--dimmed) 6%, var(--dimmed) 94%, transparent);
+      width: 100%;
+      height: 1px;
+      content: '';
+    }
+
     &:last-child {
-      border-bottom: none;
+      &::after {
+        display: none;
+      }
     }
 
     &[href],

@@ -1,8 +1,8 @@
 :root {
   --gutter: 1rem;
   --max-width: 1200px;
-  --radius: 16px;
-  --inner-radius: 12px;
+  --radius: 18px;
+  --inner-radius: 14px;
   --card-content-height: 300px;
   --row-height: 32px;
   --form-margin: 0.9rem;

@@ -54,7 +54,7 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      background: var(--dimmed);
+      background: linear-gradient(to right, transparent, var(--dimmed) 4%, var(--dimmed));
       width: var(--max-width);
       height: 1px;
       content: '';
@@ -90,14 +90,16 @@
     animation: barChart__grow 0.3s ease backwards;
     animation-delay: var(--bar-chart-stagger-delay);
     transition: height 0.3s ease;
-    background: var(--tertiary);
+    border-radius: 4px;
+    background-image: linear-gradient(20deg, transparent, rgba(0, 0, 0, 0.1));
+    background-color: var(--tertiary);
     width: 100%;
     height: var(--size);
     min-height: 2px;
   }
 
   &__column.active &__bar {
-    background: var(--primary);
+    background-color: var(--primary);
 
     &::after {
       --arrow-width: 15px;
