@@ -71,7 +71,7 @@
     "uuid": "^14.0.2"
   },
   "devDependencies": {
-    "@apollo/client": "^4.3.2",
+    "@apollo/client": "^4.3.3",
     "@electerious/eslint-config": "^6.0.0",
     "@electerious/prettier-config": "^5.0.0",
     "ava": "^8.0.1",
