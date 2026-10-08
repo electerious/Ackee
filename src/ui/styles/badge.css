@@ -2,6 +2,7 @@
   --badge-height: 28px;
   --badge-padding-vertical: 1px;
 
+  transition: opacity 0.15s ease;
   display: grid;
   grid-auto-flow: column;
   align-items: center;
@@ -9,6 +10,11 @@
   border-radius: 100px;
   padding: 0 calc(var(--gutter) / 1.5);
   height: calc(var(--badge-height) + var(--badge-padding-vertical) * 2);
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
 
   &--with-icon {
     padding-left: var(--badge-padding-vertical);
@@ -38,6 +44,7 @@
   }
 
   &__icon {
+    transition: transform 0.3s ease;
     fill: currentColor;
     width: var(--badge-height);
     height: var(--badge-height);
@@ -45,10 +52,28 @@
 
   &--positive &__icon {
     transform: rotate(-45deg);
+
+    @starting-style {
+      transform: rotate(0deg);
+    }
   }
 
   &--negative &__icon {
     transform: rotate(45deg);
+
+    @starting-style {
+      transform: rotate(0deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    & {
+      transition: none;
+    }
+
+    &__icon {
+      transition: none;
+    }
   }
 
   &__value {
