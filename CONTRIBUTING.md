@@ -22,7 +22,7 @@ Once you're finished, push your branch to your repo and create a pull request!
 
 ## Development mode
 
-Simply run Ackee with `NODE_ENV` set to `development` to get access to the [GraphQL Playground](https://docs.ackee.electerious.com/#/docs/API#playground). You can do this by adding `NODE_ENV=development` to the environment of your `docker-compose.yml` or by running:
+Simply run Ackee with `NODE_ENV` set to `development` to get access to [Apollo Sandbox](https://docs.ackee.electerious.com/#/docs/API#playground). You can do this by adding `NODE_ENV=development` to the environment of your `docker-compose.yml` or by running:
 
 ```sh
 npm run dev
@@ -47,6 +47,8 @@ npm run format
 ```
 
 ## Testing
+
+Tests require Node.js 24.12+ or 26+ and use an in-memory MongoDB instance. No separate MongoDB server is needed for tests.
 
 To make sure your changes didn't break anything, use the `test` task to run all tests:
 

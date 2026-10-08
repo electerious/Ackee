@@ -68,7 +68,7 @@ ACKEE_TRACKER=custom name
 
 ## Environment
 
-Set the environment to `development` to see additional details in the console and to disable caching.
+Set the environment to `development` to see additional error details and enable Apollo Sandbox. UI assets rebuilt with `npm run build:pre` will be unminified in this mode.
 
 ```
 NODE_ENV=development
@@ -76,7 +76,7 @@ NODE_ENV=development
 
 ## Demo mode
 
-Set to `true` to enable demo mode. In demo mode, all mutations (creating, updating, deleting) are blocked, and the GraphQL Playground is enabled.
+Set to `true` to enable demo mode. In demo mode, mutations that change domains, events, or permanent tokens are blocked, and Apollo Sandbox is enabled. Visitor tracking and login/logout remain available.
 
 ```
 ACKEE_DEMO=true

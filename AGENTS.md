@@ -7,7 +7,7 @@ This document provides guidelines for AI coding agents working on the Ackee code
 Ackee is a self-hosted Node.js analytics tool built with:
 
 - **Backend**: Node.js (ESM modules), Express, Apollo Server (GraphQL), Mongoose (MongoDB)
-- **Frontend**: React (with createElement as `h`), Apollo Client, SCSS
+- **Frontend**: React (with createElement as `h`), Apollo Client, CSS with imports and nesting
 - **Build**: Custom build script (`build.js`), Rosid handlers
 - **Testing**: AVA test framework
 - **Code Quality**: ESLint + Prettier (via @electerious configs)
@@ -17,8 +17,8 @@ Ackee is a self-hosted Node.js analytics tool built with:
 ### Build
 
 ```bash
-npm run build              # Production build
-npm run build:pre          # Development build (BUILD_ENV=pre)
+npm run build              # Build installation-specific HTML and tracker
+npm run build:pre          # Rebuild all assets (BUILD_ENV=pre)
 npm start                  # Build and start server
 ```
 
@@ -34,10 +34,10 @@ npm run server             # Start server without building
 ```bash
 npm test                   # Run lint + all tests
 npm run lint               # ESLint + Prettier check only
-ava                        # Run all tests without linting
-ava test/path/to/file.js   # Run a single test file
-ava test/**/*domains*.js   # Run tests matching pattern
-ava --watch                # Run in watch mode
+npm exec -- ava                        # Run all tests without linting
+npm exec -- ava test/path/to/file.js    # Run a single test file
+npm exec -- ava 'test/**/*domains*.js'  # Run tests matching pattern
+npm exec -- ava --watch                # Run in watch mode
 ```
 
 ### Code Quality
@@ -67,25 +67,26 @@ npm run healthcheck        # Run health check script
 
 - Use `.js` extensions in all import paths
 - Group imports logically: external deps → internal modules → utils
-- Use named exports for utilities, default exports for main components/resolvers
+- Match existing exports: named exports for grouped functions/constants, default exports for most components, resolvers, and utilities
 
 ```javascript
 import { randomUUID as uuid } from 'node:crypto'
 import Domain from '../models/domain.js'
-import sortByProp from '../utils/sortByProp.js'
+import sortByProperty from '../utils/sort-by-property.js'
 ```
 
 ### File Naming
 
-- **Backend**: camelCase for files (e.g., `domains.js`, `requireAuth.js`)
-- **Frontend Components**: PascalCase (e.g., `Input.js`, `Dashboard.js`)
-- **Frontend Hooks**: camelCase with `use` prefix (e.g., `useDomains.js`)
-- **Constants**: camelCase files (e.g., `routes.js`, `intervals.js`)
+- Use kebab-case for JavaScript and CSS filenames
+- **Backend**: e.g., `domains.js`, `require-auth.js`
+- **Frontend Components**: e.g., `input.js`, `dashboard.js`; keep component names in PascalCase
+- **Frontend Hooks**: use a `use-` prefix (e.g., `use-domains.js`); keep hook names in camelCase
+- **Constants**: e.g., `routes.js`, `intervals.js`
 
 ### Formatting
 
 - Uses Prettier via `@electerious/prettier-config`
-- Tabs for indentation (configured in Prettier)
+- Two spaces for indentation (configured in Prettier)
 - Single quotes for strings
 - Trailing commas in multi-line structures
 - **Do not manually format** - run `npm run format` instead
@@ -116,7 +117,7 @@ export default Component
 
 - Use `gql` template tag from `@apollo/client`
 - Define fragments in separate files
-- Mutations return `{ success, payload }` structure
+- Mutations return `success`; creation and entity-edit mutations also return `payload` where defined in the schema
 
 ```javascript
 const QUERY = gql`
@@ -184,7 +185,8 @@ export const get = async (id) => {
 
 ```javascript
 import test from 'ava'
-import { api, cleanup, fillDatabase, gql } from './_utils.js'
+import { api } from '../_utils.js'
+import { cleanupDatabase, fillDatabase, gql } from './_utils.js'
 
 test.beforeEach(fillDatabase)
 test.afterEach.always(cleanupDatabase)
@@ -210,7 +212,7 @@ src/
 ├── types/            # GraphQL type definitions
 ├── ui/               # React frontend
 │   ├── scripts/      # React components, hooks, utils
-│   └── styles/       # SCSS stylesheets
+│   └── styles/       # CSS stylesheets
 └── utils/            # Utility functions
 
 test/
@@ -223,11 +225,12 @@ test/
 ## Important Notes
 
 - **Node.js version**: Requires Node.js >= 24
+- **Testing**: AVA requires Node.js 24.12+ or 26+
 - **Environment variables**: Uses `.env` files (see `.env` for local config)
-- **MongoDB**: Required for development and testing (uses mongodb-memory-server for tests)
-- **Development mode**: Set `NODE_ENV=development` for GraphQL Playground access
-- **Demo mode**: Set `ACKEE_DEMO=true` to enable demo mode (blocks mutations)
-- **Contributing**: Always work on `develop` branch, discuss changes in issues first
+- **MongoDB**: Required to run Ackee; tests use mongodb-memory-server and need no separate MongoDB server
+- **Development mode**: Set `NODE_ENV=development` for Apollo Sandbox access
+- **Demo mode**: Set `ACKEE_DEMO=true` to block domain, event, and permanent-token changes; tracking and login/logout remain available
+- **Contributing**: Base contribution branches on `develop`; discuss changes in issues before submitting a PR
 
 ## References
 
