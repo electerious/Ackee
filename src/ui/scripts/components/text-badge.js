@@ -6,7 +6,7 @@ const TextBadge = (props) => {
   return h(
     'div',
     {
-      className: classNames('badge', `badge--${props.type}`),
+      className: classNames('badge', `badge--${props.type}`, props.isLive && 'badge--live'),
     },
     h(
       'span',
@@ -19,6 +19,7 @@ const TextBadge = (props) => {
 }
 
 TextBadge.propTypes = {
+  isLive: PropTypes.bool,
   type: PropTypes.oneOf(['positive', 'negative', 'neutral']).isRequired,
   value: PropTypes.string.isRequired,
 }

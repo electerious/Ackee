@@ -1,3 +1,16 @@
+@keyframes badge__live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
+}
+
 .badge {
   --badge-height: 28px;
   --badge-padding-vertical: 1px;
@@ -37,6 +50,15 @@
     color: var(--light);
   }
 
+  &--live::before {
+    animation: badge__live-pulse 1.5s ease-in-out infinite;
+    background: currentColor;
+    border-radius: 50%;
+    content: '';
+    height: 0.5em;
+    width: 0.5em;
+  }
+
   &__icon {
     transition: transform 0.3s ease;
     fill: currentColor;
@@ -61,6 +83,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    &--live::before {
+      animation: none;
+    }
+
     &__icon {
       transition: none;
     }

@@ -59,7 +59,7 @@ const CardFacts = (props) => {
       headline: 'Active visitors',
       value: activeVisitors,
       unit: pluralize(['visitors', 'visitor', 'visitors'], activeVisitors),
-      addition: h(TextBadge, { type: 'positive', value: 'Live' }),
+      addition: h(TextBadge, { type: 'positive', value: 'Live', isLive: true }),
     }),
     h(Presentation, {
       headline: 'Average views',

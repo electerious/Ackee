@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- The Live badge on active visitors now pulses to signal real-time data
 - Modals now fade and slide in and out, respecting reduced-motion preferences
 - Bar chart bars now grow in sequence
 - List items in cards now fade in sequentially
