@@ -32,11 +32,11 @@ const normalizeSiteReferrer = (siteReferrer) => {
 const polish = (obj) => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
     value = typeof value === 'string' ? value.trim() : value
-    value = value == null ? undefined : value
+    if (value === null) value = undefined
     value = value === '' ? undefined : value
 
     if (key === 'siteLocation') value = normalizeSiteLocation(value)
-    if (key === 'siteReferrer') value = normalizeSiteReferrer(value)
+    else if (key === 'siteReferrer') value = normalizeSiteReferrer(value)
 
     acc[key] = value
     return acc

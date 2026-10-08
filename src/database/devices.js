@@ -22,7 +22,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
   })()
 
   const enhanceId = (id) => {
-    if (type === DEVICES_TYPE_NO_MODEL) return `${id.deviceManufacturer}`
+    if (type === DEVICES_TYPE_NO_MODEL) return String(id.deviceManufacturer)
     if (type === DEVICES_TYPE_WITH_MODEL) return `${id.deviceManufacturer} ${id.deviceName}`
   }
 

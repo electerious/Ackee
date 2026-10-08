@@ -28,7 +28,7 @@ const errorsReducer = (state, action) => {
     case ActionTypes.SUCCESS: {
       const { result } = action.payload
       const hasErrors = result != null && result.errors != null
-      return hasErrors === true ? [...result.errors] : state
+      return hasErrors ? [...result.errors] : state
     }
     default: {
       return state

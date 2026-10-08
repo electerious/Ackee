@@ -27,9 +27,9 @@ export default (ids, unique, interval, limit, dateDetails) => {
   const matchMonth = [INTERVALS_DAILY, INTERVALS_MONTHLY].includes(interval)
   const matchYear = [INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY].includes(interval)
 
-  if (matchDay === true) aggregation[1].$group._id.day = { $dayOfMonth: dateExpression }
-  if (matchMonth === true) aggregation[1].$group._id.month = { $month: dateExpression }
-  if (matchYear === true) aggregation[1].$group._id.year = { $year: dateExpression }
+  if (matchDay) aggregation[1].$group._id.day = { $dayOfMonth: dateExpression }
+  if (matchMonth) aggregation[1].$group._id.month = { $month: dateExpression }
+  if (matchYear) aggregation[1].$group._id.year = { $year: dateExpression }
 
   return aggregation
 }

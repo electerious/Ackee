@@ -46,7 +46,7 @@ const ModalPermanentTokenAdd = (props) => {
         type: 'text',
         id: titleId,
         required: true,
-        disabled: loading === true,
+        disabled: loading,
         focused: true,
         placeholder: 'Permanent token title',
         value: inputs.title,
@@ -75,9 +75,9 @@ const ModalPermanentTokenAdd = (props) => {
         'button',
         {
           className: 'card__button card__button--primary link color-white',
-          disabled: loading === true,
+          disabled: loading,
         },
-        loading === true ? h(Spinner) : 'Add',
+        loading ? h(Spinner) : 'Add',
       ),
     ),
   )

@@ -13,7 +13,7 @@ const IconColumn = (props) => {
   return h(
     'div',
     { className: 'flexList__column flexList__column--spacing-right' },
-    hasBar === true &&
+    hasBar &&
       h('div', {
         className: 'flexList__bar flexList__bar--favicon',
         style: { '--width': `${props.barWidth}%` },
@@ -70,7 +70,7 @@ const TextRow = (props) => {
 
 const PresentationIconList = (props) => {
   const totalCount = props.items.reduce(sumByProperty('count'), 0)
-  const hasCount = Number.isNaN(totalCount) === false
+  const hasCount = !Number.isNaN(totalCount)
   const proportionalWidth = ({ count }) => (count / totalCount) * 100
 
   return h(
@@ -82,7 +82,7 @@ const PresentationIconList = (props) => {
       props.items.map((item, index) => {
         const commonProps = {
           key: item.text + index,
-          barWidth: hasCount === true ? proportionalWidth(item) : undefined,
+          barWidth: hasCount ? proportionalWidth(item) : undefined,
           onEnter: () => props.onItemEnter(index),
           onLeave: () => props.onItemLeave(index),
         }

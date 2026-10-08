@@ -45,9 +45,9 @@ const Button = (props) => {
       'div',
       { className: 'context__head' },
       h('div', { className: 'context__label' }, props.label),
-      hasKeyHint === true && h(KeyHint, {}, props.keyHint),
+      hasKeyHint && h(KeyHint, {}, props.keyHint),
     ),
-    hasKeyDescription === true && h('div', { className: 'context__description' }, props.description),
+    hasKeyDescription && h('div', { className: 'context__description' }, props.description),
   )
 }
 

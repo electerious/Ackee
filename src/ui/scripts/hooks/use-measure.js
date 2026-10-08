@@ -28,8 +28,8 @@ const getMeasurement = (targetRef, elementRef) => {
       y: targetBoundingClientRect.top,
     },
     absolute: {
-      x: targetBoundingClientRect.left + scrollingBoundingClientRect.left * -1,
-      y: targetBoundingClientRect.top + scrollingBoundingClientRect.top * -1,
+      x: targetBoundingClientRect.left + -scrollingBoundingClientRect.left,
+      y: targetBoundingClientRect.top + -scrollingBoundingClientRect.top,
     },
   }
 
@@ -55,7 +55,7 @@ export default (targetRef, elementRef) => {
     const nextMeasurement = getMeasurement(targetRef, elementRef)
     const needsStateUpdate = isEqual(measurement || {}, nextMeasurement) === false
 
-    if (needsStateUpdate === false) return
+    if (!needsStateUpdate) return
 
     setMeasurement(nextMeasurement)
   }, true)

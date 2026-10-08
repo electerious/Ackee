@@ -76,17 +76,17 @@ export const getChart = async (ids, type, interval, limit, dateDetails) => {
       // Find a entry that matches the date
       const entry = entries.find((entry) => {
         return matchesDate(
-          matchDay === true ? entry._id.day : undefined,
-          matchMonth === true ? entry._id.month : undefined,
-          matchYear === true ? entry._id.year : undefined,
+          matchDay ? entry._id.day : undefined,
+          matchMonth ? entry._id.month : undefined,
+          matchYear ? entry._id.year : undefined,
           userZonedDate,
         )
       })
 
       const value = (() => {
-        if (matchDay === true) return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-        if (matchMonth === true) return `${date.getFullYear()}-${date.getMonth() + 1}`
-        if (matchYear === true) return `${date.getFullYear()}`
+        if (matchDay) return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+        if (matchMonth) return `${date.getFullYear()}-${date.getMonth() + 1}`
+        if (matchYear) return String(date.getFullYear())
       })()
 
       return {
@@ -106,8 +106,7 @@ export const getList = async (ids, sorting, type, range, limit, dateDetails) => 
       if (sorting === SORTINGS_TOP) return aggregateTopActions(ids, false, range, limit, dateDetails)
       if (sorting === SORTINGS_NEW) return aggregateNewActions(ids, limit)
       if (sorting === SORTINGS_RECENT) return aggregateRecentActions(ids, limit)
-    }
-    if (type === 'AVERAGE') {
+    } else if (type === 'AVERAGE') {
       if (sorting === SORTINGS_TOP) return aggregateTopActions(ids, true, range, limit, dateDetails)
       if (sorting === SORTINGS_NEW) return aggregateNewActions(ids, limit)
       if (sorting === SORTINGS_RECENT) return aggregateRecentActions(ids, limit)

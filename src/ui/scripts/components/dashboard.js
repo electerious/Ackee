@@ -85,7 +85,7 @@ const Dashboard = (props) => {
 
   const items = [
     createButton('Overview', '/', props.route, props.setRoute),
-    hasDomains === true ? createDropdown(domainsLabel, domainsItems) : undefined,
+    hasDomains ? createDropdown(domainsLabel, domainsItems) : undefined,
     createDropdown(insightsLabel, insightsItems),
     createButton('Settings', '/settings', props.route, props.setRoute),
   ].filter(Boolean)

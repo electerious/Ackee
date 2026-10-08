@@ -1,7 +1,7 @@
 import * as permanentTokens from '../database/permanent-tokens.js'
 import * as tokens from '../database/tokens.js'
-import KnownError from './known-error.js'
 import isExpired from './is-expired.js'
+import KnownError from './known-error.js'
 
 export default async (authorization, ttl) => {
   // Token not in request
@@ -9,8 +9,8 @@ export default async (authorization, ttl) => {
     return new KnownError('Token missing')
   }
 
-  const key = authorization.split(' ')[0]
-  const token = authorization.split(' ')[1]
+  const key = authorization.split(' ', 1)[0]
+  const token = authorization.split(' ', 2)[1]
 
   // Token not in header
   if (key !== 'Bearer' || token == null) {
@@ -25,7 +25,7 @@ export default async (authorization, ttl) => {
     const valid = isExpired(tokenEntry.updated, ttl) === false
 
     // Token too old
-    if (valid === false) {
+    if (!valid) {
       return new KnownError('Token invalid')
     }
 

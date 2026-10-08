@@ -52,7 +52,7 @@ const ModalEventAdd = (props) => {
         type: 'text',
         id: titleId,
         required: true,
-        disabled: loading === true,
+        disabled: loading,
         focused: true,
         placeholder: 'Event title',
         value: inputs.title,
@@ -69,7 +69,7 @@ const ModalEventAdd = (props) => {
       h(Select, {
         id: typeId,
         required: true,
-        disabled: loading === true,
+        disabled: loading,
         value: inputs.type,
         items: [
           {
@@ -114,9 +114,9 @@ const ModalEventAdd = (props) => {
         'button',
         {
           className: 'card__button card__button--primary link color-white',
-          disabled: loading === true,
+          disabled: loading,
         },
-        loading === true ? h(Spinner) : 'Add',
+        loading ? h(Spinner) : 'Add',
       ),
     ),
   )

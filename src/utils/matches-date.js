@@ -3,5 +3,5 @@ export default (day, month, year, date) => {
   const isMonth = month === date.getMonth() + 1 || month == null
   const isYear = year === date.getFullYear() || year == null
 
-  return isDay === true && isMonth === true && isYear === true
+  return isDay && isMonth && isYear
 }

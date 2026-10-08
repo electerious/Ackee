@@ -3,7 +3,6 @@ import { createElement as h } from 'react'
 
 import * as modals from '../../constants/modals.js'
 
-import Modal from './modal.js'
 import ModalDomainAdd from './modal-domain-add.js'
 import ModalDomainEdit from './modal-domain-edit.js'
 import ModalDurations from './modal-durations.js'
@@ -12,6 +11,7 @@ import ModalEventEdit from './modal-event-edit.js'
 import ModalPermanentTokenAdd from './modal-permanent-token-add.js'
 import ModalPermanentTokenEdit from './modal-permanent-token-edit.js'
 import ModalViews from './modal-views.js'
+import Modal from './modal.js'
 
 const modalComponents = {
   [modals.MODALS_VIEWS]: ModalViews,

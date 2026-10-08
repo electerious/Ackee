@@ -12,13 +12,13 @@ const Main = (props) => {
   const authenticated = useAuthenticated(props.token, errors, props.reset)
 
   const requiresLogin = authenticated === false
-  if (requiresLogin === true)
+  if (requiresLogin)
     return h(OverlayLogin, {
       setToken: props.setToken,
     })
 
   const hasErrors = errors.length > 0
-  if (hasErrors === true)
+  if (hasErrors)
     return h(OverlayFailure, {
       errors,
       reset: props.reset,

@@ -15,7 +15,7 @@ test('return nothing for localhost hostname', (t) => {
 })
 
 test('return nothing for localhost subdomains', (t) => {
-  const result = faviconUrl(new URL('http://app.localhost:5173/path'))
+  const result = faviconUrl(new URL('https://app.localhost:5173/path'))
 
   t.is(result, undefined)
 })

@@ -26,7 +26,7 @@ const Headline = (props) => {
         props.className,
       ),
     },
-    hasClick === true ? button : props.children,
+    hasClick ? button : props.children,
   )
 }
 

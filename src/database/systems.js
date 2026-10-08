@@ -21,7 +21,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
   })()
 
   const enhanceId = (id) => {
-    if (type === SYSTEMS_TYPE_NO_VERSION) return `${id.osName}`
+    if (type === SYSTEMS_TYPE_NO_VERSION) return String(id.osName)
     if (type === SYSTEMS_TYPE_WITH_VERSION) return `${id.osName} ${id.osVersion}`
   }
 

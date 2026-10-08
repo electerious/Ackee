@@ -46,7 +46,7 @@ const ModalDomainAdd = (props) => {
         type: 'text',
         id: titleId,
         required: true,
-        disabled: loading === true,
+        disabled: loading,
         focused: true,
         placeholder: 'Domain title',
         value: inputs.title,
@@ -75,9 +75,9 @@ const ModalDomainAdd = (props) => {
         'button',
         {
           className: 'card__button card__button--primary link color-white',
-          disabled: loading === true,
+          disabled: loading,
         },
-        loading === true ? h(Spinner) : 'Add',
+        loading ? h(Spinner) : 'Add',
       ),
     ),
   )

@@ -1,1 +1,1 @@
-export default (length) => Array.from({ length }).fill()
+export default (length) => Array.from({ length })

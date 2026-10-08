@@ -19,6 +19,7 @@ export default defineConfig([
       'unicorn/prefer-top-level-await': 0,
       'unicorn/no-thenable': 0,
       'unicorn/no-process-exit': 0,
+      'unicorn/filename-case': 0,
     },
   },
 ])

@@ -83,9 +83,9 @@ const Dropdown = (props) => {
         className: classNames({
           'header__button': true,
           'hovered': active === true,
-          'active': containsActiveItem === true,
+          'active': containsActiveItem,
           'link': true,
-          'color-white': containsActiveItem === true,
+          'color-white': containsActiveItem,
         }),
         onClick: toggle,
       },

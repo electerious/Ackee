@@ -16,11 +16,11 @@ export default (ref, fn) => {
     const handler = (event) => {
       // Only continue with handler when a ref exists
       const hasRef = ref != null && ref.current != null
-      if (hasRef === false) return
+      if (!hasRef) return
 
       // Only close when click is outside of target
       const isTarget = ref.current.contains(event.target) === true
-      if (isTarget === true) return
+      if (isTarget) return
 
       fn()
     }

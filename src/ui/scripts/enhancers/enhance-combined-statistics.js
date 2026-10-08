@@ -6,7 +6,9 @@ export default (domains = [], length, field) => {
   const base = createArray(length).map(() => [])
 
   return domains.reduce((acc, domain) => {
-    for (const [index, statistic] of domain.statistics[field].entries()) {
+    const statistics = domain.statistics[field]
+
+    for (const [index, statistic] of statistics.entries()) {
       const existingItems = acc[index]
       const newItem = { text: domain.title, count: statistic.count }
 

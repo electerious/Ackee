@@ -6,7 +6,7 @@ const isLocalHostname = (hostname) => {
 }
 
 export default (url) => {
-  if (url == null || isLocalHostname(url.hostname) === true) return
+  if (url == null || isLocalHostname(url.hostname)) return
 
   return new URL('/favicon.ico', url).href
 }

@@ -1,10 +1,10 @@
 import { mergeResolvers } from '@graphql-tools/merge'
 
 import actions from './actions.js'
-import domains from './domains.js'
 import domainStatistics from './domain-statistics.js'
-import events from './events.js'
+import domains from './domains.js'
 import eventStatistics from './event-statistics.js'
+import events from './events.js'
 import facts from './facts.js'
 import permanentTokens from './permanent-tokens.js'
 import records from './records.js'

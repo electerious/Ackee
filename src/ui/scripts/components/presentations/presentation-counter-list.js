@@ -7,8 +7,8 @@ import sumByProperty from '../../utils/sum-by-property.js'
 const Row = (props) => {
   const hasUrl = props.url != null
 
-  const rootType = hasUrl === true ? 'a' : 'div'
-  const rootProps = hasUrl === true ? { href: enhanceUrl(props.url).href, target: '_blank', rel: 'noopener' } : {}
+  const rootType = hasUrl ? 'a' : 'div'
+  const rootProps = hasUrl ? { href: enhanceUrl(props.url).href, target: '_blank', rel: 'noopener' } : {}
 
   return h(
     rootType,
@@ -24,7 +24,7 @@ const Row = (props) => {
         style: { '--width': `${props.counterWidth}px` },
       },
       h('div', { className: 'flexList__bar flexList__bar--counter', style: { '--width': `${props.barWidth}%` } }),
-      h('span', { className: 'color-primary' }, `${props.count}`),
+      h('span', { className: 'color-primary' }, props.count),
     ),
     h(
       'div',

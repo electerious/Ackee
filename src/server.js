@@ -34,7 +34,7 @@ const handleGraphError = (formattedError, error) => {
   const isKnownError = suitableError instanceof KnownError
 
   // Only log the full error stack when the error isn't a known response
-  if (isKnownError === false) {
+  if (!isKnownError) {
     signale.fatal(suitableError)
     return formattedError
   }

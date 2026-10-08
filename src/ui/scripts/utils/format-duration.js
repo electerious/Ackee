@@ -13,14 +13,14 @@ export default (ms) => {
   const hasMinutes = duration.match(/^00:00:/) == null
   const hasHours = duration.match(/^00:/) == null
 
-  if (hasMinutes === false)
+  if (!hasMinutes)
     return {
       value: cleanZeros(duration.slice(6)),
       unit: 's',
       toString,
     }
 
-  if (hasHours === false)
+  if (!hasHours)
     return {
       value: cleanZeros(duration.slice(3)),
       unit: 'm',

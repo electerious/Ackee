@@ -6,10 +6,10 @@ export default (data, loading) => {
   const isEmpty = data == null || data.length === 0
 
   // Has no data, but loads data
-  const isInitializing = isEmpty === true && loading === true
+  const isInitializing = isEmpty && loading === true
 
   // Has data and loads new data
-  const isUpdating = isEmpty === false && loading === true
+  const isUpdating = !isEmpty && loading === true
 
   return {
     isLoading,

@@ -60,12 +60,12 @@ const OverlayLogin = (props) => {
 
       h(Spacer, { size: 2.5 }),
 
-      hasError === true && h(Message, { status: 'error' }, createToken.error.message),
+      hasError && h(Message, { status: 'error' }, createToken.error.message),
 
       h(Input, {
         type: 'username',
         required: true,
-        disabled: loading === true,
+        disabled: loading,
         focused: true,
         placeholder: 'Username',
         value: inputs.username,
@@ -74,7 +74,7 @@ const OverlayLogin = (props) => {
       h(Input, {
         type: 'password',
         required: true,
-        disabled: loading === true,
+        disabled: loading,
         placeholder: 'Password',
         value: inputs.password,
         onChange: onInputChange('password'),
@@ -105,9 +105,9 @@ const OverlayLogin = (props) => {
         'button',
         {
           className: 'card__button card__button--primary link color-white',
-          disabled: loading === true,
+          disabled: loading,
         },
-        loading === true ? h(Spinner) : 'Sign In →',
+        loading ? h(Spinner) : 'Sign In →',
       ),
     ),
   )

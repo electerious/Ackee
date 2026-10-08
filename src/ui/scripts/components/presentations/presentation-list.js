@@ -6,8 +6,8 @@ import enhanceUrl from '../../enhancers/enhance-url.js'
 const Row = (props) => {
   const hasUrl = props.url != null
 
-  const rootType = hasUrl === true ? 'a' : 'div'
-  const rootProps = hasUrl === true ? { href: enhanceUrl(props.url).href, target: '_blank', rel: 'noopener' } : {}
+  const rootType = hasUrl ? 'a' : 'div'
+  const rootProps = hasUrl ? { href: enhanceUrl(props.url).href, target: '_blank', rel: 'noopener' } : {}
 
   return h(
     rootType,

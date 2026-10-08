@@ -22,7 +22,7 @@ const get = async (ids, sorting, type, range, limit, dateDetails) => {
   })()
 
   const enhanceId = (id) => {
-    if (type === BROWSERS_TYPE_NO_VERSION) return `${id.browserName}`
+    if (type === BROWSERS_TYPE_NO_VERSION) return String(id.browserName)
     if (type === BROWSERS_TYPE_WITH_VERSION) return `${id.browserName} ${id.browserVersion}`
   }
 

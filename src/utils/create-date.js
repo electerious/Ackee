@@ -17,7 +17,7 @@ import serverTimeZone from './time-zone.js'
 const sanitizeTimeZone = (tz) => {
   if (tz == null) return serverTimeZone
   try {
-    Intl.DateTimeFormat(undefined, { timeZone: tz })
+    new Intl.DateTimeFormat(undefined, { timeZone: tz })
     return tz
   } catch {
     return serverTimeZone

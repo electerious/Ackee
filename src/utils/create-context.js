@@ -6,7 +6,7 @@ import { isSet } from './ignore-cookie.js'
 import isAuthenticated from './is-authenticated.js'
 
 export const createServerlessContext = (request) => {
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip')
+  const ip = request.headers.get('x-forwarded-for')?.split(',', 1)[0]?.trim() || request.headers.get('x-real-ip')
   const headers = Object.fromEntries(request.headers)
   return createContext(ip, headers)
 }
