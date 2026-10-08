@@ -5,7 +5,7 @@ import Label from '../label.js'
 import Spacer from '../spacer.js'
 import Spinner from '../spinner.js'
 
-import useCreatePermanentToken from '../../api/hooks/permanentTokens/use-create-permanent-token.js'
+import useCreatePermanentToken from '../../api/hooks/permanent-tokens/use-create-permanent-token.js'
 import useInputs from '../../hooks/use-inputs.js'
 import commonModalProps from '../../utils/common-modal-props.js'
 import shortId from '../../utils/short-id.js'

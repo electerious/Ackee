@@ -4,7 +4,7 @@ import { Fragment, createElement as h } from 'react'
 import { homepage, version } from '../../../../../package.json'
 import useDomains from '../../api/hooks/domains/use-domains.js'
 import useEvents from '../../api/hooks/events/use-events.js'
-import usePermanentTokens from '../../api/hooks/permanentTokens/use-permanent-tokens.js'
+import usePermanentTokens from '../../api/hooks/permanent-tokens/use-permanent-tokens.js'
 import useDeleteToken from '../../api/hooks/tokens/use-delete-token.js'
 import {
   MODALS_DOMAIN_ADD,
