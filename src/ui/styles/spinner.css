@@ -16,7 +16,7 @@
 
   &__circle {
     position: absolute;
-    animation-timing-function: linear;
+    animation-timing-function: var(--motion-easing-linear);
     animation-iteration-count: infinite;
     animation-name: spinner__rotate;
     border-width: 3px;
@@ -27,12 +27,12 @@
     height: 100%;
 
     &--primary {
-      animation-duration: 0.5s;
+      animation-duration: var(--motion-duration-spin-fast);
       border-right-color: var(--primary);
     }
 
     &--white {
-      animation-duration: 0.8s;
+      animation-duration: var(--motion-duration-spin-slow);
       border-right-color: var(--white);
     }
 

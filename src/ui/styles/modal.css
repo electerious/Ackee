@@ -29,19 +29,19 @@
 }
 
 ::view-transition-new(.modal-backdrop-enter) {
-  animation: modal-fade-in 0.3s ease both;
+  animation: modal-fade-in var(--motion-duration-ui) var(--motion-easing-standard) both;
 }
 
 ::view-transition-old(.modal-backdrop-exit) {
-  animation: modal-fade-out 0.3s ease both;
+  animation: modal-fade-out var(--motion-duration-ui) var(--motion-easing-standard) both;
 }
 
 ::view-transition-new(.modal-panel-enter) {
-  animation: modal-panel-enter 0.3s ease both;
+  animation: modal-panel-enter var(--motion-duration-ui) var(--motion-easing-standard) both;
 }
 
 ::view-transition-old(.modal-panel-exit) {
-  animation: modal-panel-exit 0.3s ease both;
+  animation: modal-panel-exit var(--motion-duration-ui) var(--motion-easing-standard) both;
 }
 
 @keyframes modal-fade-in {
@@ -85,14 +85,5 @@
   to {
     transform: translateY(20px);
     opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-new(.modal-backdrop-enter),
-  ::view-transition-old(.modal-backdrop-exit),
-  ::view-transition-new(.modal-panel-enter),
-  ::view-transition-old(.modal-panel-exit) {
-    animation: none;
   }
 }

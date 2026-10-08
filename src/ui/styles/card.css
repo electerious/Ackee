@@ -37,7 +37,7 @@
   &__button {
     display: flex;
     justify-content: flex-end;
-    transition: background 0.3s ease;
+    transition: background var(--motion-duration-ui) var(--motion-easing-standard);
     outline: none;
     padding: var(--gutter) calc(var(--gutter) * 1.5);
 

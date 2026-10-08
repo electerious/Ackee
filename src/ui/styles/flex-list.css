@@ -45,8 +45,8 @@
     display: flex;
     position: relative;
     align-items: center;
-    animation: flexList__fade-in 0.3s ease backwards;
-    animation-delay: calc((sibling-index() - 1) * 300ms / sibling-count());
+    animation: flexList__fade-in var(--motion-duration-ui) var(--motion-easing-standard) backwards;
+    animation-delay: calc((sibling-index() - 1) * var(--motion-duration-ui) / sibling-count());
     height: calc(var(--row-height) + var(--gutter));
     font-size: 0.9em;
 
@@ -68,7 +68,7 @@
 
     &[href],
     &--has-hover {
-      transition: color 0.3s ease;
+      transition: color var(--motion-duration-ui) var(--motion-easing-standard);
       color: currentColor;
       text-decoration: none;
     }
@@ -76,12 +76,6 @@
     &[href]:hover,
     &--has-hover:hover {
       color: var(--white);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &__row {
-      animation: none;
     }
   }
 
@@ -135,7 +129,7 @@
 
   &__obscured {
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--motion-duration-ui) var(--motion-easing-standard);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -27,8 +27,8 @@
 
   &__circle {
     position: absolute;
-    animation-duration: 2s;
-    animation-timing-function: ease;
+    animation-duration: var(--motion-duration-feedback);
+    animation-timing-function: var(--motion-easing-standard);
     animation-iteration-count: infinite;
     animation-name: updater__zoom;
     border-radius: inherit;

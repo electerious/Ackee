@@ -1,0 +1,20 @@
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+
+  .inputMessage:focus-within::after {
+    animation: inputMessage__show var(--motion-duration-feedback) steps(1, end) both !important;
+  }
+
+  ::view-transition-new(.modal-backdrop-enter),
+  ::view-transition-old(.modal-backdrop-exit),
+  ::view-transition-new(.modal-panel-enter),
+  ::view-transition-old(.modal-panel-exit) {
+    animation: none;
+  }
+}

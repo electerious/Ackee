@@ -7,6 +7,14 @@
   --row-height: 32px;
   --form-margin: 0.9rem;
   --form-padding: 0.6rem;
+  --motion-duration-ui: 250ms;
+  --motion-duration-spin-fast: 500ms;
+  --motion-duration-spin-slow: 800ms;
+  --motion-duration-long: 1.5s;
+  --motion-duration-feedback: 2s;
+  --motion-easing-standard: ease;
+  --motion-easing-emphasized: ease-in-out;
+  --motion-easing-linear: linear;
   --primary: rgba(115, 250, 200, 1);
   --secondary: rgba(0, 190, 225, 1);
   --tertiary: rgba(110, 115, 115, 1);

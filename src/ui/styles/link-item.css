@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: color 0.3s ease;
+  transition: color var(--motion-duration-ui) var(--motion-easing-standard);
   margin: 0 0 var(--gutter);
   outline: none;
   width: 100%;

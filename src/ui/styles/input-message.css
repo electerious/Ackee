@@ -38,8 +38,8 @@
   }
 
   &:focus-within::after {
-    animation-duration: 2s;
-    animation-timing-function: ease;
+    animation-duration: var(--motion-duration-feedback);
+    animation-timing-function: var(--motion-easing-standard);
     animation-name: inputMessage__show;
   }
 }

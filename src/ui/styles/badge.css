@@ -51,7 +51,7 @@
   }
 
   &--live::before {
-    animation: badge__live-pulse 1.5s ease-in-out infinite;
+    animation: badge__live-pulse var(--motion-duration-long) var(--motion-easing-emphasized) infinite;
     background: currentColor;
     border-radius: 50%;
     content: '';
@@ -60,7 +60,7 @@
   }
 
   &__icon {
-    transition: transform 0.3s ease;
+    transition: transform var(--motion-duration-ui) var(--motion-easing-standard);
     fill: currentColor;
     width: var(--badge-height);
     height: var(--badge-height);
@@ -79,16 +79,6 @@
 
     @starting-style {
       transform: rotate(0deg);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &--live::before {
-      animation: none;
-    }
-
-    &__icon {
-      transition: none;
     }
   }
 

@@ -67,7 +67,7 @@
   }
 
   &__column {
-    --bar-chart-stagger-delay: calc((sibling-index() - 1) * 300ms / sibling-count());
+    --bar-chart-stagger-delay: calc((sibling-index() - 1) * var(--motion-duration-ui) / sibling-count());
 
     display: flex;
     align-items: flex-end;
@@ -79,17 +79,11 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    &__bar {
-      animation: none;
-    }
-  }
-
   &__bar {
     position: relative;
-    animation: barChart__grow 0.3s ease backwards;
+    animation: barChart__grow var(--motion-duration-ui) var(--motion-easing-standard) backwards;
     animation-delay: var(--bar-chart-stagger-delay);
-    transition: height 0.3s ease;
+    transition: height var(--motion-duration-ui) var(--motion-easing-standard);
     border-radius: 4px;
     background-image: linear-gradient(20deg, transparent, rgba(0, 0, 0, 0.1));
     background-color: var(--tertiary);

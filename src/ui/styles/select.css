@@ -1,6 +1,6 @@
 .select {
   appearance: none;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--motion-duration-ui) var(--motion-easing-standard);
   box-sizing: border-box;
   margin: 0 0 var(--form-margin);
   outline: none;

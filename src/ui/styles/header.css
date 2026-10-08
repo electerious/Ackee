@@ -53,10 +53,10 @@
     top: calc(var(--header-spinner-offset) * -1);
     left: calc(var(--header-spinner-offset) * -1);
     opacity: 0;
-    animation-timing-function: linear;
+    animation-timing-function: var(--motion-easing-linear);
     animation-iteration-count: infinite;
     animation-name: header__rotate;
-    transition: opacity 1.2s ease;
+    transition: opacity var(--motion-duration-long) var(--motion-easing-standard);
     border-width: 2px;
     border-style: solid;
     border-color: transparent;
@@ -69,12 +69,12 @@
     }
 
     &--white {
-      animation-duration: 0.5s;
+      animation-duration: var(--motion-duration-spin-fast);
       border-right-color: var(--white);
     }
 
     &--primary {
-      animation-duration: 1.2s;
+      animation-duration: var(--motion-duration-long);
       border-right-color: var(--primary);
     }
   }
@@ -95,7 +95,7 @@
   &__button {
     display: flex;
     align-items: center;
-    transition: box-shadow 0.3s ease;
+      transition: box-shadow var(--motion-duration-ui) var(--motion-easing-standard);
     margin: 0 calc(var(--gutter) / 2);
     outline: none;
     padding: calc(var(--gutter) / 1.5) 2px;

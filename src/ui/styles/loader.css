@@ -19,8 +19,8 @@
   &__circle {
     position: absolute;
     opacity: 0.6;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
+    animation-duration: var(--motion-duration-spin-fast);
+    animation-timing-function: var(--motion-easing-linear);
     animation-iteration-count: infinite;
     animation-name: loader__rotate;
     border-width: 2px;
