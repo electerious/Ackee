@@ -3,6 +3,16 @@
 
   position: relative;
 
+  @keyframes flexList__fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
   &::before,
   &::after {
     position: absolute;
@@ -35,6 +45,8 @@
     display: flex;
     position: relative;
     align-items: center;
+    animation: flexList__fade-in 0.3s ease backwards;
+    animation-delay: calc((sibling-index() - 1) * 300ms / sibling-count());
     border-bottom: 1px solid var(--dimmed);
     height: calc(var(--row-height) + var(--gutter));
     font-size: 0.9em;
@@ -53,6 +65,12 @@
     &[href]:hover,
     &--has-hover:hover {
       color: var(--white);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__row {
+      animation: none;
     }
   }
 
