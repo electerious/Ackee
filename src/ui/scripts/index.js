@@ -2,20 +2,20 @@ import { ApolloProvider } from '@apollo/client/react'
 import { createElement as h, useCallback, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import createAuthLink from './api/links/createAuthLink.js'
-import createHttpLink from './api/links/createHttpLink.js'
-import createStatusLink from './api/links/createStatusLink.js'
-import createClient from './api/utils/createClient.js'
+import createAuthLink from './api/links/create-auth-link.js'
+import createHttpLink from './api/links/create-http-link.js'
+import createStatusLink from './api/links/create-status-link.js'
+import createClient from './api/utils/create-client.js'
 
-import useCustomScrollbar from './hooks/useCustomScrollbar.js'
-import useFilters from './hooks/useFilters.js'
-import useModals from './hooks/useModals.js'
-import useRouter from './hooks/useRouter.js'
-import useScrollReset from './hooks/useScrollReset.js'
-import useToken from './hooks/useToken.js'
+import useCustomScrollbar from './hooks/use-custom-scrollbar.js'
+import useFilters from './hooks/use-filters.js'
+import useModals from './hooks/use-modals.js'
+import useRouter from './hooks/use-router.js'
+import useScrollReset from './hooks/use-scroll-reset.js'
+import useToken from './hooks/use-token.js'
 
-import ErrorBoundary from './components/ErrorBoundary.js'
-import Main from './components/Main.js'
+import ErrorBoundary from './components/error-boundary.js'
+import Main from './components/main.js'
 
 if (globalThis.env.isDemoMode === true) {
   console.warn('Ackee runs in demo mode')

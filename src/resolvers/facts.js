@@ -3,10 +3,10 @@ import { VIEWS_TYPE_UNIQUE } from '../constants/views.js'
 import getDurations from '../database/durations.js'
 import getActiveVisitors from '../database/facts.js'
 import getViews from '../database/views.js'
-import requireAuth from '../middlewares/requireAuth.js'
-import domainIds from '../utils/domainIds.js'
+import requireAuth from '../middlewares/require-auth.js'
+import domainIds from '../utils/domain-ids.js'
 import pipe from '../utils/pipe.js'
-import recursiveId from '../utils/recursiveId.js'
+import recursiveId from '../utils/recursive-id.js'
 
 export default {
   AverageViews: {

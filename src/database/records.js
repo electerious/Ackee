@@ -1,4 +1,4 @@
-import Record from '../models/Record.js'
+import Record from '../models/record.js'
 
 const response = (entry) => ({
   id: entry.id,

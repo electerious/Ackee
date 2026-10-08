@@ -1,5 +1,5 @@
-import aggregateActiveVisitors from '../aggregations/aggregateActiveVisitors.js'
-import Record from '../models/Record.js'
+import aggregateActiveVisitors from '../aggregations/aggregate-active-visitors.js'
+import Record from '../models/record.js'
 
 const getActiveVisitors = async (ids, dateDetails) => {
   const enhance = (entries) => {

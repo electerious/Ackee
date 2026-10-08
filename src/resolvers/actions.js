@@ -1,6 +1,6 @@
 import * as actions from '../database/actions.js'
 import * as events from '../database/events.js'
-import KnownError from '../utils/KnownError.js'
+import KnownError from '../utils/known-error.js'
 import messages from '../utils/messages.js'
 
 const polish = (obj) => {

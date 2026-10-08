@@ -3,7 +3,7 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 
 import config from '../utils/config.js'
-import * as customTracker from '../utils/customTracker.js'
+import * as customTracker from '../utils/custom-tracker.js'
 import layout from '../utils/layout.js'
 import signale from '../utils/signale.js'
 

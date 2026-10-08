@@ -1,12 +1,12 @@
 import { toZonedTime } from 'date-fns-tz'
 
-import aggregateViews from '../aggregations/aggregateViews.js'
+import aggregateViews from '../aggregations/aggregate-views.js'
 import { INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY } from '../constants/intervals.js'
 import { VIEWS_TYPE_TOTAL, VIEWS_TYPE_UNIQUE } from '../constants/views.js'
-import Record from '../models/Record.js'
-import createArray from '../utils/createArray.js'
-import matchesDate from '../utils/matchesDate.js'
-import recursiveId from '../utils/recursiveId.js'
+import Record from '../models/record.js'
+import createArray from '../utils/create-array.js'
+import matchesDate from '../utils/matches-date.js'
+import recursiveId from '../utils/recursive-id.js'
 
 const get = async (ids, type, interval, limit, dateDetails) => {
   const aggregation = (() => {

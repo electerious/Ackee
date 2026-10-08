@@ -1,15 +1,15 @@
 import { toZonedTime } from 'date-fns-tz'
 
-import aggregateActions from '../aggregations/aggregateActions.js'
-import aggregateNewActions from '../aggregations/aggregateNewActions.js'
-import aggregateRecentActions from '../aggregations/aggregateRecentActions.js'
-import aggregateTopActions from '../aggregations/aggregateTopActions.js'
+import aggregateActions from '../aggregations/aggregate-actions.js'
+import aggregateNewActions from '../aggregations/aggregate-new-actions.js'
+import aggregateRecentActions from '../aggregations/aggregate-recent-actions.js'
+import aggregateTopActions from '../aggregations/aggregate-top-actions.js'
 import { INTERVALS_DAILY, INTERVALS_MONTHLY, INTERVALS_YEARLY } from '../constants/intervals.js'
 import { SORTINGS_NEW, SORTINGS_RECENT, SORTINGS_TOP } from '../constants/sortings.js'
-import Action from '../models/Action.js'
-import createArray from '../utils/createArray.js'
-import matchesDate from '../utils/matchesDate.js'
-import recursiveId from '../utils/recursiveId.js'
+import Action from '../models/action.js'
+import createArray from '../utils/create-array.js'
+import matchesDate from '../utils/matches-date.js'
+import recursiveId from '../utils/recursive-id.js'
 
 const response = (entry) => ({
   id: entry.id,

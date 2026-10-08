@@ -2,10 +2,10 @@ import { HeaderMap } from '@apollo/server'
 
 import config from './utils/config.js'
 import connect from './utils/connect.js'
-import createApolloServer from './utils/createApolloServer.js'
-import { createServerlessContext } from './utils/createContext.js'
-import findMatchingOrigin from './utils/findMatchingOrigin.js'
-import setSecurityHeaders from './utils/securityHeaders.js'
+import createApolloServer from './utils/create-apollo-server.js'
+import { createServerlessContext } from './utils/create-context.js'
+import findMatchingOrigin from './utils/find-matching-origin.js'
+import setSecurityHeaders from './utils/security-headers.js'
 
 if (config.dbUrl == null) {
   throw new Error('MongoDB connection URI missing in environment')

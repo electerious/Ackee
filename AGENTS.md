@@ -71,7 +71,7 @@ npm run healthcheck        # Run health check script
 
 ```javascript
 import { randomUUID as uuid } from 'node:crypto'
-import Domain from '../models/Domain.js'
+import Domain from '../models/domain.js'
 import sortByProp from '../utils/sortByProp.js'
 ```
 

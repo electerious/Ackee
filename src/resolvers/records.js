@@ -1,9 +1,9 @@
 import * as domains from '../database/domains.js'
 import * as records from '../database/records.js'
 import identifier from '../utils/identifier.js'
-import KnownError from '../utils/KnownError.js'
+import KnownError from '../utils/known-error.js'
 import messages from '../utils/messages.js'
-import normalizeUrl from '../utils/normalizeUrl.js'
+import normalizeUrl from '../utils/normalize-url.js'
 
 const normalizeSiteLocation = (siteLocation) => {
   if (siteLocation == null) {

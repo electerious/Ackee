@@ -1,0 +1,50 @@
+import PropTypes from 'prop-types'
+import { createElement as h, useCallback, useEffect, useState } from 'react'
+
+import { SORTINGS_RECENT, SORTINGS_TOP } from '../../../../constants/sortings.js'
+
+import formatCount from '../../utils/format-count.js'
+import rangeLabel from '../../utils/range-label.js'
+import relativeDate from '../../utils/relative-date.js'
+
+import PresentationCounterList from '../presentations/presentation-counter-list.js'
+import PresentationList from '../presentations/presentation-list.js'
+
+const textLabel = (item, range, isRecent) => {
+  if (item && item.date) return relativeDate(item.date)
+  if (isRecent) return 'Recent'
+
+  return rangeLabel(range)
+}
+
+const RendererList = (props) => {
+  // Index of the active element
+  const [active, setActive] = useState()
+
+  const onItemEnter = useCallback((index) => setActive(index), [setActive])
+  const onItemLeave = useCallback(() => setActive(), [setActive])
+
+  const label = textLabel(props.items[active], props.range, props.sorting === SORTINGS_RECENT)
+  useEffect(() => props.setStatusLabel(label), [label])
+
+  if (props.sorting === SORTINGS_TOP)
+    return h(PresentationCounterList, {
+      items: props.items,
+      formatter: formatCount,
+    })
+
+  return h(PresentationList, {
+    items: props.items,
+    onItemEnter,
+    onItemLeave,
+  })
+}
+
+RendererList.propTypes = {
+  items: PropTypes.array.isRequired,
+  sorting: PropTypes.string.isRequired,
+  range: PropTypes.string.isRequired,
+  setStatusLabel: PropTypes.func.isRequired,
+}
+
+export default RendererList

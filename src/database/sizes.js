@@ -1,6 +1,6 @@
-import aggregateNewRecords from '../aggregations/aggregateNewRecords.js'
-import aggregateRecentRecords from '../aggregations/aggregateRecentRecords.js'
-import aggregateTopRecords from '../aggregations/aggregateTopRecords.js'
+import aggregateNewRecords from '../aggregations/aggregate-new-records.js'
+import aggregateRecentRecords from '../aggregations/aggregate-recent-records.js'
+import aggregateTopRecords from '../aggregations/aggregate-top-records.js'
 import {
   SIZES_TYPE_BROWSER_HEIGHT,
   SIZES_TYPE_BROWSER_RESOLUTION,
@@ -10,8 +10,8 @@ import {
   SIZES_TYPE_SCREEN_WIDTH,
 } from '../constants/sizes.js'
 import { SORTINGS_NEW, SORTINGS_RECENT, SORTINGS_TOP } from '../constants/sortings.js'
-import Record from '../models/Record.js'
-import recursiveId from '../utils/recursiveId.js'
+import Record from '../models/record.js'
+import recursiveId from '../utils/recursive-id.js'
 
 const get = async (ids, sorting, type, range, limit, dateDetails) => {
   const aggregation = (() => {

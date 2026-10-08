@@ -1,5 +1,5 @@
-import Event from '../models/Event.js'
-import sortByProperty from '../utils/sortByProperty.js'
+import Event from '../models/event.js'
+import sortByProperty from '../utils/sort-by-property.js'
 
 const response = (entry) => ({
   id: entry.id,

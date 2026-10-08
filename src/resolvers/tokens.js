@@ -1,7 +1,7 @@
 import * as tokens from '../database/tokens.js'
 import config from '../utils/config.js'
-import { off as ignoreCookieOff, on as ignoreCookieOn } from '../utils/ignoreCookie.js'
-import KnownError from '../utils/KnownError.js'
+import { off as ignoreCookieOff, on as ignoreCookieOn } from '../utils/ignore-cookie.js'
+import KnownError from '../utils/known-error.js'
 
 const response = (entry) => ({
   id: entry.id,

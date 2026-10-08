@@ -1,5 +1,5 @@
-import Domain from '../models/Domain.js'
-import sortByProperty from '../utils/sortByProperty.js'
+import Domain from '../models/domain.js'
+import sortByProperty from '../utils/sort-by-property.js'
 
 const response = (entry) => ({
   id: entry.id,

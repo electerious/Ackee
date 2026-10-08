@@ -2,7 +2,7 @@ import server from './server.js'
 import config from './utils/config.js'
 import connect from './utils/connect.js'
 import signale from './utils/signale.js'
-import stripUrlAuth from './utils/stripUrlAuth.js'
+import stripUrlAuth from './utils/strip-url-auth.js'
 
 if (config.dbUrl == null) {
   signale.fatal('MongoDB connection URI missing in environment')

@@ -1,8 +1,8 @@
 import * as actions from '../database/actions.js'
 import * as events from '../database/events.js'
-import blockDemoMode from '../middlewares/blockDemoMode.js'
-import requireAuth from '../middlewares/requireAuth.js'
-import KnownError from '../utils/KnownError.js'
+import blockDemoMode from '../middlewares/block-demo-mode.js'
+import requireAuth from '../middlewares/require-auth.js'
+import KnownError from '../utils/known-error.js'
 import messages from '../utils/messages.js'
 import pipe from '../utils/pipe.js'
 

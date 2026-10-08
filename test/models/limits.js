@@ -1,10 +1,10 @@
 import test from 'ava'
 
-import Action from '../../src/models/Action.js'
-import Domain from '../../src/models/Domain.js'
-import Event from '../../src/models/Event.js'
-import PermanentToken from '../../src/models/PermanentToken.js'
-import Record from '../../src/models/Record.js'
+import Action from '../../src/models/action.js'
+import Domain from '../../src/models/domain.js'
+import Event from '../../src/models/event.js'
+import PermanentToken from '../../src/models/permanent-token.js'
+import Record from '../../src/models/record.js'
 
 const hasValidationError = async (Model, data, path) => {
   const error = await new Model(data).validate().catch((error_) => error_)
