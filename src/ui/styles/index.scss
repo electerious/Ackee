@@ -5,7 +5,7 @@
 // Styles ------------------------------------------------------ //
 @use 'html';
 @use 'body';
-@use 'customScrollbar';
+@use 'custom-scrollbar';
 @use 'fonts';
 @use 'headline';
 @use 'text';
@@ -13,7 +13,7 @@
 @use 'link';
 @use 'input';
 @use 'select';
-@use 'inputMessage';
+@use 'input-message';
 @use 'main';
 @use 'card';
 @use 'spinner';
@@ -22,17 +22,17 @@
 @use 'message';
 @use 'header';
 @use 'content';
-@use 'barChart';
+@use 'bar-chart';
 @use 'line';
-@use 'linkItem';
-@use 'flexList';
-@use 'emptyState';
-@use 'valueUnit';
+@use 'link-item';
+@use 'flex-list';
+@use 'empty-state';
+@use 'value-unit';
 @use 'favicon';
 @use 'modal';
 @use 'context';
 @use 'filter';
-@use 'keyHint';
+@use 'key-hint';
 @use 'status';
 @use 'facts';
 @use 'tooltip';
