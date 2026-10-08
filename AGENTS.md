@@ -204,7 +204,6 @@ Disabled rules for this project:
 
 - `import-x/dynamic-import-chunkname`
 - `import-x/no-named-as-default`
-- `unicorn/filename-case`
 - `unicorn/consistent-function-scoping`
 - `unicorn/no-await-expression-member`
 - `unicorn/no-anonymous-default-export`
