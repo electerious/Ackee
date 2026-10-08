@@ -8,10 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- Context menus, popovers, and tooltips now fade and shift into place; floating filters enter from below
-- Context menu buttons now share floating filters' selection styling
+- Context menus, popovers, and tooltips are now animated
+- Updated selection look of menus
 - The Live badge on active visitors now pulses to signal real-time data
-- Modals now fade and slide in and out, respecting reduced-motion preferences
+- Modals now fade and slide in and out
 - Bar chart bars now grow in sequence
 - Chart bars now have a subtle gradient, and chart and list divider lines fade at the edges
 - List items in cards now fade in sequentially
@@ -19,7 +19,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Change badges now show 0% when comparison data is unavailable
 - Facts values now use a subtle diagonal white gradient
 - UI styles now use CSS imports and nesting instead of Sass
-- Small visual improvements
 - Internal modernization and code cleanup
 
 ### Fixed
