@@ -196,21 +196,6 @@ test.serial('create domain', async (t) => {
 })
 ```
 
-## ESLint Rules
-
-Base config: `@electerious/eslint-config`
-
-Disabled rules for this project:
-
-- `import-x/dynamic-import-chunkname`
-- `import-x/no-named-as-default`
-- `unicorn/consistent-function-scoping`
-- `unicorn/no-await-expression-member`
-- `unicorn/no-anonymous-default-export`
-- `unicorn/prefer-top-level-await`
-- `unicorn/no-thenable`
-- `unicorn/no-process-exit`
-
 ## Project Structure
 
 ```
