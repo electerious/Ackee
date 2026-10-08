@@ -11,6 +11,8 @@ import commonModalProps from '../../utils/common-modal-props.js'
 import formatDuration from '../../utils/format-duration.js'
 import relativeFn from '../../utils/relative-fn.js'
 
+const formatter = (ms) => formatDuration(ms).toString()
+
 const ModalDurations = (props) => {
   const { value, status } = useCombinedDurations({
     interval: props.interval,
@@ -42,7 +44,7 @@ const ModalDurations = (props) => {
       ),
       h(PresentationCounterList, {
         items: value[props.index],
-        formatter: formatDuration,
+        formatter,
       }),
     ),
     h(

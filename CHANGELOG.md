@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Fixed
 
+- Opening duration details previously crashed the UI
 - Cookie opt-outs now require an exact `ackee_ignore=1` cookie instead of matching substrings (thanks @Davidowi2, #409)
 
 ## [3.6.1] - 2026-09-18
