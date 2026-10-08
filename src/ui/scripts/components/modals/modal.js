@@ -1,9 +1,19 @@
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { createElement as h } from 'react'
+import { Fragment, createElement as h, ViewTransition } from 'react'
 
 import useHotkey from '../../hooks/use-hotkey.js'
 import commonModalProps from '../../utils/common-modal-props.js'
+
+const createViewTransition = (name, child) =>
+  h(
+    ViewTransition,
+    {
+      default: 'none',
+      enter: `${name}-enter`,
+      exit: `${name}-exit`,
+    },
+    child,
+  )
 
 const Modal = (props) => {
   useHotkey('escape', props.closeModal, {
@@ -12,20 +22,18 @@ const Modal = (props) => {
   })
 
   return h(
-    'div',
-    {
-      className: classNames({
-        modal: true,
-        visible: props.visible === true,
-      }),
-    },
-    h('div', { className: 'modal__inner' }, props.children),
+    Fragment,
+    null,
+    createViewTransition('modal-backdrop', h('div', { className: 'modal-backdrop' })),
+    createViewTransition(
+      'modal-panel',
+      h('div', { className: 'modal-panel' }, h('div', { className: 'modal-panel__inner' }, props.children)),
+    ),
   )
 }
 
 Modal.propTypes = {
   ...commonModalProps,
-  visible: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 }
 

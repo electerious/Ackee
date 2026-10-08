@@ -36,7 +36,7 @@ const Modals = (props) => {
 
     return h(
       Modal,
-      { key: modalId, visible: true, ...commonProps },
+      { key: modalId, ...commonProps },
       h(modalComponents[modalData.type], {
         ...commonProps,
         ...modalData.props,

@@ -1,37 +1,98 @@
-.modal {
+.modal-backdrop,
+.modal-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+}
+
+.modal-backdrop {
+  background: var(--modal-backdrop);
+}
+
+.modal-panel {
   display: flex;
 
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  z-index: 3;
-  transition: opacity 0.3s ease;
-  background: var(--modal-backdrop);
   padding: 0 var(--gutter);
   pointer-events: none;
+}
 
-  &.visible {
+.modal-panel__inner {
+  width: 100%;
+  max-width: 600px;
+  max-height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  pointer-events: all;
+}
+
+::view-transition-new(.modal-backdrop-enter) {
+  animation: modal-fade-in 0.3s ease both;
+}
+
+::view-transition-old(.modal-backdrop-exit) {
+  animation: modal-fade-out 0.3s ease both;
+}
+
+::view-transition-new(.modal-panel-enter) {
+  animation: modal-panel-enter 0.3s ease both;
+}
+
+::view-transition-old(.modal-panel-exit) {
+  animation: modal-panel-exit 0.3s ease both;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
     opacity: 1;
-    pointer-events: all;
+  }
+}
+
+@keyframes modal-fade-out {
+  from {
+    opacity: 1;
   }
 
-  &__inner {
-    width: 100%;
-    max-width: 600px;
-    max-height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-panel-enter {
+  from {
     transform: translateY(20px);
-    transition: transform 0.3s ease;
-    overscroll-behavior: contain;
+    opacity: 0;
   }
 
-  &.visible &__inner {
-    transform: none;
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-panel-exit {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(.modal-backdrop-enter),
+  ::view-transition-old(.modal-backdrop-exit),
+  ::view-transition-new(.modal-panel-enter),
+  ::view-transition-old(.modal-panel-exit) {
+    animation: none;
   }
 }
