@@ -23,7 +23,7 @@ The event type specifies how Ackee will show the aggregated data in the UI. It c
 
 ### Adding actions
 
-An action should be added to an event whenever the user does what you want to track. It's similar to domains that get filled with records. You can add an action to an event [using the GraphQL API](API.md#Create%20an%20action) or using [ackee-tracker](https://github.com/electerious/ackee-tracker). An action creation can be triggered by anything that executes JS.
+An action should be added to an event whenever the user does what you want to track. It's similar to domains that get filled with records. You can add an action to an event [using the GraphQL API](API.md#create-an-action) or using [ackee-tracker](https://github.com/electerious/ackee-tracker). An action creation can be triggered by anything that executes JS.
 
 Setup:
 

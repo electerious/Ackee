@@ -189,11 +189,11 @@ export default gql`
 
   enum SizeType {
     """
-    Browser height in pixels.
+    Browser width in pixels.
     """
     BROWSER_WIDTH
     """
-    Browser width in pixels.
+    Browser height in pixels.
     """
     BROWSER_HEIGHT
     """
@@ -201,15 +201,15 @@ export default gql`
     """
     BROWSER_RESOLUTION
     """
-    Browser height in pixels.
+    Screen width in pixels.
     """
     SCREEN_WIDTH
     """
-    Browser width in pixels.
+    Screen height in pixels.
     """
     SCREEN_HEIGHT
     """
-    Browser width and height in pixels.
+    Screen width and height in pixels.
     """
     SCREEN_RESOLUTION
   }

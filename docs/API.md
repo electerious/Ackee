@@ -9,7 +9,7 @@ Here are a few resources to help you get started with GraphQL:
 
 ## Playground
 
-GraphQL Playground is a graphical, interactive, in-browser GraphQL IDE. It allows you to play and experiment with the API of Ackee.
+Ackee uses Apollo Sandbox, an interactive, in-browser GraphQL IDE. It allows you to play and experiment with the API of Ackee.
 
 Simply run Ackee with `NODE_ENV` set to `development` and visit the `/api` playground in your browser. You can do so by adding `NODE_ENV=development` to the environment of your `docker-compose.yml` or by using `npm run dev`. Only use this mode on your local machine as Ackee runs slower when in development mode.
 
@@ -98,11 +98,11 @@ The time zone of the server will be used as a fallback.
 
 Queries are used to receive data. Here are a few examples.
 
-- [Get all domains](#Get%20all%20domains)
-- [Get a specific domain](#Get%20a%20specific%20domain)
-- [Get facts of domains](#Get%20facts%20of%20domains)
-- [Get statistics of domains](#Get%20statistics%20of%20domains)
-- [Get events](#Get%20events)
+- [Get all domains](#get-all-domains)
+- [Get a specific domain](#get-a-specific-domain)
+- [Get facts of domains](#get-facts-of-domains)
+- [Get statistics of domains](#get-statistics-of-domains)
+- [Get events](#get-events)
 
 ### Get all domains
 
@@ -139,8 +139,14 @@ query getDomainsFacts {
   domains {
     facts {
       activeVisitors
-      averageViews
-      averageDuration
+      averageViews {
+        count
+        change
+      }
+      averageDuration {
+        count
+        change
+      }
       viewsToday
       viewsMonth
       viewsYear
@@ -157,44 +163,53 @@ query getDomainsStatistics {
     statistics {
       durations(interval: DAILY) {
         id
+        value
         count
       }
       views(interval: YEARLY, type: UNIQUE) {
         id
+        value
         count
       }
       languages(sorting: TOP) {
         id
+        value
         count
         created
       }
       browsers(sorting: TOP, type: WITH_VERSION) {
         id
+        value
         count
         created
       }
       devices(sorting: TOP, type: WITH_MODEL) {
         id
+        value
         count
         created
       }
       pages(sorting: TOP) {
         id
+        value
         count
         created
       }
       referrers(sorting: TOP, type: WITH_SOURCE) {
         id
+        value
         count
         created
       }
       sizes(sorting: TOP, type: SCREEN_RESOLUTION) {
         id
+        value
         count
         created
       }
       systems(sorting: TOP, type: NO_VERSION) {
         id
+        value
         count
         created
       }
@@ -213,10 +228,12 @@ query getEvents {
     statistics {
       chart(interval: DAILY, type: TOTAL) {
         id
+        value
         count
       }
       list(sorting: TOP, type: TOTAL) {
         id
+        value
         count
       }
     }
@@ -228,12 +245,12 @@ query getEvents {
 
 Mutations are used to add, update or delete data. Here are a few examples.
 
-- [Create a domain](#Create%20a%20domain)
-- [Delete a domain](#Delete%20a%20domain)
-- [Create a record](#Create%20a%20record)
-- [Create an event](#Create%20an%20event)
-- [Create an action](#Create%20an%20action)
-- [Update an action](#Update%20an%20action)
+- [Create a domain](#create-a-domain)
+- [Delete a domain](#delete-a-domain)
+- [Create a record](#create-a-record)
+- [Create an event](#create-an-event)
+- [Create an action](#create-an-action)
+- [Update an action](#update-an-action)
 
 ### Create a domain
 
@@ -342,9 +359,7 @@ mutation createAction($eventId: ID!, $input: CreateActionInput!) {
 ```graphql
 mutation updateAction($id: ID!, $input: UpdateActionInput!) {
   updateAction(id: $id, input: $input) {
-    payload {
-      id
-    }
+    success
   }
 }
 ```
