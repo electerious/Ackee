@@ -1,0 +1,21 @@
+.message {
+  margin-bottom: var(--gutter);
+  border: 2px solid transparent;
+  border-radius: var(--inner-radius);
+  /* Keep padding consistent with form controls. */
+  padding: var(--form-padding);
+  color: var(--white);
+  font-size: 0.8em;
+
+  &--success {
+    background: var(--success);
+  }
+
+  &--warning {
+    background: var(--warning);
+  }
+
+  &--error {
+    background: var(--error);
+  }
+}

@@ -1,0 +1,14 @@
+.keyHint {
+  --key-hint-size: 1.5em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--tertiary);
+  border-radius: 6px;
+  background: var(--dimmed);
+  width: var(--key-hint-size);
+  height: var(--key-hint-size);
+  color: var(--light);
+  font-size: 0.8em;
+}

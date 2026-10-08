@@ -1,0 +1,24 @@
+.linkItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease;
+  margin: 0 0 var(--gutter);
+  outline: none;
+  width: 100%;
+
+  &--disabled {
+    cursor: inherit;
+  }
+
+  &:not(.linkItem--disabled):focus,
+  &:not(.linkItem--disabled):hover {
+    color: var(--white);
+  }
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}

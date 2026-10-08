@@ -1,0 +1,67 @@
+.badge {
+  --badge-height: 28px;
+  --badge-padding-vertical: 1px;
+
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: calc(var(--gutter) / 3);
+  border-radius: 100px;
+  padding: 0 calc(var(--gutter) / 1.5);
+  height: calc(var(--badge-height) + var(--badge-padding-vertical) * 2);
+
+  &--with-icon {
+    padding-left: var(--badge-padding-vertical);
+
+    @media (max-width: 1100px) and (min-width: 901px) {
+      padding-right: var(--badge-padding-vertical);
+    }
+
+    @media (max-width: 700px) and (min-width: 561px) {
+      padding-right: var(--badge-padding-vertical);
+    }
+  }
+
+  &--positive {
+    background: var(--positive-background);
+    color: var(--positive);
+  }
+
+  &--negative {
+    background: var(--negative-background);
+    color: var(--negative);
+  }
+
+  &--neutral {
+    background: var(--light-background);
+    color: var(--light);
+  }
+
+  &__icon {
+    fill: currentColor;
+    width: var(--badge-height);
+    height: var(--badge-height);
+  }
+
+  &--positive &__icon {
+    transform: rotate(-45deg);
+  }
+
+  &--negative &__icon {
+    transform: rotate(45deg);
+  }
+
+  &__value {
+    font-size: 0.8em;
+  }
+
+  &--with-icon &__value {
+    @media (max-width: 1100px) and (min-width: 901px) {
+      display: none;
+    }
+
+    @media (max-width: 700px) and (min-width: 561px) {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.customScrollbar {
+  --scrollbar-size: 6px;
+
+  ::-webkit-scrollbar {
+    z-index: 1000;
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: calc(var(--scrollbar-size) / 2);
+    background-color: var(--light);
+  }
+
+  ::-webkit-scrollbar-corner {
+    display: none;
+  }
+
+  * {
+    scrollbar-color: var(--light) transparent;
+    scrollbar-width: thin;
+  }
+}

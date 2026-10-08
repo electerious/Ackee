@@ -1,0 +1,3 @@
+.spacer {
+  height: calc(var(--gutter) * var(--size));
+}

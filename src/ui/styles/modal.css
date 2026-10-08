@@ -1,0 +1,37 @@
+.modal {
+  display: flex;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.3s ease;
+  background: var(--modal-backdrop);
+  padding: 0 var(--gutter);
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: 600px;
+    max-height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    overscroll-behavior: contain;
+  }
+
+  &.visible &__inner {
+    transform: none;
+  }
+}

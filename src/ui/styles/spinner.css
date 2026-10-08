@@ -1,0 +1,43 @@
+.spinner {
+  --spinner-size: 26px;
+
+  @keyframes spinner__rotate {
+    0% {
+      transform: rotate(0turn);
+    }
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+
+  position: relative;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+
+  &__circle {
+    position: absolute;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: spinner__rotate;
+    border-width: 3px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+
+    &--primary {
+      animation-duration: 0.5s;
+      border-right-color: var(--primary);
+    }
+
+    &--white {
+      animation-duration: 0.8s;
+      border-right-color: var(--white);
+    }
+
+    &--dimmed {
+      border-color: var(--dimmed);
+    }
+  }
+}

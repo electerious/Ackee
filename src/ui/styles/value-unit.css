@@ -1,0 +1,7 @@
+.valueUnit {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: end;
+  gap: calc(var(--gutter) / 2);
+}

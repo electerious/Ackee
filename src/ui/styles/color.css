@@ -1,0 +1,21 @@
+.color {
+  &-primary {
+    color: var(--primary);
+  }
+
+  &-white {
+    color: var(--white);
+  }
+
+  &-light {
+    color: var(--light);
+  }
+
+  &-black {
+    color: var(--black);
+  }
+
+  &-destructive {
+    color: var(--destructive);
+  }
+}

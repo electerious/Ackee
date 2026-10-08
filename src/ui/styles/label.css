@@ -1,0 +1,9 @@
+.label {
+  display: block;
+  margin: 0 0 calc(var(--gutter) / 4);
+  font-size: 0.9em;
+
+  &--no-spacing {
+    margin-bottom: 0;
+  }
+}

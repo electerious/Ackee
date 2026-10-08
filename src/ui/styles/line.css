@@ -1,0 +1,6 @@
+.line {
+  margin: 0 0 var(--gutter);
+  border: 0;
+  background: var(--dimmed);
+  height: 1px;
+}

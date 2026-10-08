@@ -1,0 +1,13 @@
+.favicon {
+  border: 2px solid var(--white);
+  border-radius: 100%;
+  background: var(--white);
+
+  width: var(--row-height);
+  height: var(--row-height);
+  overflow: hidden;
+
+  &--missing {
+    background: var(--gradient);
+  }
+}

@@ -1,0 +1,21 @@
+.emptyState {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  height: var(--card-content-height);
+
+  &__inner {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: calc(var(--gutter) / 1.5);
+  }
+
+  &__icon {
+    --empty-state-icon-size: 24px;
+
+    fill: var(--light);
+    width: var(--empty-state-icon-size);
+    height: var(--empty-state-icon-size);
+  }
+}

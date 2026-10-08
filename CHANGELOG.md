@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- UI styles now use CSS imports and nesting instead of Sass
 - Small visual improvements
 - Internal modernization and code cleanup
 

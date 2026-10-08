@@ -1,0 +1,36 @@
+:root {
+  --gutter: 1rem;
+  --max-width: 1200px;
+  --radius: 16px;
+  --inner-radius: 12px;
+  --card-content-height: 300px;
+  --row-height: 32px;
+  --form-margin: 0.9rem;
+  --form-padding: 0.6rem;
+  --primary: rgba(115, 250, 200, 1);
+  --secondary: rgba(0, 190, 225, 1);
+  --tertiary: rgba(110, 115, 115, 1);
+  --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+  --white: rgba(255, 255, 255, 1);
+  --light: rgba(255, 255, 255, 0.5);
+  --black: rgba(40, 45, 45, 1);
+  --dimmed: rgba(255, 255, 255, 0.05);
+  --card: rgba(51, 56, 56, 1);
+  --context: rgba(69, 74, 74, 0.85);
+  --border: rgba(0, 0, 0, 0.3);
+  --success: rgba(0, 255, 0, 0.1);
+  --warning: rgba(255, 255, 0, 0.1);
+  --error: rgba(255, 0, 0, 0.15);
+  --positive: var(--primary);
+  --negative: rgba(250, 154, 115, 1);
+  --destructive: rgba(255, 60, 60, 1);
+  --black-transparent: rgba(40, 45, 45, 0);
+  --card-transparent: rgba(51, 56, 56, 0);
+  --positive-background: rgba(115, 250, 200, 0.3);
+  --negative-background: rgba(250, 154, 115, 0.3);
+  --light-background: rgba(255, 255, 255, 0.3);
+  --disabled-background: hsla(0, 0%, 95%, 0.05);
+  --disabled-border: hsla(0, 0%, 5%, 0);
+  --modal-backdrop: rgba(26, 29, 29, 0.9);
+  --backdrop-filter: blur(10px);
+}

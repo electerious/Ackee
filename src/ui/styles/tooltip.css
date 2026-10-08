@@ -1,0 +1,24 @@
+.tooltip {
+  --tooltip-size: 1em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border-radius: 100%;
+  background: var(--dimmed);
+  width: var(--tooltip-size);
+  height: var(--tooltip-size);
+
+  &:focus {
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+
+  &__icon {
+    --tooltip-icon-size: 12px;
+    fill: currentColor;
+
+    width: var(--tooltip-icon-size);
+    height: var(--tooltip-icon-size);
+  }
+}

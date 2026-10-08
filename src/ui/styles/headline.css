@@ -1,0 +1,37 @@
+.headline {
+  margin: 0 0 calc(var(--gutter) / 2);
+  color: var(--white);
+  font-weight: 400;
+  font-size: 2.2em;
+  line-height: 1;
+  text-rendering: optimizeLegibility;
+
+  &--medium {
+    margin: 0 0 calc(var(--gutter) / 4);
+    font-size: 1.5em;
+    line-height: 1.2;
+  }
+
+  &--small {
+    margin: 0 0 calc(var(--gutter) / 3);
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  &--no-spacing {
+    margin-bottom: 0;
+  }
+
+  &__button {
+    max-width: 100%;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__button:focus {
+    outline: none;
+    color: var(--primary);
+  }
+}

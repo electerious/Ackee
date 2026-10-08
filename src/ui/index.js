@@ -17,10 +17,10 @@ export const index = () => {
 }
 
 export const styles = async () => {
-  const { default: sass } = await import('rosid-handler-sass')
-  const filePath = path.resolve(__dirname, './styles/index.scss')
+  const { default: css } = await import('rosid-handler-css')
+  const filePath = path.resolve(__dirname, './styles/index.css')
 
-  return sass(filePath, { optimize: config.isDevelopmentMode === false })
+  return css(filePath, { optimize: config.isDevelopmentMode === false })
 }
 
 export const scripts = async () => {

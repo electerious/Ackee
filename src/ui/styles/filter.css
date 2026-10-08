@@ -1,0 +1,47 @@
+.filter {
+  display: grid;
+
+  position: fixed;
+  bottom: 4vh;
+  justify-content: center;
+  z-index: 2;
+  width: 100%;
+  pointer-events: none;
+
+  @media (max-width: 800px) {
+    font-size: 0.9em;
+  }
+
+  &__bar {
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--gutter);
+    backdrop-filter: var(--backdrop-filter);
+    border-radius: 100px;
+    background: var(--context);
+    padding: 0 calc(var(--gutter) * 1.5);
+    pointer-events: all;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    outline: none;
+    padding: calc(var(--gutter) / 1.5) 0;
+    color: var(--white);
+    white-space: nowrap;
+
+    &:focus {
+      color: var(--primary);
+    }
+  }
+
+  &__arrow {
+    --filter-arrow-size: 12px;
+    fill: var(--light);
+
+    margin-left: calc(var(--gutter) / 2);
+    width: var(--filter-arrow-size);
+    height: var(--filter-arrow-size);
+  }
+}

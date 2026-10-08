@@ -1,0 +1,39 @@
+.updater {
+  --updater-size: 1em;
+
+  @keyframes updater__zoom {
+    0% {
+      transform: scale(0.2);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.6;
+    }
+    80% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+  }
+
+  position: relative;
+  border-radius: 100%;
+  background: var(--context);
+  width: var(--updater-size);
+  height: var(--updater-size);
+
+  &__circle {
+    position: absolute;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-name: updater__zoom;
+    border-radius: inherit;
+    background: var(--white);
+    width: 100%;
+    height: 100%;
+  }
+}

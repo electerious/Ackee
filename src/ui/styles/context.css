@@ -1,0 +1,101 @@
+.context {
+  display: grid;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(var(--x), var(--y));
+  opacity: 0;
+  z-index: 3;
+  backdrop-filter: var(--backdrop-filter);
+  border-radius: var(--radius);
+  background: var(--context);
+  padding: calc(var(--gutter) / 2) 0;
+  min-width: 210px;
+  pointer-events: none;
+
+  @media (max-width: 800px) {
+    font-size: 0.9em;
+  }
+
+  &--fixed {
+    position: fixed;
+  }
+
+  &--tooltip {
+    max-width: 300px;
+  }
+
+  &--floating {
+    border-radius: var(--radius);
+  }
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__content {
+    margin: 0;
+    padding: calc(var(--gutter) / 3) calc(var(--gutter) * 1.2);
+    font-size: 0.9em;
+  }
+
+  &__button {
+    transition:
+      color 0.3s ease,
+      background 0.2s ease;
+    outline: none;
+    padding: calc(var(--gutter) / 3) calc(var(--gutter) * 1.2);
+    color: currentColor;
+    line-height: 1.4;
+    text-align: left;
+
+    &.active {
+      color: var(--white);
+    }
+
+    &:focus,
+    &:hover {
+      background: var(--dimmed);
+    }
+  }
+
+  &--floating &__button {
+    margin: 0 calc(var(--gutter) / 2);
+    border-radius: var(--inner-radius);
+    padding: calc(var(--gutter) / 2) calc(var(--gutter) / 1.6);
+    color: var(--white);
+
+    &.active {
+      color: var(--primary);
+    }
+  }
+
+  &__head {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gutter);
+  }
+
+  &__label {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__description {
+    padding-right: var(--gutter);
+    color: var(--light);
+    font-size: 0.86em;
+  }
+
+  &__separator {
+    margin: calc(var(--gutter) / 2) 0;
+    background: var(--dimmed);
+    height: 1px;
+  }
+}

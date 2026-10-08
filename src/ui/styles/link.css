@@ -1,0 +1,11 @@
+.link {
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  color: currentColor;
+  font: inherit;
+  text-decoration: none;
+}

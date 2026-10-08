@@ -1,0 +1,6 @@
+.status {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: calc(var(--gutter) / 2);
+}

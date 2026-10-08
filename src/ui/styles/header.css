@@ -1,0 +1,123 @@
+.header {
+  display: flex;
+
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--gutter) * 2);
+    pointer-events: none;
+    content: '';
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, var(--black), var(--black-transparent));
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to right, var(--black-transparent), var(--black));
+  }
+
+  @keyframes header__rotate {
+    0% {
+      transform: rotate(0turn);
+    }
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+
+  &__logo {
+    --header-logo-size: 42px;
+
+    position: relative;
+    margin: var(--gutter) 0 calc(var(--gutter) / 2);
+    border-radius: 100%;
+    background: var(--gradient);
+    width: var(--header-logo-size);
+    height: var(--header-logo-size);
+  }
+
+  &__spinner {
+    --header-spinner-offset: 4px;
+
+    position: absolute;
+    top: calc(var(--header-spinner-offset) * -1);
+    left: calc(var(--header-spinner-offset) * -1);
+    opacity: 0;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: header__rotate;
+    transition: opacity 1.2s ease;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 100%;
+    width: calc(100% + var(--header-spinner-offset) * 2);
+    height: calc(100% + var(--header-spinner-offset) * 2);
+
+    &--visible {
+      opacity: 1;
+    }
+
+    &--white {
+      animation-duration: 0.5s;
+      border-right-color: var(--white);
+    }
+
+    &--primary {
+      animation-duration: 1.2s;
+      border-right-color: var(--primary);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__buttons {
+    display: flex;
+    margin: 0 auto;
+    padding: 0 calc(var(--gutter) / 2);
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+    margin: 0 calc(var(--gutter) / 2);
+    outline: none;
+    padding: calc(var(--gutter) / 1.5) 2px;
+    white-space: nowrap;
+
+    &.hovered,
+    &:hover,
+    &:focus {
+      box-shadow: inset 0 -2px 0 var(--light);
+    }
+
+    &.active {
+      box-shadow: inset 0 -2px 0 var(--primary);
+    }
+  }
+
+  &__arrow {
+    --header-arrow-size: 12px;
+    fill: currentColor;
+
+    margin-left: calc(var(--gutter) / 2);
+    width: var(--header-arrow-size);
+    height: var(--header-arrow-size);
+  }
+}

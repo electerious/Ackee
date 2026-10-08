@@ -1,0 +1,31 @@
+.input {
+  appearance: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  margin: 0 0 var(--form-margin);
+  outline: none;
+  box-shadow: none;
+  border: 2px solid transparent;
+  border-radius: var(--inner-radius);
+  background: var(--dimmed);
+  padding: var(--form-padding);
+  width: 100%;
+  resize: vertical;
+  color: var(--white);
+
+  &:disabled {
+    cursor: not-allowed;
+    border-color: var(--disabled-border);
+    background-color: var(--disabled-background);
+    color: var(--white);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+  }
+
+  &::placeholder {
+    opacity: 1;
+    color: #999;
+  }
+}

@@ -35,7 +35,7 @@
   },
   "nodemonConfig": {
     "exec": "npm run build:pre && npm run server",
-    "ext": "js,json,graphql,scss",
+    "ext": "js,json,graphql,css",
     "watch": [
       "src"
     ]
@@ -90,8 +90,8 @@
     "react-dom": "^19.3.0",
     "react-fast-compare": "^3.2.2",
     "react-use": "^17.6.1",
+    "rosid-handler-css": "^1.1.1",
     "rosid-handler-js-next": "^2.0.1",
-    "rosid-handler-sass": "^10.0.0",
     "s-ago": "^2.2.0",
     "shortid": "^2.2.17",
     "test-listen": "^1.1.0",

@@ -1,0 +1,20 @@
+.content {
+  --columns: 2;
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: var(--gutter);
+  margin: 0 auto;
+  padding: 6vh var(--gutter);
+  width: 100%;
+  max-width: var(--max-width);
+
+  @media (max-width: 800px) {
+    --columns: 1;
+  }
+
+  &__spacer {
+    grid-column: 1 / -1;
+    height: 3vh;
+  }
+}

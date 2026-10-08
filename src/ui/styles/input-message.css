@@ -1,0 +1,45 @@
+.inputMessage {
+  display: grid;
+  position: relative;
+  grid-template-areas: 'main';
+  margin-bottom: var(--form-margin);
+
+  @keyframes inputMessage__show {
+    0% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .input {
+    grid-area: main;
+    margin-bottom: 0;
+  }
+
+  &::after {
+    display: flex;
+    grid-area: main;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    backdrop-filter: var(--backdrop-filter);
+    border: 2px solid var(--primary);
+    border-radius: var(--inner-radius);
+    background: var(--context);
+    pointer-events: none;
+    content: attr(title);
+    color: var(--white);
+    font-size: 0.86em;
+  }
+
+  &:focus-within::after {
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-name: inputMessage__show;
+  }
+}

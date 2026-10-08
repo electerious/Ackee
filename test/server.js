@@ -36,6 +36,9 @@ test('return production styles', async (t) => {
 
   t.is(typeof content, 'string')
   t.false(content.includes('sourceMappingURL'))
+  t.true(content.includes('.header__spinner--visible'))
+  t.true(content.includes('.badge--positive .badge__icon'))
+  t.false(content.includes('@import'))
 })
 
 test('return production scripts', async (t) => {

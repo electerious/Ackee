@@ -1,0 +1,43 @@
+.facts {
+  --columns: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+
+  grid-column: 1 / -1;
+  gap: 1px;
+  border-radius: var(--radius);
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 900px) {
+    --columns: 2;
+  }
+
+  @media (max-width: 560px) {
+    --columns: 1;
+  }
+
+  &__card {
+    display: grid;
+    grid-template-areas: 'top top' 'left right';
+    align-content: space-between;
+    align-items: end;
+    gap: var(--gutter);
+    background: var(--card);
+    padding: calc(var(--gutter) * 1.6) calc(var(--gutter) * 1.5) calc(var(--gutter) * 1.5);
+    width: 100%;
+  }
+
+  &__top {
+    grid-area: top;
+  }
+
+  &__left {
+    grid-area: left;
+  }
+
+  &__right {
+    grid-area: right;
+    justify-self: end;
+  }
+}

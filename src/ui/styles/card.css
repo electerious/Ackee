@@ -1,0 +1,68 @@
+.card {
+  border-radius: var(--radius);
+
+  background: var(--card);
+  width: 100%;
+  overflow: hidden;
+
+  &--overlay {
+    align-self: center;
+    justify-self: center;
+    max-width: 420px;
+  }
+
+  &--wide {
+    grid-column: 1 / -1;
+  }
+
+  &__inner {
+    padding: calc(var(--gutter) * 1.6) calc(var(--gutter) * 1.5) calc(var(--gutter) * 1.5);
+    width: 100%;
+  }
+
+  &__group {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: calc(var(--gutter) / 4);
+    justify-content: start;
+    align-items: center;
+    margin: 0 0 calc(var(--gutter) / 4);
+  }
+
+  &__footer {
+    display: flex;
+    border-top: 1px solid var(--black);
+  }
+
+  &__button {
+    display: flex;
+    justify-content: flex-end;
+    transition: background 0.3s ease;
+    outline: none;
+    padding: var(--gutter) calc(var(--gutter) * 1.5);
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
+    &:not([disabled]):focus,
+    &:not([disabled]):hover {
+      background: var(--dimmed);
+    }
+
+    &:active {
+      transition: none;
+      background: none;
+    }
+
+    &--primary {
+      width: 100%;
+    }
+  }
+
+  &__separator {
+    flex-shrink: 0;
+    background: var(--black);
+    width: 1px;
+  }
+}
