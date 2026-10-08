@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - List items in cards now fade in sequentially
 - Change badge icons now rotate on appearance
 - Change badges now show 0% when comparison data is unavailable
+- Facts values now use a subtle diagonal white gradient
 - UI styles now use CSS imports and nesting instead of Sass
 - Small visual improvements
 - Internal modernization and code cleanup

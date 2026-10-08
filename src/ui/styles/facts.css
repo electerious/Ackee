@@ -34,6 +34,16 @@
 
   &__left {
     grid-area: left;
+
+    .headline {
+      @supports (background-clip: text) or (-webkit-background-clip: text) {
+        background-image: linear-gradient(150deg, var(--white), rgba(255, 255, 255, 0.5));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+    }
   }
 
   &__right {
