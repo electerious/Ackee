@@ -1,7 +1,7 @@
 import * as actions from '../database/actions.js'
 import * as events from '../database/events.js'
 import KnownError from '../utils/KnownError.js'
-import messages from '../utils/messages.js'
+import validated from '../utils/validated.js'
 
 const polish = (obj) => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
@@ -33,17 +33,7 @@ export default {
 
       if (event == null) throw new KnownError('Unknown event')
 
-      let entry
-
-      try {
-        entry = await actions.add(data)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(actions.add(data))
 
       return {
         success: true,
@@ -58,17 +48,7 @@ export default {
         }
       }
 
-      let entry
-
-      try {
-        entry = await actions.update(id, input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(actions.update(id, input))
 
       if (entry == null) {
         throw new KnownError('Unknown action')

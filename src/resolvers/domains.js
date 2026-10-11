@@ -3,8 +3,8 @@ import * as records from '../database/records.js'
 import blockDemoMode from '../middlewares/blockDemoMode.js'
 import requireAuth from '../middlewares/requireAuth.js'
 import KnownError from '../utils/KnownError.js'
-import messages from '../utils/messages.js'
 import pipe from '../utils/pipe.js'
+import validated from '../utils/validated.js'
 
 export default {
   Domain: {
@@ -21,17 +21,7 @@ export default {
   },
   Mutation: {
     createDomain: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
-      let entry
-
-      try {
-        entry = await domains.add(input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(domains.add(input))
 
       return {
         payload: entry,
@@ -39,17 +29,7 @@ export default {
       }
     }),
     updateDomain: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
-      let entry
-
-      try {
-        entry = await domains.update(id, input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(domains.update(id, input))
 
       if (entry == null) {
         throw new KnownError('Unknown domain')

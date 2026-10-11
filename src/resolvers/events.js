@@ -3,8 +3,8 @@ import * as events from '../database/events.js'
 import blockDemoMode from '../middlewares/blockDemoMode.js'
 import requireAuth from '../middlewares/requireAuth.js'
 import KnownError from '../utils/KnownError.js'
-import messages from '../utils/messages.js'
 import pipe from '../utils/pipe.js'
+import validated from '../utils/validated.js'
 
 export default {
   Event: {
@@ -20,17 +20,7 @@ export default {
   },
   Mutation: {
     createEvent: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
-      let entry
-
-      try {
-        entry = await events.add(input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(events.add(input))
 
       return {
         payload: entry,
@@ -38,17 +28,7 @@ export default {
       }
     }),
     updateEvent: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
-      let entry
-
-      try {
-        entry = await events.update(id, input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(events.update(id, input))
 
       if (entry == null) {
         throw new KnownError('Unknown event')
