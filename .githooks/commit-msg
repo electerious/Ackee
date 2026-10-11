@@ -1,0 +1,12 @@
+#!/bin/sh
+# Every commit names its ticket, so the history can be traced back to the board.
+subject=$(head -n 1 "$1")
+
+case "$subject" in
+  Merge* | Revert* | fixup!* | squash!*) exit 0 ;;
+esac
+
+if ! printf '%s' "$subject" | grep -Eq '^ACKEE-[0-9]+ [A-Z]'; then
+  echo "Commit subject must start with the ticket, for example: ACKEE-10 Add the sign-up form" >&2
+  exit 1
+fi

@@ -16,9 +16,17 @@ jobs:
     timeout-minutes: 10
 
     strategy:
+      # Without this a failure on one platform cancels the others, and the run reports the
+      # first thing that broke rather than everything that is broken.
+      fail-fast: false
       matrix:
         node-version: [24.x, 26.x]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        # Linux is what the image runs on, macOS is what the team writes on. Windows was
+        # dropped: it only ever reported that our own scripts used shell syntax, which is
+        # a problem created by testing there rather than one found by it. `cross-env` in
+        # package.json keeps those scripts working for anyone who does open the repository
+        # on Windows, but nothing here proves it.
+        os: [ubuntu-latest, macOS-latest]
 
     steps:
       - uses: actions/checkout@v5
@@ -27,7 +35,64 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - run: npm ci
 
+      # The server reads dist/index.html at run time, and only the favicon of that folder
+      # is committed. Without this the tests that ask for a page fail on a missing file.
+      - run: npm run build:pre
+
       - run: npm test
+
+  coverage:
+    name: 'Coverage'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.x
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build:pre
+
+      # The thresholds live in .c8rc.json and sit a little below the measured value, so a
+      # failure means a real regression rather than noise.
+      - run: npm run test:coverage
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
+
+  audit:
+    name: 'Dependency audit'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.x
+          cache: npm
+
+      - run: npm ci
+
+      # A high finding in something that ships is a build failure. The same finding in a
+      # build tool is worth knowing about but does not stop a release, so it only reports.
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Audit all dependencies (report only)
+        run: npm audit --audit-level=moderate
+        continue-on-error: true

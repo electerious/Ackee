@@ -1,6 +1,6 @@
 {
   "name": "ackee",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "private": true,
   "description": "Self-hosted, Node.js based analytics tool for those who care about privacy",
   "keywords": [
@@ -22,8 +22,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "node --env-file-if-exists=.env build.js",
-    "build:pre": "BUILD_ENV=pre npm run build",
-    "dev": "NODE_ENV=development nodemon",
+    "build:pre": "cross-env BUILD_ENV=pre npm run build",
+    "dev": "cross-env NODE_ENV=development nodemon",
     "eslint": "eslint \"**/*.js\"",
     "format": "npm run eslint -- --fix && npm run prettier -- --write",
     "healthcheck": "node --env-file-if-exists=.env src/healthcheck.js",
@@ -31,7 +31,8 @@
     "prettier": "prettier \"**/*.{js,json,md,yml}\"",
     "server": "node --env-file-if-exists=.env src/index.js",
     "start": "npm run build && npm run server",
-    "test": "npm run lint && ava"
+    "test": "npm run lint && ava",
+    "test:coverage": "c8 --reporter=text --reporter=lcov --reporter=json-summary ava"
   },
   "nodemonConfig": {
     "exec": "npm run build:pre && npm run server",
@@ -75,7 +76,9 @@
     "@electerious/eslint-config": "^5.4.0",
     "@electerious/prettier-config": "^5.0.0",
     "ava": "^6.4.1",
+    "c8": "^10.1.3",
     "classnames": "^2.5.1",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.5",
     "formbase": "^12.0.3",
     "globals": "^17.12.0",

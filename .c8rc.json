@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "include": ["src/**/*.js"],
+  "exclude": ["src/ui/**", "src/serverless.js", "src/healthcheck.js", "src/index.js"],
+  "reports-dir": "coverage",
+  "lines": 97,
+  "functions": 96,
+  "branches": 88,
+  "statements": 97,
+  "check-coverage": true
+}
