@@ -1,0 +1,14 @@
+#!/bin/sh
+# Lint and format only what is staged, so the check stays fast. CI runs the full suite.
+# NUL-separated, because some docs have spaces in their names.
+staged() {
+  git diff --cached --name-only --diff-filter=ACMR -z -- "$@"
+}
+
+if [ -n "$(staged '*.js' | tr -d '\0')" ]; then
+  staged '*.js' | xargs -0 npx eslint || exit 1
+fi
+
+if [ -n "$(staged '*.js' '*.json' '*.md' '*.yml' | tr -d '\0')" ]; then
+  staged '*.js' '*.json' '*.md' '*.yml' | xargs -0 npx prettier --check || exit 1
+fi
