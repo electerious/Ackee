@@ -30,6 +30,7 @@ Version 2.0 is built by the Traceless Squad team. Our process, in short:
 4. A pull request into `develop`, filled in from the template, with the Definition of Done ticked.
 5. CI has to be green and at least one teammate has to approve. Nobody pushes to `develop` or `master` directly.
 6. The branch is merged with a merge commit and deleted; the card moves to Done.
+7. Tickets do not edit `CHANGELOG.md`. It is written once per release from the merged pull requests.
 
 Enable the git hooks once after cloning. They lint the staged files and check the commit subject:
 
