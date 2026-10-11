@@ -44,3 +44,31 @@ jobs:
       - run: npm run build:pre
 
       - run: npm test
+
+  coverage:
+    name: 'Coverage'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.x
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build:pre
+
+      # The thresholds live in .c8rc.json and sit a little below the measured value, so a
+      # failure means a real regression rather than noise.
+      - run: npm run test:coverage
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
