@@ -20,6 +20,25 @@ Ensure that you open an issue to discuss the changes before submitting a PR.
 
 Once you're finished, push your branch to your repo and create a pull request!
 
+## Team workflow
+
+Version 2.0 is built by the Traceless Squad team. Our process, in short:
+
+1. Every change starts as a ticket `ACKEE-N` on the Trello board, with acceptance criteria.
+2. One ticket, one branch from `develop`: `feature/ACKEE-N-short-name`.
+3. Small commits, each subject starts with the ticket: `ACKEE-10 Add the sign-up form`.
+4. A pull request into `develop`, filled in from the template, with the Definition of Done ticked.
+5. CI has to be green and at least one teammate has to approve. Nobody pushes to `develop` or `master` directly.
+6. The branch is merged with a merge commit and deleted; the card moves to Done.
+
+Enable the git hooks once after cloning. They lint the staged files and check the commit subject:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+Details: [coding standards](docs/engineering/coding-standards.md), [CI/CD](docs/engineering/ci-cd.md).
+
 ## Development mode
 
 Simply run Ackee with `NODE_ENV` set to `development` to get access to the [GraphQL Playground](https://docs.ackee.electerious.com/#/docs/API#playground). You can do this by adding `NODE_ENV=development` to the environment of your `docker-compose.yml` or by running:
