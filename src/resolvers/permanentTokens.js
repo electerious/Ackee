@@ -2,8 +2,8 @@ import * as permanentTokens from '../database/permanentTokens.js'
 import blockDemoMode from '../middlewares/blockDemoMode.js'
 import requireAuth from '../middlewares/requireAuth.js'
 import KnownError from '../utils/KnownError.js'
-import messages from '../utils/messages.js'
 import pipe from '../utils/pipe.js'
+import validated from '../utils/validated.js'
 
 export default {
   Query: {
@@ -16,17 +16,7 @@ export default {
   },
   Mutation: {
     createPermanentToken: pipe(requireAuth, blockDemoMode, async (parent, { input }) => {
-      let entry
-
-      try {
-        entry = await permanentTokens.add(input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(permanentTokens.add(input))
 
       return {
         payload: entry,
@@ -34,17 +24,7 @@ export default {
       }
     }),
     updatePermanentToken: pipe(requireAuth, blockDemoMode, async (parent, { id, input }) => {
-      let entry
-
-      try {
-        entry = await permanentTokens.update(id, input)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(permanentTokens.update(id, input))
 
       if (entry == null) {
         throw new KnownError('Unknown domain')

@@ -1,5 +1,5 @@
-export default (parent, args, { isAuthenticated }) => {
-  if (isAuthenticated !== true) {
-    throw isAuthenticated
-  }
+import KnownError from '../utils/KnownError.js'
+
+export default (parent, args, { viewer }) => {
+  if (viewer instanceof KnownError) throw viewer
 }

@@ -2,8 +2,8 @@ import * as domains from '../database/domains.js'
 import * as records from '../database/records.js'
 import identifier from '../utils/identifier.js'
 import KnownError from '../utils/KnownError.js'
-import messages from '../utils/messages.js'
 import normalizeUrl from '../utils/normalizeUrl.js'
+import validated from '../utils/validated.js'
 
 const normalizeSiteLocation = (siteLocation) => {
   if (siteLocation == null) {
@@ -66,17 +66,7 @@ export default {
 
       if (domain == null) throw new KnownError('Unknown domain')
 
-      let entry
-
-      try {
-        entry = await records.add(data)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(records.add(data))
 
       // Anonymize old entries with the same clientId to prevent that the browsing history
       // of a user is reconstructible. Will be skipped when there're no previous entries.
@@ -95,17 +85,7 @@ export default {
         }
       }
 
-      let entry
-
-      try {
-        entry = await records.update(id)
-      } catch (error) {
-        if (error.name === 'ValidationError') {
-          throw new KnownError(messages(error.errors))
-        }
-
-        throw error
-      }
+      const entry = await validated(records.update(id))
 
       if (entry == null) {
         throw new KnownError('Unknown record')
