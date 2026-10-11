@@ -17,8 +17,7 @@ coverage
 
 # User data
 /data
-# Every variant, not just .env: a file like .env.clickhouse holds the same passwords
-# and was not covered before.
+# Every variant, not just .env: a file like .env.local holds the same secrets.
 .env
 .env.*
 
