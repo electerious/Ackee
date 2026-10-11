@@ -72,3 +72,27 @@ jobs:
           name: coverage
           path: coverage/
           retention-days: 14
+
+  audit:
+    name: 'Dependency audit'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.x
+          cache: npm
+
+      - run: npm ci
+
+      # A high finding in something that ships is a build failure. The same finding in a
+      # build tool is worth knowing about but does not stop a release, so it only reports.
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Audit all dependencies (report only)
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
