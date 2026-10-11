@@ -32,7 +32,16 @@ const errorWith = async (headers) => {
 }
 
 test('reject a request without a token', async (t) => {
-  t.is(await errorWith({}), 'Token missing')
+  // Not through `api`: it sends the string "undefined" when there is no token.
+  const url = new URL('/api', await base)
+  const response = await fetch(url.href, {
+    method: 'post',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  })
+  const json = await response.json()
+
+  t.is(json.errors?.[0]?.message, 'Token missing')
 })
 
 test('reject a request with another scheme', async (t) => {
