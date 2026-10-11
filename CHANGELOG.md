@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - 2026-10-11
+## [3.6.2] - 2026-10-11
 
 ### Added
 
@@ -15,10 +15,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - CI runs on Linux and macOS instead of Linux, macOS and Windows
-
-## [1.0.0]
-
-Ackee v2.0 starts here. This version is upstream Ackee 3.6.1 without changes. Versions restart from 1.0.0 and the history below belongs to upstream.
 
 ## [3.6.1] - 2026-09-18
 
