@@ -18,11 +18,26 @@ const __dirname = import.meta.dirname
 
 const loadFile = (filename) => readFile(path.resolve(__dirname, '../dist', filename)).catch(signale.fatal)
 
-const index = loadFile('index.html')
-const favicon = loadFile('favicon.ico')
-const styles = loadFile('index.css')
-const scripts = loadFile('index.js')
-const tracker = loadFile('tracker.js')
+const html = 'text/html; charset=utf-8'
+const javascript = 'text/javascript; charset=utf-8'
+
+// Route, file in dist and content type of every static file.
+const staticFiles = [
+  ['/', 'index.html', html],
+  ['/index.html', 'index.html', html],
+  ['/favicon.ico', 'favicon.ico', 'image/vnd.microsoft.icon'],
+  ['/index.css', 'index.css', 'text/css; charset=utf-8'],
+  ['/index.js', 'index.js', javascript],
+  ['/tracker.js', 'tracker.js', javascript],
+]
+
+if (customTracker.exists === true) staticFiles.push([customTracker.url, 'tracker.js', javascript])
+
+// Each file is read once, even when two routes serve it.
+const files = new Map()
+for (const [, filename] of staticFiles) {
+  if (files.has(filename) === false) files.set(filename, loadFile(filename))
+}
 
 const handleGraphError = (formattedError, error) => {
   // This part is for error that happen inside GraphQL resolvers.
@@ -86,40 +101,10 @@ app.options('/{*path}', (request, response) => {
 })
 
 // Serve static files
-app.get('/', async (request, response) => {
-  response.setHeader('Content-Type', 'text/html; charset=utf-8')
-  response.end(await index)
-})
-
-app.get('/index.html', async (request, response) => {
-  response.setHeader('Content-Type', 'text/html; charset=utf-8')
-  response.end(await index)
-})
-
-app.get('/favicon.ico', async (request, response) => {
-  response.setHeader('Content-Type', 'image/vnd.microsoft.icon')
-  response.end(await favicon)
-})
-
-app.get('/index.css', async (request, response) => {
-  response.setHeader('Content-Type', 'text/css; charset=utf-8')
-  response.end(await styles)
-})
-
-app.get('/index.js', async (request, response) => {
-  response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-  response.end(await scripts)
-})
-
-app.get('/tracker.js', async (request, response) => {
-  response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-  response.end(await tracker)
-})
-
-if (customTracker.exists === true) {
-  app.get(customTracker.url, async (request, response) => {
-    response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-    response.end(await tracker)
+for (const [route, filename, type] of staticFiles) {
+  app.get(route, async (request, response) => {
+    response.setHeader('Content-Type', type)
+    response.end(await files.get(filename))
   })
 }
 
