@@ -62,3 +62,32 @@ test('return favicon', async (t) => {
 
   t.is(status, 200)
 })
+
+// The content type of every static route, so that moving the routes cannot change them.
+const routes = [
+  ['/', 'text/html; charset=utf-8'],
+  ['/index.html', 'text/html; charset=utf-8'],
+  ['/favicon.ico', 'image/vnd.microsoft.icon'],
+  ['/index.css', 'text/css; charset=utf-8'],
+  ['/index.js', 'text/javascript; charset=utf-8'],
+  ['/tracker.js', 'text/javascript; charset=utf-8'],
+  // The name is specified in the package.json ava configuration
+  ['/custom%20name.js', 'text/javascript; charset=utf-8'],
+]
+
+for (const [path, type] of routes) {
+  test(`return ${path} as ${type}`, async (t) => {
+    const url = new URL(path, await base)
+    const response = await fetch(url.href)
+
+    t.is(response.status, 200)
+    t.is(response.headers.get('Content-Type'), type)
+  })
+}
+
+test('return the same file for the tracker and the custom tracker', async (t) => {
+  const tracker = await fetch(new URL('/tracker.js', await base).href).then((response) => response.text())
+  const custom = await fetch(new URL('/custom%20name.js', await base).href).then((response) => response.text())
+
+  t.is(custom, tracker)
+})
