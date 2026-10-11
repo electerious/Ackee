@@ -27,7 +27,12 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - run: npm ci
+
+      # The server reads dist/index.html at run time, and only the favicon of that folder
+      # is committed. Without this the tests that ask for a page fail on a missing file.
+      - run: npm run build:pre
 
       - run: npm test
