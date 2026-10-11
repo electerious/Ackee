@@ -3,7 +3,7 @@ import { getClientIp } from 'request-ip'
 import config from './config.js'
 import createDate from './createDate.js'
 import { isSet } from './ignoreCookie.js'
-import isAuthenticated from './isAuthenticated.js'
+import resolveViewer from './viewer.js'
 
 export const createServerlessContext = (request) => {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip')
@@ -18,7 +18,8 @@ export const createExpressContext = ({ req }) => {
 const createContext = async (ip, headers) => {
   return {
     isDemoMode: config.isDemoMode,
-    isAuthenticated: await isAuthenticated(headers['authorization'], config.ttl),
+    // Who sent the request, or why that is unknown.
+    viewer: await resolveViewer(headers['authorization'], config.ttl),
     isIgnored: isSet(headers['cookie']),
     dateDetails: createDate(headers['time-zone']),
     userAgent: headers['user-agent'],
