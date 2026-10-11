@@ -17,7 +17,10 @@ coverage
 
 # User data
 /data
+# Every variant, not just .env: a file like .env.clickhouse holds the same passwords
+# and was not covered before.
 .env
+.env.*
 
 # Build output
 dist/*
