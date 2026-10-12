@@ -1,0 +1,19 @@
+# Caddy gets and renews the Let's Encrypt certificates itself.
+# All three names point to 178.104.38.165.
+
+ackee.varlex.app {
+	encode gzip
+	reverse_proxy ackee-v1:3000
+}
+
+ackee2.varlex.app {
+	encode gzip
+	reverse_proxy ackee-live:3000
+}
+
+dev.ackee2.varlex.app {
+	encode gzip
+	# A test stand: keep it out of search results.
+	header X-Robots-Tag "noindex, nofollow"
+	reverse_proxy ackee-dev:3000
+}

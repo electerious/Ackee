@@ -1,0 +1,46 @@
+#!/bin/sh
+# The only thing the GitHub deploy key may do.
+#
+# The key in authorized_keys is pinned to this script with `command=`, so whatever the
+# client asks for is ignored. "<stage> <tag>" arrives in SSH_ORIGINAL_COMMAND and is
+# checked here: a leaked key can redeploy a published image and nothing else.
+set -euf
+
+set -- ${SSH_ORIGINAL_COMMAND:-}
+[ $# -eq 2 ] || { echo "Usage: <dev|live> <tag>" >&2; exit 1; }
+STAGE=$1
+TAG=$2
+
+case "$STAGE" in
+  dev) VAR=ACKEE_DEV_TAG ;;
+  live) VAR=ACKEE_LIVE_TAG ;;
+  *) echo "Refusing stage: $STAGE" >&2; exit 1 ;;
+esac
+
+# dev runs sha-<commit>, live runs a version.
+case "$STAGE:$TAG" in
+  dev:sha-[0-9a-f]*) ;;
+  live:[0-9]*.[0-9]*.[0-9]*) ;;
+  *) echo "Refusing tag for $STAGE: $TAG" >&2; exit 1 ;;
+esac
+case "$TAG" in
+  *[!0-9a-z.-]*) echo "Refusing tag: $TAG" >&2; exit 1 ;;
+esac
+
+cd /opt/ackee
+
+# The tag is kept in .env, so a restart by hand brings back the same build.
+if grep -q "^$VAR=" .env; then
+  sed -i "s/^$VAR=.*/$VAR=$TAG/" .env
+else
+  echo "$VAR=$TAG" >> .env
+fi
+
+echo "Deploying $TAG to $STAGE"
+docker compose pull "ackee-$STAGE"
+docker compose up -d --no-deps "ackee-$STAGE"
+
+# Every merge pulls a new image. Without this the old ones fill the disk.
+docker image prune -af
+
+docker compose ps --format "{{.Name}}  {{.Image}}  {{.Status}}"

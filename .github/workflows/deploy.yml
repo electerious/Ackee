@@ -1,0 +1,179 @@
+name: Deploy
+
+# Two stands on one server. Every merge into develop goes to dev on its own. A version tag
+# goes to live, and the `live` environment can ask for a reviewer before it does.
+#
+# Secrets, under each environment (dev and live):
+#   DEPLOY_HOST  address of the server
+#   DEPLOY_USER  user to connect as
+#   DEPLOY_KEY   private half of the key the server pins to /usr/local/bin/ackee-deploy
+# Variable, under each environment:
+#   DEPLOY_URL   address to check once the container is back
+
+on:
+  push:
+    branches: [develop]
+    # Our tags are 3.6.3, upstream ones are v3.6.1. Both mean a release.
+    tags: ['[0-9]+.[0-9]+.[0-9]+*', 'v[0-9]+.[0-9]+.[0-9]+*']
+
+permissions:
+  contents: read
+
+# Two merges in a row must not deploy in the wrong order. The newer one waits.
+concurrency:
+  group: deploy-${{ github.ref_type }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: 'Verify'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.x
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build:pre
+      - run: npm test
+
+      # A tag that says one version over a package.json that says another ships a lie.
+      - name: Tag matches the version in package.json
+        if: github.ref_type == 'tag'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "${TAG#v}" != "$version" ]; then
+            echo "Tag $TAG does not match package.json version $version"
+            exit 1
+          fi
+
+  image:
+    name: 'Publish image'
+    needs: verify
+    # The server is arm64. A native runner builds in minutes, emulation takes much longer.
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 20
+
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # develop gets a tag per commit, so dev always runs one exact build and a redeploy
+      # of an older commit is possible. A release gets its version.
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix=sha-,enable=${{ github.ref_type == 'branch' }}
+            type=semver,pattern={{version}}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - id: tag
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          VERSION: ${{ steps.meta.outputs.version }}
+          SHA: ${{ github.sha }}
+        run: |
+          if [ "$REF_TYPE" = tag ]; then
+            echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=sha-${SHA::7}" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    name: 'Deploy'
+    needs: image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    environment:
+      name: ${{ github.ref_type == 'tag' && 'live' || 'dev' }}
+      url: ${{ vars.DEPLOY_URL }}
+
+    # Values reach the shell through env. A `${{ }}` inside a run line is pasted into the
+    # script before the shell reads it.
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_URL: ${{ vars.DEPLOY_URL }}
+      STAGE: ${{ github.ref_type == 'tag' && 'live' || 'dev' }}
+      TAG: ${{ needs.image.outputs.tag }}
+
+    steps:
+      - name: Refuse to start without the secrets
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          missing=''
+          [ -z "$DEPLOY_HOST" ] && missing="$missing DEPLOY_HOST"
+          [ -z "$DEPLOY_USER" ] && missing="$missing DEPLOY_USER"
+          [ -z "$DEPLOY_KEY" ] && missing="$missing DEPLOY_KEY"
+          if [ -n "$missing" ]; then
+            echo "Missing secrets in the $STAGE environment:$missing"
+            exit 1
+          fi
+          echo "Deploying $TAG to $STAGE"
+
+      - name: Load the key
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      # The server pins the key to one script. It reads "<stage> <tag>", checks both and
+      # runs compose for that one stand. Nothing else can be asked of it.
+      - name: Deploy
+        run: ssh -i ~/.ssh/id_deploy -o IdentitiesOnly=yes "$DEPLOY_USER@$DEPLOY_HOST" "$STAGE $TAG"
+
+      - name: Check it answers
+        run: |
+          if [ -z "$DEPLOY_URL" ]; then
+            echo "DEPLOY_URL is not set, skipping the check"
+            exit 0
+          fi
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$DEPLOY_URL")
+            [ "$code" = "200" ] && { echo "$DEPLOY_URL answers $code"; exit 0; }
+            sleep 5
+          done
+          echo "$DEPLOY_URL did not come back"
+          exit 1
+
+      - name: Forget the key
+        if: always()
+        run: rm -f ~/.ssh/id_deploy

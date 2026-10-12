@@ -1,0 +1,110 @@
+# The server side of .github/workflows/deploy.yml. Lives in /opt/ackee next to .env.
+#
+#   ackee.varlex.app       upstream 3.6.1, the unchanged reference
+#   ackee2.varlex.app      live: the last version tag
+#   dev.ackee2.varlex.app  dev: the last merge into develop
+#
+# One MongoDB, one database per stand.
+
+# Without limits the json logs grow until the disk is full. That is how mongo went down.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: 10m
+    max-file: '3'
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: ackee-mongo
+    restart: unless-stopped
+    # 3.7 GB on the server. By default WiredTiger takes half of it for the cache.
+    command: ['mongod', '--wiredTigerCacheSizeGB', '0.35']
+    mem_limit: 768m
+    volumes:
+      - mongo-data:/data/db
+    networks: [ackee]
+    logging: *logging
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand("ping")']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  ackee-v1:
+    image: electerious/ackee:3.6.1
+    container_name: ackee-v1
+    restart: unless-stopped
+    environment:
+      ACKEE_MONGODB: mongodb://mongo:27017/ackee_v1
+      ACKEE_USERNAME: ${ACKEE_USERNAME}
+      ACKEE_PASSWORD: ${ACKEE_PASSWORD}
+      ACKEE_ALLOW_ORIGIN: https://ackee.varlex.app
+      ACKEE_AUTO_ORIGIN: 'true'
+    depends_on:
+      mongo:
+        condition: service_healthy
+    mem_limit: 640m
+    networks: [ackee]
+    logging: *logging
+
+  ackee-live:
+    # The tag is written by /usr/local/bin/ackee-deploy.
+    image: ghcr.io/voronov/ackee:${ACKEE_LIVE_TAG:?set by ackee-deploy}
+    container_name: ackee-live
+    restart: unless-stopped
+    environment:
+      ACKEE_MONGODB: mongodb://mongo:27017/ackee_live
+      ACKEE_USERNAME: ${ACKEE_USERNAME}
+      ACKEE_PASSWORD: ${ACKEE_PASSWORD}
+      ACKEE_ALLOW_ORIGIN: https://ackee2.varlex.app
+      ACKEE_AUTO_ORIGIN: 'true'
+    depends_on:
+      mongo:
+        condition: service_healthy
+    mem_limit: 640m
+    networks: [ackee]
+    logging: *logging
+
+  ackee-dev:
+    image: ghcr.io/voronov/ackee:${ACKEE_DEV_TAG:?set by ackee-deploy}
+    container_name: ackee-dev
+    restart: unless-stopped
+    environment:
+      ACKEE_MONGODB: mongodb://mongo:27017/ackee_dev
+      ACKEE_USERNAME: ${ACKEE_USERNAME}
+      ACKEE_PASSWORD: ${ACKEE_PASSWORD}
+      ACKEE_ALLOW_ORIGIN: https://dev.ackee2.varlex.app
+      ACKEE_AUTO_ORIGIN: 'true'
+    depends_on:
+      mongo:
+        condition: service_healthy
+    mem_limit: 512m
+    networks: [ackee]
+    logging: *logging
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: ackee-caddy
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on: [ackee-v1, ackee-live, ackee-dev]
+    mem_limit: 96m
+    networks: [ackee]
+    logging: *logging
+
+networks:
+  ackee:
+
+volumes:
+  mongo-data:
+  caddy-data:
+  caddy-config:
+  # Left from 4.0.1. Not mounted any more, kept until someone decides to drop it.
+  clickhouse-data:
