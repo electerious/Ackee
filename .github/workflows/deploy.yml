@@ -15,13 +15,20 @@ on:
     branches: [develop]
     # Our tags are 3.6.3, upstream ones are v3.6.1. Both mean a release.
     tags: ['[0-9]+.[0-9]+.[0-9]+*', 'v[0-9]+.[0-9]+.[0-9]+*']
+  # Puts an existing tag on live: the first time, for a tag pushed before this workflow
+  # existed, and to roll back to an earlier version.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag to put on live, for example 3.6.3'
+        required: true
 
 permissions:
   contents: read
 
 # Two merges in a row must not deploy in the wrong order. The newer one waits.
 concurrency:
-  group: deploy-${{ github.ref_type }}
+  group: deploy-${{ github.ref_type == 'tag' || inputs.tag != '' }}
   cancel-in-progress: false
 
 jobs:
@@ -32,6 +39,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.tag || github.ref }}
 
       - uses: actions/setup-node@v5
         with:
@@ -44,9 +53,9 @@ jobs:
 
       # A tag that says one version over a package.json that says another ships a lie.
       - name: Tag matches the version in package.json
-        if: github.ref_type == 'tag'
+        if: github.ref_type == 'tag' || inputs.tag != ''
         env:
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           version=$(node -p "require('./package.json').version")
           if [ "${TAG#v}" != "$version" ]; then
@@ -67,9 +76,12 @@ jobs:
 
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
+      stage: ${{ steps.tag.outputs.stage }}
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.tag || github.ref }}
 
       - uses: docker/setup-buildx-action@v3
 
@@ -86,9 +98,9 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=ref,event=branch
-            type=sha,prefix=sha-,enable=${{ github.ref_type == 'branch' }}
-            type=semver,pattern={{version}}
+            type=ref,event=branch,enable=${{ inputs.tag == '' }}
+            type=sha,prefix=sha-,enable=${{ github.ref_type == 'branch' && inputs.tag == '' }}
+            type=semver,pattern={{version}},value=${{ inputs.tag }}
 
       - uses: docker/build-push-action@v6
         with:
@@ -102,13 +114,15 @@ jobs:
 
       - id: tag
         env:
-          REF_TYPE: ${{ github.ref_type }}
+          RELEASE: ${{ github.ref_type == 'tag' || inputs.tag != '' }}
           VERSION: ${{ steps.meta.outputs.version }}
           SHA: ${{ github.sha }}
         run: |
-          if [ "$REF_TYPE" = tag ]; then
+          if [ "$RELEASE" = true ]; then
+            echo "stage=live" >> "$GITHUB_OUTPUT"
             echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
           else
+            echo "stage=dev" >> "$GITHUB_OUTPUT"
             echo "tag=sha-${SHA::7}" >> "$GITHUB_OUTPUT"
           fi
 
@@ -119,7 +133,7 @@ jobs:
     timeout-minutes: 15
 
     environment:
-      name: ${{ github.ref_type == 'tag' && 'live' || 'dev' }}
+      name: ${{ needs.image.outputs.stage }}
       url: ${{ vars.DEPLOY_URL }}
 
     # Values reach the shell through env. A `${{ }}` inside a run line is pasted into the
@@ -128,7 +142,7 @@ jobs:
       DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
       DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
       DEPLOY_URL: ${{ vars.DEPLOY_URL }}
-      STAGE: ${{ github.ref_type == 'tag' && 'live' || 'dev' }}
+      STAGE: ${{ needs.image.outputs.stage }}
       TAG: ${{ needs.image.outputs.tag }}
 
     steps:
