@@ -54,7 +54,12 @@ const Column = (props) => {
 const PresentationBarChart = (props) => {
   return h(
     'div',
-    { className: 'barChart' },
+    {
+      className: classNames({
+        'barChart': true,
+        'barChart--visible': props.status.isInitializing !== true,
+      }),
+    },
     h(
       'div',
       { className: 'barChart__axis' },
@@ -82,6 +87,9 @@ const PresentationBarChart = (props) => {
 
 PresentationBarChart.propTypes = {
   items: PropTypes.arrayOf(PropTypes.number).isRequired,
+  status: PropTypes.shape({
+    isInitializing: PropTypes.bool.isRequired,
+  }).isRequired,
   formatter: PropTypes.func.isRequired,
   onItemEnter: PropTypes.func.isRequired,
   onItemLeave: PropTypes.func.isRequired,

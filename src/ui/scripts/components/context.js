@@ -82,7 +82,7 @@ const Context = (props) => {
           'context--fixed': props.fixed === true,
           'context--tooltip': props.tooltip === true,
           'context--floating': props.floating === true,
-          'visible': measurement != null,
+          'context--visible': measurement != null,
         }),
         style: {
           '--x': x,

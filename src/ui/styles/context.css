@@ -29,6 +29,8 @@
   }
 
   &--tooltip {
+    --context-starting-y: 4px;
+
     max-width: 300px;
   }
 
@@ -38,15 +40,10 @@
     border-radius: var(--radius);
   }
 
-  &.visible {
+  &--visible {
     translate: 0 0;
     opacity: 1;
     pointer-events: all;
-
-    @starting-style {
-      translate: 0 var(--context-starting-y);
-      opacity: 0;
-    }
   }
 
   &__content {

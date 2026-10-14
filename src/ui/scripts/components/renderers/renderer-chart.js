@@ -23,6 +23,7 @@ const RendererChart = (props) => {
     items: props.items,
     formatter: props.formatter,
     active,
+    status: props.status,
     onItemEnter,
     onItemLeave,
     onItemClick: props.onItemClick,
@@ -31,6 +32,9 @@ const RendererChart = (props) => {
 
 RendererChart.propTypes = {
   items: PropTypes.array.isRequired,
+  status: PropTypes.shape({
+    isInitializing: PropTypes.bool.isRequired,
+  }).isRequired,
   interval: PropTypes.string.isRequired,
   formatter: PropTypes.func.isRequired,
   setStatusLabel: PropTypes.func.isRequired,

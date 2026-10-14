@@ -19,6 +19,9 @@
   grid-auto-flow: column;
   align-items: center;
   gap: calc(var(--gutter) / 3);
+  transition:
+    background-color var(--motion-duration-ui) var(--motion-easing-standard),
+    color var(--motion-duration-ui) var(--motion-easing-standard);
   border-radius: 100px;
   padding: 0 calc(var(--gutter) / 1.5);
   height: calc(var(--badge-height) + var(--badge-padding-vertical) * 2);
@@ -36,17 +39,17 @@
   }
 
   &--positive {
-    background: var(--positive-background);
+    background-color: var(--positive-background);
     color: var(--positive);
   }
 
   &--negative {
-    background: var(--negative-background);
+    background-color: var(--negative-background);
     color: var(--negative);
   }
 
   &--neutral {
-    background: var(--light-background);
+    background-color: var(--light-background);
     color: var(--light);
   }
 

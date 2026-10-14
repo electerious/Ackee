@@ -43,6 +43,7 @@ const CardStatistics = (props) => {
       h(props.renderer, {
         ...props.rendererProps,
         items: value,
+        status,
         setStatusLabel,
       }),
     ),
